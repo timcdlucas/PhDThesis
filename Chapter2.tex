@@ -17,14 +17,14 @@ However, the factors that control pathogen diversity in wild populations are sti
 Host species traits such as population density, longevity, body size and population structure have been shown to correlate with pathogen diversity.
 However, our mechanistic understanding of how population structure (i.e. non random contacts across the population creating barriers to disease spread) affects pathogen diversity is poor.
 Greater mechanistic understanding is needed to clarify the exact causal role population structure has in controlling pathogen diversity.
-Mechanistic models are also likely to be more robust to transfering understanding between taxa and predicting changes. % !!! Not great.
+Mechanistic models are also likely to be more robust to transferring understanding between taxa and predicting changes. % !!! Not great.
 
 Typically it is assumed that well-connected populations promote disease spread (high $R_0$) and therefore promote pathogen diversity.
 However, if competition is strong endemic pathogens will dominate and prevent new diseases from invading and spreading.
 In a structured population, stochastic effects could create areas of low prevalence of the endemic disease, allowing new diseases to invade.
 
 We consider bats as a case study as they have been implicated in a number of recent, high profile diseases such as Ebola, SARS, Hendra and Nipah.
-Bats have varied social structures and so the structure of populations could be one way to prioritize zoonotic disease surveillance in this group.
+Bats have varied social structures and so the structure of populations could be one way to prioritise zoonotic disease surveillance in this group.
 
 \subsubsection{One sentence clearly stating the general problem (the gap)}
 % being addressed by this particular study.
@@ -32,7 +32,7 @@ It is unknown whether population structure allows escape from competition and th
 
 We hypothesise that low dispersal rates and a low number of connections in a metapopulation network will allow invading pathogens to establish more readily. 
 
-\subsubsection{One sentence summarizing the main result}
+\subsubsection{One sentence summarising the main result}
 %  (with the words “here we show” or their equivalent).
 I find that neither population connectedness nor dispersal rate affect the probability that a new pathogen will invade into a population.
 
@@ -79,8 +79,8 @@ However, the factors that control the diversity of pathogens in a wild animal po
 
 \subsubsection{We know some factors that correlate with pathogen diversity}
 A number of host traits have been shown to correlate with pathogen richness including body size  \cite{}, longevity  \cite{} and social structure  \cite{}.
-However, studies are often contradictory due to small sample sizes, noisey data and because empirical relationships often do not generalise across taxa.
-Furthermore, the correlation between many traits makes it hard to clearly distnguish which factors are important.
+However, studies are often contradictory due to small sample sizes, noisy data and because empirical relationships often do not generalise across taxa.
+Furthermore, the correlation between many traits makes it hard to clearly distinguish which factors are important.
 Knowing the factors that correlate with pathogen richness also does not tell us how it controls richness. 
 Mechanisms by which a trait could increase pathogen diversity include promoting the evolution of new strains within a species, reduction of the rate of parasite extinction and an increased probability of pathogen invasion.
 
@@ -143,11 +143,11 @@ Single pathogen epidemics
 \subsubsection{Empirical evidence that structure might affect diversity}
 
 
-Maganga \emph{et al.} found that distribution fragmentation predicts viral richness   \cite{maganga2014bat}, but   \cite{gay2014parasite} finds the opposite relationship. 
-While the dataset in   \cite{gay2014parasite} is larger, the analysis in   \cite{maganga2014bat} is much more focused on fragmentation.
+Maganga \emph{et al.} found that distribution fragmentation predicts viral richness \cite{maganga2014bat}, but \cite{gay2014parasite} finds the opposite relationship. 
+While the data set in \cite{gay2014parasite} is larger, the analysis in \cite{maganga2014bat} is much more focused on fragmentation.
 
 Genetic correlates of population structure have also been used.
-Turmelle \emph{et al.}   \cite{turmelle2009correlates}, in a small analysis, find that high $F_{st}$ (i.e. a structured population) correlates with high richness.
+Turmelle \emph{et al.} \cite{turmelle2009correlates}, in a small analysis, find that high $F_{st}$ (i.e. a structured population) correlates with high richness.
 
 
 
@@ -222,7 +222,7 @@ Although still simplified, the model is complex enough that if good measurements
 
 \subsection{What I found}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% One sentence summarizing the main result
+% One sentence summarising the main result
 % (with the words “here we show” or their equivalent).
 
 
@@ -267,14 +267,13 @@ Recovered individuals, $R$, are immune to both pathogens, even if they have only
 Furthermore, recovery from a pathogen moves an individual straight into the recovered class, even if the individual is infected with both pathogen.
 This modelling choice allows the model to be easily expanded to included more than two pathogens.
 The assumption of immediate recovery from all other diseases is likely to be quite accurate for very closely related pathogens as is being studied here as once an acquired immune response is activated, all infections are likely to be cleared quickly.
-The coinfection rate is adjusted compared to the first infection rate by a factor $\alpha$.
 
+The coinfection rate is adjusted compared to the first infection rate by a factor $\alpha$.
 Birth and death rates are assumed to be equal, $b = d$.
 
 
 \begin{figure}[b]
 \centering
-
   \includegraphics[width=0.4\textwidth]{imgs/SIRoption1.pdf}
   \caption{The SIR model used.}
   \label{f:sir}
@@ -289,7 +288,7 @@ However, dispersal between subpopulations occurs at a rate $\lambda$.
 Individuals can only disperse to subpopulations connected to theirs in the network.
 The rate of dispersal is not affected by the number of edges a subpopulation has (the degree of the subpopulation).
 So the dispersal rate from a subpopulation $m$ with degree $k_m$ to subpopulation $n$ is $\frac{\lambda}{k_m}$.
-Note this rate is independant of the degree of subpopulation $n$.
+Note this rate is independent of the degree of subpopulation $n$.
 
 
 \subsubsection{Stochastic simulations}
@@ -308,34 +307,36 @@ Finally, the length of the time step, $\delta$, is drawn from an exponential dis
 This means that the length of each simulation is stochastic. 
 We define the number of events we wish to simulate instead.
 
-We can now write down the rates of all events. I define $I^+_p$ to be the sum of all classes that are infectious with pathogen $p$, for example $I^+_1 = I_1 + I_{12}$. Assuming asexual reproduction, that all classes reproduce at the same rate and that individuals are born into the susceptible class we get
+We can now write down the rates of all events. 
+I define $I^+_p$ to be the sum of all classes that are infectious with pathogen $p$, for example $I^+_1 = I_1 + I_{12}$. 
+Assuming asexual reproduction, that all classes reproduce at the same rate and that individuals are born into the susceptible class we get
 \begin{align}
-P\left( S_{nt^\prime} = S_{nt} +1\right) &= b\left( S_{nt}+\sum_q I_{qnt} + R_{nt}\right) 
+  P\left( S_{nt^\prime} = S_{nt} +1\right) &= b\left( S_{nt}+\sum_q I_{qnt} + R_{nt}\right) 
 \end{align}
 where $P\left( S_{nt^\prime} = S_{nt} +1\right)$ is the probability that the number of susceptibles in subpopulation $n$ will increase by 1 (a single birth) the short time interval $t$ to $t^\prime$ and $\sum_q I_{qnt}$ is the sum of all infection classes $q \in {1, 2, 12}$.
 The rates of death, given a death rate $d$ are given by
 \begin{align}
-P\left( S_{nt^\prime} = S_{nt}-1 \right) &= dS_{nt} \\
-P\left( I_{qnt^\prime} = I_{qnt}-1 \right) &= dI_{qnt}\\
-P\left( R_{nt^\prime} = R_{nt}-1 \right) &= dR_{nt}.
+  P\left( S_{nt^\prime} = S_{nt}-1 \right) &= dS_{nt} \\
+  P\left( I_{qnt^\prime} = I_{qnt}-1 \right) &= dI_{qnt}\\
+  P\left( R_{nt^\prime} = R_{nt}-1 \right) &= dR_{nt}.
 \end{align}
 Infection of a susceptible with either pathogen 1 or 2, $S \rightarrow I_p$ where $p\in \{1,2\}$, is given by
 \begin{align}
-P\left( I_{pnt^\prime} = I_{pnt}+1, S_{nt^\prime} = S_{nt}-1 \right) &= \beta S_{nt}I^+_{pnt},
+  P\left( I_{pnt^\prime} = I_{pnt}+1, S_{nt^\prime} = S_{nt}-1 \right) &= \beta S_{nt}I^+_{pnt},
 \end{align}
 while coinfection, given a crossimmunity factor $\alpha$, is given by
 \begin{align}
-P\left( I_{12,nt^\prime} = I_{12,nt}+1,\: I_{pnt^\prime} = I_{pnt}-1\right) = \alpha\beta I_{nt}I^+_{pnt}.
+  P\left( I_{12,nt^\prime} = I_{12,nt}+1,\: I_{pnt^\prime} = I_{pnt}-1\right) = \alpha\beta I_{nt}I^+_{pnt}.
 \end{align}
 The probability of migration from colony $m$ (with degree $k_m$) to colony $n$, given a dispersal rate $\lambda$ is given by
 \begin{align}
-P\left(S_{nt^\prime}=S_{nt}+1,\: S_{mt^\prime} = S_{mt}-1\right) &= \frac{\lambda S_{mt}}{k_m-1}\\
-P\left(I_{qnt^\prime}=I_{qnt}+1,\: I_{qmt^\prime} = I_{qmt}-1\right) &= \frac{\lambda I_{qmt}}{k_m}\\
-P\left(R_{nt^\prime}=S_{nt}+1,\: R_{mt^\prime} = R_{mt}-1\right) &= \frac{\lambda R_{mt}}{k_m}.
+  P\left(S_{nt^\prime}=S_{nt}+1,\: S_{mt^\prime} = S_{mt}-1\right) &= \frac{\lambda S_{mt}}{k_m-1}\\
+  P\left(I_{qnt^\prime}=I_{qnt}+1,\: I_{qmt^\prime} = I_{qmt}-1\right) &= \frac{\lambda I_{qmt}}{k_m}\\
+  P\left(R_{nt^\prime}=S_{nt}+1,\: R_{mt^\prime} = R_{mt}-1\right) &= \frac{\lambda R_{mt}}{k_m}.
 \end{align}
 Finally, recovery from any infectious class occurs at a rate $\gamma$
 \begin{align}
-P\left( I_{qnt^\prime} = I_{qnt}-1,\: R_{nt^\prime} = R_{nt}+1 \right) &= \gamma I_{qnt}.
+  P\left( I_{qnt^\prime} = I_{qnt}-1,\: R_{nt^\prime} = R_{nt}+1 \right) &= \gamma I_{qnt}.
 \end{align}
 
 
@@ -343,57 +344,31 @@ P\left( I_{qnt^\prime} = I_{qnt}-1,\: R_{nt^\prime} = R_{nt}+1 \right) &= \gamma
 In each simulation the population is seeded with 200 infected individuals of disease 1 in each colony. 
 Disease 1 is then allowed to spread and reach equilibrium. 
 After 40,000 events, 10 individuals infected with disease 2 are added to one colony. 
-After another 10,000 events the invasion of disease 2 is considered successful if any individuals with the disease still remain.
+After another 10,000 events the invasion of disease 2 is considered successful if any individuals with disease 2 still remain.
 
-
-
-\subsection{Parameter selection}
-
-The values used for the independant variables are chosen to highlight the affects of these variables. 
-The network structure is synthetically created to be either fully or minimally connected (i.e. a ring). 
-10 subpopulations was selected as a trade off between computation time and a network complicated enough that structure might have an effect. 
-This value is artificially small compared to wildlife populations. 
-
-Dispersal values are $\lambda = 0.1, 0.01 and 0.001$ dispersals per year. 
-$\lambda = 0.1$ relates to individuals moving between colonies on average twice per lifetime. 
-Therefore exclusively juevinile dispersal would have dispersal rates similar to this. 
-Otherwise it relates to dispersal being a rare event with animals often staying in a colony for many years.
-$\lambda = 0.01$ relates to 20\% of individuals dispersing once in their lifetime.
-This value is therefore close to male-biased dispersal, with female philopatry. 
-Finally, $lambda = 0.001$ relates to 2\% of invididuals dispersing in their lifetime.
-This therefore relates to a population that does not habitually disperse.
-
-
-
-The fixed parameters used are chosen to roughly reflect realistic wild bat populations. 
-The death rate $d$ is set as 0.05 per year giving a generation time of 20 years.
-The birth rate $b$ is set to be equal to $d$ so that the population size is stable.
-The recovery rate $\gamma$ is set to 0.1 giving a average infection duration of 10 years. 
-This is therefore a chronic infection. 
-It is very difficult to directly estimate infection durations in wild populations.
-But it seems that these infections might be long lasting \cite{}.
-
-Cross immunity is set to 0.1 so that an individual infected with one disease is 90\% less likely to be infected with another.
-This is a rather arbitrary value.
-However, the model assumes complete cross immunity after infection.
-Furthermore, the rationale of some modelling choices is that the invading species might be a newly speciated strain of the endemic species.
-Therefore cross immunity is likely to be very strong.
-
-
-
-
-
-Three values of the transmission rate $\beta$ are used, 2, 5 and 10.
 
 
 \subsection{Dispersal}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+The values used for the independant variables are chosen to highlight the affects of these variables. 
+Dispersal values are $\lambda = 0.1, 0.01$ and $ 0.001$ dispersals per individual per year. 
+$\lambda = 0.1$ relates to individuals moving between colonies on average twice per lifetime. 
+Therefore exclusively juvenile dispersal would have dispersal rates similar to this. 
+Otherwise it relates to dispersal being a rare event with animals often staying in a colony for many years.
+$\lambda = 0.01$ relates to 20\% of individuals dispersing once in their lifetime.
+This value is therefore close to male-biased dispersal, with female philopatry. 
+Finally, $lambda = 0.001$ relates to 2\% of individuals dispersing in their lifetime.
+This therefore relates to a population that does not habitually disperse.
+
+
 
 
 \subsection{Network structure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+The network structure is synthetically created to be either fully or minimally connected (See Figure~\ref{f:net}). 
+10 subpopulations was selected as a trade off between computation time and a network complicated enough that structure might have an effect. 
+This value is artificially small compared to wildlife populations. 
 
 \begin{figure}[b]
 \centering
@@ -411,12 +386,49 @@ Three values of the transmission rate $\beta$ are used, 2, 5 and 10.
                 \label{fig:minimallyConnected}
         \end{subfigure}%%
 
-\caption[Network topologies used to test whether network connectedness influences pathogen invasion]{The two network topologies used to test whether network connectedness influences a viruses ability to invade. Dispersal is held constant between the two topologies.}
+\caption[Network topologies used to test whether network connectedness influences pathogen invasion]{
+The two network topologies used to test whether network connectedness influences a viruses ability to invade. 
+Dispersal is held constant between the two topologies.
+}
 \label{f:net}
 \end{figure}
 
 
 
+
+
+\subsection{Parameter selection}
+
+
+The fixed parameters used are chosen to roughly reflect realistic wild bat populations. 
+The death rate $d$ is set as 0.05 per year giving a generation time of 20 years.
+The birth rate $b$ is set to be equal to $d$ so that the population size is stable.
+The recovery rate $\gamma$ is set to 0.1 giving a average infection duration of 10 years. 
+This is therefore a chronic infection. 
+It is very difficult to directly estimate infection durations in wild populations.
+But it seems that these infections might be long lasting \cite{}.
+
+Cross immunity is set to 0.1 so that an individual infected with one disease is 90\% less likely to be infected with another.
+This is a rather arbitrary value.
+However, the model assumes complete cross immunity after infection.
+Furthermore, the rationale of the model is that the invading species might be a newly speciated strain of the endemic species.
+Therefore cross immunity is likely to be very strong.
+
+The population size of each subpopulation is set to 3000. 
+This is appropriate for many bat species \cite{jones2009pantheria}, especially the large, frugivorous \emph{Pteropodidae} that have been particularly associated with recent zoonotic diseases.
+
+The number of invading pathogens added is set to 10. 
+This is a trade off between getting a reasonable proportion of invasions, while still retaining the stochastic nature of invasion.
+
+Three values of the transmission rate $\beta$ are used, 2, 5 and 10.
+All simulations are run under all three transmission rates as this is such a fundamental parameter.
+Given the recovery, birth and death rates we can calculate an approximation of $R_0$ that ignores spatial structure.
+That is, this is $R_0$ for the local, within-subpopulation dynamics.
+Furthermore, it is $R_0$ for the first pathogen; $R_0$ of the invading pathogen will be lower due to competition.
+We can calculate that $R_0 \approx \frac{\beta d}{d(d+ \gamma)}$.
+For our three values of $\beta = 2, 5, 10$ we therefore get $R_0 \approx 13.3, 33.3, 66.6$.
+These values are very high in part to again find a reasonable trade off between the number of simulations and the reasonableness of the parameters.
+$R_0 \approx 13.3$ is similar to a highly contagious disease such as measles or pertussis. 
 
 
 
@@ -434,26 +446,33 @@ Three values of the transmission rate $\beta$ are used, 2, 5 and 10.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-The proportion of invasions was not different across dispersal rates. This was true at all transmission levels ($\chi^2$ test. $\beta = 2$: $\chi^2 = 4.19$, $df = 2$, $p = 0.12$. $\beta = 5$: $\chi^2 = 1.27$, $df = 2$, $p = 0.53$. $\beta = 10$: $\chi^2 = 0.01$, $df = 2$, $p = 0.996$)
+The proportion of invasions was not different across dispersal rates. 
+This was true at all transmission levels ($\chi^2$ test. $\beta = 2$: $\chi^2 = 4.19$, $df = 2$, $p = 0.12$. $\beta = 5$: $\chi^2 = 1.27$, $df = 2$, $p = 0.53$. $\beta = 10$: $\chi^2 = 0.01$, $df = 2$, $p = 0.996$)
 
 
 \begin{figure}[b]
 \centering
-        \begin{subfigure}[b]{0.35\textwidth}
-                \centering
-		\includegraphics[width=1\textwidth]{imgs/fig150327.pdf}
-                \caption{}
-                \label{fig:dispersalProbs}
-        \end{subfigure}
-        ~ 
-	\begin{subfigure}[b]{0.35\textwidth}
-                \centering
-		\includegraphics[width=1\textwidth]{imgs/figs.pdf}
-                \caption{}
-                \label{fig:structureProbs}
-        \end{subfigure}%%
+\begin{subfigure}[b]{0.35\textwidth}
+  \centering
+	\includegraphics[width=1\textwidth]{imgs/fig150327.pdf}
+  \caption{}
+  \label{fig:dispersalProbs}
+\end{subfigure}
+  ~ 
+\begin{subfigure}[b]{0.35\textwidth}
+  \centering
+  \includegraphics[width=1\textwidth]{imgs/figs.pdf}
+  \caption{}
+  \label{fig:structureProbs}
+\end{subfigure}%%
 
-\caption[Invasion probability]{The probability of successful invasion. For three different transmission rates, the probability of invasion success does not change between different a) dispersal rates or b) network structures. Error bars are 95\% confidence intervals. Other parameters are kept constant at: $N = 10,\, \bar{n} = 3000,\, b = d = 0.05,\, \gamma = 0.1,\, \alpha = 0.1$. When dispersal is varied, the population structure is fully connected. When population structure is varied, $\lambda = 0.01$.}
+\caption[Invasion probability]{
+The probability of successful invasion. 
+For three different transmission rates, the probability of invasion success does not change between different a) dispersal rates or b) network structures. 
+Error bars are 95\% confidence intervals. 
+Other parameters are kept constant at: $N = 10,\, \bar{n} = 3000,\, b = d = 0.05,\, \gamma = 0.1,\, \alpha = 0.1$. 
+When dispersal is varied, the population structure is fully connected. When population structure is varied, $\lambda = 0.01$.
+}
 \label{f:dist}
 \end{figure}
 
@@ -461,7 +480,8 @@ The proportion of invasions was not different across dispersal rates. This was t
 \subsection{Network structure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The proportion of invasions was not different between highly connected and largely unconnected metapopulations. This was true at all transmission levels ($\chi^2$ test. $\beta = 2$: $\chi^2 = 0.54$, $df = 1$, $p = 0.46$. $\beta = 5$: $\chi^2 = 0.06$, $df = 1$, $p = 0.81$. $\beta = 10$: $\chi^2 = 3.01$, $df = 1$, $p = 0.08$)
+The proportion of invasions was not different between highly connected and largely unconnected metapopulations. 
+This was true at all transmission levels ($\chi^2$ test. $\beta = 2$: $\chi^2 = 0.54$, $df = 1$, $p = 0.46$. $\beta = 5$: $\chi^2 = 0.06$, $df = 1$, $p = 0.81$. $\beta = 10$: $\chi^2 = 3.01$, $df = 1$, $p = 0.08$)
 
  
 
@@ -504,7 +524,7 @@ $d_I$ & Infectious death rate & Additional deaths per day per individual&\\
 $\rho$ & No. pathogens && 2\\
 $p$ &  Pathogen index i.e. $p\in\{1,2\}$ for pathogens 1 and 2 & &\\
 $q$ & Disease class i.e., $q\in\{1,2,12\}$&\\
-$\mathcal{V}$ & Neighourhood of a node &&\\
+$\mathcal{V}$ & Neighbourhood of a node &&\\
 $t, t^\prime$ & Time and time plus waiting time i.e., $t+\delta$ & Days&\\
 $k_i$ & Degree of node $i$ &&\\
 $\delta$ & Waiting time until next event & Days&\\
