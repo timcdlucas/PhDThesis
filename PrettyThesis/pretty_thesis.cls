@@ -151,8 +151,17 @@
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{book}}
 \ProcessOptions
 \LoadClass{book}
-\RequirePackage{ucl_a4}
-\RequirePackage{times}
+
+
+% Chose fonts
+\RequirePackage[default]{cantarell} %% Use option "defaultsans" to use cantarell as sans serif only
+\RequirePackage[T1]{fontenc}
+
+
+\RequirePackage{pretty_a4}
+
+
+
 \RequirePackage{mathptmx}
 %    \end{macrocode}
 %
@@ -170,14 +179,14 @@
 %      not less than 20 mm (.75 inches)." 
 %
 %    \begin{macrocode}
-\setlength \textwidth {415\p@}
+\setlength \textwidth {370\p@}
 \setlength \textheight {692\p@}
 \setlength \topmargin {36\p@}
-\setlength \oddsidemargin {96\p@}
+\setlength \oddsidemargin {140\p@}
 \if@twoside
-    \setlength \evensidemargin {60\p@}
+    \setlength \evensidemargin {90\p@}
 \else
-    \setlength \evensidemargin {96\p@}
+    \setlength \evensidemargin {140\p@}
 \fi
 %    \end{macrocode}
 %  \begin{macro}{\ps@headings}

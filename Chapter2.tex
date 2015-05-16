@@ -78,7 +78,7 @@ However, the factors that control the diversity of pathogens in a wild animal po
 
 
 \subsubsection{We know some factors that correlate with pathogen diversity}
-A number of host traits have been shown to correlate with pathogen richness including body size  \cite{}, longevity  \cite{} and social structure  \cite{}.
+A number of host traits have been shown to correlate with pathogen richness including body size  \cite{kamiya2014determines}, longevity  \cite{} and social structure \cite{}.
 However, studies are often contradictory due to small sample sizes, noisy data and because empirical relationships often do not generalise across taxa.
 Furthermore, the correlation between many traits makes it hard to clearly distinguish which factors are important.
 Knowing the factors that correlate with pathogen richness also does not tell us how it controls richness. 
@@ -114,6 +114,8 @@ One host-species trait that has been largely understudied with respect to pathog
 Population structure has been comprehensively studied with respect to single or competing epidemics in human populations, wildlife populations and technological networks.
 However, as explained above, the assumption that population structures that yield high $R_0$ will also give high pathogen diversity is unfounded.
 
+The assumption that high $R_0$ yields high diversity ignores competitive affects.
+A number of authors have demonstrated a competitive exclusion principle where only the most optimally spreading disease will survive when infection with one pathogen prevents infection with another pathogen \cite{bremermann1989competitive, martcheva2013competitive, ackleh2003competitive, ackleh2014robust, turner2002impact}.
 
 
 \subsubsection{Network structure has been studied}
@@ -142,7 +144,12 @@ Single pathogen epidemics
 
 \subsubsection{Empirical evidence that structure might affect diversity}
 
+% Mammals
 
+
+
+% Bats
+Few studies focus on bats, despite their role in recent zoonoses.
 Maganga \emph{et al.} found that distribution fragmentation predicts viral richness \cite{maganga2014bat}, but \cite{gay2014parasite} finds the opposite relationship. 
 While the data set in \cite{gay2014parasite} is larger, the analysis in \cite{maganga2014bat} is much more focused on fragmentation.
 
@@ -358,7 +365,7 @@ Therefore exclusively juvenile dispersal would have dispersal rates similar to t
 Otherwise it relates to dispersal being a rare event with animals often staying in a colony for many years.
 $\lambda = 0.01$ relates to 20\% of individuals dispersing once in their lifetime.
 This value is therefore close to male-biased dispersal, with female philopatry. 
-Finally, $lambda = 0.001$ relates to 2\% of individuals dispersing in their lifetime.
+Finally, $\lambda = 0.001$ relates to 2\% of individuals dispersing in their lifetime.
 This therefore relates to a population that does not habitually disperse.
 
 
@@ -479,6 +486,16 @@ When dispersal is varied, the population structure is fully connected. When popu
 
 \subsection{Network structure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%1> props
+%  transmission meanK      props
+%1            2     2 0.11976048
+%2            2     9 0.09638554
+%3            5     2 0.22289157
+%4            5     9 0.22155689
+%5           10     2 0.26946108
+%6           10     9 0.33132530
+
 
 The proportion of invasions was not different between highly connected and largely unconnected metapopulations. 
 This was true at all transmission levels ($\chi^2$ test. $\beta = 2$: $\chi^2 = 0.54$, $df = 1$, $p = 0.46$. $\beta = 5$: $\chi^2 = 0.06$, $df = 1$, $p = 0.81$. $\beta = 10$: $\chi^2 = 3.01$, $df = 1$, $p = 0.08$)
