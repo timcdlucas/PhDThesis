@@ -1,0 +1,964 @@
+24/1.5
+16*1.5
+30*1000
+30*1000/(60*24)
+500/24
+1000/16
+1000/(16*24)
+?rasterImage
+24-17
+sqrt((3733.12-3785.32)^2 + (3809.77-3833.37)^2)
+atan((3733.12-3785.32) / (3809.77-3833.37))
+atan( (3809.77-3833.37)/ (3733.12-3785.32) )
+atan( (-3809.77+3833.37)/ (3733.12-3785.32) )
+atan( (-3809.77+3833.37)/ (3733.12-3785.32) )+(2*pi)
+atan((3733.12-3785.32)/ (-3809.77+3833.37))+(2*pi)
+atan((3753.59-3620.43)/ (3735.43-3821.21))
+atan((3753.59-3620.43)/ (3735.43-3821.21))+Pi
+atan((3753.59-3620.43)/ (3735.43-3821.21))+pi
+(3753.59-3620.43)/ (3735.43-3821.21)
+((3753.59-3620.43)/ (3735.43-3821.21))*3735.43-3753.59
+(()(3753.59-3620.43)/ (3735.43-3821.21))*3735.43)-3753.59
+(((3753.59-3620.43)/ (3735.43-3821.21))*3735.43)-3753.59
+sqrt((3753.59-  3577.82)^2 + (3735.43 - 3848.66)^2)
+atan((3753.59-  3577.82)/ (3735.43 - 3848.66))
+atan((3753.59-  3577.82)/ (3735.43 - 3848.66))+(2*pi)
+3733.53 XandY[v*2]: 3761.34 previous_y_animal: 3605.85 previous_x_animal: 3798.94
+plot(y=c(3733.53,3605.85),x=c(3761.34,3798.94))
+3758.83 XandY[v*2]: 3732.06 previous_y_animal: 3816.17 previous_x_animal: 3695.12 current_y_animal: 3862.54 location_x_animal: 3665.25
+plot(y=c(3758.83,3816.17,3862.54),x=c(3732.06,3695.12,3665.25))
+3.71385+pi/2
+3.71385+3*pi/4
+2*pi-0.572261
+atan(-1)
+atan(-1)-pi/2
+(atan(-1)-pi/2)+pi
+(atan(-1)-pi/2)+2*pi
+(atan(-1))
+(atan(-1))+pi
+(atan(-1))+2*pi
+(atan(-1))
+(atan(-1))+pi
+(atan(1))+pi
+(atan(-1))+pi
+(atan(-1))+2*pi
+49995/(1*10^6)
+1/sqrt(2)
+1/sqrt(2)-0.707107
+(1/sqrt(2)-0.707107)>0.001
+1/sqrt(2)
+asin(4/5)
+sin(4/5)
+sin(3/5)
+asin(3/5)
+acos(3/5)
+acos(3/5)*180/pi
+acos(4/5)*180/pi
+asin(4/5)*180/pi
+asin(3/5)
+124/2
+126/2
+.26/2
+1/16
+0.062*10^6
+pi/4
+pi/4+pi
+163/5
+126/4
+(10^6)*0.24
+7500*7500
+10000*10000
+(7500*7500)/(10000*10000)
+2740/60
+1300/60
+21*100/60
+21*1000/(60*24)
+21*20/(60)
+21*50/(60)
+24-17
+24-15
+1290/60
+22*50/(60)
+50/3
+library(Rcpp)#
+#
+sourceCpp("/Users/student/Documents/subsample.cpp")#
+#
+#subsample("/Users/student/Documents/Bats/Simulations/Run23Oct2013,Density=70,Speed=0.00012,Iterations=1-51,StepLength=300,CorrWalkMaxAngleChange=3.14159,Captures.csv","/Users/student/Documents/Bats/Simulations/Run23Oct2013,Density=70,Speed=0.00012,Iterations=1-51,StepLength=300,CorrWalkMaxAngleChange=3.14159,Sensors.csv","/Users/student/Documents/Bats/Simulations/Run23Oct2013,Density=70,Speed=0.00012,Iterations=1-51,StepLength=300,CorrWalkMaxAngleChange=3.14159,Settings.csv")#
+#
+subsample("/Users/student/Documents/Bats/Simulations/Run23Oct2013,Density=70,Speed=0.00012,Iterations=1-51,StepLength=300,CorrWalkMaxAngleChange=3.14159,Sensors.csv","/Users/student/Documents/Bats/Simulations/Run23Oct2013,Density=70,Speed=0.00012,Iterations=1-51,StepLength=300,CorrWalkMaxAngleChange=3.14159,Settings.csv")
+sourceCpp("/Users/student/Documents/subsample.cpp")
+library(Rcpp)#
+#
+sourceCpp("/Users/student/Documents/subsample.cpp")#
+#
+#captures<-c("/Users/student/Documents/Bats/Simulations/Run23Oct2013,Density=70,Speed=0.00012,Iterations=1-51,StepLength=300,CorrWalkMaxAngleChange=3.14159,Captures.csv",#
+#"/Users/student/Documents/Bats/Simulations/Run23Oct2013,Density=70,Speed=0.00012,Iterations=51-101,StepLength=300,CorrWalkMaxAngleChange=3.14159,Captures.csv")#
+captures<-c("/Users/student/Documents/Bats/Simulations/Run23Oct2013Perch0.5,Density=70,Speed=0.46,Iterations=1-51,StepLength=300,CorrWalkMaxAngleChange=0,Captures.csv","/Users/student/Documents/Bats/Simulations/Run23Oct2013Perch0.5,Density=70,Speed=0.46,Iterations=51-101,StepLength=300,CorrWalkMaxAngleChange=0,Captures.csv")#
+#
+captures1<-c("/Users/student/Documents/Bats/Simulations/Run23Oct2013Perch0.5,Density=70,Speed=0.46,Iterations=1-51,StepLength=300,CorrWalkMaxAngleChange=0,Captures.csv")#
+settings<-"/Users/student/Documents/Bats/Simulations/Run23Oct2013,Density=70,Speed=0.00012,Iterations=1-51,StepLength=300,CorrWalkMaxAngleChange=3.14159,Settings.csv"#
+sensors<-"/Users/student/Documents/Bats/Simulations/Run23Oct2013,Density=70,Speed=0.00012,Iterations=1-51,StepLength=300,CorrWalkMaxAngleChange=3.14159,Sensors.csv"#
+#
+subsample(captures,sensors,settings)
+library(plotKML)
+data(eberg_contours)
+plotKML(eberg_contours)
+plotKML(eberg)
+data(eberg)
+coordinates(eberg)<- ±X+Y
+coordinates(eberg)<- ~X+Y
+plotKML(eberg["CLYNET_A"])
+names(eberg)
+plotKML(eberg["CLYMHT_A"])
+library(sp)
+plotKML(eberg["CLYNET_A"])
+plotKML(eberg["CLYNET_A",])
+plotKML(eberg_contours)
+getwd()
+library(CircStats)
+?dwrcauchy
+?dwrpcauchy
+dweibull
+?dweibull
+plot(rweibull(1000,8,1))
+hist(rweibull(1000,8,1))
+hist(rweibull(1000,800,1))
+hist(rweibull(1000,8,800))
+4/27
+3/27
+3.5/27
+3.5/27.5
+7*8
+7*4
+7*4*6
+26*26
+4*8
+5000/750
+360-90-138
+132/3
+132/3*2
+1+8+8+6
+13+16+18+15+16
+7.38*37.5
+7.38*37.5*4*3
+8.8*37.5*4*3
+8.8*37.5
+65*5*6
+65*5*4*3
+37.68/pi
+sqrt(37.68/pi)
+2*sqrt(2)
+sqrt(37.68)
+sqrt(37.68)/pi
+sqrt(37.68/pi)
+1/sqrt(37.68/pi)
+13/47
+29/47
+36/47
+4/47
+sqrt(2^2+2^2)
+9109*4
+9109/4
+9109/(24*4)
+900/60
+9109/(24*4)
+0.176/0.469
+(0.469-0.176)/0.469
+38/4
+5*5
+5*6
+5*1
+5*5+5
+5*10+5
+24-7
+20/180
+1/9
+100/180
+5/9
+exp(4.23)
+exp(7)
+1.74533/pi
+1.74533/pi*180
+1.0472/pi*180
+library(R2WinBUGS)
+?R2WinBUGS
+2228/60
+sample(1:10,10000,replace=T)
+2014-1972
+55 - 2014+1972
+2.85599/pi*180
+2.85599/pi
+3.14159/pi
+pi/10*180
+10/180*pi
+170/180*pi
+160/180*pi
+165/180*pi
+180*pi
+1/180*pi
+1/11
+2/11
+2.57039/pi
+9/11
+pi
+10/11*pi
+3/11*pi
+2/11*pi
+1/11*pi
+plot(density(rgamma(n=100,0.01,0.01)))
+plot(density(rgamma(n=1000,0.01,0.01)))
+plot(density(rgamma(n=10000,shape=0,scale=1)))
+plot(density(rgamma(n=10000,shape=5,scale=1)))
+1.01*10^-4*1000
+log(1.01*10^-4*1000)
+log(1.01*10^-3*1000)
+250/30
+plot(density(rgamma(10000,5,1)))
+####
+# Parameters#
+N=5000 # Number of #
+SHAPE<-c(7,3);SCALE<-c(NA,2.5)#
+EPS<-5.5; SCALE[1] <-SCALE[2]+EPS#
+MU<-c(0,3.14);RHO<-c(0.5,0.5);#
+STATE=c(0.5,0.5)#
+parameters<-list(SHAPE=SHAPE,SCALE=SCALE,MU=MU,RHO=RHO,STATE=STATE)#
+simulated.movement<-as.data.frame(matrix(ncol=8,nrow=0))#
+names(simulated.movement)<-c("UTM_X_Zone","UTM_Y_Zone","Date_Time","Dist_Difference","ChangeAngle","True_State","AnimID","Sex")#
+no.of.steps<-24*(12*30)/5#
+count<-0#
+I=8;J=2#
+for(i in 1:I){#
+	if(i<I/2){Sex<-"F"}else{Sex<-"M"}#
+	for(j in 1:J){#
+		count<-count+1#
+		move<-path.of.animal(no.of.steps,seed = count,parameters)#
+		AnimID<-rep(i,dim(move)[1]) # where i becomes the ID of the animal#
+		new.move<-cbind(move,AnimID,Sex)#
+		simulated.movement<-rbind(simulated.movement,new.move)#
+	}#
+}#
+names(simulated.movement)<-c("UTM_X_Zone","UTM_Y_Zone","Date_Time","Dist_Difference","ChangeAngle","True_State","AnimID","Sex")#
+#
+# Runs through the problem though the monthly thing#
+test.sim<-Months(simulated.movement,0,3)
+#--------------------------------#
+# Project title: Snow leopards#
+##
+# Elizabeth Moorcroft: Created: 19 August 2014#
+# #
+# Script title: Snow Leopard Simulation of movement#
+# Purpose: Creates dummy movement data#
+#--------------------------------#
+####
+library(RColorBrewer)#
+library(GISTools)#
+####
+# Functions#
+#	  x#
+#    ___#
+#	|  /#
+# y | / h#
+#	|/#
+# sin(theta) = x/h#
+#  -> x=sin(theta)*h#
+# cos(theta) = y/h#
+#  -> y=cos(theta)*h #
+#
+new.location<-function(current.location, distance, angle){#
+	new.location<-c()#
+	new.location[1]<-distance*sin(angle)+current.location[1]#
+	new.location[2]<-distance*cos(angle)+current.location[2]#
+	return(new.location)#
+}#
+#
+# distance calculation given state#
+distance.simulation<-function(seed,state,SHAPE,SCALE){#
+	if(state==1){#
+		shape = SHAPE[1];scale = SCALE[1]#
+	} else{#
+		shape = SHAPE[2];scale = SCALE[2]#
+	}#
+	set.seed(seed)#
+	distance<-exp(rweibull(n=1, shape, scale))#
+	return(distance)#
+}#
+#
+# angle calculation given state#
+angle.simulation<-function(seed,state,MU,RHO){#
+	angle<-NaN#
+	if(state==1){#
+		mu = MU[1];rho = RHO[1]#
+	} else{#
+		mu = MU[2];rho = RHO[2]#
+	}#
+	while(is.nan(angle)){#
+		set.seed(seed)#
+		seed<-sample(10^9,1)#
+		angle<-rwrpcauchy(n=1,location=mu,rho =rho)#
+	}#
+	return(angle)#
+}#
+path.of.animal<-function(number.of.steps,seed,parameters){#
+	# Creates a stream of random numbers#
+	set.seed(seed)#
+	random.stream<-sample(size=number.of.steps,x=number.of.steps*10^6)#
+	# Sets the initial time and location and state#
+	new.time<-as.POSIXlt('2000-1-1 00:00:00')#
+	current.state<-rbinom(1,1,0.5)#
+	new.location.est<-c(rnorm(1,0,100),rnorm(1,0,100))#
+	current.location<-matrix(ncol=6,c(new.location.est,as.character(new.time),NA,NA,current.state))#
+	#print(current.location)#
+	for(step in 1:number.of.steps){#
+		set.seed(random.stream[step])#
+		random.stream.two<-sample(size=50,x=50*10^6)#
+		set.seed(random.stream.two[10])#
+		if(current.state==1){#
+			current.state<-rbinom(n=1,size=1,prob=parameters$STATE[2])#
+		} else{#
+			current.state<-rbinom(n=1,size=1,prob=parameters$STATE[1])#
+		}#
+		distance<-distance.simulation(seed=random.stream.two[20],#
+										state=current.state,parameters$SHAPE,parameters$SCALE)#
+		angle<-angle.simulation(seed=random.stream.two[30],#
+										state=current.state,parameters$MU,parameters$RHO)#
+		new.time<-new.time+5*60*60+rnorm(1,0,15)#
+		new.location.est<-new.location(new.location.est, distance, angle)#
+		current.location<-rbind(current.location,c(new.location.est,as.character(new.time),distance,angle,current.state))		#
+	}#
+	colnames(current.location)<-c("x","y","Date_Time","Dist_Difference","ChangeAngle","True_State")#
+	return(current.location)#
+}#
+#
+####
+# Parameters#
+N=5000 # Number of #
+SHAPE<-c(7,3);SCALE<-c(NA,2.5)#
+EPS<-5.5; SCALE[1] <-SCALE[2]+EPS#
+MU<-c(0,3.14);RHO<-c(0.5,0.5);#
+STATE=c(0.5,0.5)#
+parameters<-list(SHAPE=SHAPE,SCALE=SCALE,MU=MU,RHO=RHO,STATE=STATE)#
+simulated.movement<-as.data.frame(matrix(ncol=8,nrow=0))#
+names(simulated.movement)<-c("UTM_X_Zone","UTM_Y_Zone","Date_Time","Dist_Difference","ChangeAngle","True_State","AnimID","Sex")#
+no.of.steps<-24*(12*30)/5#
+count<-0#
+I=8;J=2#
+for(i in 1:I){#
+	if(i<I/2){Sex<-"F"}else{Sex<-"M"}#
+	for(j in 1:J){#
+		count<-count+1#
+		move<-path.of.animal(no.of.steps,seed = count,parameters)#
+		AnimID<-rep(i,dim(move)[1]) # where i becomes the ID of the animal#
+		new.move<-cbind(move,AnimID,Sex)#
+		simulated.movement<-rbind(simulated.movement,new.move)#
+	}#
+}#
+names(simulated.movement)<-c("UTM_X_Zone","UTM_Y_Zone","Date_Time","Dist_Difference","ChangeAngle","True_State","AnimID","Sex")#
+#
+# Runs through the problem though the monthly thing#
+test.sim<-Months(simulated.movement,0,3)
+library(CircStats)
+####
+# Parameters#
+N=5000 # Number of #
+SHAPE<-c(7,3);SCALE<-c(NA,2.5)#
+EPS<-5.5; SCALE[1] <-SCALE[2]+EPS#
+MU<-c(0,3.14);RHO<-c(0.5,0.5);#
+STATE=c(0.5,0.5)#
+parameters<-list(SHAPE=SHAPE,SCALE=SCALE,MU=MU,RHO=RHO,STATE=STATE)#
+simulated.movement<-as.data.frame(matrix(ncol=8,nrow=0))#
+names(simulated.movement)<-c("UTM_X_Zone","UTM_Y_Zone","Date_Time","Dist_Difference","ChangeAngle","True_State","AnimID","Sex")#
+no.of.steps<-24*(12*30)/5#
+count<-0#
+I=8;J=2#
+for(i in 1:I){#
+	if(i<I/2){Sex<-"F"}else{Sex<-"M"}#
+	for(j in 1:J){#
+		count<-count+1#
+		move<-path.of.animal(no.of.steps,seed = count,parameters)#
+		AnimID<-rep(i,dim(move)[1]) # where i becomes the ID of the animal#
+		new.move<-cbind(move,AnimID,Sex)#
+		simulated.movement<-rbind(simulated.movement,new.move)#
+	}#
+}#
+names(simulated.movement)<-c("UTM_X_Zone","UTM_Y_Zone","Date_Time","Dist_Difference","ChangeAngle","True_State","AnimID","Sex")#
+#
+# Runs through the problem though the monthly thing#
+test.sim<-Months(simulated.movement,0,3)
+Months<-function(data,min,Noofmonths){#
+    # Select the correct months#
+    months<-as.POSIXlt(data$Date_Time)$mon#
+    Mrows<-which(months>=min & months<(min+Noofmonths))#
+    if((min+Noofmonths)>11){#
+      leftover<-min+Noofmonths-13#
+      Mrows<-c(Mrows,which(months>=0 & months<leftover))#
+    }#
+    print(length(Mrows))#
+    data<-data[Mrows,]#
+    RunFiveHrs<-vector(length=dim(data)[1])#
+    LRunFiveHrs<-vector(length=dim(data)[1])#
+    data<-cbind(data,RunFiveHrs)#
+    data<-cbind(data,LRunFiveHrs)#
+    data$RunFiveHrs<-NA#
+    data$LRunFiveHrs<-NA#
+    count<-1#
+    ind<-1#
+    data$RunFiveHrs[1] <- count#
+    row.numbers<-list(); vector.of.current.rows<-c(1)#
+    for(i in 2:dim(data)[1]){#
+      time<- abs(difftime(data$Date_Time[i],data$Date_Time[i-1],units="hours"))#
+      if(#
+        data$AnimID[i-1]==data$AnimID[i] &#
+          (#
+            ( time <5.5 &  time >4.5 )#
+            |#
+            (  time <10.5 & time >9.5 )#
+            |#
+            (  time <15.5 & time >14.5 )#
+            |#
+            (  time <20.5 & time >19.5 )#
+            |#
+            (  time <25.5 & time >24.5 )#
+            |#
+            (  time <30.5 & time >29.5 )#
+          )#
+        )#
+      {#
+        data$RunFiveHrs[i] <- count#
+        ind<-ind+1#
+        vector.of.current.rows<-c( vector.of.current.rows,i)#
+      }else{#
+      	#print(vector.of.current.rows)#
+      	row.numbers[[length(row.numbers)+1]]<-vector.of.current.rows # New item added to list#
+      	vector.of.current.rows<-c(i)#
+        #print(paste(i,"/",dim(data)[1], "- new number ", time))    #
+        data$LRunFiveHrs[i-1] <- ind#
+        count<-count+1#
+        ind<-1#
+        data$RunFiveHrs[i] <- count#
+      }#
+    }#
+   row.numbers[[length(row.numbers)+1]]<-vector.of.current.rows #
+    resultslist<-vector(mode="list")#
+    animallist<-vector(mode="list")#
+    rowlist<-vector(mode="list")#
+    t<-table(data$RunFiveHrs)#
+    RunNumbers<-as.numeric(names(t))#
+    count<-1#
+    for(i in 1:max(RunNumbers)){#
+      tempdata<-data[which(data$RunFiveHrs==RunNumbers[i]),]#
+      print(tempdata[2,]);print(as.POSIXct(tempdata[2,3]))#
+      if(dim(tempdata)[1]>25){#
+        resultslist[[count]]<-addBlankrows(tempdata)#
+        animallist[[count]]<-c(unique(tempdata$AnimID),unique(tempdata$Sex))#
+        rowlist[[count]]<-row.numbers[[i]]#
+        count= count+1#
+      }#
+    }#
+    lengths<-sapply(resultslist,function(x) dim(x)[1])#
+    print(lengths)#
+    maxrownum<-max(lengths,na.rm=T)#
+    DataInHMMform<-matrix(nrow=maxrownum,ncol=0)#
+    for(i in 1:(count-1)){#
+      diff<-maxrownum-dim(resultslist[[i]])[1]#
+      temp<-matrix(ncol=2,nrow=diff)#
+      tempanimal<-rbind(resultslist[[i]],temp)#
+      DataInHMMform<-cbind(DataInHMMform,tempanimal)#
+    }#
+    returnvalues<-list("5HrsData" = DataInHMMform, "ID&Sex" = animallist,"Rownumbers"=rowlist)#
+    return(returnvalues)#
+}#
+#
+addBlankrows<-function(data){#
+  Output<-matrix(ncol=2,nrow=1)#
+  Output[1,1]<-data$Dist_Difference[1];Output[1,2]<-data$ChangeAngle[1];#
+  for(i in 2:dim(data)[1]){#
+      time<- abs(difftime(data$Date_Time[i],data$Date_Time[i-1],units="hours"))#
+      distance<-as.numeric(as.character(data$Dist_Difference[i]))#
+      angle<-as.numeric(as.character(data$ChangeAngle[i]))#
+      if( time <10.5 & time >9.5 )#
+      {#
+        temp<-matrix(ncol=2,nrow=2,c(rep(NA,2),distance,angle),byrow=TRUE)#
+      }#
+      else if( time <15.5 & time >14.5 )#
+      {#
+        temp<-matrix(ncol=2,nrow=3,c(rep(NA,4),distance,angle),byrow=TRUE)#
+      }#
+      else if( time <20.5 & time >19.5 )#
+      {#
+        temp<-matrix(ncol=2,nrow=4,c(rep(NA,6),distance,angle),byrow=TRUE)#
+      }#
+      else if( time <25.5 & time >24.5 )#
+      {#
+        temp<-matrix(ncol=2,nrow=5,c(rep(NA,8),distance,angle),byrow=TRUE)#
+      }#
+      else if( time <30.5 & time >29.5 )#
+      {#
+        temp<-matrix(ncol=2,nrow=6,c(rep(NA,10),distance,angle),byrow=TRUE)#
+      }#
+      else#
+      {#
+        temp<-matrix(ncol=2,nrow=1,c(distance,angle),byrow=TRUE)#
+      }#
+      Output<-rbind(Output,temp)#
+   }#
+  Output[,1]<-Output[,1]/1000#
+  Output[,2]<-Output[,2]#
+  Output[which(Output[,2]<0),2]<-Output[which(Output[,2]<0),2]+2*pi#
+  return(Output)#
+}
+test.sim<-Months(simulated.movement,0,3)
+plot.movement<-function(data){#
+	plot(data[,1],data[,2],type="l")#
+	text(data[1,1],data[1,2],label="start")#
+	l.data<-length(data);text(data[1,l.data],data[1,l.data],label="start")#
+}
+plot(simulated.movement[1:100,1],simulated.movement[1:100,2],type="l")
+simulated.movement[1:100,1]
+simulated.movement[1:100,2]
+plot(simulated.movement[1:100,1],simulated.movement[1:100,2],type="l")
+simulated.movement[1:100,1]
+simulated.movement[1:100,1]/1000
+as.numeric(as.character(simulated.movement[1:100,1:2]))
+as.numeric(as.character(simulated.movement[1,1]))
+x<-as.numeric(as.character(simulated.movement[1:100,1]))
+x
+y<-as.numeric(as.character(simulated.movement[1:100,2]))
+plot(x,y,type="l")
+plot.movement<-function(data){#
+	x<-as.numeric(as.character(data[,1]));y<-as.numeric(as.character(data[,2]));#
+	plot(x,y,type="l")#
+	text(x[1],y[1],label="start")#
+	l.data<-length(data);text(x[l.data],y[l.data],label="end")#
+}
+plot.movement(simulated.movement[test[[3]][[1]]])
+plot.movement(simulated.movement[test.sim[[3]][[1]]])
+plot.movement(simulated.movement[test.sim[[3]][[1]],])
+plot.movement<-function(data){#
+	x<-as.numeric(as.character(data[,1]));y<-as.numeric(as.character(data[,2]));#
+	plot(x,y,type="l")#
+	text(x[1],y[1],label="start")#
+	l.data<-length(x);text(x[l.data],y[l.data],label="end")#
+}
+plot.movement(simulated.movement[test.sim[[3]][[1]],])
+for(i in 1:length(test.sim[[3]])){#
+	plot.movement(simulated.movement[test.sim[[3]][[i]],])#
+}
+plot(density(simulated.movement$Dist_Difference))
+names(simulated.movement)
+plot(density(as.numeric(as.character(simulated.movement$Dist_Difference))))
+plot(density(as.numeric(as.character(simulated.movement$Dist_Difference)),na.rm=T))
+exp(10)
+exp(8)
+exp(9)
+exp(9.5)
+# distance calculation given state#
+distance.simulation<-function(seed,state,SHAPE,SCALE){#
+	distance<-11#
+	if(state==1){#
+		shape = SHAPE[1];scale = SCALE[1]#
+	} else{#
+		shape = SHAPE[2];scale = SCALE[2]#
+	}#
+	set.seed(seed)#
+	while(distance>10){#
+		seed.new<-sample(x=1:10^9,size=100)[100]#
+		set.seed(seed.new)#
+		distance<-rweibull(n=1, shape, scale)#
+	}#
+	distance<-exp(distance)#
+	return(distance)#
+}
+####
+# Parameters#
+N=5000 # Number of #
+SHAPE<-c(7,3);SCALE<-c(NA,2.5)#
+EPS<-5.5; SCALE[1] <-SCALE[2]+EPS#
+MU<-c(0,3.14);RHO<-c(0.5,0.5);#
+STATE=c(0.5,0.5)#
+parameters<-list(SHAPE=SHAPE,SCALE=SCALE,MU=MU,RHO=RHO,STATE=STATE)#
+simulated.movement<-as.data.frame(matrix(ncol=8,nrow=0))#
+names(simulated.movement)<-c("UTM_X_Zone","UTM_Y_Zone","Date_Time","Dist_Difference","ChangeAngle","True_State","AnimID","Sex")#
+no.of.steps<-24*(12*30)/5#
+count<-0#
+I=8;J=2#
+for(i in 1:I){#
+	if(i<I/2){Sex<-"F"}else{Sex<-"M"}#
+	for(j in 1:J){#
+		count<-count+1#
+		move<-path.of.animal(no.of.steps,seed = count,parameters)#
+		AnimID<-rep(i,dim(move)[1]) # where i becomes the ID of the animal#
+		new.move<-cbind(move,AnimID,Sex)#
+		simulated.movement<-rbind(simulated.movement,new.move)#
+	}#
+}#
+names(simulated.movement)<-c("UTM_X_Zone","UTM_Y_Zone","Date_Time","Dist_Difference","ChangeAngle","True_State","AnimID","Sex")#
+#
+# Runs through the problem though the monthly thing#
+test.sim<-Months(simulated.movement,0,3)
+distance.simulation<-function(seed,state,SHAPE,SCALE){#
+	distance<-11#
+	if(state==1){#
+		shape = SHAPE[1];scale = SCALE[1]#
+	} else{#
+		shape = SHAPE[2];scale = SCALE[2]#
+	}#
+	set.seed(seed)#
+	count<-0#
+	while(distance>10){#
+		print(paste("count =",count))#
+		seed.new<-sample(x=1:10^9,size=100)[100]#
+		set.seed(seed.new)#
+		distance<-rweibull(n=1, shape, scale)#
+		count=count+1#
+	}#
+	distance<-exp(distance)#
+	return(distance)#
+}
+simulated.movement<-as.data.frame(matrix(ncol=8,nrow=0))#
+names(simulated.movement)<-c("UTM_X_Zone","UTM_Y_Zone","Date_Time","Dist_Difference","ChangeAngle","True_State","AnimID","Sex")#
+no.of.steps<-24*(12*30)/5#
+count<-0#
+I=8;J=2#
+for(i in 1:I){#
+	if(i<I/2){Sex<-"F"}else{Sex<-"M"}#
+	for(j in 1:J){#
+		count<-count+1#
+		move<-path.of.animal(no.of.steps,seed = count,parameters)#
+		AnimID<-rep(i,dim(move)[1]) # where i becomes the ID of the animal#
+		new.move<-cbind(move,AnimID,Sex)#
+		simulated.movement<-rbind(simulated.movement,new.move)#
+	}#
+}
+distance.simulation<-function(seed,state,SHAPE,SCALE){#
+	distance<-11#
+	if(state==1){#
+		shape = SHAPE[1];scale = SCALE[1]#
+	} else{#
+		shape = SHAPE[2];scale = SCALE[2]#
+	}#
+	set.seed(seed)#
+	count<-0#
+	#while(distance>10){#
+		print(paste("count =",count))#
+		seed.new<-sample(x=1:10^9,size=100)[100]#
+		set.seed(seed.new)#
+		distance<-rweibull(n=1, shape, scale)#
+		count=count+1#
+	#}#
+	distance<-exp(distance)#
+	return(distance)#
+}
+simulated.movement<-as.data.frame(matrix(ncol=8,nrow=0))#
+names(simulated.movement)<-c("UTM_X_Zone","UTM_Y_Zone","Date_Time","Dist_Difference","ChangeAngle","True_State","AnimID","Sex")#
+no.of.steps<-24*(12*30)/5#
+count<-0#
+I=8;J=2#
+for(i in 1:I){#
+	if(i<I/2){Sex<-"F"}else{Sex<-"M"}#
+	for(j in 1:J){#
+		count<-count+1#
+		move<-path.of.animal(no.of.steps,seed = count,parameters)#
+		AnimID<-rep(i,dim(move)[1]) # where i becomes the ID of the animal#
+		new.move<-cbind(move,AnimID,Sex)#
+		simulated.movement<-rbind(simulated.movement,new.move)#
+	}#
+}
+distance.simulation<-function(seed,state,SHAPE,SCALE){#
+	distance<-11#
+	if(state==1){#
+		shape = SHAPE[1];scale = SCALE[1]#
+	} else{#
+		shape = SHAPE[2];scale = SCALE[2]#
+	}#
+	set.seed(seed)#
+	count<-0#
+	while(distance>10){#
+		print(paste("count =",count))#
+		seed.new<-sample(x=1:10^9,size=100)[100]#
+		set.seed(seed.new)#
+		distance<-rweibull(n=1, shape, scale)#
+		count=count+1#
+	}#
+	distance<-exp(distance)#
+	return(distance)#
+}
+simulated.movement<-as.data.frame(matrix(ncol=8,nrow=0))#
+names(simulated.movement)<-c("UTM_X_Zone","UTM_Y_Zone","Date_Time","Dist_Difference","ChangeAngle","True_State","AnimID","Sex")#
+no.of.steps<-24*(12*30)/5#
+count<-0#
+I=8;J=2#
+for(i in 1:I){#
+	if(i<I/2){Sex<-"F"}else{Sex<-"M"}#
+	for(j in 1:J){#
+		count<-count+1#
+		move<-path.of.animal(no.of.steps,seed = count,parameters)#
+		AnimID<-rep(i,dim(move)[1]) # where i becomes the ID of the animal#
+		new.move<-cbind(move,AnimID,Sex)#
+		simulated.movement<-rbind(simulated.movement,new.move)#
+	}#
+}
+path.of.animal<-function(number.of.steps,seed,parameters){#
+	# Creates a stream of random numbers#
+	set.seed(seed)#
+	random.stream<-sample(size=number.of.steps,x=number.of.steps*10^6)#
+	# Sets the initial time and location and state#
+	new.time<-as.POSIXlt('2000-1-1 00:00:00')#
+	current.state<-rbinom(1,1,0.5)#
+	new.location.est<-c(rnorm(1,0,100),rnorm(1,0,100))#
+	current.location<-matrix(ncol=6,c(new.location.est,as.character(new.time),NA,NA,current.state))#
+	#print(current.location)#
+	for(step in 1:number.of.steps){#
+		print(paste("step =",step))#
+		set.seed(random.stream[step])#
+		random.stream.two<-sample(size=50,x=50*10^6)#
+		set.seed(random.stream.two[10])#
+		if(current.state==1){#
+			current.state<-rbinom(n=1,size=1,prob=parameters$STATE[2])#
+		} else{#
+			current.state<-rbinom(n=1,size=1,prob=parameters$STATE[1])#
+		}#
+		distance<-distance.simulation(seed=random.stream.two[20],#
+										state=current.state,parameters$SHAPE,parameters$SCALE)#
+		angle<-angle.simulation(seed=random.stream.two[30],#
+										state=current.state,parameters$MU,parameters$RHO)#
+		new.time<-new.time+5*60*60+rnorm(1,0,15)#
+		new.location.est<-new.location(new.location.est, distance, angle)#
+		current.location<-rbind(current.location,c(new.location.est,as.character(new.time),distance,angle,current.state))		#
+	}#
+	colnames(current.location)<-c("x","y","Date_Time","Dist_Difference","ChangeAngle","True_State")#
+	return(current.location)#
+}
+simulated.movement<-as.data.frame(matrix(ncol=8,nrow=0))#
+names(simulated.movement)<-c("UTM_X_Zone","UTM_Y_Zone","Date_Time","Dist_Difference","ChangeAngle","True_State","AnimID","Sex")#
+no.of.steps<-24*(12*30)/5#
+count<-0#
+I=8;J=2#
+for(i in 1:I){#
+	if(i<I/2){Sex<-"F"}else{Sex<-"M"}#
+	for(j in 1:J){#
+		count<-count+1#
+		move<-path.of.animal(no.of.steps,seed = count,parameters)#
+		AnimID<-rep(i,dim(move)[1]) # where i becomes the ID of the animal#
+		new.move<-cbind(move,AnimID,Sex)#
+		simulated.movement<-rbind(simulated.movement,new.move)#
+	}#
+}
+no.of.steps<-24*(12*30)/5
+no.of.steps
+6.5/8
+0.8125*2.2
+6.5*2.2
+55*2.2/14
+##########################################################################
+# Project title: Calculating denisty of animals from number of captures ##
+# Project: Bat Project					                            	##
+#                                                                   	##
+# Author: Elizabeth Moorcroft                                       	##
+# Date created: Who knows?!                                         	##
+#                                                                  	 	##
+# Edited by: -                                                     		##
+# Edited on: -			                                            	##
+#                                                                   	##
+# Script title: Density calculation	         	                    	##
+# Script purpose:Calculate the density form the simulation using		##
+#                  - Tim's Function	(Not implemented)			        ##
+#                  - Marcus' Function                    				##
+#                                                                   	##
+##########################################################################
+rm(list=ls(all=TRUE)) #
+#
+######################
+# Libraries 		##
+######################
+library("RColorBrewer")#
+library("plotrix")#
+######################
+# Directory			##
+######################
+DIR_DATA<-"/Users/student/Documents/Bats/Simulations"#
+DIR_SAVE<-"/Users/student/Documents/Bats/Simulations"#
+DIR_IMG<-"/Users/student/Documents/Bats/lucasMoorcroftManuscript/imgs"#
+#DIR_IMG<-"/Users/student/Documents/Bats/Temp"#
+DIR_CODE<-"/Users/student/Documents/Bats/R analysis code"#
+######################
+# Source code		##
+######################
+setwd(DIR_CODE)#
+source("Tim's original bat code.R")#
+source("calculateProfileWidth.R")#
+source("ModelSelect.R")#
+source("subfunctions.R")#
+#
+######################
+# Colours 			##
+######################
+COLset1=brewer.pal(9,"Set1")#
+COLset2=brewer.pal(8,"Set2")#
+COLset3=brewer.pal(12,"Set3")#
+#
+COLsets=rep(c(COLset1,COLset2,COLset3),4)#
+#
+COLmodel<-matrix(ncol=2,nrow=4)#
+COLmodel[1,]<-c("NW1", COLset3[3])#
+COLmodel[2,]<-c("SW1", COLset3[11])#
+COLmodel[3,]<-c("NE1", COLset3[1])#
+COLmodel[4,]<-c("SE3", COLset3[11])#
+##################################
+# Load in Settings				##
+##################################
+setwd(DIR_DATA)#
+Settings<-read.csv("Run23Oct201317July0,Density=70,Speed=0.46,Iterations=1-101,StepLength=900,CorrWalkMaxAngleChange=0,Settings.csv")#
+Cameras<-read.csv("Run23Oct201317July0,Density=70,Speed=0.46,Iterations=1-101,StepLength=900,CorrWalkMaxAngleChange=0,Sensors.csv")#
+#
+##################################
+# Setting variables				##
+##################################
+NoOfIterations	<-5#100 #Settings[which(Settings[,1] %in% "NoOfIterations"),2]#
+Seed			<-Settings[which(Settings[,1] %in% "Seed"),2]#
+NoOfSteps		<-Settings[which(Settings[,1] %in% "NoSteps"),2]#
+StepLength		<-Settings[which(Settings[,1] %in% "StepLength"),2]#
+CameraCallRadius<-Settings[which(Settings[,1] %in% "DetectorRadius"),2]#
+CameraSpeed		<-Settings[which(Settings[,1] %in% "SpeedCamera"),2]#
+Speed			<-Settings[which(Settings[,1] %in% "AnimalSpeed"),2]#
+NoofAnimals		<-Settings[which(Settings[,1] %in% "NoOfAnimals"),2]#
+Area			<-Settings[which(Settings[,1] %in% "Area"),2]#
+LengthMonitoring<-Settings[which(Settings[,1] %in% "LengthMonitoring"),2]#
+Time			<-NoOfSteps*StepLength#
+Density			<-NoofAnimals/(Area)#
+#
+##################################
+# Load Data						##
+##################################
+loadindata<-read.csv("Run23Oct201317July0,Density=70,Speed=0.46,Iterations=1-101,StepLength=900,CorrWalkMaxAngleChange=0,TestCounts6Aug.csv",header=FALSE)#
+x<-loadindata[,-dim(loadindata)[2]]#
+#
+Data<-x[-c(1:3),-1]#
+header<-x[c(1:3),-1]#
+#
+capsrow<-which(x[,1]=="Captures")#
+sensorrow<-which(x[,1]=="Sensor")#
+callrow<-which(x[,1]=="Call")#
+estimatesmatrix<-matrix(nrow=dim(Data)[1]+3,ncol=dim(Data)[2])#
+#
+#for(i in 1:dim(Data)[2]){#
+for(i in 1:836){#
+	print(paste(i,"/",dim(Data)[2]))#
+	profile<-cameraprofile(SensorNo=header[sensorrow,i], SensorInfo=Cameras, Callwidth=header[callrow,i]*2)[[1]]#
+	model<-pickmodel(sensor=Cameras[which(header[sensorrow,i]==Cameras$ID),]$HalfWidthAngle*2,call=header[callrow,i]*2)#
+	estimatesmatrix[1,i]<-model#
+	print("model select")#
+	if((header[callrow,i] == 3.14159 & Cameras[which(header[sensorrow,i]==Cameras$ID),]$HalfWidthAngle == 1.04720)||#
+		(header[callrow,i] == 1.428 & Cameras[which(header[sensorrow,i]==Cameras$ID),]$HalfWidthAngle == 1.04720)||#
+		(header[callrow,i] == 3.14159 & Cameras[which(header[sensorrow,i]==Cameras$ID),]$HalfWidthAngle == 1.74533)||#
+		(header[callrow,i] == 1.428 & Cameras[which(header[sensorrow,i]==Cameras$ID),]$HalfWidthAngle == 1.74533)#
+	){estimatesmatrix[2,i]<-"Y"}else{estimatesmatrix[2,i]<-"N"}#
+	estimatesmatrix[3,i]<-header[capsrow,i]#
+	print("time")#
+	Time<-Data[,i]#
+	print(mean(Time/(60*60)))#
+	Captures<-header[capsrow,i]#
+	estimatesmatrix[4:(dim(Data)[1]+3),i]<-((1/profile)*Captures/(Speed*Time))*(1000^2)#
+}#
+#
+testcases<-estimatesmatrix[,which(estimatesmatrix[2,]=="Y")]#
+NW1<-testcases[,which(testcases[1,]=="NW1" & as.numeric(testcases[3,])>0)]#
+SW1<-testcases[,which(testcases[1,]=="SW1" & as.numeric(testcases[3,])>0)]#
+NE1<-testcases[,which(testcases[1,]=="NE1" & as.numeric(testcases[3,])>0)]#
+SE3<-testcases[,which(testcases[1,]=="SE3" & as.numeric(testcases[3,])>0)]#
+PlusMinusPerError<-70#
+#
+maxval<-(dim(Data)[1]+3)#
+yval<-10#
+#
+CV<-function(data){round(sd(data)/mean(data),2)}#
+#
+setwd(DIR_IMG)#
+pdf("ResultsNoCaptures.pdf")#
+par(mfrow=c(4,1),oma=c(3,3,0,0), mar=c(2,4,2,0.5))#
+plot(0,0,type="n",xlim=c(1,yval),ylim=c(0-PlusMinusPerError,0+PlusMinusPerError),#
+	ylab="",xlab="", axes=FALSE#
+	,main="")#
+	box()#
+abline(h=0,lty=2,col="grey")#
+#mtext(side=1,at=c(2,4,6,8,10),text=expression(20,40,60,80,100),line=1)#
+mtext(side=2,at=c(-PlusMinusPerError,0,PlusMinusPerError),text=c(-PlusMinusPerError,0,PlusMinusPerError),line=1)#
+mtext(text="NW1",side=3,line=0)#
+for(i in 1:dim(NW1)[2]){#
+	model<-"NW1"#
+	COL<-COLmodel[which(COLmodel==model),2]#
+	data<-as.numeric(NW1[4:maxval,i])#
+	dataerr<-data - Density*1000^2#
+	cv<-CV(data)#
+	boxplot(dataerr,add=T, at=as.numeric(NW1[3,i])/10, axes=FALSE,col=COL)#
+	text(x=as.numeric(NW1[3,i])/10,y=min(dataerr)-10, label=paste(cv ),cex=1)#
+	w.test<-wilcox.test(data,mu=Density*1000^2)$p.value#
+	sig.value<-0.05/dim(SE3)[2]; if(w.test<sig.value){sig<-"yes"}else{sig<-"no"}#
+	print(paste("Number of caps:",as.numeric(NW1[3,i])/10 ,"CV",sd(data)/mean(data), " p-value: ", w.test, " significant ", sig))#
+}#
+#
+plot(0,0,type="n",xlim=c(1,yval),ylim=c(0-PlusMinusPerError,0+PlusMinusPerError),#
+	ylab="",xlab="", axes=FALSE#
+	,main="")#
+box()#
+abline(h=0,lty=2,col="grey")#
+#mtext(side=1,at=c(2,4,6,8,10),text=expression(20,40,60,80,100),line=1)#
+mtext(side=2,at=c(-PlusMinusPerError,0,PlusMinusPerError),text=c(-PlusMinusPerError,0,PlusMinusPerError),line=1)#
+mtext(text="SW1",side=3,line=0)#
+for(i in 1:dim(SW1)[2]){#
+	model<-"SW1"#
+	COL<-COLmodel[which(COLmodel==model),2]#
+	data<-as.numeric(SW1[4:maxval,i])#
+	dataerr<-data - Density*1000^2#
+	cv<-CV(data)#
+	boxplot(dataerr,add=T, at=as.numeric(SW1[3,i])/10, axes=FALSE,col=COL)#
+	text(x=as.numeric(SW1[3,i])/10,y=min(dataerr)-10, label=paste(cv ),cex=1)#
+	w.test<-wilcox.test(data,mu=Density*1000^2)$p.value#
+	sig.value<-0.05/dim(SE3)[2]; if(w.test<sig.value){sig<-"yes"}else{sig<-"no"}#
+#
+	print(paste("Number of caps:",as.numeric(NW1[3,i])/10 ,"CV",sd(data)/mean(data), " p-value: ", w.test, " significant ", sig))#
+}#
+plot(0,0,type="n",xlim=c(1,yval),ylim=c(0-PlusMinusPerError,0+PlusMinusPerError),#
+	ylab="",xlab="", axes=FALSE#
+	,main="")#
+box()#
+abline(h=0,lty=2,col="grey")#
+#mtext(side=1,at=c(2,4,6,8,10),text=expression(20,40,60,80,100),line=1)#
+mtext(side=2,at=c(-PlusMinusPerError,0,PlusMinusPerError),text=c(-PlusMinusPerError,0,PlusMinusPerError),line=1)#
+mtext(text="SE3",side=3,line=0)#
+for(i in 1:dim(SE3)[2]){#
+	model<-"SE3"#
+	COL<-COLmodel[which(COLmodel==model),2]#
+	data<-as.numeric(SE3[4:maxval,i])#
+	dataerr<-data - Density*1000^2#
+	cv<-CV(data)#
+	boxplot(dataerr,add=T, at=as.numeric(SE3[3,i])/10, axes=FALSE,col=COL)#
+	text(x=as.numeric(SE3[3,i])/10,y=min(dataerr)-10, label=paste(cv ),cex=1)#
+	w.test<-wilcox.test(data,mu=Density*1000^2)$p.value#
+    sig.value<-0.05/dim(SE3)[2]; if(w.test<sig.value){sig<-"yes"}else{sig<-"no"}#
+	print(paste("Number of caps:",as.numeric(NW1[3,i])/10 ,"CV",sd(data)/mean(data), " p-value: ", w.test, " significant ", sig))#
+}#
+plot(0,0,type="n",xlim=c(1,yval),ylim=c(0-PlusMinusPerError,0+PlusMinusPerError),#
+	ylab="",xlab="", axes=FALSE#
+	,main="")#
+box()#
+abline(h=0,lty=2,col="grey")#
+mtext(side=1,at=c(2,4,6,8,10),text=expression(20,40,60,80,100),line=1)#
+mtext(side=2,at=c(-PlusMinusPerError,0,PlusMinusPerError),text=c(-PlusMinusPerError,0,PlusMinusPerError),line=1)#
+mtext(text="NE1",side=3,line=0)#
+for(i in 1:dim(NE1)[2]){#
+	model<-"NE1"#
+	COL<-COLmodel[which(COLmodel==model),2]#
+	data<-as.numeric(NE1[4:maxval,i])#
+	dataerr<-data - Density*1000^2#
+	cv<-CV(data)#
+	boxplot(dataerr,add=T, at=as.numeric(NE1[3,i])/10, axes=FALSE,col=COL)#
+	text(x=as.numeric(NE1[3,i])/10,y=min(dataerr)-10, label=paste( cv ),cex=1)#
+	w.test<-wilcox.test(data,mu=Density*1000^2)$p.value#
+	sig.value<-0.05/dim(SE3)[2]; if(w.test<sig.value){sig<-"yes"}else{sig<-"no"}#
+	print(paste("Number of caps:",as.numeric(NW1[3,i])/10 ,"CV",sd(data)/mean(data), " p-value: ", w.test, " significant ", sig))#
+}#
+#
+mtext(side=1,text="Number of captures",line=1.5,outer=TRUE)#
+mtext(side=2,text="Percentage error between estimated and true density",line=1.5,outer=TRUE)#
+dev.off()
