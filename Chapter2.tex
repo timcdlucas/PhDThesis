@@ -438,6 +438,8 @@ These values are very high in part to again find a reasonable trade off between 
 $R_0 \approx 13.3$ is similar to a highly contagious disease such as measles or pertussis. 
 
 
+\subsection{Analysis}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -446,6 +448,7 @@ $R_0 \approx 13.3$ is similar to a highly contagious disease such as measles or 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+The probability of the new pathogen invading ranged from 0.12 to 0.55.
 
 
 
@@ -496,12 +499,20 @@ When dispersal is varied, the population structure is fully connected. When popu
 %5           10     2 0.26946108
 %6           10     9 0.33132530
 
+We ran 2000 simulations over three transmission values ($\beta = 2, 5, 10$).
+The proportion of invasions was not different between highly connected and largely unconnected metapopulations (See Figure~\ref{fig:structureProbs}). 
+This was true at all transmission levels ($\chi^2$ test. $\beta = 2$: $\chi^2 = 1.81$, $df = 1$, $p =  0.18$. $\beta = 5$: $\chi^2 =  0.62$, $df = 1$, $p = 0.43$. $\beta = 10$: $\chi^2 = 2.65$, $df = 1$, $p =0.10$).
 
-The proportion of invasions was not different between highly connected and largely unconnected metapopulations. 
-This was true at all transmission levels ($\chi^2$ test. $\beta = 2$: $\chi^2 = 0.54$, $df = 1$, $p = 0.46$. $\beta = 5$: $\chi^2 = 0.06$, $df = 1$, $p = 0.81$. $\beta = 10$: $\chi^2 = 3.01$, $df = 1$, $p = 0.08$)
+In a small proportion of simulations, both pathogens went extinct.
+In these cases we still counted the invading pathogen as failing to invade.
+However, the results are the same as above if these simulations are removed from the analysis ($\chi^2$ test. $\beta = 2$: $\chi^2 = 2.29$, $df = 1$, $p = 0.13$. $\beta = 5$: $\chi^2 = 0.15$, $df = 1$, $p = 0.70$. $\beta = 10$: $\chi^2 = 2.36$, $df = 1$, $p = 0.12$).
 
  
+\subsection{Transmission}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+\subsection{Other Analysis}
 
 
 
