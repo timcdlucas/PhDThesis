@@ -85,10 +85,12 @@ A number of host traits have been shown to correlate with pathogen richness incl
 
 \subsubsection{But we do not understand the mechanistic processes}
 
-However, empirical, correlative studies are often contradictory due to small sample sizes, noisy data and because empirical relationships often do not generalise across taxa.
+However, empirical, correlative studies are often contradictory due to small sample sizes, noisy data and because empirical relationships often do not generalise across taxa (though see \cite{kamiya2014determines} for a meta-analysis).
 Furthermore, the correlation between many traits (e.g. \cite{nunn2015infectious}) makes it hard to clearly distinguish which factors are important.
 Knowing the factors that correlate with pathogen richness also does not tell us how it controls richness. 
-Mechanisms by which a trait could increase pathogen diversity include promoting the evolution of new strains within a species \cite{buckee2004effects}, reduction of the rate of parasite extinction and an increased probability of pathogen invasion.
+Mechanisms by which a trait could increase pathogen diversity include promoting the evolution of new strains within a species \cite{buckee2004effects}, reduction of the rate of parasite extinction and an increased probability of pathogen invasion from other species.
+These seperate mechanisms have not been examined and it is difficult to see how they could be approached through comparitive methods.
+We need explicit mechanistic models in order to tease apart these factors.
 
 
 
@@ -106,7 +108,7 @@ Mechanisms by which a trait could increase pathogen diversity include promoting 
 \subsubsection{Population structure could be important}
 One host-species trait that has been largely understudied with respect to pathogen diversity is population structure.
 Population structure has been comprehensively studied with respect to single or competing epidemics in human populations, wildlife populations and technological networks.
-However, the assumption that population structures that yield high $R_0$ will also give high pathogen diversity is unfounded.
+However, the assumption that population structures that yield high $R_0$ will also give high pathogen diversity \cite{nunn2003comparative} is unfounded.
 
 
 
@@ -118,7 +120,16 @@ However, this ignores competitive mechanisms such as cross-immunity and depletio
 A number of authors have demonstrated a competitive exclusion principle where only the most optimally spreading disease will survive when infection with one pathogen prevents infection with another pathogen \cite{bremermann1989competitive, martcheva2013competitive, ackleh2003competitive, ackleh2014robust, turner2002impact}.
 If competitive mechanisms are strong, pathogens in populations structured such that $R_0$ will be high will be able to easily out-compete invading pathogens.
 Only if competitive mechanisms are weak will high $R_0$  enable the invasion of new pathogens and allow higher pathogen diversity.
-However, the important affects of population structure on single disease epidemic spread and competing epidemics shows the important role structure has on disease dynamics.
+
+Competitive affects are likely to be more or less important depending on the mechanism by which pathogen diversity is created.
+Competition is likely to be very strong between a newly evolved strain and the existing strain of a pathogen. 
+In this case, there is likely to be strong cross immunity between strains.
+In the case of pathogens invading from other hosts species, cross immunity is likely to be less strong due to the evolutionary distance between the new and endemic pathogens.
+However, competition could still occur as disease induced mortality of host individuals reduces host density which promotes pathogen persistance.
+Finally, it is unclear how competition would affect the persistance of pathogens once they are established, though is seems that cross immunity can keep a pathogen at a low prevalence in the population (e.g. monkey pox \cite{rimoin2010major} and monkey malaria \cite{cox2008knowlesi}). 
+This would make stochastic extinction more likely.
+
+The important affects of population structure on single disease epidemic spread and competing epidemics shows the important role structure has on disease dynamics.
 We can therefore expect it to have an important role in the dynamics of multidisease systems as well.
 
 \subsubsection{Network structure has been studied}
@@ -131,7 +142,7 @@ These have been so simple that empirical data cannot easily be applied to them t
 There is a need for models that can be carefully and fully explored, while still capturing the complexities of the real world.
 
 Analytical models of well mixed have widely different outcomes: infinite diversity \cite{may1994superinfection, ackleh2014robust} or competitive exclusion have both been predicted \cite{ackleh2003competitive,bremermann1989competitive,martcheva2013competitive,qiu2013vector,allen2004sis}
-When competitive exclusion occurs, population structure has sometimes been shown to allow coexistence \cite{qiu2013vector,allen2004sis}.
+When competitive exclusion occurs, population structure has sometimes been shown to allow coexistence \cite{qiu2013vector,allen2004sis, nunes2006localized}.
 
 Competing epidemics, or two pathogens spreading at the same time in a population, is a well studied area \cite{poletto2013host, poletto2015characterising, karrer2011competing}. 
 This area is related to the study of pathogen richness in that they indicate that dynamics of multiple pathogens in a population do depend on population structure.
@@ -202,12 +213,11 @@ Many bats also have interesting seasonal behaviour such as migration \cite{richt
 
 We have very abstract, simplified models that predict zero or infinite diversity depending on specifics.
 These cannot be easily applied to real data.
-they also do not easily predict quantitative or even relative diversity as they often predict either zero or infinite diversity with nothing in between.
+They also do not easily predict quantitative or even relative diversity as they often predict either zero or infinite diversity with nothing in between.
 
 We need models that can quantitatively or at least relatively predict diversity in a populations.
 This requires a middle ground of model diversity.
 
-Furthermore there are few studies that aim to predict bat pathogen diversity.
 There are no studies that directly model bat pathogen diversity.
 
 Specifically we use these models to test the affects of population structure on the ability of a new pathogen to invade a population.
@@ -221,6 +231,7 @@ We test two aspects of structure, dispersal rate and connectedness of the metapo
 I have run epidemiological simulations based broadly on real world bat populations.
 Although still simplified, the model is complex enough that if good measurements of bat populations could be found, simulations of the real world bat population could be run.
 
+The
 
 
 
@@ -456,7 +467,7 @@ The probability of the new pathogen invading ranged from 0.12 to 0.55.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-The proportion of invasions was not different across dispersal rates. 
+The proportion of invasions was not different across dispersal rates across 1500 simulation run.. 
 This was true at all transmission levels ($\chi^2$ test. $\beta = 2$: $\chi^2 = 4.19$, $df = 2$, $p = 0.12$. $\beta = 5$: $\chi^2 = 1.27$, $df = 2$, $p = 0.53$. $\beta = 10$: $\chi^2 = 0.01$, $df = 2$, $p = 1.00$)
 
 
