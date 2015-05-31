@@ -440,8 +440,6 @@ Therefore cross immunity is likely to be very strong.
 The population size of each subpopulation is set to 3000. 
 This is appropriate for many bat species \cite{jones2009pantheria}, especially the large, frugivorous \emph{Pteropodidae} that have been particularly associated with recent zoonotic diseases.
 
-The number of invading pathogens added is set to 10. 
-This is a trade off between getting a reasonable proportion of invasions, while still retaining the stochastic nature of invasion.
 
 Three values of the transmission rate $\beta$ are used, 2, 5 and 10.
 All simulations are run under all three transmission rates as this is such a fundamental parameter.
@@ -454,7 +452,15 @@ These values are very high in part to again find a reasonable trade off between 
 $R_0 \approx 13.3$ is similar to a highly contagious disease such as measles or pertussis. 
 
 
-\subsection{Analysis}
+For the simulations where an invading pathogen is added to the populations the number of invading pathogens added is set to 10. 
+This is a trade off between getting a reasonable proportion of invasions, while still retaining the stochastic nature of invasion.
+
+For simulations studying extinction rates, half of the subpopulation were seeded with each pathogen.
+2000 susceptibles and 1000 infected individuals were placed in each subpopulation in order to quickly reach equilibrium.
+
+
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -464,11 +470,11 @@ $R_0 \approx 13.3$ is similar to a highly contagious disease such as measles or 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\subsection{Invasion}
 The probability of the new pathogen invading ranged from 0.12 to 0.55.
 
 
-
-\subsection{Dispersal}
+\subsubsection{Dispersal}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -503,7 +509,7 @@ When dispersal is varied, the population structure is fully connected. When popu
 \end{figure}
 
 
-\subsection{Network structure}
+\subsubsection{Network structure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %1> props
@@ -515,7 +521,7 @@ When dispersal is varied, the population structure is fully connected. When popu
 %5           10     2 0.26946108
 %6           10     9 0.33132530
 
-We ran 2000 simulations over three transmission values ($\beta = 2, 5, 10$).
+I ran 2000 simulations over three transmission values ($\beta = 2, 5, 10$).
 The proportion of invasions was not different between highly connected and largely unconnected metapopulations (See Figure~\ref{fig:structureProbs}). 
 This was true at all transmission levels ($\chi^2$ test. $\beta = 2$: $\chi^2 = 1.81$, $df = 1$, $p =  0.18$. $\beta = 5$: $\chi^2 =  0.62$, $df = 1$, $p = 0.43$. $\beta = 10$: $\chi^2 = 2.65$, $df = 1$, $p =0.10$).
 
@@ -530,7 +536,16 @@ However, the results are the same as above if these simulations are removed from
 Inline with theory, increasing the transmission rate increased the probability of invasion (Figure~\ref{f:props}).
 This is true for all three dispersal values ($\chi^2$ test. $\lambda = 0.001$: $\chi^2 = 19.35$, $df = 2$, $p < 10^{-4}$. $\lambda = 0.01$: $\chi^2 = 29.05$, $df = 2$, $p < 10^{-6}$. $\lambda = 0.1$: $\chi^2 = 38.90$, $df = 2$, $p < 10^{-8}$) and both network structures ($\chi^2$ test. Fully connected: $\chi^2 = 66.40$, $df = 2$, $p < 10^{-14}$. Minimally connected: $\chi^2 = 28.17$, $df = 2$, $p < 10^{-6}$).
 
-\subsection{Other Analysis}
+
+
+
+\subsection{Extinction}
+
+I ran 1000 simulations varying dispersal rate and 1000 varying network topology. 
+However, in these simulations no pathogens went extinct. 
+Therefore it seems that once a pathogen is established in the these populations, it is very rare for them to stochastically go extinct.
+Dispersal nor network topology altered the proportion of extinctions, but clearly this comparison does tell us much.
+
 
 
 
@@ -553,19 +568,23 @@ I have used mechanistic, metapopulation models to test whether increased populat
 \subsubsection{Population structure does not affect pathogen richness}
 
 Probably because dynamics are dominated by local processes.
-This goes against many predictions that increasing $R_0$ increases pathogen richness.
-Further work could examine reduced colony sizes to test when global structure become more important.
+This goes against many predictions that increasi  ng $R_0$ increases pathogen richness.
+Further work could examine reduced col  ony sizes to test when global structure become more important.
 Measures of population structure should not be used to predict zoonotic potential.
 
 \subsubsection{Dispersal does not affect pathogen richness}
 
 
+
 \subsubsection{Network connectedness does not affect pathogen richness}
 
 This is in direct contrast to \cite{campos2006pathogen}. 
+However, the model in \cite{campos2006pathogen} is a contact network, so increasing the connectedness increases the chance of succesful transmission events for the first few transmission generations.
+This lends support to the idea that I found now affect of connectedness due to the dominance of local dynamics.
 
-Can be seen as a function of dispersal distance, density and colony size.
-Density 
+Network connectedness can be seen as a function of average dispersal distance, density and colony size.
+A high density species with small colony sizes must have colonies relatively close together.
+Therefore colonies would be more likely to be connected for a given dispersal distance. 
 
 
 \subsection{Discuss assumptions}
