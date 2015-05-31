@@ -562,17 +562,31 @@ Measures of population structure should not be used to predict zoonotic potentia
 
 \subsubsection{Network connectedness does not affect pathogen richness}
 
+This is in direct contrast to \cite{campos2006pathogen}. 
+
 Can be seen as a function of dispersal distance, density and colony size.
+Density 
 
 
 \subsection{Discuss assumptions}
 
 \subsubsection{Complete cross-immunity}
 
+I have assumed that once recovered, individuals are immune to both pathogens. 
+Furthermore, when a coinfected individual recovers from one pathogen, it immediately recovers from the other as well.
+This is probably a fairly reasonable assumption given that I am modelling a newly evolved strain.
+However, further work could relax this assumption using a model similar to \cite{poletto2015characterising} which contains additional classes for `infected with pathogen one, immune to pathogen two' and `infected with pathogen two, immune to pathogen one'.
+The model here was formulated such that the study of systems with greater than two pathogens is still computationally feasible while a model such as used in \cite{poletto2015characterising} contains $3^\rho$ classes for a system with $\rho$ pathogen species.
+This quickly becomes computationally restrictive.
+
 \subsubsection{Identical strains}
 
+Many papers on pathogen richness have focussed on the evolution of pathogen traits and have considered a trade off between transmission rate and virulence \cite{nowak1994superinfection, nowak1994superinfection} or infectious period \cite{poletto2013hostinfec}.
+However, here we are interested in host traits.
+Therefore we have assumed that pathogen strains are identical.
+It is clear however that there are a number of factors that affect pathogen richness and our focus on host population structure does not imply that pathogen traits are not important.
 
-\subsection{Conclusions}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
