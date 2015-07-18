@@ -1,0 +1,53 @@
+
+\documentclass[a4paper,10pt,reqno]{scrartcl}
+
+\input{KnitrSettings}
+
+
+\usepackage{caption}
+\usepackage{verbatim, geometry, amsfonts, fancyhdr,  graphicx, xcomment, microtype, array, subcaption}
+\usepackage{amsmath}
+
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern} %Normal serif but apparently more advanced?
+\usepackage{tgheros}  %  the advanced helvet as it was nice.
+
+\usepackage{bm} % for \bm bold math command for matrices.
+
+\usepackage[colorlinks=TRUE, citecolor=black, linkcolor=black, urlcolor=blue, pagebackref=TRUE]{hyperref}
+
+
+
+\usepackage{titlesec} % format titles
+\titleformat{\subsubsection}[runin]{\normalfont\it}{}{0pt}{}
+
+
+
+\setcounter{tocdepth}{4} % make TOC go to subsubsection
+
+
+
+
+\begin{document}
+
+
+\title{The role of population structure in pathogen diversity in bat populations}
+\author{Tim Lucas. \today}
+\date{}
+
+\maketitle
+\tableofcontents
+
+\input{Chapter2.tex}
+
+
+
+
+
+\small
+\bibliographystyle{unsrt}	% (uses file "plain.bst")
+\bibliography{../../epilit}		% expects file "myrefs.bib"
+
+
+\end{document}
