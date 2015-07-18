@@ -154,7 +154,7 @@
 
 
 % Chose fonts
-\RequirePackage[default]{cantarell} %% Use option "defaultsans" to use cantarell as sans serif only
+\RequirePackage{accanthis} %% Use option "defaultsans" to use cantarell as sans serif only
 \RequirePackage[T1]{fontenc}
 
 
