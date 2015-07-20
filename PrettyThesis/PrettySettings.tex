@@ -36,7 +36,15 @@
 
 
 % Want superscript citations
-\usepackage[superscript,biblabel]{cite}
+%\usepackage[superscript,biblabel]{cite}
+
+
+
+% Redefine cite so that we get references in footnotes.
+\usepackage[backend=biber]{biblatex} %style=mla for footnotes.
+%\renewcommand{\cite}[1]{\footcite{#1}}
+\renewcommand{\cite}[1]{\supercite{#1}}
+
 
 
 

@@ -271,8 +271,35 @@ Connectedness &  & \\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%
+
+
+
 
 \subsection{Metapopulation model}
+
+
+%%begin.rcode settings, echo = FALSE, cache = FALSE, results = FALSE, message = FALSE, results = TRUE
+
+
+opts_chunk$set(cache.path = '.Ch2Cache/')
+
+source('misc/theme_tcdl.R')
+source('misc/KnitrOptions.R')
+warnings()
+
+
+%%end.rcode
+
+
+%%begin.rcode plotTest,  fig.cap = 'A caption.', fig.lp = 'f:A', fig.height = 4, results = TRUE
+x <- data.frame(a=rnorm(10), b = rnorm(10) + 2)
+
+ggplot(x, aes(a, b)) + 
+  geom_point(size = 4)
+
+
+%%end.rcode
 
 
 

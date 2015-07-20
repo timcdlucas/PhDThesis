@@ -3,8 +3,11 @@
 # Large influence from Naom Ross's theme
 #   https://github.com/noamross/noamtools/blob/master/R/theme_nr.R
 
-library(extraFonts)
-loadfonts()
+#library(extrafont)
+#loadfonts()
+
+library(ggplot2)
+library(grid)
 
 theme_tcdl <-theme(text = element_text(family = "Lato Light", size = 12),
         panel.grid.major.x = element_line(colour = "#ECECEC", size = 0.3, linetype = 1),
@@ -25,4 +28,6 @@ theme_tcdl <-theme(text = element_text(family = "Lato Light", size = 12),
         panel.border  =  element_blank(), 
         axis.line  =  element_line(colour  =  "grey"),
         plot.margin  =  unit(c(0.3,0.1,1,1.3), "lines"))
+
+theme_set(theme_grey() + theme_tcdl)
 

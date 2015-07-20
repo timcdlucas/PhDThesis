@@ -87,11 +87,14 @@
 % This file has the normal knitr stuff. Should therefore be able to knit content only files and \include{} them.
 \input{PrettyKnitrSettings}
 
+% biblatex does bibs like this.
+\addbibresource{../../../epilit.bib}
+
 \begin{document}
 
 
 
-\nobibliography*
+%\nobibliography*
 % This is a dumb trick that works with the bibentry package to let
 %  you put bibliography entries whereever you like.
 % I used this to put references to papers a chapter's work was 
@@ -151,7 +154,7 @@
 \addcontentsline{toc}{chapter}{Bibliography}
 
 % Actually generates your bibliography.
-\bibliography{../../../epilit}
+%\bibliography{../../../epilit}
 
 % All done. \o/
 \end{document}
