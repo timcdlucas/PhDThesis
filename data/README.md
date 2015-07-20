@@ -1,6 +1,6 @@
 # Description of the data files
 
-`150325Data.csv` contains extracted parameters from simulations comparing pathogen invasion probilities across different dispersal values.
+`150327Data.csv` contains extracted parameters from simulations comparing pathogen invasion probilities across different dispersal values.
 
 `150405Data.csv` contains extracted parameters from simulations comparing pathogen invasion probilities across different network topologies.
 
