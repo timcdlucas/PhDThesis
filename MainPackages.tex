@@ -112,7 +112,7 @@
 %  make a single figure with 4 individually labeled and referenceable
 %  sub-figures.
 % It's quite fiddly to use, so check the documentation.
-%\usepackage{subfig}
+\usepackage{subfig}
 
 % The natbib package allows book-type citations commonly used in
 %  longer works, and less commonly in science articles (IME).
@@ -151,6 +151,8 @@
 \DeclareSIUnit{\animals}{animals}
 \DeclareSIUnit{\day}{day}
 
+\sisetup{scientific-notation = true, detect-mode = true, round-precision = 2}
+
 
 
 
@@ -164,5 +166,10 @@
 
 % This is included in KnitrSettings so that it is included in other tex documents.
 % \usepackage{color}
+
+
+
+
+
 
 

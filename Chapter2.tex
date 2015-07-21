@@ -3,21 +3,7 @@
 
 
 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlcom{# Compilation options}
-\hlcom{# Run simulations? This will take many hours}
-\hlstd{runAllSims} \hlkwb{<-} \hlnum{FALSE}
 
-
-\hlstd{opts_chunk}\hlopt{$}\hlkwd{set}\hlstd{(}\hlkwc{cache.path} \hlstd{=} \hlstr{'.Ch2Cache/'}\hlstd{)}
-
-\hlkwd{source}\hlstd{(}\hlstr{'misc/theme_tcdl.R'}\hlstd{)}
-\hlkwd{source}\hlstd{(}\hlstr{'misc/KnitrOptions.R'}\hlstd{)}
-\end{alltt}
-\end{kframe}
-\end{knitrout}
 
 
 
@@ -393,29 +379,24 @@ Finally, recovery from any infectious class occurs at a rate $\gamma$
 \end{align}
 
 
-
 \begin{figure}[t]
-\centering
-        \begin{subfigure}[b]{0.35\textwidth}
-                \centering
-		\includegraphics[width=1\textwidth]{imgs/fullyConnected.pdf}
-                \caption{High $\bar{k}$}
-                \label{fig:fullyConnected}
-        \end{subfigure}
-        ~ 
-	\begin{subfigure}[b]{0.35\textwidth}
-                \centering
-		\includegraphics[width=1\textwidth]{imgs/minimallyConnected.pdf}
-                \caption{Low $\bar{k}$}
-                \label{fig:minimallyConnected}
-        \end{subfigure}%%
-
+{\centering 
+\subfloat[High $\bar{k}$\label{fig:fullyConnected}]{
+  \includegraphics[width=0.45\textwidth]{imgs/fullyConnected.pdf} 
+}
+\subfloat[Low $\bar{k}$
+\label{fig:minimallyConnected}]{
+  \includegraphics[width=0.45\textwidth]{imgs/minimallyConnected.pdf} 
+}
+}
 \caption[Network topologies used to test whether network connectedness influences pathogen invasion]{
 The two network topologies used to test whether network connectedness influences a viruses ability to invade. 
 Dispersal is held constant between the two topologies.
 }
 \label{f:net}
 \end{figure}
+
+
 In each simulation the population is seeded with 200 infected individuals of disease 1 in each colony. 
 Disease 1 is then allowed to spread and reach equilibrium. 
 After 40,000 events, 10 individuals infected with disease 2 are added to one colony. 
@@ -527,14 +508,37 @@ For simulations studying extinction rates, half of the subpopulation were seeded
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[t]
 
-{\centering \includegraphics[width=0.8\textwidth]{figure/invasionPropPlots-1} 
+{\centering \subfloat[Dispersal\label{f:invasionPropPlots1}]{\includegraphics[width=0.45\textwidth]{figure/invasionPropPlots-1} }
+\subfloat[Network topology\label{f:invasionPropPlots2}]{\includegraphics[width=0.45\textwidth]{figure/invasionPropPlots-2} }
 
 }
 
-\caption[A captions]{A captions}\label{f:AinvasionPropPlots}
+\caption[The probability of successful invasion]{The probability of successful invasion. 
+  For three different transmission rates, the probability of invasion success does not change between different a) dispersal rates or b) network structures. 
+  Error bars are 95\% confidence intervals. 
+  Other parameters are kept constant at: $N = 10,\, \bar{n} = 3000,\, b = d = 0.05,\, \gamma = 0.1,\, \alpha = 0.1$. 
+  When dispersal is varied, the population structure is fully connected. When population structure is varied, $\lambda = 0.01$.}\label{f:invasionPropPlots}
 \end{figure}
 
 
@@ -551,66 +555,31 @@ The probability of the new pathogen invading ranged from 0.12 to 0.55.
 
 
 The proportion of invasions was not different across dispersal rates across 1500 simulation run.. 
-This was true at all transmission levels ($\chi^2$ test. $\beta = 2$: $\chi^2 = 4.19$, $df = 2$, $p = 0.12$. $\beta = 5$: $\chi^2 = 1.27$, $df = 2$, $p = 0.53$. $\beta = 10$: $\chi^2 = 0.01$, $df = 2$, $p = 1.00$)
-
-
-\begin{figure}[b]
-\centering
-\begin{subfigure}[b]{0.35\textwidth}
-  \centering
-	\includegraphics[width=1\textwidth]{imgs/fig150327.pdf}
-  \caption{}
-  \label{fig:dispersalProbs}
-\end{subfigure}
-  ~ 
-\begin{subfigure}[b]{0.35\textwidth}
-  \centering
-  \includegraphics[width=1\textwidth]{imgs/figs.pdf}
-  \caption{}
-  \label{fig:structureProbs}
-\end{subfigure}%%
-
-\caption[Invasion probability]{
-The probability of successful invasion. 
-For three different transmission rates, the probability of invasion success does not change between different a) dispersal rates or b) network structures. 
-Error bars are 95\% confidence intervals. 
-Other parameters are kept constant at: $N = 10,\, \bar{n} = 3000,\, b = d = 0.05,\, \gamma = 0.1,\, \alpha = 0.1$. 
-When dispersal is varied, the population structure is fully connected. When population structure is varied, $\lambda = 0.01$.
-}
-\label{f:props}
-\end{figure}
+This was true at all transmission levels ($\chi^2$ test. $\beta = 2$: $\chi^2 = 4.19$, $\text{df} = 2$, $p = 0.12$. $\beta = 5$: $\chi^2 = 1.27$, $\text{df} = 2$, $p = 0.53$. $\beta = 10$: $\chi^2 = 0.01$, $\text{df} = 2$, $p = 1$).
 
 
 \subsubsection{Network structure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%1> props
-%  transmission meanK      props
-%1            2     2 0.11976048
-%2            2     9 0.09638554
-%3            5     2 0.22289157
-%4            5     9 0.22155689
-%5           10     2 0.26946108
-%6           10     9 0.33132530
-
 I ran 2000 simulations over three transmission values ($\beta = 2, 5, 10$).
-The proportion of invasions was not different between highly connected and largely unconnected metapopulations (See Figure~\ref{fig:structureProbs}). 
-This was true at all transmission levels ($\chi^2$ test. $\beta = 2$: $\chi^2 = 1.81$, $df = 1$, $p =  0.18$. $\beta = 5$: $\chi^2 =  0.62$, $df = 1$, $p = 0.43$. $\beta = 10$: $\chi^2 = 2.65$, $df = 1$, $p =0.10$).
+The proportion of invasions was not different between highly connected and largely unconnected metapopulations (See Figure~\ref{f:invasionPropPlots1}). 
+This was true at all transmission levels ($\chi^2$ test. $\beta = 2$: $\chi^2 = 1.81$, $\text{df} = 1$, $p = 0.18$. $\beta = 5$: $\chi^2 = 0.62$, $\text{df} = 1$, $p = 0.43$. $\beta = 10$: $\chi^2 = 2.65$, $\text{df} = 1$, $p = 0.1$).
 
 In a small proportion of simulations, both pathogens went extinct.
 In these cases we still counted the invading pathogen as failing to invade.
-However, the results are the same as above if these simulations are removed from the analysis ($\chi^2$ test. $\beta = 2$: $\chi^2 = 2.29$, $df = 1$, $p = 0.13$. $\beta = 5$: $\chi^2 = 0.15$, $df = 1$, $p = 0.70$. $\beta = 10$: $\chi^2 = 2.36$, $df = 1$, $p = 0.12$).
+However, the results are the same as above if these simulations are removed from the analysis ($\chi^2$ test. $\beta = 2$: $\chi^2 = 2.29$, $\text{df} = 1$, $p = 0.13$. $\beta = 5$: $\chi^2 = 0.15$, $\text{df} = 1$, $p = 0.7$. $\beta = 10$: $\chi^2 = 2.36$, $\text{df} = 1$, $p = 0.12$).
 
  
 \subsection{Transmission}
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Inline with theory, increasing the transmission rate increased the probability of invasion (Figure~\ref{f:props}).
-This is true for all three dispersal values ($\chi^2$ test. $\lambda = 0.001$: $\chi^2 = 19.35$, $df = 2$, $p < 10^{-4}$. $\lambda = 0.01$: $\chi^2 = 29.05$, $df = 2$, $p < 10^{-6}$. $\lambda = 0.1$: $\chi^2 = 38.90$, $df = 2$, $p < 10^{-8}$) and both network structures ($\chi^2$ test. Fully connected: $\chi^2 = 66.40$, $df = 2$, $p < 10^{-14}$. Minimally connected: $\chi^2 = 28.17$, $df = 2$, $p < 10^{-6}$).
+Inline with theory, increasing the transmission rate increased the probability of invasion (Figure~\ref{f:invasionPropPlots1}--\ref{f:invasionPropPlots2}).
+This is true for all three dispersal values ($\chi^2$ test. $\lambda = 0.001$: $\chi^2 = 19.35$, $\text{df} = 2$, $p = \ensuremath{6.27\times 10^{-5}}$. $\lambda = 0.01$: $\chi^2 = 29.05$, $\text{df} = 2$, $p = \ensuremath{4.92\times 10^{-7}}$. $\lambda = 0.1$: $\chi^2 = 38.9$, $\text{df} = 2$, $p = \ensuremath{3.56\times 10^{-9}}$) and both network structures ($\chi^2$ test. Fully connected: $\chi^2 = 66.4$, $\text{df} = 2$, $p =\ensuremath{3.81\times 10^{-15}}$. Minimally connected: $\chi^2 =  66.4$, $\text{df} = 2$, $p = \ensuremath{3.81\times 10^{-15}}$).
 
 
+\ensuremath{3.81\times 10^{-5}}
 
-
+\ensuremath{10^{-6}}
 \subsection{Extinction}
 
 I ran 1000 simulations varying dispersal rate and 1000 varying network topology. 
@@ -711,7 +680,7 @@ $k_i$ & Degree of node $i$ &&\\
 $\delta$ & Waiting time until next event & Days&\\
 $\alpha$ & Cross immunity & Proportion& 0.1\\
 $n, m$ & Colony index &&\\
-$\bm{A}_{mn}$ & Adjacency matrix. & Distance &\\
+$A_{mn}$ & Adjacency matrix. & Distance &\\
 $\mu$ & Maximum distance for edge to exist & km& 40, 100\\
 $\sigma$ & Invading pathogen seed size & & 10\\
 $r_i$ & The rate that event $i$ occurs. & Days$^{-1}$&\\

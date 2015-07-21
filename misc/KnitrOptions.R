@@ -18,6 +18,25 @@ opts_chunk$set(
   #fig.showtext = TRUE, # Embeds fonts.
   out.width = paste0(propOfTextwidth,'\\textwidth')
   )
+options(digits=2)
+
+#inline_hook <- function (x) {
+#  if (is.numeric(x)) {
+#    # ifelse does a vectorized comparison
+#    # If integer, print without decimal; otherwise print two places
+#    res <- ifelse(x == round(x),
+#      sprintf("%d", x),
+#      sprintf("%.2f", x)
+#    )
+#    paste(res, collapse = ", ")
+#  }
+#}
+#knit_hooks$set(inline = inline_hook)
 
 
 
+
+# Write a function for pvalues
+
+
+  
