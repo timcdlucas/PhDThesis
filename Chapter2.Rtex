@@ -1,5 +1,34 @@
 
 \clearpage
+
+
+
+%%begin.rcode settings, echo = TRUE, cache = FALSE, results = TRUE, message = FALSE, results = FALSE
+
+# Compilation options
+# Run simulations? This will take many hours
+runAllSims <- FALSE
+
+
+opts_chunk$set(cache.path = '.Ch2Cache/')
+
+source('misc/theme_tcdl.R')
+source('misc/KnitrOptions.R')
+
+%%end.rcode
+
+
+%%begin.rcode libs, cache = FALSE, result = FALSE
+
+library(MetapopEpi)
+library(reshape2)
+library(dplyr)
+library(binom)
+
+
+%%end.rcode
+
+
 \section{Abstract}
 
 
@@ -279,30 +308,6 @@ Connectedness &  & \\
 \subsection{Metapopulation model}
 
 
-%%begin.rcode settings, echo = FALSE, cache = FALSE, results = FALSE, message = FALSE, results = TRUE
-
-
-opts_chunk$set(cache.path = '.Ch2Cache/')
-
-source('misc/theme_tcdl.R')
-source('misc/KnitrOptions.R')
-warnings()
-
-
-%%end.rcode
-
-
-%%begin.rcode plotTest,  fig.cap = 'A caption.', fig.lp = 'f:A', fig.height = 4, results = TRUE
-x <- data.frame(a=rnorm(10), b = rnorm(10) + 2)
-
-ggplot(x, aes(a, b)) + 
-  geom_point(size = 4)
-
-
-%%end.rcode
-
-
-
 
 
 \subsubsection{Two pathogen SIR model}
@@ -497,6 +502,152 @@ For simulations studying extinction rates, half of the subpopulation were seeded
 \section{Results}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%begin.rcode loadTopoData
+
+# Read in the data.
+# Later I'll add in the option to simulate the whole dataset.
+d <- read.csv('data/150405Data.csv', stringsAsFactors = FALSE)
+dim(d)
+head(d)
+
+%%end.rcode
+
+
+%%begin.rcode TopoDataOrganise
+
+d$invasion <- d$nPathogens - d$nExtantDis == 0
+
+invs <- d %>% 
+  group_by(transmission, meanK) %>% 
+  select(invasion) %>%
+  filter(invasion == TRUE) %>%
+  summarise(n())
+
+invs
+
+n <- d %>% 
+  group_by(transmission, meanK) %>% 
+  select(invasion) %>%
+  summarise(n())
+
+n
+
+# Proportion of invasions in totals.
+props <- data.frame(invs[, 1:2], props = invs$n / n$n)
+
+props
+
+%%end.rcode
+
+
+
+
+%%begin.rcode TopoPropTests
+
+# Then run proportion tests between population structures
+
+prop.test(invs$n[1:2], n$n[1:2])
+prop.test(invs$n[3:4], n$n[3:4])
+prop.test(invs$n[5:6], n$n[5:6])
+
+%%end.rcode
+
+
+
+
+
+%%begin.rcode TopoTransPropTests
+#Finally run proportion tests between transmission rates
+
+prop.test(invs$n[c(1, 3, 5)], n$n[c(1, 3, 5)])
+prop.test(invs$n[c(2, 4, 6)], n$n[c(2, 4, 6)])
+
+# Between groups
+prop.test(invs$n[c(1, 3)], n$n[c(1, 3)])
+prop.test(invs$n[c(1, 5)], n$n[c(1, 5)])
+prop.test(invs$n[c(3, 5)], n$n[c(3, 5)])
+
+prop.test(invs$n[c(2, 4)], n$n[c(2, 4)])
+prop.test(invs$n[c(2, 6)], n$n[c(2, 6)])
+prop.test(invs$n[c(4, 6)], n$n[c(4, 6)])
+
+%%end.rcode
+
+
+
+
+
+%%begin.rcode propsWithoutDoubleExt
+
+## With total extinction sims removed.
+
+d2 <- d[d$nExtantDis > 0, ]
+
+invs2 <- d2 %>% 
+  group_by(transmission, maxDistance) %>% 
+  select(invasion) %>%
+  filter(invasion == TRUE) %>%
+  summarise(n())
+
+n2 <- d2 %>% 
+  group_by(transmission, maxDistance) %>% 
+  select(invasion) %>%
+  summarise(n())
+
+# Proportion of invasions in totals.
+props <- data.frame(invs2[, 1:2], props = invs2$n / n2$n)
+
+prop.test(invs2$n[1:2], n2$n[1:2])
+prop.test(invs2$n[3:4], n2$n[3:4])
+prop.test(invs2$n[5:6], n2$n[5:6])
+
+
+%%end.rcode
+
+
+
+%%begin.rcode compTrans
+
+# Finally run proportion tests between transmission rates
+
+prop.test(invs2$n[c(1, 3, 5)], n$n[c(1, 3, 5)])
+prop.test(invs2$n[c(2, 4, 6)], n$n[c(2, 4, 6)])
+
+# Between groups
+prop.test(invs2$n[c(1, 3)], n2$n[c(1, 3)])
+prop.test(invs2$n[c(1, 5)], n2$n[c(1, 5)])
+prop.test(invs2$n[c(3, 5)], n2$n[c(3, 5)])
+
+prop.test(invs2$n[c(2, 4)], n2$n[c(2, 4)])
+prop.test(invs2$n[c(2, 6)], n2$n[c(2, 6)])
+prop.test(invs2$n[c(4, 6)], n2$n[c(4, 6)])
+
+
+%%end.rcode
+
+
+
+%%begin.rcode invasionPropPlots, fig.cap = 'A captions', fig.lp = 'f:A', fig.height = 4
+
+props2 <- data.frame(invs2[, 1:2], binom.confint(invs2$n, n2$n, conf.level = 0.95, methods = "exact"))
+
+ggplot(props2, aes(x = factor(transmission), y = mean, fill = factor(maxDistance))) +
+  geom_bar(stat = 'identity', position=position_dodge()) +
+  geom_errorbar(aes(ymin = lower, ymax = upper),
+                width=.2,                   
+                position = position_dodge(.9)) +
+  xlab('Transmission') + 
+  ylab('Prop. Invasions') +
+  scale_fill_hue(name="Connectedness", 
+                 labels=c("Low", "High")) +
+  theme_tcdl
+
+%%end.rcode
+
+
 
 \subsection{Invasion}
 The probability of the new pathogen invading ranged from 0.12 to 0.55.
