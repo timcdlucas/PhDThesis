@@ -37,6 +37,25 @@ options(digits=2)
 
 
 # Write a function for pvalues
+p <- function(x, eps = 1e-3){
 
+      if(x > 0.95){
+          return("1.00")
+        } else if(x > eps){
+          if(round(x, 2) == round(x, 1)){
+            return(sprintf("%.2f", x)) 
+          } else {
+            return(x)
+          }
+
+        } else  {
+          return(10^(ceiling(log10(x))))
+        }
+      }
+
+#p <- function(x) return(x)
+
+
+options('scipen' = -1)
 
   

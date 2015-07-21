@@ -739,7 +739,7 @@ The probability of the new pathogen invading ranged from 0.12 to 0.55.
 
 
 The proportion of invasions was not different across dispersal rates across 1500 simulation run.. 
-This was true at all transmission levels ($\chi^2$ test. $\beta = 2$: $\chi^2 = \rinline{DispTest1$statistic}$, $\text{df} = \rinline{DispTest1$parameter}$, $p = \rinline{DispTest1$p.value}$. $\beta = 5$: $\chi^2 = \rinline{DispTest2$statistic}$, $\text{df} = \rinline{DispTest2$parameter}$, $p = \rinline{DispTest2$p.value}$. $\beta = 10$: $\chi^2 = \rinline{DispTest3$statistic}$, $\text{df} = \rinline{DispTest3$parameter}$, $p = \rinline{DispTest3$p.value}$).
+This was true at all transmission levels ($\chi^2$ test. $\beta = 2$: $\chi^2 = \rinline{DispTest1$statistic}$, $\text{df} = \rinline{DispTest1$parameter}$, $p = \rinline{p(DispTest1$p.value)}$. $\beta = 5$: $\chi^2 = \rinline{DispTest2$statistic}$, $\text{df} = \rinline{DispTest2$parameter}$, $p = \rinline{p(DispTest2$p.value)}$. $\beta = 10$: $\chi^2 = \rinline{DispTest3$statistic}$, $\text{df} = \rinline{DispTest3$parameter}$, $p = \rinline{p(DispTest3$p.value)}$).
 
 
 \subsubsection{Network structure}
@@ -747,23 +747,20 @@ This was true at all transmission levels ($\chi^2$ test. $\beta = 2$: $\chi^2 = 
 
 I ran 2000 simulations over three transmission values ($\beta = 2, 5, 10$).
 The proportion of invasions was not different between highly connected and largely unconnected metapopulations (See Figure~\ref{f:invasionPropPlots1}). 
-This was true at all transmission levels ($\chi^2$ test. $\beta = 2$: $\chi^2 = \rinline{TopoTest1$statistic}$, $\text{df} = \rinline{TopoTest1$parameter}$, $p = \rinline{TopoTest1$p.value}$. $\beta = 5$: $\chi^2 = \rinline{TopoTest2$statistic}$, $\text{df} = \rinline{TopoTest2$parameter}$, $p = \rinline{TopoTest2$p.value}$. $\beta = 10$: $\chi^2 = \rinline{TopoTest3$statistic}$, $\text{df} = \rinline{TopoTest3$parameter}$, $p = \rinline{TopoTest3$p.value}$).
+This was true at all transmission levels ($\chi^2$ test. $\beta = 2$: $\chi^2 = \rinline{TopoTest1$statistic}$, $\text{df} = \rinline{TopoTest1$parameter}$, $p = \rinline{p(TopoTest1$p.value)}$. $\beta = 5$: $\chi^2 = \rinline{TopoTest2$statistic}$, $\text{df} = \rinline{TopoTest2$parameter}$, $p = \rinline{p(TopoTest2$p.value)}$. $\beta = 10$: $\chi^2 = \rinline{TopoTest3$statistic}$, $\text{df} = \rinline{TopoTest3$parameter}$, $p = \rinline{p(TopoTest3$p.value)}$).
 
 In a small proportion of simulations, both pathogens went extinct.
 In these cases we still counted the invading pathogen as failing to invade.
-However, the results are the same as above if these simulations are removed from the analysis ($\chi^2$ test. $\beta = 2$: $\chi^2 = \rinline{Topo2Test1$statistic}$, $\text{df} = \rinline{Topo2Test1$parameter}$, $p = \rinline{Topo2Test1$p.value}$. $\beta = 5$: $\chi^2 = \rinline{Topo2Test2$statistic}$, $\text{df} = \rinline{Topo2Test2$parameter}$, $p = \rinline{Topo2Test2$p.value}$. $\beta = 10$: $\chi^2 = \rinline{Topo2Test3$statistic}$, $\text{df} = \rinline{Topo2Test3$parameter}$, $p = \rinline{Topo2Test3$p.value}$).
+However, the results are the same as above if these simulations are removed from the analysis ($\chi^2$ test. $\beta = 2$: $\chi^2 = \rinline{Topo2Test1$statistic}$, $\text{df} = \rinline{Topo2Test1$parameter}$, $p = \rinline{p(Topo2Test1$p.value)}$. $\beta = 5$: $\chi^2 = \rinline{Topo2Test2$statistic}$, $\text{df} = \rinline{Topo2Test2$parameter}$, $p = \rinline{p(Topo2Test2$p.value)}$. $\beta = 10$: $\chi^2 = \rinline{Topo2Test3$statistic}$, $\text{df} = \rinline{Topo2Test3$parameter}$, $p = \rinline{p(Topo2Test3$p.value)}$).
 
  
 \subsection{Transmission}
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Inline with theory, increasing the transmission rate increased the probability of invasion (Figure~\ref{f:invasionPropPlots1}--\ref{f:invasionPropPlots2}).
-This is true for all three dispersal values ($\chi^2$ test. $\lambda = 0.001$: $\chi^2 = \rinline{DispTransTest1$statistic}$, $\text{df} = \rinline{DispTransTest1$parameter}$, $p = \rinline{DispTransTest1$p.value}$. $\lambda = 0.01$: $\chi^2 = \rinline{DispTransTest2$statistic}$, $\text{df} = \rinline{DispTransTest2$parameter}$, $p = \rinline{DispTransTest2$p.value}$. $\lambda = 0.1$: $\chi^2 = \rinline{DispTransTest3$statistic}$, $\text{df} = \rinline{DispTransTest3$parameter}$, $p = \rinline{DispTransTest3$p.value}$) and both network structures ($\chi^2$ test. Fully connected: $\chi^2 = \rinline{TopoTransTest2$statistic}$, $\text{df} = \rinline{TopoTransTest2$parameter}$, $p =\rinline{TopoTransTest2$p.value}$. Minimally connected: $\chi^2 =  \rinline{TopoTransTest2$statistic}$, $\text{df} = \rinline{TopoTransTest2$parameter}$, $p = \rinline{TopoTransTest2$p.value}$).
+This is true for all three dispersal values ($\chi^2$ test. $\lambda = 0.001$: $\chi^2 = \rinline{DispTransTest1$statistic}$, $\text{df} = \rinline{DispTransTest1$parameter}$, $p = \rinline{p(DispTransTest1$p.value)}$. $\lambda = 0.01$: $\chi^2 = \rinline{DispTransTest2$statistic}$, $\text{df} = \rinline{DispTransTest2$parameter}$, $p = \rinline{p(DispTransTest2$p.value)}$. $\lambda = 0.1$: $\chi^2 = \rinline{DispTransTest3$statistic}$, $\text{df} = \rinline{DispTransTest3$parameter}$, $p = \rinline{p(DispTransTest3$p.value)}$) and both network structures ($\chi^2$ test. Fully connected: $\chi^2 = \rinline{TopoTransTest2$statistic}$, $\text{df} = \rinline{TopoTransTest2$parameter}$, $p = \rinline{p(TopoTransTest2$p.value)}$. Minimally connected: $\chi^2 =  \rinline{TopoTransTest2$statistic}$, $\text{df} = \rinline{TopoTransTest2$parameter}$, $p = \rinline{p(TopoTransTest2$p.value)}$).
 
 
-\rinline{0.0000381}
-
-\rinline{0.000001}
 \subsection{Extinction}
 
 I ran 1000 simulations varying dispersal rate and 1000 varying network topology. 
@@ -793,7 +790,7 @@ I have used mechanistic, metapopulation models to test whether increased populat
 \subsubsection{Population structure does not affect pathogen richness}
 
 Probably because dynamics are dominated by local processes.
-This goes against many predictions that increasi  ng $R_0$ increases pathogen richness.
+This goes against many predictions that increasing $R_0$ increases pathogen richness.
 Further work could examine reduced col  ony sizes to test when global structure become more important.
 Measures of population structure should not be used to predict zoonotic potential.
 

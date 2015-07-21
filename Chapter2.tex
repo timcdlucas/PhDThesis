@@ -555,7 +555,7 @@ The probability of the new pathogen invading ranged from 0.12 to 0.55.
 
 
 The proportion of invasions was not different across dispersal rates across 1500 simulation run.. 
-This was true at all transmission levels ($\chi^2$ test. $\beta = 2$: $\chi^2 = 4.19$, $\text{df} = 2$, $p = 0.12$. $\beta = 5$: $\chi^2 = 1.27$, $\text{df} = 2$, $p = 0.53$. $\beta = 10$: $\chi^2 = 0.01$, $\text{df} = 2$, $p = 1$).
+This was true at all transmission levels ($\chi^2$ test. $\beta = 2$: $\chi^2 = 4.19$, $\text{df} = 2$, $p = 0.12$. $\beta = 5$: $\chi^2 = 1.27$, $\text{df} = 2$, $p = 0.53$. $\beta = 10$: $\chi^2 = \ensuremath{6.61\times 10^{-3}}$, $\text{df} = 2$, $p = 1.00$).
 
 
 \subsubsection{Network structure}
@@ -563,23 +563,20 @@ This was true at all transmission levels ($\chi^2$ test. $\beta = 2$: $\chi^2 = 
 
 I ran 2000 simulations over three transmission values ($\beta = 2, 5, 10$).
 The proportion of invasions was not different between highly connected and largely unconnected metapopulations (See Figure~\ref{f:invasionPropPlots1}). 
-This was true at all transmission levels ($\chi^2$ test. $\beta = 2$: $\chi^2 = 1.81$, $\text{df} = 1$, $p = 0.18$. $\beta = 5$: $\chi^2 = 0.62$, $\text{df} = 1$, $p = 0.43$. $\beta = 10$: $\chi^2 = 2.65$, $\text{df} = 1$, $p = 0.1$).
+This was true at all transmission levels ($\chi^2$ test. $\beta = 2$: $\chi^2 = 1.81$, $\text{df} = 1$, $p = 0.18$. $\beta = 5$: $\chi^2 = 0.62$, $\text{df} = 1$, $p = 0.43$. $\beta = 10$: $\chi^2 = 2.65$, $\text{df} = 1$, $p = 0.10$).
 
 In a small proportion of simulations, both pathogens went extinct.
 In these cases we still counted the invading pathogen as failing to invade.
-However, the results are the same as above if these simulations are removed from the analysis ($\chi^2$ test. $\beta = 2$: $\chi^2 = 2.29$, $\text{df} = 1$, $p = 0.13$. $\beta = 5$: $\chi^2 = 0.15$, $\text{df} = 1$, $p = 0.7$. $\beta = 10$: $\chi^2 = 2.36$, $\text{df} = 1$, $p = 0.12$).
+However, the results are the same as above if these simulations are removed from the analysis ($\chi^2$ test. $\beta = 2$: $\chi^2 = 2.29$, $\text{df} = 1$, $p = 0.13$. $\beta = 5$: $\chi^2 = 0.15$, $\text{df} = 1$, $p = 0.70$. $\beta = 10$: $\chi^2 = 2.36$, $\text{df} = 1$, $p = 0.12$).
 
  
 \subsection{Transmission}
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Inline with theory, increasing the transmission rate increased the probability of invasion (Figure~\ref{f:invasionPropPlots1}--\ref{f:invasionPropPlots2}).
-This is true for all three dispersal values ($\chi^2$ test. $\lambda = 0.001$: $\chi^2 = 19.35$, $\text{df} = 2$, $p = \ensuremath{6.27\times 10^{-5}}$. $\lambda = 0.01$: $\chi^2 = 29.05$, $\text{df} = 2$, $p = \ensuremath{4.92\times 10^{-7}}$. $\lambda = 0.1$: $\chi^2 = 38.9$, $\text{df} = 2$, $p = \ensuremath{3.56\times 10^{-9}}$) and both network structures ($\chi^2$ test. Fully connected: $\chi^2 = 66.4$, $\text{df} = 2$, $p =\ensuremath{3.81\times 10^{-15}}$. Minimally connected: $\chi^2 =  66.4$, $\text{df} = 2$, $p = \ensuremath{3.81\times 10^{-15}}$).
+This is true for all three dispersal values ($\chi^2$ test. $\lambda = 0.001$: $\chi^2 = 19.35$, $\text{df} = 2$, $p = \ensuremath{10^{-4}}$. $\lambda = 0.01$: $\chi^2 = 29.05$, $\text{df} = 2$, $p = \ensuremath{10^{-6}}$. $\lambda = 0.1$: $\chi^2 = 38.9$, $\text{df} = 2$, $p = \ensuremath{10^{-8}}$) and both network structures ($\chi^2$ test. Fully connected: $\chi^2 = 66.4$, $\text{df} = 2$, $p = \ensuremath{10^{-14}}$. Minimally connected: $\chi^2 =  66.4$, $\text{df} = 2$, $p = \ensuremath{10^{-14}}$).
 
 
-\ensuremath{3.81\times 10^{-5}}
-
-\ensuremath{10^{-6}}
 \subsection{Extinction}
 
 I ran 1000 simulations varying dispersal rate and 1000 varying network topology. 
@@ -609,7 +606,7 @@ I have used mechanistic, metapopulation models to test whether increased populat
 \subsubsection{Population structure does not affect pathogen richness}
 
 Probably because dynamics are dominated by local processes.
-This goes against many predictions that increasi  ng $R_0$ increases pathogen richness.
+This goes against many predictions that increasing $R_0$ increases pathogen richness.
 Further work could examine reduced col  ony sizes to test when global structure become more important.
 Measures of population structure should not be used to predict zoonotic potential.
 
