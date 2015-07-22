@@ -5,9 +5,26 @@
 
 %%begin.rcode settings, echo = FALSE, cache = FALSE, message = FALSE, results = 'hide'
 
+####################################
+### Important simulation options ###
+####################################
+
 # Compilation options
 # Run simulations? This will take many hours
-runAllSims <- FALSE
+runAllSims <- TRUE
+
+# Save raw simulation output
+# This will take ~10GB or so.
+# If false, summary statistics of each simulation are saved instead.
+saveData <- FALSE
+
+
+# How many cores do you want to use to run simulations?
+nCores <- 7
+
+##########################
+### End options        ###
+##########################
 
 
 opts_chunk$set(cache.path = '.Ch2Cache/')
@@ -32,6 +49,10 @@ library(binom)
 
 # To tidy up stats models/tests
 library(broom)
+
+
+# Run simulations in parallel
+library(parallel)
 %%end.rcode
 
 
@@ -423,10 +444,214 @@ Dispersal is held constant between the two topologies.
 \end{figure}
 
 
+%%begin.rcode DispSimsFuncs
+
+  #################################
+  # Dispersal sim definitions     #
+  #################################
+
+  # How long should the simulation last?
+  nEvent <- 1e6
+
+  # When should the invading pathogen be added.
+  invadeT <- 5e5
+
+  # How often should the population be sampled. Only sampled populations are saved.
+  sample <- 1000
+
+  # How many simulations to run?
+  nDispSims <- 9*200
+
+
+# Define our simulation function.
+fullSim <- function(x){
+
+  dispVec <- rep(c(0.001, 0.01, 0.1), each = nDispSims/3 +1)
+  disp <- dispVec[x]
+
+  tranVec <- rep(c(2, 5, 10), nDispSims/3 + 1)
+  tran <- tranVec[x]
+
+  # Set seed (this is set within each parallel simulation to prevent reusing random numbers).
+  simSeed <- paste0(seed, x)
+  set.seed(simSeed)
+
+  # Make the population.
+  p <- makePop(model = 'SIR', events = nEvent, nColonies = 10, nPathogens = 2,   recovery = 1,  sample = sample, dispersal = disp, birth = 0.05, death = 0.05, crossImmunity = 0.1, meanColonySize = 3000, infectDeath = 0, transmission = tran, maxDistance = 100, colonySpatialDistr = 'circle')
+
+  # Seed endemic pathogen.
+  for(i in 1:10){
+    p <- seedPathogen(p, 2, n = 200, diffCols = FALSE)
+  }
+
+  # Burn in simulation
+  p <- runSim(p, end = invadeT)
+
+  # Seed invading pathogen.
+  p$I[2, 1, (invadeT + 1) %% sample] <- 10
+  
+  # Recalculate rates of each event after seeding.
+  p <- transRates(p, (invadeT + 1) %% sample)
+
+  # Continue simulation
+  p <- runSim(p, start = invadeT + 1, end = 'end')
+
+  # Was the invasion succesful?
+  invasion <- findDisDistr(p, 2)[1] > 0
+
+  # Save summary stats
+  d <- data.frame(transmission = NA)
+
+  d$transmission <- p$parameters['transmission']
+  d$dispersal <- p$parameters['dispersal']
+  d$nExtantDis <- sum(findDisDistr(p, 2) > 0)
+  d$singleInf <- findCoinfDistr(p, 2)[2]
+  d$doubleInf <- findCoinfDistr(p, 2)[3]
+  d$nColonies <- p$parameters['nColonies']
+  d$nPathogens <- p$parameters['nPathogens']
+  d$meanK <- sum(p$adjacency != 0 )/p$parameters['nColonies']
+  d$maxDistance <- p$parameters['maxDistance']
+  d$nEvents <- p$parameters['events']
+
+
+  message(paste0("finished ", x, ". Invasion: ", invasion ))
+  
+  if(saveData){ 
+    file <- paste0('data/Chapter2/DispSims/DispSim_', formatC(x, width = 4, flag = '0'), '.RData')
+    save(p, file = file)
+  }
+
+  rm(p)
+
+  return(d)
+
+}
+%%end.rcode
+
+%%begin.rcode runDispSim, eval = runAllSims, cache = TRUE
+
+# Create and set seed (seed object is used to set seed in each seperate simulation.'
+seed <- 33355
+set.seed(seed)
+
+# If we want to save the data, make a directory for it.
+if(saveData){
+  dir.create('data/Chapter2/DispSims/')
+}
+
+# Run sims.
+z <- mclapply(1:nDispSims, . %>% fullSim, mc.preschedule = FALSE, mc.cores = nCores)
+
+z <- do.call(rbind, z)
+
+# Save summary data.
+write.csv(z, file = 'data/Chapter2/DispSims.csv')
+
+%%end.rcode
+
+
+%%begin.rcode TopoSimsFuncs
+
+  #################################
+  # Topology sim definitions      #
+  #################################
+
+  # How many simulations to run?
+  nTopoSims <- 6 * 200
+
+# Define our simulation function.
+fullSim <- function(x){
+
+  # Chose maxdistance so that we get either fully connected or circle networks.
+  mxDis <- rep(c(40,200), nTopoSims)[x]
+
+  # Chose transmission rates.
+  tranVec <- rep(c(2, 5, 10), nTopoSims/3 + 1)
+  tran <- tranVec[x]
+
+  # Set seed (this is set within each parallel simulation to prevent reusing random numbers).
+  simSeed <- paste0(seed, x)
+  set.seed(simSeed)
+
+  # Make the population.
+  p <- makePop(model = 'SIR', events = nEvent, nColonies = 10, nPathogens = 2,   recovery = 1,  sample = sample, dispersal = 0.01, birth = 0.05, death = 0.05, crossImmunity = 0.1, meanColonySize = 3000, infectDeath = 0, transmission = tran, maxDistance = mxDis, colonySpatialDistr = 'circle')
+
+  # Seed endemic pathogen.
+  for(i in 1:10){
+    p <- seedPathogen(p, 2, n = 200, diffCols = FALSE)
+  }
+
+  # Burn in simulation
+  p <- runSim(p, end = invadeT)
+
+  # Seed invading pathogen.
+  p$I[2, 1, (invadeT + 1) %% sample] <- 10
+  
+  # Recalculate rates of each event after seeding.
+  p <- transRates(p, (invadeT + 1) %% sample)
+
+  # Continue simulation
+  p <- runSim(p, start = invadeT + 1, end = 'end')
+
+  # Was the invasion succesful?
+  invasion <- findDisDistr(p, 2)[1] > 0
+
+  # Save summary stats
+  d <- data.frame(transmission = NA)
+
+  d$transmission <- p$parameters['transmission']
+  d$dispersal <- p$parameters['dispersal']
+  d$nExtantDis <- sum(findDisDistr(p, 2) > 0)
+  d$singleInf <- findCoinfDistr(p, 2)[2]
+  d$doubleInf <- findCoinfDistr(p, 2)[3]
+  d$nColonies <- p$parameters['nColonies']
+  d$nPathogens <- p$parameters['nPathogens']
+  d$meanK <- sum(p$adjacency != 0 )/p$parameters['nColonies']
+  d$maxDistance <- p$parameters['maxDistance']
+  d$nEvents <- p$parameters['events']
+
+
+  message(paste0("finished ", x, ". Invasion: ", invasion ))
+  
+  if(saveData){ 
+    file <- paste0('data/Chapter2/TopoSims/TopoSim_', formatC(x, width = 4, flag = '0'), '.RData')
+    save(p, file = file)
+  }
+
+  rm(p)
+
+  return(d)
+
+}
+%%end.rcode
+
+%%begin.rcode runTopoSim, eval = runAllSims, cache = TRUE
+
+# Create and set seed (seed object is used to set seed in each seperate simulation.'
+seed <- 1230202
+set.seed(seed)
+
+# If we want to save the data, make a directory for it.
+if(saveData){
+  dir.create('data/Chapter2/TopoSims/')
+}
+
+# Run sims.
+z <- mclapply(1:nTopoSims, . %>% fullSim, mc.preschedule = FALSE, mc.cores = nCores)
+
+z <- do.call(rbind, z)
+
+# Save summary data.
+write.csv(z, file = 'data/Chapter2/TopoSims.csv')
+
+%%end.rcode
+
+
+
 In each simulation the population is seeded with 200 infected individuals of disease 1 in each colony. 
 Disease 1 is then allowed to spread and reach equilibrium. 
-After 40,000 events, 10 individuals infected with disease 2 are added to one colony. 
-After another 10,000 events the invasion of disease 2 is considered successful if any individuals with disease 2 still remain.
+After \rinline{invadeT} events, 10 individuals infected with disease 2 are added to one colony. 
+After another \rinline{nEvent - invadeT} events the invasion of disease 2 is considered successful if any individuals with disease 2 still remain.
 
 
 
@@ -497,6 +722,12 @@ For simulations studying extinction rates, half of the subpopulation were seeded
 
 
 
+
+
+
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \clearpage
@@ -510,7 +741,7 @@ For simulations studying extinction rates, half of the subpopulation were seeded
 
 # Read in the data.
 # Later I'll add in the option to simulate the whole dataset.
-dDisp <- read.csv('data/Chapter2/150327Data.csv', stringsAsFactors = FALSE)
+dDisp <- read.csv('data/Chapter2/DispSims.csv', stringsAsFactors = FALSE)
 dim(dDisp)
 head(dDisp)
 
@@ -581,7 +812,7 @@ DispTransTest3 <- tidy(prop.test(invsDisp$n[c(3, 6, 9)], nDisp$n[c(3, 6, 9)]))
 
 # Read in the data.
 # Later I'll add in the option to simulate the whole dataset.
-dTopo <- read.csv('data/Chapter2/150405Data.csv', stringsAsFactors = FALSE)
+dTopo <- read.csv('data/Chapter2/TopoSims.csv', stringsAsFactors = FALSE)
 dim(dTopo)
 head(dTopo)
 

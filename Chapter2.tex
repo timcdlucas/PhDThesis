@@ -397,10 +397,21 @@ Dispersal is held constant between the two topologies.
 \end{figure}
 
 
+
+
+
+
+
+
+
+
+
+
+
 In each simulation the population is seeded with 200 infected individuals of disease 1 in each colony. 
 Disease 1 is then allowed to spread and reach equilibrium. 
-After 40,000 events, 10 individuals infected with disease 2 are added to one colony. 
-After another 10,000 events the invasion of disease 2 is considered successful if any individuals with disease 2 still remain.
+After \ensuremath{3\times 10^{3}} events, 10 individuals infected with disease 2 are added to one colony. 
+After another \ensuremath{4.7\times 10^{4}} events the invasion of disease 2 is considered successful if any individuals with disease 2 still remain.
 
 
 
@@ -465,6 +476,12 @@ This is a trade off between getting a reasonable proportion of invasions, while 
 
 For simulations studying extinction rates, half of the subpopulation were seeded with each pathogen.
 2000 susceptibles and 1000 infected individuals were placed in each subpopulation in order to quickly reach equilibrium.
+
+
+
+
+
+
 
 
 
@@ -555,7 +572,7 @@ The probability of the new pathogen invading ranged from 0.12 to 0.55.
 
 
 The proportion of invasions was not different across dispersal rates across 1500 simulation run.. 
-This was true at all transmission levels ($\chi^2$ test. $\beta = 2$: $\chi^2 = 4.19$, $\text{df} = 2$, $p = 0.12$. $\beta = 5$: $\chi^2 = 1.27$, $\text{df} = 2$, $p = 0.53$. $\beta = 10$: $\chi^2 = \ensuremath{6.61\times 10^{-3}}$, $\text{df} = 2$, $p = 1.00$).
+This was true at all transmission levels ($\chi^2$ test. $\beta = 2$: $\chi^2 = \ensuremath{NaN}$, $\text{df} = 2$, $p = \ensuremath{NaN}$. $\beta = 5$: $\chi^2 = \ensuremath{NaN}$, $\text{df} = 2$, $p = \ensuremath{NaN}$. $\beta = 10$: $\chi^2 = \ensuremath{NaN}$, $\text{df} = 2$, $p = \ensuremath{NaN}$).
 
 
 \subsubsection{Network structure}
@@ -563,18 +580,18 @@ This was true at all transmission levels ($\chi^2$ test. $\beta = 2$: $\chi^2 = 
 
 I ran 2000 simulations over three transmission values ($\beta = 2, 5, 10$).
 The proportion of invasions was not different between highly connected and largely unconnected metapopulations (See Figure~\ref{f:invasionPropPlots1}). 
-This was true at all transmission levels ($\chi^2$ test. $\beta = 2$: $\chi^2 = 1.81$, $\text{df} = 1$, $p = 0.18$. $\beta = 5$: $\chi^2 = 0.62$, $\text{df} = 1$, $p = 0.43$. $\beta = 10$: $\chi^2 = 2.65$, $\text{df} = 1$, $p = 0.10$).
+This was true at all transmission levels ($\chi^2$ test. $\beta = 2$: $\chi^2 = \ensuremath{NaN}$, $\text{df} = 1$, $p = \ensuremath{NaN}$. $\beta = 5$: $\chi^2 = \ensuremath{NaN}$, $\text{df} = 1$, $p = \ensuremath{NaN}$. $\beta = 10$: $\chi^2 = \ensuremath{NaN}$, $\text{df} = 1$, $p = \ensuremath{NaN}$).
 
 In a small proportion of simulations, both pathogens went extinct.
 In these cases we still counted the invading pathogen as failing to invade.
-However, the results are the same as above if these simulations are removed from the analysis ($\chi^2$ test. $\beta = 2$: $\chi^2 = 2.29$, $\text{df} = 1$, $p = 0.13$. $\beta = 5$: $\chi^2 = 0.15$, $\text{df} = 1$, $p = 0.70$. $\beta = 10$: $\chi^2 = 2.36$, $\text{df} = 1$, $p = 0.12$).
+However, the results are the same as above if these simulations are removed from the analysis ($\chi^2$ test. $\beta = 2$: $\chi^2 = \ensuremath{NaN}$, $\text{df} = 1$, $p = \ensuremath{NaN}$. $\beta = 5$: $\chi^2 = \ensuremath{NaN}$, $\text{df} = 1$, $p = \ensuremath{NaN}$. $\beta = 10$: $\chi^2 = \ensuremath{NaN}$, $\text{df} = 1$, $p = \ensuremath{NaN}$).
 
  
 \subsection{Transmission}
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Inline with theory, increasing the transmission rate increased the probability of invasion (Figure~\ref{f:invasionPropPlots1}--\ref{f:invasionPropPlots2}).
-This is true for all three dispersal values ($\chi^2$ test. $\lambda = 0.001$: $\chi^2 = 19.35$, $\text{df} = 2$, $p = \ensuremath{10^{-4}}$. $\lambda = 0.01$: $\chi^2 = 29.05$, $\text{df} = 2$, $p = \ensuremath{10^{-6}}$. $\lambda = 0.1$: $\chi^2 = 38.9$, $\text{df} = 2$, $p = \ensuremath{10^{-8}}$) and both network structures ($\chi^2$ test. Fully connected: $\chi^2 = 66.4$, $\text{df} = 2$, $p = \ensuremath{10^{-14}}$. Minimally connected: $\chi^2 =  66.4$, $\text{df} = 2$, $p = \ensuremath{10^{-14}}$).
+This is true for all three dispersal values ($\chi^2$ test. $\lambda = 0.001$: $\chi^2 = \ensuremath{NaN}$, $\text{df} = 2$, $p = \ensuremath{NaN}$. $\lambda = 0.01$: $\chi^2 = \ensuremath{NaN}$, $\text{df} = 2$, $p = \ensuremath{NaN}$. $\lambda = 0.1$: $\chi^2 = \ensuremath{NaN}$, $\text{df} = 2$, $p = \ensuremath{NaN}$) and both network structures ($\chi^2$ test. Fully connected: $\chi^2 = \ensuremath{NaN}$, $\text{df} = 2$, $p = \ensuremath{NaN}$. Minimally connected: $\chi^2 =  \ensuremath{NaN}$, $\text{df} = 2$, $p = \ensuremath{NaN}$).
 
 
 \subsection{Extinction}

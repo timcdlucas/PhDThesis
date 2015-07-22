@@ -6,7 +6,7 @@ propOfTextwidth = 0.8
 
 opts_chunk$set(
   echo = FALSE, 
-  cache = 2, 
+  cache = FALSE, 
   dev = 'cairo_pdf', 
   warning = FALSE,
   results = 'hide',
@@ -19,19 +19,6 @@ opts_chunk$set(
   out.width = paste0(propOfTextwidth,'\\textwidth')
   )
 options(digits=2)
-
-#inline_hook <- function (x) {
-#  if (is.numeric(x)) {
-#    # ifelse does a vectorized comparison
-#    # If integer, print without decimal; otherwise print two places
-#    res <- ifelse(x == round(x),
-#      sprintf("%d", x),
-#      sprintf("%.2f", x)
-#    )
-#    paste(res, collapse = ", ")
-#  }
-#}
-#knit_hooks$set(inline = inline_hook)
 
 
 
@@ -53,7 +40,7 @@ p <- function(x, eps = 1e-3){
         }
       }
 
-#p <- function(x) return(x)
+p <- function(x) return(x)
 
 
 options('scipen' = -1)
