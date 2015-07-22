@@ -78,7 +78,8 @@ We start deriving the gREM with the simplest situation, the gas model where $\th
         \centering
 	\includegraphics[width=4cm]{imgs/lucas_et_al_figure1.pdf}
 
-\caption[Representation of sensor detection width and animal signal width]{Representation of sensor detection width and animal signal width.
+\caption[Representation of sensor detection width and animal signal width]{
+Representation of sensor detection width and animal signal width.
 The filled square and circle represent a sensor and an animal, respectively; $\theta$, sensor detection width (radians); $r$, sensor detection distance; dark grey shaded area, sensor detection zone; $\alpha$, animal signal width (radians).
 Dashed lines around the filled square and circle represents the maximum extent of $\theta$ and $\alpha$, respectively.} 
 \label{f:AngleDef}
@@ -113,7 +114,8 @@ However, different combinations of $\theta$ and $\alpha$ need different equation
 \begin{figure}
 \centering
 \includegraphics[width=7cm]{imgs/lucas_et_al_figure2.pdf}
-\caption[Locations where derivation of the average profile $\bar{p}$ is the same]{Locations where derivation of the average profile $\bar{p}$ is the same for different combinations of sensor detection and animal signal widths.
+\caption[Locations where derivation of the average profile $\bar{p}$ is the same]{
+Locations where derivation of the average profile $\bar{p}$ is the same for different combinations of sensor detection and animal signal widths.
 Symbols within each polygon refer to each gREM submodel named after their compass point, except for Gas and REM which highlight the position of these previously derived models within the gREM.
 Symbols on the edge of the plot are for submodels where $\alpha, \theta = 2\pi$}
 \label{f:equalRegions}
@@ -139,18 +141,18 @@ During this first interval, the size of $\alpha$ limits the width of the profile
 When the animal reaches $x_1$  = $\theta/2 + \pi/2 - \alpha/2$ (Figure~\ref{f:x1AndInt}c), the size of the profile is $r\sin( \alpha/2) + r\cos( x_1  - \theta/2)$ and the size of $\theta$ and $\alpha$ both limit the width of the profile (Figure~ \ref{f:x1AndInt}c).
 Finally, at $x_1  = 5\pi/2 - \theta/2  - \alpha/2$ until $x_1  = 3\pi/2$, the width of the profile is again $2r\sin\alpha/2$ (Figure~ \ref{f:x1AndInt}d) and the size of $\alpha$ again limits the width of the profile. 
 
-%insert new figure
 
 \begin{figure}[t]
         \centering
 	\includegraphics[width=7cm]{imgs/lucas_et_al_figure3.pdf}
-\caption[An overview of the derivation of the average profile $\bar{p}$ for the gREM submodel SE2]{An overview of the derivation of the average profile $\bar{p}$ for the gREM submodel SE2, where (a) shows the location of the profile $p$ (the line an animal must pass through in order to be captured) in red and the focal angle, $x_1$, for an animal (filled circle), its signal (unfilled sector), and direction of movement (shown as an arrow).
+\caption[An overview of the derivation of the average profile $\bar{p}$ for the gREM submodel SE2]{
+An overview of the derivation of the average profile $\bar{p}$ for the gREM submodel SE2, where (a) shows the location of the profile $p$ (the line an animal must pass through in order to be captured) in red and the focal angle, $x_1$, for an animal (filled circle), its signal (unfilled sector), and direction of movement (shown as an arrow).
 The detection zone of the sensor is shown as a filled grey sector with a detection distance of $r$.
 The vertical black line within the circle shows the direction the sensor is facing.
 The derivation of $p$ changes as the animal approaches the sensor from different directions (shown in b-d), where (b) is the derivation of $p$ when $x_1$ is in the interval $\lbrack\frac{\pi}{2}, \frac{\pi}{2} + \frac{\theta}{2} - \frac{\alpha}{2}\rbrack$, (c)  $p$ when $x_1$ is in the interval $\lbrack\frac{\pi}{2} + \frac{\theta}{2} - \frac{\alpha}{2}, \frac{5 \pi}{2} - \frac{\theta}{2} - \frac{\alpha}{2} \rbrack$ and (d) $p$ when $x_1$ is in the interval $\lbrack\frac{5 \pi}{2} - \frac{\theta}{2} - \frac{\alpha}{2}, \frac{3 \pi}{2}\rbrack$, where $\theta$, sensor detection width; $\alpha$, animal signal width.
 The resultant equation for $p$ is shown beneath b-d.
 The average profile $\bar{p}$ is the size of the profile averaged across all approach angles.}
- 	\label{f:x1AndInt}
+\label{f:x1AndInt}
 
 \end{figure}
 
@@ -169,7 +171,6 @@ D = z/vt\bar{p}.
 \end{equation}
 
 
-%fix this @Tim
 Rather than having one equation that describes $\bar{p}$ globally, the gREM must be split into submodels due to discontinuous changes in $p$ as $\alpha$ and $\beta$ change.
 These discontinuities can occur for a number of reasons such as a profile switching between being limited by $\alpha$ and $\theta$, the difference between very small profiles and profiles of size zero, and the fact that the width of a sector stops increasing once the central angle reaches $\pi$ radians (i.e., a semi-circle is just as wide as a full circle).
 As an example, if $\alpha$ is small, there is an interval between Figure \ref{f:x1AndInt}c and \ref{f:x1AndInt}d where the `blind spot' would prevent animals being detected giving $p=0$.
@@ -211,8 +212,6 @@ The gREM also assumes that individuals move continuously with straight-line move
 We used the four submodels to compare the accuracy and precision of a simple movement model, stop-start movement models (using different average amounts of time spent stationary), and random walk movement models.
 Finally, as the parameters ($\alpha$, $\beta$, $r$ and $v$) are likely to be measured with error, we compared true simulation densities to densities estimated with parameters with errors of $0\%$, $\pm 5\%$ and $\pm 10\%$, for all gREM submodels.
 
-% @tim what did we actually do accuracy, precision? 
-
 
 \section{Results}
 
@@ -227,7 +226,8 @@ Although more thorough checks are performed in Appendix S3, it can be seen that 
 \begin{figure}
 	\centering
 	\includegraphics[width=7cm]{imgs/lucas_et_al_figure4.pdf}
-	\caption[Expressions for the average profile width]{Expressions for the average profile width, $\bar{p}$, given a range of sensor and signal widths.
+	\caption[Expressions for the average profile width]{
+Expressions for the average profile width, $\bar{p}$, given a range of sensor and signal widths.
 Despite independent derivation within each block, many models result in the same expression.
 These are collected together and presented as one block of colour.
 Expressions on the edge of the plot are for submodels with $\alpha, \theta = 2\pi$. }
@@ -261,14 +261,15 @@ However, the precision was dependent on the number of captures across all four o
 For all gREM submodels, the the coefficient of variation falls to 10\% at 100 captures. 
 
 \begin{figure}[t]
-       \centering
+  \centering
 	\includegraphics[width=7cm]{imgs/lucas_et_al_figure6.pdf}
-        \caption[Simulation model results of the accuracy and precision of four gREM submodels]{Simulation model results of the accuracy and precision of four gREM submodels (NW1, SW1, SE3 and NE1) given different numbers of captures.
+\caption[Simulation model results of the accuracy and precision of four gREM submodels]{
+Simulation model results of the accuracy and precision of four gREM submodels (NW1, SW1, SE3 and NE1) given different numbers of captures.
 The percentage error between estimated and true density within each gREM sub model for capture rate is shown within each box plot, where the black line represents the median percentage error across all simulations, boxes represent the middle 50\% of the data, whiskers represent variability outside the upper and lower quartiles with outliers plotted as individual points.
 Sensor and signal widths vary between submodels.
 The numbers beneath each plot represent the coefficient of variation.
 The colour of each box plot corresponds to the expressions for average profile width $\bar{p}$ given in Figure 4. }            
-	\label{f:Captures}
+\label{f:Captures}
 \end{figure}
 
 
@@ -296,7 +297,7 @@ However, in all cases the percentage error in the density estimate is not more t
   }
 	\label{f:BreakAssump}
 	\caption[Simulation model results of the accuracy and precision of four gREM submodels]{
-	Simulation model results of the accuracy and precision of four gREM submodels (NW1, SW1, SE3 and NE1) given different movement models where (a) average amount of time spent stationary (stop-start movement) and (b) maximum change in direction at each step (correlated random walk model).
+Simulation model results of the accuracy and precision of four gREM submodels (NW1, SW1, SE3 and NE1) given different movement models where (a) average amount of time spent stationary (stop-start movement) and (b) maximum change in direction at each step (correlated random walk model).
 The percentage error between estimated and true density within each gREM sub model for the different movement models is shown within each box plot, where the black line represents the median percentage error across all simulations, boxes represent the middle 50\% of the data, whiskers represent variability outside the upper and lower quartiles with outliers plotted as individual points.
 The simple model is represented where time and maximum change in direction equals 0.
 The colour of each box plot corresponds to the expressions for average profile width $\bar{p}$ given in Figure 4.} 
@@ -384,12 +385,12 @@ As sensors such as camera traps and acoustic detectors become more ubiquitous, t
 
 
 %%%% ------- Acknowledgments ---------%%%%
-\section{Acknowledgments}
-We thank Hilde Wilkinson-Herbot, Chris Carbone, Francois Balloux, Andrew Cunningham, Steve Hailes, Richard Glennie and an anonymous referee for comments on previous versions of the manuscript.
-This study was funded through CoMPLEX PhD studentships at University College London supported by BBSRC and EPSRC (EAM and TCDL) and The Darwin Initiative (Awards 15003, 161333, EIDPR075), NERC (NE/H525003/1), and The Leverhulme Trust (Philip Leverhulme Prize) for KEJ.
+%\section{Acknowledgments}
+%We thank Hilde Wilkinson-Herbot, Chris Carbone, Francois Balloux, Andrew Cunningham, Steve Hailes, Richard Glennie and an anonymous referee for comments on previous versions of the manuscript.
+%This study was funded through CoMPLEX PhD studentships at University College London supported by BBSRC and EPSRC (EAM and TCDL) and The Darwin Initiative (Awards 15003, 161333, EIDPR075), NERC (NE/H525003/1), and The Leverhulme Trust (Philip Leverhulme Prize) for KEJ.
 
 %%%% ------- Data Accessibility ---------%%%%
 \section{Data Accessibility}
 
-The code used in this paper is available on Github at \url{https://github.com/timcdlucas/lucasMoorcroftManuscript/tree/postPeerReview}.
+The code used in this chapter is available on Github at \url{https://github.com/timcdlucas/lucasMoorcroftManuscript/tree/postPeerReview}.
 
