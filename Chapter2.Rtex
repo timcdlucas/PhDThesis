@@ -415,7 +415,7 @@ Finally, recovery from any infectious class occurs at a rate $\gamma$
   \includegraphics[width=0.45\textwidth]{imgs/minimallyConnected.pdf} 
 }
 }
-\caption[Network topologies used to test whether network connectedness influences pathogen invasion]{
+\caption[Network topologies used to compare network connectedness]{
 The two network topologies used to test whether network connectedness influences a viruses ability to invade. 
 Dispersal is held constant between the two topologies.
 }
@@ -510,7 +510,7 @@ For simulations studying extinction rates, half of the subpopulation were seeded
 
 # Read in the data.
 # Later I'll add in the option to simulate the whole dataset.
-dDisp <- read.csv('data/150327Data.csv', stringsAsFactors = FALSE)
+dDisp <- read.csv('data/Chapter2/150327Data.csv', stringsAsFactors = FALSE)
 dim(dDisp)
 head(dDisp)
 
@@ -581,7 +581,7 @@ DispTransTest3 <- tidy(prop.test(invsDisp$n[c(3, 6, 9)], nDisp$n[c(3, 6, 9)]))
 
 # Read in the data.
 # Later I'll add in the option to simulate the whole dataset.
-dTopo <- read.csv('data/150405Data.csv', stringsAsFactors = FALSE)
+dTopo <- read.csv('data/Chapter2/150405Data.csv', stringsAsFactors = FALSE)
 dim(dTopo)
 head(dTopo)
 
@@ -861,7 +861,7 @@ $k_i$ & Degree of node $i$ &&\\
 $\delta$ & Waiting time until next event & Days&\\
 $\alpha$ & Cross immunity & Proportion& 0.1\\
 $n, m$ & Colony index &&\\
-$A_{mn}$ & Adjacency matrix. & Distance &\\
+$\bm{A}_{mn}$ & Adjacency matrix. & Distance &\\
 $\mu$ & Maximum distance for edge to exist & km& 40, 100\\
 $\sigma$ & Invading pathogen seed size & & 10\\
 $r_i$ & The rate that event $i$ occurs. & Days$^{-1}$&\\

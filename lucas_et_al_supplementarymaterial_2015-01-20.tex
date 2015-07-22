@@ -1,4 +1,4 @@
-
+  
 
 \clearpage
 \section{Table of symbols}
@@ -65,34 +65,22 @@ These supplementary methods derive all the models used. For continuity, the gas 
 
 
 \begin{figure}[h!]
-        \centering
-        \begin{subfigure}[t]{7cm}
-                \centering
-        \includegraphics[width=1\textwidth]{imgs/AverageModelBias_callerror.pdf}
-                \caption{}               
-                \label{f:signal}
-        \end{subfigure}
-        ~ 
-        \begin{subfigure}[t]{7cm}
-                \centering
-        \includegraphics[width=1\textwidth]{imgs/AverageModelBias_cameraerror.pdf}
-                \caption{}               
-                \label{f:sensor}
-        \end{subfigure}
-        
-	\begin{subfigure}[t]{7cm}
-                \centering
-        \includegraphics[width=1\textwidth]{imgs/AverageModelBias_radiuserror.pdf}
-                \caption{}               
-                \label{f:radius}
-        \end{subfigure}%%
-	~
-	\begin{subfigure}[t]{7cm}
-                \centering
-        \includegraphics[width=1\textwidth]{imgs/AverageModelBias_speederror.pdf}
-                \caption{}               
-                \label{f:speed}
-        \end{subfigure}%%
+  \centering
+{
+  \subfloat[label{f:signal}]{
+    \includegraphics[width=0.4\textwidth]{imgs/AverageModelBias_callerror.pdf}
+  } 
+  \subfloat[label{f:sensor}]{
+    \includegraphics[width=0.4\textwidth]{imgs/AverageModelBias_cameraerror.pdf}
+  } 
+    
+	\subfloat[label{f:radius}]{
+    \includegraphics[width=0.4\textwidth]{imgs/AverageModelBias_radiuserror.pdf}
+  }%%
+	\subfloat[label{f:speed}]{
+    \includegraphics[width=0.4\textwidth]{imgs/AverageModelBias_speederror.pdf}
+  }
+}%%
 \caption[Model sensitivity to error in parameter estimates]{Model sensitivity (for all gREM submodels) to error in estimates of a) signal width $\alpha$,  b) sensor width $\theta$, c) detection distance $r$ and d) animal movement speed $v$. Estimates are -10\% (red), -1\% (orange), 0\% (grey), +1\% (green) and +10\% (blue) of the true parameter value. The black dashed line indicates zero error in density estimates. The error bars 95\% confidence intervals across all simulations.
 %@tim double check this is standard error 
 }

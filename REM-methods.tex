@@ -7,35 +7,35 @@ Following \cite{yapp1956theory}, we derive the gas model where sensors can captu
 
 
 \begin{figure}[t]
-        \centering
-        \begin{subfigure}[t]{0.34\textwidth}
-                \centering
-        \includegraphics[width=1\textwidth, trim=2cm 1cm 2cm 1cm]{imgs/x1.pdf}
-                \caption{$x_1$}               
-                \label{f:x1}
-        \end{subfigure}
-        ~ 
-        \begin{subfigure}[t]{0.22\textwidth}
-                \centering
-        \includegraphics[width=1\textwidth, trim=9cm 2cm 9cm 2cm]{imgs/x2.pdf}
-                \caption{$x_2$}               
-                \label{f:x2}
-        \end{subfigure}
-        ~ 
-	\begin{subfigure}[t]{0.22\textwidth}
-                \centering
-        \includegraphics[width=1\textwidth, trim=9cm 2cm 9cm 2cm]{imgs/x3.pdf}
-                \caption{$x_3$}               
-                \label{f:x3}
-        \end{subfigure}%%
-	~
-	\begin{subfigure}[t]{0.22\textwidth}
-                \centering
-        \includegraphics[width=1\textwidth, trim=9cm 2cm 9cm 2cm]{imgs/x4.pdf}
-                \caption{$x_4$}               
-                \label{f:x4}
-        \end{subfigure}%%
-\caption[The location of the focal angles $x_{i\in[1,4]}$]{The location of the focal angles $x_{i\in[1,4]}$. $x_1$ is used in SE and NE models (including the gas model). $x_2$ -- $x_4$ are used in NW and SW models. The sector shaped detection region is shown in grey. Animals are filled black circles and the animal signal is an unfilled sector. The animals direction of movement is indicated with an arrow. The profile $p$ is shown with a red line. (a) Animal is directly approaching the sensor at $x_1$ = $\frac{\pi}{2}$. (b) Animal is directly approaching the sensor at $x_2$ = $\frac{\pi}{2}$. $x_2$ then decreases until the profile is perpendicular to the edge of the detection region. (c) When the profile is perpendicular to the edge of the detection region, $x_3 = \theta$. (d) $x_4$ measures the angle between the left side of the detection region and the profile.}
+  \centering
+{
+  \subfloat[$x_1$\label{f:x1}]{
+    \includegraphics[width=.34\textwidth, trim=2cm 1cm 2cm 1cm]{imgs/x1.pdf}
+  }
+  \subfloat[$x_2$\label{f:x2}]{
+    \includegraphics[width=.22\textwidth, trim=9cm 2cm 9cm 2cm]{imgs/x2.pdf}
+  }
+  
+  \subfloat[$x_3$\label{f:x3}]{
+    \includegraphics[width=.22\textwidth, trim=9cm 2cm 9cm 2cm]{imgs/x3.pdf}
+  }
+  \subfloat[$x_4$\label{f:x4}]{
+    \includegraphics[width=.22\textwidth, trim=9cm 2cm 9cm 2cm]{imgs/x4.pdf}
+  }
+}
+\caption[The location of the focal angles $x_{i\in[1,4]}$]{
+The location of the focal angles $x_{i\in[1,4]}$. 
+$x_1$ is used in SE and NE models (including the gas model). 
+$x_2$ -- $x_4$ are used in NW and SW models. 
+The sector shaped detection region is shown in grey. 
+Animals are filled black circles and the animal signal is an unfilled sector. 
+The animals direction of movement is indicated with an arrow. 
+The profile $p$ is shown with a red line. 
+(a) Animal is directly approaching the sensor at $x_1$ = $\frac{\pi}{2}$. 
+(b) Animal is directly approaching the sensor at $x_2$ = $\frac{\pi}{2}$. 
+$x_2$ then decreases until the profile is perpendicular to the edge of the detection region. 
+(c) When the profile is perpendicular to the edge of the detection region, $x_3 = \theta$. 
+(d) $x_4$ measures the angle between the left side of the detection region and the profile.}
 
 \label{f:xis}
 \end{figure}
@@ -68,29 +68,30 @@ When the detection zone is not a circle, we have more complex profiles  and need
 
 
 \begin{figure}[t]
-        \centering
-        \begin{subfigure}[t]{0.3\textwidth}
-                \centering
-        \includegraphics[width=1\textwidth, trim=5cm 3cm 4cm 1cm]{imgs/ne2.pdf}
-                \caption{}
-                \label{f:NELimit}
-        \end{subfigure}
-        ~ 
-        \begin{subfigure}[t]{0.3\textwidth}
-                \centering
-                       \includegraphics[width=1\textwidth, trim=4cm 2cm 6cm 0cm]{imgs/ne33.pdf}
-                \caption{}
-                \label{f:NE3third}
-        \end{subfigure}
-        ~ 
-        \begin{subfigure}[t]{0.3\textwidth}
-                \centering
-                       \includegraphics[width=1\textwidth, trim=5cm 1cm 4cm 1cm]{imgs/ne34.pdf}
-                \caption{}
-                \label{f:NE3fourth}
-        \end{subfigure}
-
-\caption[Three of the integrals in NE models]{Three of the integrals in NE models. The sector shaped detection region is shown in grey. Animals are filled black circles and the animal signal is an unfilled sector. The animals direction of movement is indicated with an arrow. The profile $p$ is shown with a red line. Dashed red lines indicate areas where animals cannot be detected. (a) The second integral in NE with width $r + r\cos(x_1 - \theta/2)$ (b) The third integral in NE3. $\alpha/2$ is labelled. As it is small, animals to the right of the detector cannot be detected. (c) After further rotation, $\alpha/2$ is now bigger than the angle shown and animals to the right of the detector can again be detected.}
+  \centering
+{
+  \subfloat[\label{f:NELimit}]{
+    \includegraphics[width=.3\textwidth, trim=5cm 3cm 4cm 1cm]{imgs/ne2.pdf}
+  } 
+  \subfloat[\label{f:NE3third}]{
+    \includegraphics[width=.3\textwidth, trim=4cm 2cm 6cm 0cm]{imgs/ne33.pdf}
+  }
+  \subfloat[\label{f:NE3fourth}]{
+    \includegraphics[width=.3\textwidth, trim=5cm 1cm 4cm 1cm]{imgs/ne34.pdf}
+  }
+}
+\caption[Three of the integrals in NE models]{
+Three of the integrals in NE models. 
+The sector shaped detection region is shown in grey. 
+Animals are filled black circles and the animal signal is an unfilled sector. 
+The animals direction of movement is indicated with an arrow. 
+The profile $p$ is shown with a red line. 
+Dashed red lines indicate areas where animals cannot be detected. 
+(a) The second integral in NE with width $r + r\cos(x_1 - \theta/2)$. 
+(b) The third integral in NE3. $\alpha/2$ is labelled. 
+As it is small, animals to the right of the detector cannot be detected. 
+(c) After further rotation, $\alpha/2$ is now bigger than the angle shown and animals to the right of the detector can again be detected.
+}
 \label{f:NE}
 \end{figure}
 
@@ -182,21 +183,25 @@ Finally SE4 is bounded by  $\alpha \le 4\pi - 2\theta $, $\alpha\le\pi$ and $\th
 
 
 \begin{figure}[t]
-        \centering
-        \begin{subfigure}[t]{0.35\textwidth}
-                \centering
-        \includegraphics[width=1\textwidth, trim=5cm 1cm 4cm 1cm]{imgs/nw2.pdf}
-                \caption{}
-                \label{f:NW1AT}
-        \end{subfigure}
-~ 
-        \begin{subfigure}[t]{0.35\textwidth}
-                \centering
-        \includegraphics[width=1\textwidth, trim=0cm 1cm 4cm 1cm]{imgs/nw4.pdf}
-                \caption{}
-                \label{f:NW1behindFull}
-        \end{subfigure}
-\caption[The second and fourth profiles of NW1]{The second and fourth profiles of NW1. The left side of of both profiles is of width $r$ while the right side differs. (a) The right side of the profile is $r\cos(\pi+x_4-\theta) = - r\cos(\theta - x_4 )$ (b) The right side is $r\cos(\pi-x_4) = - r\cos x_4$ respectively. In both images the sector shaped detection region is shown in grey. Animals are filled black circles and the animal signal is an unfilled sector. The animals direction of movement is indicated with an arrow. The profile $p$ is shown with a red line. }
+  \centering
+{
+  \subfloat[\label{f:NW1AT}]{
+    \includegraphics[width=0.35\textwidth, trim=5cm 1cm 4cm 1cm]{imgs/nw2.pdf}
+  }
+  \subfloat[\label{f:NW1behindFull}]{
+    \includegraphics[width=0.35\textwidth, trim=0cm 1cm 4cm 1cm]{imgs/nw4.pdf}
+  }
+}
+\caption[The second and fourth profiles of NW1]{
+The second and fourth profiles of NW1. 
+The left side of of both profiles is of width $r$ while the right side differs. 
+(a) The right side of the profile is $r\cos(\pi+x_4-\theta) = - r\cos(\theta - x_4 )$ 
+(b) The right side is $r\cos(\pi-x_4) = - r\cos x_4$ respectively. 
+In both images the sector shaped detection region is shown in grey. 
+Animals are filled black circles and the animal signal is an unfilled sector. 
+The animals direction of movement is indicated with an arrow. 
+The profile $p$ is shown with a red line. 
+}
 \label{f:NW1}
 \end{figure}
 
@@ -230,22 +235,25 @@ The models NW2--4 have the five potential profiles in NW1 but not all profiles o
 
 
 \begin{figure}[t]
-        \centering
-        \begin{subfigure}[t]{0.35\textwidth}
-                \centering
-        \includegraphics[width=1\textwidth, trim=5cm 6cm 4cm 1cm]{imgs/behind.pdf}
-                \label{f:NW2--4behind}
-                \caption{}
-        \end{subfigure}
-~ 
-        \begin{subfigure}[t]{0.35\textwidth}
-                \centering
-        \includegraphics[width=1\textwidth, trim=5cm 6cm 4cm 1cm]{imgs/behind2.pdf}
-                \label{f:NW2--4behind2}
-                \caption{}
-        \end{subfigure}
-
-\caption[Profile sizes when an animal approaches from behind in models NW2--4]{Profile sizes when an animal approaches from behind in models NW2--4. If $\alpha$ is relatively large, animals can be detected when approaching from behind. Otherwise animals cannot be detected.  The sector shaped detection region is shown in grey. Animals are filled black circles and the animal signal is an unfilled sector. The animals direction of movement is indicated with an arrow.  (a) If $\alpha/2$ is less than $\pi - \theta/2$, as is the case here, then the width of the profile when an animal approaches directly from behind is zero. (b) If $\alpha/2 > \pi - \theta/2$ the profile width from behind is $2r\sin\left(\theta/2\right)\sin(x_2)$.}
+  \centering
+{
+  \subfloat[\label{f:NW2--4behind}]{
+    \includegraphics[width=0.35\textwidth, trim=5cm 6cm 4cm 1cm]{imgs/behind.pdf}   
+  }
+  \subfloat[\label{f:NW2--4behind2}]{
+    \includegraphics[width=0.35\textwidth, trim=5cm 6cm 4cm 1cm]{imgs/behind2.pdf}      
+  }
+}
+\caption[Profile sizes when an animal approaches from behind in models NW2--4]{
+Profile sizes when an animal approaches from behind in models NW2--4. 
+If $\alpha$ is relatively large, animals can be detected when approaching from behind. 
+Otherwise animals cannot be detected.  
+The sector shaped detection region is shown in grey. 
+Animals are filled black circles and the animal signal is an unfilled sector. 
+The animals direction of movement is indicated with an arrow.  
+(a) If $\alpha/2$ is less than $\pi - \theta/2$, as is the case here, then the width of the profile when an animal approaches directly from behind is zero. 
+(b) If $\alpha/2 > \pi - \theta/2$ the profile width from behind is $2r\sin\left(\theta/2\right)\sin(x_2)$.
+}
 \label{f:NW2--4}
 \end{figure}
 
@@ -337,22 +345,24 @@ It is similar to NW6 but does not include the last integral as during the $x_3$ 
 The models in SW1--3 are described with the two focal angles used in models NW2--4, $x_2$ and $x_4$. As $\alpha \le\pi$ an animal can never be detected if it is approaching the detector from behind. This makes these models simpler in that they go through the $x_2$ and $x_4$ profiles only once each. 
 
 \begin{figure}[t]
-        \centering
-        \begin{subfigure}[t]{0.35\textwidth}
-                \centering
-        \includegraphics[width=1\textwidth, trim=7cm 10cm 6cm 1cm]{imgs/forward.pdf}
-                \caption{}
-                \label{f:SWforward} %NW1AT
-        \end{subfigure}
-~ 
-        \begin{subfigure}[t]{0.35\textwidth}
-                \centering
-        \includegraphics[width=1\textwidth, trim=7cm 10cm 6cm 1cm]{imgs/forward2.pdf}
-                \caption{}
-                \label{f:SWforwad2}
-        \end{subfigure}
-
-\caption[The first profile in SW models]{The first profile in SW models is limited by either $\alpha$ or $\beta$ depending on whether $\alpha < \beta$.  The sector shaped detection region is shown in grey. Animals are filled black circles and the animal signal is an unfilled sector. The animals direction of movement is indicated with an arrow. (a)  As $\alpha/2 < \theta/2$ the profile width is limited by the signal width rather than the sensor region. The profile width is $2r\sin\left(\alpha/2\right)$ (b) As $\alpha/2 > \theta/2$ the profile width is limited by the sensor region, not the signal width. The profile width is $2r\sin\left(\theta/2\right)\sin(x_2)$.    }
+  \centering
+{
+  \subfloat[\label{f:SWforward}]{
+    \includegraphics[width=0.35\textwidth, trim=7cm 10cm 6cm 1cm]{imgs/forward.pdf}
+  }
+  \subfloat[\label{f:SWforwad2}]{
+    \includegraphics[width=0.35\textwidth, trim=7cm 10cm 6cm 1cm]{imgs/forward2.pdf}
+  }
+}
+\caption[The first profile in SW models]{
+The first profile in SW models is limited by either $\alpha$ or $\beta$ depending on whether $\alpha < \beta$.  
+The sector shaped detection region is shown in grey. 
+Animals are filled black circles and the animal signal is an unfilled sector. 
+The animals direction of movement is indicated with an arrow. 
+(a)  As $\alpha/2 < \theta/2$ the profile width is limited by the signal width rather than the sensor region. 
+The profile width is $2r\sin\left(\alpha/2\right)$ (b) As $\alpha/2 > \theta/2$ the profile width is limited by the sensor region, not the signal width. 
+The profile width is $2r\sin\left(\theta/2\right)\sin(x_2)$.    
+}
 \label{f:forward}
 \end{figure}
 
@@ -412,22 +422,28 @@ As $\alpha < \pi$, animals approaching the sensor from behind can never be detec
 \end{enumerate}
 
 \begin{figure}[t]
-       \centering
-        \begin{subfigure}[t]{0.4\textwidth}
-                \centering
-        \includegraphics[width=1\textwidth, trim=8cm 9cm 8cm 4cm]{imgs/x4is0.pdf}
-                \caption{}
-                \label{f:SW4--9nox4}
-        \end{subfigure}
-~ 
-        \begin{subfigure}[t]{0.4\textwidth}
-                \centering
-        \includegraphics[width=1\textwidth, trim=8cm 9cm 8cm 4cm]{imgs/4--9int3.pdf}
-                \caption{}
-                \label{f:4--9int3}
-        \end{subfigure}
-
-\caption[Description of two profiles in SW models]{Description of two profiles in SW models. The sector shaped detection region is shown in grey. Animals are filled black circles and the animal signal is an unfilled sector. The animals direction of movement is indicated with an arrow. The profile $p$ is shown with a red line. Dashed red lines indicate areas where animals cannot be detected. (a) At $x_4 = 0$, if $\alpha/2 < \pi/2 - \theta$ then $\alpha/2$ is too small for an animal to be detected at all during the $x_4$ profile (shown with dashed red.) This inequality simplifies to $\alpha < \pi - 2\theta$. (b) The right of the profile is limited by the signal width, not the sensor. On the left, the profile is limited by the sensor and not the signal. Overall the profile width is $r\sin(\alpha/2) - r\cos(x_2 + \theta/2)$.     }
+ \centering
+{
+  \subfloat[\label{f:SW4--9nox4}]{
+    \includegraphics[width=.4\textwidth, trim=8cm 9cm 8cm 4cm]{imgs/x4is0.pdf}
+  }
+  \subfloat[\label{f:4--9int3}]{
+    \includegraphics[width=.4\textwidth, trim=8cm 9cm 8cm 4cm]{imgs/4--9int3.pdf}
+  }
+}
+\caption[Description of two profiles in SW models]{
+Description of two profiles in SW models. 
+The sector shaped detection region is shown in grey. 
+Animals are filled black circles and the animal signal is an unfilled sector. 
+The animals direction of movement is indicated with an arrow. 
+The profile $p$ is shown with a red line. 
+Dashed red lines indicate areas where animals cannot be detected. 
+(a) At $x_4 = 0$, if $\alpha/2 < \pi/2 - \theta$ then $\alpha/2$ is too small for an animal to be detected at all during the $x_4$ profile (shown with dashed red.)
+This inequality simplifies to $\alpha < \pi - 2\theta$. 
+(b) The right of the profile is limited by the signal width, not the sensor. 
+On the left, the profile is limited by the sensor and not the signal. 
+Overall the profile width is $r\sin(\alpha/2) - r\cos(x_2 + \theta/2)$.    
+}
 \label{f:SW4--9}
 \end{figure}
 
