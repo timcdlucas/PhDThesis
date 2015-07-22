@@ -701,7 +701,7 @@ invasionPropCaption <- "The probability of successful invasion.
 %%end.rcode
 
 
-%%begin.rcode invasionPropPlots, fig.lp = 'f:', fig.height = 4, fig.subcap = c('Dispersal', 'Network topology'), out.width = "0.45\\textwidth", fig.cap = invasionPropCaption
+%%begin.rcode invasionPropPlots, fig.lp = 'f:', fig.height = 4, fig.subcap = c('Dispersal', 'Network topology'), out.width = "0.45\\textwidth", fig.cap = invasionPropCaption, cache = FALSE
 
 propsDispCI <- data.frame(invsDisp[, 1:2], binom.confint(invsDisp$n, nDisp$n, conf.level = 0.95, methods = "exact"))
 
@@ -822,7 +822,7 @@ This quickly becomes computationally restrictive.
 
 \subsubsection{Identical strains}
 
-Many papers on pathogen richness have focussed on the evolution of pathogen traits and have considered a trade off between transmission rate and virulence \cite{nowak1994superinfection, nowak1994superinfection} or infectious period \cite{poletto2013hostinfec}.
+Many papers on pathogen richness have focussed on the evolution of pathogen traits and have considered a trade off between transmission rate and virulence \cite{nowak1994superinfection, nowak1994superinfection} or infectious period \cite{poletto2013host}.
 However, here we are interested in host traits.
 Therefore we have assumed that pathogen strains are identical.
 It is clear however that there are a number of factors that affect pathogen richness and our focus on host population structure does not imply that pathogen traits are not important.
