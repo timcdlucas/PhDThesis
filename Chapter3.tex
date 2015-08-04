@@ -4,29 +4,7 @@
 
 
 
-\begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.137, 0.137, 0.137}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlcom{# Data handling}
-\hlkwd{library}\hlstd{(dplyr)}
-\hlkwd{library}\hlstd{(broom)}
-\hlkwd{library}\hlstd{(readxl)}
-\hlkwd{library}\hlstd{(sqldf)}
 
-\hlcom{# phylogenetic regression}
-\hlkwd{library}\hlstd{(ape)}
-\hlkwd{library}\hlstd{(caper)}
-
-\hlcom{# Plotting}
-\hlkwd{library}\hlstd{(ggplot2)}
-\hlkwd{library}\hlstd{(dotwhisker)}
-\hlkwd{library}\hlstd{(ggfortify)}
-
-\hlcom{# Web scraping.}
-\hlkwd{library}\hlstd{(rvest)}
-\end{alltt}
-\end{kframe}
-\end{knitrout}
 
 \section{Abstract}
 
@@ -81,82 +59,20 @@
 
 To measure pathogen richness I used data from \cite{luis2013comparison}. 
 These simply include known infections of a bat species with a pathogen species. 
+Only species with at least one pathogen were included in the analysis.
 To control for study bias I collected the number of pubmed citations for each bat species including synonyms from ITIS \cite{itis} via the taxize package \cite{chamberlain2013taxize}.
+The counts were scraped using the rvest package \cite{rvest}.
 
 
-\begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.137, 0.137, 0.137}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlcom{#read in luis2013virus data}
-\hlstd{virus2} \hlkwb{<-} \hlkwd{read.csv}\hlstd{(}\hlstr{'data/Chapter3/luis2013comparison.csv'}\hlstd{,} \hlkwc{stringsAsFactors} \hlstd{=} \hlnum{FALSE}\hlstd{)}
 
 
-\hlstd{virus2}\hlopt{$}\hlstd{binomial} \hlkwb{<-} \hlkwd{paste}\hlstd{(virus2}\hlopt{$}\hlstd{host.genus, virus2}\hlopt{$}\hlstd{host.species)}
-\end{alltt}
-\end{kframe}
-\end{knitrout}
 
-
-I used to measures of population structure. 
+I used two measures of population structure. 
 $F_{ST}$ and the number of subspecies.
 The number of of subspecies was counted using the Wilson and Reeder taxonomy \cite{wilson2005mammal}.
 
 \begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.137, 0.137, 0.137}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlstd{tax} \hlkwb{<-} \hlkwd{read.csv}\hlstd{(}\hlstr{'data/Chapter3/msw3-all.csv'}\hlstd{,} \hlkwc{stringsAsFactors} \hlstd{=} \hlnum{FALSE}\hlstd{)}
-
-\hlstd{chir} \hlkwb{<-} \hlstd{tax} \hlopt{%>%}
-          \hlkwd{filter}\hlstd{(Order} \hlopt{==} \hlstr{'CHIROPTERA'}\hlstd{)}
-
-\hlcom{# Save some memory.}
-\hlkwd{rm}\hlstd{(tax)}
-
-\hlcom{# Count the number of subspecies each bat species has.}
-\hlstd{subs} \hlkwb{<-} \hlkwd{sqldf}\hlstd{(}\hlstr{'
-  SELECT Family, Genus, Species, COUNT(Subspecies)
-  AS NumberOfSubspecies
-  FROM chir
-  Where Species <> ""
-  GROUP BY Genus, Species
-               '}\hlstd{)}
-
-
-
-\hlcom{# I think each species has 1 row for species and extra rows for subspecies}
-\hlcom{#   Check this is true. }
-\hlcom{#   If that is correct, then Species with >1 NumberOfSubspecies should be one less.}
-
-\hlstd{SpeciesRows} \hlkwb{<-} \hlkwd{sqldf}\hlstd{(}\hlstr{'
-  SELECT Genus, Species, COUNT(Subspecies)
-  AS SpeciesRows
-  FROM chir
-  WHERE Subspecies == "" AND Species <> ""
-  GROUP BY Genus, Species
-               '}\hlstd{)}
-
-\hlcom{# }
-\hlstd{(SpeciesRows}\hlopt{$}\hlstd{SpeciesRows} \hlopt{!=} \hlnum{1}\hlstd{)} \hlopt{%>%} \hlstd{sum}
-\hlkwd{all}\hlstd{(SpeciesRows}\hlopt{$}\hlstd{SpeciesRows} \hlopt{==} \hlnum{1}\hlstd{)}
-
-\hlcom{# Species with >1 NumberOfSubspecies should be one less}
-\hlstd{subs}\hlopt{$}\hlstd{NumberOfSubspecies} \hlkwb{<-} \hlkwd{ifelse}\hlstd{(subs}\hlopt{$}\hlstd{NumberOfSubspecies} \hlopt{>} \hlnum{1}\hlstd{,}
-                             \hlstd{subs}\hlopt{$}\hlstd{NumberOfSubspecies} \hlopt{-} \hlnum{1}\hlstd{,}
-                             \hlstd{subs}\hlopt{$}\hlstd{NumberOfSubspecies)}
-
-\hlcom{# Quick look at species with highest number of subspecies.}
-\hlstd{subs[}\hlkwd{order}\hlstd{(subs}\hlopt{$}\hlstd{NumberOfSubspecies,} \hlkwc{decreasing} \hlstd{=} \hlnum{TRUE} \hlstd{),]} \hlopt{%>%} \hlstd{head}
-
-\hlcom{# Megaderma spasma is top. It's widespread across south east asia islands. }
-\hlcom{#   So this makes sense.}
-
-\hlcom{# Quick look at the number of subspecies.}
-\hlkwd{ggplot}\hlstd{(subs,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= NumberOfSubspecies))} \hlopt{+}
-  \hlkwd{geom_histogram}\hlstd{()} \hlopt{+}
-  \hlkwd{xlab}\hlstd{(}\hlstr{'Number of Subspecies'}\hlstd{)} \hlopt{+}
-  \hlkwd{ylab}\hlstd{(}\hlstr{'Count'}\hlstd{)}
-\end{alltt}
-\end{kframe}\begin{figure}[t]
+\definecolor{shadecolor}{rgb}{0.137, 0.137, 0.137}\color{fgcolor}\begin{figure}[t]
 
 {\centering \includegraphics[width=0.8\textwidth]{figure/wilsonReaderTaxonomyRead-1} 
 
@@ -165,26 +81,11 @@ The number of of subspecies was counted using the Wilson and Reeder taxonomy \ci
 \caption[Histogram of number of subspecies]{Histogram of number of subspecies}\label{fig:wilsonReaderTaxonomyRead}
 \end{figure}
 
-\begin{kframe}\begin{alltt}
-\hlcom{# Create a combined binomial name column}
-\hlstd{subs}\hlopt{$}\hlstd{binomial} \hlkwb{<-} \hlkwd{paste}\hlstd{(subs}\hlopt{$}\hlstd{Genus, subs}\hlopt{$}\hlstd{Species)}
-\end{alltt}
-\end{kframe}
+
 \end{knitrout}
 
 \begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.137, 0.137, 0.137}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlcom{# Compare the histograms of numbers of subspecies over the families with many species.}
-\hlstd{subs} \hlopt{%>%}
-  \hlkwd{filter}\hlstd{(Family} \hlopt{%in%} \hlkwd{names}\hlstd{(}\hlkwd{which}\hlstd{(}\hlkwd{table}\hlstd{(subs}\hlopt{$}\hlstd{Family)} \hlopt{>} \hlnum{99}\hlstd{)))} \hlopt{%>%}
-  \hlkwd{ggplot}\hlstd{(.,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= NumberOfSubspecies,} \hlkwc{y} \hlstd{= ..density..))} \hlopt{+}
-    \hlkwd{geom_histogram}\hlstd{()} \hlopt{+}
-    \hlkwd{facet_grid}\hlstd{(.} \hlopt{~} \hlstd{Family)} \hlopt{+}
-    \hlkwd{xlab}\hlstd{(}\hlstr{'Number of Subspecies'}\hlstd{)} \hlopt{+}
-    \hlkwd{ylab}\hlstd{(}\hlstr{'Density'}\hlstd{)}
-\end{alltt}
-\end{kframe}\begin{figure}[t]
+\definecolor{shadecolor}{rgb}{0.137, 0.137, 0.137}\color{fgcolor}\begin{figure}[t]
 
 {\centering \includegraphics[width=0.8\textwidth]{figure/subsHistsByFam-1} 
 
@@ -196,63 +97,10 @@ The number of of subspecies was counted using the Wilson and Reeder taxonomy \ci
 
 \end{knitrout}
 
-\begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.137, 0.137, 0.137}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlstd{subvsvirus} \hlkwb{<-} \hlstr{'
-Number of viruses against number of subspecies.
-Points are coloured by family, with families with less than 10 species being grouped into "other".
-Contours show the 2D density of points and suggest a positive correlation.
-'}
-\end{alltt}
-\end{kframe}
-\end{knitrout}
+
 
 \begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.137, 0.137, 0.137}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlcom{# create combined dataframe}
-
-\hlcom{# Join dataframes}
-\hlstd{species} \hlkwb{<-} \hlkwd{sqldf}\hlstd{(}\hlstr{"
-               SELECT subs.binomial, virus2.[virus.species]
-               FROM subs
-               INNER JOIN virus2
-               ON subs.binomial=virus2.binomial;
-              "}\hlstd{)}
-
-\hlcom{# Count number of virus species for each bat species}
-\hlstd{nSpecies} \hlkwb{<-} \hlstd{species} \hlopt{%>%}
-              \hlstd{unique} \hlopt{%>%}
-              \hlkwd{group_by}\hlstd{(binomial)} \hlopt{%>%}
-              \hlkwd{summarise}\hlstd{(}\hlkwc{virusSpecies} \hlstd{=} \hlkwd{n}\hlstd{())}
-
-\hlcom{# Add other Subspecies data.}
-\hlstd{nSpecies} \hlkwb{<-} \hlkwd{sqldf}\hlstd{(}\hlstr{"
-              SELECT nSpecies.binomial, virusSpecies, NumberOfSubspecies, Genus, Family
-              FROM nSpecies
-              LEFT JOIN subs
-              ON nSpecies.binomial=subs.binomial
-             "}\hlstd{)}
-
-\hlcom{# Create another column to make plotting easier.}
-\hlcom{#   Group families with few rows into 'other'}
-
-\hlstd{nSpecies}\hlopt{$}\hlstd{familyPlotCol} \hlkwb{<-} \hlstd{nSpecies}\hlopt{$}\hlstd{Family}
-\hlstd{nSpecies}\hlopt{$}\hlstd{familyPlotCol[}
-  \hlstd{nSpecies}\hlopt{$}\hlstd{Family} \hlopt{%in%} \hlkwd{names}\hlstd{(}\hlkwd{which}\hlstd{(}\hlkwd{table}\hlstd{(nSpecies}\hlopt{$}\hlstd{Family)} \hlopt{<} \hlnum{10}\hlstd{))]} \hlkwb{<-} \hlstr{'Other'}
-
-\hlkwd{table}\hlstd{(nSpecies}\hlopt{$}\hlstd{familyPlotCol)}
-
-\hlkwd{ggplot}\hlstd{(nSpecies,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{=} \hlkwd{log}\hlstd{(NumberOfSubspecies),} \hlkwc{y} \hlstd{=} \hlkwd{log}\hlstd{(virusSpecies)))}\hlopt{+}
-  \hlcom{# geom_smooth(method = 'lm') +}
-  \hlkwd{geom_jitter}\hlstd{(}\hlkwd{aes}\hlstd{(}\hlkwc{colour} \hlstd{= familyPlotCol),} \hlkwc{size} \hlstd{=} \hlnum{2.5}\hlstd{,} \hlkwc{alpha} \hlstd{=} \hlnum{0.8}\hlstd{,}
-    \hlkwc{position} \hlstd{=} \hlkwd{position_jitter}\hlstd{(}\hlkwc{width} \hlstd{=} \hlnum{.1}\hlstd{,} \hlkwc{height} \hlstd{=} \hlnum{.1}\hlstd{))} \hlopt{+}
-  \hlkwd{thesis_palette}\hlstd{()} \hlopt{+}
-  \hlkwd{geom_density2d}\hlstd{()} \hlopt{+}
-  \hlkwd{labs}\hlstd{(}\hlkwc{colour} \hlstd{=} \hlstr{'Family'}\hlstd{)}
-\end{alltt}
-\end{kframe}\begin{figure}[t]
+\definecolor{shadecolor}{rgb}{0.137, 0.137, 0.137}\color{fgcolor}\begin{figure}[t]
 
 {\centering \includegraphics[width=\textwidth]{figure/subsDataFrame-1} 
 
@@ -269,19 +117,127 @@ Contours show the 2D density of points and suggest a positive correlation.
 
 \end{knitrout}
 
-
-
-%%being.rcode euthRead
-
-
-
-
-%%end.rcode
+Measures of bady mass are taken from Pantheria \cite{jones2009pantheria}.
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+To control for phylogenetic nonindependance I used the best-supported phylogeny from \cite{fritz2009geographical} which is the supertree from \cite{bininda2007delayed} with names updated to match the Wilson \& Reeder taxonomy \cite{wilson2005mammal}.
+Phylogenetic manipulation was performed using the ape package \cite{ape}.
+
+
+
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.137, 0.137, 0.137}\color{fgcolor}\begin{figure}[t]
+
+{\centering \includegraphics[width=0.8\textwidth]{figure/treePlot-1} 
+
+}
+
+\caption[Pruned phylogeny with dot size showing number of pathogens and colour showing family]{Pruned phylogeny with dot size showing number of pathogens and colour showing family.}\label{fig:treePlot}
+\end{figure}
+
+
+\end{knitrout}
+
+
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.137, 0.137, 0.137}\color{fgcolor}\begin{figure}[t]
+
+{\centering \includegraphics[width=0.8\textwidth]{figure/subsDataviz-1} 
+
+}
+
+\caption{}\label{fig:subsDataviz}
+\end{figure}
+
+\begin{figure}[t]
+
+{\centering \includegraphics[width=0.8\textwidth]{figure/subsDataviz-2} 
+
+}
+
+\caption{}\label{fig:subsDataviz}
+\end{figure}
+
+\begin{figure}[t]
+
+{\centering \includegraphics[width=0.8\textwidth]{figure/subsDataviz-3} 
+
+}
+
+\caption{}\label{fig:subsDataviz}
+\end{figure}
+
+\begin{figure}[t]
+
+{\centering \includegraphics[width=0.8\textwidth]{figure/subsDataviz-4} 
+
+}
+
+\caption{}\label{fig:subsDataviz}
+\end{figure}
+
+
+\end{knitrout}
+
+
+I wanted to run three models using the phylolm package testing the relationship between pathogen richness and log number of subspecies.
+I tried phylogenetically controlled, multivariate GLMs with poisson errors and identity links.
+This model was fitted both with and without an interaction term between number of subspecies and study effort.
+I also fitted a phylogenetically controlled, GLM with poisson errors and identity link to pathogen richness and study effort.
+The residuals from this model was then used as the response variable in a multivariate GLM.
+However, with these models the numerical optimisation failed to converge.
+
+I ran three models using the caper package \cite{caper} testing the relationship between pathogen richness and log number of subspecies.
+All independant variables were log transformed --- study effort was $\log(\text{citations} + 1)$.
+I ran phylogenetically controlled, multivariate linear models.
+This model was fitted both with and without an interaction term between number of subspecies and study effort.
+We also fitted a phylogenetically controlled, GLM with poisson errors and identity link to pathogen richness and study effort.
+The residuals from this model was then used as the response variable in a multivariate GLM.
+
+
+
+
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.137, 0.137, 0.137}\color{fgcolor}\begin{figure}[t]
+
+{\centering \includegraphics[width=0.8\textwidth]{figure/plotSubspecies-1} 
+
+}
+
+\caption[Number of virus species against log number of subspecies]{Number of virus species against log number of subspecies. Nonphylogenetic trend line in blue. Phylogenetic model (evaluated at mean body mass and mean study effort values) is shown in red.}\label{fig:plotSubspecies}
+\end{figure}
+
+
+\end{knitrout}
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.137, 0.137, 0.137}\color{fgcolor}\begin{figure}[t]
+
+{\centering \includegraphics[width=0.8\textwidth]{figure/pubmedresidPlot-1} 
+
+}
+
+\caption[Plot using residuals from number of viruses against number of citations (study effort)]{Plot using residuals from number of viruses against number of citations (study effort). Nonphylogenetic trend line added. }\label{fig:pubmedresidPlot}
+\end{figure}
+
+
+\end{knitrout}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -289,6 +245,37 @@ Contours show the 2D density of points and suggest a positive correlation.
 \section{Results}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+See Fig.\ref{fig:plotSubspeciesCoefs} for a display of estimated coefficients for the two models using number of viruses as the response variable. 
+The main model with mass, study effort and number of subspecies as predictors found study effort to be highly significant ($\beta = $1.01, $p = $\ensuremath{3.9\times 10^{-12}}). 
+The number of subspecies was marginally significant ($\beta = $ 0.48, $p = $0.06). 
+The effect of nonindependance due to phylogeny was very small ($\lambda = $0.07, $p = $0.1).
+
+The interaction term between study effort and number of subspecies, when included, was not significant ($\beta = $ 0.23, $p = $0.12).
+
+The model using the residuals from a regression between number of viruses and study effort as the response variable found no significant affect of number of subspecies. 
+Mass was marginally significant.
+
+
+
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.137, 0.137, 0.137}\color{fgcolor}\begin{figure}[t]
+
+{\centering \includegraphics[width=0.8\textwidth]{figure/plotSubspeciesCoefs-1} 
+
+}
+
+\caption[
+Plot of coefficient estimates and 95\% confidence intervals for phylogenetic model with (inter) and without (joint) interactions between study effort and number of subspecies]{
+Plot of coefficient estimates and 95\% confidence intervals for phylogenetic model with (inter) and without (joint) interactions between study effort and number of subspecies. 
+Without interactions, number of subspecies is marginally significant.
+}\label{fig:plotSubspeciesCoefs}
+\end{figure}
+
+
+\end{knitrout}
+
 
 
 

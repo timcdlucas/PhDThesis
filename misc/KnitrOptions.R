@@ -6,14 +6,14 @@
 propOfTextwidth = 0.8
 
 opts_chunk$set(
-  echo = TRUE, 
-  cache = FALSE, 
+  echo = FALSE, 
+  cache = TRUE, 
   dev = 'cairo_pdf', 
   warning = FALSE,
   results = 'hide',
   message = FALSE,
   fig.width = 6.45 * propOfTextwidth,
-  fig.height = 6.45 * propOfTextwidth * 0.7,
+  fig.height = 6.45 * propOfTextwidth * 0.5,
   fig.align = 'center',
   fig.pos = 't',
   #fig.showtext = TRUE, # Embeds fonts.

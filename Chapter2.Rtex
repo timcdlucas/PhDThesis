@@ -475,7 +475,7 @@ fullSim <- function(x){
   dispVec <- rep(c(0.001, 0.01, 0.1), each = nDispSims/3 +1)
   disp <- dispVec[x]
 
-  tranVec <- rep(c(0.1, 0.5, 1, 2), nDispSims/3 + 1)
+  tranVec <- rep(c(0.1, 0.2, 0.4, 0.6 ), nDispSims/3 + 1)
   tran <- tranVec[x]
 
   # Set seed (this is set within each parallel simulation to prevent reusing random numbers).
@@ -569,10 +569,10 @@ write.csv(z, file = 'data/Chapter2/DispSims.csv')
 fullSim <- function(x){
 
   # Chose maxdistance so that we get either fully connected or circle networks.
-  mxDis <- rep(c(40,200), nTopoSims)[x]
+  mxDis <- rep(c(40, 200), each = nTopoSims)[x]
 
   # Chose transmission rates.
-  tranVec <- rep(c(0.1, 0.5, 1, 2), nDispSims/3 + 1)
+  tranVec <- rep(c(0.1, 0.2, 0.4, 0.6), nDispSims/3 + 1)
   tran <- tranVec[x]
 
   # Set seed (this is set within each parallel simulation to prevent reusing random numbers).
@@ -733,7 +733,6 @@ For simulations studying extinction rates, half of the subpopulation were seeded
 
 
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \clearpage
@@ -760,14 +759,7 @@ head(dDisp)
 
 dDisp$invasion <- dDisp$nPathogens - dDisp$nExtantDis == 0
 
-# Number of extinctions by treatment
-invsDisp <- dDisp %>% 
-  group_by(transmission, dispersal) %>% 
-  select(invasion) %>%
-  filter(invasion == TRUE) %>%
-  summarise(n())
 
-invsDisp
 
 # Number of simulations of each treatment
 nDisp <- dDisp %>% 
@@ -777,8 +769,25 @@ nDisp <- dDisp %>%
 
 nDisp
 
+
+# Number of extinctions by treatment
+invsDisp <- dDisp %>% 
+  group_by(transmission, dispersal) %>% 
+  select(invasion) %>%
+  filter(invasion == TRUE) %>%
+  summarise(n())
+
+invsDisp
+
+
+propsDisp <- left_join(nDisp, invsDisp, by = c('dispersal', 'transmission'))
+
+names(propsDisp) <- c( 'transmission', 'dispersal', 'n', 'invasions')
+
+propsDisp$invasions[is.na(propsDisp$invasions)] <- 0
+
 # Proportion of invasions in totals.
-propsDisp <- data.frame(invsDisp[, 1:2], props = invsDisp$n / nDisp$n)
+propsDisp$props <- propsDisp$invasions / propsDisp$n 
 
 propsDisp
 
@@ -791,11 +800,11 @@ propsDisp
 
 # Then run proportion tests between dispersal rates
 
-DispTest1 <- tidy(prop.test(invsDisp$n[1:3], nDisp$n[1:3]))
-DispTest2 <- tidy(prop.test(invsDisp$n[4:6], nDisp$n[4:6]))
-DispTest3 <- tidy(prop.test(invsDisp$n[7:9], nDisp$n[7:9]))
+#DispTest1 <- tidy(prop.test(invsDisp$n[1:3], nDisp$n[1:3]))
+#DispTest2 <- tidy(prop.test(invsDisp$n[4:6], nDisp$n[4:6]))
+#DispTest3 <- tidy(prop.test(invsDisp$n[7:9], nDisp$n[7:9]))
 
-DispTest1
+#DispTest1
 
 %%end.rcode
 
@@ -848,8 +857,16 @@ nTopo <- dTopo %>%
 
 nTopo
 
+
+
+propsTopo <- left_join(nTopo, invsTopo, by = c('meanK', 'transmission'))
+
+names(propsTopo) <- c( 'transmission', 'meanK', 'n', 'invasions')
+
+propsTopo$invasions[is.na(propsTopo$invasions)] <- 0
+
 # Proportion of invasions in totals.
-propsTopo <- data.frame(invsTopo[, 1:2], props = invsTopo$n / nTopo$n)
+propsTopo$props <- propsTopo$invasions / propsTopo$n 
 
 propsTopo
 
@@ -862,9 +879,9 @@ propsTopo
 
 # Then run proportion tests between population structures
 
-TopoTest1 <- prop.test(invsTopo$n[1:2], nTopo$n[1:2])
-TopoTest2 <- prop.test(invsTopo$n[3:4], nTopo$n[3:4])
-TopoTest3 <- prop.test(invsTopo$n[5:6], nTopo$n[5:6])
+#TopoTest1 <- prop.test(invsTopo$n[1:2], nTopo$n[1:2])
+#TopoTest2 <- prop.test(invsTopo$n[3:4], nTopo$n[3:4])
+#TopoTest3 <- prop.test(invsTopo$n[5:6], nTopo$n[5:6])
 
 
 %%end.rcode
