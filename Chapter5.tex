@@ -2,6 +2,12 @@
 
 
 
+
+
+
+
+
+
 \section{Abstract}
 Wildlife monitoring technology is advancing rapidly and the use of remote sensors such as camera traps and acoustic detectors is becoming common in both the terrestrial and marine environments.
 Current methods to estimate abundance or density require individual recognition of animals or knowing the distance of the animal from the sensor, which is often difficult.
@@ -143,8 +149,22 @@ Finally, at $x_1  = 5\pi/2 - \theta/2  - \alpha/2$ until $x_1  = 3\pi/2$, the wi
 
 
 \begin{figure}[t]
-        \centering
-	\includegraphics[width=7cm]{imgs/lucas_et_al_figure3.pdf}
+	\centering
+	\subfloat[\label{f:intx1}]{
+		\includegraphics[trim = 20mm 40mm 20mm 10mm, width=70mm]{imgs/x1.pdf}
+  }
+  \subfloat[\label{f:int1}]{
+		\includegraphics[trim = 20mm 40mm 20mm 10mm, width=70mm]{imgs/firstIntegral.pdf}
+  }
+  
+  \subfloat[\label{f:int2}]{
+		\includegraphics[trim = 20mm 40mm 20mm 10mm, width=70mm]{imgs/secondIntegral.pdf}
+  }
+  \subfloat[\label{f:int3}]{
+		\includegraphics[trim = 20mm 40mm 20mm 10mm, width=70mm]{imgs/thirdIntegral.pdf}
+  }
+
+	%\includegraphics[width=7cm]{imgs/lucas_et_al_figure3.pdf}
 \caption[An overview of the derivation of the average profile $\bar{p}$ for the gREM submodel SE2]{
 An overview of the derivation of the average profile $\bar{p}$ for the gREM submodel SE2, where (a) shows the location of the profile $p$ (the line an animal must pass through in order to be captured) in red and the focal angle, $x_1$, for an animal (filled circle), its signal (unfilled sector), and direction of movement (shown as an arrow).
 The detection zone of the sensor is shown as a filled grey sector with a detection distance of $r$.
@@ -284,6 +304,8 @@ Altering the maximum change in direction in each step (0, $\pi/3$, $2\pi/3$, and
 The percentage error in the density estimates across all parameters and gREM submodels shows a similar response for under and over estimated parameters, suggesting the accuracy is reasonable with respect to parameter error (Appendix S6).
 The impact of parameter error on the precision of the density estimate varies across gREM submodels and parameters, where $\alpha$ shows the largest variation including the largest values.
 However, in all cases the percentage error in the density estimate is not more than 5\% greater than the error in the parameter estimate (Appendix S6).
+
+
 
 
 
