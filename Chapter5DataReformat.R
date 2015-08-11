@@ -7,26 +7,6 @@ library(ggplot2)
 library(plyr)
 
 
-tort <- read.csv('data/Chapter5/max_angle_change_percentageerror.csv',  stringsAsFactors = FALSE)
-
-
-
-tortClean <- tort[5:NROW(tort),] %>%
-               melt(variable.name = 'model', value.name = 'percentageerror') %>%
-               mutate(model2 = ifelse(grepl('\\.', model), as.character(model), '.4')) %>%
-               mutate(maxAngle = gsub('.*\\.', '', model2)) %>%
-               mutate(maxAngle = factor(maxAngle, levels = c('4', '1', '2', '3'), 
-                      labels = c('0',	'pi/3', '2pi/3', 'pi'))) %>%
-               mutate(model = gsub('\\..*', '', model)) %>%
-               select(model, percentageerror, maxAngle)
-
-ggplot(tortClean, aes(x = maxAngle, y = percentageerror)) + 
-  geom_boxplot() +
-  facet_grid(. ~ model)
-
-write.csv(tortClean, file = 'data/Chapter5/max_angle_tidy.csv', row.names = FALSE)
-
-
 
 allModels <- read.csv('data/Chapter5/AllModels_percenterror.csv',  stringsAsFactors = FALSE, header = TRUE)
 
@@ -51,6 +31,53 @@ ggplot(modsClean, aes(x = model, y = percentageerror, fill = expression)) +
 
 write.csv(modsClean, file = 'data/Chapter5/all_models_tidy.csv', row.names = FALSE)
 
+
+
+
+
+
+tort <- read.csv('data/Chapter5/max_angle_change_percentageerror.csv',  stringsAsFactors = FALSE)
+
+
+
+tortClean <- tort[5:NROW(tort),] %>%
+               melt(variable.name = 'model', value.name = 'percentageerror') %>%
+               mutate(model2 = ifelse(grepl('\\.', model), as.character(model), '.4')) %>%
+               mutate(maxAngle = gsub('.*\\.', '', model2)) %>%
+               mutate(maxAngle = factor(maxAngle, levels = c('4', '1', '2', '3'), 
+                      labels = c('0',	'pi/3', '2pi/3', 'pi'))) %>%
+               mutate(model = gsub('\\..*', '', model)) %>%
+               select(model, percentageerror, maxAngle)
+
+ggplot(tortClean, aes(x = maxAngle, y = percentageerror)) + 
+  geom_boxplot() +
+  facet_grid(. ~ model)
+
+write.csv(tortClean, file = 'data/Chapter5/max_angle_tidy.csv', row.names = FALSE)
+
+
+
+
+
+
+wait <- read.csv('data/Chapter5/Prop_time_still_percentageerror.csv',  stringsAsFactors = FALSE)
+
+
+
+waitClean <- wait[5:NROW(tort),] %>%
+               melt(variable.name = 'model', value.name = 'percentageerror') %>%
+               mutate(model2 = ifelse(grepl('\\.', model), as.character(model), '.4')) %>%
+               mutate(wait = gsub('.*\\.', '', model2)) %>%
+               mutate(wait = factor(wait, levels = c('4', '1', '2'), 
+                      labels = c('0',	'0.5', '0.75'))) %>%
+               mutate(model = gsub('\\..*', '', model)) %>%
+               select(model, percentageerror, wait)
+
+ggplot(waitClean, aes(x = wait, y = percentageerror)) + 
+  geom_boxplot() +
+  facet_grid(. ~ model)
+
+write.csv(waitClean, file = 'data/Chapter5/prop_time_still_tidy.csv', row.names = FALSE)
 
 
   

@@ -300,7 +300,7 @@ Box colours correspond to the expressions for average profile width $\\bar{p}$ g
 gremSubsShort <- 'Simulation model results of the accuracy and precision for gREM submodels'
 %%end.rcode
 
-%%begin.rcode gremSubmods, fig.cap = gremSubsCapt, fig.scap = gremSubsShort
+%%begin.rcode gremSubmods, fig.cap = gremSubsCapt, fig.scap = gremSubsShort, out.width = '\\textwidth'
 
 allMods <- read.csv('data/Chapter5/all_models_tidy.csv')
 
@@ -309,23 +309,24 @@ allMods$model <- factor(allMods$model, levels =  c('SW9', 'SW8', 'SW7',  'SW6', 
 
 
 ggplot(allMods, aes(x = model, y = percentageerror, fill = expression)) + 
-  geom_boxplot() +
+  geom_boxplot(outlier.size = 1, size = 0.3) +
   thesis_palette('fill') +
   theme(legend.position = 'none') + 
   xlab('gREM Submodel') +
-  ylab('Percentage Error')
+  ylab('Percentage Error') +
+  theme(axis.text.x = element_text(angle = 90, vjust=0.5, size = 9))
 
 %%end.rcode
 
-\begin{figure}[t]
-	\centering
-	\includegraphics[width=7cm]{imgs/lucas_et_al_figure5.pdf}
-       	\caption[Simulation model results of the accuracy and precision for gREM submodels]{Simulation model results of the accuracy and precision for gREM submodels.
-The percentage error between estimated and true density for each gREM sub model is shown within each box plot, where the black line represents the median percentage error across all simulations, boxes represent the middle 50\% of the data, whiskers represent variability outside the upper and lower quartiles with outliers plotted as individual points.
-Box colours correspond to the expressions for average profile width $\bar{p}$ given in Figure 4.        
-} 
-	\label{f:ModelBias}
-\end{figure}
+%\begin{figure}[t]
+%	\centering
+%	\includegraphics[width=7cm]{imgs/lucas_et_al_figure5.pdf}
+%       	\caption[Simulation model results of the accuracy and precision for gREM submodels]{Simulation model results of the accuracy and precision for gREM submodels.
+%The percentage error between estimated and true density for each gREM sub model is shown within each box plot, where the black line represents the median percentage error across all simulations, boxes represent the middle 50\% of the data, whiskers represent variability outside the upper and lower quartiles with outliers plotted as individual points.
+%Box colours correspond to the expressions for average profile width $\bar{p}$ given in Figure 4.        
+%} 
+%	\label{f:ModelBias}
+%\end{figure}
 
 \subsubsection{Number of captures}
 
@@ -363,33 +364,77 @@ However, in all cases the percentage error in the density estimate is not more t
 movtCapt <- '
 Simulation model results of the accuracy and precision of four gREM submodels (NW1, SW1, SE3 and NE1) given different movement models where (a) average amount of time spent stationary (stop-start movement) and (b) maximum change in direction at each step (correlated random walk model).
 The percentage error between estimated and true density within each gREM sub model for the different movement models is shown within each box plot, where the black line represents the median percentage error across all simulations, boxes represent the middle 50\\% of the data, whiskers represent variability outside the upper and lower quartiles with outliers plotted as individual points.
+Notches in boxplots show the 95\\% confidence for the median.
 The simple model is represented where time and maximum change in direction equals 0.
-The colour of each box plot corresponds to the expressions for average profile width $\bar{p}$ given in Figure 4.
+The colour of each box plot corresponds to the expressions for average profile width $\\bar{p}$ given in Figure 4.
 '
 
 movtTitle <- 'Simulation model results of the accuracy and precision of four gREM submodels'
 
 %%end.rcode
 
-%%begin.rcode movtFig, fig.cap = movtCapt, fig.scap = movtTitle, fig.show = 'hide'
+%%begin.rcode movtFig, fig.cap = movtCapt, fig.scap = movtTitle, fig.subcap = c('', ''), out.width = '0.5\\textwidth'
+
+wait <- read.csv('data/Chapter5/prop_time_still_tidy.csv')
+
+wait$wait <- factor(wait$wait)
+
+wait$expression <- wait$model
+
+# SW1 and SE3 have the same expression, so give them the same name.
+wait$expression[wait$expression == 'SW1'] <- 'SE3' 
+
+ggplot(wait, aes(x = wait, y = percentageerror, colour = expression, fill = expression)) + 
+  facet_grid(. ~ model) +
+  geom_boxplot(outlier.colour = grey(0.3), notch = TRUE, notchwidth = 0.7) +
+  scale_colour_brewer(palette = 'Dark2') +
+  scale_fill_brewer(palette = 'Dark2') +
+  stat_summary(geom = "crossbar", width=0.45, fatten=0, color="white", 
+    fun.data = function(x){ return(c(y=median(x), ymin=median(x), ymax=median(x))) }) +
+  theme(legend.position = 'none') +
+  ylab('Percentage Error') +
+  xlab('Prop. Time Stationary')
+
+
+tort <- read.csv('data/Chapter5/max_angle_tidy.csv')
+
+tort$expression <- tort$model
+
+# SW1 and SE3 have the same expression, so give them the same name.
+tort$expression[tort$expression == 'SW1'] <- 'SE3' 
+
+ggplot(tort, aes(x = maxAngle, y = percentageerror, colour = expression, fill = expression)) + 
+  facet_grid(. ~ model) +
+  geom_boxplot(outlier.colour = grey(0.3), notch = TRUE, notchwidth = 0.7) +
+  scale_colour_brewer(palette = 'Dark2') +
+  scale_fill_brewer(palette = 'Dark2') +
+  stat_summary(geom = "crossbar", width=0.45, fatten=0, color="white", 
+    fun.data = function(x){ return(c(y=median(x), ymin=median(x), ymax=median(x))) }) +
+  theme(legend.position = 'none') +
+  ylab('Percentage Error') +
+  xlab('Max Angle')
+
+
+
 
 %%end.rcode
 
-\begin{figure}[t]
-	\centering
-	\subfloat[\label{f:Perch}]{
-		\includegraphics[width=60mm]{imgs/lucas_et_al_figure7a.pdf}
-  }
-  \subfloat[\label{f:Tort}]{
-		\includegraphics[width=60mm]{imgs/lucas_et_al_figure7b.pdf}
-  }
-	\label{f:BreakAssump}
-	\caption[Simulation model results of the accuracy and precision of four gREM submodels]{
-Simulation model results of the accuracy and precision of four gREM submodels (NW1, SW1, SE3 and NE1) given different movement models where (a) average amount of time spent stationary (stop-start movement) and (b) maximum change in direction at each step (correlated random walk model).
-The percentage error between estimated and true density within each gREM sub model for the different movement models is shown within each box plot, where the black line represents the median percentage error across all simulations, boxes represent the middle 50\% of the data, whiskers represent variability outside the upper and lower quartiles with outliers plotted as individual points.
-The simple model is represented where time and maximum change in direction equals 0.
-The colour of each box plot corresponds to the expressions for average profile width $\bar{p}$ given in Figure 4.} 
-\end{figure}
+%\begin{figure}[t]
+%	\centering
+%	\subfloat[\label{f:Perch}]{
+%		\includegraphics[width=60mm]{imgs/lucas_et_al_figure7a.pdf}
+%  }
+%  \subfloat[\label{f:Tort}]{
+%		\includegraphics[width=60mm]{imgs/lucas_et_al_figure7b.pdf}
+%  }
+%	\label{f:BreakAssump}
+%	\caption[Simulation model results of the accuracy and precision of four gREM submodels]{
+%Simulation model results of the accuracy and precision of four gREM submodels (NW1, SW1, SE3 and NE1) given different movement models where (a) average amount of time spent stationary (stop-start movement) and (b) maximum change in direction at each step (correlated random walk model).
+%The percentage error between estimated and true density within each gREM sub model for the different movement models is shown within each box plot, where the black line represents the median percentage error across all simulations, boxes represent the middle 50\% of the data, whiskers represent variability outside the upper and lower quartiles with outliers plotted as individual points.
+%The simple model is represented where time and maximum change in direction equals 0.
+%The colour of each box plot corresponds to the expressions for average profile width $\bar{p}$ given in Figure 4.} 
+%\end{figure}
+%
 
                   
                   

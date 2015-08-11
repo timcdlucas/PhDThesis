@@ -243,6 +243,9 @@ Figure~\ref{f:equalModelResults} shows the expression for $\bar{p}$ in each case
 The general equation for density, \ref{e:gas}, is used with the correct value of $\bar{p}$ substituted.
 Although more thorough checks are performed in Appendix S3, it can be seen that all adjacent expressions in Figure~\ref{f:equalModelResults} are equal when expressions for the boundaries between them are substituted in.
 
+
+
+
 \begin{figure}
 	\centering
 	\includegraphics[width=7cm]{imgs/lucas_et_al_figure4.pdf}
@@ -263,15 +266,34 @@ All gREM submodels showed a high accuracy, i.e., the median difference between t
 However, the precision of the submodels do vary, where the gas model is the most precise and the SW7 sub model the least precise, having the smallest and the largest interquartile range, respectively (Figure~\ref{f:ModelBias}).
 The standard deviation of the error between the estimated and true densities is strongly related to both the sensor and signal widths (Appendix S5), such that larger widths have lower standard deviations (greater precision) due to the increased capture rate of these models.
 
-\begin{figure}[t]
-	\centering
-	\includegraphics[width=7cm]{imgs/lucas_et_al_figure5.pdf}
-       	\caption[Simulation model results of the accuracy and precision for gREM submodels]{Simulation model results of the accuracy and precision for gREM submodels.
+
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.137, 0.137, 0.137}\color{fgcolor}\begin{figure}[t]
+
+{\centering \includegraphics[width=\textwidth]{figure/gremSubmods-1} 
+
+}
+
+\caption[Simulation model results of the accuracy and precision for gREM submodels]{
+Simulation model results of the accuracy and precision for gREM submodels.
 The percentage error between estimated and true density for each gREM sub model is shown within each box plot, where the black line represents the median percentage error across all simulations, boxes represent the middle 50\% of the data, whiskers represent variability outside the upper and lower quartiles with outliers plotted as individual points.
-Box colours correspond to the expressions for average profile width $\bar{p}$ given in Figure 4.        
-} 
-	\label{f:ModelBias}
+Box colours correspond to the expressions for average profile width $\bar{p}$ given in Figure 4. 
+}\label{fig:gremSubmods}
 \end{figure}
+
+
+\end{knitrout}
+
+%\begin{figure}[t]
+%	\centering
+%	\includegraphics[width=7cm]{imgs/lucas_et_al_figure5.pdf}
+%       	\caption[Simulation model results of the accuracy and precision for gREM submodels]{Simulation model results of the accuracy and precision for gREM submodels.
+%The percentage error between estimated and true density for each gREM sub model is shown within each box plot, where the black line represents the median percentage error across all simulations, boxes represent the middle 50\% of the data, whiskers represent variability outside the upper and lower quartiles with outliers plotted as individual points.
+%Box colours correspond to the expressions for average profile width $\bar{p}$ given in Figure 4.        
+%} 
+%	\label{f:ModelBias}
+%\end{figure}
 
 \subsubsection{Number of captures}
 
@@ -307,23 +329,42 @@ However, in all cases the percentage error in the density estimate is not more t
 
 
 
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.137, 0.137, 0.137}\color{fgcolor}\begin{figure}[t]
 
+{\centering \subfloat[\label{fig:movtFig1}]{\includegraphics[width=0.45\textwidth]{figure/movtFig-1} }
+\subfloat[\label{fig:movtFig2}]{\includegraphics[width=0.45\textwidth]{figure/movtFig-2} }
 
-\begin{figure}[t]
-	\centering
-	\subfloat[\label{f:Perch}]{
-		\includegraphics[width=60mm]{imgs/lucas_et_al_figure7a.pdf}
-  }
-  \subfloat[\label{f:Tort}]{
-		\includegraphics[width=60mm]{imgs/lucas_et_al_figure7b.pdf}
-  }
-	\label{f:BreakAssump}
-	\caption[Simulation model results of the accuracy and precision of four gREM submodels]{
+}
+
+\caption[Simulation model results of the accuracy and precision of four gREM submodels]{
 Simulation model results of the accuracy and precision of four gREM submodels (NW1, SW1, SE3 and NE1) given different movement models where (a) average amount of time spent stationary (stop-start movement) and (b) maximum change in direction at each step (correlated random walk model).
 The percentage error between estimated and true density within each gREM sub model for the different movement models is shown within each box plot, where the black line represents the median percentage error across all simulations, boxes represent the middle 50\% of the data, whiskers represent variability outside the upper and lower quartiles with outliers plotted as individual points.
+Notches in boxplots show the 95\% confidence for the median.
 The simple model is represented where time and maximum change in direction equals 0.
-The colour of each box plot corresponds to the expressions for average profile width $\bar{p}$ given in Figure 4.} 
+The colour of each box plot corresponds to the expressions for average profile width $\bar{p}$ given in Figure 4.
+}\label{fig:movtFig}
 \end{figure}
+
+
+\end{knitrout}
+
+%\begin{figure}[t]
+%	\centering
+%	\subfloat[\label{f:Perch}]{
+%		\includegraphics[width=60mm]{imgs/lucas_et_al_figure7a.pdf}
+%  }
+%  \subfloat[\label{f:Tort}]{
+%		\includegraphics[width=60mm]{imgs/lucas_et_al_figure7b.pdf}
+%  }
+%	\label{f:BreakAssump}
+%	\caption[Simulation model results of the accuracy and precision of four gREM submodels]{
+%Simulation model results of the accuracy and precision of four gREM submodels (NW1, SW1, SE3 and NE1) given different movement models where (a) average amount of time spent stationary (stop-start movement) and (b) maximum change in direction at each step (correlated random walk model).
+%The percentage error between estimated and true density within each gREM sub model for the different movement models is shown within each box plot, where the black line represents the median percentage error across all simulations, boxes represent the middle 50\% of the data, whiskers represent variability outside the upper and lower quartiles with outliers plotted as individual points.
+%The simple model is represented where time and maximum change in direction equals 0.
+%The colour of each box plot corresponds to the expressions for average profile width $\bar{p}$ given in Figure 4.} 
+%\end{figure}
+%
 
                   
                   
