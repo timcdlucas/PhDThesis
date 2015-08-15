@@ -308,13 +308,19 @@ allMods$expression <- factor(allMods$expression)
 allMods$model <- factor(allMods$model, levels =  c('SW9', 'SW8', 'SW7',  'SW6', 'SW5', 'SW4',  'SW3', 'SW2', 'SW1', 'NW7', 'NW6', 'NW5', 'REM','NW4', 'NW3', 'NW2', 'NW1', 'SE4', 'SE3',  'SE2', 'SE1', 'NE3', 'NE2', 'NE1', 'gas'))
 
 
-ggplot(allMods, aes(x = model, y = percentageerror, fill = expression)) + 
-  geom_boxplot(outlier.size = 1, size = 0.3) +
-  thesis_palette('fill') +
+ggplot(allMods, aes(x = model, y = percentageerror, colour = expression, fill = expression)) + 
+  geom_boxplot(outlier.size = 1, size = 0.3, outlier.colour = grey(0.3), 
+    notch = TRUE, notchwidth = 0.7) +
+  scale_colour_brewer(palette = 'Dark2') +
+  scale_fill_brewer(palette = 'Dark2') +
+  stat_summary(geom = "crossbar", width = 0.3, fatten = 0, color = "white", 
+    fun.data = function(x){ return(c(y = median(x), ymin = median(x), ymax = median(x))) }) +
   theme(legend.position = 'none') + 
   xlab('gREM Submodel') +
   ylab('Percentage Error') +
-  theme(axis.text.x = element_text(angle = 90, vjust=0.5, size = 9))
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, size = 9))
+
+
 
 %%end.rcode
 

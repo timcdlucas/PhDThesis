@@ -60,9 +60,9 @@ theme_pres <- theme(text = element_text(family = "Lato Light", size = 12),
 
 thesis_palette <- function(scale = "colour"){
   if(scale == 'colour'){
-    scale_colour_brewer(palette = 'Dark2')
+    scale_colour_brewer(palette = 'Set1')
   } else {
-    scale_fill_brewer(palette = 'Dark2')
+    scale_fill_brewer(palette = 'Set1')
   }
 }
 
