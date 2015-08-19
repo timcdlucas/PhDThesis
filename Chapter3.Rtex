@@ -814,6 +814,28 @@ ggplot(nSpecies, aes(log(NumberOfSubspecies), virusSpecies)) +
 
 %%end.rcode
 
+
+%%begin.rcode OneorMoreVirCapt
+OneorMoreVirCapt <- 'Number of subspecies by log study effort with colour indicating whether a species has 1 or more than 1 known virus species.
+There does not seem to be a huge difference.
+Species with many references often have many subspecies as expected.
+Species with many references, have more subspecies per effort if they have multiple viruses.'
+
+OneorMoreVirCaptTitle <- 'Number of subspecies by study effort'
+
+%%end.rcode 
+
+%%begin.rcode OneorMoreVir, fig.show = extraFigs, fig.cap = OneorMoreVirCapt, fig.scap = OneorMoreVirCaptTitle
+
+ggplot(nSpecies, 
+  aes(y = NumberOfSubspecies, x = scholarRefs, colour = virusSpecies > 1)) +
+  geom_point() +
+  scale_x_log10()
+
+
+%%end.rcode
+
+
 %%begin.rcode pubmedresidPlot, fig.cap = 'Plot using residuals from number of viruses against number of citations (study effort). Nonphylogenetic trend line added. '
 
 
