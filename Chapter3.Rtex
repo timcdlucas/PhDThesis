@@ -783,7 +783,6 @@ ggplot(nSpecies, aes(x = NumberOfSubspecies, fill = virusSpecies > 1)) +
   geom_density(alpha = 0.4) +
   scale_x_log10()
 
-
 ggplot(nSpecies, aes(x = pubmedRefs + 1, fill = virusSpecies > 1)) + 
   geom_density(alpha = 0.4) +
   scale_x_log10()
