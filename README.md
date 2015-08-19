@@ -5,7 +5,7 @@ This is a repo containing my PhD Thesis.
 
 The template is taken from [here](https://github.com/ucl/ucl-latex-thesis-templates).
 
-The main file is [tim-lucas-thesis.tex](tim-lucas-thesis.tex) and [tim-lucas-thesis.[df](tim-lucas-thesis.pdf) is the compiled pdf which should render in github (maybe slowly).
+The main file is [tim-lucas-thesis.tex](tim-lucas-thesis.tex) and [tim-lucas-thesis.pdf](tim-lucas-thesis.pdf) is the compiled pdf which should render in github (maybe slowly).
 
 The following files contain the main content of the thesis.
 - [Introduction.tex](Introduction.tex)
