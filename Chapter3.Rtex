@@ -257,6 +257,12 @@ ggplot(nSpecies, aes(x = log(NumberOfSubspecies), y = log(virusSpecies))) +
   
 %%end.rcode
 
+%%begin.rcode virusHist, fig.show = extraFigs, fig.cap = 'Histogram of known viruses per species'
+
+ggplot(nSpecies, aes(x = virusSpecies)) +
+  geom_histogram()
+
+%%end.rcode
 Measures of body mass are taken from Pantheria \cite{jones2009pantheria}.
 
 %%begin.rcode euthRead
