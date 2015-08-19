@@ -79,7 +79,7 @@ Additionally, we model the animal as having an associated signal width $\alpha$ 
 We start deriving the gREM with the simplest situation, the gas model where $\theta =  2\pi$ and $ \alpha =  2\pi$. 
 
 
-%%% Put in new diagram.
+
 \begin{figure}[t]
         \centering
 	\includegraphics[width=4cm]{imgs/lucas_et_al_figure1.pdf}
@@ -117,18 +117,38 @@ The size of $p$ depends on the signal width, detector width and the angle that t
 The size of the profile (averaged across all approach angles) is defined as the average profile $\bar{p}$.
 However, different combinations of $\theta$ and $\alpha$ need different equations to calculate $\bar{p}$. 
 
-\begin{figure}
-\centering
-\includegraphics[width=7cm]{imgs/lucas_et_al_figure2.pdf}
+
+
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.137, 0.137, 0.137}\color{fgcolor}\begin{figure}[t]
+
+{\centering \includegraphics[width=0.6\textwidth]{figure/equalRegions-1} 
+
+}
+
 \caption[Locations where derivation of the average profile $\bar{p}$ is the same]{
 Locations where derivation of the average profile $\bar{p}$ is the same for different combinations of sensor detection and animal signal widths.
 Symbols within each polygon refer to each gREM submodel named after their compass point, except for Gas and REM which highlight the position of these previously derived models within the gREM.
-Symbols on the edge of the plot are for submodels where $\alpha, \theta = 2\pi$}
-\label{f:equalRegions}
+Symbols on the edge of the plot are for submodels where $\alpha, \theta = 2\pi$
+}\label{fig:equalRegions}
 \end{figure}
 
-We have identified the parameter space for the combinations of $\theta$ and $\alpha$ for which the derivation of the equations are the same (defined as sub-models in the gREM) (Figure~\ref{f:equalRegions}).
-For example, the gas model becomes the simplest gREM sub-model (upper right in Figure~\ref{f:equalRegions}) and the REM from \cite{rowcliffe2008estimating} is another gREM sub-model where $\theta<\pi/2$ and $\alpha = 2\pi$.
+
+\end{knitrout}
+
+%\begin{figure}
+%\centering
+%\includegraphics[width=7cm]{imgs/lucas_et_al_figure2.pdf}
+%\caption[Locations where derivation of the average profile $\bar{p}$ is the same]{
+%Locations where derivation of the average profile $\bar{p}$ is the same for different combinations of sensor detection and animal signal widths.
+%Symbols within each polygon refer to each gREM submodel named after their compass point, except for Gas and REM which highlight the position of these previously derived models within the gREM.
+%Symbols on the edge of the plot are for submodels where $\alpha, \theta = 2\pi$}
+%\label{f:equalRegions}
+%\end{figure}
+
+We have identified the parameter space for the combinations of $\theta$ and $\alpha$ for which the derivation of the equations are the same (defined as sub-models in the gREM) (Figure~\ref{fig:equalRegions}).
+For example, the gas model becomes the simplest gREM sub-model (upper right in Figure~\ref{fig:equalRegions}) and the REM from \cite{rowcliffe2008estimating} is another gREM sub-model where $\theta<\pi/2$ and $\alpha = 2\pi$.
 We derive one gREM sub-model SE2 as an example below, where $2 \pi - \alpha/2 < \theta < 2\pi ,\; 0 < \alpha <\pi$ (see Appendix S2 for derivations of all gREM sub-models).
 Any estimate of density would require prior knowledge of animal velocity, $v$ and animal signal width, $\alpha$ taken from other sources, for example existing literature \cite{brinklov2011, carbone2005far}.
 Sensor width, $\theta$, and detection distance, $r$ would also need to be measured or obtained from manufacturer specifications \cite{holderied2003echolocation, adams2012you}.
@@ -224,7 +244,7 @@ Precision of the gREM was determined by the standard deviation of estimated dens
 We used this method to compare the accuracy and precision of all the gREM submodels.
 As these submodels are derived for different combinations of $\alpha$ and $\theta$, the accuracy and precision of the submodels was used to determine the impact of different values of $\alpha$ and $\theta$. 
 
-The influence of the number of captures and animal movement models on accuracy and precision was investigated using four different gREM submodels representative of the range $\alpha$ and $\theta$ values (submodels NW1, SW1, NE1, and SE3, Figure~\ref{f:equalRegions}).
+The influence of the number of captures and animal movement models on accuracy and precision was investigated using four different gREM submodels representative of the range $\alpha$ and $\theta$ values (submodels NW1, SW1, NE1, and SE3, Figure~\ref{fig:equalRegions}).
 From a random starting point we ran the simulation until a range of different capture numbers were recorded (from 10 to 100 captures), recorded the length of time this took, and estimated the animal density for each of the four sub-models.
 These estimated densities were compared to the true density to assess the impact on the accuracy and precision of the gREM.
 We calculated the coefficient of variation in order to compare the precision of the density estimates from simulations with different expected numbers of captures.
@@ -246,9 +266,11 @@ Although more thorough checks are performed in Appendix S3, it can be seen that 
 
 
 
+
+
 \begin{figure}
 	\centering
-	\includegraphics[width=7cm]{imgs/lucas_et_al_figure4.pdf}
+	\includegraphics[width=7cm]{imgs/equalRegionsExpressions.pdf}
 	\caption[Expressions for the average profile width]{
 Expressions for the average profile width, $\bar{p}$, given a range of sensor and signal widths.
 Despite independent derivation within each block, many models result in the same expression.
@@ -258,12 +280,11 @@ Expressions on the edge of the plot are for submodels with $\alpha, \theta = 2\p
 \end{figure}
 
 
-
 \subsection{Simulation model}
 
 \subsubsection{gREM submodels}
-All gREM submodels showed a high accuracy, i.e., the median difference between the estimated and true values was less than 2\% across all models (Figure~\ref{f:ModelBias}).
-However, the precision of the submodels do vary, where the gas model is the most precise and the SW7 sub model the least precise, having the smallest and the largest interquartile range, respectively (Figure~\ref{f:ModelBias}).
+All gREM submodels showed a high accuracy, i.e., the median difference between the estimated and true values was less than 2\% across all models (Figure~\ref{fig:gremSubmods}).
+However, the precision of the submodels do vary, where the gas model is the most precise and the SW7 sub model the least precise, having the smallest and the largest interquartile range, respectively (Figure~\ref{fig:gremSubmods}).
 The standard deviation of the error between the estimated and true densities is strongly related to both the sensor and signal widths (Appendix S5), such that larger widths have lower standard deviations (greater precision) due to the increased capture rate of these models.
 
 
@@ -277,8 +298,9 @@ The standard deviation of the error between the estimated and true densities is 
 
 \caption[Simulation model results of the accuracy and precision for gREM submodels]{
 Simulation model results of the accuracy and precision for gREM submodels.
-The percentage error between estimated and true density for each gREM sub model is shown within each box plot, where the black line represents the median percentage error across all simulations, boxes represent the middle 50\% of the data, whiskers represent variability outside the upper and lower quartiles with outliers plotted as individual points.
-Box colours correspond to the expressions for average profile width $\bar{p}$ given in Figure 4. 
+The percentage error between estimated and true density for each gREM sub model is shown within each box plot, where the white line represents the median percentage error across all simulations, boxes represent the middle 50\% of the data, whiskers represent variability outside the upper and lower quartiles with outliers plotted as individual points.
+Notches indicate 95\% confidence intervals.
+Box colours correspond to the expressions for average profile width $\bar{p}$ given in Figure \ref{f:equalModelResults}. 
 }\label{fig:gremSubmods}
 \end{figure}
 
@@ -298,28 +320,49 @@ Box colours correspond to the expressions for average profile width $\bar{p}$ gi
 \subsubsection{Number of captures}
 
 Within the four gREM submodels tested (NW1, SW1, SE3, NE1), the accuracy was not strongly affected by the number of captures.
-The median difference between the estimated and true values was less than 15\% across all capture rates (Figure~\ref{f:Captures}).
-However, the precision was dependent on the number of captures across all four of the gREM submodels, where precision increases as number of captures increases, as would be expected for any statistical estimate (Figure~\ref{f:Captures}).
+The median difference between the estimated and true values was less than 15\% across all capture rates (Figure~\ref{fig:Captures}).
+However, the precision was dependent on the number of captures across all four of the gREM submodels, where precision increases as number of captures increases, as would be expected for any statistical estimate (Figure~\ref{fig:Captures}).
 For all gREM submodels, the the coefficient of variation falls to 10\% at 100 captures. 
 
-\begin{figure}[t]
-  \centering
-	\includegraphics[width=7cm]{imgs/lucas_et_al_figure6.pdf}
+
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.137, 0.137, 0.137}\color{fgcolor}\begin{figure}[t]
+
+{\centering \includegraphics[width=0.8\textwidth]{figure/Captures-1} 
+
+}
+
 \caption[Simulation model results of the accuracy and precision of four gREM submodels]{
 Simulation model results of the accuracy and precision of four gREM submodels (NW1, SW1, SE3 and NE1) given different numbers of captures.
-The percentage error between estimated and true density within each gREM sub model for capture rate is shown within each box plot, where the black line represents the median percentage error across all simulations, boxes represent the middle 50\% of the data, whiskers represent variability outside the upper and lower quartiles with outliers plotted as individual points.
+The percentage error between estimated and true density within each gREM sub model for capture rate is shown within each box plot, where the white line represents the median percentage error across all simulations, boxes represent the middle 50\% of the data, whiskers represent variability outside the upper and lower quartiles with outliers plotted as individual points.
+Notches show the 95\% confidence interval.
 Sensor and signal widths vary between submodels.
 The numbers beneath each plot represent the coefficient of variation.
-The colour of each box plot corresponds to the expressions for average profile width $\bar{p}$ given in Figure 4. }            
-\label{f:Captures}
+The colour of each box plot corresponds to the expressions for average profile width $\bar{p}$ given in Figure \ref{f:equalModelResults}. 
+}\label{fig:Captures}
 \end{figure}
 
+
+\end{knitrout}
+
+%\begin{figure}[t]
+%  \centering
+%	\includegraphics[width=7cm]{imgs/lucas_et_al_figure6.pdf}
+%\caption[Simulation model results of the accuracy and precision of four gREM submodels]{
+%Simulation model results of the accuracy and precision of four gREM submodels (NW1, SW1, SE3 and NE1) given different numbers of captures.
+%The percentage error between estimated and true density within each gREM sub model for capture rate is shown within each box plot, where the black line represents the median percentage error across all simulations, boxes represent the middle 50\% of the data, whiskers represent variability outside the upper and lower quartiles with outliers plotted as individual points.
+%Sensor and signal widths vary between submodels.
+%The numbers beneath each plot represent the coefficient of variation.
+%The colour of each box plot corresponds to the expressions for average profile width $\bar{p}$ given in Figure 4. }            
+%\label{f:Captures}
+%\end{figure}
 
 \subsubsection{Movement models}
 
 Within the four gREM submodels tested (NW1, SW1, SE3, NE1), neither the accuracy or precision was affected by the average amount of time spent stationary.
-The median difference between the estimated and true values was less than 2\% for each category of stationary time (0, 0.25, 0.5 and 0.75) (Figure~\ref{f:Perch}).
-Altering the maximum change in direction in each step (0, $\pi/3$, $2\pi/3$, and $\pi$) did not affect the accuracy or precision of the four gREM submodels (Figure~\ref{f:Tort}). 
+The median difference between the estimated and true values was less than 2\% for each category of stationary time (0, 0.25, 0.5 and 0.75) (Figure~\ref{fig:movtFig1}).
+Altering the maximum change in direction in each step (0, $\pi/3$, $2\pi/3$, and $\pi$) did not affect the accuracy or precision of the four gREM submodels (Figure~\ref{fig:movtFig2}). 
 
 \subsubsection{Impact of parameter error}
 
@@ -332,14 +375,14 @@ However, in all cases the percentage error in the density estimate is not more t
 \begin{knitrout}\footnotesize
 \definecolor{shadecolor}{rgb}{0.137, 0.137, 0.137}\color{fgcolor}\begin{figure}[t]
 
-{\centering \subfloat[\label{fig:movtFig1}]{\includegraphics[width=0.5\textwidth]{figure/movtFig-1} }
-\subfloat[\label{fig:movtFig2}]{\includegraphics[width=0.5\textwidth]{figure/movtFig-2} }
+{\centering \subfloat[\label{fig:movtFig1}]{\includegraphics[width=0.45\textwidth]{figure/movtFig-1} }
+\subfloat[\label{fig:movtFig2}]{\includegraphics[width=0.45\textwidth]{figure/movtFig-2} }
 
 }
 
 \caption[Simulation model results of the accuracy and precision of four gREM submodels]{
 Simulation model results of the accuracy and precision of four gREM submodels (NW1, SW1, SE3 and NE1) given different movement models where (a) average amount of time spent stationary (stop-start movement) and (b) maximum change in direction at each step (correlated random walk model).
-The percentage error between estimated and true density within each gREM sub model for the different movement models is shown within each box plot, where the black line represents the median percentage error across all simulations, boxes represent the middle 50\% of the data, whiskers represent variability outside the upper and lower quartiles with outliers plotted as individual points.
+The percentage error between estimated and true density within each gREM sub model for the different movement models is shown within each box plot, where the white line represents the median percentage error across all simulations, boxes represent the middle 50\% of the data, whiskers represent variability outside the upper and lower quartiles with outliers plotted as individual points.
 Notches in boxplots show the 95\% confidence for the median.
 The simple model is represented where time and maximum change in direction equals 0.
 The colour of each box plot corresponds to the expressions for average profile width $\bar{p}$ given in Figure 4.

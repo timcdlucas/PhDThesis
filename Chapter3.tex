@@ -255,7 +255,8 @@ The residuals from this model was then used as the response variable in a multiv
 
 }
 
-\caption[Fitted values against residuals from the full phylogenetic model (virusSpecies ~ log(pubmedRefs + 1) + log(NumberOfSubspecies) +  log(mass))]{Fitted values against residuals from the full phylogenetic model (virusSpecies ~ log(pubmedRefs + 1) + log(NumberOfSubspecies) +  log(mass)). A loess curve is shown in blue.}\label{fig:subsAnalysis}
+\caption[Fitted values against residuals from the full phylogenetic model (virusSpecies ]{Fitted values against residuals from the full phylogenetic model (virusSpecies $\sim$ log(pubmedRefs + 1) + log(NumberOfSubspecies) +  log(mass)). A loess curve is shown in blue. 
+The $R^2$ value give is for the full model (not the loess curve).}\label{fig:subsAnalysis}
 \end{figure}
 
 \begin{figure}[t]
@@ -291,7 +292,35 @@ The residuals from this model was then used as the response variable in a multiv
 
 }
 
-\caption[Fitted values against residuals from the full phylogenetic model (virusSpecies ~ log(pubmedRefs + 1) + log(NumberOfSubspecies) +  log(mass))]{Fitted values against residuals from the full phylogenetic model (virusSpecies ~ log(pubmedRefs + 1) + log(NumberOfSubspecies) +  log(mass)). A loess curve is shown in blue.}\label{fig:subsAnalysis}
+\caption[Fitted values against residuals from the full phylogenetic model (virusSpecies ]{Fitted values against residuals from the full phylogenetic model (virusSpecies $\sim$ NumberOfSubspecies + log(pubmedRefs + 1) +   log(mass)). A loess curve is shown in blue.
+The $R^2$ value give is for the full model (not the loess curve).}\label{fig:subsAnalysis}
+\end{figure}
+
+\begin{figure}[t]
+
+{\centering \includegraphics[width=0.8\textwidth]{figure/subsAnalysis-6} 
+
+}
+
+\caption[Study effort against residuals (unlogged subspecies) with a loess trend]{Study effort against residuals (unlogged subspecies) with a loess trend.}\label{fig:subsAnalysis}
+\end{figure}
+
+\begin{figure}[t]
+
+{\centering \includegraphics[width=0.8\textwidth]{figure/subsAnalysis-7} 
+
+}
+
+\caption[Mass against residuals  (unlogged subspecies) with a loess trend shown in blue]{Mass against residuals  (unlogged subspecies) with a loess trend shown in blue.}\label{fig:subsAnalysis}
+\end{figure}
+
+\begin{figure}[t]
+
+{\centering \includegraphics[width=0.8\textwidth]{figure/subsAnalysis-8} 
+
+}
+
+\caption[Number of subspecies against phylogenetic residuals]{Number of subspecies against phylogenetic residuals. The mean for each value of logged subspecies is shown in blue. A ribbon showing the mean $\pm 1.96{SD}$ is shown in grey. The ribbon does not cover the full range of the x axis as there are not enough data points to calculate the SD towards the right.}\label{fig:subsAnalysis}
 \end{figure}
 
 

@@ -1,10 +1,11 @@
 
 
 setwd('~/Dropbox/phd/Documents/thesis/')
+library(plyr)
 library(reshape2)
 library(dplyr)
 library(ggplot2)
-library(plyr)
+
 
 
 
@@ -64,7 +65,7 @@ wait <- read.csv('data/Chapter5/Prop_time_still_percentageerror.csv',  stringsAs
 
 
 
-waitClean <- wait[5:NROW(tort),] %>%
+waitClean <- wait[5:NROW(wait),] %>%
                melt(variable.name = 'model', value.name = 'percentageerror') %>%
                mutate(model2 = ifelse(grepl('\\.', model), as.character(model), '.4')) %>%
                mutate(wait = gsub('.*\\.', '', model2)) %>%
@@ -78,6 +79,48 @@ ggplot(waitClean, aes(x = wait, y = percentageerror)) +
   facet_grid(. ~ model)
 
 write.csv(waitClean, file = 'data/Chapter5/prop_time_still_tidy.csv', row.names = FALSE)
+
+
+
+
+
+
+
+captures <- read.csv('data/Chapter5/Allmodels_fixedcaps_variabletime_percenterror.csv',  stringsAsFactors = FALSE)
+
+
+cols <- lapply(2:5, function(x) which(apply(captures[1:3, ] == wait[1:3, x], 2, all)))
+names(cols) <- c('NW1', 'SW1', 'NE1', 'SE3')
+
+capturesParam <- captures[1:4, c(1, unlist(cols))] %>% 
+                   melt(variable.name = 'model', value.name = 'value')
+
+capturesClean <- captures[5:NROW(captures),] %>%
+               select(unlist(cols)) %>%
+               melt(variable.name = 'model', value.name = 'percentageerror') %>%
+               mutate(model = gsub('^(.*?)\\.', '', as.character(model))) %>%
+              
+
+capturesClean$count <- capturesParam %>% filter(namemodel == 'No_of_captures') %>%
+                         left_join(capturesClean, .) %>%
+                         .$value
+
+capturesClean$model <- gsub('\\..*', '', capturesClean$model)
+
+capturesClean <- filter(capturesClean, count != 0)
+
+ggplot(capturesClean, aes(x = factor(count), y = percentageerror)) + 
+  geom_boxplot() +
+  facet_grid(. ~ model) 
+
+cov <- function(x) sd(x)/mean(x)
+
+capturesClean %>%
+  filter(count == 20, model == 'NW1') %>% 
+  .$percentageerror %>%
+  cov
+
+write.csv(capturesClean, file = 'data/Chapter5/captures_tidy.csv', row.names = FALSE)
 
 
   

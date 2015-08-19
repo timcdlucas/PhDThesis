@@ -967,7 +967,7 @@ ggplot(propsDispCI, aes(x = factor(transmission), y = mean, fill = factor(disper
   xlab('Transmission') + 
   ylab('Prop. Invasions') +
   scale_fill_hue(name="Dispersal Rate") +
-  thesis_palette()
+  thesis_fill()
 
 propsTopoCI <- data.frame(invsTopo2[, 1:2], binom.confint(invsTopo2$n, nTopo2$n, conf.level = 0.95, methods = "exact"))
 
@@ -980,7 +980,7 @@ ggplot(propsTopoCI, aes(x = factor(transmission), y = mean, fill = factor(maxDis
   ylab('Prop. Invasions') +
   scale_fill_hue(name="Connectedness", 
                  labels=c("Low", "High")) +
-  thesis_palette()
+  thesis_fill()
 
 %%end.rcode
 

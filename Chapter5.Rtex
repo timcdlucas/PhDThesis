@@ -24,8 +24,17 @@ library(binom)
 # plotting
 library(ggplot2)
 
-# Run simulations in parallel
-library(parallel)
+# Used for units in ggplot2
+library(grid)
+
+# Make sure fonts are available. Not sure if this is needed or not
+library(extrafont)
+
+# Convert latex strings to expression.
+library(latex2exp)
+
+library(RColorBrewer)
+
 %%end.rcode
 
 
@@ -102,7 +111,7 @@ Additionally, we model the animal as having an associated signal width $\alpha$ 
 We start deriving the gREM with the simplest situation, the gas model where $\theta =  2\pi$ and $ \alpha =  2\pi$. 
 
 
-%%% Put in new diagram.
+
 \begin{figure}[t]
         \centering
 	\includegraphics[width=4cm]{imgs/lucas_et_al_figure1.pdf}
@@ -140,18 +149,105 @@ The size of $p$ depends on the signal width, detector width and the angle that t
 The size of the profile (averaged across all approach angles) is defined as the average profile $\bar{p}$.
 However, different combinations of $\theta$ and $\alpha$ need different equations to calculate $\bar{p}$. 
 
-\begin{figure}
-\centering
-\includegraphics[width=7cm]{imgs/lucas_et_al_figure2.pdf}
-\caption[Locations where derivation of the average profile $\bar{p}$ is the same]{
-Locations where derivation of the average profile $\bar{p}$ is the same for different combinations of sensor detection and animal signal widths.
-Symbols within each polygon refer to each gREM submodel named after their compass point, except for Gas and REM which highlight the position of these previously derived models within the gREM.
-Symbols on the edge of the plot are for submodels where $\alpha, \theta = 2\pi$}
-\label{f:equalRegions}
-\end{figure}
 
-We have identified the parameter space for the combinations of $\theta$ and $\alpha$ for which the derivation of the equations are the same (defined as sub-models in the gREM) (Figure~\ref{f:equalRegions}).
-For example, the gas model becomes the simplest gREM sub-model (upper right in Figure~\ref{f:equalRegions}) and the REM from \cite{rowcliffe2008estimating} is another gREM sub-model where $\theta<\pi/2$ and $\alpha = 2\pi$.
+%%begin.rcode equalRegionsCapt
+equalRegionsCapt <- '
+Locations where derivation of the average profile $\\bar{p}$ is the same for different combinations of sensor detection and animal signal widths.
+Symbols within each polygon refer to each gREM submodel named after their compass point, except for Gas and REM which highlight the position of these previously derived models within the gREM.
+Symbols on the edge of the plot are for submodels where $\\alpha, \\theta = 2\\pi$
+'
+
+equalRegionsTitle <- 'Locations where derivation of the average profile $\\bar{p}$ is the same'
+%%end.rcode
+
+%%begin.rcode equalRegions, fig.width = 6, fig.height = 6, fig.show = 'show', fig.cap = equalRegionsCapt, fig.scap = equalRegionsTitle, out.width = '0.6\\textwidth'
+
+
+polys <- list(
+              gas=list(c(2*pi, pi),c(pi, 2*pi)),
+              NW1=list(c(pi/2, pi), c(2*pi, 2*pi)),
+              REM=list(c(0,pi/2), c(2*pi,  2*pi)),
+              NE1=list(c(pi, 2*pi, 2*pi), c(2*pi, 2*pi, pi)),
+              NE2=list(c(3*pi/2, pi, 2*pi),c(pi, 2*pi, pi)),
+              NE3=list(c(pi, pi, 3*pi/2),c(pi, 2*pi, pi)),
+              NW2=list(c(pi/2, pi, pi),c(2*pi, 2*pi, pi)),
+              NW3=list(c(pi/2, pi/2, pi),c(3*pi/2, 2*pi, pi)),
+              NW4=list(c(pi/2, pi/2, pi),c(pi, 3*pi/2, pi)),
+              NW5=list(c(0, pi/2, pi/2),c(2*pi, 2*pi, 3*pi/2)),
+              NW6=list(c(0, pi/2, pi/2),c(2*pi, 3*pi/2, pi)),
+              NW7=list(c(0, 0, pi/2),c(pi, 2*pi, pi)),
+              SE1=list(c(2*pi, 2*pi),c(pi,0)),
+              SE2=list(c(3*pi/2, 2*pi, 2*pi),c(pi, pi, 0)),
+              SE3=list(c(pi, 3*pi/2, 2*pi),c(pi, pi, 0)),
+              SE4=list(c(pi, 2*pi, pi),c(pi, 0, 0)),
+              SW1=list(c(pi/2, pi/2, pi),c(pi/2, pi, pi)),
+              SW2=list(c(pi/2, pi/2, pi),c(0, pi/2, pi)),
+              SW3=list(c(pi/2, pi, pi),c(0, pi, 0)),
+              SW4=list(c(pi/3, pi/2, pi/2),c(pi/3, pi/2, 0)),
+              SW5=list(c(pi/4,pi/2, pi/2, pi/3),c(pi/2, pi, pi/2, pi/3)),
+              SW6=list(c(0, pi/2, pi/4),c(pi, pi, pi/2)),   
+              SW7=list(c(0, pi/3, pi/2),c(0, pi/3, 0)),   
+              SW8=list(c(0, pi/4, pi/3),c(0, pi/2, pi/3)),
+              SW9=list(c(0, 0, pi/4),c(0, pi, pi/2))
+)    
+
+
+reg <- do.call(rbind, lapply(1:length(polys), function(x) data.frame(do.call(cbind, polys[[x]]), names(polys[x]))))
+
+names(reg) <- c('x', 'y', 'model')
+
+# Create locations for model names
+
+locations <- data.frame(models = names(polys), Cx = NA, Cy = NA)
+
+for( i in 1: length(polys)){
+	xV <- c(polys[[i]][[1]], polys[[i]][[1]][1])
+	yV <- c(polys[[i]][[2]], polys[[i]][[2]][1])
+
+	A <- 0.5*sum(sapply(c(1:(length(xV)-1)), function(j){ xV[j]*yV[j+1] - xV[j+1]*yV[j] }))
+
+	locations$Cx[i] <- sum(sapply(c(1:(length(xV)-1)), function(j){ (xV[j] + xV[j+1])*(xV[j]*yV[j+1] - xV[j+1]*yV[j]) }))/(6*A)
+	locations$Cy[i] <- sum(sapply(c(1:(length(xV)-1)), function(j){ (yV[j] + yV[j+1])*(xV[j]*yV[j+1] - xV[j+1]*yV[j]) }))/(6*A)
+
+}
+
+locations[1:3, 2:3] <- rbind(c(2*pi, 1.5*pi), c(0.75*pi, 2*pi), c(0.25*pi, 2*pi))
+locations[13, 2:3] <- c(2*pi, 0.5*pi)
+
+ggplot(reg, aes(x = x, y = y)) +
+  geom_polygon(aes(group = model), fill = 'white', colour = 'grey') +
+  ylab(expression(paste('Signal width, ', alpha))) +
+  xlab(expression(paste('Sensor width, ', theta))) +
+  scale_x_continuous(breaks = c(0, pi, 2*pi),
+    labels = expression(0, pi, paste(2, pi))) +
+  scale_y_continuous(breaks = c(0, pi, 2*pi),
+    labels = expression(0, pi, paste(2, pi))) +
+  theme(plot.margin = unit(c(2, 2, 1, 1), 'lines')) +
+  geom_text(data = locations, aes(x = Cx, y = Cy, label = models), family = 'Lato Light') +
+  coord_cartesian(xlim = c(0, 2.1*pi), ylim = c(0, 2.1*pi)) +
+  geom_segment(aes(x = pi, xend = pi, y = 0, yend = 2*pi), colour = 'black', size = 0.5) +
+  geom_segment(aes(x = 0, xend = 2*pi, y = pi, yend = pi), colour = 'black', size = 0.5) +
+  theme(
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.minor.y = element_blank(),
+    panel.grid.major.y = element_blank()
+  )
+
+%%end.rcode
+
+%\begin{figure}
+%\centering
+%\includegraphics[width=7cm]{imgs/lucas_et_al_figure2.pdf}
+%\caption[Locations where derivation of the average profile $\bar{p}$ is the same]{
+%Locations where derivation of the average profile $\bar{p}$ is the same for different combinations of sensor detection and animal signal widths.
+%Symbols within each polygon refer to each gREM submodel named after their compass point, except for Gas and REM which highlight the position of these previously derived models within the gREM.
+%Symbols on the edge of the plot are for submodels where $\alpha, \theta = 2\pi$}
+%\label{f:equalRegions}
+%\end{figure}
+
+We have identified the parameter space for the combinations of $\theta$ and $\alpha$ for which the derivation of the equations are the same (defined as sub-models in the gREM) (Figure~\ref{fig:equalRegions}).
+For example, the gas model becomes the simplest gREM sub-model (upper right in Figure~\ref{fig:equalRegions}) and the REM from \cite{rowcliffe2008estimating} is another gREM sub-model where $\theta<\pi/2$ and $\alpha = 2\pi$.
 We derive one gREM sub-model SE2 as an example below, where $2 \pi - \alpha/2 < \theta < 2\pi ,\; 0 < \alpha <\pi$ (see Appendix S2 for derivations of all gREM sub-models).
 Any estimate of density would require prior knowledge of animal velocity, $v$ and animal signal width, $\alpha$ taken from other sources, for example existing literature \cite{brinklov2011, carbone2005far}.
 Sensor width, $\theta$, and detection distance, $r$ would also need to be measured or obtained from manufacturer specifications \cite{holderied2003echolocation, adams2012you}.
@@ -247,7 +343,7 @@ Precision of the gREM was determined by the standard deviation of estimated dens
 We used this method to compare the accuracy and precision of all the gREM submodels.
 As these submodels are derived for different combinations of $\alpha$ and $\theta$, the accuracy and precision of the submodels was used to determine the impact of different values of $\alpha$ and $\theta$. 
 
-The influence of the number of captures and animal movement models on accuracy and precision was investigated using four different gREM submodels representative of the range $\alpha$ and $\theta$ values (submodels NW1, SW1, NE1, and SE3, Figure~\ref{f:equalRegions}).
+The influence of the number of captures and animal movement models on accuracy and precision was investigated using four different gREM submodels representative of the range $\alpha$ and $\theta$ values (submodels NW1, SW1, NE1, and SE3, Figure~\ref{fig:equalRegions}).
 From a random starting point we ran the simulation until a range of different capture numbers were recorded (from 10 to 100 captures), recorded the length of time this took, and estimated the animal density for each of the four sub-models.
 These estimated densities were compared to the true density to assess the impact on the accuracy and precision of the gREM.
 We calculated the coefficient of variation in order to compare the precision of the density estimates from simulations with different expected numbers of captures.
@@ -266,12 +362,53 @@ Figure~\ref{f:equalModelResults} shows the expression for $\bar{p}$ in each case
 The general equation for density, \ref{e:gas}, is used with the correct value of $\bar{p}$ substituted.
 Although more thorough checks are performed in Appendix S3, it can be seen that all adjacent expressions in Figure~\ref{f:equalModelResults} are equal when expressions for the boundaries between them are substituted in.
 
+%%begin.rcode equalRegionsResultCapt
+equalRegionsResultCapt <- '
+Expressions for the average profile width, $\\bar{p}$, given a range of sensor and signal widths.
+Despite independent derivation within each block, many models result in the same expression.
+These are collected together and presented as one block of colour.
+Expressions on the edge of the plot are for submodels with $\\alpha, \\theta = 2\\pi$. 
+'
 
+equalRegionsResultTitle <- 'Expressions for the average profile width'
+
+%%end.rcode
+
+%%begin.rcode, fig.width = 6, fig.height = 6, fig.cap = equalRegionsResultCapt, fig.scap = equalRegionsResultTitle, out.width = '0.6\\textwidth', fig.show = 'hide'
+
+
+type = c(8, 5, 5, 6, 7, 2, 2, 2, 2, 2, 2, 2, 4, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
+
+reg$cols <- type[as.numeric(reg$model)]
+
+
+w <-ggplot(reg, aes(x = x, y = y, fill = factor(cols))) +
+  geom_polygon(aes(group = model), colour = NA, alpha = 0.4) +
+  thesis_fill() +
+  ylab(expression(paste('Signal width, ', alpha))) +
+  xlab(expression(paste('Sensor width, ', theta))) +
+  scale_x_continuous(breaks = c(0, pi, 2*pi),
+    labels = expression(0, pi, paste(2, pi))) +
+  scale_y_continuous(breaks = c(0, pi, 2*pi),
+    labels = expression(0, pi, paste(2, pi))) +
+  theme(plot.margin = unit(c(2, 2, 1, 1), 'lines')) +
+  theme(legend.position = 'none') +
+  coord_cartesian(xlim = c(0, 2.1*pi), ylim = c(0, 2.1*pi)) +
+  theme(
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.minor.y = element_blank(),
+    panel.grid.major.y = element_blank()
+  )
+
+
+
+%%end.rcode
 
 
 \begin{figure}
 	\centering
-	\includegraphics[width=7cm]{imgs/lucas_et_al_figure4.pdf}
+	\includegraphics[width=7cm]{imgs/equalRegionsExpressions.pdf}
 	\caption[Expressions for the average profile width]{
 Expressions for the average profile width, $\bar{p}$, given a range of sensor and signal widths.
 Despite independent derivation within each block, many models result in the same expression.
@@ -281,20 +418,20 @@ Expressions on the edge of the plot are for submodels with $\alpha, \theta = 2\p
 \end{figure}
 
 
-
 \subsection{Simulation model}
 
 \subsubsection{gREM submodels}
-All gREM submodels showed a high accuracy, i.e., the median difference between the estimated and true values was less than 2\% across all models (Figure~\ref{f:ModelBias}).
-However, the precision of the submodels do vary, where the gas model is the most precise and the SW7 sub model the least precise, having the smallest and the largest interquartile range, respectively (Figure~\ref{f:ModelBias}).
+All gREM submodels showed a high accuracy, i.e., the median difference between the estimated and true values was less than 2\% across all models (Figure~\ref{fig:gremSubmods}).
+However, the precision of the submodels do vary, where the gas model is the most precise and the SW7 sub model the least precise, having the smallest and the largest interquartile range, respectively (Figure~\ref{fig:gremSubmods}).
 The standard deviation of the error between the estimated and true densities is strongly related to both the sensor and signal widths (Appendix S5), such that larger widths have lower standard deviations (greater precision) due to the increased capture rate of these models.
 
 %%begin.rcode gremSubsCapt
 
 gremSubsCapt <- '
 Simulation model results of the accuracy and precision for gREM submodels.
-The percentage error between estimated and true density for each gREM sub model is shown within each box plot, where the black line represents the median percentage error across all simulations, boxes represent the middle 50\\% of the data, whiskers represent variability outside the upper and lower quartiles with outliers plotted as individual points.
-Box colours correspond to the expressions for average profile width $\\bar{p}$ given in Figure 4. 
+The percentage error between estimated and true density for each gREM sub model is shown within each box plot, where the white line represents the median percentage error across all simulations, boxes represent the middle 50\\% of the data, whiskers represent variability outside the upper and lower quartiles with outliers plotted as individual points.
+Notches indicate 95\\% confidence intervals.
+Box colours correspond to the expressions for average profile width $\\bar{p}$ given in Figure \\ref{f:equalModelResults}. 
 '
 
 gremSubsShort <- 'Simulation model results of the accuracy and precision for gREM submodels'
@@ -304,15 +441,18 @@ gremSubsShort <- 'Simulation model results of the accuracy and precision for gRE
 
 allMods <- read.csv('data/Chapter5/all_models_tidy.csv')
 
+
+modelLevels <- c('SW9', 'SW8', 'SW7',  'SW6', 'SW5', 'SW4',  'SW3', 'SW2', 'SW1', 'NW7', 'NW6', 'NW5', 'REM','NW4', 'NW3', 'NW2', 'NW1', 'SE4', 'SE3',  'SE2', 'SE1', 'NE3', 'NE2', 'NE1', 'gas')
+
 allMods$expression <- factor(allMods$expression)
-allMods$model <- factor(allMods$model, levels =  c('SW9', 'SW8', 'SW7',  'SW6', 'SW5', 'SW4',  'SW3', 'SW2', 'SW1', 'NW7', 'NW6', 'NW5', 'REM','NW4', 'NW3', 'NW2', 'NW1', 'SE4', 'SE3',  'SE2', 'SE1', 'NE3', 'NE2', 'NE1', 'gas'))
+allMods$model <- factor(allMods$model, levels =  modelLevels)
 
 
 ggplot(allMods, aes(x = model, y = percentageerror, colour = expression, fill = expression)) + 
   geom_boxplot(outlier.size = 1, size = 0.3, outlier.colour = grey(0.3), 
-    notch = TRUE, notchwidth = 0.7) +
-  scale_colour_brewer(palette = 'Dark2') +
-  scale_fill_brewer(palette = 'Dark2') +
+    notch = TRUE, notchwidth = 0.7, alpha = 0.7) +
+  thesis_fill() +
+  thesis_colour() +
   stat_summary(geom = "crossbar", width = 0.3, fatten = 0, color = "white", 
     fun.data = function(x){ return(c(y = median(x), ymin = median(x), ymax = median(x))) }) +
   theme(legend.position = 'none') + 
@@ -337,28 +477,71 @@ ggplot(allMods, aes(x = model, y = percentageerror, colour = expression, fill = 
 \subsubsection{Number of captures}
 
 Within the four gREM submodels tested (NW1, SW1, SE3, NE1), the accuracy was not strongly affected by the number of captures.
-The median difference between the estimated and true values was less than 15\% across all capture rates (Figure~\ref{f:Captures}).
-However, the precision was dependent on the number of captures across all four of the gREM submodels, where precision increases as number of captures increases, as would be expected for any statistical estimate (Figure~\ref{f:Captures}).
+The median difference between the estimated and true values was less than 15\% across all capture rates (Figure~\ref{fig:Captures}).
+However, the precision was dependent on the number of captures across all four of the gREM submodels, where precision increases as number of captures increases, as would be expected for any statistical estimate (Figure~\ref{fig:Captures}).
 For all gREM submodels, the the coefficient of variation falls to 10\% at 100 captures. 
 
-\begin{figure}[t]
-  \centering
-	\includegraphics[width=7cm]{imgs/lucas_et_al_figure6.pdf}
-\caption[Simulation model results of the accuracy and precision of four gREM submodels]{
+%%begin.rcode CapturesCapt
+
+CapturesCapt <- '
 Simulation model results of the accuracy and precision of four gREM submodels (NW1, SW1, SE3 and NE1) given different numbers of captures.
-The percentage error between estimated and true density within each gREM sub model for capture rate is shown within each box plot, where the black line represents the median percentage error across all simulations, boxes represent the middle 50\% of the data, whiskers represent variability outside the upper and lower quartiles with outliers plotted as individual points.
+The percentage error between estimated and true density within each gREM sub model for capture rate is shown within each box plot, where the white line represents the median percentage error across all simulations, boxes represent the middle 50\\% of the data, whiskers represent variability outside the upper and lower quartiles with outliers plotted as individual points.
+Notches show the 95\\% confidence interval.
 Sensor and signal widths vary between submodels.
 The numbers beneath each plot represent the coefficient of variation.
-The colour of each box plot corresponds to the expressions for average profile width $\bar{p}$ given in Figure 4. }            
-\label{f:Captures}
-\end{figure}
+The colour of each box plot corresponds to the expressions for average profile width $\\bar{p}$ given in Figure \\ref{f:equalModelResults}. 
+'
 
+CapturesTitle <- 'Simulation model results of the accuracy and precision of four gREM submodels'
+
+%%end.rcode
+
+%%begin.rcode Captures, fig.cap = CapturesCapt, fig.scap = CapturesTitle, out.widht = '0.9\\textwidth'
+
+captures <- read.csv('data/Chapter5/captures_tidy.csv')
+captures$count <- factor(captures$count)
+
+captures$expression <- captures$model
+# SW1 and SE3 have the same expression, so give them the same name.
+captures$expression[captures$expression == 'SW1'] <- 'SE3' 
+
+xlabels <- as.numeric(seq(10, 100, by = 10))
+names(xlabels) <- xlabels
+xlabels[c(2, 3, 5, 6, 8, 9)] <- ''
+
+ggplot(captures, aes(x = count, y = percentageerror, 
+    fill = expression, colour = expression)) + 
+  geom_boxplot(outlier.size = 1, size = 0.3, outlier.colour = grey(0.3), alpha = 0.7) +
+  stat_summary(geom = "crossbar", width = 1, fatten = 0, color = "white", 
+    fun.data = function(x){ return(c(y = median(x), ymin = median(x), ymax = median(x))) }) +
+  facet_grid(. ~ model) +
+  scale_colour_manual(values = brewer.pal(8, 'Set1')[c(5, 2, 1)]) +
+  scale_fill_manual(values = brewer.pal(8, 'Set1')[c(5, 2, 1)]) +
+  theme(legend.position = 'none') + 
+  scale_x_discrete("Captures", labels = xlabels) + 
+  ylab('Percentage Error') +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, size = 8))
+
+
+%%end.rcode
+
+%\begin{figure}[t]
+%  \centering
+%	\includegraphics[width=7cm]{imgs/lucas_et_al_figure6.pdf}
+%\caption[Simulation model results of the accuracy and precision of four gREM submodels]{
+%Simulation model results of the accuracy and precision of four gREM submodels (NW1, SW1, SE3 and NE1) given different numbers of captures.
+%The percentage error between estimated and true density within each gREM sub model for capture rate is shown within each box plot, where the black line represents the median percentage error across all simulations, boxes represent the middle 50\% of the data, whiskers represent variability outside the upper and lower quartiles with outliers plotted as individual points.
+%Sensor and signal widths vary between submodels.
+%The numbers beneath each plot represent the coefficient of variation.
+%The colour of each box plot corresponds to the expressions for average profile width $\bar{p}$ given in Figure 4. }            
+%\label{f:Captures}
+%\end{figure}
 
 \subsubsection{Movement models}
 
 Within the four gREM submodels tested (NW1, SW1, SE3, NE1), neither the accuracy or precision was affected by the average amount of time spent stationary.
-The median difference between the estimated and true values was less than 2\% for each category of stationary time (0, 0.25, 0.5 and 0.75) (Figure~\ref{f:Perch}).
-Altering the maximum change in direction in each step (0, $\pi/3$, $2\pi/3$, and $\pi$) did not affect the accuracy or precision of the four gREM submodels (Figure~\ref{f:Tort}). 
+The median difference between the estimated and true values was less than 2\% for each category of stationary time (0, 0.25, 0.5 and 0.75) (Figure~\ref{fig:movtFig1}).
+Altering the maximum change in direction in each step (0, $\pi/3$, $2\pi/3$, and $\pi$) did not affect the accuracy or precision of the four gREM submodels (Figure~\ref{fig:movtFig2}). 
 
 \subsubsection{Impact of parameter error}
 
@@ -369,7 +552,7 @@ However, in all cases the percentage error in the density estimate is not more t
 %%begin.rcode movtCapt
 movtCapt <- '
 Simulation model results of the accuracy and precision of four gREM submodels (NW1, SW1, SE3 and NE1) given different movement models where (a) average amount of time spent stationary (stop-start movement) and (b) maximum change in direction at each step (correlated random walk model).
-The percentage error between estimated and true density within each gREM sub model for the different movement models is shown within each box plot, where the black line represents the median percentage error across all simulations, boxes represent the middle 50\\% of the data, whiskers represent variability outside the upper and lower quartiles with outliers plotted as individual points.
+The percentage error between estimated and true density within each gREM sub model for the different movement models is shown within each box plot, where the white line represents the median percentage error across all simulations, boxes represent the middle 50\\% of the data, whiskers represent variability outside the upper and lower quartiles with outliers plotted as individual points.
 Notches in boxplots show the 95\\% confidence for the median.
 The simple model is represented where time and maximum change in direction equals 0.
 The colour of each box plot corresponds to the expressions for average profile width $\\bar{p}$ given in Figure 4.
@@ -379,7 +562,7 @@ movtTitle <- 'Simulation model results of the accuracy and precision of four gRE
 
 %%end.rcode
 
-%%begin.rcode movtFig, fig.cap = movtCapt, fig.scap = movtTitle, fig.subcap = c('', ''), out.width = '0.5\\textwidth'
+%%begin.rcode movtFig, fig.cap = movtCapt, fig.scap = movtTitle, fig.subcap = c('', ''), out.width = '0.45\\textwidth'
 
 wait <- read.csv('data/Chapter5/prop_time_still_tidy.csv')
 
@@ -392,9 +575,9 @@ wait$expression[wait$expression == 'SW1'] <- 'SE3'
 
 ggplot(wait, aes(x = wait, y = percentageerror, colour = expression, fill = expression)) + 
   facet_grid(. ~ model) +
-  geom_boxplot(outlier.colour = grey(0.3), notch = TRUE, notchwidth = 0.7) +
-  scale_colour_brewer(palette = 'Dark2') +
-  scale_fill_brewer(palette = 'Dark2') +
+  geom_boxplot(outlier.colour = grey(0.3), notch = TRUE, notchwidth = 0.7, alpha = 0.7) +
+  scale_colour_manual(values = brewer.pal(8, 'Set1')[c(5, 2, 1)]) +
+  scale_fill_manual(values = brewer.pal(8, 'Set1')[c(5, 2, 1)]) +
   stat_summary(geom = "crossbar", width=0.45, fatten=0, color="white", 
     fun.data = function(x){ return(c(y=median(x), ymin=median(x), ymax=median(x))) }) +
   theme(legend.position = 'none') +
@@ -408,12 +591,13 @@ tort$expression <- tort$model
 
 # SW1 and SE3 have the same expression, so give them the same name.
 tort$expression[tort$expression == 'SW1'] <- 'SE3' 
+#tort$expression <- factor(tort$expression, levels = c('SE3', 'NW1', 3:7, 'NE1'))
 
 ggplot(tort, aes(x = maxAngle, y = percentageerror, colour = expression, fill = expression)) + 
   facet_grid(. ~ model) +
-  geom_boxplot(outlier.colour = grey(0.3), notch = TRUE, notchwidth = 0.7) +
-  scale_colour_brewer(palette = 'Dark2') +
-  scale_fill_brewer(palette = 'Dark2') +
+  geom_boxplot(outlier.colour = grey(0.3), notch = TRUE, notchwidth = 0.7, alpha = 0.7) +
+  scale_colour_manual(values = brewer.pal(8, 'Set1')[c(5, 2, 1)]) +
+  scale_fill_manual(values = brewer.pal(8, 'Set1')[c(5, 2, 1)]) +
   stat_summary(geom = "crossbar", width=0.45, fatten=0, color="white", 
     fun.data = function(x){ return(c(y=median(x), ymin=median(x), ymax=median(x))) }) +
   theme(legend.position = 'none') +
