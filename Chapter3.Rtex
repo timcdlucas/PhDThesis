@@ -817,6 +817,26 @@ wilcox.test(nSpecies$NumberOfSubspecies[nSpecies$virusSpecies > 1],
 
 
 
+compRm1Vir <- comparative.data(data = nSpecies[nSpecies$virusSpecies > 1, ], 
+                               phy = pruneTree, names.col = 'binomial')
+
+# Subspecies p = 0.24. Loses significance.
+# n = 84
+# R^2 similar to model with all species.
+unlogRm1 <- pgls(
+  virusSpecies ~ log(scholarRefs) + NumberOfSubspecies +  log(mass), 
+  data = compRm1Vir, lambda = 'ML')
+
+unlogRm1.summary <- summary(subspeciesJointUnlog)
+
+# Subspecies p = 0.057. Marginal.
+logRm1 <- pgls(
+  virusSpecies ~ log(scholarRefs) + log(NumberOfSubspecies) +  log(mass), 
+  data = compSubspecies, lambda = 'ML')
+
+logRm1.summary <- summary(subspeciesJoint)
+
+
 %%end.rcode
 
 
