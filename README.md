@@ -9,14 +9,16 @@ The main file is [tim-lucas-thesis.tex](tim-lucas-thesis.tex) and [tim-lucas-the
 
 The following files contain the main content of the thesis.
 - [Introduction.tex](Introduction.tex)
-- [Chapter2.tex](Chapter2.tex)
-- [Chapter3.tex](Chapter3.tex)
-- [Chapter4.tex](Chapter4.tex)
-- [Chapter5.tex](Chapter5.tex)
+- [Chapter2.Rtex](Chapter2.Rtex)
+- [Chapter3.Rtex](Chapter3.Rtex)
+- [Chapter4.Rtex](Chapter4.Rtex)
+- [Chapter5.Rtex](Chapter5.Rtex)
 - [Conclusions.tex](Conclusions.tex)
 
-With Chapter2-5.tex being the four data chapters.
-The data chapters are written as .Rtex files with embedded R code. These files are `Chapter*.Rtex`.
+Data chapters are written as .Rtex files with embedded R code. 
+These files are `Chapter*.Rtex`.
+These files are compiled to create files `Chapter*.tex` which does not include R code.
+Text only chapters are written directly in a .tex file.
 
 While [tim-lucas-thesis.pdf](tim-lucas-thesis.pdf) is the full thesis pdf, most chapters are also compiled seperately. These files are 
 
