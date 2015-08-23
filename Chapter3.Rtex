@@ -794,6 +794,32 @@ ggplot(nSpecies, aes(x = scholarRefs, fill = virusSpecies > 1)) +
 
 %%end.rcode
 
+%%begin.rcode rm1virTests
+
+# Wilcox test to compare means of mass (certainly not normally distributed)
+# p = 0.09. 
+wilcox.test(nSpecies$mass[nSpecies$virusSpecies > 1], 
+            nSpecies$mass[nSpecies$virusSpecies == 1])
+
+# t.test for Scholar. Approx. normal and good to have confidence intervals of diff mean.
+# p = 8e-5. diff (95%) = 1028 (530, 1526)
+t.test(nSpecies$scholarRefs[nSpecies$virusSpecies > 1], 
+            nSpecies$scholarRefs[nSpecies$virusSpecies == 1])
+
+
+# p = 2e-4. 
+wilcox.test(nSpecies$NumberOfSubspecies[nSpecies$virusSpecies > 1], 
+            nSpecies$NumberOfSubspecies[nSpecies$virusSpecies == 1])
+
+%%end.rcode
+
+%%begin.rcode phyloRM1vir
+
+
+
+%%end.rcode
+
+
 \clearpage
 %%begin.rcode plotSubspecies, fig.cap = 'Number of virus species against log number of subspecies. Nonphylogenetic trend line in blue. Phylogenetic model (evaluated at mean body mass and mean study effort values) is shown in red.'
 
