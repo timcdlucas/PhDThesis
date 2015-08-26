@@ -14,7 +14,7 @@
    version="1.2"
    id="svg2"
    inkscape:version="0.48.4 r9939"
-   sodipodi:docname="equalRegionsExpressions.pdf">
+   sodipodi:docname="equalRegionsExpressions.svg">
   <metadata
      id="metadata877">
     <rdf:RDF>
@@ -23,7 +23,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -41,10 +41,10 @@
      id="namedview875"
      showgrid="false"
      inkscape:zoom="1.2361274"
-     inkscape:cx="291.12466"
+     inkscape:cx="148.74451"
      inkscape:cy="270.74919"
      inkscape:window-x="49"
-     inkscape:window-y="24"
+     inkscape:window-y="34"
      inkscape:window-maximized="0"
      inkscape:current-layer="surface1" />
   <defs
@@ -2340,10 +2340,10 @@
        sodipodi:linespacing="125%"
        transform="scale(0.8,0.8)"><tspan
          sodipodi:role="line"
-         id="tspan3856"></tspan></text>
+         id="tspan3856" /></text>
     <text
        xml:space="preserve"
-       style="font-size:32px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:#000000;font-family:Sans;stroke-opacity:1"
+       style="font-size:32px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:#000000;stroke-opacity:1;font-family:Sans"
        x="-282.12717"
        y="32.182735"
        id="text4637"
@@ -2353,7 +2353,7 @@
          id="tspan4639"
          x="-282.12717"
          y="32.182735"
-         style="font-family:lato light;-inkscape-font-specification:lato light;fill:#000000;fill-opacity:1;stroke:#000000;stroke-opacity:1">Signal Width</tspan></text>
+         style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-opacity:1;font-family:lato light;-inkscape-font-specification:lato light">Signal Width,</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:32px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
@@ -2365,6 +2365,30 @@
          id="tspan4645"
          x="134.61395"
          y="411.29016"
-         style="font-family:lato light;-inkscape-font-specification:lato light;stroke:#000000;stroke-opacity:1">Sensor Width</tspan></text>
+         style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-opacity:1;font-family:lato light;-inkscape-font-specification:lato light">Sensor Width,</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:lato;-inkscape-font-specification:lato"
+       x="332.65179"
+       y="411.93735"
+       id="text4198"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4200"
+         x="332.65179"
+         y="411.93735"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;font-family:Times New Roman;-inkscape-font-specification:Times New Roman">θ</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times New Roman"
+       x="-94.681076"
+       y="32.928307"
+       id="text4202"
+       sodipodi:linespacing="125%"
+       transform="matrix(0,-1,1,0,0,0)"><tspan
+         sodipodi:role="line"
+         id="tspan4204"
+         x="-94.681076"
+         y="32.928307">α</tspan></text>
   </g>
 </svg>
