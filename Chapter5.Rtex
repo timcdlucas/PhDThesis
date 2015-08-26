@@ -512,7 +512,7 @@ xlabels[c(2, 3, 5, 6, 8, 9)] <- ''
 ggplot(captures, aes(x = count, y = percentageerror, 
     fill = expression, colour = expression)) + 
   geom_boxplot(outlier.size = 1, size = 0.3, outlier.colour = grey(0.3), alpha = 0.7) +
-  stat_summary(geom = "crossbar", width = 1, fatten = 0, color = "white", 
+  stat_summary(geom = "crossbar", width = 0.4, fatten = 0, color = "white", 
     fun.data = function(x){ return(c(y = median(x), ymin = median(x), ymax = median(x))) }) +
   facet_grid(. ~ model) +
   scale_colour_manual(values = brewer.pal(8, 'Set1')[c(5, 2, 1)]) +
@@ -593,6 +593,9 @@ tort$expression <- tort$model
 tort$expression[tort$expression == 'SW1'] <- 'SE3' 
 #tort$expression <- factor(tort$expression, levels = c('SE3', 'NW1', 3:7, 'NE1'))
 
+# Reorder maxAngle factor 
+tort$maxAngle <- factor(tort$maxAngle, levels(tort$maxAngle)[c(1, 4, 2, 3)])
+
 ggplot(tort, aes(x = maxAngle, y = percentageerror, colour = expression, fill = expression)) + 
   facet_grid(. ~ model) +
   geom_boxplot(outlier.colour = grey(0.3), notch = TRUE, notchwidth = 0.7, alpha = 0.7) +
@@ -602,7 +605,12 @@ ggplot(tort, aes(x = maxAngle, y = percentageerror, colour = expression, fill = 
     fun.data = function(x){ return(c(y=median(x), ymin=median(x), ymax=median(x))) }) +
   theme(legend.position = 'none') +
   ylab('Percentage Error') +
-  xlab('Max Angle')
+  xlab('Max Angle') +
+  scale_x_discrete(breaks=c("0", "pi/3", "2pi/3", "pi"),
+                      labels=c(expression(phantom(over(0, 0))*0*phantom(0)), 
+                        expression(over(pi, 3)), 
+                        expression(over(2*pi, 3)), 
+                        expression(phantom(over(0, 0))*pi*phantom(0))))
 
 
 

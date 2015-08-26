@@ -449,6 +449,8 @@ nSpecies$scholarRefs <- sqldf('
 %%end.rcode
 
 
+
+
 %%begin.rcode scholarvspubmed, fig.show = extraFigs, fig.cap = 'Logged number of references on scholar and pubmed, with a fitted (unphylogenetic) linear model. Colours indicate family.'
 
 ggplot(nSpecies, aes(x = scholarRefs, y = pubmedRefs + 1)) +
@@ -457,6 +459,16 @@ ggplot(nSpecies, aes(x = scholarRefs, y = pubmedRefs + 1)) +
   scale_x_log10() +
   scale_y_log10() +
   thesis_colour()
+
+%%end.rcode
+
+
+%%begin.rcode savenSpecies
+########################################################
+### At this point, nSpecies should be in final form  ###
+########################################################
+
+write.csv(nSpecies, file = 'data/Chapter3/nSpecies.csv')
 
 %%end.rcode
 
@@ -750,19 +762,47 @@ summary(subspeciesResid)
 
 %%end.rcode
 \clearpage
+
+
+%%begin.rcode rm1virTests
+
+# Wilcox test to compare means of mass (certainly not normally distributed)
+# p = 0.09. 
+massTest <- wilcox.test(nSpecies$mass[nSpecies$virusSpecies > 1], 
+            nSpecies$mass[nSpecies$virusSpecies == 1])
+
+# t.test for Scholar. Approx. normal and good to have confidence intervals of diff mean.
+# p = 8e-5. diff (95%) = 1028 (530, 1526)
+scholarTest <- t.test(nSpecies$scholarRefs[nSpecies$virusSpecies > 1], 
+            nSpecies$scholarRefs[nSpecies$virusSpecies == 1])
+
+
+# p = 2e-4. 
+subspeciesTest <- wilcox.test(nSpecies$NumberOfSubspecies[nSpecies$virusSpecies > 1], 
+            nSpecies$NumberOfSubspecies[nSpecies$virusSpecies == 1])
+
+%%end.rcode
+
 %%begin.rcode rm1virCapt
 
-rm1virCapt <- c('
-Density curves for mass of bat species with 1 or > 1 pathogen species.
+rm1virCapt <- c(
+paste0(
+'Density curves for mass of bat species with 1 or > 1 pathogen species.
 The hump of the \\emph{Pteropodidae} (large fruit bats) can be seen.
-It seems likely that this family are overstudied as they carry a number of important zoonotics.',
-'Density curves for number of subspecies of bat species with 1 or > 1 pathogen species.',
+It seems likely that this family are overstudied as they carry a number of important zoonotics.
+(Wilcox test: p = ', round(massTest$p.value, 3), ')') ,
+paste0(
+'Density curves for number of subspecies of bat species with 1 or > 1 pathogen species.
+(Wilcox test: p = ',
+round(subspeciesTest$p.value, 5), ')'),
 'Density curves for number of pubmed references of bat species with 1 or > 1 pathogen species.
 There is a clear trend that many species with only 1 virus species, have 0 pubmed references.
 ',
+paste0(
 'Density curves for number of scholar references of bat species with 1 or > 1 pathogen species.
 The strong trend in the pubmed data is not noticeable here.
-')
+(t.test: p = ', round(scholarTest$p.value, 5), ')')
+)
 
 rm1virCaptTitle <- c(
   'Density of mass variable for 1 or >1 viruses.',
@@ -772,6 +812,7 @@ rm1virCaptTitle <- c(
 )
 
 %%end.rcode
+
 
 %%begin.rcode rm1vir, fig.show = extraFigs, fig.cap = rm1virCapt, fig.scap = rm1virCaptTitle
 
@@ -794,24 +835,6 @@ ggplot(nSpecies, aes(x = scholarRefs, fill = virusSpecies > 1)) +
 
 %%end.rcode
 
-%%begin.rcode rm1virTests
-
-# Wilcox test to compare means of mass (certainly not normally distributed)
-# p = 0.09. 
-wilcox.test(nSpecies$mass[nSpecies$virusSpecies > 1], 
-            nSpecies$mass[nSpecies$virusSpecies == 1])
-
-# t.test for Scholar. Approx. normal and good to have confidence intervals of diff mean.
-# p = 8e-5. diff (95%) = 1028 (530, 1526)
-t.test(nSpecies$scholarRefs[nSpecies$virusSpecies > 1], 
-            nSpecies$scholarRefs[nSpecies$virusSpecies == 1])
-
-
-# p = 2e-4. 
-wilcox.test(nSpecies$NumberOfSubspecies[nSpecies$virusSpecies > 1], 
-            nSpecies$NumberOfSubspecies[nSpecies$virusSpecies == 1])
-
-%%end.rcode
 
 %%begin.rcode phyloRM1vir
 
@@ -838,9 +861,26 @@ logRm1.summary <- summary(subspeciesJoint)
 
 
 %%end.rcode
-
-
 \clearpage
+
+
+These are the fits from models fitted with the species with only 1 virus species removed.
+We can see that if number of subspecies is unlogged, it remains marginally significant.
+If subspecies is logged it is no longer significant.
+%%begin.rcode rm1virresults, echo = TRUE, results = 'markdown'
+
+# Models with species with only 1 virus removed
+
+# Unlogged subspecies variable
+unlogRm1.summary
+
+# logged subspecies variable
+logRm1.summary
+
+%%end.rcode
+
+
+
 %%begin.rcode plotSubspecies, fig.cap = 'Number of virus species against log number of subspecies. Nonphylogenetic trend line in blue. Phylogenetic model (evaluated at mean body mass and mean study effort values) is shown in red.'
 
 

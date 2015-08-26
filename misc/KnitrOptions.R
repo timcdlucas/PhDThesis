@@ -54,7 +54,7 @@ options('scipen' = -1)
 # syntax highlighting.
 # This is only used for echo = TRUE which won't be in the final thesis at all.
 
-knit_theme$set("camo")
+#knit_theme$set("camo")
 
 
 

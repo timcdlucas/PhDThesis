@@ -98,7 +98,7 @@ capturesParam <- captures[1:4, c(1, unlist(cols))] %>%
 capturesClean <- captures[5:NROW(captures),] %>%
                select(unlist(cols)) %>%
                melt(variable.name = 'model', value.name = 'percentageerror') %>%
-               mutate(model = gsub('^(.*?)\\.', '', as.character(model))) %>%
+               mutate(model = gsub('^(.*?)\\.', '', as.character(model)))
               
 
 capturesClean$count <- capturesParam %>% filter(namemodel == 'No_of_captures') %>%
@@ -123,5 +123,57 @@ capturesClean %>%
 write.csv(capturesClean, file = 'data/Chapter5/captures_tidy.csv', row.names = FALSE)
 
 
+
+
+
+## Sensitivty analysis
+sens <- read.csv('data/Chapter5/Sensitivity_percentageerror.csv', stringsAsFactors = FALSE)
+
   
+sensParam <- sens[1:10, ] %>% 
+                   melt(variable.name = 'model', value.name = 'value')
+
+sensParamW <- sensParam %>% 
+                dcast(model ~ ModelName) %>%
+                mutate(camerawidthChange = round(camerawidth/input_camerawidth, 2),
+                       cameraradiusChange = round(cameraradius/input_cameraradius, 2),
+                       callwidthChange = round(callwidth/input_callwidth, 2),
+                       speedChange = round(speed/input_speed, 2))
+
+sensParamW$errorParam <-  sapply(
+                  lapply(1:nrow(sensParamW), function(x)  
+                    c('camerawidthChange', 'cameraradiusChange', 'callwidthChange', 'speedChange')[
+                      which(sensParamW[x, c((ncol(sensParamW) - 3):ncol(sensParamW))] != 1)
+                    ] ),
+                  function(y) ifelse(length(y) == 1, y, 'none')
+                )  
+
+
+
+sensParamW$error <-  sapply(
+                  lapply(1:nrow(sensParamW), function(x) 
+                    ((sensParamW[x, c((ncol(sensParamW) - 3):(ncol(sensParamW))-1)])[ 
+                      which(sensParamW[x, c((ncol(sensParamW) - 3):(ncol(sensParamW)) - 1)] != 1)
+                    ])
+                  ),
+                  function(y) ifelse(ncol(y) == 1, y[,1], NA)
+                )  
+
+sensClean <- sens[11:NROW(sens),] %>%
+                   melt(variable.name = 'model', vdalue.name = 'percentageerror')
+
+              
+sensClean <- sensClean %>%
+               inner_join(sensParamW, by = 'model') 
+
+sensClean$modelShort <- gsub('\\..*', '', sensClean$model)
+             
+
+sensClean %>%
+  filter(errorParam == 'callwidthChange') %>%
+ggplot(., aes(x = modelShort, y =  value, fill = error)) +
+  geom_boxplot()
+
+
+
 
