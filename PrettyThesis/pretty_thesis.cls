@@ -154,8 +154,14 @@
 
 
 % Chose fonts
-\RequirePackage{accanthis} %% Use option "defaultsans" to use cantarell as sans serif only
 \RequirePackage[T1]{fontenc}
+
+\RequirePackage[defaultsans]{lato}
+
+\RequirePackage{accanthis} %% Use option "defaultsans" to use cantarell as sans serif only
+
+
+
 
 
 \RequirePackage{pretty_a4}

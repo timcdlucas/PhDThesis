@@ -85,10 +85,16 @@
 
 % knitr
 % This file has the normal knitr stuff. Should therefore be able to knit content only files and \include{} them.
+
 \input{PrettyKnitrSettings}
 
 % biblatex does bibs like this.
-\addbibresource{../epilit.bib}
+% This didn't work, so copied epilit to this folder instead.
+%\addbibresource{../epilit.bib}
+
+
+\renewcommand{\mddefault}{l}
+
 
 \begin{document}
 
@@ -112,9 +118,12 @@
 \input{Preamble}
 
 
+
 \chapter{Introductory Material}
 \label{chapterlabel1}
+
 \input{../Introduction}
+
 
 \chapter[Network structure and diversity]{Does network structure of bat populations promote viral diversity?}
 \label{chapterlabel2}

@@ -8,8 +8,9 @@
 
 
 
+
 \section{Abstract}
-Wildlife monitoring technology is advancing rapidly and the use of remote sensors such as camera traps and acoustic detectors is becoming common in both the terrestrial and marine environments.
+\lettr{W}ildlife monitoring technology is advancing rapidly and the use of remote sensors such as camera traps and acoustic detectors is becoming common in both the terrestrial and marine environments.
 Current methods to estimate abundance or density require individual recognition of animals or knowing the distance of the animal from the sensor, which is often difficult.
 A method without these requirements, the random encounter model (REM), has been successfully applied to estimate animal densities from count data generated from camera traps.
 However, count data from acoustic detectors do not fit the assumptions of the REM due to the directionality of animal signals.
@@ -265,12 +266,7 @@ Although more thorough checks are performed in Appendix S3, it can be seen that 
 
 
 
-\begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): could not find function "{}thesis\_fill"{}}}\end{kframe}
-\end{knitrout}
 
 
 \begin{figure}
@@ -295,10 +291,21 @@ The standard deviation of the error between the estimated and true densities is 
 
 
 \begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[t]
+
+{\centering \includegraphics[width=\textwidth]{figure/gremSubmods-1} 
+
+}
+
+\caption[Simulation model results of the accuracy and precision for gREM submodels]{
+Simulation model results of the accuracy and precision for gREM submodels.
+The percentage error between estimated and true density for each gREM sub model is shown within each box plot, where the white line represents the median percentage error across all simulations, boxes represent the middle 50\% of the data, whiskers represent variability outside the upper and lower quartiles with outliers plotted as individual points.
+Notches indicate 95\% confidence intervals.
+Box colours correspond to the expressions for average profile width $\bar{p}$ given in Figure \ref{f:equalModelResults}. 
+}\label{fig:gremSubmods}
+\end{figure}
 
 
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): could not find function "{}thesis\_fill"{}}}\end{kframe}
 \end{knitrout}
 
 %\begin{figure}[t]
@@ -493,4 +500,5 @@ As sensors such as camera traps and acoustic detectors become more ubiquitous, t
 \section{Data Accessibility}
 
 The code used in this chapter is available on Github at \url{https://github.com/timcdlucas/lucasMoorcroftManuscript/tree/postPeerReview}.
+
 

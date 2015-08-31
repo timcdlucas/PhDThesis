@@ -6,7 +6,12 @@
 
 
 
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: package or namespace load failed for 'MetapopEpi'}}\end{kframe}
+\end{knitrout}
 
 
 \section{Abstract}
@@ -410,165 +415,23 @@ Dispersal is held constant between the two topologies.
 
 
 
-In each simulation the population is seeded with 200 infected individuals of disease 1 in each colony. 
-Disease 1 is then allowed to spread and reach equilibrium. 
-After \ensuremath{3\times 10^{5}} events, 10 individuals infected with disease 2 are added to one colony. 
-After another \ensuremath{5\times 10^{5}} events the invasion of disease 2 is considered successful if any individuals with disease 2 still remain.
 
 
 
-\subsection{Dispersal}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The values used for the independant variables are chosen to highlight the affects of these variables. 
-Dispersal values are $\lambda = 0.1, 0.01$ and $ 0.001$ dispersals per individual per year. 
-$\lambda = 0.1$ relates to individuals moving between colonies on average twice per lifetime. 
-Therefore exclusively juvenile dispersal would have dispersal rates similar to this. 
-Otherwise it relates to dispersal being a rare event with animals often staying in a colony for many years.
-$\lambda = 0.01$ relates to 20\% of individuals dispersing once in their lifetime.
-This value is therefore close to male-biased dispersal, with female philopatry. 
-Finally, $\lambda = 0.001$ relates to 2\% of individuals dispersing in their lifetime.
-This therefore relates to a population that does not habitually disperse.
 
 
 
 
-\subsection{Network structure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The network structure is synthetically created to be either fully or minimally connected (See Figure~\ref{f:net}). 
-10 subpopulations was selected as a trade off between computation time and a network complicated enough that structure might have an effect. 
-This value is artificially small compared to wildlife populations. 
 
 
 
-\subsection{Parameter selection}
 
 
-The fixed parameters used are chosen to roughly reflect realistic wild bat populations. 
-The death rate $d$ is set as 0.05 per year giving a generation time of 20 years.
-The birth rate $b$ is set to be equal to $d$ so that the population size is stable.
-The recovery rate $\gamma$ is set to 0.1 giving a average infection duration of 10 years. 
-This is therefore a chronic infection. 
-It is very difficult to directly estimate infection durations in wild populations.
-But it seems that these infections might be long lasting \cite{}.
 
-Cross immunity is set to 0.1 so that an individual infected with one disease is 90\% less likely to be infected with another.
-This is a rather arbitrary value.
-However, the model assumes complete cross immunity after infection.
-Furthermore, the rationale of the model is that the invading species might be a newly speciated strain of the endemic species.
-Therefore cross immunity is likely to be very strong.
 
-The population size of each subpopulation is set to 3000. 
-This is appropriate for many bat species \cite{jones2009pantheria}, especially the large, frugivorous \emph{Pteropodidae} that have been particularly associated with recent zoonotic diseases.
 
 
-Three values of the transmission rate $\beta$ are used, 2, 5 and 10.
-All simulations are run under all three transmission rates as this is such a fundamental parameter.
-Given the recovery, birth and death rates we can calculate an approximation of $R_0$ that ignores spatial structure.
-That is, this is $R_0$ for the local, within-subpopulation dynamics.
-Furthermore, it is $R_0$ for the first pathogen; $R_0$ of the invading pathogen will be lower due to competition.
-We can calculate that $R_0 \approx \frac{\beta d}{d(d+ \gamma)}$.
-For our three values of $\beta = 2, 5, 10$ we therefore get $R_0 \approx 13.3, 33.3, 66.6$.
-These values are very high in part to again find a reasonable trade off between the number of simulations and the reasonableness of the parameters.
-$R_0 \approx 13.3$ is similar to a highly contagious disease such as measles or pertussis. 
 
 
-For the simulations where an invading pathogen is added to the populations the number of invading pathogens added is set to 10. 
-This is a trade off between getting a reasonable proportion of invasions, while still retaining the stochastic nature of invasion.
-
-For simulations studying extinction rates, half of the subpopulation were seeded with each pathogen.
-2000 susceptibles and 1000 infected individuals were placed in each subpopulation in order to quickly reach equilibrium.
-
-
-
-
-
-
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\clearpage
-\section{Results}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.137, 0.137, 0.137}\color{fgcolor}\begin{kframe}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in prop.test(invsDisp\$n[c(3, 6, 9)], nDisp\$n[c(3, 6, 9)]): elements of 'x' must not be greater than those of 'n'}}\end{kframe}
-\end{knitrout}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.137, 0.137, 0.137}\color{fgcolor}\begin{kframe}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in prop.test(invsTopo2\$n[5:6], nTopo2\$n[5:6]): not enough data}}\end{kframe}
-\end{knitrout}
-
-
-
-
-
-
-
-
-
-\begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.137, 0.137, 0.137}\color{fgcolor}\begin{figure}[t]
-
-{\centering \subfloat[Dispersal\label{f:invasionPropPlots1}]{\includegraphics[width=0.45\textwidth]{figure/invasionPropPlots-1} }
-\subfloat[Network topology\label{f:invasionPropPlots2}]{\includegraphics[width=0.45\textwidth]{figure/invasionPropPlots-2} }
-
-}
-
-\caption[The probability of successful invasion]{The probability of successful invasion. 
-  For three different transmission rates, the probability of invasion success does not change between different a) dispersal rates or b) network structures. 
-  Error bars are 95\% confidence intervals. 
-  Other parameters are kept constant at: $N = 10,\, \bar{n} = 3000,\, b = d = 0.05,\, \gamma = 0.1,\, \alpha = 0.1$. 
-  When dispersal is varied, the population structure is fully connected. When population structure is varied, $\lambda = 0.01$.}\label{f:invasionPropPlots}
-\end{figure}
-
-
-\end{knitrout}
 

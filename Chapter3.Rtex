@@ -44,6 +44,7 @@ library(ggplot2)
 library(dotwhisker)
 library(ggfortify)
 library(ggtree)
+library(RColorBrewer)
 
 # Web scraping.
 library(rvest)
@@ -519,7 +520,9 @@ p %<+% nSpecies[, 1:6] +
   geom_point(aes(size = virusSpecies, color = Family), subset=.(isTip)) +
   scale_size(range = c(1, 4)) +
   theme_tcdl +
-  theme(plot.margin = unit(c(-1,-2,-3,-3), "lines")) 
+  theme(plot.margin = unit(c(-1, 4, -3, -3), "lines")) +
+  theme(legend.position = 'right') +
+  labs(size = 'Virus Richness')
 
 %%end.rcode
 
@@ -564,6 +567,24 @@ ggplot(nSpecies, aes(SubspeciesFactor, virusSpecies)) +
   scale_x_discrete(limits = levels(nSpecies$SubspeciesFactor), drop=FALSE) +
   geom_smooth(method = 'lm', aes(group = 1)) +
   xlab('# subspecies')
+
+
+ggplot(nSpecies, aes(SubspeciesFactor, virusSpecies, colour = 'a', fill = 'a')) + 
+  geom_smooth(method = 'lm',  aes(group = 1), colour = 'black', fill = 'grey') +
+  geom_boxplot(outlier.size = 1, size = 0.3, outlier.colour = grey(0.3), 
+    notch = FALSE) +
+  scale_colour_manual(values = brewer.pal(4, 'Paired')[2]) +
+  scale_fill_manual(values = brewer.pal(4, 'Paired')) +
+#  thesis_fill() +
+#  thesis_colour() +
+  stat_summary(geom = "crossbar", width = 0.7, fatten = 2, 
+    fun.data = function(x){ return(c(y = median(x), ymin = median(x), ymax = median(x))) }) +
+  theme(legend.position = 'none') + 
+  geom_smooth(method = 'lm',  aes(group = 1), colour = 'black', fill = NA) +
+  scale_x_discrete(limits = levels(nSpecies$SubspeciesFactor), drop=FALSE) +
+  xlab('N. of Subspecies')+
+  ylab('Viral Richness')
+
 
 
 ggplot(nSpecies, aes(log(pubmedRefs + 1), virusSpecies)) +

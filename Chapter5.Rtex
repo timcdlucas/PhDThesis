@@ -1,5 +1,6 @@
 
 
+
 %%begin.rcode settings, echo = FALSE, cache = FALSE, message = FALSE, results = 'hide'
 
 
@@ -41,7 +42,7 @@ library(RColorBrewer)
 
 
 \section{Abstract}
-Wildlife monitoring technology is advancing rapidly and the use of remote sensors such as camera traps and acoustic detectors is becoming common in both the terrestrial and marine environments.
+\lettr{W}ildlife monitoring technology is advancing rapidly and the use of remote sensors such as camera traps and acoustic detectors is becoming common in both the terrestrial and marine environments.
 Current methods to estimate abundance or density require individual recognition of animals or knowing the distance of the animal from the sensor, which is often difficult.
 A method without these requirements, the random encounter model (REM), has been successfully applied to estimate animal densities from count data generated from camera traps.
 However, count data from acoustic detectors do not fit the assumptions of the REM due to the directionality of animal signals.
@@ -725,4 +726,5 @@ As sensors such as camera traps and acoustic detectors become more ubiquitous, t
 \section{Data Accessibility}
 
 The code used in this chapter is available on Github at \url{https://github.com/timcdlucas/lucasMoorcroftManuscript/tree/postPeerReview}.
+
 

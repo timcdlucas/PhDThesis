@@ -475,7 +475,7 @@ fullSim <- function(x){
   dispVec <- rep(c(0.001, 0.01, 0.1), each = nDispSims/3 +1)
   disp <- dispVec[x]
 
-  tranVec <- rep(c(0.1, 0.2, 0.4, 0.6 ), nDispSims/3 + 1)
+  tranVec <- rep(c(0.1, 0.2, 0.3, 0.4 ), nDispSims/3 + 1)
   tran <- tranVec[x]
 
   # Set seed (this is set within each parallel simulation to prevent reusing random numbers).
@@ -568,12 +568,14 @@ write.csv(z, file = 'data/Chapter2/DispSims.csv')
 # Define our simulation function.
 fullSim <- function(x){
 
+
   # Chose maxdistance so that we get either fully connected or circle networks.
-  mxDis <- rep(c(40, 200), each = nTopoSims)[x]
+  mxDis <- rep(c(40, 200), each = nTopoSims/2 + 1)[x]
 
   # Chose transmission rates.
-  tranVec <- rep(c(0.1, 0.2, 0.4, 0.6), nDispSims/3 + 1)
+  tranVec <- rep(c(0.1, 0.2, 0.3, 0.4), nTopoSims/4 + 1)
   tran <- tranVec[x]
+
 
   # Set seed (this is set within each parallel simulation to prevent reusing random numbers).
   simSeed <- paste0(seed, x)
@@ -957,7 +959,7 @@ invasionPropCaption <- "The probability of successful invasion.
 
 %%begin.rcode invasionPropPlots, fig.lp = 'f:', fig.height = 4, fig.subcap = c('Dispersal', 'Network topology'), out.width = "0.45\\textwidth", fig.cap = invasionPropCaption, cache = FALSE
 
-propsDispCI <- data.frame(invsDisp[, 1:2], binom.confint(invsDisp$n, nDisp$n, conf.level = 0.95, methods = "exact"))
+propsDispCI <- data.frame(propsDisp[, 1:2], binom.confint(propsDisp$invasions, propsDisp$n, conf.level = 0.95, methods = "exact"))
 
 ggplot(propsDispCI, aes(x = factor(transmission), y = mean, fill = factor(dispersal))) +
   geom_bar(stat = 'identity', position=position_dodge()) +
@@ -966,10 +968,10 @@ ggplot(propsDispCI, aes(x = factor(transmission), y = mean, fill = factor(disper
                 position = position_dodge(.9)) +
   xlab('Transmission') + 
   ylab('Prop. Invasions') +
-  scale_fill_hue(name="Dispersal Rate") +
+  #scale_fill_hue(name="Dispersal Rate") +
   thesis_fill()
 
-propsTopoCI <- data.frame(invsTopo2[, 1:2], binom.confint(invsTopo2$n, nTopo2$n, conf.level = 0.95, methods = "exact"))
+propsTopoCI <- data.frame(propsTopo[, 1:2], binom.confint(propsTopo$invasions, nTopo2$n, conf.level = 0.95, methods = "exact"))
 
 ggplot(propsTopoCI, aes(x = factor(transmission), y = mean, fill = factor(maxDistance))) +
   geom_bar(stat = 'identity', position=position_dodge()) +
