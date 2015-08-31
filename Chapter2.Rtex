@@ -61,7 +61,7 @@ library(parallel)
 
 \subsubsection{One or two sentences providing a basic introduction to the field}
 % comprehensible to a scientist in any discipline.
-An increasingly large fraction of emerging diseases come from animals \cite{jones2008global, taylor2001risk} and these diseases have a huge impact on human health.
+\lettr{A}n increasingly large fraction of emerging diseases come from animals \cite{jones2008global, taylor2001risk} and these diseases have a huge impact on human health.
 The chance that a new disease will come from any particularly wild host species increases with the diversity of pathogens in that species.
 However, the factors that control pathogen diversity in wild populations are still unknown.
 
