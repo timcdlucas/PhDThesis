@@ -517,18 +517,22 @@ pruneTree <- drop.tip(tr1, unneededTips)
 p <- ggtree(pruneTree, layout = 'fan') 
 
 p %<+% nSpecies[, 1:6] +
-  geom_point(aes(size = virusSpecies, color = Family), subset=.(isTip)) +
-  scale_size(range = c(1, 4)) +
+  geom_point(aes(size = virusSpecies, colour = Family), subset=.(isTip)) +
+  scale_size(range = c(0.8, 3)) +
+  scale_colour_manual(values = c(hc_pal()(10), brewer.pal(3, 'Dark2'))) +
   theme_tcdl +
-  theme(plot.margin = unit(c(-1, 4, -3, -3), "lines")) +
+  theme(plot.margin = unit(c(-1, 3, -2.5, -2), "lines")) +
   theme(legend.position = 'right') +
-  labs(size = 'Virus Richness')
+  labs(size = 'Virus Richness') +
+  theme(legend.key.size = unit(0.6, "lines"),
+              legend.text = element_text(size = 6),
+              legend.title = element_text(size = 8))
 
 %%end.rcode
 
 %%begin.rcode subsDataCapts
 subsDataCapts <- c(
-'Unlogged number of virus species against log mass with a non-phylogenetic linear model added. Points are significantly jittered to try and reveal the sever overplotting in the bottom left corner in particular.',
+'Unlogged number of virus species hc_pal()against log mass with a non-phylogenetic linear model added. Points are significantly jittered to try and reveal the sever overplotting in the bottom left corner in particular.',
 'Number of virus species against logged number of subspecies (not marginal) with a non-phylogenetic linear model added. Points are significantly jittered to try and reveal the sever overplotting in the bottom left corner in particular.', 
 'Number of virus species against logged number of subspecies (not marginal) with a non-phylogenetic linear model added.',
 'Number of virus species against number of subspecies. Data within a number of subspecies are plotted as boxplots with the dark bar showing the median, the box showing the interquartile range, vertical lines showing the range and outliers shown as seperate points. A non-phylogenetic linear model is shown in blue', 
@@ -871,14 +875,14 @@ unlogRm1 <- pgls(
   virusSpecies ~ log(scholarRefs) + NumberOfSubspecies +  log(mass), 
   data = compRm1Vir, lambda = 'ML')
 
-unlogRm1.summary <- summary(subspeciesJointUnlog)
+unlogRm1.summary <- summary(unlogRm1)
 
 # Subspecies p = 0.057. Marginal.
 logRm1 <- pgls(
   virusSpecies ~ log(scholarRefs) + log(NumberOfSubspecies) +  log(mass), 
   data = compSubspecies, lambda = 'ML')
 
-logRm1.summary <- summary(subspeciesJoint)
+logRm1.summary <- summary(logRm1)
 
 
 %%end.rcode
@@ -980,7 +984,7 @@ Without interactions, number of subspecies is marginally significant.
 
 %%end.rcode
 
-%%begin.rcode plotSubspeciesCoefs, fig.cap = dwplotCap
+%%begin.rcode plotSubspeciesCoefs, fig.cap = dwplotCap, fig.height = 2
 
 
 subspeciesCoefs <- data.frame(
@@ -997,11 +1001,17 @@ x <- rbind(subspeciesCoefs,
   arrange(model, term) 
 
 x$term <- plyr::mapvalues(x$term, from = levels(x$term)[2:5], 
-  to = c('mass', 'Subspecies', 'Cites*Subspecies', 'Cites'))
+  to = c('Mass', 'Subspecies', 'Cites*Subspecies', 'Cites'))
+
+
 
 dwplot(x) +
   theme(legend.position="right",
-        axis.text = element_text(color = "black", size = 13, family  =  "Lato Light"))
+        axis.text.y = element_text(color = "black", size = 13, family  =  "Lato Light", vjust = 0.3)) +
+  scale_colour_manual(name = 'Model', 
+                                    labels = c('Interaction', 'No Interaction'),
+                                    values = hc_pal()(2)) +
+  xlab('Coefficient Estimate')
     
 %%end.rcode
 

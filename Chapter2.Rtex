@@ -11,7 +11,7 @@
 
 # Compilation options
 # Run simulations? This will take many hours
-runAllSims <- TRUE
+runAllSims <- FALSE
 
 # Save raw simulation output
 # This will take ~10GB or so.
@@ -961,6 +961,7 @@ invasionPropCaption <- "The probability of successful invasion.
 
 propsDispCI <- data.frame(propsDisp[, 1:2], binom.confint(propsDisp$invasions, propsDisp$n, conf.level = 0.95, methods = "exact"))
 
+
 ggplot(propsDispCI, aes(x = factor(transmission), y = mean, fill = factor(dispersal))) +
   geom_bar(stat = 'identity', position=position_dodge()) +
   geom_errorbar(aes(ymin = lower, ymax = upper),
@@ -973,7 +974,7 @@ ggplot(propsDispCI, aes(x = factor(transmission), y = mean, fill = factor(disper
 
 propsTopoCI <- data.frame(propsTopo[, 1:2], binom.confint(propsTopo$invasions, nTopo2$n, conf.level = 0.95, methods = "exact"))
 
-ggplot(propsTopoCI, aes(x = factor(transmission), y = mean, fill = factor(maxDistance))) +
+ggplot(propsTopoCI, aes(x = factor(transmission), y = mean, fill = factor(meanK))) +
   geom_bar(stat = 'identity', position=position_dodge()) +
   geom_errorbar(aes(ymin = lower, ymax = upper),
                 width=.2,                   
