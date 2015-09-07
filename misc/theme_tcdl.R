@@ -73,13 +73,13 @@ theme_pres <- theme(text = element_text(family = "Lato Light", size = 12),
 
 
 
-thesis_fill <- function(){
-  scale_fill_hc()
+thesis_fill <- function(...){
+  scale_fill_hc(...)
 }
 
 
-thesis_colour <- function(){
-  scale_colour_hc()
+thesis_colour <- function(...){
+  scale_colour_hc(...)
 }
 
 

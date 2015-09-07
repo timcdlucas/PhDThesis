@@ -562,3 +562,135 @@ For simulations studying extinction rates, half of the subpopulation were seeded
 
 \end{knitrout}
 
+
+
+\subsection{Invasion}
+
+
+\subsubsection{Dispersal}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+The proportion of invasions was not different across dispersal rates across \ensuremath{1.2\times 10^{3}} simulation run (Figure \ref{f:invasionPropPlots1}).
+This was true at all transmission levels ($\chi^2$ test. $\beta = 0.1$: $\chi^2 = 1.98$, $\text{df} = 2$, $p = 0.37$. $\beta = 0.2$: $\chi^2 = 9.44$, $\text{df} = 2$, $p = \ensuremath{8.9\times 10^{-3}}$. $\beta = 0.3$: $\chi^2 = 0.29$, $\text{df} = 2$, $p = 0.87$, $\beta = 0.4$: $\chi^2 = 0.83$, $\text{df} = 2$, $p = 0.66$).
+
+
+\subsubsection{Network structure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+I ran 800 simulations over 4 transmission values ($\beta = $ 0.1, 0.2, 0.3, 0.4).
+The proportion of invasions was not different between highly connected and largely unconnected metapopulations (Figure~\ref{f:invasionPropPlots2}). 
+This was true at all transmission levels ($\chi^2$ test. $\beta = 0.1$: $\chi^2 = \ensuremath{5.23\times 10^{-31}}$, $\text{df} = 1$, $p = 1$. $\beta = 0.2$: $\chi^2 = 0.02$, $\text{df} = 1$, $p = 0.88$. $\beta = 0.3$: $\chi^2 = 1.53$, $\text{df} = 1$, $p = 0.22$. $\beta = 0.4$: $\chi^2 = 0.26$, $\text{df} = 1$, $p = 0.61$).
+
+ 
+\subsection{Transmission}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Inline with theory, increasing the transmission rate increased the probability of invasion (Figure~\ref{f:invasionPropPlots1}--\ref{f:invasionPropPlots2}).
+This is true for all three dispersal values ($\chi^2$ test. $\lambda = 0.001$: $\chi^2 = 243.56$, $\text{df} = 3$, $p = \ensuremath{1.62\times 10^{-52}}$. $\lambda = 0.01$: $\chi^2 = 265.4$, $\text{df} = 3$, $p = \ensuremath{3.05\times 10^{-57}}$. $\lambda = 0.1$: $\chi^2 = 244.95$, $\text{df} = 3$, $p = \ensuremath{8.1\times 10^{-53}}$) and both network structures ($\chi^2$ test. Fully connected: $\chi^2 = 267.3$, $\text{df} = 3$, $p = \ensuremath{1.18\times 10^{-57}}$. Minimally connected: $\chi^2 =  267.3$, $\text{df} = 3$, $p = \ensuremath{1.18\times 10^{-57}}$).
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\clearpage
+\section{Discussion}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Restate the gap and the main result}
+
+Empirical studies on the role of population structure on the are equivocal and cannot examine the specific mechanisms by which pathogen communities are created and maintained.
+I have used mechanistic, metapopulation models to test whether increased population structure can promote pathogen richness by facilitating invasion of new pathogens.
+
+
+
+\subsection{Link results to consequences}
+
+\subsubsection{Population structure does not affect pathogen richness}
+
+Probably because dynamics are dominated by local processes.
+This goes against many predictions that increasing $R_0$ increases pathogen richness.
+Further work could examine reduced col  ony sizes to test when global structure become more important.
+Measures of population structure should not be used to predict zoonotic potential.
+
+\subsubsection{Dispersal does not affect pathogen richness}
+
+
+
+\subsubsection{Network connectedness does not affect pathogen richness}
+
+This is in direct contrast to \cite{campos2006pathogen}. 
+However, the model in \cite{campos2006pathogen} is a contact network, so increasing the connectedness increases the chance of succesful transmission events for the first few transmission generations.
+This lends support to the idea that I found now affect of connectedness due to the dominance of local dynamics.
+
+Network connectedness can be seen as a function of average dispersal distance, density and colony size.
+A high density species with small colony sizes must have colonies relatively close together.
+Therefore colonies would be more likely to be connected for a given dispersal distance. 
+
+
+\subsection{Discuss assumptions}
+
+\subsubsection{Complete cross-immunity}
+
+I have assumed that once recovered, individuals are immune to both pathogens. 
+Furthermore, when a coinfected individual recovers from one pathogen, it immediately recovers from the other as well.
+This is probably a fairly reasonable assumption given that I am modelling a newly evolved strain.
+However, further work could relax this assumption using a model similar to \cite{poletto2015characterising} which contains additional classes for `infected with pathogen one, immune to pathogen two' and `infected with pathogen two, immune to pathogen one'.
+The model here was formulated such that the study of systems with greater than two pathogens is still computationally feasible while a model such as used in \cite{poletto2015characterising} contains $3^\rho$ classes for a system with $\rho$ pathogen species.
+This quickly becomes computationally restrictive.
+
+\subsubsection{Identical strains}
+
+Many papers on pathogen richness have focussed on the evolution of pathogen traits and have considered a trade off between transmission rate and virulence \cite{nowak1994superinfection, nowak1994superinfection} or infectious period \cite{poletto2013host}.
+However, here we are interested in host traits.
+Therefore we have assumed that pathogen strains are identical.
+It is clear however that there are a number of factors that affect pathogen richness and our focus on host population structure does not imply that pathogen traits are not important.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\clearpage
+\section{Appendix}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{table}[b!]
+
+\begin{tabular}{lp{5.6cm}p{4.3cm}l}
+ & Explanation & Units&Value\\
+\hline
+$S$ & Susceptible individuals &&\\
+$I_q$ & Infectious with diseases $q$ &&\\
+$I^+_p$ & Sum of classes infected with pathogen $p$ &\\
+$N$ & Number of colonies&& 10\\
+$\bar{n}$ & Mean colony starting size && 3000\\
+$\beta$ & Transmission rate & Transmission events per year per individual& 2, 5, 10\\
+$\gamma$ & Recovery rate & Recovery events per year. & 0.1\\
+$\lambda$ & Dispersal & Dispersal events per day per individual& 0.001--0.1\\
+$b$ & Birth rate & Births per year per individual& 0.05\\
+$d$ & Death rate & Deaths per year per individual & 0.05\\
+$d_I$ & Infectious death rate & Additional deaths per day per individual&\\
+$\rho$ & No. pathogens && 2\\
+$p$ &  Pathogen index i.e. $p\in\{1,2\}$ for pathogens 1 and 2 & &\\
+$q$ & Disease class i.e., $q\in\{1,2,12\}$&\\
+$\mathcal{V}$ & Neighbourhood of a node &&\\
+$t, t^\prime$ & Time and time plus waiting time i.e., $t+\delta$ & Days&\\
+$k_i$ & Degree of node $i$ &&\\
+$\delta$ & Waiting time until next event & Days&\\
+$\alpha$ & Cross immunity & Proportion& 0.1\\
+$n, m$ & Colony index &&\\
+$\bm{A}_{mn}$ & Adjacency matrix. & Distance &\\
+$\mu$ & Maximum distance for edge to exist & km& 40, 100\\
+$\sigma$ & Invading pathogen seed size & & 10\\
+$r_i$ & The rate that event $i$ occurs. & Days$^{-1}$&\\
+&&&\\
+\end{tabular}
+\caption{All symbols used.}
+\label{t:params}
+\end{table}
+
+
+
+

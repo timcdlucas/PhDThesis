@@ -800,27 +800,28 @@ propsDisp
 
 %%begin.rcode DispPropTests
 
-# Then run proportion tests between dispersal rates
+# Then run proportion tests between population structures
 
-#DispTest1 <- tidy(prop.test(invsDisp$n[1:3], nDisp$n[1:3]))
-#DispTest2 <- tidy(prop.test(invsDisp$n[4:6], nDisp$n[4:6]))
-#DispTest3 <- tidy(prop.test(invsDisp$n[7:9], nDisp$n[7:9]))
+DispTest1 <- prop.test(propsDisp$invasions[1:3], propsDisp$n[1:3])
+DispTest2 <- prop.test(propsDisp$invasions[4:6], propsDisp$n[4:6])
+DispTest3 <- prop.test(propsDisp$invasions[7:9], propsDisp$n[7:9])
+DispTest4 <- prop.test(propsDisp$invasions[10:12], propsDisp$n[10:12])
 
-#DispTest1
 
 %%end.rcode
+
+
 
 
 %%begin.rcode DispTransPropTests
 #Finally run proportion tests between transmission rates
+DispTransTest1 <- prop.test(propsDisp$invasions[c(1, 4, 7, 10)], propsDisp$n[c(1, 4, 7, 1)])
+DispTransTest2 <- prop.test(propsDisp$invasions[c(2, 5, 8, 11)], propsDisp$n[c(2, 5, 8, 11)])
+DispTransTest3 <- prop.test(propsDisp$invasions[c(3, 6, 9, 12)], propsDisp$n[c(3, 6, 9, 12)])
 
-DispTransTest1 <- tidy(prop.test(invsDisp$n[c(1, 4, 7)], nDisp$n[c(1, 4, 7)]))
-DispTransTest2 <- tidy(prop.test(invsDisp$n[c(2, 5, 8)], nDisp$n[c(2, 5, 8)]))
-DispTransTest3 <- tidy(prop.test(invsDisp$n[c(3, 6, 9)], nDisp$n[c(3, 6, 9)]))
+
 
 %%end.rcode
-
-
 
 
 
@@ -881,9 +882,10 @@ propsTopo
 
 # Then run proportion tests between population structures
 
-#TopoTest1 <- prop.test(invsTopo$n[1:2], nTopo$n[1:2])
-#TopoTest2 <- prop.test(invsTopo$n[3:4], nTopo$n[3:4])
-#TopoTest3 <- prop.test(invsTopo$n[5:6], nTopo$n[5:6])
+TopoTest1 <- prop.test(propsTopo$invasions[1:2], propsTopo$n[1:2])
+TopoTest2 <- prop.test(propsTopo$invasions[3:4], propsTopo$n[3:4])
+TopoTest3 <- prop.test(propsTopo$invasions[5:6], propsTopo$n[5:6])
+TopoTest4 <- prop.test(propsTopo$invasions[7:8], propsTopo$n[7:8])
 
 
 %%end.rcode
@@ -894,8 +896,8 @@ propsTopo
 %%begin.rcode TopoTransPropTests
 #Finally run proportion tests between transmission rates
 
-TopoTransTest1 <- tidy(prop.test(invsTopo$n[c(1, 3, 5)], nTopo$n[c(1, 3, 5)]))
-TopoTransTest2 <- tidy(prop.test(invsTopo$n[c(2, 4, 6)], nTopo$n[c(2, 4, 6)]))
+TopoTransTest1 <- prop.test(propsTopo$invasions[c(1, 3, 5, 7)], propsTopo$n[c(1, 3, 5, 7)])
+TopoTransTest2 <- prop.test(propsTopo$invasions[c(2, 4, 6, 8)], propsTopo$n[c(2, 4, 6, 8)])
 
 
 %%end.rcode
@@ -969,8 +971,8 @@ ggplot(propsDispCI, aes(x = factor(transmission), y = mean, fill = factor(disper
                 position = position_dodge(.9)) +
   xlab('Transmission') + 
   ylab('Prop. Invasions') +
-  #scale_fill_hue(name="Dispersal Rate") +
-  thesis_fill()
+  thesis_fill(name="Dispersal", 
+                 labels=c('0.001', '0.01', '0.1'))
 
 propsTopoCI <- data.frame(propsTopo[, 1:2], binom.confint(propsTopo$invasions, nTopo2$n, conf.level = 0.95, methods = "exact"))
 
@@ -981,36 +983,32 @@ ggplot(propsTopoCI, aes(x = factor(transmission), y = mean, fill = factor(meanK)
                 position = position_dodge(.9)) +
   xlab('Transmission') + 
   ylab('Prop. Invasions') +
-  scale_fill_hue(name="Connectedness", 
-                 labels=c("Low", "High")) +
-  thesis_fill()
+  #scale_fill_hue(name="Connectedness", 
+  #               labels=c("Low", "High")) +
+  thesis_fill(name="Connectedness", 
+                 labels=c("Low", "High"))
 
 %%end.rcode
 
 
 
 \subsection{Invasion}
-The probability of the new pathogen invading ranged from 0.12 to 0.55.
 
 
 \subsubsection{Dispersal}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-The proportion of invasions was not different across dispersal rates across 1500 simulation run.. 
-This was true at all transmission levels ($\chi^2$ test. $\beta = 2$: $\chi^2 = \rinline{DispTest1$statistic}$, $\text{df} = \rinline{DispTest1$parameter}$, $p = \rinline{p(DispTest1$p.value)}$. $\beta = 5$: $\chi^2 = \rinline{DispTest2$statistic}$, $\text{df} = \rinline{DispTest2$parameter}$, $p = \rinline{p(DispTest2$p.value)}$. $\beta = 10$: $\chi^2 = \rinline{DispTest3$statistic}$, $\text{df} = \rinline{DispTest3$parameter}$, $p = \rinline{p(DispTest3$p.value)}$).
+The proportion of invasions was not different across dispersal rates across \rinline{nDispSims} simulation run (Figure \ref{f:invasionPropPlots1}).
+This was true at all transmission levels ($\chi^2$ test. $\beta = 0.1$: $\chi^2 = \rinline{DispTest1$statistic}$, $\text{df} = \rinline{DispTest1$parameter}$, $p = \rinline{p(DispTest1$p.value)}$. $\beta = 0.2$: $\chi^2 = \rinline{DispTest2$statistic}$, $\text{df} = \rinline{DispTest2$parameter}$, $p = \rinline{p(DispTest2$p.value)}$. $\beta = 0.3$: $\chi^2 = \rinline{DispTest3$statistic}$, $\text{df} = \rinline{DispTest3$parameter}$, $p = \rinline{p(DispTest3$p.value)}$, $\beta = 0.4$: $\chi^2 = \rinline{DispTest4$statistic}$, $\text{df} = \rinline{DispTest4$parameter}$, $p = \rinline{p(DispTest4$p.value)}$).
 
 
 \subsubsection{Network structure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-I ran 2000 simulations over three transmission values ($\beta = 2, 5, 10$).
-The proportion of invasions was not different between highly connected and largely unconnected metapopulations (See Figure~\ref{f:invasionPropPlots1}). 
-This was true at all transmission levels ($\chi^2$ test. $\beta = 2$: $\chi^2 = \rinline{TopoTest1$statistic}$, $\text{df} = \rinline{TopoTest1$parameter}$, $p = \rinline{p(TopoTest1$p.value)}$. $\beta = 5$: $\chi^2 = \rinline{TopoTest2$statistic}$, $\text{df} = \rinline{TopoTest2$parameter}$, $p = \rinline{p(TopoTest2$p.value)}$. $\beta = 10$: $\chi^2 = \rinline{TopoTest3$statistic}$, $\text{df} = \rinline{TopoTest3$parameter}$, $p = \rinline{p(TopoTest3$p.value)}$).
-
-In a small proportion of simulations, both pathogens went extinct.
-In these cases we still counted the invading pathogen as failing to invade.
-However, the results are the same as above if these simulations are removed from the analysis ($\chi^2$ test. $\beta = 2$: $\chi^2 = \rinline{Topo2Test1$statistic}$, $\text{df} = \rinline{Topo2Test1$parameter}$, $p = \rinline{p(Topo2Test1$p.value)}$. $\beta = 5$: $\chi^2 = \rinline{Topo2Test2$statistic}$, $\text{df} = \rinline{Topo2Test2$parameter}$, $p = \rinline{p(Topo2Test2$p.value)}$. $\beta = 10$: $\chi^2 = \rinline{Topo2Test3$statistic}$, $\text{df} = \rinline{Topo2Test3$parameter}$, $p = \rinline{p(Topo2Test3$p.value)}$).
+I ran \rinline{nTopoSims} simulations over \rinline{length(unique(propsTopo$transmission))} transmission values ($\beta = $ \rinline{unique(propsTopo$transmission)}).
+The proportion of invasions was not different between highly connected and largely unconnected metapopulations (Figure~\ref{f:invasionPropPlots2}). 
+This was true at all transmission levels ($\chi^2$ test. $\beta = 0.1$: $\chi^2 = \rinline{TopoTest1$statistic}$, $\text{df} = \rinline{TopoTest1$parameter}$, $p = \rinline{p(TopoTest1$p.value)}$. $\beta = 0.2$: $\chi^2 = \rinline{TopoTest2$statistic}$, $\text{df} = \rinline{TopoTest2$parameter}$, $p = \rinline{p(TopoTest2$p.value)}$. $\beta = 0.3$: $\chi^2 = \rinline{TopoTest3$statistic}$, $\text{df} = \rinline{TopoTest3$parameter}$, $p = \rinline{p(TopoTest3$p.value)}$. $\beta = 0.4$: $\chi^2 = \rinline{TopoTest4$statistic}$, $\text{df} = \rinline{TopoTest4$parameter}$, $p = \rinline{p(TopoTest4$p.value)}$).
 
  
 \subsection{Transmission}
@@ -1018,15 +1016,6 @@ However, the results are the same as above if these simulations are removed from
 
 Inline with theory, increasing the transmission rate increased the probability of invasion (Figure~\ref{f:invasionPropPlots1}--\ref{f:invasionPropPlots2}).
 This is true for all three dispersal values ($\chi^2$ test. $\lambda = 0.001$: $\chi^2 = \rinline{DispTransTest1$statistic}$, $\text{df} = \rinline{DispTransTest1$parameter}$, $p = \rinline{p(DispTransTest1$p.value)}$. $\lambda = 0.01$: $\chi^2 = \rinline{DispTransTest2$statistic}$, $\text{df} = \rinline{DispTransTest2$parameter}$, $p = \rinline{p(DispTransTest2$p.value)}$. $\lambda = 0.1$: $\chi^2 = \rinline{DispTransTest3$statistic}$, $\text{df} = \rinline{DispTransTest3$parameter}$, $p = \rinline{p(DispTransTest3$p.value)}$) and both network structures ($\chi^2$ test. Fully connected: $\chi^2 = \rinline{TopoTransTest2$statistic}$, $\text{df} = \rinline{TopoTransTest2$parameter}$, $p = \rinline{p(TopoTransTest2$p.value)}$. Minimally connected: $\chi^2 =  \rinline{TopoTransTest2$statistic}$, $\text{df} = \rinline{TopoTransTest2$parameter}$, $p = \rinline{p(TopoTransTest2$p.value)}$).
-
-
-\subsection{Extinction}
-
-I ran 1000 simulations varying dispersal rate and 1000 varying network topology. 
-However, in these simulations no pathogens went extinct. 
-Therefore it seems that once a pathogen is established in the these populations, it is very rare for them to stochastically go extinct.
-Dispersal nor network topology altered the proportion of extinctions, but clearly this comparison does tell us much.
-
 
 
 
