@@ -247,52 +247,84 @@ Finally, recovery from any infectious class occurs at a rate $\gamma$
 \end{align}
 
 
-%%begin.rcode SimLengths
+%%begin.rcode SimSetup
 
   # These apply to both topo and disp sims. And probably should apply to extinction sims if I include them.
   # How long should the simulation last?
-  nEvent <- 8e5
-
+  #nEvent <- 8e5
+  nEvent <- 8e4
   # When should the invading pathogen be added.
-  invadeT <- 3e5
-
-%%end.rcode
-
-
-%%begin.rcode DispSimsFuncs
-
-  #################################
-  # Dispersal sim definitions     #
-  #################################
-
-
+  #invadeT <- 3e5
+  invadeT <- 3e4
+  
+  # Sims per parameter set.
+  each <- 5
+  
   # How often should the population be sampled. Only sampled populations are saved.
   sample <- 1000
 
-  # How many simulations to run?
-  nDispSims <- 12*100
+%%end.rcode
 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Constant density size. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%begin.rcode DensSimsFuncs
+
+  #################################
+  # Density sim definitions       #
+  #################################
+
+
+
+  # How many simulations to run?
+  nDensSims <- 15 * each
+
+  # Parameters for constant density
+  #   Area and meanColonySize are the actal input arguments
+  pop <- rep(c(1000, 5000, 10000, 50000, 100000), each = 3 * each)
+  colonySize <- pop/10
+
+  area <- pop
+  side <- sqrt(area)
+
+  tran <- rep(c(0.1, 0.2, 0.3), times = 5 * each)
 
 # Define our simulation function.
 fullSim <- function(x){
-
-  dispVec <- rep(c(0.001, 0.01, 0.1), each = nDispSims/3 +1)
-  disp <- dispVec[x]
-
-  tranVec <- rep(c(0.1, 0.2, 0.3, 0.4 ), nDispSims/3 + 1)
-  tran <- tranVec[x]
 
   # Set seed (this is set within each parallel simulation to prevent reusing random numbers).
   simSeed <- paste0(seed, x)
   set.seed(simSeed)
 
   # Make the population.
-  p <- makePop(model = 'SIR', events = nEvent, nColonies = 10, nPathogens = 2,   recovery = 1,  sample = sample, dispersal = disp, birth = 0.05, death = 0.05, crossImmunity = 0.1, meanColonySize = 3000, infectDeath = 0, transmission = tran, maxDistance = 100, colonySpatialDistr = 'circle')
+  p <- makePop(space = side[x], 
+               transmission = tran[x], 
+               meanColonySize = colonySize[x], 
+               model = 'SIR', 
+               events = nEvent, 
+               nColonies = 10, 
+               nPathogens = 2, 
+               recovery = 1,  
+               sample = sample, 
+               dispersal = 0.01, 
+               birth = 0.05, 
+               death = 0.05,
+               crossImmunity = 0.1, 
+               infectDeath = 0,
+               maxDistance = 100)
 
-  # Seed endemic pathogen.
-  for(i in 1:10){
-    p <- seedPathogen(p, 2, n = 200, diffCols = FALSE)
-  }
+  p$I[1, , 1] <- colonySize[x] - 20
+
+  # Seed invading pathogen.
+  p$I[2, , 1] <- 20
+  
+  # Recalculate rates of each event after seeding.
+  p <- transRates(p, 1)
 
   # Burn in simulation
   p <- runSim(p, end = invadeT)
@@ -315,19 +347,19 @@ fullSim <- function(x){
   d$transmission <- p$parameters['transmission']
   d$dispersal <- p$parameters['dispersal']
   d$nExtantDis <- sum(findDisDistr(p, 2) > 0)
-  d$singleInf <- findCoinfDistr(p, 2)[2]
-  d$doubleInf <- findCoinfDistr(p, 2)[3]
   d$nColonies <- p$parameters['nColonies']
   d$nPathogens <- p$parameters['nPathogens']
   d$meanK <- sum(p$adjacency != 0 )/p$parameters['nColonies']
   d$maxDistance <- p$parameters['maxDistance']
   d$nEvents <- p$parameters['events']
+  d$pop <- p$parameters['meanColonySize'] * p$parameters['nColonies']
+  d$area <- p$parameters['space']^2
 
 
   message(paste0("finished ", x, ". Invasion: ", invasion ))
   
   if(saveData){ 
-    file <- paste0('data/Chapter2/DispSims/DispSim_', formatC(x, width = 4, flag = '0'), '.RData')
+    file <- paste0('data/Chapter4/DensSim_', formatC(x, width = 4, flag = '0'), '.RData')
     save(p, file = file)
   }
 
@@ -338,60 +370,88 @@ fullSim <- function(x){
 }
 %%end.rcode
 
-%%begin.rcode runDispSim, eval = runAllSims, cache = TRUE
+%%begin.rcode runDensSim, eval = runAllSims, cache = TRUE
 
 # Create and set seed (seed object is used to set seed in each seperate simulation.'
-seed <- 33355
+seed <- 635412
 set.seed(seed)
 
 # If we want to save the data, make a directory for it.
 if(saveData){
-  dir.create('data/Chapter2/DispSims/')
+  dir.create('data/Chapter4/')
 }
 
 # Run sims.
-z <- mclapply(1:nDispSims, . %>% fullSim, mc.preschedule = FALSE, mc.cores = nCores)
+z <- mclapply(1:nDensSims, . %>% fullSim, mc.preschedule = FALSE, mc.cores = nCores)
 
 z <- do.call(rbind, z)
 
 # Save summary data.
-write.csv(z, file = 'data/Chapter2/DispSims.csv')
+write.csv(z, file = 'data/Chapter4/DensSims.csv')
 
 %%end.rcode
 
 
-%%begin.rcode TopoSimsFuncs
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Constant Population. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%begin.rcode PopSimsFuncs
 
   #################################
-  # Topology sim definitions      #
+  # Population sim definitions    #
   #################################
+
+
 
   # How many simulations to run?
-  nTopoSims <- 8 * 100
+  nPopSims <- 15 * each
+
+  # Parameters for constant density
+  #   Area and meanColonySize are the actal input arguments
+  pop <- 10000
+
+  colonySize <- pop/10
+
+  area <- rep(c(1000, 5000, 10000, 50000, 100000), each = 3 * each)
+  side <- sqrt(area)
+
+  tran <- rep(c(0.1, 0.2, 0.3), times = 5 * each)
 
 # Define our simulation function.
 fullSim <- function(x){
-
-
-  # Chose maxdistance so that we get either fully connected or circle networks.
-  mxDis <- rep(c(40, 200), each = nTopoSims/2 + 1)[x]
-
-  # Chose transmission rates.
-  tranVec <- rep(c(0.1, 0.2, 0.3, 0.4), nTopoSims/4 + 1)
-  tran <- tranVec[x]
-
 
   # Set seed (this is set within each parallel simulation to prevent reusing random numbers).
   simSeed <- paste0(seed, x)
   set.seed(simSeed)
 
   # Make the population.
-  p <- makePop(model = 'SIR', events = nEvent, nColonies = 10, nPathogens = 2,   recovery = 1,  sample = sample, dispersal = 0.01, birth = 0.05, death = 0.05, crossImmunity = 0.1, meanColonySize = 3000, infectDeath = 0, transmission = tran, maxDistance = mxDis, colonySpatialDistr = 'circle')
+  p <- makePop(space = side[x], 
+               transmission = tran[x], 
+               meanColonySize = colonySize, 
+               model = 'SIR', 
+               events = nEvent, 
+               nColonies = 10, 
+               nPathogens = 2, 
+               recovery = 1,  
+               sample = sample, 
+               dispersal = 0.01, 
+               birth = 0.05, 
+               death = 0.05,
+               crossImmunity = 0.1, 
+               infectDeath = 0,
+               maxDistance = 100)
 
-  # Seed endemic pathogen.
-  for(i in 1:10){
-    p <- seedPathogen(p, 2, n = 200, diffCols = FALSE)
-  }
+  p$I[1, , 1] <- colonySize[x] - 20
+
+  # Seed invading pathogen.
+  p$I[2, , 1] <- 20
+  
+  # Recalculate rates of each event after seeding.
+  p <- transRates(p, 1)
 
   # Burn in simulation
   p <- runSim(p, end = invadeT)
@@ -414,19 +474,17 @@ fullSim <- function(x){
   d$transmission <- p$parameters['transmission']
   d$dispersal <- p$parameters['dispersal']
   d$nExtantDis <- sum(findDisDistr(p, 2) > 0)
-  d$singleInf <- findCoinfDistr(p, 2)[2]
-  d$doubleInf <- findCoinfDistr(p, 2)[3]
   d$nColonies <- p$parameters['nColonies']
   d$nPathogens <- p$parameters['nPathogens']
   d$meanK <- sum(p$adjacency != 0 )/p$parameters['nColonies']
   d$maxDistance <- p$parameters['maxDistance']
   d$nEvents <- p$parameters['events']
-
-
+  d$pop <- p$parameters['meanColonySize'] * p$parameters['nColonies']
+  d$area <- p$parameters['space']^2
   message(paste0("finished ", x, ". Invasion: ", invasion ))
   
   if(saveData){ 
-    file <- paste0('data/Chapter2/TopoSims/TopoSim_', formatC(x, width = 4, flag = '0'), '.RData')
+    file <- paste0('data/Chapter4/PopSim_', formatC(x, width = 4, flag = '0'), '.RData')
     save(p, file = file)
   }
 
@@ -437,26 +495,33 @@ fullSim <- function(x){
 }
 %%end.rcode
 
-%%begin.rcode runTopoSim, eval = runAllSims, cache = TRUE
+%%begin.rcode runPopSim, eval = runAllSims, cache = TRUE
 
 # Create and set seed (seed object is used to set seed in each seperate simulation.'
-seed <- 1230202
+seed <- 256842
 set.seed(seed)
 
 # If we want to save the data, make a directory for it.
 if(saveData){
-  dir.create('data/Chapter2/TopoSims/')
+  dir.create('data/Chapter4/')
 }
 
 # Run sims.
-z <- mclapply(1:nTopoSims, . %>% fullSim, mc.preschedule = FALSE, mc.cores = nCores)
+z <- mclapply(1:nPopSims, . %>% fullSim, mc.preschedule = FALSE, mc.cores = nCores)
 
 z <- do.call(rbind, z)
 
 # Save summary data.
-write.csv(z, file = 'data/Chapter2/TopoSims.csv')
+write.csv(z, file = 'data/Chapter2/PopSims.csv')
 
 %%end.rcode
+
+
+
+
+
+
+
 
 
 
@@ -548,278 +613,8 @@ For simulations studying extinction rates, half of the subpopulation were seeded
 
 
 
-%%begin.rcode loadDispData
-
-# Read in the data.
-# Later I'll add in the option to simulate the whole dataset.
-dDisp <- read.csv('data/Chapter2/DispSims.csv', stringsAsFactors = FALSE)
-dim(dDisp)
-head(dDisp)
-
-%%end.rcode
-
-
-%%begin.rcode DispDataOrganise
-
-# Which simulations have an extinction
-
-dDisp$invasion <- dDisp$nPathogens - dDisp$nExtantDis == 0
-
-
-
-# Number of simulations of each treatment
-nDisp <- dDisp %>% 
-  group_by(transmission, dispersal) %>% 
-  select(invasion) %>%
-  summarise(n())
-
-nDisp
-
-
-# Number of extinctions by treatment
-invsDisp <- dDisp %>% 
-  group_by(transmission, dispersal) %>% 
-  select(invasion) %>%
-  filter(invasion == TRUE) %>%
-  summarise(n())
-
-invsDisp
-
-
-propsDisp <- left_join(nDisp, invsDisp, by = c('dispersal', 'transmission'))
-
-names(propsDisp) <- c( 'transmission', 'dispersal', 'n', 'invasions')
-
-propsDisp$invasions[is.na(propsDisp$invasions)] <- 0
-
-# Proportion of invasions in totals.
-propsDisp$props <- propsDisp$invasions / propsDisp$n 
-
-propsDisp
-
-%%end.rcode
-
-
-
-
-%%begin.rcode DispPropTests
-
-# Then run proportion tests between population structures
-
-DispTest1 <- prop.test(propsDisp$invasions[1:3], propsDisp$n[1:3])
-DispTest2 <- prop.test(propsDisp$invasions[4:6], propsDisp$n[4:6])
-DispTest3 <- prop.test(propsDisp$invasions[7:9], propsDisp$n[7:9])
-DispTest4 <- prop.test(propsDisp$invasions[10:12], propsDisp$n[10:12])
-
-
-%%end.rcode
-
-
-
-
-%%begin.rcode DispTransPropTests
-#Finally run proportion tests between transmission rates
-DispTransTest1 <- prop.test(propsDisp$invasions[c(1, 4, 7, 10)], propsDisp$n[c(1, 4, 7, 1)])
-DispTransTest2 <- prop.test(propsDisp$invasions[c(2, 5, 8, 11)], propsDisp$n[c(2, 5, 8, 11)])
-DispTransTest3 <- prop.test(propsDisp$invasions[c(3, 6, 9, 12)], propsDisp$n[c(3, 6, 9, 12)])
-
-
-
-%%end.rcode
-
-
-
-
-%%begin.rcode loadTopoData
-
-# Read in the data.
-# Later I'll add in the option to simulate the whole dataset.
-dTopo <- read.csv('data/Chapter2/TopoSims.csv', stringsAsFactors = FALSE)
-dim(dTopo)
-head(dTopo)
-
-%%end.rcode
-
-
-%%begin.rcode TopoDataOrganise
-
-# Which simulations have an extinction
-
-dTopo$invasion <- dTopo$nPathogens - dTopo$nExtantDis == 0
-
-# Number of extinctions by treatment
-invsTopo <- dTopo %>% 
-  group_by(transmission, meanK) %>% 
-  select(invasion) %>%
-  filter(invasion == TRUE) %>%
-  summarise(n())
-
-invsTopo
-
-# Number of simulations of each treatment
-nTopo <- dTopo %>% 
-  group_by(transmission, meanK) %>% 
-  select(invasion) %>%
-  summarise(n())
-
-nTopo
-
-
-
-propsTopo <- left_join(nTopo, invsTopo, by = c('meanK', 'transmission'))
-
-names(propsTopo) <- c( 'transmission', 'meanK', 'n', 'invasions')
-
-propsTopo$invasions[is.na(propsTopo$invasions)] <- 0
-
-# Proportion of invasions in totals.
-propsTopo$props <- propsTopo$invasions / propsTopo$n 
-
-propsTopo
-
-%%end.rcode
-
-
-
-
-%%begin.rcode TopoPropTests
-
-# Then run proportion tests between population structures
-
-TopoTest1 <- prop.test(propsTopo$invasions[1:2], propsTopo$n[1:2])
-TopoTest2 <- prop.test(propsTopo$invasions[3:4], propsTopo$n[3:4])
-TopoTest3 <- prop.test(propsTopo$invasions[5:6], propsTopo$n[5:6])
-TopoTest4 <- prop.test(propsTopo$invasions[7:8], propsTopo$n[7:8])
-
-
-%%end.rcode
-
-
-
-
-%%begin.rcode TopoTransPropTests
-#Finally run proportion tests between transmission rates
-
-TopoTransTest1 <- prop.test(propsTopo$invasions[c(1, 3, 5, 7)], propsTopo$n[c(1, 3, 5, 7)])
-TopoTransTest2 <- prop.test(propsTopo$invasions[c(2, 4, 6, 8)], propsTopo$n[c(2, 4, 6, 8)])
-
-
-%%end.rcode
-
-
-
-
-%%begin.rcode propsWithoutDoubleExt
-
-# In some simulations both pathogens go extinct.
-# I'm not sure it's correct to call this a failed invasion.
-# So check that is doesn't broadly affect results. 
-# With total extinction sims removed.
-
-dTopo2 <- dTopo[dTopo$nExtantDis > 0, ]
-
-invsTopo2 <- dTopo2 %>% 
-  group_by(transmission, maxDistance) %>% 
-  select(invasion) %>%
-  filter(invasion == TRUE) %>%
-  summarise(n())
-
-nTopo2 <- dTopo2 %>% 
-  group_by(transmission, maxDistance) %>% 
-  select(invasion) %>%
-  summarise(n())
-
-# Proportion of invasions in totals.
-propsTopo2 <- data.frame(invsTopo2[, 1:2], props = invsTopo2$n / nTopo2$n)
-
-Topo2Test1 <- tidy(prop.test(invsTopo2$n[1:2], nTopo2$n[1:2]))
-Topo2Test2 <- tidy(prop.test(invsTopo2$n[3:4], nTopo2$n[3:4]))
-Topo2Test3 <- tidy(prop.test(invsTopo2$n[5:6], nTopo2$n[5:6]))
-
-%%end.rcode
-
-
-
-%%begin.rcode topoCompTrans
-
-# Finally run proportion tests between transmission rates
-
-Topo2TransTest1 <- tidy(prop.test(invsTopo2$n[c(1, 3, 5)], nTopo$n[c(1, 3, 5)]))
-Topo2TransTest2 <- tidy(prop.test(invsTopo2$n[c(2, 4, 6)], nTopo$n[c(2, 4, 6)]))
-
-
-%%end.rcode
-
-
-%%begin.rcode caption1String
-# Just defining my caption label here to avoid the long string in chunk options below.
-
-invasionPropCaption <- "The probability of successful invasion. 
-  For three different transmission rates, the probability of invasion success does not change between different a) dispersal rates or b) network structures. 
-  Error bars are 95\\% confidence intervals. 
-  Other parameters are kept constant at: $N = 10,\\, \\bar{n} = 3000,\\, b = d = 0.05,\\, \\gamma = 0.1,\\, \\alpha = 0.1$. 
-  When dispersal is varied, the population structure is fully connected. When population structure is varied, $\\lambda = 0.01$."
-
-%%end.rcode
-
-
-%%begin.rcode invasionPropPlots, fig.lp = 'f:', fig.height = 4, fig.subcap = c('Dispersal', 'Network topology'), out.width = "0.45\\textwidth", fig.cap = invasionPropCaption, cache = FALSE
-
-propsDispCI <- data.frame(propsDisp[, 1:2], binom.confint(propsDisp$invasions, propsDisp$n, conf.level = 0.95, methods = "exact"))
-
-
-ggplot(propsDispCI, aes(x = factor(transmission), y = mean, fill = factor(dispersal))) +
-  geom_bar(stat = 'identity', position=position_dodge()) +
-  geom_errorbar(aes(ymin = lower, ymax = upper),
-                width=.2,                   
-                position = position_dodge(.9)) +
-  xlab('Transmission') + 
-  ylab('Prop. Invasions') +
-  thesis_fill(name="Dispersal", 
-                 labels=c('0.001', '0.01', '0.1'))
-
-propsTopoCI <- data.frame(propsTopo[, 1:2], binom.confint(propsTopo$invasions, nTopo2$n, conf.level = 0.95, methods = "exact"))
-
-ggplot(propsTopoCI, aes(x = factor(transmission), y = mean, fill = factor(meanK))) +
-  geom_bar(stat = 'identity', position=position_dodge()) +
-  geom_errorbar(aes(ymin = lower, ymax = upper),
-                width=.2,                   
-                position = position_dodge(.9)) +
-  xlab('Transmission') + 
-  ylab('Prop. Invasions') +
-  #scale_fill_hue(name="Connectedness", 
-  #               labels=c("Low", "High")) +
-  thesis_fill(name="Connectedness", 
-                 labels=c("Low", "High"))
-
-%%end.rcode
-
-
 
 \subsection{Invasion}
-
-
-\subsubsection{Dispersal}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-The proportion of invasions was not different across dispersal rates across \rinline{nDispSims} simulation run (Figure \ref{f:invasionPropPlots1}).
-This was true at all transmission levels ($\chi^2$ test. $\beta = 0.1$: $\chi^2 = \rinline{DispTest1$statistic}$, $\text{df} = \rinline{DispTest1$parameter}$, $p = \rinline{p(DispTest1$p.value)}$. $\beta = 0.2$: $\chi^2 = \rinline{DispTest2$statistic}$, $\text{df} = \rinline{DispTest2$parameter}$, $p = \rinline{p(DispTest2$p.value)}$. $\beta = 0.3$: $\chi^2 = \rinline{DispTest3$statistic}$, $\text{df} = \rinline{DispTest3$parameter}$, $p = \rinline{p(DispTest3$p.value)}$, $\beta = 0.4$: $\chi^2 = \rinline{DispTest4$statistic}$, $\text{df} = \rinline{DispTest4$parameter}$, $p = \rinline{p(DispTest4$p.value)}$).
-
-
-\subsubsection{Network structure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-I ran \rinline{nTopoSims} simulations over \rinline{length(unique(propsTopo$transmission))} transmission values ($\beta = $ \rinline{unique(propsTopo$transmission)}).
-The proportion of invasions was not different between highly connected and largely unconnected metapopulations (Figure~\ref{f:invasionPropPlots2}). 
-This was true at all transmission levels ($\chi^2$ test. $\beta = 0.1$: $\chi^2 = \rinline{TopoTest1$statistic}$, $\text{df} = \rinline{TopoTest1$parameter}$, $p = \rinline{p(TopoTest1$p.value)}$. $\beta = 0.2$: $\chi^2 = \rinline{TopoTest2$statistic}$, $\text{df} = \rinline{TopoTest2$parameter}$, $p = \rinline{p(TopoTest2$p.value)}$. $\beta = 0.3$: $\chi^2 = \rinline{TopoTest3$statistic}$, $\text{df} = \rinline{TopoTest3$parameter}$, $p = \rinline{p(TopoTest3$p.value)}$. $\beta = 0.4$: $\chi^2 = \rinline{TopoTest4$statistic}$, $\text{df} = \rinline{TopoTest4$parameter}$, $p = \rinline{p(TopoTest4$p.value)}$).
-
- 
-\subsection{Transmission}
-%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Inline with theory, increasing the transmission rate increased the probability of invasion (Figure~\ref{f:invasionPropPlots1}--\ref{f:invasionPropPlots2}).
-This is true for all three dispersal values ($\chi^2$ test. $\lambda = 0.001$: $\chi^2 = \rinline{DispTransTest1$statistic}$, $\text{df} = \rinline{DispTransTest1$parameter}$, $p = \rinline{p(DispTransTest1$p.value)}$. $\lambda = 0.01$: $\chi^2 = \rinline{DispTransTest2$statistic}$, $\text{df} = \rinline{DispTransTest2$parameter}$, $p = \rinline{p(DispTransTest2$p.value)}$. $\lambda = 0.1$: $\chi^2 = \rinline{DispTransTest3$statistic}$, $\text{df} = \rinline{DispTransTest3$parameter}$, $p = \rinline{p(DispTransTest3$p.value)}$) and both network structures ($\chi^2$ test. Fully connected: $\chi^2 = \rinline{TopoTransTest2$statistic}$, $\text{df} = \rinline{TopoTransTest2$parameter}$, $p = \rinline{p(TopoTransTest2$p.value)}$. Minimally connected: $\chi^2 =  \rinline{TopoTransTest2$statistic}$, $\text{df} = \rinline{TopoTransTest2$parameter}$, $p = \rinline{p(TopoTransTest2$p.value)}$).
 
 
 
