@@ -352,14 +352,15 @@ fullSim <- function(x){
   d$maxDistance <- p$parameters['maxDistance']
   d$nEvents <- p$parameters['events']
   d$colonySize <- p$parameters['meanColonySize']
-  d$colonyNumner <- p$parameters['nColonies']
+  d$colonyNumber <- p$parameters['nColonies']
   d$pop <- p$parameters['meanColonySize'] * p$parameters['nColonies']
   d$area <- p$parameters['space']^2
   d$dens <- d$pop / d$area
 
 
   message(paste0("finished ", x, ". Invasion: ", invasion ))
-  message(d)
+  message(paste('trans:', d$transmission, 'nColonies:', d$colonyNumber, 
+    'colonySize:', d$colonySize, 'dens:', d$dens, 'pop:', d$pop))
   
   if(saveData){ 
     file <- paste0('data/Chapter4/DensSim_', formatC(x, width = 4, flag = '0'), '.RData')
@@ -481,13 +482,15 @@ fullSim <- function(x){
   d$maxDistance <- p$parameters['maxDistance']
   d$nEvents <- p$parameters['events']
   d$colonySize <- p$parameters['meanColonySize']
-  d$colonyNumner <- p$parameters['nColonies']
+  d$colonyNumber <- p$parameters['nColonies']
   d$pop <- p$parameters['meanColonySize'] * p$parameters['nColonies']
   d$area <- p$parameters['space']^2
   d$dens <- d$pop / d$area
 
+
   message(paste0("finished ", x, ". Invasion: ", invasion ))
-  message(d)
+  message(paste('trans:', d$transmission, 'nColonies:', d$colonyNumber, 
+    'colonySize:', d$colonySize, 'dens:', d$dens, 'pop:', d$pop))
 
   if(saveData){ 
     file <- paste0('data/Chapter4/DensSim_', formatC(x, width = 4, flag = '0'), '.RData')
@@ -611,13 +614,15 @@ fullSim <- function(x){
   d$maxDistance <- p$parameters['maxDistance']
   d$nEvents <- p$parameters['events']
   d$colonySize <- p$parameters['meanColonySize']
-  d$colonyNumner <- p$parameters['nColonies']
+  d$colonyNumber <- p$parameters['nColonies']
   d$pop <- p$parameters['meanColonySize'] * p$parameters['nColonies']
   d$area <- p$parameters['space']^2
   d$dens <- d$pop / d$area
 
+
   message(paste0("finished ", x, ". Invasion: ", invasion ))
-  message(d)
+  message(paste('trans:', d$transmission, 'nColonies:', d$colonyNumber, 
+    'colonySize:', d$colonySize, 'dens:', d$dens, 'pop:', d$pop))
   
   if(saveData){ 
     file <- paste0('data/Chapter4/PopSim_', formatC(x, width = 4, flag = '0'), '.RData')
