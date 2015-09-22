@@ -251,14 +251,14 @@ Finally, recovery from any infectious class occurs at a rate $\gamma$
 
   # These apply to both topo and disp sims. And probably should apply to extinction sims if I include them.
   # How long should the simulation last?
+  nEvent <- 3e3
   #nEvent <- 8e5
-  nEvent <- 8e4
   # When should the invading pathogen be added.
-  #invadeT <- 3e5
-  invadeT <- 3e4
+  invadeT <- 2e3
+  #invadeT <- 6e5
   
   # Sims per parameter set.
-  each <- 5
+  each <- 1
   
   # How often should the population be sampled. Only sampled populations are saved.
   sample <- 1000
@@ -279,17 +279,17 @@ Finally, recovery from any infectious class occurs at a rate $\gamma$
   # Density sim definitions       #
   #################################
 
-
+  # Keep density constant. Alter population size via colonySize
 
   # How many simulations to run?
   nDensSims <- 15 * each
 
   # Parameters for constant density
   #   Area and meanColonySize are the actal input arguments
-  pop <- rep(c(1000, 5000, 10000, 50000, 100000), each = 3 * each)
-  colonySize <- pop/10
+  pop <- rep(c(10000, 50000, 100000, 500000, 1000000), each = 3 * each)
+  colonySize <- pop / 100
 
-  area <- pop
+  area <- pop / 10
   side <- sqrt(area)
 
   tran <- rep(c(0.1, 0.2, 0.3), times = 5 * each)
@@ -305,11 +305,11 @@ fullSim <- function(x){
   p <- makePop(space = side[x], 
                transmission = tran[x], 
                meanColonySize = colonySize[x], 
+               nColonies = 100, 
                model = 'SIR', 
                events = nEvent, 
-               nColonies = 10, 
                nPathogens = 2, 
-               recovery = 1,  
+               recovery = 0.5,  
                sample = sample, 
                dispersal = 0.01, 
                birth = 0.05, 
@@ -320,8 +320,8 @@ fullSim <- function(x){
 
   p$I[1, , 1] <- colonySize[x] - 20
 
-  # Seed invading pathogen.
-  p$I[2, , 1] <- 20
+  # Seed endemic pathogen.
+  p$I[3, , 1] <- 20
   
   # Recalculate rates of each event after seeding.
   p <- transRates(p, 1)
@@ -347,16 +347,19 @@ fullSim <- function(x){
   d$transmission <- p$parameters['transmission']
   d$dispersal <- p$parameters['dispersal']
   d$nExtantDis <- sum(findDisDistr(p, 2) > 0)
-  d$nColonies <- p$parameters['nColonies']
   d$nPathogens <- p$parameters['nPathogens']
   d$meanK <- sum(p$adjacency != 0 )/p$parameters['nColonies']
   d$maxDistance <- p$parameters['maxDistance']
   d$nEvents <- p$parameters['events']
+  d$colonySize <- p$parameters['meanColonySize']
+  d$colonyNumner <- p$parameters['nColonies']
   d$pop <- p$parameters['meanColonySize'] * p$parameters['nColonies']
   d$area <- p$parameters['space']^2
+  d$dens <- d$pop / d$area
 
 
   message(paste0("finished ", x, ". Invasion: ", invasion ))
+  message(d)
   
   if(saveData){ 
     file <- paste0('data/Chapter4/DensSim_', formatC(x, width = 4, flag = '0'), '.RData')
@@ -392,31 +395,30 @@ write.csv(z, file = 'data/Chapter4/DensSims.csv')
 %%end.rcode
 
 
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%% Constant Population. 
+%%%% Constant density 2. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-%%begin.rcode PopSimsFuncs
+%%begin.rcode Dens2SimsFuncs
 
   #################################
-  # Population sim definitions    #
+  # Density2 sim definitions      #
   #################################
 
+  # Keep density constant. Alter population size via colonyNumber
 
 
   # How many simulations to run?
-  nPopSims <- 15 * each
+  nDens2Sims <- 15 * each
 
   # Parameters for constant density
   #   Area and meanColonySize are the actal input arguments
-  pop <- 10000
+  pop <- rep(c(10000, 50000, 100000, 500000, 1000000), each = 3 * each)
+  colonySize <- 1000
+  colonyNumber <- pop / colonySize
 
-  colonySize <- pop/10
-
-  area <- rep(c(1000, 5000, 10000, 50000, 100000), each = 3 * each)
+  area <- pop / 10
   side <- sqrt(area)
 
   tran <- rep(c(0.1, 0.2, 0.3), times = 5 * each)
@@ -432,11 +434,11 @@ fullSim <- function(x){
   p <- makePop(space = side[x], 
                transmission = tran[x], 
                meanColonySize = colonySize, 
+               nColonies = colonyNumber[x], 
                model = 'SIR', 
                events = nEvent, 
-               nColonies = 10, 
                nPathogens = 2, 
-               recovery = 1,  
+               recovery = 0.5,  
                sample = sample, 
                dispersal = 0.01, 
                birth = 0.05, 
@@ -445,10 +447,10 @@ fullSim <- function(x){
                infectDeath = 0,
                maxDistance = 100)
 
-  p$I[1, , 1] <- colonySize[x] - 20
+  p$I[1, , 1] <- colonySize - 20
 
-  # Seed invading pathogen.
-  p$I[2, , 1] <- 20
+  # Seed endemic pathogen.
+  p$I[3, , 1] <- 20
   
   # Recalculate rates of each event after seeding.
   p <- transRates(p, 1)
@@ -474,14 +476,148 @@ fullSim <- function(x){
   d$transmission <- p$parameters['transmission']
   d$dispersal <- p$parameters['dispersal']
   d$nExtantDis <- sum(findDisDistr(p, 2) > 0)
-  d$nColonies <- p$parameters['nColonies']
   d$nPathogens <- p$parameters['nPathogens']
   d$meanK <- sum(p$adjacency != 0 )/p$parameters['nColonies']
   d$maxDistance <- p$parameters['maxDistance']
   d$nEvents <- p$parameters['events']
+  d$colonySize <- p$parameters['meanColonySize']
+  d$colonyNumner <- p$parameters['nColonies']
   d$pop <- p$parameters['meanColonySize'] * p$parameters['nColonies']
   d$area <- p$parameters['space']^2
+  d$dens <- d$pop / d$area
+
   message(paste0("finished ", x, ". Invasion: ", invasion ))
+  message(d)
+
+  if(saveData){ 
+    file <- paste0('data/Chapter4/DensSim_', formatC(x, width = 4, flag = '0'), '.RData')
+    save(p, file = file)
+  }
+
+  rm(p)
+
+  return(d)
+
+}
+%%end.rcode
+
+%%begin.rcode runDens2Sim, eval = runAllSims, cache = TRUE
+
+# Create and set seed (seed object is used to set seed in each seperate simulation.'
+seed <- 635412
+set.seed(seed)
+
+# If we want to save the data, make a directory for it.
+if(saveData){
+  dir.create('data/Chapter4/')
+}
+
+# Run sims.
+z <- mclapply(1:nDensSims, . %>% fullSim, mc.preschedule = FALSE, mc.cores = nCores)
+
+z <- do.call(rbind, z)
+
+# Save summary data.
+write.csv(z, file = 'data/Chapter4/Dens2Sims.csv')
+
+%%end.rcode
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Constant Population. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%begin.rcode PopSimsFuncs
+
+  #################################
+  # Population sim definitions    #
+  #################################
+
+  # Keep population constant. Alter density by area
+
+  # How many simulations to run?
+  nPopSims <- 15 * each
+
+  # Parameters for constant density
+  #   Area and meanColonySize are the actal input arguments
+  pop <- 100000
+
+  colonySize <- pop / 100
+
+  area <- rep(c(10000, 50000, 100000, 500000, 1000000), each = 3 * each)
+  side <- sqrt(area)
+
+  tran <- rep(c(0.1, 0.2, 0.3), times = 5 * each)
+
+# Define our simulation function.
+fullSim <- function(x){
+
+  # Set seed (this is set within each parallel simulation to prevent reusing random numbers).
+  simSeed <- paste0(seed, x)
+  set.seed(simSeed)
+
+  # Make the population.
+  p <- makePop(space = side[x], 
+               transmission = tran[x], 
+               meanColonySize = colonySize, 
+               nColonies = 100, 
+               model = 'SIR', 
+               events = nEvent, 
+               nPathogens = 2, 
+               recovery = 0.5,  
+               sample = sample, 
+               dispersal = 0.01, 
+               birth = 0.05, 
+               death = 0.05,
+               crossImmunity = 0.1, 
+               infectDeath = 0,
+               maxDistance = 100)
+
+  p$I[1, , 1] <- colonySize - 20
+
+  # Seed endemic pathogen.
+  p$I[3, , 1] <- 20
+  
+  # Recalculate rates of each event after seeding.
+  p <- transRates(p, 1)
+
+  # Burn in simulation
+  p <- runSim(p, end = invadeT)
+
+  # Seed invading pathogen.
+  p$I[2, 1, (invadeT + 1) %% sample] <- 5
+  
+  # Recalculate rates of each event after seeding.
+  p <- transRates(p, (invadeT + 1) %% sample)
+
+  # Continue simulation
+  p <- runSim(p, start = invadeT + 1, end = 'end')
+
+  # Was the invasion succesful?
+  invasion <- findDisDistr(p, 2)[1] > 0
+
+  # Save summary stats
+  d <- data.frame(transmission = NA)
+
+
+  d$transmission <- p$parameters['transmission']
+  d$dispersal <- p$parameters['dispersal']
+  d$nExtantDis <- sum(findDisDistr(p, 2) > 0)
+  d$nPathogens <- p$parameters['nPathogens']
+  d$meanK <- sum(p$adjacency != 0 )/p$parameters['nColonies']
+  d$maxDistance <- p$parameters['maxDistance']
+  d$nEvents <- p$parameters['events']
+  d$colonySize <- p$parameters['meanColonySize']
+  d$colonyNumner <- p$parameters['nColonies']
+  d$pop <- p$parameters['meanColonySize'] * p$parameters['nColonies']
+  d$area <- p$parameters['space']^2
+  d$dens <- d$pop / d$area
+
+  message(paste0("finished ", x, ". Invasion: ", invasion ))
+  message(d)
   
   if(saveData){ 
     file <- paste0('data/Chapter4/PopSim_', formatC(x, width = 4, flag = '0'), '.RData')
@@ -512,7 +648,7 @@ z <- mclapply(1:nPopSims, . %>% fullSim, mc.preschedule = FALSE, mc.cores = nCor
 z <- do.call(rbind, z)
 
 # Save summary data.
-write.csv(z, file = 'data/Chapter2/PopSims.csv')
+write.csv(z, file = 'data/Chapter4/PopSims.csv')
 
 %%end.rcode
 
