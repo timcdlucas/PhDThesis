@@ -7,6 +7,21 @@
 \usepackage{tgheros}  %  the advanced helvet as it was nice.
 
 
+
+% Redefine cite so that we get references in footnotes.
+\usepackage[
+backend=biber,
+citestyle=numeric-comp,
+bibstyle=authoryear,
+sorting=none,
+firstinits=true
+]{biblatex} %style=mla for footnotes.
+%\renewcommand{\cite}[1]{\footcite{#1}}
+%\renewcommand{\cite}[1]{\supercite{#1}}
+
+\addbibresource{epilit.bib}
+
+
 % This has to go below fontenc for some reason
 \input{KnitrSettings}
 
@@ -45,7 +60,7 @@
 \date{}
 
 \maketitle
-\tableofcontents
+%\tableofcontents
 
 \input{Chapter2.tex}
 
@@ -54,8 +69,6 @@
 
 
 \small
-\bibliographystyle{unsrt}	% (uses file "plain.bst")
-\bibliography{../../epilit}		% expects file "myrefs.bib"
-
+\printbibliography 
 
 \end{document}

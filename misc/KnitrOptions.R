@@ -48,7 +48,7 @@ p <- function(x, eps = 1e-3){
 p <- function(x) return(x)
 
 
-options('scipen' = -1)
+options('scipen' = 0)
 
 
 

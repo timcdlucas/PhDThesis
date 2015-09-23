@@ -251,14 +251,14 @@ Finally, recovery from any infectious class occurs at a rate $\gamma$
 
   # These apply to both topo and disp sims. And probably should apply to extinction sims if I include them.
   # How long should the simulation last?
-  nEvent <- 3e3
-  #nEvent <- 8e5
+  nEvent <- 1e6
   # When should the invading pathogen be added.
-  invadeT <- 2e3
-  #invadeT <- 6e5
+  invadeT <- 7e5
+  #nEvent <- 3e4
+  #invadeT <- 2e4
   
   # Sims per parameter set.
-  each <- 1
+  each <- 20
   
   # How often should the population be sampled. Only sampled populations are saved.
   sample <- 1000
@@ -286,10 +286,10 @@ Finally, recovery from any infectious class occurs at a rate $\gamma$
 
   # Parameters for constant density
   #   Area and meanColonySize are the actal input arguments
-  pop <- rep(c(10000, 50000, 100000, 500000, 1000000), each = 3 * each)
-  colonySize <- pop / 100
+  pop <- rep(c(2000, 4000, 8000, 16000, 32000), each = 3 * each)
+  colonySize <- pop / 20
 
-  area <- pop / 10
+  area <- pop / 0.8
   side <- sqrt(area)
 
   tran <- rep(c(0.1, 0.2, 0.3), times = 5 * each)
@@ -305,7 +305,7 @@ fullSim <- function(x){
   p <- makePop(space = side[x], 
                transmission = tran[x], 
                meanColonySize = colonySize[x], 
-               nColonies = 100, 
+               nColonies = 20, 
                model = 'SIR', 
                events = nEvent, 
                nPathogens = 2, 
@@ -415,12 +415,15 @@ write.csv(z, file = 'data/Chapter4/DensSims.csv')
 
   # Parameters for constant density
   #   Area and meanColonySize are the actal input arguments
-  pop <- rep(c(10000, 50000, 100000, 500000, 1000000), each = 3 * each)
-  colonySize <- 1000
+  pop <- rep(c(2000, 4000, 8000, 16000, 32000), each = 3 * each)
+  colonySize <- 400
   colonyNumber <- pop / colonySize
 
-  area <- pop / 10
+  area <- pop / 0.8
   side <- sqrt(area)
+
+
+
 
   tran <- rep(c(0.1, 0.2, 0.3), times = 5 * each)
 
@@ -546,11 +549,11 @@ write.csv(z, file = 'data/Chapter4/Dens2Sims.csv')
 
   # Parameters for constant density
   #   Area and meanColonySize are the actal input arguments
-  pop <- 100000
+  pop <- 8000
 
-  colonySize <- pop / 100
+  colonySize <- pop / 20
 
-  area <- rep(c(10000, 50000, 100000, 500000, 1000000), each = 3 * each)
+  area <- rep(c(40000, 20000, 10000, 5000, 2500), each = 3 * each)
   side <- sqrt(area)
 
   tran <- rep(c(0.1, 0.2, 0.3), times = 5 * each)
@@ -566,7 +569,7 @@ fullSim <- function(x){
   p <- makePop(space = side[x], 
                transmission = tran[x], 
                meanColonySize = colonySize, 
-               nColonies = 100, 
+               nColonies = 20, 
                model = 'SIR', 
                events = nEvent, 
                nPathogens = 2, 
