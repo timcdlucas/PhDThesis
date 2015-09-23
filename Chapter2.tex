@@ -151,12 +151,12 @@ Studies of the role of population structure on pathogen diversity have been in v
 These have been so simple that empirical data cannot easily be applied to them to predict pathogen diversity of real wild animal populations.
 There is a need for models that can be carefully and fully explored, while still capturing the complexities of the real world.
 
-Analytical models of well mixed have widely different outcomes: infinite pathogen diversity \cite{may1994superinfection, ackleh2014robust} or competitive exclusion have both been predicted \cite{ackleh2003competitive,bremermann1989competitive,martcheva2013competitive,qiu2013vector,allen2004sis}
+Analytical models of well mixed have widely different outcomes: infinite pathogen diversity \cite{may1994superinfection, ackleh2014robust} or competitive exclusion have both been predicted \cite{ackleh2003competitive,bremermann1989competitive,martcheva2013competitive,qiu2013vector,allen2004sis}.
 When competitive exclusion occurs, population structure has sometimes been shown to allow coexistence \cite{qiu2013vector,allen2004sis, nunes2006localized}.
 
 Competing epidemics, or two pathogens spreading at the same time in a population, is a well studied area \cite{poletto2013host, poletto2015characterising, karrer2011competing}. 
 This area is related to the study of pathogen richness in that they indicate that dynamics of multiple pathogens in a population do depend on population structure.
-However, the results for short term epidemic competition do not directly transfer to the study of long term disease persistence.
+However, the results for short term epidemic competition do not directly transfer to the study of long term disease persistence which is the relative time scale when looking at zoonotic potential of a host species.
 
 
 
@@ -174,6 +174,7 @@ While the data set in \cite{gay2014parasite} is larger, the analysis in \cite{ma
 
 Genetic correlates of population structure have also been used.
 Turmelle \emph{et al.} \cite{turmelle2009correlates}, in a small analysis, find that high $F_{st}$ (i.e. a structured population) correlates with high richness.
+However, they do not account for the widely different spatial scales foudn in population structure studies, nor do they deal with the differences between $F_{ST}$, $\phi_{ST}$ and other measures appropriately. 
 
 
 
@@ -185,7 +186,7 @@ This is the population within which a pathogen can spread in an epidemiologicall
 It is therefore closely related to a population as defined by population genetics, but with movement defined on a shorter time scale.
 
 The epidemiological contacts within the population can be examined at the individual level (as in contact network epidemiology) or larger scales.
-We consider the metapopulation network the most appropriate.
+I consider the metapopulation network the most appropriate.
 Ignoring the metapopulation assumes a fully mixed population which is unlikely.
 Trying to study the contact network relies detailed individual level detail which is not available.
 Metapopulation models consider a network of small subpopulations. 
@@ -208,11 +209,11 @@ However, other measures that take into account second-order structure in the net
 Bats (Order Chiroptera) have, over the last decade, become a focus for disease research  \cite{calisher2006bats, hughes2007emerging}.
 Recently they have been implicated in a number of high profile diseases such as Ebola, SARS, Hendra and Nipah  \cite{calisher2006bats, li2005bats}.
 
-A number of traits have been suggested as predisposing bats towards being reservoirs of zoonotic diseases: high sympatry \cite{luis2013comparison}, flight \cite{wang2011mass} and longevity \cite{wang2011mass}
+A number of traits have been suggested as predisposing bats towards being reservoirs of zoonotic diseases: high sympatry \cite{luis2013comparison}, flight \cite{wang2011mass} and longevity \cite{wang2011mass}.
 
-Bats have an unusual variety of social structures.
-Group living ranges from colonies 10--1 million \cite{jones2009pantheria}.
-Many bats also have interesting seasonal behaviour such as migration \cite{richter2008first, fleming2003ecology}
+Bats have an unusually large variety of social structures.
+Colony sizes range from 10 to 1 million \cite{jones2009pantheria}.
+Many bats also have interesting seasonal behaviour such as migration \cite{richter2008first, fleming2003ecology}, hibernation, birth puleses and swarming behaviours.
 
 
 \subsection{The gap}
@@ -226,7 +227,7 @@ These cannot be easily applied to real data.
 They also do not easily predict quantitative or even relative diversity as they often predict either zero or infinite diversity with nothing in between.
 
 We need models that can quantitatively or at least relatively predict diversity in a populations.
-This requires a middle ground of model diversity.
+This requires a middle ground of model complexity.
 
 There are no studies that directly model bat pathogen diversity.
 
@@ -238,13 +239,12 @@ We test two aspects of structure, dispersal rate and connectedness of the metapo
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-I have run epidemiological simulations based broadly on real world bat populations.
+I have run epidemiological simulations based broadly on real-world bat populations.
 Although still simplified, the model is complex enough that if good measurements of bat populations could be found, simulations of the real world bat population could be run.
 
 I have studied the invasion of new pathogens as a mechanisms for increasing pathogen richness.
 In particular I have focussed on studying the invasion of a newly evolved pathogen that is therefore identical in epidemiological parameters to the endemic pathogen.
 Furthermore, this close evolutionary relationship means that cross immunity is strong.
-Note: I think I probably should run sims for two species together to also study the mechanism of pathogen extinction.
 
 I have studied two metrics for population structure, dispersal rate and metapopulation network topology, to test for effects of population structure on pathogen richness.
 
@@ -260,9 +260,9 @@ Here I show that given the assumptions of a metapopulation, population structure
 \begin{tabular}{>{\it}lp{8cm}l}
 \normalfont{Term} & Definition & Synonyms \\
 \hline
-Metapopulation & A group of colonies with rare movement of animals between them. Closed to outside migration. & Network\\
-Subpopulation & A group of animals. Social interactions within a colony is likely high. & Node, colony\\
-Dispersal & Movement from one colony to another  & Migration\\
+Metapopulation & A group of subpopulations with rare movement of animals between them. Closed to outside migration. & Network\\
+Subpopulation & A group of animals. Social interactions within a subpopulation is likely high. & Node, colony\\
+Dispersal & Movement from one subpopulation to another  & Migration\\
 Population & A closed group of animals. No epidemiological affects from outside the group on epidemiological timescale (years -- decades.) & \\
 Pathogen diversity & The number of species or strains of pathogens in a host & Pathogen richness\\
 Connectedness &  & \\
@@ -292,26 +292,27 @@ Connectedness &  & \\
 
 \subsubsection{Two pathogen SIR model}
 
-We examine a multpathogen SIR model. 
+I examine a multipathogen SIR model. 
 This is a compartment model with individuals being classed as susceptible, infected or recovered with immunity (Figure~\ref{f:sir}).
 Susceptible individuals are counted in class $S$.
 There are three infected classes, $I_1$, $I_2$ and $I_{12}$, being individuals infected with pathogen 1, pathogen 2 or both respectively.
 Recovered individuals, $R$, are immune to both pathogens, even if they have only been infected with one.
-Furthermore, recovery from a pathogen moves an individual straight into the recovered class, even if the individual is infected with both pathogen.
-This modelling choice allows the model to be easily expanded to included more than two pathogens.
+Furthermore, recovery from one pathogen moves an individual straight into the recovered class, even if the individual is infected with both pathogen.
+This modelling choice allows the model to be easily expanded to include more than two pathogens.
 The assumption of immediate recovery from all other diseases is likely to be quite accurate for very closely related pathogens as is being studied here as once an acquired immune response is activated, all infections are likely to be cleared quickly.
 
-The coinfection rate is adjusted compared to the first infection rate by a factor $\alpha$.
-Birth and death rates are assumed to be equal, $b = d$.
+The coinfection rate (the rate at which an infected individual is infected with a second pathogen) is adjusted compared to the infection rate by a factor $\alpha$ (i.e. $\alpha = 0.5$ means coinfection happens at half the rate of infections).
+Birth and death rates are assumed to be equal, $b = d$ (see Table~\ref{t:params} for a list of symbols used).
+The time scale of the simulations are set by setting b = 0.05 per year, yielding an average host generation time of 20 years.
 
 
 \subsubsection{Metapopulation}
 
 
 The population is divided into a number of subpopulations.
-This metapopulation is modelled as a network with subpopulations being nodes and dispersal between subpopulations being indicated by edges (Figure~\ref{f:net})
-Individuals with a subpopulation interact randomly so that the subpopulation is fully mixed.
-However, dispersal between subpopulations occurs at a rate $\lambda$.
+This metapopulation is modelled as a network with subpopulations being nodes and dispersal between subpopulations being indicated by edges (Figure~\ref{f:net}).
+Individuals within a subpopulation interact randomly so that the subpopulation is fully mixed.
+Dispersal between subpopulations occurs at a rate $\lambda$.
 Individuals can only disperse to subpopulations connected to theirs in the network.
 The rate of dispersal is not affected by the number of edges a subpopulation has (the degree of the subpopulation).
 So the dispersal rate from a subpopulation $m$ with degree $k_m$ to subpopulation $n$ is $\frac{\lambda}{k_m}$.
@@ -323,7 +324,7 @@ Note this rate is independent of the degree of subpopulation $n$.
 
 \subsubsection{Stochastic simulations}
 
-We examine this model using stochastic, continuous time simulations using the Gillespie algorithm.
+I examine this model using stochastic, continuous time simulations using the Gillespie algorithm.
 At each step in the simulation we calculate the rate that each possible event might occur.
 One event is then randomly chosen, weighted by it's rate
 \begin{align}
@@ -334,7 +335,7 @@ Finally, the length of the time step, $\delta$, is drawn from an exponential dis
 \begin{align}
   \delta \sim \operatorname{Exp}\left(\sum_i r_i  \right).
 \end{align}
-This means that the length of each simulation is stochastic. 
+This means that the total length of each simulation is stochastic. 
 We define the number of events we wish to simulate instead.
 
 
@@ -352,11 +353,11 @@ Assuming asexual reproduction, that all classes reproduce at the same rate and t
 \begin{align}
   P\left( S_{nt^\prime} = S_{nt} +1\right) &= b\left( S_{nt}+\sum_q I_{qnt} + R_{nt}\right) 
 \end{align}
-where $P\left( S_{nt^\prime} = S_{nt} +1\right)$ is the probability that the number of susceptibles in subpopulation $n$ will increase by 1 (a single birth) the short time interval $t$ to $t^\prime$ and $\sum_q I_{qnt}$ is the sum of all infection classes $q \in {1, 2, 12}$.
+where $P\left( S_{nt^\prime} = S_{nt} +1\right)$ is the probability that the number of susceptibles in subpopulation $n$ will increase by 1 (a single birth) in the time interval $t$ to $t^\prime$ and $\sum_q I_{qnt}$ is the sum of all infection classes $q \in {1, 2, 12}$.
 The rates of death, given a death rate $d$ are given by
 \begin{align}
-  P\left( S_{nt^\prime} = S_{nt}-1 \right) &= dS_{nt} \\
-  P\left( I_{qnt^\prime} = I_{qnt}-1 \right) &= dI_{qnt}\\
+  P\left( S_{nt^\prime} = S_{nt}-1 \right) &= dS_{nt}, \\
+  P\left( I_{qnt^\prime} = I_{qnt}-1 \right) &= dI_{qnt},\\
   P\left( R_{nt^\prime} = R_{nt}-1 \right) &= dR_{nt}.
 \end{align}
 Infection of a susceptible with either pathogen 1 or 2, $S \rightarrow I_p$ where $p\in \{1,2\}$, is given by
@@ -365,13 +366,14 @@ Infection of a susceptible with either pathogen 1 or 2, $S \rightarrow I_p$ wher
 \end{align}
 while coinfection, given a crossimmunity factor $\alpha$, is given by
 \begin{align}
-  P\left( I_{12,nt^\prime} = I_{12,nt}+1,\: I_{pnt^\prime} = I_{pnt}-1\right) = \alpha\beta I_{nt}I^+_{pnt}.
+  P\left( I_{12,nt^\prime} = I_{12,nt}+1,\: I_{1nt^\prime} = I_{1nt}-1\right) = &\alpha\beta I_{1nt}I^+_{2nt},\\
+  P\left( I_{12,nt^\prime} = I_{12,nt}+1,\: I_{2nt^\prime} = I_{2nt}-1\right) = &\alpha\beta I_{2nt}I^+_{1nt}.
 \end{align}
 The probability of migration from colony $m$ (with degree $k_m$) to colony $n$, given a dispersal rate $\lambda$ is given by
 \begin{align}
-  P\left(S_{nt^\prime}=S_{nt}+1,\: S_{mt^\prime} = S_{mt}-1\right) &= \frac{\lambda S_{mt}}{k_m-1}\\
-  P\left(I_{qnt^\prime}=I_{qnt}+1,\: I_{qmt^\prime} = I_{qmt}-1\right) &= \frac{\lambda I_{qmt}}{k_m}\\
-  P\left(R_{nt^\prime}=S_{nt}+1,\: R_{mt^\prime} = R_{mt}-1\right) &= \frac{\lambda R_{mt}}{k_m}.
+  P\left(S_{nt^\prime}=S_{nt}+1,\: S_{mt^\prime} = S_{mt}-1\right) &= \frac{\lambda S_{mt}}{k_m-1},\\
+  P\left(I_{qnt^\prime}=I_{qnt}+1,\: I_{qmt^\prime} = I_{qmt}-1\right) &= \frac{\lambda I_{qmt}}{k_m-1},\\
+  P\left(R_{nt^\prime}=S_{nt}+1,\: R_{mt^\prime} = R_{mt}-1\right) &= \frac{\lambda R_{mt}}{k_m-1}.
 \end{align}
 Finally, recovery from any infectious class occurs at a rate $\gamma$
 \begin{align}
@@ -416,7 +418,7 @@ For each 200 infected individuals added, 200 susceptible individuals were remove
 Disease 1 was then allowed to spread and reach equilibrium. 
 After \ensuremath{3\times 10^{5}} events, 5 individuals infected with disease 2 were added to one colony. 
 Visual inspection of preliminary simulations was used to decide on \ensuremath{3\times 10^{5}} as being long enough for the epidemic to reach an equilibrium state.
-After another \ensuremath{5\times 10^{5}} events the invasion of disease 2 is considered successful if any individuals with disease 2 still remain.
+After another \ensuremath{5\times 10^{5}} events the invasion of disease 2 is considered successful if any individuals are still infected with pathogen 2.
 Again visual inspection of preliminary simulations was used to determine whether this was long enough to be confident that an invading disease 
 
 
@@ -478,9 +480,6 @@ $R_0 \approx 13.3$ is similar to a highly contagious disease such as measles or 
 
 For the simulations where an invading pathogen is added to the populations the number of invading pathogens added is set to 10. 
 This is a trade off between getting a reasonable proportion of invasions, while still retaining the stochastic nature of invasion.
-
-For simulations studying extinction rates, half of the subpopulation were seeded with each pathogen.
-2000 susceptibles and 1000 infected individuals were placed in each subpopulation in order to quickly reach equilibrium.
 
 
 
