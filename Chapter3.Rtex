@@ -14,7 +14,8 @@ runScholarScrape <- FALSE
 
 # There are figures created in the data analysis which are not in the final chapter document.
 #   If TRUE, they will be included in the output.
-extraFigs <- TRUE
+#   Use 'hide' to remove them.
+extraFigs <- 'hide'
 
 #knitr options
 opts_chunk$set(cache.path = '.Ch3Cache/')
@@ -532,8 +533,8 @@ p %<+% nSpecies[, 1:6] +
 
 %%begin.rcode subsDataCapts
 subsDataCapts <- c(
-'Unlogged number of virus species hc_pal()against log mass with a non-phylogenetic linear model added. Points are significantly jittered to try and reveal the sever overplotting in the bottom left corner in particular.',
-'Number of virus species against logged number of subspecies (not marginal) with a non-phylogenetic linear model added. Points are significantly jittered to try and reveal the sever overplotting in the bottom left corner in particular.', 
+'Unlogged number of virus species against log mass with a non-phylogenetic linear model added. Points are significantly jittered to try and reveal the severe overplotting in the bottom left corner in particular.',
+'Number of virus species against logged number of subspecies (not marginal) with a non-phylogenetic linear model added. Points are significantly jittered to try and reveal the severe overplotting in the bottom left corner in particular.', 
 'Number of virus species against logged number of subspecies (not marginal) with a non-phylogenetic linear model added.',
 'Number of virus species against number of subspecies. Data within a number of subspecies are plotted as boxplots with the dark bar showing the median, the box showing the interquartile range, vertical lines showing the range and outliers shown as seperate points. A non-phylogenetic linear model is shown in blue', 
 'Virus species against study effort (log pubmed references +1)')
@@ -892,7 +893,7 @@ logRm1.summary <- summary(logRm1)
 These are the fits from models fitted with the species with only 1 virus species removed.
 We can see that if number of subspecies is unlogged, it remains marginally significant.
 If subspecies is logged it is no longer significant.
-%%begin.rcode rm1virresults, echo = TRUE, results = 'markdown'
+%%begin.rcode rm1virresults, echo = FALSE, results = 'hide'
 
 # Models with species with only 1 virus removed
 
