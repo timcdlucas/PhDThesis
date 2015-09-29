@@ -13,12 +13,13 @@
 \usepackage[
 backend=biber,
 citestyle=authoryear,
-bibstyle=authoryear,
+bibstyle=authoryear-comp,
 sorting=none,
-firstinits=true
+firstinits=true,
+maxcitenames=2
 ]{biblatex} %style=mla for footnotes.
 %\renewcommand{\cite}[1]{\footcite{#1}}
-%\renewcommand{\cite}[1]{\supercite{#1}}
+\renewcommand{\cite}[1]{\parencite{#1}}
 
 \newcommand{\lettr}[1]{#1}
 
