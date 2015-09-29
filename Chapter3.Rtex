@@ -46,7 +46,7 @@ library(dotwhisker)
 library(ggfortify)
 library(ggtree)
 library(RColorBrewer)
-library(palettetown)
+
 
 # Web scraping.
 library(rvest)
@@ -518,7 +518,7 @@ In this case, this would be counted as one virus species.
 
 I used two measures of population structure. 
 $F_{ST}$ and the number of subspecies.
-The number of of subspecies was counted using the Wilson and Reeder taxonomy \cite{wilson2005mammal}.
+The number of subspecies was counted using the Wilson and Reeder taxonomy \cite{wilson2005mammal}.
 $F_{ST}$ and other measures were collated from the literature.
 Studies are from a wide range of spatial scales, from local ($\sim\SI{10}{\kilo\metre}$) to continental.
 As $F_{ST}$ inevitably increases with spatial scale I controlled for this by only using data from studies where a large proportion of the species range was studied.
@@ -665,6 +665,7 @@ All independant variables were log transformed.
 I ran phylogenetically controlled, multivariate linear models.
 This model was fitted both with and without an interaction term between number of subspecies and study effort.
 
+Plots were created with a combination of \cite{ggplot2, palettetown, dotwhisker, ggtree}
 %%begin.rcode diagCapts
 diagCapts <- c(
 'Fitted values against residuals from the full phylogenetic model (virusSpecies $\\sim$ log(pubmedRefs + 1) + log(NumberOfSubspecies) +  log(mass)). A loess curve is shown in blue. 
@@ -1045,7 +1046,7 @@ ggplot(nSpecies, aes(y = pubmedResid, x = log(NumberOfSubspecies))) +
 
 %%end.rcode
 
-Plots are created with a combination of \cite{ggplot2, palettetown, dotwhisker, ggtree}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1096,7 +1097,7 @@ dwplot(x) +
   theme(legend.position="right",
         axis.text.y = element_text(color = "black", size = 13, family  =  "Lato Light", vjust = 0.3)) +
   scale_colour_poke(pokemon = 'Tangela', spread = 2, 
-    labels = c('Interaction', 'No Interaction'), ) +
+    labels = c('Interaction', 'No Interaction'), name = 'Model') +
   xlab('Coefficient Estimate')
     
 %%end.rcode

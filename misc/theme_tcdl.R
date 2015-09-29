@@ -9,6 +9,7 @@
 library(ggplot2)
 library(grid)
 library(ggthemes)
+library(palettetown)
 
 theme_tcdl <-theme(text = element_text(family = "Lato Light", size = 12),
         panel.grid.major.x = element_line(colour = "#ECECEC", size = 0.3, linetype = 1),
@@ -73,13 +74,21 @@ theme_pres <- theme(text = element_text(family = "Lato Light", size = 12),
 
 
 
-thesis_fill <- function(...){
-  scale_fill_hc(...)
+thesis_fill <- function(..., pal = 1){
+  if(pal == 1){
+    scale_fill_hc(...)
+  } else {
+    scale_fill_poke(...) 
+  } 
 }
 
 
 thesis_colour <- function(...){
-  scale_colour_hc(...)
+  if(pal == 1){
+    scale_colour_hc(...)
+  } else {
+    scale_colour_poke(...) 
+  } 
 }
 
 

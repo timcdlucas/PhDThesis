@@ -53,6 +53,10 @@ library(broom)
 
 # Run simulations in parallel
 library(parallel)
+
+# Plotting
+library(ggplot2)
+
 %%end.rcode
 
 
@@ -768,7 +772,7 @@ dDisp$invasion <- dDisp$nPathogens - dDisp$nExtantDis == 0
 # Number of simulations of each treatment
 nDisp <- dDisp %>% 
   group_by(transmission, dispersal) %>% 
-  select(invasion) %>%
+  dplyr::select(invasion) %>%
   summarise(n())
 
 nDisp
@@ -777,7 +781,7 @@ nDisp
 # Number of extinctions by treatment
 invsDisp <- dDisp %>% 
   group_by(transmission, dispersal) %>% 
-  select(invasion) %>%
+  dplyr::select(invasion) %>%
   filter(invasion == TRUE) %>%
   summarise(n())
 
@@ -848,7 +852,7 @@ dTopo$invasion <- dTopo$nPathogens - dTopo$nExtantDis == 0
 # Number of extinctions by treatment
 invsTopo <- dTopo %>% 
   group_by(transmission, meanK) %>% 
-  select(invasion) %>%
+  dplyr::select(invasion) %>%
   filter(invasion == TRUE) %>%
   summarise(n())
 
@@ -857,7 +861,7 @@ invsTopo
 # Number of simulations of each treatment
 nTopo <- dTopo %>% 
   group_by(transmission, meanK) %>% 
-  select(invasion) %>%
+  dplyr::select(invasion) %>%
   summarise(n())
 
 nTopo
@@ -909,30 +913,30 @@ TopoTransTest2 <- prop.test(propsTopo$invasions[c(2, 4, 6, 8)], propsTopo$n[c(2,
 
 %%begin.rcode propsWithoutDoubleExt
 
-# In some simulations both pathogens go extinct.
-# I'm not sure it's correct to call this a failed invasion.
-# So check that is doesn't broadly affect results. 
-# With total extinction sims removed.
+## In some simulations both pathogens go extinct.
+## I'm not sure it's correct to call this a failed invasion.
+## So check that is doesn't broadly affect results. 
+## With total extinction sims removed.
 
-dTopo2 <- dTopo[dTopo$nExtantDis > 0, ]
+#dTopo2 <- dTopo[dTopo$nExtantDis > 0, ]
 
-invsTopo2 <- dTopo2 %>% 
-  group_by(transmission, maxDistance) %>% 
-  select(invasion) %>%
-  filter(invasion == TRUE) %>%
-  summarise(n())
+#invsTopo2 <- dTopo2 %>% 
+#  group_by(transmission, maxDistance) %>% 
+#  dplyr::select(invasion) %>%
+#  filter(invasion == TRUE) %>%
+#  summarise(n())
 
-nTopo2 <- dTopo2 %>% 
-  group_by(transmission, maxDistance) %>% 
-  select(invasion) %>%
-  summarise(n())
+#nTopo2 <- dTopo2 %>% 
+#  group_by(transmission, maxDistance) %>% 
+#  dplyr::select(invasion) %>%
+#  summarise(n())
 
-# Proportion of invasions in totals.
-propsTopo2 <- data.frame(invsTopo2[, 1:2], props = invsTopo2$n / nTopo2$n)
+## Proportion of invasions in totals.
+#propsTopo2 <- data.frame(invsTopo2[, 1:2], props = invsTopo2$n / nTopo2$n)
 
-Topo2Test1 <- tidy(prop.test(invsTopo2$n[1:2], nTopo2$n[1:2]))
-Topo2Test2 <- tidy(prop.test(invsTopo2$n[3:4], nTopo2$n[3:4]))
-Topo2Test3 <- tidy(prop.test(invsTopo2$n[5:6], nTopo2$n[5:6]))
+#Topo2Test1 <- tidy(prop.test(invsTopo2$n[1:2], nTopo2$n[1:2]))
+#Topo2Test2 <- tidy(prop.test(invsTopo2$n[3:4], nTopo2$n[3:4]))
+#Topo2Test3 <- tidy(prop.test(invsTopo2$n[5:6], nTopo2$n[5:6]))
 
 %%end.rcode
 
@@ -974,7 +978,10 @@ ggplot(propsDispCI, aes(x = factor(transmission), y = mean, fill = factor(disper
   xlab('Transmission') + 
   ylab('Prop. Invasions') +
   thesis_fill(name="Dispersal", 
-                 labels=c('0.001', '0.01', '0.1'))
+                 labels=c('0.001', '0.01', '0.1'), 
+                 pal = 2,
+                 pokemon = 'Swampert',
+                 spread = 3)
 
 propsTopoCI <- data.frame(propsTopo[, 1:2], binom.confint(propsTopo$invasions, nTopo2$n, conf.level = 0.95, methods = "exact"))
 
@@ -985,10 +992,11 @@ ggplot(propsTopoCI, aes(x = factor(transmission), y = mean, fill = factor(meanK)
                 position = position_dodge(.9)) +
   xlab('Transmission') + 
   ylab('Prop. Invasions') +
-  #scale_fill_hue(name="Connectedness", 
-  #               labels=c("Low", "High")) +
   thesis_fill(name="Connectedness", 
-                 labels=c("Low", "High"))
+                 labels=c("Low", "High"),
+                 pal = 2,
+                 pokemon = 'Swampert',
+                 spread = 2)
 
 %%end.rcode
 
