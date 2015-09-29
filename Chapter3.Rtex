@@ -516,34 +516,6 @@ If a host carries an unknown Paramyxoviridae virus and a known Paramyxoviridae v
 In this case, this would be counted as one virus species.
 
 
-I used two measures of population structure. 
-$F_{ST}$ and the number of subspecies.
-The number of subspecies was counted using the Wilson and Reeder taxonomy \cite{wilson2005mammal}.
-$F_{ST}$ and other measures were collated from the literature.
-Studies are from a wide range of spatial scales, from local ($\sim\SI{10}{\kilo\metre}$) to continental.
-As $F_{ST}$ inevitably increases with spatial scale I controlled for this by only using data from studies where a large proportion of the species range was studied.
-I used the ratio of the furthest distance between $F_{ST}$ samples to the width of the species range and only used studies if this ratio was greater than 0.3.
-To allow comparison between different measures ($F_{ST}, \phi_{ST}$) and data from different molecular regions I converted all data to diploid gene flow.
-WILL ADD EXTRA METHODS LATER.
-These two measures of population structure were analysed separately as the number of subspecies has \rinline{nrow(nSpecies)} data points while there is only $F_{ST}$ data for $\sim 30$ bat species.
-
-To control for study bias I collected the number of Pubmed and Google Scholar citations for each bat species including synonyms from ITIS \cite{itis} via the taxize package \cite{chamberlain2013taxize}.
-The counts were scraped using the rvest package \cite{rvest}.
-I log transformed these variables as they were strongly right skewed.
-The log number of citations on Pubmed and Google scholar were highly correlated (pgls: $t$ = \rinline{studyEffortCor$coefficients['log(pubmedRefs + 1)', 't value']}, df = \rinline{studyEffortCor$df[2]}, $p$ = \rinline{studyEffortCor$coefficients['log(pubmedRefs + 1)', 'Pr(>|t|)']}).
-The results here are for analyses using only Google Scholar citations.
-See the appendix for analyses run using Pubmed citations.
-
-Measures of body mass are taken from Pantheria \cite{jones2009pantheria}.
-They are log transformed due to the strong right skew.
-
-
-
-%Pubmed was scraped on \rinline{pubmedScrapeDate} and Google Scholar was scraped on \rinline{scholarScrapeDate}
-
-To control for phylogenetic nonindependance I used the best-supported phylogeny from \cite{fritz2009geographical} which is the supertree from \cite{bininda2007delayed} with names updated to match the Wilson \& Reeder taxonomy \cite{wilson2005mammal}.
-Phylogenetic manipulation was performed using the ape package \cite{ape}.
-
 %%begin.rcode treeRead
 
 # Read in trees
@@ -658,6 +630,34 @@ ggplot(nSpecies, aes(log(pubmedRefs + 1), virusSpecies)) +
 
 
 
+
+I used two measures of population structure. 
+$F_{ST}$ and the number of subspecies.
+The number of subspecies was counted using the Wilson and Reeder taxonomy \cite{wilson2005mammal}.
+$F_{ST}$ and other measures were collated from the literature.
+Studies are from a wide range of spatial scales, from local ($\sim\SI{10}{\kilo\metre}$) to continental.
+As $F_{ST}$ inevitably increases with spatial scale I controlled for this by only using data from studies where a large proportion of the species range was studied.
+I used the ratio of the furthest distance between $F_{ST}$ samples to the width of the species range and only used studies if this ratio was greater than 0.3.
+To allow comparison between different measures ($F_{ST}, \phi_{ST}$) and data from different molecular regions I converted all data to diploid gene flow.
+WILL ADD EXTRA METHODS LATER.
+These two measures of population structure were analysed separately as the number of subspecies has \rinline{nrow(nSpecies)} data points while there is only $F_{ST}$ data for $\sim 30$ bat species.
+
+To control for study bias I collected the number of Pubmed and Google Scholar citations for each bat species including synonyms from ITIS \cite{itis} via the taxize package \cite{chamberlain2013taxize}.
+The counts were scraped using the rvest package \cite{rvest}.
+I log transformed these variables as they were strongly right skewed.
+The log number of citations on Pubmed and Google scholar were highly correlated (pgls: $t$ = \rinline{studyEffortCor$coefficients['log(pubmedRefs + 1)', 't value']}, df = \rinline{studyEffortCor$df[2]}, $p$ = \rinline{studyEffortCor$coefficients['log(pubmedRefs + 1)', 'Pr(>|t|)']}).
+The results here are for analyses using only Google Scholar citations.
+See the appendix for analyses run using Pubmed citations.
+
+Measures of body mass are taken from Pantheria \cite{jones2009pantheria}.
+They are log transformed due to the strong right skew.
+
+
+
+%Pubmed was scraped on \rinline{pubmedScrapeDate} and Google Scholar was scraped on \rinline{scholarScrapeDate}
+
+To control for phylogenetic nonindependance I used the best-supported phylogeny from \cite{fritz2009geographical} which is the supertree from \cite{bininda2007delayed} with names updated to match the Wilson \& Reeder taxonomy \cite{wilson2005mammal}.
+Phylogenetic manipulation was performed using the ape package \cite{ape}.
 
 
 I ran two models using the caper package \cite{caper} testing the relationship between pathogen richness and log number of subspecies.

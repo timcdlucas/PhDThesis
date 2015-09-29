@@ -393,7 +393,13 @@ We define the number of events we wish to simulate instead.
 \begin{figure}[t]
 \centering
   \includegraphics[width=0.4\textwidth]{imgs/SIRoption1.pdf}
-  \caption{The SIR model used.}
+  \caption{
+Schematic of the SIR model used. 
+Individuals are in one five classes, susceptible (orange, S), infectious with pathogen 1, pathogen 2 or both (blue, $I_1, I_2, I_{12}$) or recovered and immune from further infection (green, R).
+Transitions between classes occurs only as indicated by arrows.
+Note that individuals in $I_{12}$ move into R, not back to $I_1$ or $I_2$. 
+That is, recovery from one pathogen causes immediate recovery from the other pathogen.
+}
   \label{f:sir}
 \end{figure}
 
@@ -444,7 +450,9 @@ Finally, recovery from any infectious class occurs at a rate $\gamma$
 }
 \caption[Network topologies used to compare network connectedness]{
 The two network topologies used to test whether network connectedness influences a viruses ability to invade. 
-Dispersal is held constant between the two topologies.
+Blue circles are subpopulations of 3000 individuals.
+Dispersal only occurs between subpopulations connected by an edge (black line).
+The dispersal rate is held constant between the two topologies.
 }
 \label{f:net}
 \end{figure}

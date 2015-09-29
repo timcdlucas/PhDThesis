@@ -12,6 +12,22 @@
 \input{KnitrSettings}
 
 
+
+% Redefine cite so that we get references in footnotes.
+\usepackage[
+backend=biber,
+citestyle=authoryear,
+bibstyle=authoryear,
+sorting=none,
+firstinits=true
+]{biblatex} %style=mla for footnotes.
+%\renewcommand{\cite}[1]{\footcite{#1}}
+%\renewcommand{\cite}[1]{\supercite{#1}}
+
+\addbibresource{epilit.bib}
+
+
+
 \usepackage{caption}
 \usepackage{verbatim, geometry, fancyhdr,  graphicx, xcomment, microtype, array}
 %\usepackage{amsmath}
@@ -59,8 +75,7 @@
 \input{lucas_et_al_supplementarymaterial_2015-01-20.tex}
 
 \small
-\bibliographystyle{unsrt}	% (uses file "plain.bst")
-\bibliography{epilit}		% expects file "myrefs.bib"
+\printbibliography 
 
 
 \end{document}
