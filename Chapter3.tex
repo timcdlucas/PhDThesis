@@ -11,7 +11,9 @@
 
 \subsubsection{One or two sentences providing a basic introduction to the field}
 % comprehensible to a scientist in any discipline.
-\lettr{W}rite abstract here.
+\lettr{B}ats are an important reservoire of zoonotic diseases.
+It is still unclear what factors determine the number of pathogens a wild bat species carries.
+But once understood, these factors could provide a way to priorities surveillance of bat populations.
 
 
 \subsubsection{Two to three sentences of more detailed background}
@@ -52,80 +54,92 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\clearpage
+%\clearpage
 \section{Methods}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 To measure pathogen richness I used data from \cite{luis2013comparison}. 
 These simply include known infections of a bat species with a pathogen species. 
 Only species with at least one pathogen were included in the analysis.
-To control for study bias I collected the number of pubmed and scholar citations for each bat species including synonyms from ITIS \cite{itis} via the taxize package \cite{chamberlain2013taxize}.
-The counts were scraped using the rvest package \cite{rvest}.
-
-
-
-
+As many viruses were not identified to species level, I counted a virus if it was the only virus, for that host species, in the lowest identified taxonomic level.
+That is, if a host carries an unknown Paramyxoviridae virus, then it must carry at least one Paramyxoviridae virus.
+If a host carries an unknown Paramyxoviridae virus and a known Paramyxoviridae virus, then it is hard to confirm that the unknown virus is not another record of the known virus.
+In this case, this would be counted as one virus species.
 
 
 I used two measures of population structure. 
 $F_{ST}$ and the number of subspecies.
 The number of of subspecies was counted using the Wilson and Reeder taxonomy \cite{wilson2005mammal}.
+$F_{ST}$ and other measures were collated from the literature.
+Studies are from a wide range of spatial scales, from local ($\sim\SI{10}{\kilo\metre}$) to continental.
+As $F_{ST}$ inevitably increases with spatial scale I controlled for this by only using data from studies where a large proportion of the species range was studied.
+I used the ratio of the furthest distance between $F_{ST}$ samples to the width of the species range and only used studies if this ratio was greater than 0.3.
+To allow comparison between different measures ($F_{ST}, \phi_{ST}$) and data from different molecular regions I converted all data to diploid gene flow.
+WILL ADD EXTRA METHODS LATER.
+These two measures of population structure were analysed separately as the number of subspecies has 196 data points while there is only $F_{ST}$ data for $\sim 30$ bat species.
 
-\begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in mget(words, envir, "{}any"{}, NA, inherits = TRUE): cannot open file '/home/tim/Dropbox/phd/Documents/thesis/.Ch3Cache/wilsonReaderTaxonomyRead\_949262de95271ee1f5068b4e7140b466.rdb': No such file or directory}}
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): cannot open file '/home/tim/Dropbox/phd/Documents/thesis/.Ch3Cache/wilsonReaderTaxonomyRead\_949262de95271ee1f5068b4e7140b466.rdb': No such file or directory}}
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): cannot open file '/home/tim/Dropbox/phd/Documents/thesis/.Ch3Cache/wilsonReaderTaxonomyRead\_949262de95271ee1f5068b4e7140b466.rdb': No such file or directory}}\end{kframe}
-\end{knitrout}
-
-
-
-
-
-
-
-
-
-
+To control for study bias I collected the number of Pubmed and Google Scholar citations for each bat species including synonyms from ITIS \cite{itis} via the taxize package \cite{chamberlain2013taxize}.
+The counts were scraped using the rvest package \cite{rvest}.
+I log transformed these variables as they were strongly right skewed.
+The log number of citations on Pubmed and Google scholar were highly correlated (pgls: $t$ = 13.23, df = 194, $p$ = 0).
+The results here are for analyses using only Google Scholar citations.
+See the appendix for analyses run using Pubmed citations.
 
 Measures of body mass are taken from Pantheria \cite{jones2009pantheria}.
 They are log transformed due to the strong right skew.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -155,19 +169,48 @@ Phylogenetic manipulation was performed using the ape package \cite{ape}.
 
 
 
-I wanted to run three models using the phylolm package testing the relationship between pathogen richness and log number of subspecies.
-I tried phylogenetically controlled, multivariate GLMs with poisson errors and identity links.
-This model was fitted both with and without an interaction term between number of subspecies and study effort.
-I also fitted a phylogenetically controlled, GLM with poisson errors and identity link to pathogen richness and study effort.
-The residuals from this model was then used as the response variable in a multivariate GLM.
-However, with these models the numerical optimisation failed to converge.
 
-I ran three models using the caper package \cite{caper} testing the relationship between pathogen richness and log number of subspecies.
-All independant variables were log transformed --- study effort was $\log(\text{citations} + 1)$.
+
+
+
+
+
+
+I ran two models using the caper package \cite{caper} testing the relationship between pathogen richness and log number of subspecies.
+All independant variables were log transformed.
 I ran phylogenetically controlled, multivariate linear models.
 This model was fitted both with and without an interaction term between number of subspecies and study effort.
-We also fitted a phylogenetically controlled, GLM with poisson errors and identity link to pathogen richness and study effort.
-The residuals from this model was then used as the response variable in a multivariate GLM.
+
+
+
+
+%\clearpage
+
+
+
+
+
+
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[t]
+
+{\centering \includegraphics[width=0.8\textwidth]{figure/boxplot-1} 
+
+}
+
+\caption[Number of virus species against number of subspecies]{Number of virus species against number of subspecies. Data within a number of subspecies are plotted as boxplots with the dark bar showing the median, the box showing the interquartile range, vertical lines showing the range and outliers shown as seperate points. A non-phylogenetic linear model is shown in blue}\label{fig:boxplot}
+\end{figure}
+
+
+\end{knitrout}
+
+
+
+
+
+
+
 
 
 
@@ -184,47 +227,12 @@ The residuals from this model was then used as the response variable in a multiv
 
 
 
-\clearpage
-
-
-These are the fits from models fitted with the species with only 1 virus species removed.
-We can see that if number of subspecies is unlogged, it remains marginally significant.
-If subspecies is logged it is no longer significant.
-
-
-
-
-\begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[t]
-
-{\centering \includegraphics[width=0.8\textwidth]{figure/plotSubspecies-1} 
-
-}
-
-\caption[Number of virus species against log number of subspecies]{Number of virus species against log number of subspecies. Nonphylogenetic trend line in blue. Phylogenetic model (evaluated at mean body mass and mean study effort values) is shown in red.}\label{fig:plotSubspecies}
-\end{figure}
-
-
-\end{knitrout}
 
 
 
 
 
-
-
-\begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[t]
-
-{\centering \includegraphics[width=0.8\textwidth]{figure/pubmedresidPlot-1} 
-
-}
-
-\caption[Plot using residuals from number of viruses against number of citations (study effort)]{Plot using residuals from number of viruses against number of citations (study effort). Nonphylogenetic trend line added. }\label{fig:pubmedresidPlot}
-\end{figure}
-
-
-\end{knitrout}
+Plots are created with a combination of \cite{ggplot2, palettetown, dotwhisker, ggtree}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -234,14 +242,12 @@ If subspecies is logged it is no longer significant.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 See Figure \ref{fig:plotSubspeciesCoefs} for a display of estimated coefficients for the two models using number of viruses as the response variable. 
-The main model with mass, study effort and number of subspecies as predictors found study effort to be highly significant ($\beta = $1.01, $p = $\ensuremath{3.9\times 10^{-12}}). 
-The number of subspecies was marginally significant ($\beta = $ 0.48, $p = $0.06). 
+The main model with mass, study effort and number of subspecies as predictors found study effort to be highly significant ($\beta = $NA, $p = $0). 
+The number of subspecies was marginally significant ($\beta = $ 0.54, $p = $0.01). 
 The effect of nonindependance due to phylogeny was very small ($\lambda = $0.07, $p = $0.1).
 
-The interaction term between study effort and number of subspecies, when included, was not significant ($\beta = $ 0.23, $p = $0.12).
+The interaction term between study effort and number of subspecies, when included, was not significant ($\beta = $ NA, $p = $0.73).
 
-The model using the residuals from a regression between number of viruses and study effort as the response variable found no significant affect of number of subspecies. 
-Mass was marginally significant.
 
 
 

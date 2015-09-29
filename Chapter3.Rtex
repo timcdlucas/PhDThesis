@@ -46,6 +46,7 @@ library(dotwhisker)
 library(ggfortify)
 library(ggtree)
 library(RColorBrewer)
+library(palettetown)
 
 # Web scraping.
 library(rvest)
@@ -60,7 +61,9 @@ library(taxize)
 
 \subsubsection{One or two sentences providing a basic introduction to the field}
 % comprehensible to a scientist in any discipline.
-\lettr{W}rite abstract here.
+\lettr{B}ats are an important reservoire of zoonotic diseases.
+It is still unclear what factors determine the number of pathogens a wild bat species carries.
+But once understood, these factors could provide a way to priorities surveillance of bat populations.
 
 
 \subsubsection{Two to three sentences of more detailed background}
@@ -101,16 +104,10 @@ library(taxize)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\clearpage
+%\clearpage
 \section{Methods}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-To measure pathogen richness I used data from \cite{luis2013comparison}. 
-These simply include known infections of a bat species with a pathogen species. 
-Only species with at least one pathogen were included in the analysis.
-To control for study bias I collected the number of pubmed and scholar citations for each bat species including synonyms from ITIS \cite{itis} via the taxize package \cite{chamberlain2013taxize}.
-The counts were scraped using the rvest package \cite{rvest}.
 
 
 
@@ -122,12 +119,10 @@ virus2 <- read.csv('data/Chapter3/luis2013comparison.csv', stringsAsFactors = FA
 
 virus2$binomial <- paste(virus2$host.genus, virus2$host.species)
 
+
+
 %%end.rcode
 
-
-I used two measures of population structure. 
-$F_{ST}$ and the number of subspecies.
-The number of of subspecies was counted using the Wilson and Reeder taxonomy \cite{wilson2005mammal}.
 
 %%begin.rcode wilsonReaderTaxonomyRead, fig.show = extraFigs, fig.cap = 'Histogram of number of subspecies'
 
@@ -190,6 +185,30 @@ subs$binomial <- paste(subs$Genus, subs$Species)
 
 
 
+
+# Check overlap of datasets.
+sum(!(virus2$binomial[virus2$host.species != ''] %in% subs$binomial))
+
+notInTax <- (virus2$binomial[virus2$host.species != ''])[!(virus2$binomial[virus2$host.species != ''] %in% subs$binomial)]
+
+# Run this to find synonyms of names not in Wilson and Reeder
+#   Doesn't find much of use.
+# syns <- synonyms(notInTax, db = 'itis')
+
+# Clean some names
+#  As taxize::synonyms didn't find most of them, I am using IUCN.
+#  And checking that the IUCN name is then in The Wilson & Reeder taxonomy
+
+virus2$binomial[virus2$binomial == 'Myotis pilosus'] <- 'Myotis ricketti'
+virus2$binomial[virus2$binomial == 'Tadarida pumila'] <- 'Chaerephon pumilus'
+virus2$binomial[virus2$binomial == 'Tadarida condylura'] <- 'Mops condylurus'
+virus2$binomial[virus2$binomial == 'Rhinolophus hildebrandti'] <- 'Rhinolophus hildebrandtii'
+# Rhinolophus horsfeldi: I can't find this species anywhere. Will exclude.
+#   Possibly Megaderma spasma according to http://www.fao.org/3/a-i2407e.pdf
+virus2$binomial[virus2$binomial == 'Tadarida plicata'] <- 'Chaerephon plicatus'
+virus2$binomial[virus2$binomial == 'Artibeus planirostris'] <- 'Artibeus jamaicensis'
+
+sum(!(virus2$binomial[virus2$host.species != ''] %in% subs$binomial))
 
 %%end.rcode
 
@@ -268,8 +287,6 @@ ggplot(nSpecies, aes(x = virusSpecies)) +
 
 
 
-Measures of body mass are taken from Pantheria \cite{jones2009pantheria}.
-They are log transformed due to the strong right skew.
 
 %%begin.rcode euthRead
 
@@ -285,6 +302,16 @@ mass <- sqldf("
 
 nSpecies$mass <- mass[, 1]
 
+# Now add additional mass estimates.
+
+additionalMass <- read.csv('data/Chapter3/AdditionalBodyMass.csv', stringsAsFactors = FALSE)
+meanAdditionalMass <- additionalMass %>%
+                        group_by(binomial) %>% 
+                        summarise(mass = mean(Body.Mass.grams))
+
+nSpecies$mass[
+  sapply(meanAdditionalMass$binomial, function(x) which(nSpecies$binomial == x))
+  ] <- meanAdditionalMass$mass 
 
 %%end.rcode
 
@@ -380,7 +407,7 @@ nSpecies$pubmedRefs <- pubmedRefs$pubmedRefs
 
 scrapeScholar <- function(sp){
     
-  wait <- rnorm(1, 22, 2)
+  wait <- rnorm(1, 40, 2)
   Sys.sleep(wait)
 
 
@@ -453,26 +480,7 @@ nSpecies$scholarRefs <- sqldf('
 
 
 
-%%begin.rcode scholarvspubmed, fig.show = extraFigs, fig.cap = 'Logged number of references on scholar and pubmed, with a fitted (unphylogenetic) linear model. Colours indicate family.'
 
-ggplot(nSpecies, aes(x = scholarRefs, y = pubmedRefs + 1)) +
-  geom_point(aes(colour = familyPlotCol), size = 2.5) +
-  geom_smooth(method = 'lm') +
-  scale_x_log10() +
-  scale_y_log10() +
-  thesis_colour()
-
-%%end.rcode
-
-
-%%begin.rcode savenSpecies
-########################################################
-### At this point, nSpecies should be in final form  ###
-########################################################
-
-write.csv(nSpecies, file = 'data/Chapter3/nSpecies.csv')
-
-%%end.rcode
 
 
 %%begin.rcode subsRemoveNAs
@@ -487,6 +495,49 @@ nSpecies$SubspeciesFactor <- factor(nSpecies$NumberOfSubspecies,
 rownames(nSpecies) <- nSpecies$binomial
 
 %%end.rcode
+
+
+
+%%begin.rcode savenSpecies
+########################################################
+### At this point, nSpecies should be in final form  ###
+########################################################
+
+write.csv(nSpecies, file = 'data/Chapter3/nSpecies.csv')
+
+%%end.rcode
+
+To measure pathogen richness I used data from \cite{luis2013comparison}. 
+These simply include known infections of a bat species with a pathogen species. 
+Only species with at least one pathogen were included in the analysis.
+As many viruses were not identified to species level, I counted a virus if it was the only virus, for that host species, in the lowest identified taxonomic level.
+That is, if a host carries an unknown Paramyxoviridae virus, then it must carry at least one Paramyxoviridae virus.
+If a host carries an unknown Paramyxoviridae virus and a known Paramyxoviridae virus, then it is hard to confirm that the unknown virus is not another record of the known virus.
+In this case, this would be counted as one virus species.
+
+
+I used two measures of population structure. 
+$F_{ST}$ and the number of subspecies.
+The number of of subspecies was counted using the Wilson and Reeder taxonomy \cite{wilson2005mammal}.
+$F_{ST}$ and other measures were collated from the literature.
+Studies are from a wide range of spatial scales, from local ($\sim\SI{10}{\kilo\metre}$) to continental.
+As $F_{ST}$ inevitably increases with spatial scale I controlled for this by only using data from studies where a large proportion of the species range was studied.
+I used the ratio of the furthest distance between $F_{ST}$ samples to the width of the species range and only used studies if this ratio was greater than 0.3.
+To allow comparison between different measures ($F_{ST}, \phi_{ST}$) and data from different molecular regions I converted all data to diploid gene flow.
+WILL ADD EXTRA METHODS LATER.
+These two measures of population structure were analysed separately as the number of subspecies has \rinline{nrow(nSpecies)} data points while there is only $F_{ST}$ data for $\sim 30$ bat species.
+
+To control for study bias I collected the number of Pubmed and Google Scholar citations for each bat species including synonyms from ITIS \cite{itis} via the taxize package \cite{chamberlain2013taxize}.
+The counts were scraped using the rvest package \cite{rvest}.
+I log transformed these variables as they were strongly right skewed.
+The log number of citations on Pubmed and Google scholar were highly correlated (pgls: $t$ = \rinline{studyEffortCor$coefficients['log(pubmedRefs + 1)', 't value']}, df = \rinline{studyEffortCor$df[2]}, $p$ = \rinline{studyEffortCor$coefficients['log(pubmedRefs + 1)', 'Pr(>|t|)']}).
+The results here are for analyses using only Google Scholar citations.
+See the appendix for analyses run using Pubmed citations.
+
+Measures of body mass are taken from Pantheria \cite{jones2009pantheria}.
+They are log transformed due to the strong right skew.
+
+
 
 %Pubmed was scraped on \rinline{pubmedScrapeDate} and Google Scholar was scraped on \rinline{scholarScrapeDate}
 
@@ -531,12 +582,33 @@ p %<+% nSpecies[, 1:6] +
 
 %%end.rcode
 
+
+
+%%begin.rcode scholarvspubmed, fig.show = extraFigs, fig.cap = 'Logged number of references on scholar and pubmed, with a fitted (unphylogenetic) linear model. Colours indicate family.'
+
+# Check how correlated pubmed and scholar are.
+
+
+compSubspecies <- comparative.data(data = nSpecies, phy = pruneTree, names.col = 'binomial')
+
+citeCor <- pgls(log(scholarRefs) ~ log(pubmedRefs + 1), data = compSubspecies, lambda = 'ML')
+
+studyEffortCor <- summary(citeCor)
+# And plot
+ggplot(nSpecies, aes(x = scholarRefs, y = pubmedRefs + 1)) +
+  geom_point(aes(colour = familyPlotCol), size = 2.5) +
+  geom_smooth(method = 'lm') +
+  scale_x_log10() +
+  scale_y_log10() +
+  thesis_colour()
+
+%%end.rcode
+
 %%begin.rcode subsDataCapts
 subsDataCapts <- c(
 'Unlogged number of virus species against log mass with a non-phylogenetic linear model added. Points are significantly jittered to try and reveal the severe overplotting in the bottom left corner in particular.',
 'Number of virus species against logged number of subspecies (not marginal) with a non-phylogenetic linear model added. Points are significantly jittered to try and reveal the severe overplotting in the bottom left corner in particular.', 
-'Number of virus species against logged number of subspecies (not marginal) with a non-phylogenetic linear model added.',
-'Number of virus species against number of subspecies. Data within a number of subspecies are plotted as boxplots with the dark bar showing the median, the box showing the interquartile range, vertical lines showing the range and outliers shown as seperate points. A non-phylogenetic linear model is shown in blue', 
+'Number of virus species against logged number of subspecies (not marginal) with a non-phylogenetic linear model added.', 
 'Virus species against study effort (log pubmed references +1)')
 %%end.rcode
 
@@ -574,23 +646,6 @@ ggplot(nSpecies, aes(SubspeciesFactor, virusSpecies)) +
   xlab('# subspecies')
 
 
-ggplot(nSpecies, aes(SubspeciesFactor, virusSpecies, colour = 'a', fill = 'a')) + 
-  geom_smooth(method = 'lm',  aes(group = 1), colour = 'black', fill = 'grey') +
-  geom_boxplot(outlier.size = 1, size = 0.3, outlier.colour = grey(0.3), 
-    notch = FALSE) +
-  scale_colour_manual(values = brewer.pal(4, 'Paired')[2]) +
-  scale_fill_manual(values = brewer.pal(4, 'Paired')) +
-#  thesis_fill() +
-#  thesis_colour() +
-  stat_summary(geom = "crossbar", width = 0.7, fatten = 2, 
-    fun.data = function(x){ return(c(y = median(x), ymin = median(x), ymax = median(x))) }) +
-  theme(legend.position = 'none') + 
-  geom_smooth(method = 'lm',  aes(group = 1), colour = 'black', fill = NA) +
-  scale_x_discrete(limits = levels(nSpecies$SubspeciesFactor), drop=FALSE) +
-  xlab('N. of Subspecies')+
-  ylab('Viral Richness')
-
-
 
 ggplot(nSpecies, aes(log(pubmedRefs + 1), virusSpecies)) +
   geom_jitter(aes(colour = familyPlotCol), size = 2.5, 
@@ -602,19 +657,13 @@ ggplot(nSpecies, aes(log(pubmedRefs + 1), virusSpecies)) +
 %%end.rcode
 
 
-I wanted to run three models using the phylolm package testing the relationship between pathogen richness and log number of subspecies.
-I tried phylogenetically controlled, multivariate GLMs with poisson errors and identity links.
-This model was fitted both with and without an interaction term between number of subspecies and study effort.
-I also fitted a phylogenetically controlled, GLM with poisson errors and identity link to pathogen richness and study effort.
-The residuals from this model was then used as the response variable in a multivariate GLM.
-However, with these models the numerical optimisation failed to converge.
 
-I ran three models using the caper package \cite{caper} testing the relationship between pathogen richness and log number of subspecies.
-All independant variables were log transformed --- study effort was $\log(\text{citations} + 1)$.
+
+
+I ran two models using the caper package \cite{caper} testing the relationship between pathogen richness and log number of subspecies.
+All independant variables were log transformed.
 I ran phylogenetically controlled, multivariate linear models.
 This model was fitted both with and without an interaction term between number of subspecies and study effort.
-We also fitted a phylogenetically controlled, GLM with poisson errors and identity link to pathogen richness and study effort.
-The residuals from this model was then used as the response variable in a multivariate GLM.
 
 %%begin.rcode diagCapts
 diagCapts <- c(
@@ -636,13 +685,13 @@ The $R^2$ value give is for the full model (not the loess curve).',
 %%begin.rcode, subsAnalysis, fig.show = extraFigs, fig.cap = diagCapts, fig.height = 4
 
 
-compSubspecies <- comparative.data(data = nSpecies, phy = pruneTree, names.col = 'binomial')
+
 
 
 # N Virus ~ log(subs + cites)
 
 subspeciesJoint <- pgls(
-  virusSpecies ~ log(pubmedRefs + 1) + log(NumberOfSubspecies) +  log(mass), 
+  virusSpecies ~ log(scholarRefs) + log(NumberOfSubspecies) +  log(mass), 
   data = compSubspecies, lambda = 'ML')
 
 subJoint.summary <- summary(subspeciesJoint)
@@ -652,7 +701,7 @@ jointDiag <- data.frame(
    FittedValue = subspeciesJoint$fitted,
    Subspecies = subspeciesJoint$x[, 'log(NumberOfSubspecies)'],
    Mass = subspeciesJoint$x[, 'log(mass)'],
-   StudyEffort = subspeciesJoint$x[, 'log(pubmedRefs + 1)'])
+   StudyEffort = subspeciesJoint$x[, 'log(scholarRefs)'])
 
 
            
@@ -689,6 +738,7 @@ jointSD <- data.frame(
           mean
       )
 )
+
 ggplot(jointSD, aes(x = Subspecies)) +
   geom_ribbon(aes(ymax = Mean + 1.96*SD, ymin = Mean - 1.96*SD),
     alpha = 0.4) +
@@ -702,7 +752,7 @@ ggplot(jointSD, aes(x = Subspecies)) +
 # N Virus ~ subs + log(cites + mass)
 
 subspeciesJointUnlog <- pgls(
-  virusSpecies ~ log(pubmedRefs + 1) + NumberOfSubspecies +  log(mass), 
+  virusSpecies ~ log(scholarRefs) + NumberOfSubspecies +  log(mass), 
   data = compSubspecies, lambda = 'ML')
 
 
@@ -713,7 +763,7 @@ jointDiagUnlog <- data.frame(
    FittedValue = subspeciesJointUnlog$fitted,
    Subspecies = subspeciesJointUnlog$x[, 'NumberOfSubspecies'],
    Mass = subspeciesJointUnlog$x[, 'log(mass)'],
-   StudyEffort = subspeciesJointUnlog$x[, 'log(pubmedRefs + 1)'])
+   StudyEffort = subspeciesJointUnlog$x[, 'log(scholarRefs)'])
 
            
 ggplot(jointDiagUnlog, aes(x = FittedValue, y = PhylogeneticResiduals)) +
@@ -764,14 +814,14 @@ ggplot(jointSDUnlog, aes(x = Subspecies)) +
 
 subspeciesInter <- pgls(
   virusSpecies ~ log(mass) + 
-  log(NumberOfSubspecies)*log(pubmedRefs + 1), 
+  log(NumberOfSubspecies)*log(scholarRefs), 
   data = compSubspecies, lambda = 'ML')
 
 subInter.summary <- summary(subspeciesInter)
 
 # glm(N Virus ~ cites)$resid ~ subs + subs*cites
 
-subspeciesEffort <- pgls(virusSpecies ~ log(pubmedRefs + 1), 
+subspeciesEffort <- pgls(virusSpecies ~ log(scholarRefs), 
   data = compSubspecies, lambda = 'ML')
 
 nSpecies$pubmedResid <- subspeciesEffort$phyres[order(rownames(subspeciesEffort$residuals))]
@@ -787,7 +837,46 @@ summary(subspeciesResid)
 
 
 %%end.rcode
-\clearpage
+%\clearpage
+
+
+
+
+%begin.rcode boxplotCapt
+
+boxplotCapt <- 'Number of virus species against number of subspecies. Data within a number of subspecies are plotted as boxplots with the dark bar showing the median, the box showing the interquartile range, vertical lines showing the range and outliers shown as seperate points. A non-phylogenetic linear model is shown in blue'
+
+%%end.rcode
+
+
+%%begin.rcode boxplot, fig.cap = boxplotCapt
+
+predData <- data.frame(NumberOfSubspecies =
+              seq(min(nSpecies$NumberOfSubspecies), max(nSpecies$NumberOfSubspecies), 200),
+                       mass = log(mean(nSpecies$mass)),
+                       scholarRefs = log(mean(nSpecies$scholarRefs))
+                       )
+#line <- predict(subspeciesJointUnlog
+
+
+ggplot(nSpecies, aes(SubspeciesFactor, virusSpecies, colour = 'a', fill = 'a')) + 
+  geom_smooth(method = 'lm',  aes(group = 1), colour = 'black', fill = 'grey') +
+  geom_boxplot(outlier.size = 1, size = 0.3, outlier.colour = grey(0.3), 
+    notch = FALSE) +
+  scale_colour_manual(values = brewer.pal(4, 'Paired')[2]) +
+  scale_fill_manual(values = brewer.pal(4, 'Paired')) +
+#  thesis_fill() +
+#  thesis_colour() +
+  stat_summary(geom = "crossbar", width = 0.7, fatten = 2, 
+    fun.data = function(x){ return(c(y = median(x), ymin = median(x), ymax = median(x))) }) +
+  theme(legend.position = 'none') + 
+  #geom_smooth(method = 'lm',  aes(group = 1), colour = 'black', fill = NA) +
+  scale_x_discrete(limits = levels(nSpecies$SubspeciesFactor), drop=FALSE) +
+  xlab('N. of Subspecies')+
+  ylab('Viral Richness')
+
+
+%%end.rcode
 
 
 %%begin.rcode rm1virTests
@@ -890,9 +979,6 @@ logRm1.summary <- summary(logRm1)
 \clearpage
 
 
-These are the fits from models fitted with the species with only 1 virus species removed.
-We can see that if number of subspecies is unlogged, it remains marginally significant.
-If subspecies is logged it is no longer significant.
 %%begin.rcode rm1virresults, echo = FALSE, results = 'hide'
 
 # Models with species with only 1 virus removed
@@ -907,12 +993,12 @@ logRm1.summary
 
 
 
-%%begin.rcode plotSubspecies, fig.cap = 'Number of virus species against log number of subspecies. Nonphylogenetic trend line in blue. Phylogenetic model (evaluated at mean body mass and mean study effort values) is shown in red.'
+%%begin.rcode plotSubspecies, fig.show = extraFigs,  fig.cap = 'Number of virus species against log number of subspecies. Nonphylogenetic trend line in blue. Phylogenetic model (evaluated at mean body mass and mean study effort values) is shown in red.'
 
 
 subspeciesJointIntercept <- subspeciesJoint$model$coef[1] + 
   mean(log(nSpecies$mass)) * subspeciesJoint$model$coef[4] +
-  mean(log(nSpecies$pubmedRefs+1)) * subspeciesJoint$model$coef[3]
+  mean(log(nSpecies$pubmedRefs + 1)) * subspeciesJoint$model$coef[3]
  
 
 ggplot(nSpecies, aes(log(NumberOfSubspecies), virusSpecies)) +
@@ -948,7 +1034,7 @@ ggplot(nSpecies,
 %%end.rcode
 
 
-%%begin.rcode pubmedresidPlot, fig.cap = 'Plot using residuals from number of viruses against number of citations (study effort). Nonphylogenetic trend line added. '
+%%begin.rcode pubmedresidPlot, fig.show = extraFigs,  fig.cap = 'Plot using residuals from number of viruses against number of citations (study effort). Nonphylogenetic trend line added. '
 
 
 ggplot(nSpecies, aes(y = pubmedResid, x = log(NumberOfSubspecies))) + 
@@ -958,6 +1044,8 @@ ggplot(nSpecies, aes(y = pubmedResid, x = log(NumberOfSubspecies))) +
   thesis_colour()
 
 %%end.rcode
+
+Plots are created with a combination of \cite{ggplot2, palettetown, dotwhisker, ggtree}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -973,8 +1061,6 @@ The effect of nonindependance due to phylogeny was very small ($\lambda = $\rinl
 
 The interaction term between study effort and number of subspecies, when included, was not significant ($\beta = $ \rinline{ subspeciesInter$model$coef['log(NumberOfSubspecies):log(pubmedRefs + 1)']}, $p = $\rinline{subInter.summary$coefficients[5,'Pr(>|t|)']}).
 
-The model using the residuals from a regression between number of viruses and study effort as the response variable found no significant affect of number of subspecies. 
-Mass was marginally significant.
 
 
 %%begin.rcode dwplotCap
@@ -997,7 +1083,7 @@ subspeciesCoefs <- data.frame(
 )
 
 x <- rbind(subspeciesCoefs, 
-  c(NA, NA, 'log(NumberOfSubspecies):log(pubmedRefs + 1)', 'joint')) %>%
+  c(NA, NA, 'log(NumberOfSubspecies):log(scholarRefs)', 'joint')) %>%
   filter(term != '(Intercept)') %>%
   arrange(model, term) 
 
@@ -1009,9 +1095,8 @@ x$term <- plyr::mapvalues(x$term, from = levels(x$term)[2:5],
 dwplot(x) +
   theme(legend.position="right",
         axis.text.y = element_text(color = "black", size = 13, family  =  "Lato Light", vjust = 0.3)) +
-  scale_colour_manual(name = 'Model', 
-                                    labels = c('Interaction', 'No Interaction'),
-                                    values = hc_pal()(2)) +
+  scale_colour_poke(pokemon = 'Tangela', spread = 2, 
+    labels = c('Interaction', 'No Interaction'), ) +
   xlab('Coefficient Estimate')
     
 %%end.rcode
