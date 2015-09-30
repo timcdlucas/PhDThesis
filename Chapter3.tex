@@ -64,13 +64,27 @@ But once understood, these factors could provide a way to priorities surveillanc
 
 
 
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in mget(words, envir, "{}any"{}, NA, inherits = TRUE): cannot open file '/home/tim/Dropbox/phd/Documents/thesis/.Ch3Cache/wilsonReaderTaxonomyRead\_22585936ebb53a60f6fa2dcad4b54d26.rdb': No such file or directory}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): cannot open file '/home/tim/Dropbox/phd/Documents/thesis/.Ch3Cache/wilsonReaderTaxonomyRead\_22585936ebb53a60f6fa2dcad4b54d26.rdb': No such file or directory}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): cannot open file '/home/tim/Dropbox/phd/Documents/thesis/.Ch3Cache/wilsonReaderTaxonomyRead\_22585936ebb53a60f6fa2dcad4b54d26.rdb': No such file or directory}}\end{kframe}
+\end{knitrout}
 
 
 
 
 
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 
 
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in thesis\_colour(): object 'pal' not found}}\end{kframe}
+\end{knitrout}
 
 
 
@@ -138,11 +152,27 @@ In this case, this would be counted as one virus species.
 
 
 
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in thesis\_colour(): object 'pal' not found}}\end{kframe}
+\end{knitrout}
 
 
 
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 
 
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in thesis\_colour(): object 'pal' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in thesis\_colour(): object 'pal' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in thesis\_colour(): object 'pal' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in thesis\_colour(): object 'pal' not found}}\end{kframe}
+\end{knitrout}
 
 
 
@@ -161,7 +191,7 @@ These two measures of population structure were analysed separately as the numbe
 To control for study bias I collected the number of Pubmed and Google Scholar citations for each bat species including synonyms from ITIS \cite{itis} via the taxize package \cite{chamberlain2013taxize}.
 The counts were scraped using the rvest package \cite{rvest}.
 I log transformed these variables as they were strongly right skewed.
-The log number of citations on Pubmed and Google scholar were highly correlated (pgls: $t$ = 13.23, df = 194, $p$ = 0).
+The log number of citations on Pubmed and Google scholar were highly correlated (pgls: $t$ = 5.58, df = 194, $p$ = \ensuremath{8.04\times 10^{-8}}).
 The results here are for analyses using only Google Scholar citations.
 See the appendix for analyses run using Pubmed citations.
 
@@ -207,7 +237,16 @@ Plots were created with a combination of \cite{ggplot2, palettetown, dotwhisker,
 \end{knitrout}
 
 
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in plot.new(): figure margins too large}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in plot.new(): figure margins too large}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in plot.new(): figure margins too large}}\end{kframe}
+\end{knitrout}
 
 
 
@@ -223,6 +262,12 @@ Plots were created with a combination of \cite{ggplot2, palettetown, dotwhisker,
 
 
 
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in thesis\_colour(): object 'pal' not found}}\end{kframe}
+\end{knitrout}
 
 
 
@@ -230,8 +275,12 @@ Plots were created with a combination of \cite{ggplot2, palettetown, dotwhisker,
 
 
 
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 
 
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in thesis\_colour(): object 'pal' not found}}\end{kframe}
+\end{knitrout}
 
 
 
@@ -242,12 +291,13 @@ Plots were created with a combination of \cite{ggplot2, palettetown, dotwhisker,
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-See Figure \ref{fig:plotSubspeciesCoefs} for a display of estimated coefficients for the two models using number of viruses as the response variable. 
-The main model with mass, study effort and number of subspecies as predictors found study effort to be highly significant ($\beta = $NA, $p = $0). 
-The number of subspecies was marginally significant ($\beta = $ 0.54, $p = $0.01). 
-The effect of nonindependance due to phylogeny was very small ($\lambda = $0.07, $p = $0.1).
 
-The interaction term between study effort and number of subspecies, when included, was not significant ($\beta = $ NA, $p = $0.73).
+See Figure \ref{fig:plotSubspeciesCoefs} for a display of estimated coefficients for the two models using number of viruses as the response variable. 
+The main model with mass, study effort and number of subspecies as predictors found study effort to be highly significant ($\beta = $ NA, $p = $ 0.08). 
+The number of subspecies was marginally significant ($\beta = $ 1, $p = $ \ensuremath{8.08\times 10^{-5}}). 
+The effect of nonindependance due to phylogeny was very small ($\lambda = $ 0.03, $p = $ 0.44).
+
+The interaction term between study effort and number of subspecies, when included, was not significant ($\beta = $ 0.08, $p = $ 0.64).
 
 
 
@@ -271,7 +321,21 @@ Without interactions, number of subspecies is marginally significant.
 \end{knitrout}
 
 
+\begin{table}
+  \rowcolors{2}{gray!25}{white}
+  \begin{tabular}{cc}
+  \hline
+  Covariate & Estimate ($\pm$ SE) \\
+  \hline
+  1 &2 \\
+  2 & 1 \\
 
+
+
+  \end{tabular}
+\caption{Table of parameter estimates.}
+\label{t:params}
+\end{table}
 
 
 
