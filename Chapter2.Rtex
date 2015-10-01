@@ -65,7 +65,7 @@ library(ggplot2)
 
 %\subsubsection{One or two sentences providing a basic introduction to the field}
 % comprehensible to a scientist in any discipline.
-\lettr{A}n increasingly large fraction of emerging diseases come from wild animals \cite{jones2008global, taylor2001risk} and these diseases have a huge impact on human health and national economies and development.
+\lettr{A}n increasingly large fraction of emerging diseases come from wild animals and these diseases have a huge impact on human health and national economies and development.
 The chance that a new zoonosis will come from any particularly wild host species increases with the diversity of pathogens in that species.
 However, the factors that control pathogen diversity in wild populations are still unknown.
 
@@ -81,7 +81,7 @@ Greater mechanistic understanding is needed to clarify the exact causal role pop
 Mechanistic models are also likely to be more robust to transferring understanding between taxa and predicting changes. % !!! Not great.
 
 Typically it is assumed that well-connected populations promote disease spread (high $R_0$) and therefore promote pathogen diversity.
-However, if competition is strong endemic pathogens will dominate and prevent new diseases from invading and spreading \cite{ackleh2003competitive,bremermann1989competitive,martcheva2013competitive,qiu2013vector}.
+However, if competition is strong endemic pathogens will dominate and prevent new diseases from invading and spreading.
 In a structured population, stochastic effects could create areas of low prevalence of the endemic disease, allowing new diseases to invade.
 
 I use bats as a case study as they have been implicated in a number of recent, high profile diseases such as Ebola, SARS, Hendra and Nipah.
@@ -134,7 +134,7 @@ This also implies that population structure is not a useful proxy for pathogen d
 \subsubsection{Why is pathogen diversity important?}
 
 The diversity of pathogens in a wild animal species strongly affects the chance that a disease from that species will infect humans.
-As over 50\% of emerging infectious diseases have an animal source  \cite{jones2008global}, understanding and predicting this process is a global health priority.
+As over 50\% of emerging infectious diseases have an animal source  \cite{jones2008global}, understanding and predicting this process is a global health priority  \cite{taylor2001risk}.
 However, the factors that control the diversity of pathogens in a wild animal population are still unclear.
 
 
