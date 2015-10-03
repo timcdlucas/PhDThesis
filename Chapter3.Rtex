@@ -510,7 +510,7 @@ write.csv(nSpecies, file = 'data/Chapter3/nSpecies.csv')
 To measure pathogen richness I used data from \cite{luis2013comparison}. 
 These simply include known infections of a bat species with a pathogen species. 
 Only species with at least one pathogen were included in the analysis.
-Many viruses were not identified to species level or their identified species was not in the ICTV virus taxonomy \citep{ICTV}.
+Many viruses were not identified to species level or their identified species was not in the ICTV virus taxonomy \cite{ICTV}.
 I counted a virus if it was the only virus, for that host species, in the lowest taxonomic level identified in the ICTV taxonomy.
 That is, if a host carries an unknown Paramyxoviridae virus, then it must carry at least one Paramyxoviridae virus.
 If a host carries an unknown Paramyxoviridae virus and a known Paramyxoviridae virus, then it is hard to confirm that the unknown virus is not another record of the known virus.
@@ -856,11 +856,11 @@ D'
 
 %%begin.rcode boxplot, fig.cap = boxplotCapt
 
-predData <- data.frame(NumberOfSubspecies =
-              seq(min(nSpecies$NumberOfSubspecies), max(nSpecies$NumberOfSubspecies), 
-              length.out = 200),
-                       mass = quantile(log(nSpecies$mass), 0.5),
-                       scholarRefs = quantile(log(nSpecies$scholarRefs), 0.5)
+predData <- data.frame(scholarRefs = quantile(nSpecies$scholarRefs, 0.5),
+                       mass = quantile(nSpecies$mass, 0.5),
+                       NumberOfSubspecies =
+                         seq(min(nSpecies$NumberOfSubspecies), max(nSpecies$NumberOfSubspecies), 
+                         length.out = 200)
                        )
 
 
@@ -1112,7 +1112,7 @@ x <- rbind(subspeciesCoefs,
   arrange(model, term) 
 
 x$term <- plyr::mapvalues(x$term, from = levels(x$term)[2:5], 
-  to = c('Mass', 'Subspecies', 'Cites*Subspecies', 'Cites'))
+  to = c('Mass', 'Cites', 'Subspecies', 'Cites*Subspecies'))
 
 
 
@@ -1163,17 +1163,16 @@ tableM <- matrix(tableV, ncol = 4, nrow = 4, byrow = TRUE)
   \hline
   Covariate & Estimate (95\% CI) & $p$ value\\
   \hline
-  Intercept & \rinline{tableM[1,1]} (\rinline{tableM[1, 2]} -- \rinline{tableM[1, 3]}) & \rinline{tableM[1, 4]}\\
   Number of subspecies & \rinline{tableM[2,1]} (\rinline{tableM[2, 2]} -- \rinline{tableM[2, 3]}) & \rinline{tableM[2, 4]}\\
   Mass & \rinline{tableM[3,1]} (\rinline{tableM[3, 2]} -- \rinline{tableM[3, 3]}) & \rinline{tableM[3, 4]}\\
   Study effort & \rinline{tableM[4,1]} (\rinline{tableM[4, 2]} -- \rinline{tableM[4, 3]}) & \rinline{tableM[4, 4]}\\
-
+  Intercept & \rinline{tableM[1,1]} (\rinline{tableM[1, 2]} -- \rinline{tableM[1, 3]}) & \rinline{tableM[1, 4]}\\
   \end{tabular}
 \caption{Table of parameter estimates.}
 \label{t:params}
 \end{table}
 
-subspeciesJointUnlog
+
 
 
 
