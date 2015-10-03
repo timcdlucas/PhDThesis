@@ -272,7 +272,7 @@ ggplot(nSpecies, aes(x = log(NumberOfSubspecies), y = log(virusSpecies))) +
   # geom_smooth(method = 'lm') +
   geom_jitter(aes(colour = familyPlotCol), size = 2.5, alpha = 0.8, 
     position = position_jitter(width = .1, height = .1)) +
-  thesis_colour() +
+  scale_colour_hc() +
   geom_density2d() +
   labs(colour = 'Family')
   
@@ -510,10 +510,12 @@ write.csv(nSpecies, file = 'data/Chapter3/nSpecies.csv')
 To measure pathogen richness I used data from \cite{luis2013comparison}. 
 These simply include known infections of a bat species with a pathogen species. 
 Only species with at least one pathogen were included in the analysis.
-As many viruses were not identified to species level, I counted a virus if it was the only virus, for that host species, in the lowest identified taxonomic level.
+Many viruses were not identified to species level or their identified species was not in the ICTV virus taxonomy \citep{ICTV}.
+I counted a virus if it was the only virus, for that host species, in the lowest taxonomic level identified in the ICTV taxonomy.
 That is, if a host carries an unknown Paramyxoviridae virus, then it must carry at least one Paramyxoviridae virus.
 If a host carries an unknown Paramyxoviridae virus and a known Paramyxoviridae virus, then it is hard to confirm that the unknown virus is not another record of the known virus.
 In this case, this would be counted as one virus species.
+
 
 
 %%begin.rcode treeRead
@@ -572,7 +574,7 @@ ggplot(nSpecies, aes(x = scholarRefs, y = pubmedRefs + 1)) +
   geom_smooth(method = 'lm') +
   scale_x_log10() +
   scale_y_log10() +
-  thesis_colour()
+  scale_colour_hc()
 
 %%end.rcode
 
@@ -590,7 +592,7 @@ ggplot(nSpecies, aes(log(mass), virusSpecies)) +
   geom_point(aes(colour = familyPlotCol), size = 2.5) + 
   geom_smooth(method = 'lm')+
   labs(colour = 'Family') +
-  thesis_colour()
+  scale_colour_hc()
 
 
 
@@ -600,7 +602,7 @@ ggplot(nSpecies, aes(NumberOfSubspecies, virusSpecies)) +
     position = position_jitter(width = .3, height = .3)) + 
   geom_smooth(method = 'lm')+
   labs(colour = 'Family') +
-  thesis_colour()
+  scale_colour_hc()
 
 ggplot(nSpecies, aes(NumberOfSubspecies, virusSpecies)) +
   geom_jitter(aes(colour = familyPlotCol), size = 2.5, 
@@ -608,7 +610,7 @@ ggplot(nSpecies, aes(NumberOfSubspecies, virusSpecies)) +
   scale_x_log10() + 
   geom_smooth(method = 'lm')+
   labs(colour = 'Family') +
-  thesis_colour()
+  scale_colour_hc()
 
 
 ggplot(nSpecies, aes(SubspeciesFactor, virusSpecies)) +
@@ -624,7 +626,7 @@ ggplot(nSpecies, aes(log(pubmedRefs + 1), virusSpecies)) +
     position = position_jitter(width = .1, height = .1)) + 
   geom_smooth(method = 'lm') +
   labs(colour = 'Family')+
-  thesis_colour()
+  scale_colour_hc()
 
 %%end.rcode
 
@@ -815,7 +817,7 @@ ggplot(jointSDUnlog, aes(x = Subspecies)) +
 
 subspeciesInter <- pgls(
   virusSpecies ~ log(mass) + 
-  log(NumberOfSubspecies)*log(scholarRefs), 
+  NumberOfSubspecies*log(scholarRefs), 
   data = compSubspecies, lambda = 'ML')
 
 subInter.summary <- summary(subspeciesInter)
@@ -845,7 +847,9 @@ summary(subspeciesResid)
 
 %begin.rcode boxplotCapt
 
-boxplotCapt <- 'Number of virus species against number of subspecies. Data within a number of subspecies are plotted as boxplots with the dark bar showing the median, the box showing the interquartile range, vertical lines showing the range and outliers shown as seperate points. A non-phylogenetic linear model is shown in blue'
+boxplotCapt <- 'Number of virus species against number of subspecies. 
+Data within a number of subspecies are plotted as boxplots with the dark bar showing the median, the box showing the interquartile range, vertical lines showing the range and outliers shown as seperate points.
+D'
 
 %%end.rcode
 
@@ -853,29 +857,36 @@ boxplotCapt <- 'Number of virus species against number of subspecies. Data withi
 %%begin.rcode boxplot, fig.cap = boxplotCapt
 
 predData <- data.frame(NumberOfSubspecies =
-              seq(min(nSpecies$NumberOfSubspecies), max(nSpecies$NumberOfSubspecies), 200),
-                       mass = log(mean(nSpecies$mass)),
-                       scholarRefs = log(mean(nSpecies$scholarRefs))
+              seq(min(nSpecies$NumberOfSubspecies), max(nSpecies$NumberOfSubspecies), 
+              length.out = 200),
+                       mass = quantile(log(nSpecies$mass), 0.5),
+                       scholarRefs = quantile(log(nSpecies$scholarRefs), 0.5)
                        )
-#line <- predict(subspeciesJointUnlog
 
+
+lines <- data.frame(NumberOfSubspecies = predData$NumberOfSubspecies, 
+               virusSpecies = predict(subspeciesJointUnlog, newdata = predData))
 
 ggplot(nSpecies, aes(SubspeciesFactor, virusSpecies, colour = 'a', fill = 'a')) + 
-  geom_smooth(method = 'lm',  aes(group = 1), colour = 'black', fill = 'grey') +
   geom_boxplot(outlier.size = 1, size = 0.3, outlier.colour = grey(0.3), 
     notch = FALSE) +
-  scale_colour_manual(values = brewer.pal(4, 'Paired')[2]) +
-  scale_fill_manual(values = brewer.pal(4, 'Paired')) +
-#  thesis_fill() +
-#  thesis_colour() +
+  scale_colour_manual(values = pokepal('Swampert')[2]) +
+  scale_fill_manual(values = pokepal('Swampert')[3]) +
   stat_summary(geom = "crossbar", width = 0.7, fatten = 2, 
     fun.data = function(x){ return(c(y = median(x), ymin = median(x), ymax = median(x))) }) +
   theme(legend.position = 'none') + 
-  #geom_smooth(method = 'lm',  aes(group = 1), colour = 'black', fill = NA) +
   scale_x_discrete(limits = levels(nSpecies$SubspeciesFactor), drop=FALSE) +
-  xlab('N. of Subspecies')+
-  ylab('Viral Richness')
+  xlab('N. of Subspecies') +
+  ylab('Viral Richness') +
+  geom_line(data = lines, aes(x = NumberOfSubspecies, y = virusSpecies, group = 1),
+    colour = pokepal('Swampert')[4], lwd = 1)
 
+#hist <- ggplot(nSpecies, aes(x = SubspeciesFactor)) +
+#          geom_histogram(width = 0.6)
+
+#grid.arrange(hist, box, ncol = 1, nrow = 2, )
+
+#multiplot(hist, box, layout = matrix(c(1, 2, 2), ncol = 1))
 
 %%end.rcode
 
@@ -892,7 +903,7 @@ scholarTest <- pgls(log(scholarRefs) ~ oneVir, data = rm1compData, lambda = 'ML'
 
 summary(scholarTest)
 par(mfrow = c(2,2))
-plot(scholarTest)
+#plot(scholarTest)
 
 
 # Wilcox test to compare means of mass (certainly not normally distributed)
@@ -901,13 +912,13 @@ massTest <-  pgls(log(mass) ~ oneVir, data = rm1compData, lambda = 'ML')
 
 summary(massTest)
 
-plot(massTest)
+#plot(massTest)
 
 # p = 2e-4. 
 subspeciesTest <-  pgls(NumberOfSubspecies ~ oneVir, data = rm1compData, lambda = 'ML')
 
 summary(subspeciesTest)
-plot(subspeciesTest)
+#plot(subspeciesTest)
 %%end.rcode
 
 %%begin.rcode rm1virCapt
@@ -1019,7 +1030,7 @@ ggplot(nSpecies, aes(log(NumberOfSubspecies), virusSpecies)) +
   geom_smooth(method = 'lm') +
   geom_abline(intercept = subspeciesJointIntercept, slope = subspeciesJoint$model$coef[2], colour = 'red')+
   labs(colour = 'Family') +
-  thesis_colour()
+  scale_colour_hc()
 
 
 %%end.rcode
@@ -1053,7 +1064,7 @@ ggplot(nSpecies, aes(y = pubmedResid, x = log(NumberOfSubspecies))) +
   geom_point(aes(colour = familyPlotCol)) +
   geom_smooth(method = 'lm') +
   labs(colour = 'Family') +
-  thesis_colour()
+  scale_colour_hc()
 
 %%end.rcode
 
@@ -1089,14 +1100,14 @@ Without interactions, number of subspecies is marginally significant.
 
 subspeciesCoefs <- data.frame(
   estimate = c(subspeciesJoint$model$coef, subspeciesInter$model$coef),
-  std.error = c(subspeciesJoint$sterr, subspeciesInter$sterr),
-  term = names(c(subspeciesJoint$model$coef, subspeciesInter$model$coef)),
+  std.error = c(subspeciesJointUnlog$sterr, subspeciesInter$sterr),
+  term = names(c(subspeciesJointUnlog$model$coef, subspeciesInter$model$coef)),
   model = rep(c('joint', 'inter'), 
-    c(length(subspeciesJoint$model$coef), length(subspeciesInter$model$coef)))
+    c(length(subspeciesJointUnlog$model$coef), length(subspeciesInter$model$coef)))
 )
 
 x <- rbind(subspeciesCoefs, 
-  c(NA, NA, 'log(NumberOfSubspecies):log(scholarRefs)', 'joint')) %>%
+  c(NA, NA, 'NumberOfSubspecies:log(scholarRefs)', 'joint')) %>%
   filter(term != '(Intercept)') %>%
   arrange(model, term) 
 
@@ -1114,23 +1125,55 @@ dwplot(x) +
     
 %%end.rcode
 
+%%begin.rcode tableParams
 
-\begin{table}
+tableV <- c(coef(subspeciesJointUnlog)['(Intercept)'], 
+            coef(subspeciesJointUnlog)['(Intercept)'] - 1.96 * (summary(subspeciesJointUnlog))$coefficients['(Intercept)', 'Std. Error'],
+            coef(subspeciesJointUnlog)['(Intercept)'] + 1.96 * (summary(subspeciesJointUnlog))$coefficients['(Intercept)', 'Std. Error'],
+            (summary(subspeciesJointUnlog))$coefficients['(Intercept)', 'Pr(>|t|)'],
+
+            coef(subspeciesJointUnlog)['NumberOfSubspecies'], 
+            coef(subspeciesJointUnlog)['NumberOfSubspecies'] - 1.96 * (summary(subspeciesJointUnlog))$coefficients['NumberOfSubspecies', 'Std. Error'],
+            coef(subspeciesJointUnlog)['NumberOfSubspecies'] + 1.96 * (summary(subspeciesJointUnlog))$coefficients['NumberOfSubspecies', 'Std. Error'],
+            (summary(subspeciesJointUnlog))$coefficients['NumberOfSubspecies', 'Pr(>|t|)'],
+
+            coef(subspeciesJointUnlog)['log(mass)'], 
+            coef(subspeciesJointUnlog)['log(mass)'] - 1.96 * (summary(subspeciesJointUnlog))$coefficients['log(mass)', 'Std. Error'],
+            coef(subspeciesJointUnlog)['log(mass)'] + 1.96 * (summary(subspeciesJointUnlog))$coefficients['log(mass)', 'Std. Error'],
+            (summary(subspeciesJointUnlog))$coefficients['log(mass)', 'Pr(>|t|)'],
+
+            coef(subspeciesJointUnlog)['log(scholarRefs)'], 
+            coef(subspeciesJointUnlog)['log(scholarRefs)'] - 1.96 * (summary(subspeciesJointUnlog))$coefficients['log(scholarRefs)', 'Std. Error'],
+            coef(subspeciesJointUnlog)['log(scholarRefs)'] + 1.96 * (summary(subspeciesJointUnlog))$coefficients['log(scholarRefs)', 'Std. Error'],
+            (summary(subspeciesJointUnlog))$coefficients['log(scholarRefs)', 'Pr(>|t|)']
+)
+
+tableM <- matrix(tableV, ncol = 4, nrow = 4, byrow = TRUE)
+
+
+%%end.rcode
+
+
+
+
+
+\begin{table}[t]
   \rowcolors{2}{gray!25}{white}
-  \begin{tabular}{cc}
+  \begin{tabular}{lrr}
   \hline
-  Covariate & Estimate ($\pm$ SE) \\
+  Covariate & Estimate (95\% CI) & $p$ value\\
   \hline
-  1 &2 \\
-  2 & 1 \\
-
-
+  Intercept & \rinline{tableM[1,1]} (\rinline{tableM[1, 2]} -- \rinline{tableM[1, 3]}) & \rinline{tableM[1, 4]}\\
+  Number of subspecies & \rinline{tableM[2,1]} (\rinline{tableM[2, 2]} -- \rinline{tableM[2, 3]}) & \rinline{tableM[2, 4]}\\
+  Mass & \rinline{tableM[3,1]} (\rinline{tableM[3, 2]} -- \rinline{tableM[3, 3]}) & \rinline{tableM[3, 4]}\\
+  Study effort & \rinline{tableM[4,1]} (\rinline{tableM[4, 2]} -- \rinline{tableM[4, 3]}) & \rinline{tableM[4, 4]}\\
 
   \end{tabular}
 \caption{Table of parameter estimates.}
 \label{t:params}
 \end{table}
 
+subspeciesJointUnlog
 
 
 
