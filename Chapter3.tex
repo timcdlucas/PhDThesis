@@ -9,34 +9,34 @@
 \section{Abstract}
 
 
-\subsubsection{One or two sentences providing a basic introduction to the field}
+\tmpsection{One or two sentences providing a basic introduction to the field}
 % comprehensible to a scientist in any discipline.
 \lettr{B}ats are an important reservoire of zoonotic diseases.
 It is still unclear what factors determine the number of pathogens a wild bat species carries.
 But once understood, these factors could provide a way to priorities surveillance of bat populations.
 
 
-\subsubsection{Two to three sentences of more detailed background}
+\tmpsection{Two to three sentences of more detailed background}
 % comprehensible to scientists in related disciplines.
 
 
-\subsubsection{One sentence clearly stating the general problem (the gap)}
+\tmpsection{One sentence clearly stating the general problem (the gap)}
 % being addressed by this particular study.
 
 
-\subsubsection{One sentence summarising the main result}
+\tmpsection{One sentence summarising the main result}
 %  (with the words “here we show” or their equivalent).
 
 
-\subsubsection{Two or three sentences explaining what the main result reveals in direct comparison to what was thought to be the case previously}
+\tmpsection{Two or three sentences explaining what the main result reveals in direct comparison to what was thought to be the case previously}
 % or how the main result adds to previous knowledge
 
 
-\subsubsection{One or two sentences to put the results into a more general context.}
+\tmpsection{One or two sentences to put the results into a more general context.}
 
 
 
-\subsubsection{Two or three sentences to provide a broader perspective, }
+\tmpsection{Two or three sentences to provide a broader perspective, }
 % readily comprehensible to a scientist in any discipline.
 
 
@@ -64,27 +64,13 @@ But once understood, these factors could provide a way to priorities surveillanc
 
 
 
-\begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in mget(words, envir, "{}any"{}, NA, inherits = TRUE): cannot open file '/home/tim/Dropbox/phd/Documents/thesis/.Ch3Cache/wilsonReaderTaxonomyRead\_22585936ebb53a60f6fa2dcad4b54d26.rdb': No such file or directory}}
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): cannot open file '/home/tim/Dropbox/phd/Documents/thesis/.Ch3Cache/wilsonReaderTaxonomyRead\_22585936ebb53a60f6fa2dcad4b54d26.rdb': No such file or directory}}
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): cannot open file '/home/tim/Dropbox/phd/Documents/thesis/.Ch3Cache/wilsonReaderTaxonomyRead\_22585936ebb53a60f6fa2dcad4b54d26.rdb': No such file or directory}}\end{kframe}
-\end{knitrout}
 
 
 
 
 
-\begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 
 
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in thesis\_colour(): object 'pal' not found}}\end{kframe}
-\end{knitrout}
 
 
 
@@ -128,7 +114,9 @@ But once understood, these factors could provide a way to priorities surveillanc
 To measure pathogen richness I used data from \cite{luis2013comparison}. 
 These simply include known infections of a bat species with a pathogen species. 
 Only species with at least one pathogen were included in the analysis.
-As many viruses were not identified to species level, I counted a virus if it was the only virus, for that host species, in the lowest identified taxonomic level.
+Rows with host species that were not identified to species level were removed.
+Many viruses were not identified to species level or their identified species was not in the ICTV virus taxonomy \cite{ICTV}.
+I counted a virus if it was the only virus, for that host species, in the lowest taxonomic level identified in the ICTV taxonomy.
 That is, if a host carries an unknown Paramyxoviridae virus, then it must carry at least one Paramyxoviridae virus.
 If a host carries an unknown Paramyxoviridae virus and a known Paramyxoviridae virus, then it is hard to confirm that the unknown virus is not another record of the known virus.
 In this case, this would be counted as one virus species.
@@ -137,10 +125,11 @@ In this case, this would be counted as one virus species.
 
 
 
+
 \begin{knitrout}\footnotesize
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[t]
 
-{\centering \includegraphics[width=0.8\textwidth]{figure/treePlot-1} 
+{\centering \includegraphics[width=\textwidth]{figure/treePlot-1} 
 
 }
 
@@ -152,27 +141,11 @@ In this case, this would be counted as one virus species.
 
 
 
-\begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in thesis\_colour(): object 'pal' not found}}\end{kframe}
-\end{knitrout}
 
 
 
-\begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 
 
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in thesis\_colour(): object 'pal' not found}}
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in thesis\_colour(): object 'pal' not found}}
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in thesis\_colour(): object 'pal' not found}}
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in thesis\_colour(): object 'pal' not found}}\end{kframe}
-\end{knitrout}
 
 
 
@@ -191,7 +164,7 @@ These two measures of population structure were analysed separately as the numbe
 To control for study bias I collected the number of Pubmed and Google Scholar citations for each bat species including synonyms from ITIS \cite{itis} via the taxize package \cite{chamberlain2013taxize}.
 The counts were scraped using the rvest package \cite{rvest}.
 I log transformed these variables as they were strongly right skewed.
-The log number of citations on Pubmed and Google scholar were highly correlated (pgls: $t$ = 5.58, df = 194, $p$ = \ensuremath{8.04\times 10^{-8}}).
+The log number of citations on Pubmed and Google scholar were highly correlated (pgls: $t$ = 19.32, df = 194, $p$ = 0).
 The results here are for analyses using only Google Scholar citations.
 See the appendix for analyses run using Pubmed citations.
 
@@ -204,7 +177,7 @@ They are log transformed due to the strong right skew.
 
 To control for phylogenetic nonindependance I used the best-supported phylogeny from \cite{fritz2009geographical} which is the supertree from \cite{bininda2007delayed} with names updated to match the Wilson \& Reeder taxonomy \cite{wilson2005mammal}.
 Phylogenetic manipulation was performed using the ape package \cite{ape}.
-
+The importance of the phylogeny on each variable separately was estimated using \cite{phytools}.
 
 I ran two models using the caper package \cite{caper} testing the relationship between pathogen richness and log number of subspecies.
 All independant variables were log transformed.
@@ -230,23 +203,16 @@ Plots were created with a combination of \cite{ggplot2, palettetown, dotwhisker,
 
 }
 
-\caption[Number of virus species against number of subspecies]{Number of virus species against number of subspecies. Data within a number of subspecies are plotted as boxplots with the dark bar showing the median, the box showing the interquartile range, vertical lines showing the range and outliers shown as seperate points. A non-phylogenetic linear model is shown in blue}\label{fig:boxplot}
+\caption[Number of virus species against number of subspecies]{Number of virus species against number of subspecies. 
+Data within a number of subspecies are plotted as boxplots with the dark bar showing the median, the box showing the interquartile range, vertical lines showing the range and outliers shown as seperate points.
+D}\label{fig:boxplot}
 \end{figure}
 
 
 \end{knitrout}
 
 
-\begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in plot.new(): figure margins too large}}
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in plot.new(): figure margins too large}}
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in plot.new(): figure margins too large}}\end{kframe}
-\end{knitrout}
 
 
 
@@ -262,12 +228,6 @@ Plots were created with a combination of \cite{ggplot2, palettetown, dotwhisker,
 
 
 
-\begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in thesis\_colour(): object 'pal' not found}}\end{kframe}
-\end{knitrout}
 
 
 
@@ -275,12 +235,12 @@ Plots were created with a combination of \cite{ggplot2, palettetown, dotwhisker,
 
 
 
-\begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 
 
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in thesis\_colour(): object 'pal' not found}}\end{kframe}
-\end{knitrout}
+
+
+
+
 
 
 
@@ -291,15 +251,34 @@ Plots were created with a combination of \cite{ggplot2, palettetown, dotwhisker,
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\subsection{Number of Subspecies}
+\tmpsection{More descriptive}
 
+After data cleaning there was data for 196 bat species in 11 families.
+The number of described virus species for a bat host ranged up to 15 viruses in \emph{Carollia perspicillata}.
+Figure~\ref{fig:treePlot} shows the phylogeny used and the number of viruses for each species.
+The mean number of viruses across families is fairly constant with a lower range of 1.67 for Nycteridae.
+The highest mean is Mormoopidae with 5 virus species per bat species, but this is based on a sample size of 3.
+The Phyllostomidae have the second highest mean (n = 37) of 3.49.
+
+The small change in mean pathogen richness across families and the lack of clear pattern in Figure~\ref{fig:treePlot} implies that viral richness is not strongly phylogenetic. 
+This is corroborated by the small estimated size of $\lambda$ ($\lambda$ = 0.04, $p$ = 0.21).
+This fact implies that other factors must control pathogen richness.
+It also implies that pathogens are not directly inherited down the phylogeny, although this is to be expected by the fast evolution of viruses.
+
+Of the explanatory variables, the number of subspecies has no phylogenetic autocorrelation ($\lambda$ = \ensuremath{6.68\times 10^{-5}}, $p$ = 1), study effort has weak but significant autocorrelation ($\lambda$ = 0.06, $p$ = 0.03) and mass is strongly phylogenetic ($\lambda$ = 0.84, $p$ = \ensuremath{1.34\times 10^{-44}}).
+
+\tmpsection{Model results}
 See Figure \ref{fig:plotSubspeciesCoefs} for a display of estimated coefficients for the two models using number of viruses as the response variable. 
-The main model with mass, study effort and number of subspecies as predictors found study effort to be highly significant ($\beta = $ NA, $p = $ 0.08). 
-The number of subspecies was marginally significant ($\beta = $ 1, $p = $ \ensuremath{8.08\times 10^{-5}}). 
-The effect of nonindependance due to phylogeny was very small ($\lambda = $ 0.03, $p = $ 0.44).
+The main model with mass, study effort and number of subspecies as predictors found study effort to be highly significant ($\beta = $ NA, $p = $ \ensuremath{1.05\times 10^{-8}}). 
+The number of subspecies was marginally significant ($\beta = $ NA, $p = $ 0.02). 
+The effect of nonindependance due to phylogeny was very small ($\lambda = $ 0.09, $p = $ 0.02).
 
-The interaction term between study effort and number of subspecies, when included, was not significant ($\beta = $ 0.08, $p = $ 0.64).
+The interaction term between study effort and number of subspecies, when included, was significant ($\beta = $ 0.14, $p = $ \ensuremath{2.99\times 10^{-3}}).
 
 
+
+\subsection{$F_{ST}$}
 
 
 
@@ -311,9 +290,9 @@ The interaction term between study effort and number of subspecies, when include
 }
 
 \caption[
-Plot of coefficient estimates and 95\% confidence intervals for phylogenetic model with (inter) and without (joint) interactions between study effort and number of subspecies]{
-Plot of coefficient estimates and 95\% confidence intervals for phylogenetic model with (inter) and without (joint) interactions between study effort and number of subspecies. 
-Without interactions, number of subspecies is marginally significant.
+Plot of coefficient estimates and 95\% confidence intervals for phylogenetic model with and without interactions between study effort and number of subspecies]{
+Plot of coefficient estimates and 95\% confidence intervals for phylogenetic model with and without interactions between study effort and number of subspecies. 
+Without interactions, number of subspecies is significant.
 }\label{fig:plotSubspeciesCoefs}
 \end{figure}
 
@@ -321,21 +300,26 @@ Without interactions, number of subspecies is marginally significant.
 \end{knitrout}
 
 
-\begin{table}
+
+
+
+
+
+\begin{table}[t]
   \rowcolors{2}{gray!25}{white}
-  \begin{tabular}{cc}
+  \begin{tabular}{lrr}
   \hline
-  Covariate & Estimate ($\pm$ SE) \\
+  Covariate & Estimate (95\% CI) & $p$ value\\
   \hline
-  1 &2 \\
-  2 & 1 \\
-
-
-
+  Number of subspecies & 0.19 (0.07 -- 0.32) & \ensuremath{1.94\times 10^{-3}}\\
+  Mass & 0.34 (\ensuremath{-1.59\times 10^{-3}} -- 0.68) & 0.05\\
+  Study effort & 0.81 (0.54 -- 1.09) & \ensuremath{2.45\times 10^{-8}}\\
+  Intercept & \ensuremath{-4.14} (\ensuremath{-6.1} -- \ensuremath{-2.18}) & \ensuremath{5.05\times 10^{-5}}\\
   \end{tabular}
 \caption{Table of parameter estimates.}
 \label{t:params}
 \end{table}
+
 
 
 
