@@ -898,6 +898,8 @@ nSubSpAIC <- AIC(subspeciesJoint, subspeciesJointUnlog, subspeciesInter)
 
 %begin.rcode boxplotCapt
 
+# Caption for the main boxploit of subspecies vs virus
+
 boxplotCapt <- 'Number of virus species against number of subspecies. 
 Data within a number of subspecies are plotted as boxplots with the dark bar showing the median, the box showing the interquartile range, vertical lines showing the range and outliers shown as seperate points.
 Regression lines are from multivariate phylogenetic models with other independant variables set at their median value.
@@ -908,6 +910,11 @@ The models shown are thos with (pink) and without (red) an interaction between s
 
 
 %%begin.rcode boxplot, fig.cap = boxplotCapt
+
+# Make a boxplot of subspecies vs virus
+# Add model lines for pgls models.
+
+# Make predictions of model w/out interactions using median values of other variables.
 
 predData <- data.frame(scholarRefs = quantile(nSpecies$scholarRefs, 0.5),
                        mass = quantile(nSpecies$mass, 0.5),
@@ -920,6 +927,7 @@ predData <- data.frame(scholarRefs = quantile(nSpecies$scholarRefs, 0.5),
 lines <- data.frame(NumberOfSubspecies = predData$NumberOfSubspecies, 
                virusSpecies = predict(subspeciesJointUnlog, newdata = predData))
 
+# Make predictions of model w/ interactions using median values of other variables.
 
 predDataInter <- data.frame(scholarRefs = quantile(nSpecies$scholarRefs, 0.5),
                        mass = quantile(nSpecies$mass, 0.5),
@@ -931,6 +939,8 @@ predDataInter <- data.frame(scholarRefs = quantile(nSpecies$scholarRefs, 0.5),
 
 linesInter <- data.frame(NumberOfSubspecies = predData$NumberOfSubspecies, 
                virusSpecies = predict(subspeciesInter, newdata = predDataInter))
+
+# Make plot
 
 ggplot(nSpecies, aes(SubspeciesFactor, virusSpecies, colour = 'a', fill = 'a')) + 
   geom_boxplot(outlier.size = 1, size = 0.3, outlier.colour = grey(0.3), 
@@ -951,12 +961,13 @@ ggplot(nSpecies, aes(SubspeciesFactor, virusSpecies, colour = 'a', fill = 'a')) 
       label = c('No interaction', 'Interaction'),
       colour = pokepal('nidorina')[c(10,13)], size = c(3, 3))
 
-#10
+
 
 %%end.rcode
 
 
 %%begin.rcode rm1virTests
+# Want to look at whether the species with only 1 virus are just an artifact and whether they strongly affec the analysis.
 
 rm1df <- cbind(nSpecies, oneVir = nSpecies$virusSpecies > 1)
 rm1compData <- comparative.data(data = rm1df, phy = pruneTree, names.col = 'binomial')
@@ -1018,6 +1029,7 @@ rm1virCaptTitle <- c(
 
 
 %%begin.rcode rm1vir, fig.show = extraFigs, fig.cap = rm1virCapt, fig.scap = rm1virCaptTitle
+# Plots to compare data for species with >1 virus and species with =1 virus.
 
 ggplot(nSpecies, aes(x = mass, fill = virusSpecies > 1)) + 
   geom_density(alpha = 0.4) +
@@ -1041,7 +1053,7 @@ ggplot(nSpecies, aes(x = scholarRefs, fill = virusSpecies > 1)) +
 
 %%begin.rcode phyloRM1vir
 
-
+# Remove species with =1 virus and refit models.
 
 compRm1Vir <- comparative.data(data = nSpecies[nSpecies$virusSpecies > 1, ], 
                                phy = pruneTree, names.col = 'binomial')
@@ -1081,26 +1093,6 @@ logRm1.summary
 
 
 
-%%begin.rcode plotSubspecies, fig.show = extraFigs,  fig.cap = 'Number of virus species against log number of subspecies. Nonphylogenetic trend line in blue. Phylogenetic model (evaluated at mean body mass and mean study effort values) is shown in red.'
-
-
-subspeciesJointIntercept <- subspeciesJoint$model$coef[1] + 
-  mean(log(nSpecies$mass)) * subspeciesJoint$model$coef[4] +
-  mean(log(nSpecies$pubmedRefs + 1)) * subspeciesJoint$model$coef[3]
- 
-
-ggplot(nSpecies, aes(log(NumberOfSubspecies), virusSpecies)) +
-  geom_jitter(aes(colour = familyPlotCol), size = 2.5, 
-    position = position_jitter(width = .1, height = .1)) + 
-  geom_smooth(method = 'lm') +
-  geom_abline(intercept = subspeciesJointIntercept, slope = subspeciesJoint$model$coef[2], colour = 'red')+
-  labs(colour = 'Family') +
-  scale_colour_hc()
-
-
-%%end.rcode
-
-
 %%begin.rcode OneorMoreVirCapt
 OneorMoreVirCapt <- 'Number of subspecies by log study effort with colour indicating whether a species has 1 or more than 1 known virus species.
 There does not seem to be a huge difference.
@@ -1113,10 +1105,19 @@ OneorMoreVirCaptTitle <- 'Number of subspecies by study effort'
 
 %%begin.rcode OneorMoreVir, fig.show = extraFigs, fig.cap = OneorMoreVirCapt, fig.scap = OneorMoreVirCaptTitle
 
+nSpecies$scholarBins <- cut(log(nSpecies$scholarRefs), 8)
+
 ggplot(nSpecies, 
   aes(y = NumberOfSubspecies, x = scholarRefs, colour = virusSpecies > 1)) +
   geom_point() +
   scale_x_log10()
+
+
+ggplot(nSpecies, 
+  aes(y = NumberOfSubspecies, x = scholarBins, colour = virusSpecies > 1, fill = virusSpecies > 1)) +
+  geom_boxplot() +
+  scale_colour_manual(values = pokepal('Charizard')[c(4,7)]) +
+  scale_fill_manual(values = pokepal('Charizard')[c(14, 9)])
 
 
 %%end.rcode
