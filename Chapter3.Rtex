@@ -334,12 +334,18 @@ nSpecies$mass[
   ] <- meanAdditionalMass$mass 
 
 
-# Also calculate how few density records there are.
-dens <- pantheria %>%
-          filter(MSW05_Order == 'Chiroptera') %>% 
-          dplyr::select(MSW05_Binomial, X21.1_PopulationDensity_n.km2) %>%
-          filter(!is.na(X21.1_PopulationDensity_n.km2)) %>% 
-          nrow
+
+# Add distribution size
+
+
+distrSize <- sqldf("
+  SELECT [X26.1_GR_Area_km2]
+  FROM nSpecies
+  LEFT JOIN pantheria
+  ON nSpecies.binomial=pantheria.MSW05_Binomial
+  ")
+
+nSpecies$distrSize <- distrSize[,1]
 
 %%end.rcode
 
@@ -668,6 +674,17 @@ ggplot(nSpecies, aes(log(pubmedRefs + 1), virusSpecies)) +
   labs(colour = 'Family')+
   scale_colour_hc()
 
+
+# Distribution size aginst virus
+
+
+ggplot(nSpecies, aes(distrSize, virusSpecies)) +
+  geom_point(aes(colour = familyPlotCol), size = 2.5) + 
+  geom_smooth(method = 'lm') +
+  labs(colour = 'Family') +
+  scale_colour_hc() +
+  scale_x_log10()
+
 %%end.rcode
 
 
@@ -691,7 +708,8 @@ The log number of citations on Pubmed and Google scholar were highly correlated 
 The results here are for analyses using only Google Scholar citations.
 See the appendix for analyses run using Pubmed citations.
 
-Measures of body mass are taken from Pantheria \cite{jones2009pantheria}.
+Measures of body mass are taken from Pantheria \cite{jones2009pantheria} and primary literature \cite{canals2005relative, arita1993rarity, lopez2014echolocation, orr2013does, , lim2001bat, aldridge1987turning, ma2003dietary, owen2003home, henderson2008movements, heaney2012nyctalus, oleksy2015high, zhang2009recent}. 
+\emph{Pipistrellus pygmaeus} was assigned the same mass as \emph{P. pipistrellus} as they indistinguishable by mass.
 They are log transformed due to the strong right skew.
 
 
@@ -957,9 +975,10 @@ ggplot(nSpecies, aes(SubspeciesFactor, virusSpecies, colour = 'a', fill = 'a')) 
     colour = pokepal('nidorina')[10], lwd = 1) +
   geom_line(data = linesInter, aes(x = NumberOfSubspecies, y = virusSpecies, group = 1),
     colour = pokepal('nidorina')[13], lwd = 1) +
-    annotate('text', x = c(11.8, 12.2), y = c(5.2, 2.8), 
+    annotate('text', x = c(11.8, 12.2), y = c(5.2, 2.7), 
       label = c('No interaction', 'Interaction'),
-      colour = pokepal('nidorina')[c(10,13)], size = c(3, 3))
+      colour = pokepal('nidorina')[c(10,13)], size = c(3, 3),
+      family = 'lato light')
 
 
 
@@ -1222,7 +1241,7 @@ x$term <- plyr::mapvalues(x$term, from = levels(x$term)[2:5],
 dwplot(x) +
   theme(legend.position="right",
         axis.text.y = element_text(color = "black", size = 13, family  =  "Lato Light", vjust = 0.3)) +
-  scale_colour_poke(pokemon = 'Tangela', spread = 2, 
+  scale_colour_manual(values = pokepal('Nidorina')[c(4, 10)], 
     labels = c('Interaction', 'No Interaction'), name = 'Model') +
   xlab('Coefficient Estimate')
     
