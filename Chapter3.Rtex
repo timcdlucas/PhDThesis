@@ -55,6 +55,10 @@ library(rvest)
 # For synonym list
 library(taxize)
 
+# Spatial analysis
+# library(maptools)
+library(geosphere)
+
 %%end.rcode
 
 \section{Abstract}
@@ -334,18 +338,37 @@ nSpecies$mass[
   ] <- meanAdditionalMass$mass 
 
 
+%%end.rcode
 
-# Add distribution size
 
 
-distrSize <- sqldf("
-  SELECT [X26.1_GR_Area_km2]
-  FROM nSpecies
-  LEFT JOIN pantheria
-  ON nSpecies.binomial=pantheria.MSW05_Binomial
-  ")
+%%being.rcode IUCNranges
 
-nSpecies$distrSize <- distrSize[,1]
+# Read in iucn ranges and calculate range sizes for each species.
+ranges <- readShapePoly('data/Chapter3/TERRESTRIAL_MAMMALS/TERRESTRIAL_MAMMALS.shp')
+
+levels(ranges$binomial) <- c(levels(ranges$binomial), 'Myotis ricketti')
+ranges$binomial[ranges$binomial == 'Myotis pilosus'] <- 'Myotis ricketti'
+
+
+
+# Remove polys that aren't in our species list.
+batRanges <- ranges[ranges$binomial %in% nSpecies$binomial, ]
+
+rm(ranges)
+
+nSpecies$binomial[!(nSpecies$binomial %in% batRanges$binomial)]
+
+findArea <- function(name){
+  #cat(name)
+  A <- areaPolygon(batRanges[batRanges$binomial == name, ])
+  sum(A)
+}
+
+iucnDistr <- sapply(nSpecies$binomial, findArea)
+
+
+nSpecies$distrSize <- iucnDistr
 
 %%end.rcode
 
@@ -979,6 +1002,13 @@ ggplot(nSpecies, aes(SubspeciesFactor, virusSpecies, colour = 'a', fill = 'a')) 
       label = c('No interaction', 'Interaction'),
       colour = pokepal('nidorina')[c(10,13)], size = c(3, 3),
       family = 'lato light')
+
+
+
+%%end.rcode
+
+%%begin.rcode ITanalysis
+
 
 
 
