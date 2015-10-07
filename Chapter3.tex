@@ -145,12 +145,7 @@ In this case, this would be counted as one virus species.
 
 
 
-\begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in data.frame(colour = c("{}Phyllostomidae"{}, "{}Phyllostomidae"{}, "{}Vespertilionidae"{}, : arguments imply differing number of rows: 196, 199}}\end{kframe}
-\end{knitrout}
 
 
 
@@ -164,17 +159,17 @@ As $F_{ST}$ inevitably increases with spatial scale I controlled for this by onl
 I used the ratio of the furthest distance between $F_{ST}$ samples to the width of the species range and only used studies if this ratio was greater than 0.3.
 To allow comparison between different measures ($F_{ST}, \phi_{ST}$) and data from different molecular regions I converted all data to diploid gene flow.
 WILL ADD EXTRA METHODS LATER.
-These two measures of population structure were analysed separately as the number of subspecies has 196 data points while there is only $F_{ST}$ data for $\sim 30$ bat species.
+These two measures of population structure were analysed separately as the number of subspecies has 192 data points while there is only $F_{ST}$ data for $\sim 30$ bat species.
 
 To control for study bias I collected the number of Pubmed and Google Scholar citations for each bat species including synonyms from ITIS \cite{itis} via the taxize package \cite{chamberlain2013taxize}.
 The counts were scraped using the rvest package \cite{rvest}.
 I log transformed these variables as they were strongly right skewed.
-The log number of citations on Pubmed and Google scholar were highly correlated (pgls: $t$ = 19.32, df = 194, $p$ = 0).
+The log number of citations on Pubmed and Google scholar were highly correlated (pgls: $t$ = 18.69, df = 190, $p$ = 0).
 The results here are for analyses using only Google Scholar citations.
 See the appendix for analyses run using Pubmed citations.
 
 Measures of body mass are taken from Pantheria \cite{jones2009pantheria} and primary literature \cite{canals2005relative, arita1993rarity, lopez2014echolocation, orr2013does, , lim2001bat, aldridge1987turning, ma2003dietary, owen2003home, henderson2008movements, heaney2012nyctalus, oleksy2015high, zhang2009recent}. 
-\emph{Pipistrellus pygmaeus} was assign the same mass as \emph{Pipistrellus pipistrellus}.
+\emph{Pipistrellus pygmaeus} was assigned the same mass as \emph{P. pipistrellus} as they indistinguishable by mass.
 They are log transformed due to the strong right skew.
 
 
@@ -261,7 +256,7 @@ The models shown are thos with (pink) and without (red) an interaction between s
 \subsection{Number of Subspecies}
 \tmpsection{More descriptive}
 
-After data cleaning there was data for 196 bat species in 11 families.
+After data cleaning there was data for 192 bat species in 11 families.
 The number of described virus species for a bat host ranged up to 15 viruses in \emph{Carollia perspicillata}.
 Figure~\ref{fig:treePlot} shows the phylogeny used and the number of viruses for each species.
 The mean number of viruses across families is fairly constant with a lower range of 1.67 for Nycteridae.
@@ -269,19 +264,19 @@ The highest mean is Mormoopidae with 5 virus species per bat species, but this i
 The Phyllostomidae have the second highest mean (n = 37) of 3.49.
 
 The small change in mean pathogen richness across families and the lack of clear pattern in Figure~\ref{fig:treePlot} implies that viral richness is not strongly phylogenetic. 
-This is corroborated by the small estimated size of $\lambda$ ($\lambda$ = 0.04, $p$ = 0.21).
+This is corroborated by the small estimated size of $\lambda$ ($\lambda$ = 0.05, $p$ = 0.1).
 This fact implies that other factors must control pathogen richness.
 It also implies that pathogens are not directly inherited down the phylogeny, although this is to be expected by the fast evolution of viruses.
 
-Of the explanatory variables, the number of subspecies has no phylogenetic autocorrelation ($\lambda$ = \ensuremath{6.68\times 10^{-5}}, $p$ = 1), study effort has weak but significant autocorrelation ($\lambda$ = 0.06, $p$ = 0.03) and mass is strongly phylogenetic ($\lambda$ = 0.84, $p$ = \ensuremath{1.34\times 10^{-44}}).
+Of the explanatory variables, the number of subspecies has no phylogenetic autocorrelation ($\lambda$ = \ensuremath{6.68\times 10^{-5}}, $p$ = 1), study effort has weak but significant autocorrelation ($\lambda$ = 0.06, $p$ = 0.04) and mass is strongly phylogenetic ($\lambda$ = 0.83, $p$ = \ensuremath{2.51\times 10^{-43}}).
 
 \tmpsection{Model results}
 See Figure \ref{fig:plotSubspeciesCoefs} for a display of estimated coefficients for the two models using number of viruses as the response variable. 
-The main model with mass, study effort and number of subspecies as predictors found study effort to be highly significant ($\beta = $ NA, $p = $ \ensuremath{1.05\times 10^{-8}}). 
-The number of subspecies was marginally significant ($\beta = $ NA, $p = $ 0.02). 
-The effect of nonindependance due to phylogeny was very small ($\lambda = $ 0.09, $p = $ 0.02).
+The main model with mass, study effort and number of subspecies as predictors found study effort to be highly significant ($\beta = $ NA, $p = $ \ensuremath{1.18\times 10^{-8}}). 
+The number of subspecies was marginally significant ($\beta = $ NA, $p = $ 0.03). 
+The effect of nonindependance due to phylogeny was very small ($\lambda = $ 0.11, $p = $ 0.01).
 
-The interaction term between study effort and number of subspecies, when included, was significant ($\beta = $ 0.14, $p = $ \ensuremath{2.99\times 10^{-3}}).
+The interaction term between study effort and number of subspecies, when included, was significant ($\beta = $ 0.15, $p = $ \ensuremath{2\times 10^{-3}}).
 
 
 
@@ -318,10 +313,10 @@ Without interactions, number of subspecies is significant.
   \hline
   Covariate & Estimate (95\% CI) & $p$ value\\
   \hline
-  Number of subspecies & 0.19 (0.07 -- 0.32) & \ensuremath{1.94\times 10^{-3}}\\
-  Mass & 0.34 (\ensuremath{-1.59\times 10^{-3}} -- 0.68) & 0.05\\
-  Study effort & 0.81 (0.54 -- 1.09) & \ensuremath{2.45\times 10^{-8}}\\
-  Intercept & \ensuremath{-4.14} (\ensuremath{-6.1} -- \ensuremath{-2.18}) & \ensuremath{5.05\times 10^{-5}}\\
+  Number of subspecies & 0.18 (0.06 -- 0.3) & \ensuremath{4.49\times 10^{-3}}\\
+  Mass & 0.33 (\ensuremath{-0.01} -- 0.68) & 0.06\\
+  Study effort & 0.82 (0.54 -- 1.09) & \ensuremath{3.53\times 10^{-8}}\\
+  Intercept & \ensuremath{-4.08} (\ensuremath{-6.06} -- \ensuremath{-2.11}) & \ensuremath{7.33\times 10^{-5}}\\
   \end{tabular}
 \caption{Table of parameter estimates.}
 \label{t:params}
