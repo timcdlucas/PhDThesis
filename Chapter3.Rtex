@@ -25,6 +25,9 @@ source('misc/KnitrOptions.R')
 source('misc/theme_tcdl.R')
 
 
+# Choose the number of cores to use
+nCores <- 7
+
 %%end.rcode
 
 
@@ -56,8 +59,11 @@ library(rvest)
 library(taxize)
 
 # Spatial analysis
-# library(maptools)
+library(maptools)
 library(geosphere)
+
+# Parllel computation
+library(parallel)
 
 %%end.rcode
 
@@ -342,7 +348,7 @@ nSpecies$mass[
 
 
 
-%%being.rcode IUCNranges
+%%begin.rcode IUCNranges
 
 # Read in iucn ranges and calculate range sizes for each species.
 ranges <- readShapePoly('data/Chapter3/TERRESTRIAL_MAMMALS/TERRESTRIAL_MAMMALS.shp')
@@ -775,7 +781,7 @@ The $R^2$ value give is for the full model (not the loess curve).',
 # N Virus ~ log(subs + cites + mass)
 
 subspeciesJoint <- pgls(
-  virusSpecies ~ log(scholarRefs) + log(NumberOfSubspecies) +  log(mass), 
+  virusSpecies ~ log(scholarRefs) + log(NumberOfSubspecies) +  log(mass) , 
   data = compSubspecies, lambda = 'ML')
 
 subJoint.summary <- summary(subspeciesJoint)
@@ -1009,10 +1015,68 @@ ggplot(nSpecies, aes(SubspeciesFactor, virusSpecies, colour = 'a', fill = 'a')) 
 
 %%begin.rcode ITanalysis
 
+varList <- c('log(scholarRefs)', 'NumberOfSubspecies', 'log(mass)', 'log(distrSize)', 'rand')
+
+findCombs <- function(k, vars, longest){
+  x <- t(combn(vars, k))
+  nas <- matrix(NA, ncol = longest - NCOL(x), nrow = nrow(x))
+  mat <- cbind(x, nas)
+  return(mat)
+}
+
+modelList <- lapply(1:4, function(k) findCombs(k, varList, 5))
+modelMat <- do.call(rbind, modelList)
+
+interMat <- modelMat[apply(modelMat, 1, function(x) "log(scholarRefs)" %in% x & "NumberOfSubspecies" %in% x), ]
+interMat[, 2:5] <- interMat[, 1:4]
+interMat[, 1] <- "log(scholarRefs):NumberOfSubspecies"
+
+allModelMat <- rbind(modelMat, interMat)
 
 
+allFormulae <- apply(allModelMat, 1, function(x) as.formula(paste('virusSpecies ~', paste(x[!is.na(x)], collapse = ' + '))))
+
+
+
+modelSelect <- function(allForm, data, phy, boot, allModelMat, varList){
+  
+  set.seed(paste0('123', boot))
+  bootData <- cbind(data, rand = runif(nrow(data)))
+  compBootData <- comparative.data(data = bootData, phy = phy, names.col = 'binomial')
+
+  results <- apply(allModelMat, 1, function(x) sapply(c(varList, "log(scholarRefs):NumberOfSubspecies"), function(y) y %in% x)) %>%
+               t %>%
+               data.frame %>%
+               cbind(AIC = NA, boot = boot, lambda = NA)
+
+  for(m in 1:length(allForm)){
+    model <- pgls(allForm[[m]], data = compBootData, lambda = 'ML')
+    results$AIC[m] <- model$aicc
+    results$lambda <- model$param['lambda']
+    message(paste('Boot:', boot, ', m:', m, '\n'))
+  }
+
+  results$dAIC <- results$AIC - min(results$AIC)
+  results$weight <- exp(- 0.5 * results$dAIC) / sum(exp(- 0.5 * results$dAIC))
+
+
+  return(results)
+
+}
+
+
+nBoots <- 50
+
+fitModelsBootStrap <- mclapply(1:nBoots, function(b) modelSelect(allFormulae, nSpecies, pruneTree, b, allModelMat, varList), mc.cores = nCores)
+
+allResults <- do.call(rbind, fitModelsBootStrap)
+
+
+
+varWeights <- sapply(names(allResults)[1:6], funcion(x) sum(allResults$weights[allResults[, x]])
 
 %%end.rcode
+
 
 
 %%begin.rcode rm1virTests
