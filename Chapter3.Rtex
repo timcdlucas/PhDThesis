@@ -11,7 +11,7 @@
 # There's some slow webscrapping functions. Run them?
 runPubmedScrape <- FALSE
 runScholarScrape <- FALSE
-runFstScrape <- TRUE
+runFstScrape <- FALSE
 
 
 # Run slow bootstrapping?
@@ -1401,6 +1401,9 @@ fst$Useable <- fst$rangeCoverage > 0.3
 sum(fst$Useable, na.rm = TRUE)
 fst$binomial[fst$Useable] %>% unique %>% .[!is.na(.)] %>% length
 
+# Need to go back and check data but for now if fst$Useable is na, then it's FALSE (i.e. it's not a useable row)
+fst$Useable[is.na(fst$Useable)] <- FALSE
+
 
 %%end.rcode
 
@@ -1432,9 +1435,29 @@ write.csv(fstNewStudy, file = 'data/Chapter3/fstScrape.csv')
 
 %%begin.rcode fstCombine
 
+fstNewStudy <- read.csv('data/Chapter3/fstScrape.csv', row.names = 1)
+names(fstNewStudy) <- c('binomial', 'scholarRefs', 'pubmedRefs')
+
+# NAs are from searches with 0 references.
+fstNewStudy$pubmedRefs[is.na(fstNewStudy$pubmedRefs)] <- 0
+
+whichRows <- lapply(fstNewStudy$binomial, function(x) which(fstStudy$binomial == x))
+for(i in 1:length(whichRows)){
+  fstStudy[whichRows[[i]], 2:3] <- fstNewStudy[i, 2:3]
+}
+
+
+fst <- cbind(fst, fstStudy[, 2:3])
+
+# Remove rows whose scale is too small
+fst <- fst[fst$Useable, ]
 
 
 %%end.rcode
+
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \clearpage
