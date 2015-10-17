@@ -1103,7 +1103,7 @@ write.csv(allResults, file = 'data/Chapter3/modelSelectSubspecies.csv')
 
 %%end.rcode
 
-%%begin.rcode analyseModelSelect
+%%begin.rcode analyseModelSelect, fig.show = extraFigs
 
 allResults <- read.csv('data/Chapter3/modelSelectSubspecies.csv', row.names = 1)
 
@@ -1112,9 +1112,11 @@ varWeights <- sapply(names(allResults)[1:6], function(x) sum(allResults$weight[a
 
 modelWeights <- allResults %>%
                   group_by(predictors) %>%
-                  summarise(modelWeight = mean(weight)) %>%
+                  summarise(AICc = mean(AIC)) %>%
+                  mutate(dAIC = AICc - min(AICc), modelWeight = exp(- 0.5 * dAIC) / sum(exp(- 0.5 * dAIC))) %>%
                   arrange(desc(modelWeight)) %>%
-                  mutate(cumulativeWeight = cumsum(modelWeight))
+                  mutate(cumulativeWeight = cumsum(modelWeight)) %>%
+                  mutate(string = levels(predictors)[predictors])
 
 
 allResults %>% 
@@ -1324,6 +1326,10 @@ virusLambda <- summary(pgls(virusSpecies ~ 1, data = compSubspecies, lambda = 'M
 %%end.rcode
 \clearpage
 
+
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% FST ANALYSIS                                                                                                                                  %%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1483,7 +1489,7 @@ It also implies that pathogens are not directly inherited down the phylogeny, al
 Of the explanatory variables, the number of subspecies has no phylogenetic autocorrelation ($\lambda$ = \rinline{sspLambda$lambda}, $p$ = \rinline{sspLambda$P}), study effort has weak but significant autocorrelation ($\lambda$ = \rinline{scholarLambda$lambda}, $p$ = \rinline{scholarLambda$P}) and mass is strongly phylogenetic ($\lambda$ = \rinline{massLambda$lambda}, $p$ = \rinline{massLambda$P}).
 
 \tmpsection{Model results}
-See Figure \ref{fig:plotSubspeciesCoefs} for a display of estimated coefficients for the two models using number of viruses as the response variable. 
+%See Figure \ref{fig:plotSubspeciesCoefs} for a display of estimated coefficients for the two models using number of viruses as the response variable. 
 The main model with mass, study effort and number of subspecies as predictors found study effort to be highly significant ($\beta = $ \rinline{subspeciesJoint$model$coef['log(pubmedRefs + 1)']}, $p = $ \rinline{subJoint.summary$coefficients[2,'Pr(>|t|)']}). 
 The number of subspecies was marginally significant ($\beta = $ \rinline{ subspeciesJoint$model$coef['NumberOfSubspecies']}, $p = $ \rinline{subJoint.summary$coefficients[3,'Pr(>|t|)']}). 
 The effect of nonindependance due to phylogeny was very small ($\lambda = $ \rinline{subJoint.summary$param['lambda']}, $p = $ \rinline{subspeciesJoint$param.CI$lambda$bounds.p[1]}).
@@ -1502,7 +1508,7 @@ Without interactions, number of subspecies is significant.
 
 %%end.rcode
 
-%%begin.rcode plotSubspeciesCoefs, fig.cap = dwplotCap, fig.height = 2
+%%begin.rcode plotSubspeciesCoefs, fig.cap = dwplotCap, fig.height = 2, fig.show = extraFigs
 
 
 subspeciesCoefs <- data.frame(
@@ -1535,29 +1541,29 @@ dwplot(x) +
 %%begin.rcode tableParams
 
 
-tableV <- c(coef(subspeciesJointUnlog)['(Intercept)'], 
-            coef(subspeciesJointUnlog)['(Intercept)'] - 1.96 * (summary(subspeciesJointUnlog))$coefficients['(Intercept)', 'Std. Error'],
-            coef(subspeciesJointUnlog)['(Intercept)'] + 1.96 * (summary(subspeciesJointUnlog))$coefficients['(Intercept)', 'Std. Error'],
-            (summary(subspeciesJointUnlog))$coefficients['(Intercept)', 'Pr(>|t|)'],
+#tableV <- c(coef(subspeciesJointUnlog)['(Intercept)'], 
+#            coef(subspeciesJointUnlog)['(Intercept)'] - 1.96 * (summary(subspeciesJointUnlog))$coefficients['(Intercept)', 'Std. Error'],
+#            coef(subspeciesJointUnlog)['(Intercept)'] + 1.96 * (summary(subspeciesJointUnlog))$coefficients['(Intercept)', 'Std. Error'],
+#            (summary(subspeciesJointUnlog))$coefficients['(Intercept)', 'Pr(>|t|)'],
 
-            coef(subspeciesJointUnlog)['NumberOfSubspecies'], 
-            coef(subspeciesJointUnlog)['NumberOfSubspecies'] - 1.96 * (summary(subspeciesJointUnlog))$coefficients['NumberOfSubspecies', 'Std. Error'],
-            coef(subspeciesJointUnlog)['NumberOfSubspecies'] + 1.96 * (summary(subspeciesJointUnlog))$coefficients['NumberOfSubspecies', 'Std. Error'],
-            (summary(subspeciesJointUnlog))$coefficients['NumberOfSubspecies', 'Pr(>|t|)'],
+#            coef(subspeciesJointUnlog)['NumberOfSubspecies'], 
+#            coef(subspeciesJointUnlog)['NumberOfSubspecies'] - 1.96 * (summary(subspeciesJointUnlog))$coefficients['NumberOfSubspecies', 'Std. Error'],
+#            coef(subspeciesJointUnlog)['NumberOfSubspecies'] + 1.96 * (summary(subspeciesJointUnlog))$coefficients['NumberOfSubspecies', 'Std. Error'],
+#            (summary(subspeciesJointUnlog))$coefficients['NumberOfSubspecies', 'Pr(>|t|)'],
 
 
-            coef(subspeciesJointUnlog)['log(mass)'], 
-            coef(subspeciesJointUnlog)['log(mass)'] - 1.96 * (summary(subspeciesJointUnlog))$coefficients['log(mass)', 'Std. Error'],
-            coef(subspeciesJointUnlog)['log(mass)'] + 1.96 * (summary(subspeciesJointUnlog))$coefficients['log(mass)', 'Std. Error'],
-            (summary(subspeciesJointUnlog))$coefficients['log(mass)', 'Pr(>|t|)'],
+#            coef(subspeciesJointUnlog)['log(mass)'], 
+#            coef(subspeciesJointUnlog)['log(mass)'] - 1.96 * (summary(subspeciesJointUnlog))$coefficients['log(mass)', 'Std. Error'],
+#            coef(subspeciesJointUnlog)['log(mass)'] + 1.96 * (summary(subspeciesJointUnlog))$coefficients['log(mass)', 'Std. Error'],
+#            (summary(subspeciesJointUnlog))$coefficients['log(mass)', 'Pr(>|t|)'],
 
-            coef(subspeciesJointUnlog)['log(scholarRefs)'], 
-            coef(subspeciesJointUnlog)['log(scholarRefs)'] - 1.96 * (summary(subspeciesJointUnlog))$coefficients['log(scholarRefs)', 'Std. Error'],
-            coef(subspeciesJointUnlog)['log(scholarRefs)'] + 1.96 * (summary(subspeciesJointUnlog))$coefficients['log(scholarRefs)', 'Std. Error'],
-            (summary(subspeciesJointUnlog))$coefficients['log(scholarRefs)', 'Pr(>|t|)']
-)
+#            coef(subspeciesJointUnlog)['log(scholarRefs)'], 
+#            coef(subspeciesJointUnlog)['log(scholarRefs)'] - 1.96 * (summary(subspeciesJointUnlog))$coefficients['log(scholarRefs)', 'Std. Error'],
+#            coef(subspeciesJointUnlog)['log(scholarRefs)'] + 1.96 * (summary(subspeciesJointUnlog))$coefficients['log(scholarRefs)', 'Std. Error'],
+#            (summary(subspeciesJointUnlog))$coefficients['log(scholarRefs)', 'Pr(>|t|)']
+#)
 
-tableM <- matrix(tableV, ncol = 4, nrow = 4, byrow = TRUE)
+#tableM <- matrix(tableV, ncol = 4, nrow = 4, byrow = TRUE)
 
 
 %%end.rcode
@@ -1566,24 +1572,64 @@ tableM <- matrix(tableV, ncol = 4, nrow = 4, byrow = TRUE)
 
 
 
+%\begin{table}[t]
+%  \rowcolors{2}{gray!25}{white}
+%  \begin{tabular}{lrr}
+% \hline
+%  Covariate & Estimate (95\% CI) & $p$ value\\
+%  \hline
+%  Number of subspecies & \rinline{tableM[2,1]} (\rinline{tableM[2, 2]} -- \rinline{tableM[2, 3]}) & \rinline{tableM[2, 4]}\\
+%  Mass & \rinline{tableM[3,1]} (\rinline{tableM[3, 2]} -- \rinline{tableM[3, 3]}) & \rinline{tableM[3, 4]}\\
+%  Study effort & \rinline{tableM[4,1]} (\rinline{tableM[4, 2]} -- \rinline{tableM[4, 3]}) & \rinline{tableM[4, 4]}\\
+%  Intercept & \rinline{tableM[1,1]} (\rinline{tableM[1, 2]} -- \rinline{tableM[1, 3]}) & \rinline{tableM[1, 4]}\\
+%  \end{tabular}
+%\caption{Table of parameter estimates.}
+%\label{t:params}
+%\end{table}
+
+
 \begin{table}[t]
-  \rowcolors{2}{gray!25}{white}
-  \begin{tabular}{lrr}
-  \hline
-  Covariate & Estimate (95\% CI) & $p$ value\\
-  \hline
-  Number of subspecies & \rinline{tableM[2,1]} (\rinline{tableM[2, 2]} -- \rinline{tableM[2, 3]}) & \rinline{tableM[2, 4]}\\
-  Mass & \rinline{tableM[3,1]} (\rinline{tableM[3, 2]} -- \rinline{tableM[3, 3]}) & \rinline{tableM[3, 4]}\\
-  Study effort & \rinline{tableM[4,1]} (\rinline{tableM[4, 2]} -- \rinline{tableM[4, 3]}) & \rinline{tableM[4, 4]}\\
-  Intercept & \rinline{tableM[1,1]} (\rinline{tableM[1, 2]} -- \rinline{tableM[1, 3]}) & \rinline{tableM[1, 4]}\\
-  \end{tabular}
-\caption{Table of parameter estimates.}
-\label{t:params}
+\rowcolors{2}{gray!25}{white}
+\begin{tabular}{>{\small}lrrrr}
+
+\normalsize{Model} & $\bar{\text{AICc}}$ & $\Delta$AICc & $w_i$ & $\sum w_i$\\
+\hline
+log(Scholar)*NSubspecies + rand & 
+\rinline{round(modelWeights[1 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[1, 3], 2))} &
+\rinline{sprintf("%.2f", round(modelWeights[1, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[1, 5], 2))}\\
+log(Scholar)*NSubspecies & 
+\rinline{round(modelWeights[2 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[2, 3], 2))} &
+\rinline{sprintf("%.2f", round(modelWeights[2, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[2, 5], 2))}\\
+log(Scholar)*NSubspecies + rand + log(Mass) & 
+\rinline{round(modelWeights[3 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[3, 3], 2))} &
+\rinline{sprintf("%.2f", round(modelWeights[3, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[3, 5], 2))}\\
+log(Scholar)*NSubspecies  + log(Mass) & 
+\rinline{round(modelWeights[4 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[4, 3], 2))} &
+\rinline{sprintf("%.2f", round(modelWeights[4, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[4, 5], 2))}\\
+log(Scholar)*NSubspecies  + log(Mass) + log(RangeSize) & 
+\rinline{round(modelWeights[5 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[5, 3], 2))} &
+\rinline{sprintf("%.2f", round(modelWeights[5, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[5, 5], 2))}\\
+log(Scholar)*NSubspecies  + rand + log(RangeSize) & 
+\rinline{round(modelWeights[6 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[6, 3], 2))} &
+\rinline{sprintf("%.2f", round(modelWeights[6, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[6, 5], 2))}\\
+log(Scholar)*NSubspecies  + log(RangeSize) & 
+\rinline{round(modelWeights[7 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[7, 3], 2))} &
+\rinline{sprintf("%.2f", round(modelWeights[7, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[7, 5], 2))}\\
+log(Scholar) + NSubspecies & 
+\rinline{round(modelWeights[8 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[8, 3], 2))} &
+\rinline{sprintf("%.2f", round(modelWeights[8, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[8, 5], 2))}\\
+log(Scholar) + NSubspecies + log(Mass) & 
+\rinline{round(modelWeights[9 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[9, 3], 2))} &
+\rinline{sprintf("%.2f", round(modelWeights[9, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[9, 5], 2))}
+\end{tabular}
+\caption{
+Model selection results. 
+$\bar{\text{AICc}}$ is the mean AICc score across \rinline{nBoots} resamplings of the null random variable. 
+$\Delta$AICc is the $\bar{\text{AICc}}$ score minus the lowest score. 
+$w_i$ is the Akaike weight and can be interpreted as the probability that the model is the best model (of those in the plausible set).
+$\sum w_i$ is the cumulative sum of the Akaike weights.}
+\label{t:subsmodels}
 \end{table}
-
-
-
-
 
 
 
