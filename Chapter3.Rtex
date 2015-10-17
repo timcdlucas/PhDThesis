@@ -11,6 +11,7 @@
 # There's some slow webscrapping functions. Run them?
 runPubmedScrape <- FALSE
 runScholarScrape <- FALSE
+runFstScrape <- TRUE
 
 
 # Run slow bootstrapping?
@@ -1361,7 +1362,7 @@ unique(fst$binomial) %>% length
 
 findAreaFst <- function(name){
   #cat(name)
-  A <- areaPolygon(ranges[ranges$binomial == name, ])
+  A <- areaPolygon(ranges[ranges$binomial == as.character(name), ])
   sum(A)
 }
 
@@ -1405,9 +1406,35 @@ fst$binomial[fst$Useable] %>% unique %>% .[!is.na(.)] %>% length
 
 
 
+%%begin.rcode fstStudyEffort
+
+# First take what data we can from nSpecies analysis.
+fstStudy <- sqldf("
+                SELECT fst.binomial, scholarRefs, pubmedRefs
+                FROM fst
+                LEFT JOIN nSpecies
+                ON nSpecies.binomial=fst.binomial
+              ")
+
+%%end.rcode
+
+%%begin.rcode fstScrape, eval = runFstScrape
+
+fstNewStudy <- fstStudy[is.na(fstStudy[,2]),1] %>%
+                 lapply(., function(x) c(x, scrapeScholar(x), scrapePub(x))) %>%
+                 do.call(rbind, .)
+
+names(fstNewStudy) <- c('binomial', 'scholarRefs', 'pubmedRefs')
+
+write.csv(fstNewStudy, file = 'data/Chapter3/fstScrape.csv')
+
+%%end.rcode
+
+%%begin.rcode fstCombine
 
 
 
+%%end.rcode
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \clearpage

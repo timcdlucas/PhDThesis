@@ -295,4 +295,101 @@ write.csv(allResults, file = 'data/Chapter3/modelSelectSubspecies.csv')
 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\clearpage
+\section{Results}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Number of Subspecies}
+\tmpsection{More descriptive}
+
+After data cleaning there was data for 196 bat species in 11 families.
+The number of described virus species for a bat host ranged up to 15 viruses in \emph{Carollia perspicillata}.
+Figure~\ref{fig:treePlot} shows the phylogeny used and the number of viruses for each species.
+The mean number of viruses across families is fairly constant with a lower range of 1.67 for Nycteridae.
+The highest mean is Mormoopidae with 5 virus species per bat species, but this is based on a sample size of 3.
+The Phyllostomidae have the second highest mean (n = 37) of 3.49.
+
+The small change in mean pathogen richness across families and the lack of clear pattern in Figure~\ref{fig:treePlot} implies that viral richness is not strongly phylogenetic. 
+This is corroborated by the small estimated size of $\lambda$ ($\lambda$ = , $p$ = ).
+This fact implies that other factors must control pathogen richness.
+It also implies that pathogens are not directly inherited down the phylogeny, although this is to be expected by the fast evolution of viruses.
+
+Of the explanatory variables, the number of subspecies has no phylogenetic autocorrelation ($\lambda$ = , $p$ = ), study effort has weak but significant autocorrelation ($\lambda$ = , $p$ = ) and mass is strongly phylogenetic ($\lambda$ = , $p$ = ).
+
+\tmpsection{Model results}
+See Figure \ref{fig:plotSubspeciesCoefs} for a display of estimated coefficients for the two models using number of viruses as the response variable. 
+The main model with mass, study effort and number of subspecies as predictors found study effort to be highly significant ($\beta = $ NA, $p = $ \ensuremath{1.05\times 10^{-8}}). 
+The number of subspecies was marginally significant ($\beta = $ NA, $p = $ 0.02). 
+The effect of nonindependance due to phylogeny was very small ($\lambda = $ 0.09, $p = $ 0.02).
+
+The interaction term between study effort and number of subspecies, when included, was significant ($\beta = $ 0.14, $p = $ \ensuremath{2.99\times 10^{-3}}).
+
+
+
+\subsection{$F_{ST}$}
+
+
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[t]
+
+{\centering \includegraphics[width=0.8\textwidth]{figure/plotSubspeciesCoefs-1} 
+
+}
+
+\caption[
+Plot of coefficient estimates and 95\% confidence intervals for phylogenetic model with and without interactions between study effort and number of subspecies]{
+Plot of coefficient estimates and 95\% confidence intervals for phylogenetic model with and without interactions between study effort and number of subspecies. 
+Without interactions, number of subspecies is significant.
+}\label{fig:plotSubspeciesCoefs}
+\end{figure}
+
+
+\end{knitrout}
+
+
+
+
+
+
+
+\begin{table}[t]
+  \rowcolors{2}{gray!25}{white}
+  \begin{tabular}{lrr}
+  \hline
+  Covariate & Estimate (95\% CI) & $p$ value\\
+  \hline
+  Number of subspecies & 0.19 (0.07 -- 0.32) & \ensuremath{1.94\times 10^{-3}}\\
+  Mass & 0.34 (\ensuremath{-1.59\times 10^{-3}} -- 0.68) & 0.05\\
+  Study effort & 0.81 (0.54 -- 1.09) & \ensuremath{2.45\times 10^{-8}}\\
+  Intercept & \ensuremath{-4.14} (\ensuremath{-6.1} -- \ensuremath{-2.18}) & \ensuremath{5.05\times 10^{-5}}\\
+  \end{tabular}
+\caption{Table of parameter estimates.}
+\label{t:params}
+\end{table}
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\clearpage
+\section{Discussion}  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
 
