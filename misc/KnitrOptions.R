@@ -7,6 +7,7 @@ propOfTextwidth = 0.8
 
 opts_chunk$set(
   echo = FALSE, 
+  error = FALSE,
   cache = TRUE, 
   dev = 'cairo_pdf', 
   warning = FALSE,

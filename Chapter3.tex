@@ -111,6 +111,10 @@ But once understood, these factors could provide a way to priorities surveillanc
 
 
 
+
+
+
+
 To measure pathogen richness I used data from \cite{luis2013comparison}. 
 These simply include known infections of a bat species with a pathogen species. 
 Only species with at least one pathogen were included in the analysis.
@@ -159,12 +163,12 @@ As $F_{ST}$ inevitably increases with spatial scale I controlled for this by onl
 I used the ratio of the furthest distance between $F_{ST}$ samples to the width of the species range and only used studies if this ratio was greater than 0.3.
 To allow comparison between different measures ($F_{ST}, \phi_{ST}$) and data from different molecular regions I converted all data to diploid gene flow.
 WILL ADD EXTRA METHODS LATER.
-These two measures of population structure were analysed separately as the number of subspecies has 192 data points while there is only $F_{ST}$ data for $\sim 30$ bat species.
+These two measures of population structure were analysed separately as the number of subspecies has 196 data points while there is only $F_{ST}$ data for $\sim 30$ bat species.
 
 To control for study bias I collected the number of Pubmed and Google Scholar citations for each bat species including synonyms from ITIS \cite{itis} via the taxize package \cite{chamberlain2013taxize}.
 The counts were scraped using the rvest package \cite{rvest}.
 I log transformed these variables as they were strongly right skewed.
-The log number of citations on Pubmed and Google scholar were highly correlated (pgls: $t$ = 18.69, df = 190, $p$ = 0).
+The log number of citations on Pubmed and Google scholar were highly correlated (pgls: $t$ = 19.32, df = 194, $p$ = 0).
 The results here are for analyses using only Google Scholar citations.
 See the appendix for analyses run using Pubmed citations.
 
@@ -218,85 +222,31 @@ The models shown are thos with (pink) and without (red) an interaction between s
 
 
 
+%%being.rcode modelSelectBoots, eval = subBoots
+
+fitModelsBootStrap <- mclapply(1:nBoots, function(b) modelSelect(allFormulae, nSpecies, pruneTree, b, allModelMat, varList), mc.cores = nCores)
+
+allResults <- do.call(rbind, fitModelsBootStrap)
+
+write.csv(allResults, file = 'data/Chapter3/modelSelectSubspecies.csv')
 
 
-
-
-
-
-
-
-\clearpage
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\clearpage
-\section{Results}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Number of Subspecies}
-\tmpsection{More descriptive}
-
-After data cleaning there was data for 192 bat species in 11 families.
-The number of described virus species for a bat host ranged up to 15 viruses in \emph{Carollia perspicillata}.
-Figure~\ref{fig:treePlot} shows the phylogeny used and the number of viruses for each species.
-The mean number of viruses across families is fairly constant with a lower range of 1.67 for Nycteridae.
-The highest mean is Mormoopidae with 5 virus species per bat species, but this is based on a sample size of 3.
-The Phyllostomidae have the second highest mean (n = 37) of 3.49.
-
-The small change in mean pathogen richness across families and the lack of clear pattern in Figure~\ref{fig:treePlot} implies that viral richness is not strongly phylogenetic. 
-This is corroborated by the small estimated size of $\lambda$ ($\lambda$ = 0.05, $p$ = 0.1).
-This fact implies that other factors must control pathogen richness.
-It also implies that pathogens are not directly inherited down the phylogeny, although this is to be expected by the fast evolution of viruses.
-
-Of the explanatory variables, the number of subspecies has no phylogenetic autocorrelation ($\lambda$ = \ensuremath{6.68\times 10^{-5}}, $p$ = 1), study effort has weak but significant autocorrelation ($\lambda$ = 0.06, $p$ = 0.04) and mass is strongly phylogenetic ($\lambda$ = 0.83, $p$ = \ensuremath{2.51\times 10^{-43}}).
-
-\tmpsection{Model results}
-See Figure \ref{fig:plotSubspeciesCoefs} for a display of estimated coefficients for the two models using number of viruses as the response variable. 
-The main model with mass, study effort and number of subspecies as predictors found study effort to be highly significant ($\beta = $ NA, $p = $ \ensuremath{1.18\times 10^{-8}}). 
-The number of subspecies was marginally significant ($\beta = $ NA, $p = $ 0.03). 
-The effect of nonindependance due to phylogeny was very small ($\lambda = $ 0.11, $p = $ 0.01).
-
-The interaction term between study effort and number of subspecies, when included, was significant ($\beta = $ 0.15, $p = $ \ensuremath{2\times 10^{-3}}).
-
-
-
-\subsection{$F_{ST}$}
-
-
+%%end.rcode
 
 \begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[t]
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=0.8\textwidth]{figure/plotSubspeciesCoefs-1} 
+{\centering \includegraphics[width=0.8\textwidth]{figure/analyseModelSelect-1} 
 
 }
 
-\caption[
-Plot of coefficient estimates and 95\% confidence intervals for phylogenetic model with and without interactions between study effort and number of subspecies]{
-Plot of coefficient estimates and 95\% confidence intervals for phylogenetic model with and without interactions between study effort and number of subspecies. 
-Without interactions, number of subspecies is significant.
-}\label{fig:plotSubspeciesCoefs}
-\end{figure}
+
+
+
+{\centering \includegraphics[width=0.8\textwidth]{figure/analyseModelSelect-2} 
+
+}
+
 
 
 \end{knitrout}
@@ -307,34 +257,36 @@ Without interactions, number of subspecies is significant.
 
 
 
-\begin{table}[t]
-  \rowcolors{2}{gray!25}{white}
-  \begin{tabular}{lrr}
-  \hline
-  Covariate & Estimate (95\% CI) & $p$ value\\
-  \hline
-  Number of subspecies & 0.18 (0.06 -- 0.3) & \ensuremath{4.49\times 10^{-3}}\\
-  Mass & 0.33 (\ensuremath{-0.01} -- 0.68) & 0.06\\
-  Study effort & 0.82 (0.54 -- 1.09) & \ensuremath{3.53\times 10^{-8}}\\
-  Intercept & \ensuremath{-4.08} (\ensuremath{-6.06} -- \ensuremath{-2.11}) & \ensuremath{7.33\times 10^{-5}}\\
-  \end{tabular}
-\caption{Table of parameter estimates.}
-\label{t:params}
-\end{table}
 
 
 
 
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \clearpage
-\section{Discussion}  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% FST ANALYSIS                                                                                                                                  %%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 
 
