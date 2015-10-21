@@ -1480,7 +1480,12 @@ $\kappa$ and $othere param$ were constrained to one.
 
 As the number of data points is close to or much less than the number of variables times 40 I calculated small sample corredted AIC (AICc) for each model and then calculated Akaiki weights.
 This value can be interpreted as the probability that a model would be the best model if the data were recollected.
-For each variable, the sum of the A
+For each variable, the sum of the Akaiki weights for models containing that variable are summed.
+This value can be interpreted as the probability that the given variable is in the best model.
+Following \cite{wittinghma} I included a uniformally random variable as a null variable as even unimportant variables can have Akaiki weights significantly greater than zero.
+The whole analysis was run \rinline{nBoots} times, resampling the random variable each time.
+We calculated $\bar{AICc}$ by averaging AICc scores within models.
+$\Delta\text{AICc}$ was calculated as $\text{min}(\bar{AICc}) - \bar{AICc}$, not the mean of the individual $\Delta\text{AICc}$ scores, to guarentee that the best model has $\Delta\text{AICc} = 0$.
 
 
 Plots were created with a combination of \cite{ggplot2, palettetown, dotwhisker, ggtree}
