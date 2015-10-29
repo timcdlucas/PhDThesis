@@ -16,6 +16,7 @@ runFstScrape <- FALSE
 
 # Run slow bootstrapping?
 subBoots <- FALSE
+fstBoots <- TRUE
 
 # There are figures created in the data analysis which are not in the final chapter document.
 #   If TRUE, they will be included in the output.
@@ -605,7 +606,7 @@ unneededTips <- tr1$tip.label[!(tr1$tip.label %in% nSpecies$binomial)]
 # Prune tree down to only needed tips.
 pruneTree <- drop.tip(tr1, unneededTips)
 
-rm(t, tr1)
+rm(t)
 
 %%end.rcode
 
@@ -1500,9 +1501,21 @@ phistBool <- fst$Measure == 'Phist' & fst$Marker == 'mtDNA'
 fst$Nm[phistBool] <- phist(fst$Value[phistBool])
 fst$fnc[phistBool] <- 'phist'
 
-fstFinal <- fst[!is.na(fst$Nm) & !(fst$Nm == Inf), ]
+fst <- fst[!is.na(fst$Nm) & !(fst$Nm == Inf), ]
+
+# Take means of species with multiple measurements
+fstFinal <- fst[!duplicated(fst$binomial), ]
+fstFinal$Nm <- sapply(fstFinal$binomial, function(x) mean(fst$Nm[fst$binomial == x]))
+
+# Add number of viruses to fst dataset
+#   Includes zeros for species with no known viruses.
+
+fstFinal$virusSpecies <- sapply(fstFinal$binomial, function(x) sum(virus2$binomial == x))
+
 
 %%end.rcode
+
+
 
 %%begin.rcode compareNm, fig.show = extraFigs
 
@@ -1510,7 +1523,127 @@ ggplot(fstFinal, aes(x = fnc, y = Nm)) +
   geom_point() +
   scale_y_log10()
 
+lm(fstFinal$Nm ~ fstFinal$fnc) %>% aov %>% summary
+
+
 %%end.rcode
+
+
+%%begin.rcode fstTree
+
+# Prune the tree for the fst data.
+
+# Which tips are not needed
+fstUnneededTips <- tr1$tip.label[!(tr1$tip.label %in% fstFinal$binomial)]
+
+# Prune tree down to only needed tips.
+fstTree <- drop.tip(tr1, fstUnneedefdTips)
+
+rm(t, tr1)
+
+%%end.rcode
+
+
+%%begin.rcode fstTreePlot, out.width = '\\textwidth', fig.cap = 'Pruned phylogeny with dot size showing number of pathogens and colour showing family.'
+
+# Plot tree 
+p <- ggtree(fstTree) 
+
+p %<+% fstFinal[, c(3, 22)] + 
+  #geom_tiplab(family = 'lato light', hjust = -0.1) +
+  geom_text(aes(label = label), subset=.(isTip), hjust = -0.3) +
+  ggplot2::xlim(0, 130) +
+  #geom_point(aes(size = virusSpecies), subset=.(isTip)) +
+  theme_tcdl
+
+
+
+  xlim(c(0, 20))
+
+
+  scale_size(range = c(0.8, 3)) +
+  scale_colour_manual(values = c(pokepal('oddish')[c(1,3,5,6,9,10)],    pokepal('Carvanha')[c(1,2,4, 13, 12)])) +
+  theme_tcdl +
+
+  theme(legend.position = 'right') +
+  labs(size = 'Virus Richness') +
+  theme(legend.key.size = unit(0.6, "lines"),
+              legend.text = element_text(size = 6),
+              legend.title = element_text(size = 8))
+
+
+%%end.rcode
+
+
+%%end.rcode
+
+
+
+
+%%begin.rcode fstITanalysis
+
+fstVarList <- c('log(scholarRefs)', 'Nm', 'log(mass)', 'log(distrSize)', 'rand')
+
+
+fstModelList <- lapply(1:4, function(k) findCombs(k, fstVarList, 5))
+fstModelMat <- do.call(rbind, fstModelList)
+
+fstInterMat <- fstModelMat[apply(fstModelMat, 1, function(x) "log(scholarRefs)" %in% x & "Nm" %in% x), ]
+fstInterMat[, 2:5] <- fstInterMat[, 1:4]
+fstInterMat[, 1] <- "log(scholarRefs):NumberOfSubspecies"
+
+fstAllModelMat <- rbind(fstModelMat, fstInterMat)
+
+
+fstAllFormulae <- apply(fstAllModelMat, 1, function(x) as.formula(paste('virusSpecies ~', paste(x[!is.na(x)], collapse = ' + '))))
+
+
+%%end.rcode
+
+%%being.rcode modelSelectBoots, eval = fstBoots
+
+fstModelsBootStrap <- mclapply(1:nBoots, function(b) modelSelect(fstAllFormulae, fstFinal, pruneTree, b, fstAllModelMat, fstVarList), mc.cores = nCores)
+
+allResults <- do.call(rbind, fitModelsBootStrap)
+
+write.csv(allResults, file = 'data/Chapter3/modelSelectSubspecies.csv')
+
+
+%%end.rcode
+
+%%begin.rcode analyseModelSelect, fig.show = extraFigs
+
+allResults <- read.csv('data/Chapter3/modelSelectSubspecies.csv', row.names = 1)
+
+varWeights <- sapply(names(allResults)[1:6], function(x) sum(allResults$weight[allResults[, x]])/nBoots)
+
+
+modelWeights <- allResults %>%
+                  group_by(predictors) %>%
+                  summarise(AICc = mean(AIC)) %>%
+                  mutate(dAIC = AICc - min(AICc), modelWeight = exp(- 0.5 * dAIC) / sum(exp(- 0.5 * dAIC))) %>%
+                  arrange(desc(modelWeight)) %>%
+                  mutate(cumulativeWeight = cumsum(modelWeight)) %>%
+                  mutate(string = levels(predictors)[predictors])
+
+
+allResults %>% 
+  filter(rand, !log.scholarRefs..NumberOfSubspecies, NumberOfSubspecies) %>%
+ggplot(., aes(x = lambda, colour = predictors)) + 
+  geom_density() +
+  scale_colour_hc()
+
+ggplot(allResults, aes(x = lambda)) + 
+  geom_density() 
+
+allResults %>% 
+  filter(boot == 1) %>%
+  dplyr::select(predictors, lambda)
+
+%%end.rcode
+
+
+
 
 $F_{ST}$ studies are conducted at a range of spatial scales, but $F_{ST}$ often increases with distance studied \cite{}.
 To minimise the effects of this I only used data from studies that cover \rinline{rangeUseable * 100}\% of the diameter of the species range.
@@ -1530,7 +1663,7 @@ The interaction was only included in models with both study effort and number of
 
 I fitted phylogenetic regressions using caper \cite{caper} to all models.
 In each case I simultaneously fitted the $\lambda$ parameter as this avoids mispecifying the model \cite{revell2010phylogenetic}.
-$\kappa$ and $othere param$ were constrained to one.
+$\kappa$ and $\delta$ were constrained to one.
 
 As the number of data points is close to or much less than the number of variables times 40 I calculated small sample corredted AIC (AICc) for each model and then calculated Akaiki weights.
 This value can be interpreted as the probability that a model would be the best model if the data were recollected.
