@@ -174,9 +174,8 @@ See the appendix for analyses run using Pubmed citations.
 
 Measures of body mass are taken from Pantheria \cite{jones2009pantheria} and primary literature \cite{canals2005relative, arita1993rarity, lopez2014echolocation, orr2013does, , lim2001bat, aldridge1987turning, ma2003dietary, owen2003home, henderson2008movements, heaney2012nyctalus, oleksy2015high, zhang2009recent}. 
 \emph{Pipistrellus pygmaeus} was assigned the same mass as \emph{P. pipistrellus} as they indistinguishable by mass.
-They are log transformed due to the strong right skew.
-
-
+Body mass measurements were log transformed due to the strong right skew.
+Distribution size was estimated by downloading range maps for all species from IUCN \cite{} and were also logged due to right skew.
 
 %Pubmed was scraped on pubmedScrapeDate and Google Scholar was scraped on scholarScrapeDate
 
@@ -184,12 +183,8 @@ To control for phylogenetic nonindependance I used the best-supported phylogeny 
 Phylogenetic manipulation was performed using the ape package \cite{ape}.
 The importance of the phylogeny on each variable separately was estimated using \cite{phytools}.
 
-I ran two models using the caper package \cite{caper} testing the relationship between pathogen richness and log number of subspecies.
-All independant variables were log transformed.
-I ran phylogenetically controlled, multivariate linear models.
-This model was fitted both with and without an interaction term between number of subspecies and study effort.
 
-Plots were created with a combination of \cite{ggplot2, palettetown, dotwhisker, ggtree}
+
 
 
 
@@ -288,7 +283,37 @@ write.csv(allResults, file = 'data/Chapter3/modelSelectSubspecies.csv')
 
 
 
+$F_{ST}$ studies are conducted at a range of spatial scales, but $F_{ST}$ often increases with distance studied \cite{}.
+To minimise the effects of this I only used data from studies that cover 30\% of the diameter of the species range.
+This is a largely arbitrary value that could be considered to reflect a `global' estimate of $F_{ST}$ while keeping a reasonable number of datapoints available.
+I calculated the diameter of the species range by finding the furthest apart points in the IUCN species range \cite{} even if the range is split into multiple polygons.
+The width covered by each study was the distance between the most distant sampling sites.
+When this was not explicit in the paper, the centre of the lowest level of geographic area was used.
 
+
+
+\subsection{Statistical analysis}
+
+Statistical analysis for both dependant variables were conducted using a information theory/model averaging approach \cite{burnham2002model} specifically following \cite{whittingham2005habitat}.
+I chose a credible set of models including all combinations of independent variables.
+In the analysis using the number of subspecies dependant variable I also included an interaction term between study effort and number of subspecies as I believe \emph{a priori} that this interaction may be present.
+The interaction was only included in models with both study effort and number of subspecies as an individual term.
+
+I fitted phylogenetic regressions using caper \cite{caper} to all models.
+In each case I simultaneously fitted the $\lambda$ parameter as this avoids mispecifying the model \cite{revell2010phylogenetic}.
+$\kappa$ and $othere param$ were constrained to one.
+
+As the number of data points is close to or much less than the number of variables times 40 I calculated small sample corredted AIC (AICc) for each model and then calculated Akaiki weights.
+This value can be interpreted as the probability that a model would be the best model if the data were recollected.
+For each variable, the sum of the Akaiki weights for models containing that variable are summed.
+This value can be interpreted as the probability that the given variable is in the best model.
+Following \cite{wittinghma} I included a uniformally random variable as a null variable as even unimportant variables can have Akaiki weights significantly greater than zero.
+The whole analysis was run 10 times, resampling the random variable each time.
+We calculated $\bar{AICc}$ by averaging AICc scores within models.
+$\Delta\text{AICc}$ was calculated as $\text{min}(\bar{AICc}) - \bar{AICc}$, not the mean of the individual $\Delta\text{AICc}$ scores, to guarentee that the best model has $\Delta\text{AICc} = 0$.
+
+
+Plots were created with a combination of \cite{ggplot2, palettetown, dotwhisker, ggtree}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \clearpage
@@ -355,7 +380,7 @@ The interaction term between study effort and number of subspecies, when include
 \rowcolors{2}{gray!25}{white}
 \begin{tabular}{>{\small}lrrrr}
 
-\normalsize{Model} & $\bar{\text{AICc}}$ & $\Delta$AIC & $w_i$ & $\sum w_i$\\
+\normalsize{Model} & $\bar{\text{AICc}}$ & $\Delta$AICc & $w_i$ & $\sum w_i$\\
 \hline
 log(Scholar)*NSubspecies + rand & 
 896 & 0.00 &
@@ -385,7 +410,12 @@ log(Scholar) + NSubspecies + log(Mass) &
 899 & 2.57 &
 0.04 & 0.82
 \end{tabular}
-\caption{Table of models estimates.}
+\caption{
+Model selection results. 
+$\bar{\text{AICc}}$ is the mean AICc score across 10 resamplings of the null random variable. 
+$\Delta$AICc is the $\bar{\text{AICc}}$ score minus the lowest score. 
+$w_i$ is the Akaike weight and can be interpreted as the probability that the model is the best model (of those in the plausible set).
+$\sum w_i$ is the cumulative sum of the Akaike weights.}
 \label{t:subsmodels}
 \end{table}
 
