@@ -1332,11 +1332,11 @@ virusLambda <- summary(pgls(virusSpecies ~ 1, data = compSubspecies, lambda = 'M
 
 
 %%begin.rcode fstRead
+
 # Read in Fst data.
 # Then add extra columns needed.
 
 fst <- read.csv('data/Chapter3/FstDataCompData.csv')
-
 
 # Check overlap of datasets.
 sum(!(fst$binomial %in% virus2$binomial[virus2$host.species != '']))
@@ -1457,6 +1457,7 @@ fst <- cbind(fst, fstStudy[, 2:3])
 fst <- fst[fst$Useable, ]
 
 
+
 %%end.rcode
 
 %%begin.rcode convertFst
@@ -1513,6 +1514,23 @@ fstFinal$Nm <- sapply(fstFinal$binomial, function(x) mean(fst$Nm[fst$binomial ==
 fstFinal$virusSpecies <- sapply(fstFinal$binomial, function(x) sum(virus2$binomial == x))
 
 
+
+
+# Add mass data.
+
+
+mass <- sqldf("
+  SELECT [X5.1_AdultBodyMass_g]
+  FROM fstFinal
+  LEFT JOIN pantheria
+  ON fstFinal.binomial=pantheria.MSW05_Binomial
+  ")
+
+fstFinal$mass <- mass[, 1]
+
+fstFinal$mass[fstFinal$binomial == 'Myotis ricketti'] <- meanAdditionalMass$mass[meanAdditionalMass$binomial == 'Myotis ricketti']
+
+fstFinal <- fstFinal[!is.na(fstFinal$mass), ]
 %%end.rcode
 
 
@@ -1537,9 +1555,9 @@ lm(fstFinal$Nm ~ fstFinal$fnc) %>% aov %>% summary
 fstUnneededTips <- tr1$tip.label[!(tr1$tip.label %in% fstFinal$binomial)]
 
 # Prune tree down to only needed tips.
-fstTree <- drop.tip(tr1, fstUnneedefdTips)
+fstTree <- drop.tip(tr1, fstUnneededTips)
 
-rm(t, tr1)
+
 
 %%end.rcode
 
@@ -1549,33 +1567,29 @@ rm(t, tr1)
 # Plot tree 
 p <- ggtree(fstTree) 
 
-p %<+% fstFinal[, c(3, 22)] + 
-  #geom_tiplab(family = 'lato light', hjust = -0.1) +
-  geom_text(aes(label = label), subset=.(isTip), hjust = -0.3) +
-  ggplot2::xlim(0, 130) +
-  #geom_point(aes(size = virusSpecies), subset=.(isTip)) +
-  theme_tcdl
+fstFinal$lengthNames <- fstFinal$binomial %>%
+                          as.character %>%
+                          paste0('  ', .)
 
 
+p %<+% fstFinal[, c('binomial', 'virusSpecies')] + 
+  #geom_tiplab(family = 'lato light', align = FALSE) +
+  geom_text(aes(x = x + 7, label = as.character(label)), subset=.(isTip), family = 'Lato light', hjust = 0) +
+  ggplot2::xlim(0, 150) +
+  geom_point(aes(x = x + 4, size = virusSpecies), subset=.(isTip)) +
+  theme_tcdl + 
+  scale_size(range = c(0, 6)) +
+  theme(legend.position="right") +
+  theme(legend.key.size = unit(0.8, "lines"),
+              legend.text = element_text(size = 10),
+              legend.title = element_text(size = 12)) +
+  labs(size = 'Virus Richness') 
 
-  xlim(c(0, 20))
-
-
-  scale_size(range = c(0.8, 3)) +
-  scale_colour_manual(values = c(pokepal('oddish')[c(1,3,5,6,9,10)],    pokepal('Carvanha')[c(1,2,4, 13, 12)])) +
-  theme_tcdl +
-
-  theme(legend.position = 'right') +
-  labs(size = 'Virus Richness') +
-  theme(legend.key.size = unit(0.6, "lines"),
-              legend.text = element_text(size = 6),
-              legend.title = element_text(size = 8))
 
 
 %%end.rcode
 
 
-%%end.rcode
 
 
 
@@ -1585,35 +1599,65 @@ p %<+% fstFinal[, c(3, 22)] +
 fstVarList <- c('log(scholarRefs)', 'Nm', 'log(mass)', 'log(distrSize)', 'rand')
 
 
-fstModelList <- lapply(1:4, function(k) findCombs(k, fstVarList, 5))
+fstModelList <- lapply(1:4, function(k) findCombs(k, fstVarList, 4))
 fstModelMat <- do.call(rbind, fstModelList)
 
-fstInterMat <- fstModelMat[apply(fstModelMat, 1, function(x) "log(scholarRefs)" %in% x & "Nm" %in% x), ]
-fstInterMat[, 2:5] <- fstInterMat[, 1:4]
-fstInterMat[, 1] <- "log(scholarRefs):NumberOfSubspecies"
-
-fstAllModelMat <- rbind(fstModelMat, fstInterMat)
-
-
-fstAllFormulae <- apply(fstAllModelMat, 1, function(x) as.formula(paste('virusSpecies ~', paste(x[!is.na(x)], collapse = ' + '))))
+fstAllFormulae <- apply(fstModelMat, 1, function(x) as.formula(paste('virusSpecies ~', paste(x[!is.na(x)], collapse = ' + '))))
 
 
 %%end.rcode
 
-%%being.rcode modelSelectBoots, eval = fstBoots
+%%being.rcode fstModelSelectBoots, eval = fstBoots
 
-fstModelsBootStrap <- mclapply(1:nBoots, function(b) modelSelect(fstAllFormulae, fstFinal, pruneTree, b, fstAllModelMat, fstVarList), mc.cores = nCores)
 
-allResults <- do.call(rbind, fitModelsBootStrap)
+fstModelSelect <- function(allForm, data, phy, boot, allModelMat, varList){
+  
+  set.seed(paste0('22311', boot))
+  bootData <- cbind(data, rand = runif(nrow(data)))
+  rownames(bootData) <- bootData$binomial
+  #compBootData <- comparative.data(data = bootData, phy = phy, names.col = 'binomial')
 
-write.csv(allResults, file = 'data/Chapter3/modelSelectSubspecies.csv')
+  results <- apply(allModelMat, 1, function(x) sapply(varList, function(y) y %in% x)) %>%
+               t %>%
+               data.frame %>%
+               cbind(AIC = NA, boot = boot, lambda = NA)
+
+  for(m in 1:length(allForm)){
+    tryCatch({
+      model <- gls(allForm[[m]], correlation = corPagel(value = 0.5, phy = phy), data = bootData)  
+    }, 
+    error = function(e){
+                model <- gls(allForm[[m]], correlation = corPagel(value = 0.4, phy = phy), data = bootData)  
+              }
+    )  
+    #model <- pgls(allForm[[m]], data = compBootData, lambda = 'ML')
+    results$AIC[m] <- AICc(model)
+    results$lambda[m] <- model$modelStruct$corStruct[1]
+    results$predictors[m] <- allForm[[m]] %>% as.character %>% .[3]
+    message(paste('Boot:', boot, ', m:', m, '\n'))
+  }
+
+  results$dAIC <- results$AIC - min(results$AIC)
+  results$weight <- exp(- 0.5 * results$dAIC) / sum(exp(- 0.5 * results$dAIC))
+
+
+  return(results)
+
+}
+
+
+fstModelsBootStrap <- mclapply(1:nBoots, function(b) fstModelSelect(fstAllFormulae, fstFinal, fstTree, b, fstModelMat, fstVarList), mc.cores = nCores)
+
+fstAllResults <- do.call(rbind, fstModelsBootStrap)
+
+write.csv(fstAllResults, file = 'data/Chapter3/fstModelSelectSubspecies.csv')
 
 
 %%end.rcode
 
-%%begin.rcode analyseModelSelect, fig.show = extraFigs
+%%begin.rcode fstAnalyseModelSelect, fig.show = extraFigs
 
-allResults <- read.csv('data/Chapter3/modelSelectSubspecies.csv', row.names = 1)
+allResults <- read.csv('data/Chapter3/fstModelSelectSubspecies.csv', row.names = 1)
 
 varWeights <- sapply(names(allResults)[1:6], function(x) sum(allResults$weight[allResults[, x]])/nBoots)
 
