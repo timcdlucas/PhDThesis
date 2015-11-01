@@ -217,43 +217,24 @@ The models shown are thos with (pink) and without (red) an interaction between s
 
 
 
-%%being.rcode modelSelectBoots, eval = subBoots
-
-fitModelsBootStrap <- mclapply(1:nBoots, function(b) modelSelect(allFormulae, nSpecies, pruneTree, b, allModelMat, varList), mc.cores = nCores)
-
-allResults <- do.call(rbind, fitModelsBootStrap)
-
-write.csv(allResults, file = 'data/Chapter3/modelSelectSubspecies.csv')
-
-
-%%end.rcode
 
 
 
 
 
 
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[t]
+
+{\centering \includegraphics[width=0.8\textwidth]{figure/ITPlots-1} 
+
+}
+
+\caption[Akaika variable weights for number of subspecies analysis]{Akaika variable weights for number of subspecies analysis. The probability that each variable will be in the best model if the data were recollected is shown for each of the bootstrap analyses. The purple ``Null'' box is a uniform random variable used as a null. Population structure (Number of subspecies) and the interaction between subspecies and study effort, shown in red, are more likely to be in the best model than this random variable.}\label{fig:ITPlots}
+\end{figure}
 
 
-
-
-
-
-
-
-\clearpage
-
-
-
-
-
-
-
-
-
-
-
-
+\end{knitrout}
 
 
 
@@ -285,6 +266,214 @@ write.csv(allResults, file = 'data/Chapter3/modelSelectSubspecies.csv')
 
 
 
+
+
+
+
+
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[t]
+
+{\centering \includegraphics[width=\textwidth]{figure/fstTreePlot-1} 
+
+}
+
+\caption[Pruned phylogeny with dot size showing number of pathogens and colour showing family]{Pruned phylogeny with dot size showing number of pathogens and colour showing family.}\label{fig:fstTreePlot}
+\end{figure}
+
+
+\end{knitrout}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[t]
+
+{\centering \includegraphics[width=0.8\textwidth]{figure/fstITPlots-1} 
+
+}
+
+\caption{Akaika variable weights for $F_{ST}$ analysis. The probability that each variable will be in the best model if the data were recollected is shown for each of the bootstrap analyses. The purple ``Null'' box is a uniform random variable used as a null. Population structure ($F_{ST}$), shown in red, is much less likely to be in the best model than this random variable.}\label{fig:fstITPlots}
+\end{figure}
+
+
+\end{knitrout}
+
+
+
+$F_{ST}$ studies are conducted at a range of spatial scales, but $F_{ST}$ often increases with distance studied \cite{}.
+To minimise the effects of this I only used data from studies that cover 20\% of the diameter of the species range.
+This is a largely arbitrary value that could be considered to reflect a `global' estimate of $F_{ST}$ while keeping a reasonable number of datapoints available.
+I calculated the diameter of the species range by finding the furthest apart points in the IUCN species range \cite{} even if the range is split into multiple polygons.
+The width covered by each study was the distance between the most distant sampling sites.
+When this was not explicit in the paper, the centre of the lowest level of geographic area was used.
+
+
+
+\subsection{Statistical analysis}
+
+Statistical analysis for both dependant variables were conducted using a information theory/model averaging approach \cite{burnham2002model} specifically following \cite{whittingham2005habitat, whittingham2006we}.
+I chose a credible set of models including all combinations of independent variables.
+In the analysis using the number of subspecies dependant variable I also included an interaction term between study effort and number of subspecies as I believe \emph{a priori} that this interaction may be present.
+The interaction was only included in models with both study effort and number of subspecies as an individual term.
+
+I fitted phylogenetic regressions using caper \cite{nmle} to all models.
+In each case I simultaneously fitted the $\lambda$ parameter as this avoids mispecifying the model \cite{revell2010phylogenetic}.
+$\kappa$ and $\delta$ were constrained to one.
+
+As the number of data points is close to or much less than the number of variables times 40 I calculated small sample corredted AIC (AICc) for each model and then calculated Akaiki weights.
+This value can be interpreted as the probability that a model would be the best model if the data were recollected.
+For each variable, the sum of the Akaiki weights for models containing that variable are summed.
+This value can be interpreted as the probability that the given variable is in the best model.
+Following \cite{whittingham2005habitat} I included a uniformally random variable as a null variable as even unimportant variables can have Akaiki weights significantly greater than zero.
+The whole analysis was run 50 times, resampling the random variable each time.
+We calculated $\bar{AICc}$ by averaging AICc scores within models.
+$\Delta\text{AICc}$ was calculated as $\text{min}(\bar{AICc}) - \bar{AICc}$, not the mean of the individual $\Delta\text{AICc}$ scores, to guarantee that the best model has $\Delta\text{AICc} = 0$.
+
+
+Plots were created with a combination of \cite{ggplot2, palettetown, dotwhisker, ggtree}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\clearpage
+\section{Results}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Number of Subspecies}
+\tmpsection{More descriptive}
+
+After data cleaning there was data for 196 bat species in 11 families.
+The number of described virus species for a bat host ranged up to 15 viruses in \emph{Carollia perspicillata}.
+Figure~\ref{fig:treePlot} shows the phylogeny used and the number of viruses for each species.
+The mean number of viruses across families is fairly constant with a lower range of 1.67 for Nycteridae.
+The highest mean is Mormoopidae with 5 virus species per bat species, but this is based on a sample size of 3.
+The Phyllostomidae have the second highest mean (n = 37) of 3.49.
+
+The small change in mean pathogen richness across families and the lack of clear pattern in Figure~\ref{fig:treePlot} implies that viral richness is not strongly phylogenetic. 
+This is corroborated by the small estimated size of $\lambda$ ($\lambda$ = , $p$ = ).
+This fact implies that other factors must control pathogen richness.
+It also implies that pathogens are not directly inherited down the phylogeny, although this is to be expected by the fast evolution of viruses.
+
+Of the explanatory variables, the number of subspecies has no phylogenetic autocorrelation ($\lambda$ = , $p$ = ), study effort has weak but significant autocorrelation ($\lambda$ = , $p$ = ) and mass is strongly phylogenetic ($\lambda$ = , $p$ = ).
+
+\tmpsection{Model results}
+%See Figure \ref{fig:plotSubspeciesCoefs} for a display of estimated coefficients for the two models using number of viruses as the response variable. 
+The main model with mass, study effort and number of subspecies as predictors found study effort to be highly significant ($\beta = $ NA, $p = $ \ensuremath{1.05\times 10^{-8}}). 
+The number of subspecies was marginally significant ($\beta = $ NA, $p = $ 0.02). 
+The effect of nonindependance due to phylogeny was very small ($\lambda = $ 0.09, $p = $ 0.02).
+
+The interaction term between study effort and number of subspecies, when included, was significant ($\beta = $ 0.14, $p = $ \ensuremath{2.99\times 10^{-3}}).
+
+
+
+\subsection{$F_{ST}$}
+
+
+
+
+
+
+
+
+
+
+
+%\begin{table}[t]
+%  \rowcolors{2}{gray!25}{white}
+%  \begin{tabular}{lrr}
+% \hline
+%  Covariate & Estimate (95\% CI) & $p$ value\\
+%  \hline
+%  Number of subspecies & tableM[2,1] (tableM[2, 2] -- tableM[2, 3]) & tableM[2, 4]\\
+%  Mass & tableM[3,1] (tableM[3, 2] -- tableM[3, 3]) & tableM[3, 4]\\
+%  Study effort & tableM[4,1] (tableM[4, 2] -- tableM[4, 3]) & tableM[4, 4]\\
+%  Intercept & tableM[1,1] (tableM[1, 2] -- tableM[1, 3]) & tableM[1, 4]\\
+%  \end{tabular}
+%\caption{Table of parameter estimates.}
+%\label{t:params}
+%\end{table}
+
+
+\begin{table}[t]
+\rowcolors{2}{gray!25}{white}
+\begin{tabular}{>{\small}lrrrr}
+
+\normalsize{Model} & $\bar{\text{AICc}}$ & $\Delta$AICc & $w_i$ & $\sum w_i$\\
+\hline
+log(Scholar)*NSubspecies + rand & 
+896 & 0.00 &
+0.14 & 0.14\\
+log(Scholar)*NSubspecies & 
+896 & 0.15 &
+0.13 & 0.27\\
+log(Scholar)*NSubspecies + rand + log(Mass) & 
+896 & 0.15 &
+0.13 & 0.40\\
+log(Scholar)*NSubspecies  + log(Mass) & 
+896 & 0.35 &
+0.12 & 0.52\\
+log(Scholar)*NSubspecies  + log(Mass) + log(RangeSize) & 
+897 & 0.95 &
+0.09 & 0.61\\
+log(Scholar)*NSubspecies  + rand + log(RangeSize) & 
+898 & 2.03 &
+0.05 & 0.66\\
+log(Scholar)*NSubspecies  + log(RangeSize) & 
+898 & 2.15 &
+0.05 & 0.71\\
+log(Scholar) + NSubspecies & 
+898 & 2.35 &
+0.04 & 0.75\\
+log(Scholar) + NSubspecies + log(Mass) & 
+899 & 2.51 &
+0.04 & 0.79
+\end{tabular}
+\caption{
+Model selection results. 
+$\bar{\text{AICc}}$ is the mean AICc score across 50 resamplings of the null random variable. 
+$\Delta$AICc is the $\bar{\text{AICc}}$ score minus the lowest score. 
+$w_i$ is the Akaike weight and can be interpreted as the probability that the model is the best model (of those in the plausible set).
+$\sum w_i$ is the cumulative sum of the Akaike weights.}
+\label{t:subsmodels}
+\end{table}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\clearpage
+\section{Discussion}  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\clearpage
 
 
 

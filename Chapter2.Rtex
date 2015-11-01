@@ -953,8 +953,8 @@ TopoTransTest2 <- prop.test(propsTopo$invasions[c(2, 4, 6, 8)], propsTopo$n[c(2,
 
 # Finally run proportion tests between transmission rates
 
-Topo2TransTest1 <- tidy(prop.test(invsTopo2$n[c(1, 3, 5)], nTopo$n[c(1, 3, 5)]))
-Topo2TransTest2 <- tidy(prop.test(invsTopo2$n[c(2, 4, 6)], nTopo$n[c(2, 4, 6)]))
+#Topo2TransTest1 <- tidy(prop.test(invsTopo2$n[c(1, 3, 5)], nTopo$n[c(1, 3, 5)]))
+#Topo2TransTest2 <- tidy(prop.test(invsTopo2$n[c(2, 4, 6)], nTopo$n[c(2, 4, 6)]))
 
 
 %%end.rcode
