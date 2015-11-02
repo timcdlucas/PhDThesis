@@ -976,6 +976,7 @@ The models shown are thos with (pink) and without (red) an interaction between s
 
 %%begin.rcode boxplot, fig.cap = boxplotCapt
 
+
 # Make a boxplot of subspecies vs virus
 # Add model lines for pgls models.
 
@@ -1005,6 +1006,7 @@ predDataInter <- data.frame(scholarRefs = quantile(nSpecies$scholarRefs, 0.5),
 linesInter <- data.frame(NumberOfSubspecies = predData$NumberOfSubspecies, 
                virusSpecies = predict(subspeciesInter, newdata = predDataInter))
 
+
 # Make plot
 
 ggplot(nSpecies, aes(SubspeciesFactor, virusSpecies, colour = 'a', fill = 'a')) + 
@@ -1025,7 +1027,7 @@ ggplot(nSpecies, aes(SubspeciesFactor, virusSpecies, colour = 'a', fill = 'a')) 
     annotate('text', x = c(11.8, 12.2), y = c(5.2, 2.7), 
       label = c('No interaction', 'Interaction'),
       colour = pokepal('nidorina')[c(10,13)], size = c(3, 3),
-      family = 'lato light')
+      family = 'Lato Light')
 
 
 
@@ -1158,7 +1160,7 @@ ggplot(sepVarWeights, aes(x = variable, y = estimate, colour = col, fill = col))
   geom_boxplot(outlier.colour = grey(0.3), notch = FALSE, notchwidth = 0.7) +
   scale_colour_manual(values = pokepal('nidorino')[c(2, 5, 11)]) +
   scale_fill_manual(values = pokepal('nidorino')[c(3, 6, 10)]) +
-  theme(legend.position = 'none', axis.text = element_text(size = 10, angle = 45, hjust = 1)) +
+  theme(legend.position = 'none', axis.text.x = element_text(size = 15, angle = 45, hjust = 1)) +
   scale_x_discrete(labels = c('Study Effort', 'Subspecies', 'Mass', 'Range Size', 'Null', 'Subspecies:Effort'))+
   ylab('P(in best model)') +
   xlab('Variable')
@@ -1461,6 +1463,18 @@ p %<+% fstFinal[, c('binomial', 'virusSpecies')] +
 
 %%end.rcode
 
+%%begin.rcode fstRawData, fig.height = 3
+
+# Plot raw fstdata
+ggplot(fstFinal, aes(x = Nm, y = virusSpecies, colour = Marker)) +
+  geom_point(size = 4) +
+  scale_colour_poke(pokemon = 'oddish', spread = 3) +
+  scale_x_log10() +
+  xlab('Gene flow (per gen.)') +
+  ylab('Viral Richness')
+
+%%end.rcode
+
 
 
 
@@ -1597,14 +1611,14 @@ fstModelWeights <- fstAllResults %>%
 %%end.rcode
 
 
-%%begin.rcode fstITPlots, fig.cap = "Akaika variable weights for $F_{ST}$ analysis. The probability that each variable will be in the best model if the data were recollected is shown for each of the bootstrap analyses. The purple ``Null'' box is a uniform random variable used as a null. Population structure ($F_{ST}$), shown in red, is much less likely to be in the best model than this random variable.", fig.height = 3
+%%begin.rcode fstITPlots, fig.cap = "Akaika variable weights for $F_{ST}$ analysis. The probability that each variable will be in the best model if the data were recollected is shown for each of the bootstrap analyses. The purple ``Null'' box is a uniform random variable used as a null. Population structure ($F_{ST}$), shown in red, is much less likely to be in the best model than this random variable.", fig.height = 3.9
 
 ggplot(fstSepVarWeights, aes(x = variable, y = estimate, colour = col, fill = col)) +
   geom_boxplot(outlier.colour = grey(0.3), notch = FALSE, notchwidth = 0.7) +
   scale_colour_manual(values = pokepal('nidorino')[c(2, 5, 11)]) +
   scale_fill_manual(values = pokepal('nidorino')[c(3, 6, 10)]) +
-  theme(legend.position = 'none') +
-  scale_x_discrete(labels = c('Study Effort', 'Fst', 'Mass', 'Range Size', 'Null'))+
+  theme(legend.position = 'none', axis.text.x = element_text(size = 15, angle = 45, hjust = 1)) +
+  scale_x_discrete(labels = c('Study Effort', 'Gene Flow', 'Mass', 'Range Size', 'Null'))+
   ylab('P(in best model)') +
   xlab('Variable')
 
@@ -1612,6 +1626,77 @@ ggplot(fstSepVarWeights, aes(x = variable, y = estimate, colour = col, fill = co
 
 %%end.rcode
 
+
+%%begin.rcode fstITlambda, fig.show = extraFigs, fig.cap = 'Values of $\\lambda$ found in $F_{ST}$ analysis.', fig.height = 3
+
+ggplot(fstAllResults, aes(x = lambda)) + 
+  geom_histogram() +
+  ylab('Count') +
+  xlab(expression(paste('Phylogenetic Signal, ', lambda)))
+
+%%end.rcode
+
+
+%%begin.rcode fstITlambdaFacets, fig.show = extraFigs, fig.height = 4
+
+
+transform(fstAllResults, log.mass. = c('Other', 'Mass' )[factor(log.mass.)]) %>%
+ggplot(aes(x = lambda)) + 
+  facet_grid(. ~ log.mass.) +
+  geom_histogram() +
+  ylab('Count') +
+  xlab(expression(paste('Phylogenetic Signal, ', lambda)))
+
+
+transform(fstAllResults, log.Nm. = c('Other', 'Nm' )[factor(log.Nm.)]) %>%
+ggplot(aes(x = lambda)) + 
+  facet_grid(. ~ log.Nm.) +
+  geom_histogram() +
+  ylab('Count') +
+  xlab(expression(paste('Phylogenetic Signal, ', lambda)))
+
+
+transform(fstAllResults, log.distrSize. = c('Other', 'distrSize' )[factor(log.distrSize.)]) %>%
+ggplot(aes(x = lambda)) + 
+  facet_grid(. ~ log.distrSize.) +
+  geom_histogram() +
+  ylab('Count') +
+  xlab(expression(paste('Phylogenetic Signal, ', lambda)))
+
+
+transform(fstAllResults, log.scholarRefs. = c('Other', 'Scholar Refs' )[factor(log.scholarRefs.)]) %>%
+ggplot(aes(x = lambda)) + 
+  facet_grid(. ~ log.scholarRefs.) +
+  geom_histogram() +
+  ylab('Count') +
+  xlab(expression(paste('Phylogenetic Signal, ', lambda)))
+
+transform(fstAllResults, rand = c('Other', 'Rand' )[factor(rand)]) %>%
+ggplot(aes(x = lambda)) + 
+  facet_grid(. ~ rand) +
+  geom_histogram() +
+  ylab('Count') +
+  xlab(expression(paste('Phylogenetic Signal, ', lambda)))
+
+
+%%end.rcode
+
+%%begin.rcode lookAtLambda, fig.show = extraFigs
+
+fstComp <- comparative.data(fstTree, fstFinal, 'binomial')
+
+fullFst <- pgls(virusSpecies ~ log(Nm) + log(mass) + log(distrSize) + log(distrSize) + log(scholarRefs), fstComp, lambda = 'ML')
+
+fst.lambda.profile <- pgls.profile(fullFst, "lambda")
+plot(fst.lambda.profile)
+
+data.frame(x = fst.lambda.profile$x, L = fst.lambda.profile$logLik) %>%
+ggplot(aes(x, L)) +
+  geom_line() +
+  geom_vline(xintercept = fst.lambda.profile$ci$ci.val, col = 'steelblue')
+
+
+%%end.rcode
 
 
 $F_{ST}$ studies are conducted at a range of spatial scales, but $F_{ST}$ often increases with distance studied \cite{}.
