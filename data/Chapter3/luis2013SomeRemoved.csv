@@ -1,0 +1,543 @@
+,virus.family,virus.genus,virus.species,host.genus,host.species,binomial,inTaxonomy,Species Count,Keep,binomial
+1,Rhabdoviridae,Lyssavirus,Rabies virus,Anoura,caudifer,Anoura caudifer,TRUE,1,,Anoura caudifer
+2,Bunyaviridae,Orthobunyavirus,Bimiti,Anoura,geoffroyi,Anoura geoffroyi,FALSE,,,Anoura geoffroyi
+3,Bunyaviridae,Orthobunyavirus,Catu virus,Anoura,geoffroyi,Anoura geoffroyi,TRUE,,,Anoura geoffroyi
+4,Flaviviridae,Flavivirus,Dengue virus,Anoura,geoffroyi,Anoura geoffroyi,TRUE,,,Anoura geoffroyi
+5,Bunyaviridae,Orthobunyavirus,Guama virus,Anoura,geoffroyi,Anoura geoffroyi,TRUE,,,Anoura geoffroyi
+6,Flaviviridae,Flavivirus,Ilheus virus,Anoura,geoffroyi,Anoura geoffroyi,TRUE,,,Anoura geoffroyi
+7,Rhabdoviridae,Lyssavirus,Rabies virus,Anoura,geoffroyi,Anoura geoffroyi,TRUE,,,Anoura geoffroyi
+8,Flaviviridae,Flavivirus,Rio Bravo virus,Anoura,geoffroyi,Anoura geoffroyi,TRUE,,,Anoura geoffroyi
+9,Flaviviridae,Flavivirus,St. Louis encephalitis virus,Anoura,geoffroyi,Anoura geoffroyi,TRUE,,,Anoura geoffroyi
+10,Flaviviridae,Flavivirus,Tamana bat virus,Anoura,geoffroyi,Anoura geoffroyi,FALSE,9,,Anoura geoffroyi
+11,Rhabdoviridae,Lyssavirus,Rabies virus,Antrozous,pallidus,Antrozous pallidus,TRUE,1,,Antrozous pallidus
+12,Flaviviridae,Flavivirus,Dengue virus,Artibeus,cinereus,Artibeus cinereus,TRUE,,,Artibeus cinereus
+13,Flaviviridae,Flavivirus,Ilheus virus,Artibeus,cinereus,Artibeus cinereus,TRUE,,,Artibeus cinereus
+14,Flaviviridae,Flavivirus,Yellow Fever virus,Artibeus,cinereus,Artibeus cinereus,FALSE,3,,Artibeus cinereus
+15,Rhabdoviridae,Lyssavirus,Rabies virus,Artibeus,fimbriatus,Artibeus fimbriatus,TRUE,1,,Artibeus fimbriatus
+16,Flaviviridae,Flavivirus,Dengue virus,Artibeus,jamaicensis,Artibeus jamaicensis,TRUE,,,Artibeus jamaicensis
+17,Togaviridae,Alphavirus,Eastern equine encephalitis virus,Artibeus,jamaicensis,Artibeus jamaicensis,TRUE,,,Artibeus jamaicensis
+18,Flaviviridae,Flavivirus,Ilheus virus,Artibeus,jamaicensis,Artibeus jamaicensis,TRUE,,,Artibeus jamaicensis
+19,Bunyaviridae,Orthobunyavirus,Marituba virus,Artibeus,jamaicensis,Artibeus jamaicensis,TRUE,,,Artibeus jamaicensis
+20,Rhabdoviridae,Lyssavirus,Rabies virus,Artibeus,jamaicensis,Artibeus jamaicensis,TRUE,,,Artibeus jamaicensis
+21,Rhabdoviridae,Lyssavirus,Rabies virus,Artibeus,planirostris,Artibeus jamaicensis,TRUE,,,Artibeus jamaicensis
+22,Flaviviridae,Flavivirus,St. Louis encephalitis virus,Artibeus,jamaicensis,Artibeus jamaicensis,TRUE,,,Artibeus jamaicensis
+23,Arenaviridae,Arenavirus,Tacaribe virus,Artibeus,jamaicensis,Artibeus jamaicensis,FALSE,,,Artibeus jamaicensis
+24,Flaviviridae,Flavivirus,Tamana bat virus,Artibeus,jamaicensis,Artibeus jamaicensis,FALSE,,,Artibeus jamaicensis
+25,Togaviridae,Alphavirus,Venezuelan equine encephalitis virus,Artibeus,jamaicensis,Artibeus jamaicensis,TRUE,,,Artibeus jamaicensis
+26,Rhabdoviridae,Vesiculovirus,Vesicular stomatitis Indiana virus,Artibeus,jamaicensis,Artibeus jamaicensis,TRUE,,,Artibeus jamaicensis
+27,Rhabdoviridae,Vesiculovirus,Vesicular stomatitis New Jersey virus,Artibeus,jamaicensis,Artibeus jamaicensis,TRUE,,,Artibeus jamaicensis
+28,Flaviviridae,Flavivirus,Yellow Fever virus,Artibeus,jamaicensis,Artibeus jamaicensis,FALSE,12,,Artibeus jamaicensis
+29,Flaviviridae,Flavivirus,Dengue virus,Artibeus,lituratus,Artibeus lituratus,TRUE,13,,Artibeus lituratus
+30,Togaviridae,Alphavirus,Eastern equine encephalitis virus,Artibeus,lituratus,Artibeus lituratus,TRUE,,,Artibeus lituratus
+31,Bunyaviridae,Orthobunyavirus,Guama virus,Artibeus,lituratus,Artibeus lituratus,TRUE,,,Artibeus lituratus
+32,Flaviviridae,Flavivirus,Ilheus virus,Artibeus,lituratus,Artibeus lituratus,TRUE,,,Artibeus lituratus
+33,Bunyaviridae,Orthobunyavirus,Marituba virus,Artibeus,lituratus,Artibeus lituratus,TRUE,,,Artibeus lituratus
+34,Bunyaviridae,Orthobunyavirus,Oriboca,Artibeus,lituratus,Artibeus lituratus,FALSE,,,Artibeus lituratus
+35,Rhabdoviridae,Lyssavirus,Rabies virus,Artibeus,lituratus,Artibeus lituratus,TRUE,,,Artibeus lituratus
+36,Flaviviridae,Flavivirus,St. Louis encephalitis virus,Artibeus,lituratus,Artibeus lituratus,TRUE,,,Artibeus lituratus
+37,Arenaviridae,Arenavirus,Tacaribe virus,Artibeus,lituratus,Artibeus lituratus,FALSE,,,Artibeus lituratus
+38,Togaviridae,Alphavirus,Venezuelan equine encephalitis virus,Artibeus,lituratus,Artibeus lituratus,TRUE,,,Artibeus lituratus
+39,Rhabdoviridae,Vesiculovirus,Vesicular stomatitis Indiana virus,Artibeus,lituratus,Artibeus lituratus,TRUE,,,Artibeus lituratus
+40,Togaviridae,Alphavirus,Western equine encephalitis virus,Artibeus,lituratus,Artibeus lituratus,TRUE,,,Artibeus lituratus
+41,Flaviviridae,Flavivirus,Yellow Fever virus,Artibeus,lituratus,Artibeus lituratus,FALSE,,,Artibeus lituratus
+42,Rhabdoviridae,Lyssavirus,Rabies virus,Artibeus,phaeotis,Artibeus phaeotis,TRUE,,,Artibeus phaeotis
+43,Flaviviridae,Flavivirus,St. Louis encephalitis virus,Artibeus,phaeotis,Artibeus phaeotis,TRUE,,,Artibeus phaeotis
+44,Togaviridae,Alphavirus,Venezuelan equine encephalitis virus,Artibeus,phaeotis,Artibeus phaeotis,TRUE,,,Artibeus phaeotis
+45,Rhabdoviridae,Vesiculovirus,Vesicular stomatitis Indiana virus,Artibeus,phaeotis,Artibeus phaeotis,TRUE,,,Artibeus phaeotis
+46,Rhabdoviridae,Vesiculovirus,Vesicular stomatitis New Jersey virus,Artibeus,phaeotis,Artibeus phaeotis,TRUE,5,,Artibeus phaeotis
+47,Astroviridae,unassigned,bat astroviruses,Aselliscus,stoliczkanus,Aselliscus stoliczkanus,FALSE,1,,Aselliscus stoliczkanus
+48,Rhabdoviridae,Lyssavirus,European bat lyssavirus 1,Barbastella,barbastellus,Barbastella barbastellus,TRUE,1,,Barbastella barbastellus
+49,Flaviviridae,Flavivirus,Dengue virus,Carollia,brevicauda,Carollia brevicauda,TRUE,,,Carollia brevicauda
+50,Togaviridae,Alphavirus,Venezuelan equine encephalitis virus,Carollia,brevicauda,Carollia brevicauda,TRUE,2,,Carollia brevicauda
+51,Retroviridae,unassigned,a retrovirus,Carollia,perspicillata,Carollia perspicillata,FALSE,,,Carollia perspicillata
+52,Bunyaviridae,Orthobunyavirus,Bimiti,Carollia,perspicillata,Carollia perspicillata,FALSE,,,Carollia perspicillata
+53,Bunyaviridae,Orthobunyavirus,Catu virus,Carollia,perspicillata,Carollia perspicillata,TRUE,,,Carollia perspicillata
+54,Flaviviridae,Flavivirus,Dengue virus,Carollia,perspicillata,Carollia perspicillata,TRUE,,,Carollia perspicillata
+55,Togaviridae,Alphavirus,Eastern equine encephalitis virus,Carollia,perspicillata,Carollia perspicillata,TRUE,,,Carollia perspicillata
+56,Flaviviridae,Flavivirus,Ilheus virus,Carollia,perspicillata,Carollia perspicillata,TRUE,,,Carollia perspicillata
+57,Bunyaviridae,Orthobunyavirus,Marituba virus,Carollia,perspicillata,Carollia perspicillata,TRUE,,,Carollia perspicillata
+58,Rhabdoviridae,Lyssavirus,Rabies virus,Carollia,perspicillata,Carollia perspicillata,TRUE,,,Carollia perspicillata
+59,Flaviviridae,Flavivirus,Rio Bravo virus,Carollia,perspicillata,Carollia perspicillata,TRUE,,,Carollia perspicillata
+60,Flaviviridae,Flavivirus,St. Louis encephalitis virus,Carollia,perspicillata,Carollia perspicillata,TRUE,,,Carollia perspicillata
+61,Flaviviridae,Flavivirus,Tamana bat virus,Carollia,perspicillata,Carollia perspicillata,FALSE,,,Carollia perspicillata
+62,Togaviridae,Alphavirus,Venezuelan equine encephalitis virus,Carollia,perspicillata,Carollia perspicillata,TRUE,,,Carollia perspicillata
+63,Rhabdoviridae,Vesiculovirus,Vesicular stomatitis Indiana virus,Carollia,perspicillata,Carollia perspicillata,TRUE,,,Carollia perspicillata
+64,Rhabdoviridae,Vesiculovirus,Vesicular stomatitis New Jersey virus,Carollia,perspicillata,Carollia perspicillata,TRUE,,,Carollia perspicillata
+65,Flaviviridae,Flavivirus,Yellow Fever virus,Carollia,perspicillata,Carollia perspicillata,FALSE,15,,Carollia perspicillata
+66,Herpesviridae,unassigned,Agua Preta virus,Carollia,subrufa,Carollia subrufa,FALSE,,,Carollia subrufa
+67,Togaviridae,Alphavirus,Venezuelan equine encephalitis virus,Carollia,subrufa,Carollia subrufa,TRUE,2,,Carollia subrufa
+68,Bunyaviridae,unassigned,Issyk-kul,Tadarida,plicata,Chaerephon plicatus,FALSE,1,,Chaerephon plicatus
+69,Bunyaviridae,Orthobunyavirus,Kaeng Khoi virus,Tadarida,plicata,Chaerephon plicatus,TRUE,,,Chaerephon plicatus
+70,Flaviviridae,Flavivirus,Bukalasa bat virus,Tadarida,pumila,Chaerephon pumilus,TRUE,,,Chaerephon pumilus
+71,Togaviridae,Alphavirus,Chikungunya virus,Tadarida,pumila,Chaerephon pumilus,TRUE,,,Chaerephon pumilus
+72,Flaviviridae,Flavivirus,Dakar bat virus,Tadarida,pumila,Chaerephon pumilus,TRUE,,,Chaerephon pumilus
+73,Flaviviridae,Flavivirus,Entebbe bat virus,Tadarida,pumila,Chaerephon pumilus,TRUE,4,,Chaerephon pumilus
+74,Rhabdoviridae,Lyssavirus,Rabies virus,Chrotopterus,auritus,Chrotopterus auritus,TRUE,1,,Chrotopterus auritus
+75,Rhabdoviridae,Lyssavirus,Rabies virus,Corynorhinus,townsendii,Corynorhinus townsendii,TRUE,1,,Corynorhinus townsendii
+76,Rhabdoviridae,Lyssavirus,Rabies virus,Cynomops,abrasus,Cynomops abrasus,TRUE,1,,Cynomops abrasus
+77,Rhabdoviridae,Lyssavirus,Rabies virus,Cynomops,planirostris,Cynomops planirostris,TRUE,1,,Cynomops planirostris
+78,Flaviviridae,Flavivirus,Carey Island virus,Cynopterus,brachyotis,Cynopterus brachyotis,TRUE,,,Cynopterus brachyotis
+79,Bunyaviridae,unassigned,Issyk-kul,Cynopterus,brachyotis,Cynopterus brachyotis,FALSE,,,Cynopterus brachyotis
+80,Flaviviridae,Flavivirus,Jugra virus,Cynopterus,brachyotis,Cynopterus brachyotis,TRUE,,,Cynopterus brachyotis
+81,Paramyxoviridae,Henipavirus,Nipah virus,Cynopterus,brachyotis,Cynopterus brachyotis,TRUE,,,Cynopterus brachyotis
+82,Flaviviridae,Flavivirus,Phnom-Penh bat virus,Cynopterus,brachyotis,Cynopterus brachyotis,FALSE,5,,Cynopterus brachyotis
+83,Orthomyxiviridae,Influenzavirus A,Influenzavirus A virus,Cynopterus,sphinx,Cynopterus sphinx,FALSE,,,Cynopterus sphinx
+84,Flaviviridae,Flavivirus,Japanese encephalitis virus,Cynopterus,sphinx,Cynopterus sphinx,TRUE,,,Cynopterus sphinx
+85,Flaviviridae,Flavivirus,Kyasanur Forest disease virus,Cynopterus,sphinx,Cynopterus sphinx,TRUE,3,,Cynopterus sphinx
+86,Flaviviridae,Flavivirus,Dengue virus,Desmodus,rotundus,Desmodus rotundus,TRUE,,,Desmodus rotundus
+87,Flaviviridae,Flavivirus,Ilheus virus,Desmodus,rotundus,Desmodus rotundus,TRUE,,,Desmodus rotundus
+88,Rhabdoviridae,Lyssavirus,Rabies virus,Desmodus,rotundus,Desmodus rotundus,TRUE,,,Desmodus rotundus
+89,Arenaviridae,Arenavirus,Tacaribe virus,Desmodus,rotundus,Desmodus rotundus,FALSE,,,Desmodus rotundus
+90,Flaviviridae,Flavivirus,Tamana bat virus,Desmodus,rotundus,Desmodus rotundus,FALSE,,,Desmodus rotundus
+91,Togaviridae,Alphavirus,Venezuelan equine encephalitis virus,Desmodus,rotundus,Desmodus rotundus,TRUE,,,Desmodus rotundus
+92,Rhabdoviridae,Vesiculovirus,Vesicular stomatitis New Jersey virus,Desmodus,rotundus,Desmodus rotundus,TRUE,7,,Desmodus rotundus
+93,Rhabdoviridae,Lyssavirus,Rabies virus,Diaemus,youngi,Diaemus youngi,TRUE,1,,Diaemus youngi
+94,Rhabdoviridae,Lyssavirus,Rabies virus,Diphylla,ecaudata,Diphylla ecaudata,TRUE,1,,Diphylla ecaudata
+95,Paramyxoviridae,Henipavirus,Hendra virus,Dobsonia,anderseni,Dobsonia anderseni,TRUE,1,,Dobsonia anderseni
+96,Paramyxoviridae,Henipavirus,Hendra virus,Dobsonia,moluccensis,Dobsonia moluccensis,TRUE,1,,Dobsonia moluccensis
+97,Herpesviridae,unassigned,a herpesvirus,Eidolon,dupreanum,Eidolon dupreanum,FALSE,,,Eidolon dupreanum
+98,Paramyxoviridae,Henipavirus,Hendra virus,Eidolon,dupreanum,Eidolon dupreanum,TRUE,,,Eidolon dupreanum
+99,Paramyxoviridae,Henipavirus,Nipah virus,Eidolon,dupreanum,Eidolon dupreanum,TRUE,3,,Eidolon dupreanum
+100,Herpesviridae,unassigned,a herpesvirus,Eidolon,helvum,Eidolon helvum,FALSE,,,Eidolon helvum
+101,Filoviridae,Ebolavirus,Ebola-Zaire virus,Eidolon,helvum,Eidolon helvum,FALSE,,,Eidolon helvum
+102,Paramyxoviridae,Henipavirus,Hendra virus,Eidolon,helvum,Eidolon helvum,TRUE,,,Eidolon helvum
+103,Reoviridae,Orbivirus,Ife virus,Eidolon,helvum,Eidolon helvum,FALSE,,,Eidolon helvum
+104,Rhabdoviridae,Lyssavirus,Lagos bat virus,Eidolon,helvum,Eidolon helvum,TRUE,,,Eidolon helvum
+105,Rhabdoviridae,Lyssavirus,Mokola virus,Eidolon,helvum,Eidolon helvum,TRUE,,,Eidolon helvum
+106,Herpesviridae,Simplexvirus,simplexvirus,Eidolon,helvum,Eidolon helvum,FALSE,7,,Eidolon helvum
+107,Bunyaviridae,unassigned,Issyk-kul,Eonycteris,spelaea,Eonycteris spelaea,FALSE,,,Eonycteris spelaea
+108,Flaviviridae,Flavivirus,Kyasanur Forest disease virus,Eonycteris,spelaea,Eonycteris spelaea,TRUE,,,Eonycteris spelaea
+109,Paramyxoviridae,Henipavirus,Nipah virus,Eonycteris,spelaea,Eonycteris spelaea,TRUE,,,Eonycteris spelaea
+110,Flaviviridae,Flavivirus,Phnom-Penh bat virus,Eonycteris,spelaea,Eonycteris spelaea,FALSE,,,Eonycteris spelaea
+111,Rhabdoviridae,Lyssavirus,unidentified,Eonycteris,spelaea,Eonycteris spelaea,FALSE,5,,Eonycteris spelaea
+112,Rhabdoviridae,Lyssavirus,Lagos bat virus,Epomophorus,gambianus,Epomophorus gambianus,TRUE,1,,Epomophorus gambianus
+113,Rhabdoviridae,Lyssavirus,Lagos bat virus,Epomophorus,wahlbergi,Epomophorus wahlbergi,TRUE,1,,Epomophorus wahlbergi
+114,Rhabdoviridae,Lyssavirus,Lagos bat virus,Epomops,dobsonii,Epomops dobsonii,TRUE,1,,Epomops dobsonii
+115,Filoviridae,Ebolavirus,Ebola-Zaire virus,Epomops,franqueti,Epomops franqueti,FALSE,,,Epomops franqueti
+116,Bunyaviridae,Phlebovirus,Rift Valley fever virus,Epomops,franqueti,Epomops franqueti,TRUE,2,,Epomops franqueti
+117,Rhabdoviridae,Lyssavirus,Rabies virus,Eptesicus,brasiliensis,Eptesicus brasiliensis,TRUE,1,,Eptesicus brasiliensis
+118,Rhabdoviridae,Lyssavirus,Rabies virus,Eptesicus,diminutus,Eptesicus diminutus,TRUE,1,,Eptesicus diminutus
+119,Rhabdoviridae,Lyssavirus,Rabies virus,Eptesicus,furinalis,Eptesicus furinalis,TRUE,1,,Eptesicus furinalis
+120,Herpesviridae,unassigned,BatGHV-1,Eptesicus,fuscus,Eptesicus fuscus,FALSE,,,Eptesicus fuscus
+121,Togaviridae,Alphavirus,Eastern equine encephalitis virus,Eptesicus,fuscus,Eptesicus fuscus,TRUE,,,Eptesicus fuscus
+122,Rhabdoviridae,Lyssavirus,Rabies virus,Eptesicus,fuscus,Eptesicus fuscus,TRUE,,,Eptesicus fuscus
+123,Flaviviridae,Flavivirus,Rio Bravo virus,Eptesicus,fuscus,Eptesicus fuscus,TRUE,,,Eptesicus fuscus
+124,Coronaviridae,Coronavirus,Rocky Mountain bat coronavirus,Eptesicus,fuscus,Eptesicus fuscus,FALSE,,,Eptesicus fuscus
+125,Flaviviridae,Flavivirus,St. Louis encephalitis virus,Eptesicus,fuscus,Eptesicus fuscus,TRUE,,,Eptesicus fuscus
+126,Flaviviridae,Flavivirus,West Nile virus,Eptesicus,fuscus,Eptesicus fuscus,TRUE,7,,Eptesicus fuscus
+127,Herpesviridae,unassigned,a gammaherpesvirus,Eptesicus,serotinus,Eptesicus serotinus,FALSE,,,Eptesicus serotinus
+128,Rhabdoviridae,Lyssavirus,European bat lyssavirus 1,Eptesicus,serotinus,Eptesicus serotinus,TRUE,,,Eptesicus serotinus
+129,Bunyaviridae,Hantavirus,Hantaan virus,Eptesicus,serotinus,Eptesicus serotinus,TRUE,,,Eptesicus serotinus
+130,Bunyaviridae,unassigned,Issyk-kul,Eptesicus,serotinus,Eptesicus serotinus,FALSE,3,,Eptesicus serotinus
+131,Rhabdoviridae,Lyssavirus,Rabies virus,Euderma,maculatum,Euderma maculatum,TRUE,1,,Euderma maculatum
+132,Rhabdoviridae,Lyssavirus,Rabies virus,Eumops,auripendulus,Eumops auripendulus,TRUE,1,,Eumops auripendulus
+133,Rhabdoviridae,Lyssavirus,Rabies virus,Eumops,glaucinus,Eumops glaucinus,TRUE,1,,Eumops glaucinus
+134,Rhabdoviridae,Lyssavirus,Rabies virus,Eumops,patagonicus,Eumops patagonicus,TRUE,1,,Eumops patagonicus
+135,Rhabdoviridae,Lyssavirus,Rabies virus,Eumops,perotis,Eumops perotis,TRUE,1,,Eumops perotis
+136,Bunyaviridae,Phlebovirus,Rift Valley fever virus,Glauconycteris,argentata,Glauconycteris argentata,TRUE,1,,Glauconycteris argentata
+137,Togaviridae,Alphavirus,Venezuelan equine encephalitis virus,Glossophaga,commissarisi,Glossophaga commissarisi,TRUE,1,,Glossophaga commissarisi
+138,Rhabdoviridae,Lyssavirus,Rabies virus,Glossophaga,morenoi,Glossophaga morenoi,TRUE,1,,Glossophaga morenoi
+139,Togaviridae,Alphavirus,Eastern equine encephalitis virus,Glossophaga,soricina,Glossophaga soricina,TRUE,,,Glossophaga soricina
+140,Flaviviridae,Flavivirus,Ilheus virus,Glossophaga,soricina,Glossophaga soricina,TRUE,,,Glossophaga soricina
+141,Rhabdoviridae,Lyssavirus,Rabies virus,Glossophaga,soricina,Glossophaga soricina,TRUE,,,Glossophaga soricina
+142,Flaviviridae,Flavivirus,St. Louis encephalitis virus,Glossophaga,soricina,Glossophaga soricina,TRUE,,,Glossophaga soricina
+143,Togaviridae,Alphavirus,Venezuelan equine encephalitis virus,Glossophaga,soricina,Glossophaga soricina,TRUE,,,Glossophaga soricina
+144,Rhabdoviridae,Vesiculovirus,Vesicular stomatitis Indiana virus,Glossophaga,soricina,Glossophaga soricina,TRUE,,,Glossophaga soricina
+145,Rhabdoviridae,Vesiculovirus,Vesicular stomatitis New Jersey virus,Glossophaga,soricina,Glossophaga soricina,TRUE,,,Glossophaga soricina
+146,Flaviviridae,Flavivirus,Yellow Fever virus,Glossophaga,soricina,Glossophaga soricina,FALSE,8,,Glossophaga soricina
+147,Bunyaviridae,Phlebovirus,Rift Valley fever virus,Hipposideros,abae,Hipposideros abae,TRUE,1,,Hipposideros abae
+148,Coronaviridae,Coronavirus,an alphacoronavirus,Hipposideros,armiger,Hipposideros armiger,FALSE,,,Hipposideros armiger
+149,Astroviridae,unassigned,bat astroviruses,Hipposideros,armiger,Hipposideros armiger,FALSE,,,Hipposideros armiger
+150,Adenoviridae,Mastadenovirus,Hipposideros adenovirus,Hipposideros,armiger,Hipposideros armiger,FALSE,,,Hipposideros armiger
+151,Flaviviridae,Flavivirus,Japanese encephalitis virus,Hipposideros,armiger,Hipposideros armiger,TRUE,,,Hipposideros armiger
+152,Paramyxoviridae,Henipavirus,Nipah virus,Hipposideros,armiger,Hipposideros armiger,TRUE,5,,Hipposideros armiger
+153,Flaviviridae,Flavivirus,Japanese encephalitis virus,Hipposideros,bicolor,Hipposideros bicolor,TRUE,1,,Hipposideros bicolor
+154,Coronaviridae,Coronavirus,Bat CoV,Hipposideros,caffer,Hipposideros caffer,FALSE,,,Hipposideros caffer
+155,Togaviridae,Alphavirus,Chikungunya virus,Hipposideros,caffer,Hipposideros caffer,TRUE,,,Hipposideros caffer
+156,Bunyaviridae,Phlebovirus,Rift Valley fever virus,Hipposideros,caffer,Hipposideros caffer,TRUE,3,,Hipposideros caffer
+157,Flaviviridae,Flavivirus,Japanese encephalitis virus,Hipposideros,cineraceus,Hipposideros cineraceus,TRUE,1,,Hipposideros cineraceus
+158,Rhabdoviridae,Lyssavirus,Shimoni bat virus,Hipposideros,commersoni,Hipposideros commersoni,TRUE,1,,Hipposideros commersoni
+159,Herpesviridae,unassigned,another bat gammaherpesvirus,Hipposideros,diadema,Hipposideros diadema,FALSE,,,Hipposideros diadema
+160,Bunyaviridae,unassigned,Issyk-kul,Hipposideros,diadema,Hipposideros diadema,FALSE,2,,Hipposideros diadema
+161,Flaviviridae,Flavivirus,Kyasanur Forest disease virus,Hipposideros,lankadiva,Hipposideros lankadiva,TRUE,1,,Hipposideros lankadiva
+162,Coronaviridae,Coronavirus,a betacoronavirus,Hipposideros,larvatus,Hipposideros larvatus,FALSE,,,Hipposideros larvatus
+163,Astroviridae,unassigned,bat astroviruses,Hipposideros,larvatus,Hipposideros larvatus,FALSE,2,,Hipposideros larvatus
+164,Astroviridae,unassigned,bat astroviruses,Hipposideros,pomona,Hipposideros pomona,FALSE,,,Hipposideros pomona
+165,Flaviviridae,Flavivirus,Japanese encephalitis virus,Hipposideros,pomona,Hipposideros pomona,TRUE,2,,Hipposideros pomona
+166,Flaviviridae,Flavivirus,Japanese encephalitis virus,Hipposideros,speoris,Hipposideros speoris,TRUE,,,Hipposideros speoris
+167,Flaviviridae,Flavivirus,Kyasanur Forest disease virus,Hipposideros,speoris,Hipposideros speoris,TRUE,2,,Hipposideros speoris
+168,Rhabdoviridae,Lyssavirus,Rabies virus,Histiotus,montanus,Histiotus montanus,TRUE,1,,Histiotus montanus
+169,Rhabdoviridae,Lyssavirus,Rabies virus,Histiotus,velatus,Histiotus velatus,TRUE,1,,Histiotus velatus
+170,Filoviridae,Ebolavirus,Ebola-Zaire virus,Hypsignathus,monstrosus,Hypsignathus monstrosus,FALSE,,,Hypsignathus monstrosus
+171,Filoviridae,Marburgvirus,Lake Victoria marburg virus,Hypsignathus,monstrosus,Hypsignathus monstrosus,FALSE,2,,Hypsignathus monstrosus
+172,Astroviridae,unassigned,bat astroviruses,Ia,io,Ia io,FALSE,1,,Ia io
+173,Rhabdoviridae,Lyssavirus,Rabies virus,Lasionycteris,noctivagans,Lasionycteris noctivagans,TRUE,1,,Lasionycteris noctivagans
+174,Rhabdoviridae,Lyssavirus,Rabies virus,Lasiurus,blossevillii,Lasiurus blossevillii,TRUE,1,,Lasiurus blossevillii
+175,Rhabdoviridae,Lyssavirus,Rabies virus,Lasiurus,borealis,Lasiurus borealis,TRUE,1,,Lasiurus borealis
+176,Togaviridae,Alphavirus,Eastern equine encephalitis virus,Lasiurus,cinereus,Lasiurus cinereus,TRUE,,,Lasiurus cinereus
+177,Rhabdoviridae,Lyssavirus,Rabies virus,Lasiurus,cinereus,Lasiurus cinereus,TRUE,2,,Lasiurus cinereus
+178,Rhabdoviridae,Lyssavirus,Rabies virus,Lasiurus,ega,Lasiurus ega,TRUE,1,,Lasiurus ega
+179,Rhabdoviridae,Lyssavirus,Rabies virus,Lasiurus,egregius,Lasiurus egregius,TRUE,1,,Lasiurus egregius
+180,Rhabdoviridae,Lyssavirus,Rabies virus,Lasiurus,intermedius,Lasiurus intermedius,TRUE,1,,Lasiurus intermedius
+181,Rhabdoviridae,Lyssavirus,Rabies virus,Lasiurus,seminolus,Lasiurus seminolus,TRUE,1,,Lasiurus seminolus
+182,Rhabdoviridae,Lyssavirus,Rabies virus,Lasiurus,xanthinus,Lasiurus xanthinus,TRUE,1,,Lasiurus xanthinus
+183,Rhabdoviridae,Lyssavirus,Rabies virus,Leptonycteris,curasoae,Leptonycteris curasoae,TRUE,1,,Leptonycteris curasoae
+184,Rhabdoviridae,Lyssavirus,Rabies virus,Leptonycteris,nivalis,Leptonycteris nivalis,TRUE,1,,Leptonycteris nivalis
+185,Rhabdoviridae,Vesiculovirus,Vesicular stomatitis New Jersey virus,Lonchophylla,robusta,Lonchophylla robusta,TRUE,1,,Lonchophylla robusta
+186,Herpesviridae,unassigned,Parixa virus,Lonchophylla,thomasi,Lonchophylla thomasi,FALSE,1,,Lonchophylla thomasi
+187,Rhabdoviridae,Lyssavirus,Rabies virus,Lonchorhina,aurita,Lonchorhina aurita,TRUE,1,,Lonchorhina aurita
+188,Rhabdoviridae,Lyssavirus,Rabies virus,Lophostoma,brasiliense,Lophostoma brasiliense,TRUE,1,,Lophostoma brasiliense
+189,Rhabdoviridae,Vesiculovirus,Vesicular stomatitis Indiana virus,Lophostoma,silvicolum,Lophostoma silvicolum,TRUE,,,Lophostoma silvicolum
+190,Rhabdoviridae,Vesiculovirus,Vesicular stomatitis New Jersey virus,Lophostoma,silvicolum,Lophostoma silvicolum,TRUE,2,,Lophostoma silvicolum
+191,Flaviviridae,Flavivirus,Carey Island virus,Macroglossus,minimus,Macroglossus minimus,TRUE,1,,Macroglossus minimus
+192,Rhabdoviridae,Lyssavirus,Rabies virus,Macrotus,californicus,Macrotus californicus,TRUE,1,,Macrotus californicus
+193,Astroviridae,unassigned,bat astroviruses,Megaderma,lyra,Megaderma lyra,FALSE,,,Megaderma lyra
+194,Orthomyxiviridae,Influenzavirus A,Influenzavirus A virus,Megaderma,lyra,Megaderma lyra,FALSE,2,,Megaderma lyra
+195,Rhabdoviridae,Lyssavirus,Rabies virus,Micronycteris,megalotis,Micronycteris megalotis,TRUE,1,,Micronycteris megalotis
+196,Filoviridae,Ebolavirus,Ebola-Zaire virus,Micropteropus,pusillus,Micropteropus pusillus,FALSE,,,Micropteropus pusillus
+197,Rhabdoviridae,Lyssavirus,Lagos bat virus,Micropteropus,pusillus,Micropteropus pusillus,TRUE,,,Micropteropus pusillus
+198,Bunyaviridae,Phlebovirus,Rift Valley fever virus,Micropteropus,pusillus,Micropteropus pusillus,TRUE,3,,Micropteropus pusillus
+199,Flaviviridae,Flavivirus,Tamana bat virus,Mimon,crenulatum,Mimon crenulatum,FALSE,1,,Mimon crenulatum
+200,Filoviridae,Marburgvirus,Lake Victoria marburg virus,Miniopterus,inflatus,Miniopterus inflatus,FALSE,1,,Miniopterus inflatus
+201,Astroviridae,unassigned,bat astrovirus AFCD337,Miniopterus,magnater,Miniopterus magnater,FALSE,,,Miniopterus magnater
+202,Coronaviridae,Coronavirus,Miniopterus bat coronavirus 1,Miniopterus,magnater,Miniopterus magnater,TRUE,2,,Miniopterus magnater
+203,Astroviridae,unassigned,bat astrovirus AFCD337,Miniopterus,pusillus,Miniopterus pusillus,FALSE,,,Miniopterus pusillus
+204,Coronaviridae,Coronavirus,Miniopterus bat coronavirus 1,Miniopterus,pusillus,Miniopterus pusillus,TRUE,,,Miniopterus pusillus
+205,Coronaviridae,Coronavirus,Miniopterus bat coronavirus HKU8,Miniopterus,pusillus,Miniopterus pusillus,TRUE,3,,Miniopterus pusillus
+206,Rhabdoviridae,Lyssavirus,Australian bat lyssavirus,Miniopterus,schreibersii,Miniopterus schreibersii,TRUE,,,Miniopterus schreibersii
+207,Astroviridae,unassigned,bat astroviruses,Miniopterus,schreibersii,Miniopterus schreibersii,FALSE,,,Miniopterus schreibersii
+208,Coronaviridae,Coronavirus,BatCoV HKU7,Miniopterus,schreibersii,Miniopterus schreibersii,FALSE,,,Miniopterus schreibersii
+209,Rhabdoviridae,Lyssavirus,Duvenhage virus,Miniopterus,schreibersii,Miniopterus schreibersii,TRUE,,,Miniopterus schreibersii
+210,Rhabdoviridae,Lyssavirus,European bat lyssavirus 1,Miniopterus,schreibersii,Miniopterus schreibersii,TRUE,,,Miniopterus schreibersii
+211,Flaviviridae,Flavivirus,Japanese encephalitis virus,Miniopterus,schreibersii,Miniopterus schreibersii,TRUE,,,Miniopterus schreibersii
+212,Flaviviridae,Flavivirus,Kyasanur Forest disease virus,Miniopterus,schreibersii,Miniopterus schreibersii,TRUE,,,Miniopterus schreibersii
+213,Coronaviridae,Coronavirus,Miniopterus bat coronavirus 1,Miniopterus,schreibersii,Miniopterus schreibersii,TRUE,,,Miniopterus schreibersii
+214,Coronaviridae,Coronavirus,Miniopterus bat coronavirus HKU8,Miniopterus,schreibersii,Miniopterus schreibersii,TRUE,,,Miniopterus schreibersii
+215,Bunyaviridae,Phlebovirus,Rift Valley fever virus,Miniopterus,schreibersii,Miniopterus schreibersii,TRUE,,,Miniopterus schreibersii
+216,Rhabdoviridae,Lyssavirus,West Caucasian bat virus,Miniopterus,schreibersii,Miniopterus schreibersii,TRUE,,,Miniopterus schreibersii
+217,Flaviviridae,Flavivirus,Yokose virus,Miniopterus,schreibersii,Miniopterus schreibersii,TRUE,12,,Miniopterus schreibersii
+218,Coronaviridae,Coronavirus,BatCoV HKU7,Miniopterus,tristis,Miniopterus tristis,FALSE,1,,Miniopterus tristis
+219,Rhabdoviridae,Lyssavirus,Rabies virus,Molossops,neglectus,Molossops neglectus,TRUE,1,,Molossops neglectus
+220,Bunyaviridae,Orthobunyavirus,Catu virus,Molossus,molossus,Molossus molossus,TRUE,,,Molossus molossus
+221,Flaviviridae,Flavivirus,Dengue virus,Molossus,molossus,Molossus molossus,TRUE,,,Molossus molossus
+222,Flaviviridae,Flavivirus,Ilheus virus,Molossus,molossus,Molossus molossus,TRUE,,,Molossus molossus
+223,Rhabdoviridae,Lyssavirus,Rabies virus,Molossus,molossus,Molossus molossus,TRUE,,,Molossus molossus
+224,Flaviviridae,Flavivirus,Rio Bravo virus,Molossus,molossus,Molossus molossus,TRUE,,,Molossus molossus
+225,Flaviviridae,Flavivirus,St. Louis encephalitis virus,Molossus,molossus,Molossus molossus,TRUE,,,Molossus molossus
+226,Flaviviridae,Flavivirus,Yellow Fever virus,Molossus,molossus,Molossus molossus,FALSE,7,,Molossus molossus
+227,Flaviviridae,Flavivirus,Dengue virus,Molossus,rufus,Molossus rufus,TRUE,,,Molossus rufus
+228,Flaviviridae,Flavivirus,Ilheus virus,Molossus,rufus,Molossus rufus,TRUE,,,Molossus rufus
+229,Bunyaviridae,Orthobunyavirus,Manzanilla,Molossus,rufus,Molossus rufus,FALSE,,,Molossus rufus
+230,Togaviridae,Alphavirus,Mucambo virus,Molossus,rufus,Molossus rufus,TRUE,,,Molossus rufus
+231,Rhabdoviridae,Lyssavirus,Rabies virus,Molossus,rufus,Molossus rufus,TRUE,,,Molossus rufus
+232,Flaviviridae,Flavivirus,Rio Bravo virus,Molossus,rufus,Molossus rufus,TRUE,,,Molossus rufus
+233,Flaviviridae,Flavivirus,St. Louis encephalitis virus,Molossus,rufus,Molossus rufus,TRUE,,,Molossus rufus
+234,Flaviviridae,Flavivirus,Tamana bat virus,Molossus,rufus,Molossus rufus,FALSE,,,Molossus rufus
+235,Flaviviridae,Flavivirus,Yellow Fever virus,Molossus,rufus,Molossus rufus,FALSE,9,,Molossus rufus
+236,Flaviviridae,Flavivirus,Dakar bat virus,Tadarida,condylura,Mops condylurus,TRUE,,,Mops condylurus
+237,Filoviridae,Ebolavirus,Ebola-Zaire virus,Tadarida,condylura,Mops condylurus,FALSE,,,Mops condylurus
+238,Flaviviridae,Flavivirus,Entebbe bat virus,Tadarida,condylura,Mops condylurus,TRUE,3,,Mops condylurus
+239,Rhabdoviridae,Lyssavirus,Rabies virus,Mormoops,megalophylla,Mormoops megalophylla,TRUE,,,Mormoops megalophylla
+240,Flaviviridae,Flavivirus,Rio Bravo virus,Mormoops,megalophylla,Mormoops megalophylla,TRUE,,,Mormoops megalophylla
+241,Flaviviridae,Flavivirus,Tamana bat virus,Mormoops,megalophylla,Mormoops megalophylla,FALSE,3,,Mormoops megalophylla
+242,Rhabdoviridae,Lyssavirus,Irkut virus,Murina,leucogaster,Murina leucogaster,TRUE,,,Murina leucogaster
+243,Flaviviridae,Flavivirus,Japanese encephalitis virus,Murina,leucogaster,Murina leucogaster,TRUE,2,,Murina leucogaster
+244,Filoviridae,Ebolavirus,Ebola-Zaire virus,Myonycteris,torquata,Myonycteris torquata,FALSE,1,,Myonycteris torquata
+245,Rhabdoviridae,Lyssavirus,Rabies virus,Myotis,albescens,Myotis albescens,TRUE,1,,Myotis albescens
+246,Rhabdoviridae,Lyssavirus,Rabies virus,Myotis,austroriparius,Myotis austroriparius,TRUE,1,,Myotis austroriparius
+247,Rhabdoviridae,Lyssavirus,Aravan,Myotis,blythii,Myotis blythii,FALSE,,,Myotis blythii
+248,Bunyaviridae,unassigned,Issyk-kul,Myotis,blythii,Myotis blythii,FALSE,2,,Myotis blythii
+249,Polyomaviridae,Polyomavirus,Myotis polyomavirus,Myotis,californicus,Myotis californicus,FALSE,,,Myotis californicus
+250,Rhabdoviridae,Lyssavirus,Rabies virus,Myotis,californicus,Myotis californicus,TRUE,2,,Myotis californicus
+251,Astroviridae,unassigned,bat astrovirus AFCD337,Myotis,chinensis,Myotis chinensis,FALSE,1,,Myotis chinensis
+252,Rhabdoviridae,Lyssavirus,European bat lyssavirus 2,Myotis,dasycneme,Myotis dasycneme,TRUE,,,Myotis dasycneme
+253,Coronaviridae,Coronavirus,Myotis dasycneme coronavirus,Myotis,dasycneme,Myotis dasycneme,FALSE,2,,Myotis dasycneme
+254,Coronaviridae,Coronavirus,BatCoV HKU6,Myotis,daubentonii,Myotis daubentonii,FALSE,,,Myotis daubentonii
+255,Rhabdoviridae,Lyssavirus,European bat lyssavirus 2,Myotis,daubentonii,Myotis daubentonii,TRUE,2,,Myotis daubentonii
+256,Rhabdoviridae,Lyssavirus,Rabies virus,Myotis,evotis,Myotis evotis,TRUE,,,Myotis evotis
+257,Coronaviridae,Coronavirus,Rocky Mountain bat coronavirus,Myotis,evotis,Myotis evotis,FALSE,2,,Myotis evotis
+258,Rhabdoviridae,Lyssavirus,Rabies virus,Myotis,grisescens,Myotis grisescens,TRUE,1,,Myotis grisescens
+259,Adenoviridae,Mastadenovirus,Myotis horsfieldii adenovirus,Myotis,horsfieldii,Myotis horsfieldii,FALSE,1,,Myotis horsfieldii
+260,Rhabdoviridae,Lyssavirus,Rabies virus,Myotis,leibii,Myotis leibii,TRUE,1,,Myotis leibii
+261,Rhabdoviridae,Lyssavirus,Rabies virus,Myotis,levis,Myotis levis,TRUE,1,,Myotis levis
+262,Herpesviridae,unassigned,A cytomegalovirus,Myotis,lucifugus,Myotis lucifugus,FALSE,,,Myotis lucifugus
+263,Togaviridae,Alphavirus,Eastern equine encephalitis virus,Myotis,lucifugus,Myotis lucifugus,TRUE,,,Myotis lucifugus
+264,Flaviviridae,Flavivirus,Montana myotis leucoencephalitis virus,Myotis,lucifugus,Myotis lucifugus,FALSE,,,Myotis lucifugus
+265,Polyomaviridae,Polyomavirus,Myotis polyomavirus,Myotis,lucifugus,Myotis lucifugus,FALSE,,,Myotis lucifugus
+266,Rhabdoviridae,Lyssavirus,Rabies virus,Myotis,lucifugus,Myotis lucifugus,TRUE,,,Myotis lucifugus
+267,Coronaviridae,Coronavirus,Rocky Mountain bat coronavirus,Myotis,lucifugus,Myotis lucifugus,FALSE,,,Myotis lucifugus
+268,Flaviviridae,Flavivirus,St. Louis encephalitis virus,Myotis,lucifugus,Myotis lucifugus,TRUE,,,Myotis lucifugus
+269,Flaviviridae,Flavivirus,West Nile virus,Myotis,lucifugus,Myotis lucifugus,TRUE,8,,Myotis lucifugus
+270,Flaviviridae,Flavivirus,Japanese encephalitis virus,Myotis,macrodactylus,Myotis macrodactylus,TRUE,1,,Myotis macrodactylus
+271,Astroviridae,Mamastrovirus,2 to 6? Astroviruses,Myotis,myotis,Myotis myotis,FALSE,,,Myotis myotis
+272,Adenoviridae,Mastadenovirus,an adenovirus,Myotis,myotis,Myotis myotis,FALSE,,,Myotis myotis
+273,Coronaviridae,Coronavirus,BatCoV HKU6,Myotis,myotis,Myotis myotis,FALSE,,,Myotis myotis
+274,Herpesviridae,unassigned,BatGHV-2,Myotis,myotis,Myotis myotis,FALSE,,,Myotis myotis
+275,Herpesviridae,unassigned,BatGHV-3,Myotis,myotis,Myotis myotis,FALSE,,FALSE,Myotis myotis
+276,Rhabdoviridae,Lyssavirus,European bat lyssavirus 1,Myotis,myotis,Myotis myotis,TRUE,,,Myotis myotis
+277,Rhabdoviridae,Lyssavirus,European bat lyssavirus 2,Myotis,myotis,Myotis myotis,TRUE,8,,Myotis myotis
+278,Flaviviridae,Flavivirus,Japanese encephalitis virus,Myotis,mystacinus,Myotis mystacinus,TRUE,,,Myotis mystacinus
+279,Rhabdoviridae,Lyssavirus,Khujand virus,Myotis,mystacinus,Myotis mystacinus,TRUE,2,,Myotis mystacinus
+280,Herpesviridae,unassigned,BatBHV-1,Myotis,nattereri,Myotis nattereri,FALSE,,,Myotis nattereri
+281,Herpesviridae,unassigned,BatGHV-1,Myotis,nattereri,Myotis nattereri,FALSE,,FALSE,Myotis nattereri
+282,Herpesviridae,unassigned,BatGHV-2,Myotis,nattereri,Myotis nattereri,FALSE,,FALSE,Myotis nattereri
+283,Herpesviridae,unassigned,BatGHV-3,Myotis,nattereri,Myotis nattereri,FALSE,,FALSE,Myotis nattereri
+284,Herpesviridae,unassigned,BatGHV-4,Myotis,nattereri,Myotis nattereri,FALSE,,FALSE,Myotis nattereri
+285,Rhabdoviridae,Lyssavirus,European bat lyssavirus 1,Myotis,nattereri,Myotis nattereri,TRUE,6,,Myotis nattereri
+286,Flaviviridae,Flavivirus,Dengue virus,Myotis,nigricans,Myotis nigricans,TRUE,,,Myotis nigricans
+287,Rhabdoviridae,Lyssavirus,Rabies virus,Myotis,nigricans,Myotis nigricans,TRUE,,,Myotis nigricans
+288,Togaviridae,Alphavirus,Venezuelan equine encephalitis virus,Myotis,nigricans,Myotis nigricans,TRUE,3,,Myotis nigricans
+289,Coronaviridae,Coronavirus,Rocky Mountain bat coronavirus,Myotis,occultus,Myotis occultus,FALSE,1,,Myotis occultus
+290,Adenoviridae,Mastadenovirus,bat adenovirus (BtAdV-TJM),Myotis,pilosus,Myotis ricketti,FALSE,,,Myotis ricketti
+291,Astroviridae,unassigned,bat astrovirus AFCD337,Myotis,pilosus,Myotis ricketti,FALSE,,,Myotis ricketti
+292,Astroviridae,unassigned,bat astroviruses,Myotis,pilosus,Myotis ricketti,FALSE,,FALSE,Myotis ricketti
+293,Coronaviridae,Coronavirus,BatCoV HKU6,Myotis,pilosus,Myotis ricketti,FALSE,3,,Myotis ricketti
+294,Rhabdoviridae,Lyssavirus,Rabies virus,Myotis,riparius,Myotis riparius,TRUE,1,,Myotis riparius
+295,Bunyaviridae,Orthobunyavirus,California encephalitis virus,Myotis,septentrionalis,Myotis septentrionalis,TRUE,,,Myotis septentrionalis
+296,Togaviridae,Alphavirus,Eastern equine encephalitis virus,Myotis,septentrionalis,Myotis septentrionalis,TRUE,,,Myotis septentrionalis
+297,Rhabdoviridae,Lyssavirus,Rabies virus,Myotis,septentrionalis,Myotis septentrionalis,TRUE,,,Myotis septentrionalis
+298,Flaviviridae,Flavivirus,West Nile virus,Myotis,septentrionalis,Myotis septentrionalis,TRUE,4,,Myotis septentrionalis
+299,Rhabdoviridae,Lyssavirus,Rabies virus,Myotis,thysanodes,Myotis thysanodes,TRUE,1,,Myotis thysanodes
+300,Rhabdoviridae,Lyssavirus,Rabies virus,Myotis,velifer,Myotis velifer,TRUE,1,,Myotis velifer
+301,Rhabdoviridae,Lyssavirus,Rabies virus,Myotis,volans,Myotis volans,TRUE,,,Myotis volans
+302,Coronaviridae,Coronavirus,Rocky Mountain bat coronavirus,Myotis,volans,Myotis volans,FALSE,2,,Myotis volans
+303,Rhabdoviridae,unassigned,Kern Canyon virus,Myotis,yumanensis,Myotis yumanensis,FALSE,,FALSE,Myotis yumanensis
+304,Rhabdoviridae,Lyssavirus,Rabies virus,Myotis,yumanensis,Myotis yumanensis,TRUE,1,,Myotis yumanensis
+305,Flaviviridae,Flavivirus,Dengue virus,Natalus,stramineus,Natalus stramineus,TRUE,1,,Natalus stramineus
+306,Bunyaviridae,Orthobunyavirus,Bimiti,Natalus,tumidirostris,Natalus tumidirostris,FALSE,,,Natalus tumidirostris
+307,Flaviviridae,Flavivirus,Ilheus virus,Natalus,tumidirostris,Natalus tumidirostris,TRUE,,,Natalus tumidirostris
+308,Flaviviridae,Flavivirus,Rio Bravo virus,Natalus,tumidirostris,Natalus tumidirostris,TRUE,,,Natalus tumidirostris
+309,Flaviviridae,Flavivirus,St. Louis encephalitis virus,Natalus,tumidirostris,Natalus tumidirostris,TRUE,,,Natalus tumidirostris
+310,Flaviviridae,Flavivirus,Tamana bat virus,Natalus,tumidirostris,Natalus tumidirostris,FALSE,4,FALSE,Natalus tumidirostris
+311,Coronaviridae,Coronavirus,BatCoV BNM98-30,Nyctalus,leisleri,Nyctalus leisleri,FALSE,1,,Nyctalus leisleri
+312,Adenoviridae,Mastadenovirus,bat adenovirus (BtAdV-TJM),Nyctalus,noctula,Nyctalus noctula,FALSE,,,Nyctalus noctula
+313,Herpesviridae,unassigned,BatGHV-3,Nyctalus,noctula,Nyctalus noctula,FALSE,,,Nyctalus noctula
+314,Herpesviridae,unassigned,BatGHV-4,Nyctalus,noctula,Nyctalus noctula,FALSE,,FALSE,Nyctalus noctula
+315,Rhabdoviridae,Lyssavirus,European bat lyssavirus 1,Nyctalus,noctula,Nyctalus noctula,TRUE,,,Nyctalus noctula
+316,Rhabdoviridae,Lyssavirus,European bat lyssavirus 2,Nyctalus,noctula,Nyctalus noctula,TRUE,,,Nyctalus noctula
+317,Orthomyxiviridae,Influenzavirus A,Influenzavirus A virus,Nyctalus,noctula,Nyctalus noctula,FALSE,,,Nyctalus noctula
+318,Bunyaviridae,unassigned,Issyk-kul,Nyctalus,noctula,Nyctalus noctula,FALSE,,,Nyctalus noctula
+319,Coronaviridae,Coronavirus,Nyctalus noctula coronavirus,Nyctalus,noctula,Nyctalus noctula,FALSE,,,Nyctalus noctula
+320,Rhabdoviridae,Lyssavirus,Rabies virus,Nyctalus,noctula,Nyctalus noctula,TRUE,8,,Nyctalus noctula
+321,Astroviridae,unassigned,bat astroviruses,Nyctalus,plancyi,Nyctalus plancyi,FALSE,1,,Nyctalus plancyi
+322,Reoviridae,Orbivirus,Chobar Gorge virus,Nycteris,gambiensis,Nycteris gambiensis,TRUE,,,Nycteris gambiensis
+323,Rhabdoviridae,Lyssavirus,Lagos bat virus,Nycteris,gambiensis,Nycteris gambiensis,TRUE,,,Nycteris gambiensis
+324,Flaviviridae,Flavivirus,Saboya virus,Nycteris,gambiensis,Nycteris gambiensis,TRUE,3,,Nycteris gambiensis
+325,Reoviridae,Orbivirus,Chobar Gorge virus,Nycteris,nana,Nycteris nana,TRUE,1,,Nycteris nana
+326,Rhabdoviridae,Lyssavirus,Duvenhage virus,Nycteris,thebaica,Nycteris thebaica,TRUE,1,,Nycteris thebaica
+327,Rhabdoviridae,Lyssavirus,Rabies virus,Nycticeius,humeralis,Nycticeius humeralis,TRUE,1,,Nycticeius humeralis
+328,Rhabdoviridae,Lyssavirus,Rabies virus,Nyctinomops,laticaudatus,Nyctinomops laticaudatus,TRUE,1,,Nyctinomops laticaudatus
+329,Rhabdoviridae,Lyssavirus,Rabies virus,Nyctinomops,macrotis,Nyctinomops macrotis,TRUE,1,,Nyctinomops macrotis
+330,Rhabdoviridae,Lyssavirus,Australian bat lyssavirus,Philetor,brachypterus,Philetor brachypterus,TRUE,1,,Philetor brachypterus
+331,Flaviviridae,Flavivirus,Rio Bravo virus,Phyllostomus,discolor,Phyllostomus discolor,TRUE,,,Phyllostomus discolor
+332,Flaviviridae,Flavivirus,Tamana bat virus,Phyllostomus,discolor,Phyllostomus discolor,FALSE,,FALSE,Phyllostomus discolor
+333,Togaviridae,Alphavirus,Venezuelan equine encephalitis virus,Phyllostomus,discolor,Phyllostomus discolor,TRUE,2,,Phyllostomus discolor
+334,Bunyaviridae,Orthobunyavirus,Bimiti,Phyllostomus,hastatus,Phyllostomus hastatus,TRUE,,,Phyllostomus hastatus
+335,Bunyaviridae,Orthobunyavirus,Catu virus,Phyllostomus,hastatus,Phyllostomus hastatus,TRUE,,,Phyllostomus hastatus
+336,Rhabdoviridae,Vesiculovirus,Cocal,Phyllostomus,hastatus,Phyllostomus hastatus,FALSE,,,Phyllostomus hastatus
+337,Flaviviridae,Flavivirus,Dengue virus,Phyllostomus,hastatus,Phyllostomus hastatus,TRUE,,,Phyllostomus hastatus
+338,Togaviridae,Alphavirus,Eastern equine encephalitis virus,Phyllostomus,hastatus,Phyllostomus hastatus,TRUE,,,Phyllostomus hastatus
+339,Bunyaviridae,Orthobunyavirus,Guama virus,Phyllostomus,hastatus,Phyllostomus hastatus,TRUE,,,Phyllostomus hastatus
+340,Flaviviridae,Flavivirus,Ilheus virus,Phyllostomus,hastatus,Phyllostomus hastatus,TRUE,,,Phyllostomus hastatus
+341,Bunyaviridae,Orthobunyavirus,Marituba virus,Phyllostomus,hastatus,Phyllostomus hastatus,TRUE,,,Phyllostomus hastatus
+342,Togaviridae,Alphavirus,Mucambo virus,Phyllostomus,hastatus,Phyllostomus hastatus,TRUE,,,Phyllostomus hastatus
+343,Rhabdoviridae,Lyssavirus,Rabies virus,Phyllostomus,hastatus,Phyllostomus hastatus,TRUE,,,Phyllostomus hastatus
+344,Flaviviridae,Flavivirus,St. Louis encephalitis virus,Phyllostomus,hastatus,Phyllostomus hastatus,TRUE,,,Phyllostomus hastatus
+345,Arenaviridae,Arenavirus,Tacaribe virus,Phyllostomus,hastatus,Phyllostomus hastatus,FALSE,,,Phyllostomus hastatus
+346,Flaviviridae,Flavivirus,Yellow Fever virus,Phyllostomus,hastatus,Phyllostomus hastatus,TRUE,13,,Phyllostomus hastatus
+347,Astroviridae,unassigned,bat astroviruses,Pipistrellus,abramus,Pipistrellus abramus,FALSE,,,Pipistrellus abramus
+348,Flaviviridae,Flavivirus,Japanese encephalitis virus,Pipistrellus,abramus,Pipistrellus abramus,TRUE,2,,Pipistrellus abramus
+349,Coronaviridae,Coronavirus,Pipistrellus bat coronavirus HKU5,Pipistrellus,abramus,Pipistrellus abramus,TRUE,1,,Pipistrellus abramus
+350,Orthomyxiviridae,Influenzavirus A,Influenzavirus A virus,Pipistrellus,ceylonicus,Pipistrellus ceylonicus,FALSE,1,,Pipistrellus ceylonicus
+351,Rhabdoviridae,Lyssavirus,Rabies virus,Pipistrellus,hesperus,Pipistrellus hesperus,TRUE,1,,Pipistrellus hesperus
+352,Bunyaviridae,Phlebovirus,Toscana virus,Pipistrellus,kuhlii,Pipistrellus kuhlii,FALSE,1,,Pipistrellus kuhlii
+353,Herpesviridae,unassigned,BatGHV-1,Pipistrellus,nathusii,Pipistrellus nathusii,FALSE,,,Pipistrellus nathusii
+354,Herpesviridae,unassigned,BatGHV-5,Pipistrellus,nathusii,Pipistrellus nathusii,FALSE,,FALSE,Pipistrellus nathusii
+355,Rhabdoviridae,Lyssavirus,European bat lyssavirus 1,Pipistrellus,nathusii,Pipistrellus nathusii,TRUE,,,Pipistrellus nathusii
+356,Coronaviridae,Coronavirus,Pipistrellus bat coronavirus HKU5,Pipistrellus,nathusii,Pipistrellus nathusii,TRUE,3,,Pipistrellus nathusii
+357,Adenoviridae,unassigned,"bat PPV1, AdV",Pipistrellus,pipistrellus,Pipistrellus pipistrellus,FALSE,,,Pipistrellus pipistrellus
+358,Herpesviridae,unassigned,BatBHV-1,Pipistrellus,pipistrellus,Pipistrellus pipistrellus,FALSE,,,Pipistrellus pipistrellus
+359,Herpesviridae,unassigned,BatGHV-1,Pipistrellus,pipistrellus,Pipistrellus pipistrellus,FALSE,,FALSE,Pipistrellus pipistrellus
+360,Herpesviridae,unassigned,BatGHV-6,Pipistrellus,pipistrellus,Pipistrellus pipistrellus,FALSE,,FALSE,Pipistrellus pipistrellus
+361,Flaviviridae,Flavivirus,Entebbe bat virus,Pipistrellus,pipistrellus,Pipistrellus pipistrellus,TRUE,,,Pipistrellus pipistrellus
+362,Rhabdoviridae,Lyssavirus,European bat lyssavirus 1,Pipistrellus,pipistrellus,Pipistrellus pipistrellus,TRUE,,,Pipistrellus pipistrellus
+363,Bunyaviridae,unassigned,Issyk-kul,Pipistrellus,pipistrellus,Pipistrellus pipistrellus,FALSE,,,Pipistrellus pipistrellus
+364,Coronaviridae,Coronavirus,Pipistrellus bat coronavirus HKU5,Pipistrellus,pipistrellus,Pipistrellus pipistrellus,TRUE,6,,Pipistrellus pipistrellus
+365,Coronaviridae,Coronavirus,Pipistrellus bat coronavirus HKU5,Pipistrellus,pygmaeus,Pipistrellus pygmaeus,TRUE,1,,Pipistrellus pygmaeus
+366,Rhabdoviridae,Lyssavirus,Rabies virus,Pipistrellus,subflavus,Pipistrellus subflavus,TRUE,1,,Pipistrellus subflavus
+367,Togaviridae,Alphavirus,Eastern equine encephalitis virus,Platyrrhinus,helleri,Platyrrhinus helleri,TRUE,,,Platyrrhinus helleri
+368,Flaviviridae,Flavivirus,Ilheus virus,Platyrrhinus,helleri,Platyrrhinus helleri,TRUE,,,Platyrrhinus helleri
+369,Arenaviridae,Arenavirus,Tacaribe virus,Platyrrhinus,helleri,Platyrrhinus helleri,FALSE,,,Platyrrhinus helleri
+370,Flaviviridae,Flavivirus,Yellow Fever virus,Platyrrhinus,helleri,Platyrrhinus helleri,TRUE,4,,Platyrrhinus helleri
+371,Rhabdoviridae,Lyssavirus,Rabies virus,Platyrrhinus,lineatus,Platyrrhinus lineatus,TRUE,1,,Platyrrhinus lineatus
+372,Herpesviridae,unassigned,BatGHV-7,Plecotus,auritus,Plecotus auritus,FALSE,,,Plecotus auritus
+373,Rhabdoviridae,Lyssavirus,European bat lyssavirus 1,Plecotus,auritus,Plecotus auritus,TRUE,,,Plecotus auritus
+374,Flaviviridae,Flavivirus,Japanese encephalitis virus,Plecotus,auritus,Plecotus auritus,TRUE,3,,Plecotus auritus
+375,Flaviviridae,Flavivirus,Dengue virus,Pteronotus,davyi,Pteronotus davyi,TRUE,,,Pteronotus davyi
+376,Flaviviridae,Flavivirus,Ilheus virus,Pteronotus,davyi,Pteronotus davyi,TRUE,,,Pteronotus davyi
+377,Flaviviridae,Flavivirus,Rio Bravo virus,Pteronotus,davyi,Pteronotus davyi,TRUE,,,Pteronotus davyi
+378,Flaviviridae,Flavivirus,St. Louis encephalitis virus,Pteronotus,davyi,Pteronotus davyi,TRUE,,,Pteronotus davyi
+379,Flaviviridae,Flavivirus,Tamana bat virus,Pteronotus,davyi,Pteronotus davyi,FALSE,,FALSE,Pteronotus davyi
+380,Flaviviridae,Flavivirus,Yellow Fever virus,Pteronotus,davyi,Pteronotus davyi,TRUE,5,,Pteronotus davyi
+381,Bunyaviridae,Orthobunyavirus,Bimiti,Pteronotus,parnellii,Pteronotus parnellii,FALSE,,,Pteronotus parnellii
+382,Flaviviridae,Flavivirus,Dengue virus,Pteronotus,parnellii,Pteronotus parnellii,TRUE,,,Pteronotus parnellii
+383,Flaviviridae,Flavivirus,Ilheus virus,Pteronotus,parnellii,Pteronotus parnellii,TRUE,,,Pteronotus parnellii
+384,Rhabdoviridae,Lyssavirus,Rabies virus,Pteronotus,parnellii,Pteronotus parnellii,TRUE,,,Pteronotus parnellii
+385,Flaviviridae,Flavivirus,Rio Bravo virus,Pteronotus,parnellii,Pteronotus parnellii,TRUE,,,Pteronotus parnellii
+386,Flaviviridae,Flavivirus,St. Louis encephalitis virus,Pteronotus,parnellii,Pteronotus parnellii,TRUE,,,Pteronotus parnellii
+387,Flaviviridae,Flavivirus,Tamana bat virus,Pteronotus,parnellii,Pteronotus parnellii,FALSE,,FALSE,Pteronotus parnellii
+388,Flaviviridae,Flavivirus,Yellow Fever virus,Pteronotus,parnellii,Pteronotus parnellii,TRUE,7,,Pteronotus parnellii
+389,Paramyxoviridae,Henipavirus,Hendra virus,Pteropus,admiralitatum,Pteropus admiralitatum,TRUE,1,,Pteropus admiralitatum
+390,Rhabdoviridae,Lyssavirus,Australian bat lyssavirus,Pteropus,alecto,Pteropus alecto,TRUE,,,Pteropus alecto
+391,Reoviridae,Orthoreovirus,Broome virus,Pteropus,alecto,Pteropus alecto,FALSE,,,Pteropus alecto
+392,Flaviviridae,Flavivirus,Dengue virus,Pteropus,alecto,Pteropus alecto,TRUE,,,Pteropus alecto
+393,Paramyxoviridae,Henipavirus,Hendra virus,Pteropus,alecto,Pteropus alecto,TRUE,,,Pteropus alecto
+394,Flaviviridae,Flavivirus,Japanese encephalitis virus,Pteropus,alecto,Pteropus alecto,TRUE,,,Pteropus alecto
+395,Paramyxoviridae,unassigned,Menangle virus,Pteropus,alecto,Pteropus alecto,FALSE,,FALSE,Pteropus alecto
+396,Flaviviridae,Flavivirus,West Nile virus,Pteropus,alecto,Pteropus alecto,TRUE,6,,Pteropus alecto
+397,Paramyxoviridae,Henipavirus,Hendra virus,Pteropus,capistratus,Pteropus capistratus,TRUE,1,,Pteropus capistratus
+398,Rhabdoviridae,Lyssavirus,Australian bat lyssavirus,Pteropus,conspicillatus,Pteropus conspicillatus,TRUE,,,Pteropus conspicillatus
+399,Paramyxoviridae,Henipavirus,Hendra virus,Pteropus,conspicillatus,Pteropus conspicillatus,TRUE,,,Pteropus conspicillatus
+400,Paramyxoviridae,unassigned,Menangle virus,Pteropus,conspicillatus,Pteropus conspicillatus,FALSE,2,FALSE,Pteropus conspicillatus
+401,Adenoviridae,Mastadenovirus,bat FBV1,Pteropus,dasymallus,Pteropus dasymallus,FALSE,,,Pteropus dasymallus
+402,Adenoviridae,unassigned,Ryukyu virus,Pteropus,dasymallus,Pteropus dasymallus,FALSE,1,FALSE,Pteropus dasymallus
+403,Flaviviridae,unassigned,GB virus D,Pteropus,giganteus,Pteropus giganteus,FALSE,,,Pteropus giganteus
+404,Paramyxoviridae,Henipavirus,Nipah virus,Pteropus,giganteus,Pteropus giganteus,TRUE,2,,Pteropus giganteus
+405,Rhabdoviridae,Lyssavirus,Australian bat lyssavirus,Pteropus,hypomelanus,Pteropus hypomelanus,TRUE,,,Pteropus hypomelanus
+406,Paramyxoviridae,Henipavirus,Hendra virus,Pteropus,hypomelanus,Pteropus hypomelanus,TRUE,,,Pteropus hypomelanus
+407,Paramyxoviridae,Henipavirus,Nipah virus,Pteropus,hypomelanus,Pteropus hypomelanus,TRUE,,,Pteropus hypomelanus
+408,Reoviridae,Orthoreovirus,Pulau virus,Pteropus,hypomelanus,Pteropus hypomelanus,FALSE,,,Pteropus hypomelanus
+409,Paramyxoviridae,unassigned,Tioman virus,Pteropus,hypomelanus,Pteropus hypomelanus,FALSE,4,FALSE,Pteropus hypomelanus
+410,Rhabdoviridae,Lyssavirus,Aravan,Pteropus,lylei,Pteropus lylei,TRUE,,,Pteropus lylei
+411,Rhabdoviridae,Lyssavirus,Australian bat lyssavirus,Pteropus,lylei,Pteropus lylei,TRUE,,,Pteropus lylei
+412,Rhabdoviridae,Lyssavirus,Irkut virus,Pteropus,lylei,Pteropus lylei,TRUE,,,Pteropus lylei
+413,Rhabdoviridae,Lyssavirus,Khujand virus,Pteropus,lylei,Pteropus lylei,TRUE,,,Pteropus lylei
+414,Paramyxoviridae,Henipavirus,Nipah virus,Pteropus,lylei,Pteropus lylei,TRUE,5,,Pteropus lylei
+415,Paramyxoviridae,Henipavirus,Hendra virus,Pteropus,neohibernicus,Pteropus neohibernicus,TRUE,,,Pteropus neohibernicus
+416,Rhabdoviridae,Lyssavirus,Australian bat lyssavirus,Pteropus,poliocephalus,Pteropus poliocephalus,TRUE,,,Pteropus poliocephalus
+417,Paramyxoviridae,Henipavirus,Hendra virus,Pteropus,poliocephalus,Pteropus poliocephalus,TRUE,,,Pteropus poliocephalus
+418,Paramyxoviridae,unassigned,Menangle virus,Pteropus,poliocephalus,Pteropus poliocephalus,FALSE,,FALSE,Pteropus poliocephalus
+419,Reoviridae,Orthoreovirus,Nelson Bay virus,Pteropus,poliocephalus,Pteropus poliocephalus,FALSE,4,,Pteropus poliocephalus
+420,Paramyxoviridae,Henipavirus,Hendra virus,Pteropus,rufus,Pteropus rufus,TRUE,,,Pteropus rufus
+421,Paramyxoviridae,Henipavirus,Nipah virus,Pteropus,rufus,Pteropus rufus,TRUE,2,,Pteropus rufus
+422,Paramyxoviridae,unassigned,Tioman virus,Pteropus,rufus,Pteropus rufus,FALSE,,FALSE,Pteropus rufus
+423,Rhabdoviridae,Lyssavirus,Australian bat lyssavirus,Pteropus,scapulatus,Pteropus scapulatus,TRUE,,,Pteropus scapulatus
+424,Reoviridae,Orthoreovirus,Broome virus,Pteropus,scapulatus,Pteropus scapulatus,FALSE,,,Pteropus scapulatus
+425,Flaviviridae,Flavivirus,Dengue virus,Pteropus,scapulatus,Pteropus scapulatus,TRUE,,,Pteropus scapulatus
+426,Paramyxoviridae,Henipavirus,Hendra virus,Pteropus,scapulatus,Pteropus scapulatus,TRUE,,,Pteropus scapulatus
+427,Flaviviridae,Flavivirus,Japanese encephalitis virus,Pteropus,scapulatus,Pteropus scapulatus,TRUE,,,Pteropus scapulatus
+428,Paramyxoviridae,unassigned,Menangle virus,Pteropus,scapulatus,Pteropus scapulatus,FALSE,,FALSE,Pteropus scapulatus
+429,Flaviviridae,Flavivirus,Murray Valley encephalitis virus,Pteropus,scapulatus,Pteropus scapulatus,TRUE,,,Pteropus scapulatus
+430,Flaviviridae,Flavivirus,West Nile virus,Pteropus,scapulatus,Pteropus scapulatus,TRUE,7,,Pteropus scapulatus
+431,Paramyxoviridae,Henipavirus,Nipah virus,Pteropus,vampyrus,Pteropus vampyrus,TRUE,1,,Pteropus vampyrus
+432,Astroviridae,unassigned,bat astroviruses,Rhinolophus,affinis,Rhinolophus affinis,FALSE,1,,Rhinolophus affinis
+433,Coronaviridae,Coronavirus,BatCoV BB98-15,Rhinolophus,blasii,Rhinolophus blasii,FALSE,,FALSE,Rhinolophus blasii
+434,Coronaviridae,Coronavirus,Rhinolophus bat coronavirus HKU2,Rhinolophus,blasii,Rhinolophus blasii,TRUE,,,Rhinolophus blasii
+435,Coronaviridae,Coronavirus,SARS coronavirus-related,Rhinolophus,blasii,Rhinolophus blasii,TRUE,2,,Rhinolophus blasii
+436,Filoviridae,Marburgvirus,Lake Victoria marburg virus,Rhinolophus,eloquens,Rhinolophus eloquens,FALSE,,,Rhinolophus eloquens
+437,Rhabdoviridae,Vesiculovirus,Mount Elgon bat virus,Rhinolophus,eloquens,Rhinolophus eloquens,FALSE,2,,Rhinolophus eloquens
+438,Coronaviridae,Coronavirus,Rhinolophus bat coronavirus HKU2,Rhinolophus,euryale,Rhinolophus euryale,TRUE,,,Rhinolophus euryale
+439,Coronaviridae,Coronavirus,SARS coronavirus-related,Rhinolophus,euryale,Rhinolophus euryale,TRUE,2,,Rhinolophus euryale
+440,Astroviridae,unassigned,bat astroviruses,Rhinolophus,ferrumequinum,Rhinolophus ferrumequinum,FALSE,,,Rhinolophus ferrumequinum
+441,Coronaviridae,Coronavirus,BatCoV BB98-15,Rhinolophus,ferrumequinum,Rhinolophus ferrumequinum,FALSE,,FALSE,Rhinolophus ferrumequinum
+442,Rhabdoviridae,Lyssavirus,European bat lyssavirus 1,Rhinolophus,ferrumequinum,Rhinolophus ferrumequinum,TRUE,,,Rhinolophus ferrumequinum
+443,Bunyaviridae,Hantavirus,Hantaan virus,Rhinolophus,ferrumequinum,Rhinolophus ferrumequinum,TRUE,,,Rhinolophus ferrumequinum
+444,Bunyaviridae,unassigned,Issyk-kul,Rhinolophus,ferrumequinum,Rhinolophus ferrumequinum,FALSE,,FALSE,Rhinolophus ferrumequinum
+445,Flaviviridae,Flavivirus,Japanese encephalitis virus,Rhinolophus,ferrumequinum,Rhinolophus ferrumequinum,TRUE,,,Rhinolophus ferrumequinum
+446,Bunyaviridae,Hantavirus,Puumala,Rhinolophus,ferrumequinum,Rhinolophus ferrumequinum,TRUE,,,Rhinolophus ferrumequinum
+447,Rhabdoviridae,Lyssavirus,Rabies virus,Rhinolophus,ferrumequinum,Rhinolophus ferrumequinum,TRUE,,,Rhinolophus ferrumequinum
+448,Adenoviridae,Mastadenovirus,Rhinolophus adenovirus,Rhinolophus,ferrumequinum,Rhinolophus ferrumequinum,FALSE,,,Rhinolophus ferrumequinum
+449,Coronaviridae,Coronavirus,Rhinolophus bat coronavirus HKU2,Rhinolophus,ferrumequinum,Rhinolophus ferrumequinum,TRUE,,,Rhinolophus ferrumequinum
+450,Coronaviridae,Coronavirus,SARS coronavirus,Rhinolophus,ferrumequinum,Rhinolophus ferrumequinum,TRUE,9,,Rhinolophus ferrumequinum
+451,Rhabdoviridae,Vesiculovirus,Mount Elgon bat virus,Rhinolophus,hildebrandti,Rhinolophus hildebrandtii,FALSE,1,,Rhinolophus hildebrandtii
+452,Coronaviridae,Coronavirus,new bat coronavirus,Rhinolophus,hipposideros,Rhinolophus hipposideros,FALSE,1,,Rhinolophus hipposideros
+453,Bunyaviridae,unassigned,Issyk-kul,Rhinolophus,horsfeldi,Rhinolophus horsfeldi,FALSE,1,,Rhinolophus horsfeldi
+454,Bunyaviridae,unassigned,Issyk-kul,Rhinolophus,lepidus,Rhinolophus lepidus,FALSE,1,,Rhinolophus lepidus
+455,Astroviridae,unassigned,bat astroviruses,Rhinolophus,macrotis,Rhinolophus macrotis,FALSE,,,Rhinolophus macrotis
+456,Coronaviridae,Coronavirus,Rhinolophus bat coronavirus HKU2,Rhinolophus,macrotis,Rhinolophus macrotis,TRUE,,,Rhinolophus macrotis
+457,Coronaviridae,Coronavirus,SARS coronavirus,Rhinolophus,macrotis,Rhinolophus macrotis,TRUE,3,,Rhinolophus macrotis
+458,Coronaviridae,Coronavirus,SARS coronavirus-related,Rhinolophus,mehelyi,Rhinolophus mehelyi,FALSE,1,,Rhinolophus mehelyi
+459,Astroviridae,unassigned,bat astroviruses,Rhinolophus,pearsonii,Rhinolophus pearsonii,FALSE,,,Rhinolophus pearsonii
+460,Coronaviridae,Coronavirus,Rhinolophus bat coronavirus HKU2,Rhinolophus,pearsonii,Rhinolophus pearsonii,TRUE,,,Rhinolophus pearsonii
+461,Coronaviridae,Coronavirus,SARS coronavirus,Rhinolophus,pearsonii,Rhinolophus pearsonii,TRUE,3,,Rhinolophus pearsonii
+462,Flaviviridae,Flavivirus,Japanese encephalitis virus,Rhinolophus,pusillus,Rhinolophus pusillus,TRUE,,,Rhinolophus pusillus
+463,Rhabdoviridae,unassigned,Oita 296 virus,Rhinolophus,pusillus,Rhinolophus pusillus,FALSE,,FALSE,Rhinolophus pusillus
+464,Rhabdoviridae,Lyssavirus,Rabies virus,Rhinolophus,pusillus,Rhinolophus pusillus,TRUE,,,Rhinolophus pusillus
+465,Coronaviridae,Coronavirus,SARS coronavirus,Rhinolophus,pusillus,Rhinolophus pusillus,TRUE,3,,Rhinolophus pusillus
+466,Astroviridae,unassigned,bat astrovirus AFCD337,Rhinolophus,rouxii,Rhinolophus rouxii,FALSE,,,Rhinolophus rouxii
+467,Flaviviridae,Flavivirus,Japanese encephalitis virus,Rhinolophus,rouxii,Rhinolophus rouxii,TRUE,,,Rhinolophus rouxii
+468,Flaviviridae,Flavivirus,Kyasanur Forest disease virus,Rhinolophus,rouxii,Rhinolophus rouxii,TRUE,3,,Rhinolophus rouxii
+469,Astroviridae,unassigned,bat astroviruses,Rhinolophus,sinicus,Rhinolophus sinicus,FALSE,,,Rhinolophus sinicus
+470,Coronaviridae,Coronavirus,Rhinolophus bat coronavirus HKU2,Rhinolophus,sinicus,Rhinolophus sinicus,TRUE,,,Rhinolophus sinicus
+471,Coronaviridae,Coronavirus,SARS coronavirus,Rhinolophus,sinicus,Rhinolophus sinicus,TRUE,3,,Rhinolophus sinicus
+472,Paramyxoviridae,Rubulavirus,Porcine rubulavirus,Rhogeessa,parvula,Rhogeessa parvula,TRUE,1,,Rhogeessa parvula
+473,Togaviridae,Alphavirus,Eastern equine encephalitis virus,Rhynchonycteris,naso,Rhynchonycteris naso,TRUE,1,,Rhynchonycteris naso
+474,Togaviridae,Alphavirus,Chikungunya virus,Rousettus,aegyptiacus,Rousettus aegyptiacus,TRUE,,,Rousettus aegyptiacus
+475,Filoviridae,Ebolavirus,Ebola-Zaire virus,Rousettus,aegyptiacus,Rousettus aegyptiacus,TRUE,,,Rousettus aegyptiacus
+476,Rhabdoviridae,Lyssavirus,European bat lyssavirus 1,Rousettus,aegyptiacus,Rousettus aegyptiacus,TRUE,,,Rousettus aegyptiacus
+477,Bunyaviridae,unassigned,Kasokero virus,Rousettus,aegyptiacus,Rousettus aegyptiacus,FALSE,,,Rousettus aegyptiacus
+478,Rhabdoviridae,Lyssavirus,Lagos bat virus,Rousettus,aegyptiacus,Rousettus aegyptiacus,TRUE,,,Rousettus aegyptiacus
+479,Filoviridae,Marburgvirus,Lake Victoria marburg virus,Rousettus,aegyptiacus,Rousettus aegyptiacus,FALSE,,,Rousettus aegyptiacus
+480,Papillomaviridae,unassigned,Rousettus aegyptiacus papillomavirus type 1,Rousettus,aegyptiacus,Rousettus aegyptiacus,FALSE,,,Rousettus aegyptiacus
+481,Flaviviridae,Flavivirus,West Nile virus,Rousettus,aegyptiacus,Rousettus aegyptiacus,TRUE,,,Rousettus aegyptiacus
+482,Bunyaviridae,unassigned,Yogue virus,Rousettus,aegyptiacus,Rousettus aegyptiacus,FALSE,8,FALSE,Rousettus aegyptiacus
+483,Rhabdoviridae,Lyssavirus,Australian bat lyssavirus,Rousettus,amplexicaudatus,Rousettus amplexicaudatus,TRUE,1,,Rousettus amplexicaudatus
+484,Paramyxoviridae,undetermined, a parainfluenzavirus,Rousettus,leschenaultii,Rousettus leschenaultii,FALSE,,FALSE,Rousettus leschenaultii
+485,Togaviridae,Alphavirus,Chikungunya virus,Rousettus,leschenaultii,Rousettus leschenaultii,TRUE,,,Rousettus leschenaultii
+486,Flaviviridae,Flavivirus,Dengue virus,Rousettus,leschenaultii,Rousettus leschenaultii,TRUE,,,Rousettus leschenaultii
+487,Orthomyxiviridae,Influenzavirus A,Influenzavirus A virus,Rousettus,leschenaultii,Rousettus leschenaultii,FALSE,,,Rousettus leschenaultii
+488,Flaviviridae,Flavivirus,Japanese encephalitis virus,Rousettus,leschenaultii,Rousettus leschenaultii,TRUE,,,Rousettus leschenaultii
+489,Flaviviridae,Flavivirus,Kyasanur Forest disease virus,Rousettus,leschenaultii,Rousettus leschenaultii,TRUE,,,Rousettus leschenaultii
+490,Reoviridae,Orthoreovirus,Nelson Bay virus,Rousettus,leschenaultii,Rousettus leschenaultii,FALSE,,,Rousettus leschenaultii
+491,Rhabdoviridae,Lyssavirus,Rabies virus,Rousettus,leschenaultii,Rousettus leschenaultii,TRUE,,,Rousettus leschenaultii
+492,Coronaviridae,Coronavirus,Rousettus bat coronavirus HKU9,Rousettus,leschenaultii,Rousettus leschenaultii,TRUE,,,Rousettus leschenaultii
+493,Coronaviridae,Coronavirus,SARS coronavirus,Rousettus,leschenaultii,Rousettus leschenaultii,TRUE,,,Rousettus leschenaultii
+494,Paramyxoviridae,Rubulavirus,Tuhokovirus 1,Rousettus,leschenaultii,Rousettus leschenaultii,FALSE,,FALSE,Rousettus leschenaultii
+495,Paramyxoviridae,Rubulavirus,Tuhokovirus 2,Rousettus,leschenaultii,Rousettus leschenaultii,FALSE,,FALSE,Rousettus leschenaultii
+496,Paramyxoviridae,Rubulavirus,Tuhokovirus 3,Rousettus,leschenaultii,Rousettus leschenaultii,FALSE,,FALSE,Rousettus leschenaultii
+497,Flaviviridae,Flavivirus,West Nile virus,Rousettus,leschenaultii,Rousettus leschenaultii,TRUE,10,,Rousettus leschenaultii
+498,Paramyxoviridae,unassigned,Tioman virus,Rousettus,madagascariensis,Rousettus madagascariensis,FALSE,1,,Rousettus madagascariensis
+499,Rhabdoviridae,Lyssavirus,Australian bat lyssavirus,Saccolaimus,flaviventris,Saccolaimus flaviventris,TRUE,1,,Saccolaimus flaviventris
+500,Rhabdoviridae,Lyssavirus,Australian bat lyssavirus,Scotophilus,kuhlii,Scotophilus kuhlii,TRUE,,,Scotophilus kuhlii
+501,Astroviridae,unassigned,bat astroviruses,Scotophilus,kuhlii,Scotophilus kuhlii,FALSE,,,Scotophilus kuhlii
+502,Flaviviridae,Flavivirus,Dengue virus,Scotophilus,kuhlii,Scotophilus kuhlii,TRUE,,,Scotophilus kuhlii
+503,Bunyaviridae,unassigned,Issyk-kul,Scotophilus,kuhlii,Scotophilus kuhlii,FALSE,,,Scotophilus kuhlii
+504,Paramyxoviridae,Henipavirus,Nipah virus,Scotophilus,kuhlii,Scotophilus kuhlii,TRUE,,,Scotophilus kuhlii
+505,Adenoviridae,Mastadenovirus,Scotophilus adenovirus,Scotophilus,kuhlii,Scotophilus kuhlii,FALSE,,,Scotophilus kuhlii
+506,Coronaviridae,Coronavirus,Scotophilus bat coronavirus 512,Scotophilus,kuhlii,Scotophilus kuhlii,TRUE,7,,Scotophilus kuhlii
+507,Flaviviridae,Flavivirus,Dakar bat virus,Scotophilus,nigrita,Scotophilus nigrita,TRUE,,,Scotophilus nigrita
+508,Bunyaviridae,Nairovirus,Qalyub,Scotophilus,nigrita,Scotophilus nigrita,FALSE,2,,Scotophilus nigrita
+509,Togaviridae,Alphavirus,Eastern equine encephalitis virus,Sturnira,lilium,Sturnira lilium,TRUE,,,Sturnira lilium
+510,Paramyxoviridae,Rubulavirus,Mapuera virus,Sturnira,lilium,Sturnira lilium,TRUE,,,Sturnira lilium
+511,Rhabdoviridae,Lyssavirus,Rabies virus,Sturnira,lilium,Sturnira lilium,TRUE,,,Sturnira lilium
+512,Flaviviridae,Flavivirus,St. Louis encephalitis virus,Sturnira,lilium,Sturnira lilium,TRUE,,,Sturnira lilium
+513,Arenaviridae,Arenavirus,Tacaribe virus,Sturnira,lilium,Sturnira lilium,FALSE,,,Sturnira lilium
+514,Flaviviridae,Flavivirus,Tamana bat virus,Sturnira,lilium,Sturnira lilium,FALSE,,FALSE,Sturnira lilium
+515,Togaviridae,Alphavirus,Venezuelan equine encephalitis virus,Sturnira,lilium,Sturnira lilium,TRUE,,,Sturnira lilium
+516,Rhabdoviridae,Vesiculovirus,Vesicular stomatitis New Jersey virus,Sturnira,lilium,Sturnira lilium,TRUE,7,,Sturnira lilium
+517,Togaviridae,Alphavirus,Venezuelan equine encephalitis virus,Sturnira,ludovici,Sturnira ludovici,TRUE,1,,Sturnira ludovici
+518,Reoviridae,Orbivirus,Japanaut virus,Syconycteris,australis,Syconycteris australis,FALSE,1,,Syconycteris australis
+519,Togaviridae,Alphavirus,Eastern equine encephalitis virus,Tadarida,brasiliensis,Tadarida brasiliensis,TRUE,,,Tadarida brasiliensis
+520,Rhabdoviridae,Lyssavirus,Rabies virus,Tadarida,brasiliensis,Tadarida brasiliensis,TRUE,,,Tadarida brasiliensis
+521,Flaviviridae,Flavivirus,Rio Bravo virus,Tadarida,brasiliensis,Tadarida brasiliensis,TRUE,,,Tadarida brasiliensis
+522,Flaviviridae,Flavivirus,St. Louis encephalitis virus,Tadarida,brasiliensis,Tadarida brasiliensis,TRUE,,,Tadarida brasiliensis
+523,Togaviridae,Alphavirus,Western equine encephalitis virus,Tadarida,brasiliensis,Tadarida brasiliensis,TRUE,5,,Tadarida brasiliensis
+524,Rhabdoviridae,Lyssavirus,European bat lyssavirus 1,Tadarida,teniotis,Tadarida teniotis,TRUE,1,,Tadarida teniotis
+525,Rhabdoviridae,Lyssavirus,Australian bat lyssavirus,Taphozous,melanopogon,Taphozous melanopogon,TRUE,,,Taphozous melanopogon
+526,Astroviridae,unassigned,bat astroviruses,Taphozous,melanopogon,Taphozous melanopogon,FALSE,,,Taphozous melanopogon
+527,Bunyaviridae,unassigned,Issyk-kul,Taphozous,melanopogon,Taphozous melanopogon,FALSE,,,Taphozous melanopogon
+528,Flaviviridae,Flavivirus,Japanese encephalitis virus,Taphozous,melanopogon,Taphozous melanopogon,TRUE,3,,Taphozous melanopogon
+529,Flaviviridae,Flavivirus,Dakar bat virus,Taphozous,perforatus,Taphozous perforatus,TRUE,,,Taphozous perforatus
+530,Bunyaviridae,Orthobunyavirus,Kaeng Khoi virus,Taphozous,perforatus,Taphozous perforatus,TRUE,2,,Taphozous perforatus
+531,Arenaviridae,Arenavirus,Tacaribe virus,Tonatia,bidens,Tonatia bidens,FALSE,1,,Tonatia bidens
+532,Rhabdoviridae,Lyssavirus,Rabies virus,Trachops,cirrhosus,Trachops cirrhosus,TRUE,1,,Trachops cirrhosus
+533,Astroviridae,unassigned,bat astroviruses,Tylonycteris,pachypus,Tylonycteris pachypus,FALSE,,,Tylonycteris pachypus
+534,Coronaviridae,Coronavirus,Tylonycteris bat coronavirus HKU4,Tylonycteris,pachypus,Tylonycteris pachypus,TRUE,2,,Tylonycteris pachypus
+535,Rhabdoviridae,Lyssavirus,Rabies virus,Uroderma,bilobatum,Uroderma bilobatum,TRUE,,,Uroderma bilobatum
+536,Arenaviridae,Arenavirus,Tacaribe virus,Uroderma,bilobatum,Uroderma bilobatum,FALSE,,,Uroderma bilobatum
+537,Flaviviridae,Flavivirus,Tamana bat virus,Uroderma,bilobatum,Uroderma bilobatum,FALSE,,,Uroderma bilobatum
+538,Togaviridae,Alphavirus,Venezuelan equine encephalitis virus,Uroderma,bilobatum,Uroderma bilobatum,TRUE,3,,Uroderma bilobatum
+539,Rhabdoviridae,Vesiculovirus,Vesicular stomatitis New Jersey virus,Vampyrodes,caraccioli,Vampyrodes caraccioli,TRUE,1,,Vampyrodes caraccioli
+540,Rhabdoviridae,Lyssavirus,European bat lyssavirus 1,Vespertilio,murinus,Vespertilio murinus,TRUE,,,Vespertilio murinus
+541,Rhabdoviridae,Lyssavirus,Rabies virus,Vespertilio,murinus,Vespertilio murinus,TRUE,,,Vespertilio murinus
+542,Flaviviridae,Flavivirus,Japanese encephalitis virus,Vespertilio,sinensis,Vespertilio sinensis,TRUE,3,,Vespertilio sinensis
