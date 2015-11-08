@@ -34,8 +34,6 @@ theme_tcdl <-theme(text = element_text(family = "Lato Light", size = 12),
         strip.text = element_text(colour = 'white', family = 'Lato Light', size = 10)
 )
 
-#theme_set(theme_grey() + theme_tcdl)
-theme_set(theme_grey() + theme_pres)
 
 theme_pres <- theme(text = element_text(family = "Lato Light", size = 12),
         panel.grid.major.x = element_line(colour = "#ECECEC", size = 0.3, linetype = 1),
@@ -62,6 +60,8 @@ theme_pres <- theme(text = element_text(family = "Lato Light", size = 12),
 
 
 
+#theme_set(theme_grey() + theme_tcdl)
+theme_set(theme_grey() + theme_pres)
 
 
 

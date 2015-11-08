@@ -17,6 +17,7 @@ runFstScrape <- FALSE
 # Run slow bootstrapping?
 subBoots <- FALSE
 fstBoots <- FALSE
+batclocksBoots <- TRUE
 
 # There are figures created in the data analysis which are not in the final chapter document.
 #   If TRUE, they will be included in the output.
@@ -1072,7 +1073,7 @@ modelSelect <- function(allForm, data, phy, boot, allModelMat, varList){
                cbind(AIC = NA, boot = boot, lambda = NA)
 
   for(m in 1:length(allForm)){
-    model <- gls(allForm[[m]], correlation = corPagel(value = 0.5, phy = phy), data = bootData)    
+    model <- gls(allForm[[m]], correlation = corPagel(value = 0.5, phy = phy), data = bootData, method = 'ML')    
     #model <- pgls(allForm[[m]], data = compBootData, lambda = 'ML')
     results$AIC[m] <- AICc(model)
     results$lambda[m] <- model$modelStruct$corStruct[1]
@@ -1163,7 +1164,7 @@ ggplot(sepVarWeights, aes(x = variable, y = estimate, colour = col, fill = col))
   theme(legend.position = 'none', axis.text.x = element_text(size = 15, angle = 45, hjust = 1)) +
   scale_x_discrete(labels = c('Study Effort', 'Subspecies', 'Mass', 'Range Size', 'Null', 'Subspecies:Effort'))+
   ylab('P(in best model)') +
-  xlab('Variable')
+  xlab('')
 
 
 
@@ -1268,7 +1269,7 @@ rangeWidth <- mclapply(fst$binomial, findWidth, mc.cores = 3) %>% do.call(c, .)
 fst$rangeWidth <- rangeWidth
 fst$rangeCoverage <- fst$Dmax..km. / fst$rangeWidth
 
-rangeUseable <- 0.2
+rangeUseable <- 0.20
 
 fst$Useable <- fst$rangeCoverage > rangeUseable
 sum(fst$Useable, na.rm = TRUE)
@@ -1286,7 +1287,7 @@ fst$Useable[is.na(fst$Useable)] <- FALSE
 
 # First take what data we can from nSpecies analysis.
 fstStudy <- sqldf("	
-                SELECT fst.binomial, scholarRefs, pubmedRefs
+                SELECT fst.binomial, nSpecies.scholarRefs, nSpecies.pubmedRefs
                 FROM fst
                 LEFT JOIN nSpecies
                 ON nSpecies.binomial=fst.binomial
@@ -1404,6 +1405,16 @@ fstFinal$mass[fstFinal$binomial == 'Myotis macropus'] <- 9.8
 fstFinal <- fstFinal[!is.na(fstFinal$mass), ]
 %%end.rcode
 
+%%begin.rcode fstCors, fig.show = extraFigs
+
+fstFinal[, c('mass', 'scholarRefs', 'rangeWidth', 'Nm')] %>%
+  log %>%
+  cbind(virusSpecies = fstFinal$virusSpecies) %>%
+  ggpairs(.)
+
+
+%%end.rcode
+
 
 
 %%begin.rcode compareNm, fig.show = extraFigs
@@ -1516,24 +1527,24 @@ fstModelSelect <- function(allForm, data, phy, boot, allModelMat, varList){
       rm(model)
     }
     try({
-      model <- gls(allForm[[m]], correlation = corPagel(value = 0.4, phy = phy), data = bootData)  
+      model <- gls(allForm[[m]], correlation = corPagel(value = 0.4, phy = phy), data = bootData, method = 'ML')  
       results$attempt[m] <- 1
     }) 
     if(!exists('model')){
       try({
-        model <- gls(allForm[[m]], correlation = corPagel(value = 0.3, phy = phy), data = bootData)  
+        model <- gls(allForm[[m]], correlation = corPagel(value = 0.3, phy = phy), data = bootData, method = 'ML')  
         results$attempt[m] <- 2
       }) 
     }
     if(!exists('model')){
       try({
-        model <- gls(allForm[[m]], correlation = corPagel(value = 0.2, phy = phy), data = bootData)  
+        model <- gls(allForm[[m]], correlation = corPagel(value = 0.2, phy = phy), data = bootData, method = 'ML')  
         results$attempt[m] <- 3
       }) 
     }
     if(!exists('model')){
       try({
-        model <- gls(allForm[[m]], correlation = corPagel(value = 0.1, phy = phy), data = bootData)  
+        model <- gls(allForm[[m]], correlation = corPagel(value = 0.1, phy = phy), data = bootData, method = 'ML')  
         results$attempt[m] <- 4
         message('Running lm')
       }) 
@@ -1620,7 +1631,7 @@ ggplot(fstSepVarWeights, aes(x = variable, y = estimate, colour = col, fill = co
   theme(legend.position = 'none', axis.text.x = element_text(size = 15, angle = 45, hjust = 1)) +
   scale_x_discrete(labels = c('Study Effort', 'Gene Flow', 'Mass', 'Range Size', 'Null'))+
   ylab('P(in best model)') +
-  xlab('Variable')
+  xlab('')
 
 
 
@@ -1664,7 +1675,7 @@ ggplot(aes(x = lambda)) +
   xlab(expression(paste('Phylogenetic Signal, ', lambda)))
 
 
-transform(fstAllResults, log.scholarRefs. = c('Other', 'Scholar Refs' )[factor(log.scholarRefs.)]) %>%
+transform(fstAllResults, log.scholarRefs. = factor(c('Scholar Refs', 'Other')[factor(!log.scholarRefs.)], levels = c('Scholar Refs', 'Other'))) %>%
 ggplot(aes(x = lambda)) + 
   facet_grid(. ~ log.scholarRefs.) +
   geom_histogram() +
@@ -2085,4 +2096,200 @@ ggplot(nSpecies, aes(y = pubmedResid, x = log(NumberOfSubspecies))) +
 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Repeat analysis with bat clocks and rocks                  %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+%%begin.rcode treeRead2
+
+# Read in trees
+t2 <- read.nexus('data/Chapter3/BatST2BL.nex')
+
+# Make names match previous names
+t2$tip.label <- gsub('_', ' ', t2$tip.label)
+
+
+unneededTips2 <- t2$tip.label[!(t2$tip.label %in% nSpecies$binomial)]
+
+# Prune tree down to only needed tips.
+pruneTree2 <- drop.tip(t2, unneededTips2)
+
+
+nSpecies2 <- sapply(pruneTree2$tip.label, function(x) which(nSpecies$binomial == x)) %>%
+               nSpecies[., ]
+
+
+
+
+# Which tips are not needed
+fstUnneededTips2 <- t2$tip.label[!(t2$tip.label %in% fstFinal$binomial)]
+
+# Prune tree down to only needed tips.
+fstTree2 <- drop.tip(t2, fstUnneededTips2)
+
+
+
+rm(t2)
+
+
+
+
+%%end.rcode
+
+
+%%begin.rcode treePlot2, show.figs = extraFigs, out.width = '\\textwidth', fig.cap = 'Pruned phylogeny \\ref{} with dot size showing number of pathogens and colour showing family.'
+
+# Plot tree 
+p2 <- ggtree(pruneTree2, layout = 'fan') 
+
+p2 %<+% nSpecies2[, 1:6] +
+  geom_point(aes(size = virusSpecies, colour = Family), subset=.(isTip)) +
+  scale_size(range = c(0.8, 3)) +
+  scale_colour_manual(values = c(pokepal('oddish')[c(1,3,5,6,9,10)],    pokepal('Carvanha')[c(1,2,4, 13, 12)])) +
+  theme_tcdl +
+  theme(plot.margin = unit(c(-1, 3, -2.5, -2), "lines")) +
+  theme(legend.position = 'right') +
+  labs(size = 'Virus Richness') +
+  theme(legend.key.size = unit(0.6, "lines"),
+              legend.text = element_text(size = 6),
+              legend.title = element_text(size = 8))
+
+
+
+%%end.rcode
+
+
+
+%%begin.rcode runBatClocks, eval = batclocksBoots
+
+
+modelSelect2 <- function(allForm, data, phy, boot, allModelMat, varList){
+  
+  set.seed(paste0('1993', boot))
+  bootData <- cbind(data, rand = runif(nrow(data)))
+  rownames(bootData) <- bootData$binomial
+  #compBootData <- comparative.data(data = bootData, phy = phy, names.col = 'binomial')
+
+  results <- apply(allModelMat, 1, function(x) sapply(c(varList, "log(scholarRefs):NumberOfSubspecies"), function(y) y %in% x)) %>%
+               t %>%
+               data.frame %>%
+               cbind(AIC = NA, boot = boot, lambda = NA)
+
+
+
+  for(m in 1:length(allForm)){
+    if(exists('model')){
+      rm(model)
+    }
+    try({
+      model <- gls(allForm[[m]], correlation = corPagel(value = 0.4, phy = phy), data = bootData, method = 'ML')  
+      results$attempt[m] <- 1
+    }) 
+    if(!exists('model')){
+      try({
+        model <- gls(allForm[[m]], correlation = corPagel(value = 0.3, phy = phy), data = bootData, method = 'ML')  
+        results$attempt[m] <- 2
+      }) 
+    }
+    if(!exists('model')){
+      try({
+        model <- gls(allForm[[m]], correlation = corPagel(value = 0.2, phy = phy), data = bootData, method = 'ML')  
+        results$attempt[m] <- 3
+      }) 
+    }
+    if(!exists('model')){
+      try({
+        model <- gls(allForm[[m]], correlation = corPagel(value = 0.1, phy = phy), data = bootData, method = 'ML')  
+        results$attempt[m] <- 4
+        message('Running lm')
+      }) 
+    }
+    if(!exists('model')){
+      try({
+        model <- lm(allForm[[m]], data = bootData) 
+        results$attempt[m] <- 5
+        message('Running lm')
+      }) 
+    }
+    #model <- lm(allForm[[m]], data = bootData)
+    #model <- pgls(allForm[[m]], data = compBootData, lambda = 'ML')
+
+
+    results$AIC[m] <- AICc(model)
+    results$predictors[m] <- allForm[[m]] %>% as.character %>% .[3]
+    if(inherits(model, 'gls')){
+        results$lambda[m] <- model$modelStruct$corStruct[1]
+    }
+    message(paste('Boot:', boot, ', m:', m, '\n'))
+  }
+
+  results$dAIC <- results$AIC - min(results$AIC)
+  results$weight <- exp(- 0.5 * results$dAIC) / sum(exp(- 0.5 * results$dAIC))
+
+
+  return(results)
+
+}
+
+
+fitModelsBootStrap2 <- mclapply(1:nBoots, function(b) modelSelect2(allFormulae, nSpecies2, pruneTree2, b, allModelMat, varList), mc.cores = nCores)
+
+allResults2 <- do.call(rbind, fitModelsBootStrap2)
+
+write.csv(allResults2, file = 'data/Chapter3/modelSelectSubspeciesBatClocks.csv')
+
+
+#fstModelsBootStrap2 <- mclapply(1:nBoots, function(b) fstModelSelect(fstAllFormulae, fstFinal, fstTree2, b, fstModelMat, fstVarList), mc.cores = nCores)
+
+#fstAllResults2 <- do.call(rbind, fstModelsBootStrap2)
+
+#write.csv(fstAllResults2, file = 'data/Chapter3/fstModelSelectSubspeciesBatClocks.csv')
+
+
+%%end.rcode
+
+
+%%begin.rcode batClocksAnalyse
+
+
+allResults2 <- read.csv('data/Chapter3/modelSelectSubspeciesBatClocks.csv', row.names = 1)
+
+varWeights2 <- sapply(names(allResults2)[1:6], function(x) sum(allResults2$weight[allResults2[, x]])/nBoots)
+
+
+sepVarWeights2 <- lapply(1:nBoots, function(b) 
+                      sapply(names(allResults2)[1:6], 
+                        function(x) 
+                          sum(allResults2[allResults2$boot == b, 'weight'][allResults2[allResults2$boot == b, x]])
+                      )
+                     )      
+
+sepVarWeights2 <- do.call(rbind, sepVarWeights2) %>%
+                      data.frame(., boot = 1:nBoots) %>%
+                      reshape2::melt(., value.name = 'estimate', id.vars = 'boot')
+
+sepVarWeights2$col <- 'Other Variables'
+sepVarWeights2$col[grep('NumberOf', sepVarWeights2$variable)] <- 'Population Structure'
+sepVarWeights2$col[sepVarWeights2$variable == 'rand'] <- 'Null'
+
+
+
+modelWeights2 <- allResults2 %>%
+                  group_by(predictors) %>%
+                  summarise(AICc = mean(AIC)) %>%
+                  mutate(dAIC = AICc - min(AICc), modelWeight = exp(- 0.5 * dAIC) / sum(exp(- 0.5 * dAIC))) %>%
+                  arrange(desc(modelWeight)) %>%
+                  mutate(cumulativeWeight = cumsum(modelWeight)) %>%
+                  mutate(string = levels(predictors)[predictors])
+
+
+
+
+
+%%end.rcode
 
