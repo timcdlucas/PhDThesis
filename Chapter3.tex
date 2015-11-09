@@ -288,12 +288,14 @@ The models shown are thos with (pink) and without (red) an interaction between s
 \end{knitrout}
 
 \begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[t]
 
 {\centering \includegraphics[width=0.8\textwidth]{figure/fstRawData-1} 
 
 }
 
+\caption[Gene flow per generation (on a log scale) against viral richness with the genetic marker used shown with colour]{Gene flow per generation (on a log scale) against viral richness with the genetic marker used shown with colour.}\label{fig:fstRawData}
+\end{figure}
 
 
 \end{knitrout}
@@ -332,6 +334,8 @@ The models shown are thos with (pink) and without (red) an interaction between s
 
 
 
+
+
 $F_{ST}$ studies are conducted at a range of spatial scales, but $F_{ST}$ often increases with distance studied \cite{}.
 To minimise the effects of this I only used data from studies that cover 20\% of the diameter of the species range.
 This is a largely arbitrary value that could be considered to reflect a `global' estimate of $F_{ST}$ while keeping a reasonable number of datapoints available.
@@ -348,7 +352,7 @@ I chose a credible set of models including all combinations of independent varia
 In the analysis using the number of subspecies dependant variable I also included an interaction term between study effort and number of subspecies as I believe \emph{a priori} that this interaction may be present.
 The interaction was only included in models with both study effort and number of subspecies as an individual term.
 
-I fitted phylogenetic regressions using caper \cite{nmle} to all models.
+I fitted phylogenetic regressions using caper \cite{nlme} to all models.
 In each case I simultaneously fitted the $\lambda$ parameter as this avoids mispecifying the model \cite{revell2010phylogenetic}.
 $\kappa$ and $\delta$ were constrained to one.
 
@@ -381,19 +385,19 @@ The highest mean is Mormoopidae with 5 virus species per bat species, but this i
 The Phyllostomidae have the second highest mean (n = 37) of 3.49.
 
 The small change in mean pathogen richness across families and the lack of clear pattern in Figure~\ref{fig:treePlot} implies that viral richness is not strongly phylogenetic. 
-This is corroborated by the small estimated size of $\lambda$ ($\lambda$ = , $p$ = ).
+This is corroborated by the small estimated size of $\lambda$ ($\lambda$ = 0.04, $p$ = 0.21).
 This fact implies that other factors must control pathogen richness.
 It also implies that pathogens are not directly inherited down the phylogeny, although this is to be expected by the fast evolution of viruses.
 
-Of the explanatory variables, the number of subspecies has no phylogenetic autocorrelation ($\lambda$ = , $p$ = ), study effort has weak but significant autocorrelation ($\lambda$ = , $p$ = ) and mass is strongly phylogenetic ($\lambda$ = , $p$ = ).
+Of the explanatory variables, the number of subspecies has no phylogenetic autocorrelation ($\lambda$ = \ensuremath{10^{-6}}, $p$ = 1), study effort and distribution size have weak but significant autocorrelation (Study Effort: $\lambda$ = 0.1, $p$ = \ensuremath{9.12\times 10^{-3}}, Distribution size: $\lambda$ = 0.32, $p$ = \ensuremath{8.82\times 10^{-8}}) and mass is strongly phylogenetic ($\lambda$ = 0.93, $p$ = 0).
 
 \tmpsection{Model results}
 %See Figure \ref{fig:plotSubspeciesCoefs} for a display of estimated coefficients for the two models using number of viruses as the response variable. 
-The main model with mass, study effort and number of subspecies as predictors found study effort to be highly significant ($\beta = $ NA, $p = $ \ensuremath{1.05\times 10^{-8}}). 
-The number of subspecies was marginally significant ($\beta = $ NA, $p = $ 0.02). 
-The effect of nonindependance due to phylogeny was very small ($\lambda = $ 0.09, $p = $ 0.02).
+%The main model with mass, study effort and number of subspecies as predictors found study effort to be highly significant ($\beta = $ subspeciesJoint$model$coef['log(pubmedRefs + 1)'], $p = $ subJoint.summary$coefficients[2,'Pr(>|t|)']). 
+%The number of subspecies was marginally significant ($\beta = $  subspeciesJoint$model$coef['NumberOfSubspecies'], $p = $ subJoint.summary$coefficients[3,'Pr(>|t|)']). 
+%The effect of nonindependance due to phylogeny was very small ($\lambda = $ subJoint.summary$param['lambda'], $p = $ subspeciesJoint$param.CI$lambda$bounds.p[1]).
 
-The interaction term between study effort and number of subspecies, when included, was significant ($\beta = $ 0.14, $p = $ \ensuremath{2.99\times 10^{-3}}).
+%The interaction term between study effort and number of subspecies, when included, was significant ($\beta = $  subspeciesInter$model$coef['NumberOfSubspecies:log(scholarRefs)'], $p = $ subInter.summary$coefficients[5,'Pr(>|t|)']).
 
 
 
@@ -516,7 +520,7 @@ $\sum w_i$ is the cumulative sum of the Akaike weights.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
+\section{Appendix}
 
 
 
@@ -530,7 +534,7 @@ $\sum w_i$ is the cumulative sum of the Akaike weights.}
 
 }
 
-\caption[Pruned phylogeny \ref{} with dot size showing number of pathogens and colour showing family]{Pruned phylogeny \ref{} with dot size showing number of pathogens and colour showing family.}\label{fig:treePlot2}
+\caption[Pruned phylogeny \cite{jones2005bats} with dot size showing number of pathogens and colour showing family]{Pruned phylogeny \cite{jones2005bats} with dot size showing number of pathogens and colour showing family.}\label{fig:treePlot2}
 \end{figure}
 
 

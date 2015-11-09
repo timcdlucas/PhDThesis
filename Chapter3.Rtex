@@ -1196,6 +1196,7 @@ sspLambda <- summary(pgls(NumberOfSubspecies ~ 1, data = compSubspecies, lambda 
 massLambda <- summary(pgls(log(mass) ~ 1, data = compSubspecies, lambda = 'ML'))
 scholarLambda <- summary(pgls(log(scholarRefs) ~ 1, data = compSubspecies, lambda = 'ML'))
 virusLambda <- summary(pgls(virusSpecies ~ 1, data = compSubspecies, lambda = 'ML'))
+distrLambda <- summary(pgls(distrSize ~ 1, data = compSubspecies, lambda = 'ML'))
 %%end.rcode
 \clearpage
 
@@ -1481,11 +1482,11 @@ p %<+% fstFinal[, c('binomial', 'virusSpecies')] +
 
 %%end.rcode
 
-%%begin.rcode fstRawData, fig.height = 3
+%%begin.rcode fstRawData, fig.height = 3, fig.cap = 'Gene flow per generation (on a log scale) against viral richness with the genetic marker used shown with colour.'
 
 # Plot raw fstdata
 ggplot(fstFinal, aes(x = Nm, y = virusSpecies, colour = Marker)) +
-  geom_point(size = 4) +
+  geom_point(size = 3.5) +
   scale_colour_poke(pokemon = 'oddish', spread = 3) +
   scale_x_log10() +
   xlab('Gene flow (per gen.)') +
@@ -1738,7 +1739,7 @@ I chose a credible set of models including all combinations of independent varia
 In the analysis using the number of subspecies dependant variable I also included an interaction term between study effort and number of subspecies as I believe \emph{a priori} that this interaction may be present.
 The interaction was only included in models with both study effort and number of subspecies as an individual term.
 
-I fitted phylogenetic regressions using caper \cite{nmle} to all models.
+I fitted phylogenetic regressions using caper \cite{nlme} to all models.
 In each case I simultaneously fitted the $\lambda$ parameter as this avoids mispecifying the model \cite{revell2010phylogenetic}.
 $\kappa$ and $\delta$ were constrained to one.
 
@@ -1771,19 +1772,19 @@ The highest mean is \rinline{familyMeans$Family[which.max(familyMeans$mean)]} wi
 The \rinline{familyMeans$Family[order(familyMeans$mean, decreasing = TRUE)[2]]} have the second highest mean (n = \rinline{familyMeans$n[order(familyMeans$mean, decreasing = TRUE)[2]]}) of \rinline{familyMeans$mean[order(familyMeans$mean, decreasing = TRUE)[2]]}.
 
 The small change in mean pathogen richness across families and the lack of clear pattern in Figure~\ref{fig:treePlot} implies that viral richness is not strongly phylogenetic. 
-This is corroborated by the small estimated size of $\lambda$ ($\lambda$ = \rinline{virusLambda$lambda}, $p$ = \rinline{virusLambda$P}).
+This is corroborated by the small estimated size of $\lambda$ ($\lambda$ = \rinline{virusLambda$param['lambda']}, $p$ = \rinline{virusLambda$param.CI$lambda$bounds.p[1]}).
 This fact implies that other factors must control pathogen richness.
 It also implies that pathogens are not directly inherited down the phylogeny, although this is to be expected by the fast evolution of viruses.
 
-Of the explanatory variables, the number of subspecies has no phylogenetic autocorrelation ($\lambda$ = \rinline{sspLambda$lambda}, $p$ = \rinline{sspLambda$P}), study effort has weak but significant autocorrelation ($\lambda$ = \rinline{scholarLambda$lambda}, $p$ = \rinline{scholarLambda$P}) and mass is strongly phylogenetic ($\lambda$ = \rinline{massLambda$lambda}, $p$ = \rinline{massLambda$P}).
+Of the explanatory variables, the number of subspecies has no phylogenetic autocorrelation ($\lambda$ = \rinline{sspLambda$param['lambda']}, $p$ = \rinline{sspLambda$param.CI$lambda$bounds.p[1]}), study effort and distribution size have weak but significant autocorrelation (Study Effort: $\lambda$ = \rinline{scholarLambda$param['lambda']}, $p$ = \rinline{scholarLambda$param.CI$lambda$bounds.p[1]}, Distribution size: $\lambda$ = \rinline{distrLambda$param['lambda']}, $p$ = \rinline{distrLambda$param.CI$lambda$bounds.p[1]}) and mass is strongly phylogenetic ($\lambda$ = \rinline{massLambda$param['lambda']}, $p$ = \rinline{massLambda$param.CI$lambda$bounds.p[1]}).
 
 \tmpsection{Model results}
 %See Figure \ref{fig:plotSubspeciesCoefs} for a display of estimated coefficients for the two models using number of viruses as the response variable. 
-The main model with mass, study effort and number of subspecies as predictors found study effort to be highly significant ($\beta = $ \rinline{subspeciesJoint$model$coef['log(pubmedRefs + 1)']}, $p = $ \rinline{subJoint.summary$coefficients[2,'Pr(>|t|)']}). 
-The number of subspecies was marginally significant ($\beta = $ \rinline{ subspeciesJoint$model$coef['NumberOfSubspecies']}, $p = $ \rinline{subJoint.summary$coefficients[3,'Pr(>|t|)']}). 
-The effect of nonindependance due to phylogeny was very small ($\lambda = $ \rinline{subJoint.summary$param['lambda']}, $p = $ \rinline{subspeciesJoint$param.CI$lambda$bounds.p[1]}).
+%The main model with mass, study effort and number of subspecies as predictors found study effort to be highly significant ($\beta = $ \rinline{subspeciesJoint$model$coef['log(pubmedRefs + 1)']}, $p = $ \rinline{subJoint.summary$coefficients[2,'Pr(>|t|)']}). 
+%The number of subspecies was marginally significant ($\beta = $ \rinline{ subspeciesJoint$model$coef['NumberOfSubspecies']}, $p = $ \rinline{subJoint.summary$coefficients[3,'Pr(>|t|)']}). 
+%The effect of nonindependance due to phylogeny was very small ($\lambda = $ \rinline{subJoint.summary$param['lambda']}, $p = $ \rinline{subspeciesJoint$param.CI$lambda$bounds.p[1]}).
 
-The interaction term between study effort and number of subspecies, when included, was significant ($\beta = $ \rinline{ subspeciesInter$model$coef['NumberOfSubspecies:log(scholarRefs)']}, $p = $ \rinline{subInter.summary$coefficients[5,'Pr(>|t|)']}).
+%The interaction term between study effort and number of subspecies, when included, was significant ($\beta = $ \rinline{ subspeciesInter$model$coef['NumberOfSubspecies:log(scholarRefs)']}, $p = $ \rinline{subInter.summary$coefficients[5,'Pr(>|t|)']}).
 
 
 
@@ -2113,7 +2114,7 @@ ggplot(nSpecies, aes(y = pubmedResid, x = log(NumberOfSubspecies))) +
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
+\section{Appendix}
 
 
 
@@ -2178,7 +2179,7 @@ rm(t2)
 %%end.rcode
 
 
-%%begin.rcode treePlot2, show.figs = extraFigs, out.width = '\\textwidth', fig.cap = 'Pruned phylogeny \\ref{} with dot size showing number of pathogens and colour showing family.'
+%%begin.rcode treePlot2, show.figs = extraFigs, out.width = '\\textwidth', fig.cap = 'Pruned phylogeny \\cite{jones2005bats} with dot size showing number of pathogens and colour showing family.'
 
 # Plot tree 
 p2 <- ggtree(pruneTree2, layout = 'fan') 
