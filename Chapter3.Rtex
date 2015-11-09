@@ -2124,6 +2124,9 @@ nSpecies2 <- sapply(pruneTree2$tip.label, function(x) which(nSpecies$binomial ==
                nSpecies[., ]
 
 
+################
+## Fst tree   ##
+################
 
 
 # Which tips are not needed
@@ -2132,7 +2135,28 @@ fstUnneededTips2 <- t2$tip.label[!(t2$tip.label %in% fstFinal$binomial)]
 # Prune tree down to only needed tips.
 fstTree2 <- drop.tip(t2, fstUnneededTips2)
 
+# Which tips in Fst analysis are not in bats clocks tree.
+fstFinal$binomial[!(fstFinal$binomial %in% fstTree2$tip.label)]
 
+
+# Hacky cruddy way of placing the missing tips into the tree. Should end up with genus level polytomies in trimmed tree.
+# Just replacing some of the uneeded tips with the ones I need.
+
+t2$tip.label[t2$tip.label == 'Miniopterus pusillus'] <- 'Miniopterus natalensis'
+t2$tip.label[t2$tip.label == 'Miniopterus schreibersi'] <- 'Miniopterus schreibersii'
+t2$tip.label[t2$tip.label == 'Rousettus celebensis'] <- 'Rousettus leschenaultii'
+t2$tip.label[t2$tip.label == 'Myotis oxyotus'] <- 'Myotis macropus'
+
+
+#Re prune tree
+# Which tips are not needed
+fstUnneededTips2 <- t2$tip.label[!(t2$tip.label %in% fstFinal$binomial)]
+
+# Prune tree down to only needed tips.
+fstTree2 <- drop.tip(t2, fstUnneededTips2)
+
+# Check we now have all the tips.
+fstFinal$binomial[!(fstFinal$binomial %in% fstTree2$tip.label)]
 
 rm(t2)
 
@@ -2244,11 +2268,13 @@ allResults2 <- do.call(rbind, fitModelsBootStrap2)
 write.csv(allResults2, file = 'data/Chapter3/modelSelectSubspeciesBatClocks.csv')
 
 
-#fstModelsBootStrap2 <- mclapply(1:nBoots, function(b) fstModelSelect(fstAllFormulae, fstFinal, fstTree2, b, fstModelMat, fstVarList), mc.cores = nCores)
+## FST analysis
 
-#fstAllResults2 <- do.call(rbind, fstModelsBootStrap2)
+fstModelsBootStrap2 <- mclapply(1:nBoots, function(b) fstModelSelect(fstAllFormulae, fstFinal, fstTree2, b, fstModelMat, fstVarList), mc.cores = nCores)
 
-#write.csv(fstAllResults2, file = 'data/Chapter3/fstModelSelectSubspeciesBatClocks.csv')
+fstAllResults2 <- do.call(rbind, fstModelsBootStrap2)
+
+write.csv(fstAllResults2, file = 'data/Chapter3/fstModelSelectSubspeciesBatClocks.csv')
 
 
 %%end.rcode
@@ -2286,6 +2312,38 @@ modelWeights2 <- allResults2 %>%
                   arrange(desc(modelWeight)) %>%
                   mutate(cumulativeWeight = cumsum(modelWeight)) %>%
                   mutate(string = levels(predictors)[predictors])
+
+
+#### FST
+
+
+fstAllResults2 <- read.csv('data/Chapter3/fstModelSelectSubspeciesBatClocks.csv', row.names = 1)
+
+fstSepVarWeights2 <- lapply(1:nBoots, function(b) 
+                      sapply(names(fstAllResults2)[1:5], 
+                        function(x) 
+                          sum(fstAllResults2[fstAllResults2$boot == b, 'weight'][fstAllResults2[fstAllResults2$boot == b, x]])
+                      )
+                     )      
+
+fstSepVarWeights2 <- do.call(rbind, fstSepVarWeights2) %>%
+                      data.frame(., boot = 1:nBoots) %>%
+                      reshape2::melt(., value.name = 'estimate', id.vars = 'boot')
+
+fstSepVarWeights2$col <- 'Other Variables'
+fstSepVarWeights2$col[fstSepVarWeights2$variable == 'log.Nm.'] <- 'Population Structure'
+fstSepVarWeights2$col[fstSepVarWeights2$variable == 'rand'] <- 'Null'
+
+
+fstVarWeights2 <- sapply(names(fstAllResults2)[1:5], function(x) sum(fstAllResults2$weight[fstAllResults2[, x]])/nBoots)
+
+
+fstModelWeights2 <- fstAllResults2 %>%
+                  group_by(predictors) %>%
+                  summarise(AICc = mean(AIC)) %>%
+                  mutate(dAIC = AICc - min(AICc), modelWeight = exp(- 0.5 * dAIC) / sum(exp(- 0.5 * dAIC))) %>%
+                  arrange(desc(modelWeight)) %>%
+                  mutate(cumulativeWeight = cumsum(modelWeight)) 
 
 
 
