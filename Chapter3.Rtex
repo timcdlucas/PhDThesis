@@ -17,7 +17,7 @@ runFstScrape <- FALSE
 # Run slow bootstrapping?
 subBoots <- FALSE
 fstBoots <- FALSE
-batclocksBoots <- TRUE
+batclocksBoots <- FALSE
 
 # There are figures created in the data analysis which are not in the final chapter document.
 #   If TRUE, they will be included in the output.
@@ -53,6 +53,7 @@ library(caper)
 library(phytools)
 library(nlme)
 library(qpcR)
+library(car)
 
 # Plotting
 library(ggplot2)
@@ -956,6 +957,12 @@ summary(subspeciesResid)
 nSubSpAIC <- AIC(subspeciesJoint, subspeciesJointUnlog, subspeciesInter)
 
 
+
+# Look at Variance inflation factors.
+#   Couple of help messages imply lm vif is fine.
+
+sqrt(vif(lm(virusSpecies ~ log(scholarRefs) + NumberOfSubspecies +  log(mass) + log(distrSize), data = nSpecies)))
+
 %%end.rcode
 %\clearpage
 
@@ -1709,6 +1716,11 @@ ggplot(aes(x, L)) +
 
 %%end.rcode
 
+
+%%begin.rcode fstVIF
+sqrt(vif(lm(virusSpecies ~ log(scholarRefs) + Nm +  log(mass) + log(distrSize), data = fstFinal)))
+
+%%end.rcode
 
 $F_{ST}$ studies are conducted at a range of spatial scales, but $F_{ST}$ often increases with distance studied \cite{}.
 To minimise the effects of this I only used data from studies that cover \rinline{rangeUseable * 100}\% of the diameter of the species range.
