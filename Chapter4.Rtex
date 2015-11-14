@@ -68,17 +68,27 @@ However, the factors that control pathogen diversity in wild populations are sti
 
 
 \subsubsection{Two to three sentences of more detailed background}
-% comprehensible to scientists in related disciplines.
+Population density is known to increase pathogen richness while theory suggests that population structure may also play a role.
+However, these factors, along with population abundance, are intrinsically linked; reducing density reduces contacts between individuals.
+In group living species, this is particularly true, with group size and the number of groups and distribution size contributing to total animal density. 
+As these factors are completely interdependant, it is very difficult to study them empirically e.g. in a comparative frame work.
 
 \subsubsection{One sentence clearly stating the general problem (the gap)}
 % being addressed by this particular study.
 
+It is unknown whether it is specifically density that controls pathogen diversity or whether density merely correlates with population structure, group size or population size (abundance).
+
+
 \subsubsection{One sentence summarising the main result}
 %  (with the words “here we show” or their equivalent).
+Here I use metapopulation SIR models to test whether it is density \emph{per se} that increases the ability of a new pathogen to invade as apposed to colony size, population abundance or population structure.
+
 
 
 \subsubsection{Two or three sentences explaining what the main result reveals in direct comparison to what was thought to be the case previously}
 % or how the main result adds to previous knowledge
+
+
 
 \subsubsection{One or two sentences to put the results into a more general context.}
 
