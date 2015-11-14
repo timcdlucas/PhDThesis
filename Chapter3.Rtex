@@ -84,33 +84,47 @@ library(parallel)
 
 \tmpsection{One or two sentences providing a basic introduction to the field}
 % comprehensible to a scientist in any discipline.
-\lettr{B}ats are an important reservoire of zoonotic diseases.
-It is still unclear what factors determine the number of pathogens a wild bat species carries.
-But once understood, these factors could provide a way to priorities surveillance of bat populations.
+\lettr{I}t is still unclear what factors determine the number of pathogens a wild species carries.
+But once understood, these factors could provide a way to prioritise surveillance of wild populations for zoonotic disease.
 
 
 \tmpsection{Two to three sentences of more detailed background}
 % comprehensible to scientists in related disciplines.
 
+% Theory led.
+% 
+
+The pattern of contacts between individuals (i.e. population structure) has long been known to strongly affect epidemic processes.
+Theory suggests that population structure can promote pathogen richness while the ecological literature generally assumes it will decrease richness.
+It is still unclear how important population structure is in controlling pathogen richness in wild populations.
+Previous studies have had contradictory results and the different measures of population structure have different shortcomings.
+
 
 \tmpsection{One sentence clearly stating the general problem (the gap)}
 % being addressed by this particular study.
 
+Here I use comparative data to test whether population structure influences pathogen richness in bats.
+I use two measures of population structure: a novel measure, number of subspecies, and a more careful application of genetic measures which have been used previously.
 
 \tmpsection{One sentence summarising the main result}
 %  (with the words “here we show” or their equivalent).
+
+I find conflicting evidence suggesting that while population structure may promote pathogen diversity it is likely not a strong affect.
 
 
 \tmpsection{Two or three sentences explaining what the main result reveals in direct comparison to what was thought to be the case previously}
 % or how the main result adds to previous knowledge
 
+The results conflict with each other and with other studies which suggests that tests of population structure is senstive to the exact measurements and data used.
+Given the conflicting results in the literature and unclear results here, it seems likely that population structure does not strongly affect pathogen richness in bats.
 
 \tmpsection{One or two sentences to put the results into a more general context.}
 
-
+Given the weakness of the association between pathogen richness and bats, this is not a useful
 
 \tmpsection{Two or three sentences to provide a broader perspective, }
 % readily comprehensible to a scientist in any discipline.
+
 
 
 
@@ -121,6 +135,7 @@ But once understood, these factors could provide a way to priorities surveillanc
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\subsection{}
 
 
 
@@ -1383,7 +1398,8 @@ fst$fnc[phistBool] <- 'phist'
 fst <- fst[!is.na(fst$Nm) & !(fst$Nm == Inf), ]
 
 # Take means of species with multiple measurements
-fstFinal <- fst[!duplicated(fst$binomial), ]
+fstFinal <- fst[fst$Marker != 'mtDNA', ]
+fstFinal <- fstFinal[!duplicated(fstFinal$binomial), ]
 fstFinal$Nm <- sapply(fstFinal$binomial, function(x) mean(fst$Nm[fst$binomial == x]))
 
 # Add number of viruses to fst dataset
@@ -1743,7 +1759,7 @@ I fitted phylogenetic regressions using caper \cite{nlme} to all models.
 In each case I simultaneously fitted the $\lambda$ parameter as this avoids mispecifying the model \cite{revell2010phylogenetic}.
 $\kappa$ and $\delta$ were constrained to one.
 
-As the number of data points is close to or much less than the number of variables times 40 I calculated small sample corredted AIC (AICc) for each model and then calculated Akaiki weights.
+As the number of data points is close to or much less than the number of variables times 40 I calculated small sample corrected AIC (AICc) for each model and then calculated Akaiki weights.
 This value can be interpreted as the probability that a model would be the best model if the data were recollected.
 For each variable, the sum of the Akaiki weights for models containing that variable are summed.
 This value can be interpreted as the probability that the given variable is in the best model.

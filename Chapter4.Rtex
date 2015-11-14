@@ -20,7 +20,7 @@ saveData <- FALSE
 
 
 # How many cores do you want to use to run simulations?
-nCores <- 7
+nCores <- 6
 
 ##########################
 ### End options        ###
@@ -254,11 +254,10 @@ Finally, recovery from any infectious class occurs at a rate $\gamma$
   nEvent <- 1e6
   # When should the invading pathogen be added.
   invadeT <- 7e5
-  #nEvent <- 3e4
-  #invadeT <- 2e4
+
   
   # Sims per parameter set.
-  each <- 20
+  each <- 100
   
   # How often should the population be sampled. Only sampled populations are saved.
   sample <- 1000
@@ -668,7 +667,6 @@ write.csv(z, file = 'data/Chapter4/PopSims.csv')
 
 
 
-
 In each simulation the population is seeded with 200 infected individuals of disease 1 in each colony. 
 Disease 1 is then allowed to spread and reach equilibrium. 
 After \rinline{invadeT} events, 10 individuals infected with disease 2 are added to one colony. 
@@ -755,11 +753,94 @@ For simulations studying extinction rates, half of the subpopulation were seeded
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%begin.rcode calcMeans
+# Constant density, altered colony size
+
+dens1 <- read.csv('data/Chapter4/DensSims.csv', row.names = 1)
+
+dens1Means <- dens1 %>%
+                group_by(transmission, colonySize) %>%
+                summarise(success = sum(nExtantDis == 2), n = n())
+
+
+dens1Means <- dens1Means %>%
+                cbind(., binom.confint(.$success, .$n, conf.level = 0.95, methods = "exact"))
+
+
+# Constant density, altered colony number
+
+dens2 <- read.csv('data/Chapter4/Dens2Sims.csv', row.names = 1)
+
+dens2Means <- dens2 %>%
+                group_by(transmission, colonyNumber) %>%
+                summarise(success = sum(nExtantDis == 2), n = n())
+
+
+dens2Means <- dens2Means %>%
+                cbind(., binom.confint(.$success, .$n, conf.level = 0.95, methods = "exact"))
 
 
 
-\subsection{Invasion}
+# Constant population, altered area
 
+pop <- read.csv('data/Chapter4/PopSims.csv', row.names = 1)
+
+popMeans <- pop %>%
+                group_by(transmission, area) %>%
+                summarise(success = sum(nExtantDis == 2), n = n())
+
+
+popMeans <- popMeans %>%
+                cbind(., binom.confint(.$success, .$n, conf.level = 0.95, methods = "exact"))
+
+
+
+%%end.rcode
+
+
+
+%%begin.rcode plotMeans
+
+
+ggplot(dens1Means, aes(x = factor(transmission), y = mean, fill = factor(colonySize))) +
+  geom_bar(stat = 'identity', position=position_dodge()) +
+  geom_errorbar(aes(ymin = lower, ymax = upper),
+                width=.2,                   
+                position = position_dodge(.9)) +
+  xlab('Transmission') + 
+  ylab('Prop. Invasions') +
+  scale_fill_poke(name="Colony Size", 
+                 #labels=c('0.001', '0.01', '0.1'), 
+                 pokemon = 'Swampert',
+                 spread = 5)
+
+
+ggplot(dens2Means, aes(x = factor(transmission), y = mean, fill = factor(colonyNumber))) +
+  geom_bar(stat = 'identity', position=position_dodge()) +
+  geom_errorbar(aes(ymin = lower, ymax = upper),
+                width=.2,                   
+                position = position_dodge(.9)) +
+  xlab('Transmission') + 
+  ylab('Prop. Invasions') +
+  scale_fill_poke(name="Colony Number", 
+                 #labels=c('0.001', '0.01', '0.1'), 
+                 pokemon = 'Swampert',
+                 spread = 5)
+
+
+ggplot(popMeans, aes(x = factor(transmission), y = mean, fill = factor(area))) +
+  geom_bar(stat = 'identity', position=position_dodge()) +
+  geom_errorbar(aes(ymin = lower, ymax = upper),
+                width=.2,                   
+                position = position_dodge(.9)) +
+  xlab('Transmission') + 
+  ylab('Prop. Invasions') +
+  scale_fill_poke(name="Area", 
+                 #labels=c('0.001', '0.01', '0.1'), 
+                 pokemon = 'Swampert',
+                 spread = 5)
+
+%%end.rcode
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

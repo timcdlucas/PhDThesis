@@ -1,7 +1,7 @@
 Family,OriginalBinomial,binomial,N,Marker,Measure,Value,Dmax (km),ApproxRangeWidth,nPops,References,Range,Notes
 Emballonuridae,Saccopterx bilineata,Saccopteryx bilineata,58,allozyme,Fst,0.013,38.71,7692.08,,burns2014correlates,Brazil to Mexico,
 Hipposideridae,Hipposideros speoris,Hipposideros speoris,186,microsatellites,Fst,0.651,1175,2514.67,11,chinnasamy2013genetic,India and Sri Lanka,
-Miniopteridae,Miniopterus nataliensis,Miniopterus natalensis,307,mtDNA,Fst,0.241,1440,6554.68,10,burns2014correlates,South Africa to Saudi Arabia,
+Miniopteridae,Miniopterus nataliensis,Miniopterus natalensis,307,microsatellites,rho,,1440,6554.68,10,burns2014correlates,South Africa to Saudi Arabia,
 Miniopteridae,Miniopterus schreibersii,Miniopterus schreibersii,407,microsatellites,Fst,0.038,488,4481.69,,burns2014correlates,Hungary to Cameroon,
 Molossidae,Mormopterus jugularis,Mormopterus jugularis,50,mtDNA,Fst,0.009,912,1237.88,18,burns2014correlates,Madagascar,
 Molossidae,Otomops martiensseni,Otomops martiensseni,31,mtDNA,Fst,0.016,4249,4915.1,8,burns2014correlates,Cote d'Ivoire to Zimbabwe,
