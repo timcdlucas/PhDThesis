@@ -135,8 +135,58 @@ Given the weakness of any association between population structure and pathogen 
 \section{Introduction}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{General Intro}
 
-\subsection{}
+
+
+
+\subsection{Specific Intro}
+
+
+
+\subsection{Theoretical background}
+
+\subsection{Previous Studies}
+
+Three studies have used comparative data to test for an association between population structure and viral richness.
+A study on 15 African bats found a positive relationship between distribution fragmentation and viral richness \cite{maganga2014bat} while a study on 20 South-East Asian bats found the opposite relationship \cite{gay2014parasite}. 
+A global study on 33 bats found a positive relationship between $F_{ST}$ --- a measure of genetic structure --- and viral richness \cite{turmelle2009correlates}. 
+However, this study included measures using mtDNA which only measures female dispersal which may haved biased the results many bat species show female philopatry \cite{kerth2002extreme, hulva2010mechanisms}.
+Furthermore, this study used measures of $F_{ST}$ irrespective of the study scale with studies covering from tens \cite{mccracken1981social} to thousands \cite{petit1999male} of kilometers.
+As isolation by distance has been shown in a number of bat species \cite{burland1999population, hulva2010mechanisms, o2015genetic} this could bias results further.
+
+
+
+
+\subsection{Rates}
+
+
+
+\subsection{Choice of measure of population structure}
+
+\tmpsection{Direct dispersal measurements}
+
+\tmpsection{Measures from range}
+
+\tmpsection{Genetic measures}
+
+\tmpsection{Number of Subspecies}
+
+
+
+
+
+\subsection{The gap}
+
+
+
+
+\subsection{What I did}
+
+
+
+
+\subsection{What I found}
 
 
 
