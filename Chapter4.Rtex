@@ -519,7 +519,7 @@ fullSim <- function(x){
 %%begin.rcode runDens2Sim, eval = runAllSims, cache = TRUE
 
 # Create and set seed (seed object is used to set seed in each seperate simulation.'
-seed <- 635412
+seed <- 67
 set.seed(seed)
 
 # If we want to save the data, make a directory for it.
@@ -651,7 +651,7 @@ fullSim <- function(x){
 %%begin.rcode runPopSim, eval = runAllSims, cache = TRUE
 
 # Create and set seed (seed object is used to set seed in each seperate simulation.'
-seed <- 256842
+seed <- 25
 set.seed(seed)
 
 # If we want to save the data, make a directory for it.
