@@ -1,0 +1,103 @@
+  
+
+\clearpage
+\section{Table of symbols}
+
+%move to appendix
+\begin{table}[h!]
+\centering
+\begin{tabular}{lll}
+Symbol 	& Description & Units\\\hline
+$\theta$	& Sensor width & \SI{}{\radian} \\
+$\alpha$	& Animal signal width & \SI{}{\radian} \\
+$x_i$	        & Focal angle, $i \in \{1,2,3,4\} $ 	& \SI{}{\radian}\\
+$r$ 		& Detection distance & \SI{}{\meter}\\
+$\bar{p}$ 		& Average profile width & \SI{}{\meter}\\
+$p$ 		& A specific profile width & \SI{}{\meter}\\
+$v$		& Velocity & \SI{}{\meter\per\second}\\
+$t$		& Time & \SI{}{\second}\\
+$z$		& Number of detections & -\\
+$D$		& Animal density & \SI{}{\per\meter\squared} \\
+$T$ 		& Step length & \SI{}{\second}\\
+$N$ 		& Number of steps per simulation & -\\
+$d$ 		& Distance moved in a time step & \SI{}{\meter}\\
+$S$ 		& Probability of remaining stationary & -\\
+$A$ 		& Maximum turning angle & \SI{}{\radian}\\
+\\
+\end{tabular}
+\caption[List of symbols used to describe the gREM and simulations]{List of symbols used to describe the gREM and simulations. `-' means the quantity has no units.}
+\label{t:paras}
+\end{table}
+
+\clearpage
+
+\section{Supplementary Methods}
+\subsection{Introduction}
+\lettr{T}hese supplementary methods derive all the models used. 
+For continuity, the gas model derivation is included here as well as in the main text. 
+The calculation of all integrals used in the gREM is included in the Python script S3. 
+
+
+\input{REM-methods.tex}
+
+\vspace{1cm}
+
+
+
+
+\clearpage
+\section{Supplementary Information: Simulation model results of the gREM precision}
+\setcounter{figure}{0}    
+
+
+
+
+\begin{figure}[h!]
+  \centering
+	\includegraphics[width=\textwidth]{imgs/ResultStandardDeviation.pdf}
+	\caption[gREM precision given a range of sensor and signal widths]{
+Simulation model results of the gREM precision given a range of sensor and signal widths, shown by the standard deviation of the error between the estimated and true densities. 
+Standard deviations are shown from deep red to pink, representing high to low values between $0.483\times10^{-6}$ to $3.74\times10^{-6}$. 
+        } 
+	\label{f:StandardDeviation}
+\end{figure}
+
+
+\clearpage
+\section{Supplementary Information: Impact of parameter error}
+
+
+
+
+\begin{figure}[h!]
+  \centering
+{
+  \subfloat[label{f:signal}]{
+    \includegraphics[width=0.4\textwidth]{imgs/AverageModelBias_callerror.pdf}
+  } 
+  \subfloat[label{f:sensor}]{
+    \includegraphics[width=0.4\textwidth]{imgs/AverageModelBias_cameraerror.pdf}
+  } 
+    
+	\subfloat[label{f:radius}]{
+    \includegraphics[width=0.4\textwidth]{imgs/AverageModelBias_radiuserror.pdf}
+  }%%
+	\subfloat[label{f:speed}]{
+    \includegraphics[width=0.4\textwidth]{imgs/AverageModelBias_speederror.pdf}
+  }
+}%%
+\caption[Model sensitivity to error in parameter estimates]{
+Model sensitivity (for all gREM submodels) to error in estimates of a) signal width $\alpha$,  b) sensor width $\theta$, c) detection distance $r$ and d) animal movement speed $v$. 
+Estimates are -10\% (red), -1\% (orange), 0\% (grey), +1\% (green) and +10\% (blue) of the true parameter value. 
+The black dashed line indicates zero error in density estimates. 
+The error bars 95\% confidence intervals across all simulations.
+}
+
+\label{f:sensitivity}
+\end{figure}
+
+
+
+
+
+
