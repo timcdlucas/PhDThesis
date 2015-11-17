@@ -12,7 +12,7 @@
 \section{Abstract}
 
 
-%\tmpsection{One or two sentences providing a basic introduction to the field}
+\tmpsection{One or two sentences providing a basic introduction to the field}
 % comprehensible to a scientist in any discipline.
 \lettr{A}n increasingly large fraction of emerging diseases come from wild animals and these diseases have a huge impact on human health, healthcare systems and economic development.
 The chance that a new zoonosis will come from any particularly wild host species increases with the diversity of pathogens in that species.
@@ -20,7 +20,7 @@ However, the factors that control pathogen diversity in wild populations are sti
 
 
 
-%\tmpsection{Two to three sentences of more detailed background}
+\tmpsection{Two to three sentences of more detailed background}
 % comprehensible to scientists in related disciplines.
 
 % Add mechanistic vs empirical
@@ -34,13 +34,13 @@ Greater understanding is needed to clarify exactly by which mechanisms populatio
 %However, if competition is strong endemic pathogens will dominate and prevent new diseases from invading and spreading.
 %In a structured population, stochastic effects could create areas of low prevalence of the endemic disease, allowing new diseases to invade.
 
-%\tmpsection{One sentence clearly stating the general problem (the gap)}
+\tmpsection{One sentence clearly stating the general problem (the gap)}
 % being addressed by this particular study.
 It is unknown whether population structure allows invading pathogens to escape from competition by stochastically creating areas of low pathogen prevalence.
 I hypothesise that low dispersal rates and a low number of connections in a metapopulation network will allow invading pathogens to establish more readily, thus increasing pathogen diversity. 
 I test these hypothesese using population networks parameterised to mimic wild bat populations as bats have highly varied social structures and have recently been implicated in a number of high profile diseases such as Ebola, SARS, Hendra and Nipah.
 
-%\tmpsection{One sentence summarising the main result}
+\tmpsection{One sentence summarising the main result}
 %  (with the words “here we show” or their equivalent).
 I find that neither population connectedness nor dispersal rate affect the probability that a new pathogen will invade into a population.
 %\subsubsection{Two or three sentences explaining what the main result reveals in direct comparison to what was thought to be the case previously}
@@ -49,7 +49,7 @@ The assumption that factors causing high $R_0$ allow new pathogens to invade and
 Instead we find that changes in population structure do not affect the probability of invasion of a new pathogen.
  
 
-%\tmpsection{One or two sentences to put the results into a more general context.}
+\tmpsection{One or two sentences to put the results into a more general context.}
 This result implies that population structure does not control pathogen diversity.
 This also implies that population structure is not a useful proxy for pathogen diversity with respect to zoonotic disease surveillance, for example in bats.
 
@@ -340,7 +340,7 @@ We define the number of events we wish to simulate instead.
 \begin{figure}[t]
 \centering
   \includegraphics[width=0.4\textwidth]{imgs/SIRoption1.pdf}
-  \caption{
+  \caption[Schematic of the SIR model used]{
 Schematic of the SIR model used. 
 Individuals are in one five classes, susceptible (orange, S), infectious with pathogen 1, pathogen 2 or both (blue, $I_1, I_2, I_{12}$) or recovered and immune from further infection (green, R).
 Transitions between classes occurs only as indicated by arrows.
@@ -543,35 +543,6 @@ This is a trade off between getting a reasonable proportion of invasions, while 
 
 
 
-
-
-
-
-
-
-
-
-
-\begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[t]
-
-{\centering \subfloat[Dispersal\label{f:invasionPropPlots1}]{\includegraphics[width=0.45\textwidth]{figure/invasionPropPlots-1} }
-\subfloat[Network topology\label{f:invasionPropPlots2}]{\includegraphics[width=0.45\textwidth]{figure/invasionPropPlots-2} }
-
-}
-
-\caption[The probability of successful invasion]{The probability of successful invasion. 
-  For three different transmission rates, the probability of invasion success does not change between different a) dispersal rates or b) network structures. 
-  Error bars are 95\% confidence intervals. 
-  Other parameters are kept constant at: $N = 10,\, \bar{n} = 3000,\, b = d = 0.05,\, \gamma = 0.1,\, \alpha = 0.1$. 
-  When dispersal is varied, the population structure is fully connected. When population structure is varied, $\lambda = 0.01$.}\label{f:invasionPropPlots}
-\end{figure}
-
-
-\end{knitrout}
-
-
-
 \subsection{Invasion}
 
 
@@ -596,6 +567,31 @@ This was true at all transmission levels ($\chi^2$ test. $\beta = 0.1$: $\chi^2 
 
 Inline with theory, increasing the transmission rate increased the probability of invasion (Figure~\ref{f:invasionPropPlots1}--\ref{f:invasionPropPlots2}).
 This is true for all three dispersal values ($\chi^2$ test. $\lambda = 0.001$: $\chi^2 = 243.56$, $\text{df} = 3$, $p = \ensuremath{1.62\times 10^{-52}}$. $\lambda = 0.01$: $\chi^2 = 265.4$, $\text{df} = 3$, $p = \ensuremath{3.05\times 10^{-57}}$. $\lambda = 0.1$: $\chi^2 = 244.95$, $\text{df} = 3$, $p = \ensuremath{8.1\times 10^{-53}}$) and both network structures ($\chi^2$ test. Fully connected: $\chi^2 = 267.3$, $\text{df} = 3$, $p = \ensuremath{1.18\times 10^{-57}}$. Minimally connected: $\chi^2 =  267.3$, $\text{df} = 3$, $p = \ensuremath{1.18\times 10^{-57}}$).
+
+
+
+
+
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[t]
+
+{\centering \subfloat[Dispersal\label{f:invasionPropPlots1}]{\includegraphics[width=0.45\textwidth]{figure/invasionPropPlots-1} }
+\subfloat[Network topology\label{f:invasionPropPlots2}]{\includegraphics[width=0.45\textwidth]{figure/invasionPropPlots-2} }
+
+}
+
+\caption[The probability of invasion across different dispersal rates and network topologies.]{The probability of successful invasion. 
+  For three different transmission rates, the probability of invasion does not change between different a) dispersal rates or b) network structures. 
+  Error bars are 95\% confidence intervals. 
+  100 simulations were run for each treatment.
+  Other parameters are kept constant at: $N = 10,\, \, b = d = 0.05,\, \gamma = 0.1,\, \alpha = 0.1$. 
+  When dispersal is varied, the population structure is fully connected. When population structure is varied, $\lambda = 0.01$.}\label{f:invasionPropPlots}
+\end{figure}
+
+
+\end{knitrout}
+
 
 
 

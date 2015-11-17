@@ -392,7 +392,7 @@ We define the number of events we wish to simulate instead.
 \begin{figure}[t]
 \centering
   \includegraphics[width=0.4\textwidth]{imgs/SIRoption1.pdf}
-  \caption{
+  \caption[Schematic of the SIR model used]{
 Schematic of the SIR model used. 
 Individuals are in one five classes, susceptible (orange, S), infectious with pathogen 1, pathogen 2 or both (blue, $I_1, I_2, I_{12}$) or recovered and immune from further infection (green, R).
 Transitions between classes occurs only as indicated by arrows.
@@ -479,7 +479,8 @@ The dispersal rate is held constant between the two topologies.
   sample <- 1000
 
   # How many simulations to run?
-  nDispSims <- 12*100
+  each <- 100
+  nDispSims <- 12 * each
 
 
 # Define our simulation function.
@@ -576,7 +577,7 @@ write.csv(z, file = 'data/Chapter2/DispSims.csv')
   #################################
 
   # How many simulations to run?
-  nTopoSims <- 8 * 100
+  nTopoSims <- 8 * each
 
 # Define our simulation function.
 fullSim <- function(x){
@@ -918,61 +919,52 @@ TopoTransTest2 <- prop.test(propsTopo$invasions[c(2, 4, 6, 8)], propsTopo$n[c(2,
 
 
 
-%%begin.rcode propsWithoutDoubleExt
 
-## In some simulations both pathogens go extinct.
-## I'm not sure it's correct to call this a failed invasion.
-## So check that is doesn't broadly affect results. 
-## With total extinction sims removed.
-
-#dTopo2 <- dTopo[dTopo$nExtantDis > 0, ]
-
-#invsTopo2 <- dTopo2 %>% 
-#  group_by(transmission, maxDistance) %>% 
-#  dplyr::select(invasion) %>%
-#  filter(invasion == TRUE) %>%
-#  summarise(n())
-
-#nTopo2 <- dTopo2 %>% 
-#  group_by(transmission, maxDistance) %>% 
-#  dplyr::select(invasion) %>%
-#  summarise(n())
-
-## Proportion of invasions in totals.
-#propsTopo2 <- data.frame(invsTopo2[, 1:2], props = invsTopo2$n / nTopo2$n)
-
-#Topo2Test1 <- tidy(prop.test(invsTopo2$n[1:2], nTopo2$n[1:2]))
-#Topo2Test2 <- tidy(prop.test(invsTopo2$n[3:4], nTopo2$n[3:4]))
-#Topo2Test3 <- tidy(prop.test(invsTopo2$n[5:6], nTopo2$n[5:6]))
-
-%%end.rcode
+\subsection{Invasion}
 
 
-
-%%begin.rcode topoCompTrans
-
-# Finally run proportion tests between transmission rates
-
-#Topo2TransTest1 <- tidy(prop.test(invsTopo2$n[c(1, 3, 5)], nTopo$n[c(1, 3, 5)]))
-#Topo2TransTest2 <- tidy(prop.test(invsTopo2$n[c(2, 4, 6)], nTopo$n[c(2, 4, 6)]))
+\subsubsection{Dispersal}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-%%end.rcode
+The proportion of invasions was not different across dispersal rates across \rinline{nDispSims} simulations run (Figure \ref{f:invasionPropPlots1}).
+This was true at all transmission levels ($\chi^2$ test. $\beta = 0.1$: $\chi^2 = \rinline{DispTest1$statistic}$, $\text{df} = \rinline{DispTest1$parameter}$, $p = \rinline{p(DispTest1$p.value)}$. $\beta = 0.2$: $\chi^2 = \rinline{DispTest2$statistic}$, $\text{df} = \rinline{DispTest2$parameter}$, $p = \rinline{p(DispTest2$p.value)}$. $\beta = 0.3$: $\chi^2 = \rinline{DispTest3$statistic}$, $\text{df} = \rinline{DispTest3$parameter}$, $p = \rinline{p(DispTest3$p.value)}$, $\beta = 0.4$: $\chi^2 = \rinline{DispTest4$statistic}$, $\text{df} = \rinline{DispTest4$parameter}$, $p = \rinline{p(DispTest4$p.value)}$).
+
+
+\subsubsection{Network structure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+I ran \rinline{nTopoSims} simulations over \rinline{length(unique(propsTopo$transmission))} transmission values ($\beta = $ \rinline{unique(propsTopo$transmission)}).
+The proportion of invasions was not different between highly connected and largely unconnected metapopulations (Figure~\ref{f:invasionPropPlots2}). 
+This was true at all transmission levels ($\chi^2$ test. $\beta = 0.1$: $\chi^2 = \rinline{TopoTest1$statistic}$, $\text{df} = \rinline{TopoTest1$parameter}$, $p = \rinline{p(TopoTest1$p.value)}$. $\beta = 0.2$: $\chi^2 = \rinline{TopoTest2$statistic}$, $\text{df} = \rinline{TopoTest2$parameter}$, $p = \rinline{p(TopoTest2$p.value)}$. $\beta = 0.3$: $\chi^2 = \rinline{TopoTest3$statistic}$, $\text{df} = \rinline{TopoTest3$parameter}$, $p = \rinline{p(TopoTest3$p.value)}$. $\beta = 0.4$: $\chi^2 = \rinline{TopoTest4$statistic}$, $\text{df} = \rinline{TopoTest4$parameter}$, $p = \rinline{p(TopoTest4$p.value)}$).
+
+ 
+\subsection{Transmission}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Inline with theory, increasing the transmission rate increased the probability of invasion (Figure~\ref{f:invasionPropPlots1}--\ref{f:invasionPropPlots2}).
+This is true for all three dispersal values ($\chi^2$ test. $\lambda = 0.001$: $\chi^2 = \rinline{DispTransTest1$statistic}$, $\text{df} = \rinline{DispTransTest1$parameter}$, $p = \rinline{p(DispTransTest1$p.value)}$. $\lambda = 0.01$: $\chi^2 = \rinline{DispTransTest2$statistic}$, $\text{df} = \rinline{DispTransTest2$parameter}$, $p = \rinline{p(DispTransTest2$p.value)}$. $\lambda = 0.1$: $\chi^2 = \rinline{DispTransTest3$statistic}$, $\text{df} = \rinline{DispTransTest3$parameter}$, $p = \rinline{p(DispTransTest3$p.value)}$) and both network structures ($\chi^2$ test. Fully connected: $\chi^2 = \rinline{TopoTransTest2$statistic}$, $\text{df} = \rinline{TopoTransTest2$parameter}$, $p = \rinline{p(TopoTransTest2$p.value)}$. Minimally connected: $\chi^2 =  \rinline{TopoTransTest2$statistic}$, $\text{df} = \rinline{TopoTransTest2$parameter}$, $p = \rinline{p(TopoTransTest2$p.value)}$).
+
 
 
 %%begin.rcode caption1String
 # Just defining my caption label here to avoid the long string in chunk options below.
 
-invasionPropCaption <- "The probability of successful invasion. 
-  For three different transmission rates, the probability of invasion success does not change between different a) dispersal rates or b) network structures. 
-  Error bars are 95\\% confidence intervals. 
-  Other parameters are kept constant at: $N = 10,\\, \\bar{n} = 3000,\\, b = d = 0.05,\\, \\gamma = 0.1,\\, \\alpha = 0.1$. 
-  When dispersal is varied, the population structure is fully connected. When population structure is varied, $\\lambda = 0.01$."
+invasionPropCaption <- sprintf("The probability of successful invasion. 
+  For three different transmission rates, the probability of invasion does not change between different a) dispersal rates or b) network structures. 
+  Error bars are 95\\%% confidence intervals. 
+  %i simulations were run for each treatment.
+  Other parameters are kept constant at: $N = 10,\\, \\, b = d = 0.05,\\, \\gamma = 0.1,\\, \\alpha = 0.1$. 
+  When dispersal is varied, the population structure is fully connected. When population structure is varied, $\\lambda = 0.01$.",
+  as.integer(each))
+
+invasionPropShort <- "The probability of invasion across different dispersal rates and network topologies."
+
 
 %%end.rcode
 
 
-%%begin.rcode invasionPropPlots, fig.lp = 'f:', fig.height = 4, fig.subcap = c('Dispersal', 'Network topology'), out.width = "0.45\\textwidth", fig.cap = invasionPropCaption, cache = FALSE
+%%begin.rcode invasionPropPlots, fig.lp = 'f:', fig.height = 4, fig.subcap = c('Dispersal', 'Network topology'), out.width = "0.45\\textwidth", fig.cap = invasionPropCaption, cache = FALSE, fig.scap = invasionPropShort
 
 propsDispCI <- data.frame(propsDisp[, 1:2], binom.confint(propsDisp$invasions, propsDisp$n, conf.level = 0.95, methods = "exact"))
 
@@ -1005,32 +997,6 @@ ggplot(propsTopoCI, aes(x = factor(transmission), y = mean, fill = factor(meanK)
 
 %%end.rcode
 
-
-
-\subsection{Invasion}
-
-
-\subsubsection{Dispersal}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-The proportion of invasions was not different across dispersal rates across \rinline{nDispSims} simulations run (Figure \ref{f:invasionPropPlots1}).
-This was true at all transmission levels ($\chi^2$ test. $\beta = 0.1$: $\chi^2 = \rinline{DispTest1$statistic}$, $\text{df} = \rinline{DispTest1$parameter}$, $p = \rinline{p(DispTest1$p.value)}$. $\beta = 0.2$: $\chi^2 = \rinline{DispTest2$statistic}$, $\text{df} = \rinline{DispTest2$parameter}$, $p = \rinline{p(DispTest2$p.value)}$. $\beta = 0.3$: $\chi^2 = \rinline{DispTest3$statistic}$, $\text{df} = \rinline{DispTest3$parameter}$, $p = \rinline{p(DispTest3$p.value)}$, $\beta = 0.4$: $\chi^2 = \rinline{DispTest4$statistic}$, $\text{df} = \rinline{DispTest4$parameter}$, $p = \rinline{p(DispTest4$p.value)}$).
-
-
-\subsubsection{Network structure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-I ran \rinline{nTopoSims} simulations over \rinline{length(unique(propsTopo$transmission))} transmission values ($\beta = $ \rinline{unique(propsTopo$transmission)}).
-The proportion of invasions was not different between highly connected and largely unconnected metapopulations (Figure~\ref{f:invasionPropPlots2}). 
-This was true at all transmission levels ($\chi^2$ test. $\beta = 0.1$: $\chi^2 = \rinline{TopoTest1$statistic}$, $\text{df} = \rinline{TopoTest1$parameter}$, $p = \rinline{p(TopoTest1$p.value)}$. $\beta = 0.2$: $\chi^2 = \rinline{TopoTest2$statistic}$, $\text{df} = \rinline{TopoTest2$parameter}$, $p = \rinline{p(TopoTest2$p.value)}$. $\beta = 0.3$: $\chi^2 = \rinline{TopoTest3$statistic}$, $\text{df} = \rinline{TopoTest3$parameter}$, $p = \rinline{p(TopoTest3$p.value)}$. $\beta = 0.4$: $\chi^2 = \rinline{TopoTest4$statistic}$, $\text{df} = \rinline{TopoTest4$parameter}$, $p = \rinline{p(TopoTest4$p.value)}$).
-
- 
-\subsection{Transmission}
-%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Inline with theory, increasing the transmission rate increased the probability of invasion (Figure~\ref{f:invasionPropPlots1}--\ref{f:invasionPropPlots2}).
-This is true for all three dispersal values ($\chi^2$ test. $\lambda = 0.001$: $\chi^2 = \rinline{DispTransTest1$statistic}$, $\text{df} = \rinline{DispTransTest1$parameter}$, $p = \rinline{p(DispTransTest1$p.value)}$. $\lambda = 0.01$: $\chi^2 = \rinline{DispTransTest2$statistic}$, $\text{df} = \rinline{DispTransTest2$parameter}$, $p = \rinline{p(DispTransTest2$p.value)}$. $\lambda = 0.1$: $\chi^2 = \rinline{DispTransTest3$statistic}$, $\text{df} = \rinline{DispTransTest3$parameter}$, $p = \rinline{p(DispTransTest3$p.value)}$) and both network structures ($\chi^2$ test. Fully connected: $\chi^2 = \rinline{TopoTransTest2$statistic}$, $\text{df} = \rinline{TopoTransTest2$parameter}$, $p = \rinline{p(TopoTransTest2$p.value)}$. Minimally connected: $\chi^2 =  \rinline{TopoTransTest2$statistic}$, $\text{df} = \rinline{TopoTransTest2$parameter}$, $p = \rinline{p(TopoTransTest2$p.value)}$).
 
 
 
