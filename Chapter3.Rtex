@@ -154,7 +154,9 @@ A global study on 33 bats found a positive relationship between $F_{ST}$ --- a m
 However, this study included measures using mtDNA which only measures female dispersal which may haved biased the results many bat species show female philopatry \cite{kerth2002extreme, hulva2010mechanisms}.
 Furthermore, this study used measures of $F_{ST}$ irrespective of the study scale with studies covering from tens \cite{mccracken1981social} to thousands \cite{petit1999male} of kilometers.
 As isolation by distance has been shown in a number of bat species \cite{burland1999population, hulva2010mechanisms, o2015genetic, vonhof2015range} this could bias results further.
-
+Finally, when a global $F_{ST}$ value is not given they use the mean of all pairwise $F_{ST}$ between sites.
+It is not clear that this is correct as from global $F_{ST}$ we expect migration rates of $M = \frac{1-F_{ST}}{8F_{ST}}$ while from $F_{ST}$ between pairs of populations we expect migration rates of $M = \frac{1-F_{ST}}{8F_{ST}}$ where $M$ is the absolute number of diploid inviduals dispersing per generation \cite{slatkin1995measure}.
+As it is in fact the movement of individuals that is epidemiologically relavent, using these studies is probably not correct without attempting to correct for these difference.
 
 
 
@@ -198,7 +200,20 @@ As isolation by distance has been shown in a number of bat species \cite{burland
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%begin.rcode parameters
+# Define some parameters.
+#   This is useful at the top so that it can go in text.
 
+# How many bootstraps for model selection NULL variable
+nBoots <- 50
+
+
+# What proportion of a species range should be covered for an Fst study to count as valid.
+rangeUseable <- 0.20
+
+
+
+%%end.rcode
 
 %%begin.rcode luis2013virusRead
 
@@ -808,7 +823,7 @@ The number of subspecies was counted using the Wilson and Reeder taxonomy \cite{
 $F_{ST}$ and other measures were collated from the literature.
 Studies are from a wide range of spatial scales, from local ($\sim\SI{10}{\kilo\metre}$) to continental.
 As $F_{ST}$ inevitably increases with spatial scale I controlled for this by only using data from studies where a large proportion of the species range was studied.
-I used the ratio of the furthest distance between $F_{ST}$ samples (measured with \url{http://www.distancefromto.net/} if not stated) to the width of the IUCN species range and only used studies if this ratio was greater than 0.3.
+I used the ratio of the furthest distance between $F_{ST}$ samples (measured with \url{http://www.distancefromto.net/} if not stated) to the width of the IUCN species range and only used studies if this ratio was greater than \rinline{rangeUseable}.
 To allow comparison between different measures ($F_{ST}, \phi_{ST}$) and data from different molecular regions I converted all data to diploid gene flow.
 WILL ADD EXTRA METHODS LATER.
 These two measures of population structure were analysed separately as the number of subspecies has \rinline{nrow(nSpecies)} data points while there is only $F_{ST}$ data for $\sim 30$ bat species.
@@ -1163,7 +1178,7 @@ modelSelect <- function(allForm, data, phy, boot, allModelMat, varList){
 }
 
 
-nBoots <- 50
+
 
 %%end.rcode
 
@@ -1325,10 +1340,13 @@ findWidth <- function(name){
   distr <- ranges[ranges$binomial == as.character(name), ]
 
   coords <- list()
+  # Get coordinates from all polygons into one matrix.
   for(i in 1:length(distr@polygons)){
     coords[[i]] <- distr@polygons[[i]]@Polygons[[1]]@coords
   }
   coords <- do.call(rbind, coords)
+
+  # Take the convex hull of coordinates to speed up last step.
   hullCoords <- coords[chull(coords), ]
 
   maxDist <- max(apply(hullCoords, 1, function(x) distGeo(coords, x)))/1000
@@ -1336,6 +1354,9 @@ findWidth <- function(name){
   
 }
 
+# Calculate widest part of all species distributions.
+#   This is slow but also RAM heavy.
+#   3 cores doesn't crash my computer with 16GB RAM.
 rangeWidth <- mclapply(fst$binomial, findWidth, mc.cores = 3) %>% do.call(c, .)
 
 #rangeWidth <- sapply(fst$binomial, findWidth)
@@ -1343,7 +1364,7 @@ rangeWidth <- mclapply(fst$binomial, findWidth, mc.cores = 3) %>% do.call(c, .)
 fst$rangeWidth <- rangeWidth
 fst$rangeCoverage <- fst$Dmax..km. / fst$rangeWidth
 
-rangeUseable <- 0.20
+
 
 fst$Useable <- fst$rangeCoverage > rangeUseable
 sum(fst$Useable, na.rm = TRUE)
@@ -1401,6 +1422,8 @@ fst <- cbind(fst, fstStudy[, 2:3])
 fst <- fst[fst$Useable, ]
 
 
+# Don't want rows using mtDNA due to female baised dispersal
+fst <- fst[fst$Marker != 'mtDNA', ]
 
 %%end.rcode
 
@@ -1418,13 +1441,9 @@ fstmicrosat <- function(fst, pops){
   Nm <- (pops - 1) * (4 * pops)^(-1) * (1 / fst - 1) 
 }
 
-# This is just a guess at the function for now.
-fstmtDNA <- fstallozyme <- function(fst){
-  Nm <- 0.5 * (1 / fst - 1)
-}
 
 phist <- function(phist){
-  Nm <- 1 / phist - 1
+  Nm <-  0.5 * (1 / phist - 1)
 }
 
 fst$Nm <- NA
@@ -1448,8 +1467,10 @@ fst$fnc[phistBool] <- 'phist'
 
 fst <- fst[!is.na(fst$Nm) & !(fst$Nm == Inf), ]
 
+fstFinal <- fst
+
 # Take means of species with multiple measurements
-fstFinal <- fst[fst$Marker != 'mtDNA', ]
+
 fstFinal <- fstFinal[!duplicated(fstFinal$binomial), ]
 fstFinal$Nm <- sapply(fstFinal$binomial, function(x) mean(fst$Nm[fst$binomial == x]))
 
@@ -1557,7 +1578,7 @@ ggplot(fstFinal, aes(x = Nm, y = virusSpecies, colour = Marker)) +
   scale_colour_poke(pokemon = 'oddish', spread = 3) +
   scale_x_log10() +
   xlab('Gene flow (per gen.)') +
-  ylab('Viral Richness')
+  ylab('Viral Richness') #+ geom_smooth(method = 'lm', aes(colour = 'a'))
 
 %%end.rcode
 
