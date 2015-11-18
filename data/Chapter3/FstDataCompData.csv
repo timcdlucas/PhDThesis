@@ -33,7 +33,7 @@ Vespertilionidae,Myotis ciliolabrum,Myotis ciliolabrum,427,microsatellites,Fst,0
 Vespertilionidae,Myotis daubentonii,Myotis daubentonii,671,microsatellites,Fst,0.017,345,10028.5,,burns2014correlates,Japan to Spain,
 Vespertilionidae,Myotis lucifugus,Myotis lucifugus,401,microsatellites,Fst,0.002,473,5817.11,,burns2014correlates,Florida to Alaska,
 Vespertilionidae,Myotis macropus,Myotis macropus,173,microsatellites,Fst,0.221,883,3302.58,5,burns2014correlates,Australia,
-Vespertilionidae,Myotis myotis,Myotis myotis,480,microsatellites,Fst,0.035,2786,4006.11,,burns2014correlates,Turkey to Spain,
+Vespertilionidae,Myotis myotis,Myotis myotis,480,microsatellites,Fst,0.035,2786,4006.11,24,burns2014correlates,Turkey to Spain,
 Vespertilionidae,Myotis mystacinus,Myotis mystacinus,182,microsatellites,Fst,0.004,100,5515.07,,burns2014correlates,Morocco to Russia,
 Vespertilionidae,Myotis nattereri,Myotis nattereri,282,microsatellites,Fst,0.017,131,4945.4,,burns2014correlates,Turkmenistan to Scotland,
 Vespertilionidae,Myotis septentrionalis,Myotis septentrionalis,88,microsatellites,Fst,0.002,240,4065.09,,burns2014correlates,North America,
@@ -50,7 +50,7 @@ Vespertilionidae,Myotis lucifugus,Myotis lucifugus,72,mtDNA,Fst,0.032,988,5817.1
 Molossidae,Chaerephon leucogaster,Chaerephon pumilus,NA,mtDNA,Fst,0.792,1412.32,7959.74,NA,lamb2012genetically,Madagascar to Senegal,
 Molossidae,Chaerephon atsinanana,Chaerephon atsinanana,107,mtDNA,Fst,0.994,619.99,1237.88,17,lamb2012genetically,Madagascar,
 Phyllostomidae,Artibeus obscurus,Artibeus obscurus,87,mtDNA,Fst,,4489.85,4778.85,4,ferreira2014phylogeography,Brazil to Venezuala,
-Emballonuridae,Balantiopteryx plicata,Balantiopteryx plicata,,,,,,,3,nagy2014dispersal,Mexico to Costa Rica,
+Emballonuridae,Balantiopteryx plicata,Balantiopteryx plicata,,,,,,,3,nagy2014dispersal,Mexico to Costa Rica,mtDNA
 Rhinolophidae,Rhinolophus affinis,Rhinolophus affinis,,,,,,,,mao2014differential,,
 Vespertilionidae,Lasiurus borealis,Lasiurus borealis,284,microsatellites,Fst,0.0044,2198,3845,12,vonhofgenetic,Mexico to Canada,Preprint
 Vespertilionidae,Lasiurus borealis,Lasiurus borealis,218,microsatellites,Fst,0.0113,2198,3845,12,vonhofgenetic,Mexico to Canada,"Preprint, approx Dmax"
@@ -63,11 +63,13 @@ Vespertilionidae,Pipistrellus pipistrellus,Pipistrellus pipistrellus,183,microsa
 Vespertilionidae,Pipistrellus pygmaeus,Pipistrellus pygmaeus,170,microsatellites,Fst,0.01,530,4162.2,7,sztencel2012population,Iran to Scotland,
 Pteropodidae,Eidolon helvum,Eidolon helvum,74,allozyme,Fst,0.0153,546,6443,5,juste2000morphological,Yemen to The Gambia,
 Vespertilionidae,Corynorhinus townsendii,Corynorhinus townsendii,,microsatellites,,,,,,piaggio2009intraspecific,,
-Vespertilionidae,Myotis punicus,Myotis punicus,,,Fst,0.272,,,,baron2010preliminary,,
+Vespertilionidae,Myotis punicus,Myotis punicus,,,Fst,0.272,,,,baron2010preliminary,,Only 4 sites
 Pteropodidae,Rousettus obliviosus,Rousettus obliviosus,43,microsatellites,Fst,0.009,160,160,3,goodman2010phylogeny,,
 Molossidae,Tadarida brasiliensis,Tadarida brasiliensis,94,mtDNA,Phist,0.004,3327,9385.81,11,russell2005genetic,Chicago to Bariloche,
-Miniopteridae,Miniopterus nataliensis,Miniopterus natalensis,307,microsatellites,Phist,0.62,1706,6554.68,11,miller2003strong,South Africa to Saudi Arabia,
+Miniopteridae,Miniopterus nataliensis,Miniopterus natalensis,307,microsatellites,Fst,0.62,1706,6554.68,11,miller2003strong,South Africa to Saudi Arabia,
 Miniopteridae,Miniopterus schreibersii,Miniopterus schreibersii,310,microsatellites,Fst,0.0629,2649,4481.69,23,witsenburg2015haemosporidian,Hungary to Cameroon,
 Megadermatidae,Macroderma gigas,Macroderma gigas,217,mtDNA,Phist,0.8,3148,,9,wilmer1999genetic,Australia,
 Megadermatidae,Macroderma gigas,Macroderma gigas,217,microsatellites,Fst,0.337,3148,,9,wilmer1999genetic,Australia,
 Vespertilionidae,Myotis lucifugus,Myotis lucifugus,637,microsatellites,Fst,0.0161,5173,,29,vonhof2015range,North America,
+Vespertilionidae,Nyctalus azoreum,Nyctalus azoreum,279,microsatellites,Fst,0.036,278,,14,salgueiro2008gene,,11 pops but analysed as 3 regions.
+Pteropodidae,Pteropus conspicillatus,Pteropus conspicillatus,718,microsatellites,Fst,0.041,993,,11,fox2006population,,
