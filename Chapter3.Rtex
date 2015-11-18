@@ -153,7 +153,7 @@ A study on 15 African bats found a positive relationship between distribution fr
 A global study on 33 bats found a positive relationship between $F_{ST}$ --- a measure of genetic structure --- and viral richness \cite{turmelle2009correlates}. 
 However, this study included measures using mtDNA which only measures female dispersal which may haved biased the results many bat species show female philopatry \cite{kerth2002extreme, hulva2010mechanisms}.
 Furthermore, this study used measures of $F_{ST}$ irrespective of the study scale with studies covering from tens \cite{mccracken1981social} to thousands \cite{petit1999male} of kilometers.
-As isolation by distance has been shown in a number of bat species \cite{burland1999population, hulva2010mechanisms, o2015genetic} this could bias results further.
+As isolation by distance has been shown in a number of bat species \cite{burland1999population, hulva2010mechanisms, o2015genetic, vonhof2015range} this could bias results further.
 
 
 
@@ -808,7 +808,7 @@ The number of subspecies was counted using the Wilson and Reeder taxonomy \cite{
 $F_{ST}$ and other measures were collated from the literature.
 Studies are from a wide range of spatial scales, from local ($\sim\SI{10}{\kilo\metre}$) to continental.
 As $F_{ST}$ inevitably increases with spatial scale I controlled for this by only using data from studies where a large proportion of the species range was studied.
-I used the ratio of the furthest distance between $F_{ST}$ samples to the width of the species range and only used studies if this ratio was greater than 0.3.
+I used the ratio of the furthest distance between $F_{ST}$ samples (measured with \url{http://www.distancefromto.net/} if not stated) to the width of the IUCN species range and only used studies if this ratio was greater than 0.3.
 To allow comparison between different measures ($F_{ST}, \phi_{ST}$) and data from different molecular regions I converted all data to diploid gene flow.
 WILL ADD EXTRA METHODS LATER.
 These two measures of population structure were analysed separately as the number of subspecies has \rinline{nrow(nSpecies)} data points while there is only $F_{ST}$ data for $\sim 30$ bat species.
