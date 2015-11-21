@@ -17,7 +17,7 @@ runFstScrape <- FALSE
 # Run slow bootstrapping?
 subBoots <- FALSE
 fstBoots <- TRUE
-batclocksBoots <- TRUE
+batclocksBoots <- FALSE
 
 # There are figures created in the data analysis which are not in the final chapter document.
 #   If TRUE, they will be included in the output.
@@ -109,22 +109,20 @@ I use two measures of population structure: a novel measure, number of subspecie
 \tmpsection{One sentence summarising the main result}
 %  (with the words “here we show” or their equivalent).
 
-I find conflicting evidence suggesting that while population structure may promote pathogen diversity it is likely not a strong affect.
+I find that both of these measures are associated with pathogen richness 
 
 
 \tmpsection{Two or three sentences explaining what the main result reveals in direct comparison to what was thought to be the case previously}
 % or how the main result adds to previous knowledge
 
-The results conflict with each other and with other studies which suggests that tests of population structure is senstive to the exact measurements and data used.
-Given the conflicting results in the literature and unclear results here, it seems likely that population structure does not strongly affect pathogen richness in bats.
+Previous studies have conflicting results on the direction and importance of a relationship between population structure and pathogen diversity.
+Here, using a larger dataset than previous studies, I find that both measures of populations structure suggest that population structure may increase pathogen diversity.
 
 \tmpsection{One or two sentences to put the results into a more general context.}
 
-Given the weakness of any association between population structure and pathogen richness in bats, this is not a useful metric for prioritising zoonotic disease surveillance.
+Given the conflicting results in the literature, it seems that the relationship between population structure and pathogen diversity might be sensitive to the specific dataset and measure of populationn structure.
+The use of a larger dataset and multiple measures of population structure therefore provide stronger evidence that population structure causes high pathogen diversity.
 
-
-\tmpsection{Two or three sentences to provide a broader perspective, }
-% readily comprehensible to a scientist in any discipline.
 
 
 
@@ -1429,22 +1427,22 @@ fst <- fst[fst$Marker != 'mtDNA', ]
 
 %%begin.rcode convertFst
 
-# define functions for phist mtDNA, fst minisatellite and fst allozyme
+# Nearly all studies use Arlequin.
+# Arlequin uses Weir and Cockerham which deal with sample size already.
+#   So I don't think I need number of populations.
 
+# Further, the quantity is Number of demes, not number of demes sampled. We have no estimates for n demes and must assume it's large.
 
+# define functions for fst minisatellite and fst allozyme
 fstallozyme <- function(fst){
-  Nm <- 0.5 * (1 / fst - 1)
+  Nm <- (1 / 4) * (1 / fst - 1)
 }
 
-# eqn 15a in slatkin 1995 A measure of population subdivision based on microsatellite allele frequencies.
+# 
 fstmicrosat <- function(fst, pops){
-  Nm <- (pops - 1) * (4 * pops)^(-1) * (1 / fst - 1) 
+  Nm <- (1 / 4)* (1 / fst - 1) 
 }
 
-
-phist <- function(phist){
-  Nm <-  0.5 * (1 / phist - 1)
-}
 
 fst$Nm <- NA
 fst$fnc <-NA
@@ -1456,14 +1454,6 @@ fst$fnc[microsatBool] <- 'fstmicrosat'
 allozymeBool <- fst$Measure == 'Fst' & fst$Marker == 'allozyme'
 fst$Nm[allozymeBool] <- fstallozyme(fst$Value[allozymeBool])
 fst$fnc[allozymeBool] <- 'fstallozyme'
-
-mtDNABool <- fst$Measure == 'Fst' & fst$Marker == 'mtDNA'
-fst$Nm[mtDNABool] <- fstmtDNA(fst$Value[mtDNABool])
-fst$fnc[mtDNABool] <- 'fstmtDNA'
-
-phistBool <- fst$Measure == 'Phist' & fst$Marker == 'mtDNA'
-fst$Nm[phistBool] <- phist(fst$Value[phistBool])
-fst$fnc[phistBool] <- 'phist'
 
 fst <- fst[!is.na(fst$Nm) & !(fst$Nm == Inf), ]
 
