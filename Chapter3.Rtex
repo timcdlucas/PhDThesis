@@ -144,6 +144,8 @@ The use of a larger dataset and multiple measures of population structure theref
 
 \subsection{Theoretical background}
 
+
+
 \subsection{Previous Studies}
 
 Three studies have used comparative data to test for an association between population structure and viral richness.
@@ -153,24 +155,28 @@ However, this study included measures using mtDNA which only measures female dis
 Furthermore, this study used measures of $F_{ST}$ irrespective of the study scale with studies covering from tens \cite{mccracken1981social} to thousands \cite{petit1999male} of kilometers.
 As isolation by distance has been shown in a number of bat species \cite{burland1999population, hulva2010mechanisms, o2015genetic, vonhof2015range} this could bias results further.
 Finally, when a global $F_{ST}$ value is not given they use the mean of all pairwise $F_{ST}$ between sites.
-It is not clear that this is correct as from global $F_{ST}$ we expect migration rates of $M = \frac{1-F_{ST}}{8F_{ST}}$ while from $F_{ST}$ between pairs of populations we expect migration rates of $M = \frac{1-F_{ST}}{8F_{ST}}$ where $M$ is the absolute number of diploid inviduals dispersing per generation \cite{slatkin1995measure}.
+It is not clear that this is correct as from global $F_{ST}$ we expect migration rates of $M = \frac{1-F_{ST}}{8F_{ST}}$ while from $F_{ST}$ between pairs of populations we expect migration rates of $M = \frac{1-F_{ST}}{16 F_{ST}}$ where $M$ is the absolute number of diploid inviduals dispersing per generation \cite{slatkin1995measure}.
 As it is in fact the movement of individuals that is epidemiologically relavent, using these studies is probably not correct without attempting to correct for these difference.
 
 
 
-\subsection{Rates}
-
-
 
 \subsection{Choice of measure of population structure}
-
+  
 \tmpsection{Direct dispersal measurements}
 
-\tmpsection{Measures from range}
+The direct study of bat dispersal is difficult due to their size, lack of identifying marks and potential for long distance travel --- in particular knowing how far individuals disperse is incredibly difficult.
+
 
 \tmpsection{Genetic measures}
 
+Both genetic measures and existence of subspecies differ 
+
 \tmpsection{Number of Subspecies}
+
+\tmpsection{Measures from range}
+
+
 
 
 
@@ -1052,16 +1058,20 @@ sqrt(vif(lm(virusSpecies ~ log(scholarRefs) + NumberOfSubspecies +  log(mass) + 
 
 # Caption for the main boxploit of subspecies vs virus
 
-boxplotCapt <- 'Number of virus species against number of subspecies. 
+boxplotCapt <- c('Number of virus species against number of subspecies. 
 Data within a number of subspecies are plotted as boxplots with the dark bar showing the median, the box showing the interquartile range, vertical lines showing the range and outliers shown as seperate points.
 Regression lines are from multivariate phylogenetic models with other independant variables set at their median value.
 The models shown are thos with (pink) and without (red) an interaction between study effort and number of subspecies.
-'
+',
+'Histogram of number of subspecies. 
+It is clear that more species have fewer subspecies.')
+
+boxplotTitle = c('Number of virus species against number of subspecies', 'Histogram of number of subspecies')
 
 %%end.rcode
 
 
-%%begin.rcode boxplot, fig.cap = boxplotCapt
+%%begin.rcode boxplot, fig.cap = boxplotCapt, fig.scap = boxplotTitle
 
 
 # Make a boxplot of subspecies vs virus
@@ -1116,7 +1126,12 @@ ggplot(nSpecies, aes(SubspeciesFactor, virusSpecies, colour = 'a', fill = 'a')) 
       colour = pokepal('nidorina')[c(10,13)], size = c(3, 3),
       family = 'Lato Light')
 
-
+# Histogram of subspecies.
+ggplot(nSpecies, aes(x = SubspeciesFactor)) + 
+  geom_histogram() +
+  xlab('N. of Subspecies') +
+  ylab('Count') +
+  scale_x_discrete(limits = levels(nSpecies$SubspeciesFactor), drop = FALSE)
 
 %%end.rcode
 
@@ -1568,7 +1583,7 @@ ggplot(fstFinal, aes(x = Nm, y = virusSpecies, colour = Marker)) +
   scale_colour_poke(pokemon = 'oddish', spread = 3) +
   scale_x_log10() +
   xlab('Gene flow (per gen.)') +
-  ylab('Viral Richness') #+ geom_smooth(method = 'lm', aes(colour = 'a'))
+  ylab('Viral Richness') #+  geom_smooth(method = 'lm', aes(colour = 'a'))
 
 %%end.rcode
 
@@ -1718,6 +1733,8 @@ ggplot(fstSepVarWeights, aes(x = variable, y = estimate, colour = col, fill = co
   scale_x_discrete(labels = c('Study Effort', 'Gene Flow', 'Mass', 'Range Size', 'Null'))+
   ylab('P(in best model)') +
   xlab('')
+
+
 
 
 
