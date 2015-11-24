@@ -62,6 +62,7 @@ library(ggtree)
 library(palettetown)
 library(ggthemes)
 library(GGally)
+library(scales)
 
 
 # Web scraping.
@@ -1583,8 +1584,9 @@ ggplot(fstFinal, aes(x = Nm, y = virusSpecies, colour = Marker)) +
   scale_colour_poke(pokemon = 'oddish', spread = 3) +
   scale_x_log10() +
   xlab('Gene flow (per gen.)') +
-  ylab('Viral Richness') #+  geom_smooth(method = 'lm', aes(colour = 'a'))
-
+  ylab('Viral Richness') + #  geom_smooth(method = 'lm', aes(colour = 'a')) +
+  scale_x_continuous(trans=log_trans(), breaks = c(0.1, 1, 10), labels = c('0.1', '1', '10')) +
+  scale_y_continuous(breaks = c(0, 2, 4, 6, 8, 10, 12))
 %%end.rcode
 
 

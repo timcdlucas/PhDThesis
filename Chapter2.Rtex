@@ -201,7 +201,7 @@ Studies of the role of population structure on pathogen diversity have been in v
 These have been so simple that empirical data cannot easily be applied to them to predict pathogen diversity of real wild animal populations.
 There is a need for models that can be carefully and fully explored, while still capturing the complexities of the real world.
 
-Analytical models of well mixed have widely different outcomes: infinite pathogen diversity \cite{may1994superinfection, ackleh2014robust} or competitive exclusion have both been predicted \cite{ackleh2003competitive,bremermann1989competitive,martcheva2013competitive,qiu2013vector,allen2004sis}.
+Analytical models of well mixed populations have widely different outcomes: infinite pathogen diversity \cite{may1994superinfection, ackleh2014robust} or competitive exclusion have both been predicted \cite{ackleh2003competitive,bremermann1989competitive,martcheva2013competitive,qiu2013vector,allen2004sis}.
 When competitive exclusion occurs, population structure has sometimes been shown to allow coexistence \cite{qiu2013vector,allen2004sis, nunes2006localized}.
 
 Competing epidemics, or two pathogens spreading at the same time in a population, is a well studied area \cite{poletto2013host, poletto2015characterising, karrer2011competing}. 
@@ -224,7 +224,7 @@ While the data set in \cite{gay2014parasite} is larger, the analysis in \cite{ma
 
 Genetic correlates of population structure have also been used.
 Turmelle \emph{et al.} \cite{turmelle2009correlates}, in a small analysis, find that high $F_{st}$ (i.e. a structured population) correlates with high richness.
-However, they do not account for the widely different spatial scales foudn in population structure studies, nor do they deal with the differences between $F_{ST}$, $\phi_{ST}$ and other measures appropriately. 
+However, they do not account for the widely different spatial scales found in population structure studies, nor do they deal with the differences between $F_{ST}$, $\phi_{ST}$ and other measures appropriately. 
 
 
 
