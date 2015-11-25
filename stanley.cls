@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{phdthesis}[2015/11/54 PhD thesis class for LaTeX]
+\ProvidesClass{stanley}[2015/11/54 PhD thesis class for LaTeX]
 
 %-------------------------------------------------------------------------------
 % Information
@@ -49,7 +49,7 @@
 
 \PassOptionsToPackage{final}{graphicx}
 \RequirePackage{xspace} % spaces in macros
-\RequirePackage{xcolor}
+%\RequirePackage{xcolor}
 
 %-------------------------------------------------------------------------------
 % Math mode
@@ -179,7 +179,9 @@
 \RequirePackage{array,booktabs} % more table options
 
 \DisemulatePackage{caption}
-\RequirePackage{caption,subcaption}	% better (sub)caption controls
+\RequirePackage{caption}	% better (sub)caption controls
+
+
 
 \DeclareCaptionSubType*{figure}
 \DeclareCaptionSubType*{table}
@@ -197,9 +199,9 @@
 % setup subcaptions
 \captionsetup[subfigure]{labelformat=simple, labelsep=quad,
 						 labelfont=bf, singlelinecheck=off,
-						 justification=raggedright}
+						 justification=centerfirst}
 					
-% \subcap for referring to subcaptions in the main caption
+%% \subcap for referring to subcaptions in the main caption
 \newcommand{\subcap}[1]{\textbf{\protect\subref{#1}}\xspace}
 
 %-------------------------------------------------------------------------------

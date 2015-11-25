@@ -307,7 +307,7 @@ Here I show that given the assumptions of a metapopulation, population structure
 
 
 \begin{table}[t]
-\begin{tabular}{>{\it}lp{8cm}l}
+\begin{tabular}{>{\textit}lp{8cm}l}
 \normalfont{Term} & Definition & Synonyms \\
 \hline
 Metapopulation & A group of subpopulations with rare movement of animals between them. Closed to outside migration. & Network\\
