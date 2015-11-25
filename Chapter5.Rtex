@@ -29,13 +29,10 @@ library(palettetown)
 # Used for units in ggplot2
 library(grid)
 
-# Make sure fonts are available. Not sure if this is needed or not
-library(extrafont)
 
 # Convert latex strings to expression.
 library(latex2exp)
 
-library(RColorBrewer)
 
 %%end.rcode
 
@@ -517,8 +514,8 @@ ggplot(captures, aes(x = count, y = percentageerror,
   stat_summary(geom = "crossbar", width = 0.4, fatten = 0, color = "white", 
     fun.data = function(x){ return(c(y = median(x), ymin = median(x), ymax = median(x))) }) +
   facet_grid(. ~ model) +
-  scale_colour_manual(values = brewer.pal(8, 'Set1')[c(5, 2, 1)]) +
-  scale_fill_manual(values = brewer.pal(8, 'Set1')[c(5, 2, 1)]) +
+  scale_colour_manual(values = combPalette[c(7, 3, 1)]) +
+  scale_fill_manual(values = combPalette[c(7, 3, 1)]) +
   theme(legend.position = 'none') + 
   scale_x_discrete("Captures", labels = xlabels) + 
   ylab('Percentage Error') +
@@ -578,8 +575,8 @@ wait$expression[wait$expression == 'SW1'] <- 'SE3'
 ggplot(wait, aes(x = wait, y = percentageerror, colour = expression, fill = expression)) + 
   facet_grid(. ~ model) +
   geom_boxplot(outlier.colour = grey(0.3), notch = TRUE, notchwidth = 0.7, alpha = 0.7) +
-  scale_colour_manual(values = brewer.pal(8, 'Set1')[c(5, 2, 1)]) +
-  scale_fill_manual(values = brewer.pal(8, 'Set1')[c(5, 2, 1)]) +
+  scale_colour_manual(values = combPalette[c(7, 3, 1)]) +
+  scale_fill_manual(values = combPalette[c(7, 3, 1)]) +
   stat_summary(geom = "crossbar", width=0.45, fatten=0, color="white", 
     fun.data = function(x){ return(c(y=median(x), ymin=median(x), ymax=median(x))) }) +
   theme(legend.position = 'none', axis.title.x = element_text(vjust = -4),
@@ -602,8 +599,8 @@ tort$maxAngle <- factor(tort$maxAngle, levels(tort$maxAngle)[c(1, 4, 2, 3)])
 ggplot(tort, aes(x = maxAngle, y = percentageerror, colour = expression, fill = expression)) + 
   facet_grid(. ~ model) +
   geom_boxplot(outlier.colour = grey(0.3), notch = TRUE, notchwidth = 0.7, alpha = 0.7) +
-  scale_colour_manual(values = brewer.pal(8, 'Set1')[c(5, 2, 1)]) +
-  scale_fill_manual(values = brewer.pal(8, 'Set1')[c(5, 2, 1)]) +
+  scale_colour_manual(values = combPalette[c(7, 3, 1)]) +
+  scale_fill_manual(values = combPalette[c(7, 3, 1)]) +
   stat_summary(geom = "crossbar", width=0.45, fatten=0, color="white", 
     fun.data = function(x){ return(c(y=median(x), ymin=median(x), ymax=median(x))) }) +
   theme(legend.position = 'none') +
