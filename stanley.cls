@@ -268,7 +268,7 @@
 \def\theprimarysv{}
 \def\thesecondarysv{}
 \newcommand{\university}[1]{\def\theuniversity{#1}}
-\newcommand{\degree}[1]{\def\thedegree{#1}}
+\newcommand{\unidegree}[1]{\def\thedegree{#1}}
 \newcommand{\primarysupervisor}[1]{\def\theprimarysv{#1}}
 \newcommand{\secondarysupervisor}[1]{\def\thesecondarysv{#1}}
 

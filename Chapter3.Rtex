@@ -1853,7 +1853,7 @@ We calculated $\bar{AICc}$ by averaging AICc scores within models.
 $\Delta\text{AICc}$ was calculated as $\text{min}(\bar{AICc}) - \bar{AICc}$, not the mean of the individual $\Delta\text{AICc}$ scores, to guarantee that the best model has $\Delta\text{AICc} = 0$.
 
 
-Plots were created with a combination of \cite{ggplot2, palettetown, dotwhisker, ggtree}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \clearpage
