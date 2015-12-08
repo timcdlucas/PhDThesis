@@ -11,7 +11,7 @@
 
 # Compilation options
 # Run simulations? This will take many hours
-runAllSims <- TRUE
+runAllSims <- FALSE
 
 # Save raw simulation output
 # This will take ~10GB or so.
@@ -53,6 +53,12 @@ library(broom)
 
 # Run simulations in parallel
 library(parallel)
+
+
+# plotting
+library(ggplot2)
+library(palettetown)
+
 %%end.rcode
 
 
@@ -386,7 +392,7 @@ fullSim <- function(x){
 %%begin.rcode runDensSim, eval = F, cache = TRUE
 
 # Create and set seed (seed object is used to set seed in each seperate simulation.'
-seed <- 63
+seed <- 1
 set.seed(seed)
 
 # If we want to save the data, make a directory for it.
@@ -519,7 +525,7 @@ fullSim <- function(x){
 %%begin.rcode runDens2Sim, eval = runAllSims, cache = TRUE
 
 # Create and set seed (seed object is used to set seed in each seperate simulation.'
-seed <- 67
+seed <- 2
 set.seed(seed)
 
 # If we want to save the data, make a directory for it.
@@ -543,7 +549,6 @@ write.csv(z, file = 'data/Chapter4/Dens2Sims.csv')
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Constant Population. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 
 %%begin.rcode PopSimsFuncs
 
@@ -651,7 +656,7 @@ fullSim <- function(x){
 %%begin.rcode runPopSim, eval = runAllSims, cache = TRUE
 
 # Create and set seed (seed object is used to set seed in each seperate simulation.'
-seed <- 25
+seed <- 3
 set.seed(seed)
 
 # If we want to save the data, make a directory for it.
@@ -819,6 +824,7 @@ ggplot(dens1Means, aes(x = factor(transmission), y = mean, fill = factor(colonyS
                 position = position_dodge(.9)) +
   xlab('Transmission') + 
   ylab('Prop. Invasions') +
+  ylim(0, 1) +
   scale_fill_poke(name="Colony Size", 
                  #labels=c('0.001', '0.01', '0.1'), 
                  pokemon = 'Swampert',
@@ -830,6 +836,7 @@ ggplot(dens2Means, aes(x = factor(transmission), y = mean, fill = factor(colonyN
   geom_errorbar(aes(ymin = lower, ymax = upper),
                 width=.2,                   
                 position = position_dodge(.9)) +
+  ylim(0, 1) +
   xlab('Transmission') + 
   ylab('Prop. Invasions') +
   scale_fill_poke(name="Colony Number", 
@@ -845,10 +852,11 @@ ggplot(popMeans, aes(x = factor(transmission), y = mean, fill = factor(area))) +
                 position = position_dodge(.9)) +
   xlab('Transmission') + 
   ylab('Prop. Invasions') +
+  ylim(0, 1) +
   scale_fill_poke(name="Area", 
                  #labels=c('0.001', '0.01', '0.1'), 
                  pokemon = 'Swampert',
-                 spread = 5)
+                 spread = 5) 
 
 %%end.rcode
 
