@@ -1,35 +1,33 @@
-%\bibliographystyle{unsrt}
+\bibliographystyle{unsrt}
 
 
 % Redefine cite so that we get references in footnotes.
-%\usepackage[
-%backend=biber,
-%citestyle=numeric-comp,
-%bibstyle=authoryear,
-%sorting=none,
-%firstinits=true
-%]{biblatex} %style=mla for footnotes.
-%%\renewcommand{\cite}[1]{\footcite{#1}}
-%%\renewcommand{\cite}[1]{\supercite{#1}}
-
-
+\usepackage[
+backend=biber,
+citestyle=numeric-comp,
+bibstyle=authoryear,
+sorting=none,
+firstinits=true
+]{biblatex} %style=mla for footnotes.
+%\renewcommand{\cite}[1]{\footcite{#1}}
+%\renewcommand{\cite}[1]{\supercite{#1}}
 
 \addbibresource{epilit.bib}
 
-%\DeclareNameAlias{sortname}{first-last}
-%\DeclareFieldFormat{labelnumberwidth}{\mkbibbrackets{#1}}
-%\defbibenvironment{bibliography}
-%  {\list
-%     {\printtext[labelnumberwidth]{%
-%    \printfield{prefixnumber}%
-%    \printfield{labelnumber}}}
-%     {\setlength{\labelwidth}{\labelnumberwidth}%
-%      \setlength{\leftmargin}{\labelwidth}%
-%      \setlength{\labelsep}{\biblabelsep}%
-%      \addtolength{\leftmargin}{\labelsep}%
-%      \setlength{\itemsep}{\bibitemsep}%
-%      \setlength{\parsep}{\bibparsep}}%
-%      \renewcommand*{\makelabel}[1]{\hss##1}}
-%  {\endlist}
-%  {\item}
+\DeclareNameAlias{sortname}{first-last}
+\DeclareFieldFormat{labelnumberwidth}{\mkbibbrackets{#1}}
+\defbibenvironment{bibliography}
+  {\list
+     {\printtext[labelnumberwidth]{%
+    \printfield{prefixnumber}%
+    \printfield{labelnumber}}}
+     {\setlength{\labelwidth}{\labelnumberwidth}%
+      \setlength{\leftmargin}{\labelwidth}%
+      \setlength{\labelsep}{\biblabelsep}%
+      \addtolength{\leftmargin}{\labelsep}%
+      \setlength{\itemsep}{\bibitemsep}%
+      \setlength{\parsep}{\bibparsep}}%
+      \renewcommand*{\makelabel}[1]{\hss##1}}
+  {\endlist}
+  {\item}
 

@@ -17,7 +17,7 @@ runFstScrape <- FALSE
 # Run slow bootstrapping?
 subBoots <- FALSE
 fstBoots <- TRUE
-batclocksBoots <- FALSE
+batclocksBoots <- TRUE
 
 # There are figures created in the data analysis which are not in the final chapter document.
 #   If TRUE, they will be included in the output.
@@ -62,7 +62,6 @@ library(ggtree)
 library(palettetown)
 library(ggthemes)
 library(GGally)
-library(scales)
 
 
 # Web scraping.
@@ -110,20 +109,22 @@ I use two measures of population structure: a novel measure, number of subspecie
 \tmpsection{One sentence summarising the main result}
 %  (with the words “here we show” or their equivalent).
 
-I find that both of these measures are associated with pathogen richness 
+I find conflicting evidence suggesting that while population structure may promote pathogen diversity it is likely not a strong affect.
 
 
 \tmpsection{Two or three sentences explaining what the main result reveals in direct comparison to what was thought to be the case previously}
 % or how the main result adds to previous knowledge
 
-Previous studies have conflicting results on the direction and importance of a relationship between population structure and pathogen diversity.
-Here, using a larger dataset than previous studies, I find that both measures of populations structure suggest that population structure may increase pathogen diversity.
+The results conflict with each other and with other studies which suggests that tests of population structure is senstive to the exact measurements and data used.
+Given the conflicting results in the literature and unclear results here, it seems likely that population structure does not strongly affect pathogen richness in bats.
 
 \tmpsection{One or two sentences to put the results into a more general context.}
 
-Given the conflicting results in the literature, it seems that the relationship between population structure and pathogen diversity might be sensitive to the specific dataset and measure of populationn structure.
-The use of a larger dataset and multiple measures of population structure therefore provide stronger evidence that population structure causes high pathogen diversity.
+Given the weakness of any association between population structure and pathogen richness in bats, this is not a useful metric for prioritising zoonotic disease surveillance.
 
+
+\tmpsection{Two or three sentences to provide a broader perspective, }
+% readily comprehensible to a scientist in any discipline.
 
 
 
@@ -145,11 +146,6 @@ The use of a larger dataset and multiple measures of population structure theref
 
 \subsection{Theoretical background}
 
-Given finite host resources and competition between parasites, there must be limits to pathogen richness.
-In particular, in the presence of competition we can expect competitive exclusion \cite{bremermann1989competitive, martcheva2013competitive, ackleh2003competitive, ackleh2014robust, turner2002impact}.
-Analytically tracteable, simple models show that dividing a population into more than one patch can allow coexistence instead \cite{qiu2013vector, allen2004sis, nunes2006localized}.
-However, in the ecological literature the opposite expectation is often held: that unstructured populations promote the spread of new pathogens and thus increase pathogen richness \cite{nunn2003comparative, morand2000wormy, poulin2014parasiteCh3}.
-
 \subsection{Previous Studies}
 
 Three studies have used comparative data to test for an association between population structure and viral richness.
@@ -159,28 +155,24 @@ However, this study included measures using mtDNA which only measures female dis
 Furthermore, this study used measures of $F_{ST}$ irrespective of the study scale with studies covering from tens \cite{mccracken1981social} to thousands \cite{petit1999male} of kilometers.
 As isolation by distance has been shown in a number of bat species \cite{burland1999population, hulva2010mechanisms, o2015genetic, vonhof2015range} this could bias results further.
 Finally, when a global $F_{ST}$ value is not given they use the mean of all pairwise $F_{ST}$ between sites.
-It is not clear that this is correct as from global $F_{ST}$ we expect migration rates of $M = \frac{1-F_{ST}}{8F_{ST}}$ while from $F_{ST}$ between pairs of populations we expect migration rates of $M = \frac{1-F_{ST}}{16 F_{ST}}$ where $M$ is the absolute number of diploid inviduals dispersing per generation \cite{slatkin1995measure}.
+It is not clear that this is correct as from global $F_{ST}$ we expect migration rates of $M = \frac{1-F_{ST}}{8F_{ST}}$ while from $F_{ST}$ between pairs of populations we expect migration rates of $M = \frac{1-F_{ST}}{8F_{ST}}$ where $M$ is the absolute number of diploid inviduals dispersing per generation \cite{slatkin1995measure}.
 As it is in fact the movement of individuals that is epidemiologically relavent, using these studies is probably not correct without attempting to correct for these difference.
 
 
 
+\subsection{Rates}
+
+
 
 \subsection{Choice of measure of population structure}
-  
+
 \tmpsection{Direct dispersal measurements}
-
-The direct study of bat dispersal is difficult due to their size, lack of identifying marks and potential for long distance travel --- in particular knowing how far individuals disperse is incredibly difficult.
-
-
-\tmpsection{Genetic measures}
-
-Both genetic measures and existence of subspecies differ 
-
-\tmpsection{Number of Subspecies}
 
 \tmpsection{Measures from range}
 
+\tmpsection{Genetic measures}
 
+\tmpsection{Number of Subspecies}
 
 
 
@@ -1062,20 +1054,16 @@ sqrt(vif(lm(virusSpecies ~ log(scholarRefs) + NumberOfSubspecies +  log(mass) + 
 
 # Caption for the main boxploit of subspecies vs virus
 
-boxplotCapt <- c('Number of virus species against number of subspecies. 
+boxplotCapt <- 'Number of virus species against number of subspecies. 
 Data within a number of subspecies are plotted as boxplots with the dark bar showing the median, the box showing the interquartile range, vertical lines showing the range and outliers shown as seperate points.
 Regression lines are from multivariate phylogenetic models with other independant variables set at their median value.
 The models shown are thos with (pink) and without (red) an interaction between study effort and number of subspecies.
-',
-'Histogram of number of subspecies. 
-It is clear that more species have fewer subspecies.')
-
-boxplotTitle = c('Number of virus species against number of subspecies', 'Histogram of number of subspecies')
+'
 
 %%end.rcode
 
 
-%%begin.rcode boxplot, fig.cap = boxplotCapt, fig.scap = boxplotTitle
+%%begin.rcode boxplot, fig.cap = boxplotCapt
 
 
 # Make a boxplot of subspecies vs virus
@@ -1130,12 +1118,7 @@ ggplot(nSpecies, aes(SubspeciesFactor, virusSpecies, colour = 'a', fill = 'a')) 
       colour = pokepal('nidorina')[c(10,13)], size = c(3, 3),
       family = 'Lato Light')
 
-# Histogram of subspecies.
-ggplot(nSpecies, aes(x = SubspeciesFactor)) + 
-  geom_histogram() +
-  xlab('N. of Subspecies') +
-  ylab('Count') +
-  scale_x_discrete(limits = levels(nSpecies$SubspeciesFactor), drop = FALSE)
+
 
 %%end.rcode
 
@@ -1446,22 +1429,22 @@ fst <- fst[fst$Marker != 'mtDNA', ]
 
 %%begin.rcode convertFst
 
-# Nearly all studies use Arlequin.
-# Arlequin uses Weir and Cockerham which deal with sample size already.
-#   So I don't think I need number of populations.
+# define functions for phist mtDNA, fst minisatellite and fst allozyme
 
-# Further, the quantity is Number of demes, not number of demes sampled. We have no estimates for n demes and must assume it's large.
 
-# define functions for fst minisatellite and fst allozyme
 fstallozyme <- function(fst){
-  Nm <- (1 / 4) * (1 / fst - 1)
+  Nm <- 0.5 * (1 / fst - 1)
 }
 
-# 
+# eqn 15a in slatkin 1995 A measure of population subdivision based on microsatellite allele frequencies.
 fstmicrosat <- function(fst, pops){
-  Nm <- (1 / 4)* (1 / fst - 1) 
+  Nm <- (pops - 1) * (4 * pops)^(-1) * (1 / fst - 1) 
 }
 
+
+phist <- function(phist){
+  Nm <-  0.5 * (1 / phist - 1)
+}
 
 fst$Nm <- NA
 fst$fnc <-NA
@@ -1473,6 +1456,14 @@ fst$fnc[microsatBool] <- 'fstmicrosat'
 allozymeBool <- fst$Measure == 'Fst' & fst$Marker == 'allozyme'
 fst$Nm[allozymeBool] <- fstallozyme(fst$Value[allozymeBool])
 fst$fnc[allozymeBool] <- 'fstallozyme'
+
+mtDNABool <- fst$Measure == 'Fst' & fst$Marker == 'mtDNA'
+fst$Nm[mtDNABool] <- fstmtDNA(fst$Value[mtDNABool])
+fst$fnc[mtDNABool] <- 'fstmtDNA'
+
+phistBool <- fst$Measure == 'Phist' & fst$Marker == 'mtDNA'
+fst$Nm[phistBool] <- phist(fst$Value[phistBool])
+fst$fnc[phistBool] <- 'phist'
 
 fst <- fst[!is.na(fst$Nm) & !(fst$Nm == Inf), ]
 
@@ -1587,9 +1578,8 @@ ggplot(fstFinal, aes(x = Nm, y = virusSpecies, colour = Marker)) +
   scale_colour_poke(pokemon = 'oddish', spread = 3) +
   scale_x_log10() +
   xlab('Gene flow (per gen.)') +
-  ylab('Viral Richness') + #  geom_smooth(method = 'lm', aes(colour = 'a')) +
-  scale_x_continuous(trans=log_trans(), breaks = c(0.1, 1, 10), labels = c('0.1', '1', '10')) +
-  scale_y_continuous(breaks = c(0, 2, 4, 6, 8, 10, 12))
+  ylab('Viral Richness') #+ geom_smooth(method = 'lm', aes(colour = 'a'))
+
 %%end.rcode
 
 
@@ -1741,8 +1731,6 @@ ggplot(fstSepVarWeights, aes(x = variable, y = estimate, colour = col, fill = co
 
 
 
-
-
 %%end.rcode
 
 
@@ -1853,7 +1841,7 @@ We calculated $\bar{AICc}$ by averaging AICc scores within models.
 $\Delta\text{AICc}$ was calculated as $\text{min}(\bar{AICc}) - \bar{AICc}$, not the mean of the individual $\Delta\text{AICc}$ scores, to guarantee that the best model has $\Delta\text{AICc} = 0$.
 
 
-
+Plots were created with a combination of \cite{ggplot2, palettetown, dotwhisker, ggtree}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \clearpage

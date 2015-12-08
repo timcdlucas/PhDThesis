@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{stanley}[2015/11/54 PhD thesis class for LaTeX]
+\ProvidesClass{phdthesis}[2015/11/54 PhD thesis class for LaTeX]
 
 %-------------------------------------------------------------------------------
 % Information
@@ -49,7 +49,7 @@
 
 \PassOptionsToPackage{final}{graphicx}
 \RequirePackage{xspace} % spaces in macros
-%\RequirePackage{xcolor}
+\RequirePackage{xcolor}
 
 %-------------------------------------------------------------------------------
 % Math mode
@@ -179,9 +179,7 @@
 \RequirePackage{array,booktabs} % more table options
 
 \DisemulatePackage{caption}
-\RequirePackage{caption}	% better (sub)caption controls
-
-
+\RequirePackage{caption,subcaption}	% better (sub)caption controls
 
 \DeclareCaptionSubType*{figure}
 \DeclareCaptionSubType*{table}
@@ -199,9 +197,9 @@
 % setup subcaptions
 \captionsetup[subfigure]{labelformat=simple, labelsep=quad,
 						 labelfont=bf, singlelinecheck=off,
-						 justification=centerfirst}
+						 justification=raggedright}
 					
-%% \subcap for referring to subcaptions in the main caption
+% \subcap for referring to subcaptions in the main caption
 \newcommand{\subcap}[1]{\textbf{\protect\subref{#1}}\xspace}
 
 %-------------------------------------------------------------------------------
@@ -212,7 +210,6 @@
 				uniquename=false, uniquelist=false, %
 				style=authoryear, firstinits=true, dashed=false %
 				maxcitenames=2, maxbibnames=99]{biblatex}
-\renewcommand{\cite}[1]{\parencite{#1}}
 				
 % bibliography paragraphs
 \setlength{\bibhang}{\parindent}
@@ -270,7 +267,7 @@
 \def\theprimarysv{}
 \def\thesecondarysv{}
 \newcommand{\university}[1]{\def\theuniversity{#1}}
-\newcommand{\unidegree}[1]{\def\thedegree{#1}}
+\newcommand{\degree}[1]{\def\thedegree{#1}}
 \newcommand{\primarysupervisor}[1]{\def\theprimarysv{#1}}
 \newcommand{\secondarysupervisor}[1]{\def\thesecondarysv{#1}}
 

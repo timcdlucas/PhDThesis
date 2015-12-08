@@ -67,7 +67,7 @@ library(palettetown)
 \tmpsection{One or two sentences providing a basic introduction to the field}
 % comprehensible to a scientist in any discipline.
 \lettr{A}n increasingly large fraction of emerging diseases come from wild animals and these diseases have a huge impact on human health, healthcare systems and economic development.
-The chance that a new zoonosis will come from any particularly wild host species increases with the diversity of pathogens in that species.
+The chance that a new zoonosis will come from any particular wild host species increases with the diversity of pathogens in that species.
 However, the factors that control pathogen diversity in wild populations are still unclear.
 
 
@@ -103,6 +103,7 @@ Instead we find that changes in population structure do not affect the probabili
 
 \tmpsection{One or two sentences to put the results into a more general context.}
 This result implies that population structure does not control pathogen diversity.
+Instead it seems that local dynamics, that affect the short term branching process at the very start of the epidemic control the chance of pathogen invasion.
 This also implies that population structure is not a useful proxy for pathogen diversity with respect to zoonotic disease surveillance, for example in bats.
 
 
@@ -201,7 +202,7 @@ Studies of the role of population structure on pathogen diversity have been in v
 These have been so simple that empirical data cannot easily be applied to them to predict pathogen diversity of real wild animal populations.
 There is a need for models that can be carefully and fully explored, while still capturing the complexities of the real world.
 
-Analytical models of well mixed populations have widely different outcomes: infinite pathogen diversity \cite{may1994superinfection, ackleh2014robust} or competitive exclusion have both been predicted \cite{ackleh2003competitive,bremermann1989competitive,martcheva2013competitive,qiu2013vector,allen2004sis}.
+Analytical models of well mixed have widely different outcomes: infinite pathogen diversity \cite{may1994superinfection, ackleh2014robust} or competitive exclusion have both been predicted \cite{ackleh2003competitive,bremermann1989competitive,martcheva2013competitive,qiu2013vector,allen2004sis}.
 When competitive exclusion occurs, population structure has sometimes been shown to allow coexistence \cite{qiu2013vector,allen2004sis, nunes2006localized}.
 
 Competing epidemics, or two pathogens spreading at the same time in a population, is a well studied area \cite{poletto2013host, poletto2015characterising, karrer2011competing}. 
@@ -224,7 +225,7 @@ While the data set in \cite{gay2014parasite} is larger, the analysis in \cite{ma
 
 Genetic correlates of population structure have also been used.
 Turmelle \emph{et al.} \cite{turmelle2009correlates}, in a small analysis, find that high $F_{st}$ (i.e. a structured population) correlates with high richness.
-However, they do not account for the widely different spatial scales found in population structure studies, nor do they deal with the differences between $F_{ST}$, $\phi_{ST}$ and other measures appropriately. 
+However, they do not account for the widely different spatial scales foudn in population structure studies, nor do they deal with the differences between $F_{ST}$, $\phi_{ST}$ and other measures appropriately. 
 
 
 
@@ -307,7 +308,7 @@ Here I show that given the assumptions of a metapopulation, population structure
 
 
 \begin{table}[t]
-\begin{tabular}{>{\textit}lp{8cm}l}
+\begin{tabular}{>{\it}lp{8cm}l}
 \normalfont{Term} & Definition & Synonyms \\
 \hline
 Metapopulation & A group of subpopulations with rare movement of animals between them. Closed to outside migration. & Network\\
@@ -1009,12 +1010,21 @@ ggplot(propsTopoCI, aes(x = factor(transmission), y = mean, fill = factor(meanK)
 
 \subsection{Restate the gap and the main result}
 
-Empirical studies on the role of population structure on the are equivocal and cannot examine the specific mechanisms by which pathogen communities are created and maintained.
+Empirical studies on the role of population structure on pathogen richness are equivocal and cannot examine the specific mechanisms by which pathogen communities are created and maintained.
 I have used mechanistic, metapopulation models to test whether increased population structure can promote pathogen richness by facilitating invasion of new pathogens.
-
+I find that population structure does not affect the ability of a new pathogen to invade and persist in a population.
+Instead I find that only transmission rate affects the chance of pathogen invasion.
 
 
 \subsection{Link results to consequences}
+
+Given that we find no affect of population structure on the ability of a new pathogen to invade, this host-trait is not a useful host trait for predicting the probability that a wild species has many pathogens.
+This means it cannot be used as a proxy for the probability that a species carries a zoonotic pathogen.
+
+However my simulations do highlight the importance of competition for the spread of a new pathogen.
+All parameters used correspong to pathogens with $R_0>1$.
+However, the competition with the endemic pathogen means that for some transmission rates the chance of epidemic spread and persistence is close to zero.
+This has implications for human epidemics as well --- if there is strong competiton between a newly evolved strain and an endemicstrain, we ar3 unlikely to see the new strain spread, irregardless of population structure.
 
 \subsubsection{Population structure does not affect pathogen richness}
 
@@ -1025,17 +1035,15 @@ Measures of population structure should not be used to predict zoonotic potentia
 
 \subsubsection{Dispersal does not affect pathogen richness}
 
+Irrespective of the network topology used, at very high dispersal rates a population will be well mixed.
 
 
 \subsubsection{Network connectedness does not affect pathogen richness}
 
 This is in direct contrast to \cite{campos2006pathogen}. 
 However, the model in \cite{campos2006pathogen} is a contact network, so increasing the connectedness increases the chance of succesful transmission events for the first few transmission generations.
-This lends support to the idea that I found now affect of connectedness due to the dominance of local dynamics.
-
-Network connectedness can be seen as a function of average dispersal distance, density and colony size.
-A high density species with small colony sizes must have colonies relatively close together.
-Therefore colonies would be more likely to be connected for a given dispersal distance. 
+This lends support to the idea that I found no affect of connectedness due to the dominance of local dynamics.
+ 
 
 
 \subsection{Discuss assumptions}
@@ -1052,7 +1060,7 @@ This quickly becomes computationally restrictive.
 \subsubsection{Identical strains}
 
 Many papers on pathogen richness have focussed on the evolution of pathogen traits and have considered a trade off between transmission rate and virulence \cite{nowak1994superinfection, nowak1994superinfection} or infectious period \cite{poletto2013host}.
-However, here we are interested in host traits.
+However, here I am interested in host traits.
 Therefore we have assumed that pathogen strains are identical.
 It is clear however that there are a number of factors that affect pathogen richness and our focus on host population structure does not imply that pathogen traits are not important.
 

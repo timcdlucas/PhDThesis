@@ -60,8 +60,8 @@ theme_pres <- theme(text = element_text(family = "Lato Light", size = 12),
 
 
 
-#theme_set(theme_grey() + theme_tcdl)
-theme_set(theme_grey() + theme_pres)
+theme_set(theme_grey() + theme_tcdl)
+#theme_set(theme_grey() + theme_pres)
 
 
 

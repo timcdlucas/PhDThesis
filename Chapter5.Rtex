@@ -24,15 +24,17 @@ library(binom)
 
 # plotting
 library(ggplot2)
-library(palettetown)
 
 # Used for units in ggplot2
 library(grid)
 
+# Make sure fonts are available. Not sure if this is needed or not
+library(extrafont)
 
 # Convert latex strings to expression.
 library(latex2exp)
 
+library(RColorBrewer)
 
 %%end.rcode
 
@@ -380,25 +382,25 @@ type = c(8, 5, 5, 6, 7, 2, 2, 2, 2, 2, 2, 2, 4, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 
 reg$cols <- type[as.numeric(reg$model)]
 
-combPalette <- c(pokepal('nidoking')[c(2, 10)],pokepal('magnemite')[c(12, 8, 4, 14, 2, 13)])
 
-#w <-ggplot(reg, aes(x = x, y = y, fill = factor(cols))) +
-#  geom_polygon(aes(group = model), colour = NA, alpha = 0.4) +
-#  ylab(expression(paste('Signal width, ', alpha))) +
-#  xlab(expression(paste('Sensor width, ', theta))) +
-#  scale_x_continuous(breaks = c(0, pi, 2*pi),
-#    labels = expression(0, pi, paste(2, pi))) +
-#  scale_y_continuous(breaks = c(0, pi, 2*pi),
-#    labels = expression(0, pi, paste(2, pi))) +
-#  theme(plot.margin = unit(c(2, 2, 1, 1), 'lines')) +
-#  theme(legend.position = 'none') +
-#  coord_cartesian(xlim = c(0, 2.1*pi), ylim = c(0, 2.1*pi)) +
-#  theme(
-#    panel.grid.major.x = element_blank(),
-#    panel.grid.minor.x = element_blank(),
-#    panel.grid.minor.y = element_blank(),
-#    panel.grid.major.y = element_blank()
-#  )
+w <-ggplot(reg, aes(x = x, y = y, fill = factor(cols))) +
+  geom_polygon(aes(group = model), colour = NA, alpha = 0.4) +
+  thesis_fill() +
+  ylab(expression(paste('Signal width, ', alpha))) +
+  xlab(expression(paste('Sensor width, ', theta))) +
+  scale_x_continuous(breaks = c(0, pi, 2*pi),
+    labels = expression(0, pi, paste(2, pi))) +
+  scale_y_continuous(breaks = c(0, pi, 2*pi),
+    labels = expression(0, pi, paste(2, pi))) +
+  theme(plot.margin = unit(c(2, 2, 1, 1), 'lines')) +
+  theme(legend.position = 'none') +
+  coord_cartesian(xlim = c(0, 2.1*pi), ylim = c(0, 2.1*pi)) +
+  theme(
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.minor.y = element_blank(),
+    panel.grid.major.y = element_blank()
+  )
 
 
 
@@ -436,7 +438,6 @@ Box colours correspond to the expressions for average profile width $\\bar{p}$ g
 gremSubsShort <- 'Simulation model results of the accuracy and precision for gREM submodels'
 %%end.rcode
 
-
 %%begin.rcode gremSubmods, fig.cap = gremSubsCapt, fig.scap = gremSubsShort, out.width = '\\textwidth'
 
 allMods <- read.csv('data/Chapter5/all_models_tidy.csv')
@@ -451,14 +452,15 @@ allMods$model <- factor(allMods$model, levels =  modelLevels)
 ggplot(allMods, aes(x = model, y = percentageerror, colour = expression, fill = expression)) + 
   geom_boxplot(outlier.size = 1, size = 0.3, outlier.colour = grey(0.3), 
     notch = TRUE, notchwidth = 0.7, alpha = 0.7) +
-  scale_fill_manual(values = combPalette) +
-  scale_colour_manual(values = combPalette) +
+  thesis_fill() +
+  thesis_colour() +
   stat_summary(geom = "crossbar", width = 0.3, fatten = 0, color = "white", 
     fun.data = function(x){ return(c(y = median(x), ymin = median(x), ymax = median(x))) }) +
   theme(legend.position = 'none') + 
   xlab('gREM Submodel') +
-  ylab('Percent Error') +
+  ylab('Percentage Error') +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, size = 9))
+
 
 
 %%end.rcode
@@ -514,8 +516,8 @@ ggplot(captures, aes(x = count, y = percentageerror,
   stat_summary(geom = "crossbar", width = 0.4, fatten = 0, color = "white", 
     fun.data = function(x){ return(c(y = median(x), ymin = median(x), ymax = median(x))) }) +
   facet_grid(. ~ model) +
-  scale_colour_manual(values = combPalette[c(7, 3, 1)]) +
-  scale_fill_manual(values = combPalette[c(7, 3, 1)]) +
+  scale_colour_manual(values = brewer.pal(8, 'Set1')[c(5, 2, 1)]) +
+  scale_fill_manual(values = brewer.pal(8, 'Set1')[c(5, 2, 1)]) +
   theme(legend.position = 'none') + 
   scale_x_discrete("Captures", labels = xlabels) + 
   ylab('Percentage Error') +
@@ -575,8 +577,8 @@ wait$expression[wait$expression == 'SW1'] <- 'SE3'
 ggplot(wait, aes(x = wait, y = percentageerror, colour = expression, fill = expression)) + 
   facet_grid(. ~ model) +
   geom_boxplot(outlier.colour = grey(0.3), notch = TRUE, notchwidth = 0.7, alpha = 0.7) +
-  scale_colour_manual(values = combPalette[c(7, 3, 1)]) +
-  scale_fill_manual(values = combPalette[c(7, 3, 1)]) +
+  scale_colour_manual(values = brewer.pal(8, 'Set1')[c(5, 2, 1)]) +
+  scale_fill_manual(values = brewer.pal(8, 'Set1')[c(5, 2, 1)]) +
   stat_summary(geom = "crossbar", width=0.45, fatten=0, color="white", 
     fun.data = function(x){ return(c(y=median(x), ymin=median(x), ymax=median(x))) }) +
   theme(legend.position = 'none', axis.title.x = element_text(vjust = -4),
@@ -599,8 +601,8 @@ tort$maxAngle <- factor(tort$maxAngle, levels(tort$maxAngle)[c(1, 4, 2, 3)])
 ggplot(tort, aes(x = maxAngle, y = percentageerror, colour = expression, fill = expression)) + 
   facet_grid(. ~ model) +
   geom_boxplot(outlier.colour = grey(0.3), notch = TRUE, notchwidth = 0.7, alpha = 0.7) +
-  scale_colour_manual(values = combPalette[c(7, 3, 1)]) +
-  scale_fill_manual(values = combPalette[c(7, 3, 1)]) +
+  scale_colour_manual(values = brewer.pal(8, 'Set1')[c(5, 2, 1)]) +
+  scale_fill_manual(values = brewer.pal(8, 'Set1')[c(5, 2, 1)]) +
   stat_summary(geom = "crossbar", width=0.45, fatten=0, color="white", 
     fun.data = function(x){ return(c(y=median(x), ymin=median(x), ymax=median(x))) }) +
   theme(legend.position = 'none') +
