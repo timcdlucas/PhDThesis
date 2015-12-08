@@ -301,7 +301,7 @@ Finally, recovery from any infectious class occurs at a rate $\gamma$
 
   # Parameters for constant density
   #   Area and meanColonySize are the actal input arguments
-  pop <- rep(c(4000, 8000, 16000, 32000, 64000), each = 3 * each)
+  pop <- rep(c(2000, 4000, 8000, 16000, 32000), each = 3 * each)
   colonySize <- pop / 20
 
   area <- pop / 0.8
@@ -430,7 +430,7 @@ write.csv(z, file = 'data/Chapter4/DensSims.csv')
 
   # Parameters for constant density
   #   Area and meanColonySize are the actal input arguments
-  pop <- rep(c(4000, 8000, 16000, 32000, 64000), each = 3 * each)
+  pop <- rep(c(2000, 4000, 8000, 16000, 32000), each = 3 * each)
   colonySize <- 400
   colonyNumber <- pop / colonySize
 
@@ -563,7 +563,7 @@ write.csv(z, file = 'data/Chapter4/Dens2Sims.csv')
 
   # Parameters for constant density
   #   Area and meanColonySize are the actal input arguments
-  pop <- 16000
+  pop <- 8000
 
   colonySize <- pop / 20
 
@@ -775,11 +775,11 @@ dens1 <- read.csv('data/Chapter4/DensSims.csv', row.names = 1)
 
 dens1Means <- dens1 %>%
                 group_by(transmission, colonySize, colonyNumber) %>%
-                summarise(success = sum(nExtantDis == 2), n = n(), pop = mean(as.numeric(as.character(pop))))
+                summarise(success = sum(nExtantDis == 2), sampleSize = n(), pop = mean(as.numeric(as.character(pop))))
 
 
 dens1Means <- dens1Means %>%
-                cbind(., vary = 'colonySize', binom.confint(.$success, .$n, conf.level = 0.95, methods = "exact"))
+                cbind(., vary = 'colonySize', binom.confint(.$success, .$sampleSize, conf.level = 0.95, methods = "exact"))
 
 
 
@@ -789,12 +789,12 @@ dens2 <- read.csv('data/Chapter4/Dens2Sims.csv', row.names = 1)
 
 dens2Means <- dens2 %>%
                 group_by(transmission, colonySize, colonyNumber) %>%
-                summarise(success = sum(nExtantDis == 2), n = n(), pop = mean(as.numeric(as.character(pop))))
+                summarise(success = sum(nExtantDis == 2), sampleSize = n(), pop = mean(as.numeric(as.character(pop))))
 
 
 dens2Means <- dens2Means %>%
-                cbind(., vary = 'colonyNumber',  binom.confint(.$success, .$n, conf.level = 0.95, methods = "exact")) 
-
+                cbind(., vary = 'colonyNumber',  binom.confint(.$success, .$sampleSize, conf.level = 0.95, methods = "exact"))
+                
 
 
 # Constant population, altered area
@@ -803,11 +803,11 @@ pop <- read.csv('data/Chapter4/PopSims.csv', row.names = 1)
 
 popMeans <- pop %>%
                 group_by(transmission, area) %>%
-                summarise(success = sum(nExtantDis == 2), n = n())
+                summarise(success = sum(nExtantDis == 2), sampleSize = n())
 
 
 popMeans <- popMeans %>%
-                cbind(., binom.confint(.$success, .$n, conf.level = 0.95, methods = "exact"))
+                cbind(., binom.confint(.$success, .$sampleSize, conf.level = 0.95, methods = "exact"))
 
 
 
@@ -870,8 +870,7 @@ ggplot(rbind(dens1Means, dens2Means), aes(x = pop, y = mean, colour = vary)) +
   facet_grid(transmission ~ .) +
   geom_point() +
   geom_errorbar(aes(ymin = lower, ymax = upper),
-              width=.2,                   
-              position = position_dodge(.9)) +
+              width=.2) +
   ylab('Prop. Invasions') +
   xlab('Population size') +
   geom_smooth(method = 'glm', family = 'binomial', se=F) +
@@ -882,18 +881,32 @@ ggplot(rbind(dens1Means, dens2Means), aes(x = pop, y = mean, colour = vary)) +
                spread = 2)
 
 
-ggplot(dens2Means, aes(x = factor(transmission), y = mean, fill = factor(colonyNumber))) +
-  geom_bar(stat = 'identity', position=position_dodge()) +
+
+d <- rbind(popMeans %>% 
+             mutate(ValueChange = as.numeric(as.character(area))/median(as.numeric(as.character(area))), vary = 'Area') %>%
+             select(ValueChange, transmission, mean, lower, upper, vary),
+           dens1Means %>% 
+             mutate(ValueChange = as.numeric(as.character(colonySize))/median(as.numeric(as.character(colonySize))), vary = 'colonySize') %>%
+             select(ValueChange, transmission, mean, lower, upper, vary),
+           dens2Means %>% 
+             mutate(ValueChange = as.numeric(as.character(colonyNumber))/median(as.numeric(as.character(colonyNumber))), vary = 'colonyNumber')%>%
+             select(ValueChange, transmission, mean, lower, upper, vary)
+     )
+
+
+ggplot(d, aes(x = ValueChange, y = mean, colour = vary)) +
+  facet_grid(transmission ~ .) +
+  geom_point() +
   geom_errorbar(aes(ymin = lower, ymax = upper),
-                width=.2,                   
-                position = position_dodge(.9)) +
-  ylim(0, 1) +
-  xlab('Transmission') + 
+              width=.01) +
   ylab('Prop. Invasions') +
-  scale_fill_poke(name="Colony Number", 
-                 #labels=c('0.001', '0.01', '0.1'), 
-                 pokemon = 'Swampert',
-                 spread = 5)
+  xlab('Amount Varied') +
+  geom_smooth(method = 'glm', family = 'binomial', se=F) +
+  ylim(0, 1) +
+  scale_colour_poke(name="Variable varied", 
+               labels=c('Area', 'Colony Number', 'Colony Size'), 
+               pokemon = 'Swampert',
+               spread = 3)
 
 
 %%end.rcode
