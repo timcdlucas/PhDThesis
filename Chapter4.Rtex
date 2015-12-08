@@ -883,7 +883,7 @@ ggplot(rbind(dens1Means, dens2Means), aes(x = pop, y = mean, colour = vary)) +
 
 
 d <- rbind(popMeans %>% 
-             mutate(ValueChange = as.numeric(as.character(area))/median(as.numeric(as.character(area))), vary = 'Area') %>%
+             mutate(ValueChange = as.numeric(as.character(area))/median(as.numeric(as.character(area))), vary = 'Density') %>%
              select(ValueChange, transmission, mean, lower, upper, vary),
            dens1Means %>% 
              mutate(ValueChange = as.numeric(as.character(colonySize))/median(as.numeric(as.character(colonySize))), vary = 'colonySize') %>%
@@ -904,7 +904,7 @@ ggplot(d, aes(x = ValueChange, y = mean, colour = vary)) +
   geom_smooth(method = 'glm', family = 'binomial', se=F) +
   ylim(0, 1) +
   scale_colour_poke(name="Variable varied", 
-               labels=c('Area', 'Colony Number', 'Colony Size'), 
+               labels=c( 'Colony Number', 'Colony Size', 'Density'), 
                pokemon = 'Swampert',
                spread = 3)
 
