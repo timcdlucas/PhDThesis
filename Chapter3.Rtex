@@ -96,31 +96,32 @@ But once understood, these factors could provide a way to prioritise surveillanc
 
 The pattern of contacts between individuals (i.e. population structure) has long been known to strongly affect epidemic processes.
 Theory suggests that population structure can promote pathogen richness while the ecological literature generally assumes it will decrease richness.
-It is still unclear how important population structure is in controlling pathogen richness in wild populations.
-Previous studies have had contradictory results and the different measures of population structure have different shortcomings.
+Previous studies in wild populations have had contradictory results and the different measures of population structure have different shortcomings.
 
 
 \tmpsection{One sentence clearly stating the general problem (the gap)}
 % being addressed by this particular study.
 
-Here I use comparative data to test whether population structure influences pathogen richness in bats.
-I use two measures of population structure: a novel measure, number of subspecies, and a more careful application of genetic measures which have been used previously.
+Here I use comparative data to test whether population structure influences pathogen richness in bats as they have been associated with a number of important, recent zoonotic outbreaks.
+Unlike previous studies I use two measures of population structure: a novel measure, number of subspecies, and a more careful application of genetic measures which have been used previously.
 
 \tmpsection{One sentence summarising the main result}
 %  (with the words “here we show” or their equivalent).
 
-I find conflicting evidence suggesting that while population structure may promote pathogen diversity it is likely not a strong affect.
+I find that both of these measures are associated with pathogen richness but with effects in opposite directions suggesting that population structure has no clear effect.
 
 
 \tmpsection{Two or three sentences explaining what the main result reveals in direct comparison to what was thought to be the case previously}
 % or how the main result adds to previous knowledge
 
-The results conflict with each other and with other studies which suggests that tests of population structure is senstive to the exact measurements and data used.
+The results conflict with each other and with other studies which suggests that tests of population structure are sensitive to the exact measurements and data used.
 Given the conflicting results in the literature and unclear results here, it seems likely that population structure does not strongly affect pathogen richness in bats.
 
 \tmpsection{One or two sentences to put the results into a more general context.}
 
+The use of larger datasets and and multiple measurements of population structure is therefore important to ensure the robustness of results.
 Given the weakness of any association between population structure and pathogen richness in bats, this is not a useful metric for prioritising zoonotic disease surveillance.
+
 
 
 \tmpsection{Two or three sentences to provide a broader perspective, }
@@ -136,7 +137,8 @@ Given the weakness of any association between population structure and pathogen 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{General Intro}
-
+The number of pathogen species carried by a host species has important consequences for the ecology of the host and the probability that the host will be a reservoir of a zoonotic pathogen.
+However, the factors that affect pathogen richness are poorly understood.
 
 
 
@@ -146,19 +148,25 @@ Given the weakness of any association between population structure and pathogen 
 
 \subsection{Theoretical background}
 
+
+Single pathogen models show that increasing population structure simply slows disease spread and makes establishment less likely \cite{}.
+In the ecological literature this is often taken as predicting that increased population structure will decrease pathogen richness \cite{}.
+However, models of competition between multiple pathogens show that in unstructured populations a competitive exclusion process occurs but that splitting the population into two patches allows coexistence \cite{}.
+
+
 \subsection{Previous Studies}
 
 Three studies have used comparative data to test for an association between population structure and viral richness.
 A study on 15 African bats found a positive relationship between distribution fragmentation and viral richness \cite{maganga2014bat} while a study on 20 South-East Asian bats found the opposite relationship \cite{gay2014parasite}. 
 A global study on 33 bats found a positive relationship between $F_{ST}$ --- a measure of genetic structure --- and viral richness \cite{turmelle2009correlates}. 
-However, this study included measures using mtDNA which only measures female dispersal which may haved biased the results many bat species show female philopatry \cite{kerth2002extreme, hulva2010mechanisms}.
+However, this study included measures using mtDNA which only measures female dispersal which may have biased the results many bat species show female philopatry \cite{kerth2002extreme, hulva2010mechanisms}.
 Furthermore, this study used measures of $F_{ST}$ irrespective of the study scale with studies covering from tens \cite{mccracken1981social} to thousands \cite{petit1999male} of kilometers.
 As isolation by distance has been shown in a number of bat species \cite{burland1999population, hulva2010mechanisms, o2015genetic, vonhof2015range} this could bias results further.
 Finally, when a global $F_{ST}$ value is not given they use the mean of all pairwise $F_{ST}$ between sites.
 It is not clear that this is correct as from global $F_{ST}$ we expect migration rates of $M = \frac{1-F_{ST}}{8F_{ST}}$ while from $F_{ST}$ between pairs of populations we expect migration rates of $M = \frac{1-F_{ST}}{8F_{ST}}$ where $M$ is the absolute number of diploid inviduals dispersing per generation \cite{slatkin1995measure}.
 As it is in fact the movement of individuals that is epidemiologically relavent, using these studies is probably not correct without attempting to correct for these difference.
 
-
+Studies on single pathogens, notably rabies, have also shown that for virulent pathogens, space can allow persistence where a well mixed population ould experience a single, large epidemic then pathogen extinction \cite{rabiespaper, colizza, pons2014insights}.
 
 \subsection{Rates}
 
@@ -166,27 +174,51 @@ As it is in fact the movement of individuals that is epidemiologically relavent,
 
 \subsection{Choice of measure of population structure}
 
+A number of measurments of population structure have been used and each has it's own shortcomings.
+In particular, the better, more direct measurements tend to be very work intensive which consequently means data is available for few species.
+
 \tmpsection{Direct dispersal measurements}
 
-\tmpsection{Measures from range}
+The ideal measurement of population structure is direct measurement of dispersal rates and distance.
+These are incredibly difficult to obtain, especially over large scales.
+Due white nose syndrom, some very large mark-recapture studies have been conducted, but recapture rates are low.
+Further, these large studies have been in species the live in a fe large colonies, so recapture rates should be higher than in less social species.
+
+
 
 \tmpsection{Genetic measures}
 
+As direct measurement of dispersal are difficult, genetic data is often used.
+Measurement such as $F_{ST}$ are used to calculate migration.
+There are strong model assumptions under the conversion from $F_{ST}$ to migration.
+However, the main issue with this measure is the effort required for each study and the subsequent low number of measurements.
+Further, there are differences in the scales of the studies and the genetic regions being sequenced.
+This differences should not be ignored.
+
 \tmpsection{Number of Subspecies}
 
+For a population to evolve distinct phenotypic or genetic traits, such that they can be classed as a subspecies, there must be limited migration between populations.
+The number of subspecies a species has therefore reflects the level of population structure in that species.
+The value of this measurement is available for every bat species.
+However, it is likely biased, with well studied species being likely to have more recognised subspecies.
+Further, this is a very course measure and it is important to consider whether it is measuring migration at a timescale and rate that is epidemiologically relevant.
 
+\tmpsection{Measures from range}
 
-
+The final measurement that has been used is derived from the shape of the species' range, typically from IUCN \cite{iucn} maps.
+The ratio between the perimeter of the range and the area (or similar values) are calculated.
+Range maps are very course for many species.
+Furthermore there is a potential bias with island living species being given sea based edges where continental species might be assumed to live everywhere in between locations where it is known to live, without considering the different terrestrial habitats in these areas.
 
 \subsection{The gap}
 
-
+There is a lack of studies using multiple measures of population structure and larger datasets to robustly estimate the importance of population structure.
 
 
 \subsection{What I did}
 
-
-
+Here I use two measures of population structure --- the number of subspecies and gene flow --- to robustly test for an association between population structure and pathogen richness.
+Furthermore, I use a much larger dataset for one of these analyses, further promoting robustness of results.
 
 \subsection{What I found}
 
