@@ -23,31 +23,32 @@ But once understood, these factors could provide a way to prioritise surveillanc
 
 The pattern of contacts between individuals (i.e. population structure) has long been known to strongly affect epidemic processes.
 Theory suggests that population structure can promote pathogen richness while the ecological literature generally assumes it will decrease richness.
-It is still unclear how important population structure is in controlling pathogen richness in wild populations.
-Previous studies have had contradictory results and the different measures of population structure have different shortcomings.
+Previous studies in wild populations have had contradictory results and the different measures of population structure have different shortcomings.
 
 
 \tmpsection{One sentence clearly stating the general problem (the gap)}
 % being addressed by this particular study.
 
-Here I use comparative data to test whether population structure influences pathogen richness in bats.
-I use two measures of population structure: a novel measure, number of subspecies, and a more careful application of genetic measures which have been used previously.
+Here I use comparative data to test whether population structure influences pathogen richness in bats as they have been associated with a number of important, recent zoonotic outbreaks.
+Unlike previous studies I use two measures of population structure: a novel measure, number of subspecies, and a more careful application of genetic measures which have been used previously.
 
 \tmpsection{One sentence summarising the main result}
 %  (with the words “here we show” or their equivalent).
 
-I find conflicting evidence suggesting that while population structure may promote pathogen diversity it is likely not a strong affect.
+I find that both of these measures are associated with pathogen richness but with effects in opposite directions suggesting that population structure has no clear effect.
 
 
 \tmpsection{Two or three sentences explaining what the main result reveals in direct comparison to what was thought to be the case previously}
 % or how the main result adds to previous knowledge
 
-The results conflict with each other and with other studies which suggests that tests of population structure is senstive to the exact measurements and data used.
+The results conflict with each other and with other studies which suggests that tests of population structure are sensitive to the exact measurements and data used.
 Given the conflicting results in the literature and unclear results here, it seems likely that population structure does not strongly affect pathogen richness in bats.
 
 \tmpsection{One or two sentences to put the results into a more general context.}
 
+The use of larger datasets and and multiple measurements of population structure is therefore important to ensure the robustness of results.
 Given the weakness of any association between population structure and pathogen richness in bats, this is not a useful metric for prioritising zoonotic disease surveillance.
+
 
 
 \tmpsection{Two or three sentences to provide a broader perspective, }
@@ -63,7 +64,8 @@ Given the weakness of any association between population structure and pathogen 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{General Intro}
-
+The number of pathogen species carried by a host species has important consequences for the ecology of the host and the probability that the host will be a reservoir of a zoonotic pathogen.
+However, the factors that affect pathogen richness are poorly understood.
 
 
 
@@ -73,19 +75,25 @@ Given the weakness of any association between population structure and pathogen 
 
 \subsection{Theoretical background}
 
+
+Single pathogen models show that increasing population structure simply slows disease spread and makes establishment less likely \cite{}.
+In the ecological literature this is often taken as predicting that increased population structure will decrease pathogen richness \cite{}.
+However, models of competition between multiple pathogens show that in unstructured populations a competitive exclusion process occurs but that splitting the population into two patches allows coexistence \cite{}.
+
+
 \subsection{Previous Studies}
 
 Three studies have used comparative data to test for an association between population structure and viral richness.
 A study on 15 African bats found a positive relationship between distribution fragmentation and viral richness \cite{maganga2014bat} while a study on 20 South-East Asian bats found the opposite relationship \cite{gay2014parasite}. 
 A global study on 33 bats found a positive relationship between $F_{ST}$ --- a measure of genetic structure --- and viral richness \cite{turmelle2009correlates}. 
-However, this study included measures using mtDNA which only measures female dispersal which may haved biased the results many bat species show female philopatry \cite{kerth2002extreme, hulva2010mechanisms}.
+However, this study included measures using mtDNA which only measures female dispersal which may have biased the results many bat species show female philopatry \cite{kerth2002extreme, hulva2010mechanisms}.
 Furthermore, this study used measures of $F_{ST}$ irrespective of the study scale with studies covering from tens \cite{mccracken1981social} to thousands \cite{petit1999male} of kilometers.
 As isolation by distance has been shown in a number of bat species \cite{burland1999population, hulva2010mechanisms, o2015genetic, vonhof2015range} this could bias results further.
 Finally, when a global $F_{ST}$ value is not given they use the mean of all pairwise $F_{ST}$ between sites.
 It is not clear that this is correct as from global $F_{ST}$ we expect migration rates of $M = \frac{1-F_{ST}}{8F_{ST}}$ while from $F_{ST}$ between pairs of populations we expect migration rates of $M = \frac{1-F_{ST}}{8F_{ST}}$ where $M$ is the absolute number of diploid inviduals dispersing per generation \cite{slatkin1995measure}.
 As it is in fact the movement of individuals that is epidemiologically relavent, using these studies is probably not correct without attempting to correct for these difference.
 
-
+Studies on single pathogens, notably rabies, have also shown that for virulent pathogens, space can allow persistence where a well mixed population ould experience a single, large epidemic then pathogen extinction \cite{rabiespaper, colizza, pons2014insights}.
 
 \subsection{Rates}
 
@@ -93,27 +101,51 @@ As it is in fact the movement of individuals that is epidemiologically relavent,
 
 \subsection{Choice of measure of population structure}
 
+A number of measurments of population structure have been used and each has it's own shortcomings.
+In particular, the better, more direct measurements tend to be very work intensive which consequently means data is available for few species.
+
 \tmpsection{Direct dispersal measurements}
 
-\tmpsection{Measures from range}
+The ideal measurement of population structure is direct measurement of dispersal rates and distance.
+These are incredibly difficult to obtain, especially over large scales.
+Due white nose syndrom, some very large mark-recapture studies have been conducted, but recapture rates are low.
+Further, these large studies have been in species the live in a fe large colonies, so recapture rates should be higher than in less social species.
+
+
 
 \tmpsection{Genetic measures}
 
+As direct measurement of dispersal are difficult, genetic data is often used.
+Measurement such as $F_{ST}$ are used to calculate migration.
+There are strong model assumptions under the conversion from $F_{ST}$ to migration.
+However, the main issue with this measure is the effort required for each study and the subsequent low number of measurements.
+Further, there are differences in the scales of the studies and the genetic regions being sequenced.
+This differences should not be ignored.
+
 \tmpsection{Number of Subspecies}
 
+For a population to evolve distinct phenotypic or genetic traits, such that they can be classed as a subspecies, there must be limited migration between populations.
+The number of subspecies a species has therefore reflects the level of population structure in that species.
+The value of this measurement is available for every bat species.
+However, it is likely biased, with well studied species being likely to have more recognised subspecies.
+Further, this is a very course measure and it is important to consider whether it is measuring migration at a timescale and rate that is epidemiologically relevant.
 
+\tmpsection{Measures from range}
 
-
+The final measurement that has been used is derived from the shape of the species' range, typically from IUCN \cite{iucn} maps.
+The ratio between the perimeter of the range and the area (or similar values) are calculated.
+Range maps are very course for many species.
+Furthermore there is a potential bias with island living species being given sea based edges where continental species might be assumed to live everywhere in between locations where it is known to live, without considering the different terrestrial habitats in these areas.
 
 \subsection{The gap}
 
-
-
+There is a lack of studies using multiple measures of population structure and larger datasets to robustly estimate the importance of population structure.
+Furthermore, the
 
 \subsection{What I did}
 
-
-
+Here I use two measures of population structure --- the number of subspecies and gene flow --- to robustly test for an association between population structure and pathogen richness.
+Furthermore, I use a much larger dataset for one of these analyses, further promoting robustness of results.
 
 \subsection{What I found}
 
@@ -183,17 +215,33 @@ As it is in fact the movement of individuals that is epidemiologically relavent,
 
 
 
+To measure pathogen richness I used data from \cite{luis2013comparison}. 
+These simply include known infections of a bat species with a pathogen species. 
+Only species with at least one pathogen were included in the analysis.
+Rows with host species that were not identified to species level were removed.
+Many viruses were not identified to species level or their identified species was not in the ICTV virus taxonomy \cite{ICTV}.
+I counted a virus if it was the only virus, for that host species, in the lowest taxonomic level identified in the ICTV taxonomy.
+That is, if a host carries an unknown Paramyxoviridae virus, then it must carry at least one Paramyxoviridae virus.
+If a host carries an unknown Paramyxoviridae virus and a known Paramyxoviridae virus, then it is hard to confirm that the unknown virus is not another record of the known virus.
+In this case, this would be counted as one virus species.
 
 
 
 
 
 
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[t]
 
+{\centering \includegraphics[width=\textwidth]{figure/treePlot-1} 
 
+}
 
+\caption[Pruned phylogeny with dot size showing number of pathogens and colour showing family]{Pruned phylogeny with dot size showing number of pathogens and colour showing family.}\label{fig:treePlot}
+\end{figure}
 
 
+\end{knitrout}
 
 
 
@@ -206,10 +254,34 @@ As it is in fact the movement of individuals that is epidemiologically relavent,
 
 
 
+I used two measures of population structure. 
+$F_{ST}$ and the number of subspecies.
+The number of subspecies was counted using the Wilson and Reeder taxonomy \cite{wilson2005mammal}.
+$F_{ST}$ and other measures were collated from the literature.
+Studies are from a wide range of spatial scales, from local ($\sim\SI{10}{\kilo\metre}$) to continental.
+As $F_{ST}$ inevitably increases with spatial scale I controlled for this by only using data from studies where a large proportion of the species range was studied.
+I used the ratio of the furthest distance between $F_{ST}$ samples (measured with \url{http://www.distancefromto.net/} if not stated) to the width of the IUCN species range and only used studies if this ratio was greater than 0.2.
+To allow comparison between different measures ($F_{ST}, \phi_{ST}$) and data from different molecular regions I converted all data to diploid gene flow.
+WILL ADD EXTRA METHODS LATER.
+These two measures of population structure were analysed separately as the number of subspecies has 196 data points while there is only $F_{ST}$ data for $\sim 30$ bat species.
 
+To control for study bias I collected the number of Pubmed and Google Scholar citations for each bat species including synonyms from ITIS \cite{itis} via the taxize package \cite{chamberlain2013taxize}.
+The counts were scraped using the rvest package \cite{rvest}.
+I log transformed these variables as they were strongly right skewed.
+The log number of citations on Pubmed and Google scholar were highly correlated (pgls: $t$ = 19.32, df = 194, $p$ = 0).
+The results here are for analyses using only Google Scholar citations.
+See the appendix for analyses run using Pubmed citations.
 
+Measures of body mass are taken from Pantheria \cite{jones2009pantheria} and primary literature \cite{canals2005relative, arita1993rarity, lopez2014echolocation, orr2013does, , lim2001bat, aldridge1987turning, ma2003dietary, owen2003home, henderson2008movements, heaney2012nyctalus, oleksy2015high, zhang2009recent}. 
+\emph{Pipistrellus pygmaeus} was assigned the same mass as \emph{P. pipistrellus} as they indistinguishable by mass.
+Body mass measurements were log transformed due to the strong right skew.
+Distribution size was estimated by downloading range maps for all species from IUCN \cite{} and were also logged due to right skew.
 
+%Pubmed was scraped on pubmedScrapeDate and Google Scholar was scraped on scholarScrapeDate
 
+To control for phylogenetic nonindependance I used the best-supported phylogeny from \cite{fritz2009geographical} which is the supertree from \cite{bininda2007delayed} with names updated to match the Wilson \& Reeder taxonomy \cite{wilson2005mammal}.
+Phylogenetic manipulation was performed using the ape package \cite{ape}.
+The importance of the phylogeny on each variable separately was estimated using \cite{phytools}.
 
 
 
@@ -218,6 +290,7 @@ As it is in fact the movement of individuals that is epidemiologically relavent,
 
 
 
+%\clearpage
 
 
 
@@ -225,11 +298,22 @@ As it is in fact the movement of individuals that is epidemiologically relavent,
 
 
 
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[t]
 
+{\centering \includegraphics[width=0.8\textwidth]{figure/boxplot-1} 
 
+}
 
+\caption[Number of virus species against number of subspecies]{Number of virus species against number of subspecies. 
+Data within a number of subspecies are plotted as boxplots with the dark bar showing the median, the box showing the interquartile range, vertical lines showing the range and outliers shown as seperate points.
+Regression lines are from multivariate phylogenetic models with other independant variables set at their median value.
+The models shown are thos with (pink) and without (red) an interaction between study effort and number of subspecies.
+}\label{fig:boxplot}
+\end{figure}
 
 
+\end{knitrout}
 
 
 
@@ -239,17 +323,341 @@ As it is in fact the movement of individuals that is epidemiologically relavent,
 
 
 
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[t]
 
+{\centering \includegraphics[width=0.8\textwidth]{figure/ITPlots-1} 
 
+}
 
+\caption[Akaika variable weights for number of subspecies analysis]{Akaika variable weights for number of subspecies analysis. The probability that each variable will be in the best model if the data were recollected is shown for each of the bootstrap analyses. The purple ``Null'' box is a uniform random variable used as a null. Population structure (Number of subspecies) and the interaction between subspecies and study effort, shown in red, are more likely to be in the best model than this random variable.}\label{fig:ITPlots}
+\end{figure}
 
 
+\end{knitrout}
 
 
 
 
 
 
+\clearpage
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% FST ANALYSIS                                                                                                                                  %%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[t]
+
+{\centering \includegraphics[width=\textwidth]{figure/fstTreePlot-1} 
+
+}
+
+\caption[Pruned phylogeny with dot size showing number of pathogens and colour showing family]{Pruned phylogeny with dot size showing number of pathogens and colour showing family.}\label{fig:fstTreePlot}
+\end{figure}
+
+
+\end{knitrout}
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[t]
+
+{\centering \includegraphics[width=0.8\textwidth]{figure/fstRawData-1} 
+
+}
+
+\caption[Gene flow per generation (on a log scale) against viral richness with the genetic marker used shown with colour]{Gene flow per generation (on a log scale) against viral richness with the genetic marker used shown with colour.}\label{fig:fstRawData}
+\end{figure}
+
+
+\end{knitrout}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[t]
+
+{\centering \includegraphics[width=0.8\textwidth]{figure/fstITPlots-1} 
+
+}
+
+\caption[Akaika variable weights for $F_{ST}$ analysis.]{Akaika variable weights for $F_{ST}$ analysis. The probability that each variable will be in the best model if the data were recollected is shown for each of the bootstrap analyses. The purple ``Null'' box is a uniform random variable used as a null. Population structure ($F_{ST}$), shown in red, is much less likely to be in the best model than this random variable.}\label{fig:fstITPlots}
+\end{figure}
+
+
+\end{knitrout}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$F_{ST}$ studies are conducted at a range of spatial scales, but $F_{ST}$ often increases with distance studied \cite{}.
+To minimise the effects of this I only used data from studies that cover 20\% of the diameter of the species range.
+This is a largely arbitrary value that could be considered to reflect a `global' estimate of $F_{ST}$ while keeping a reasonable number of datapoints available.
+I calculated the diameter of the species range by finding the furthest apart points in the IUCN species range \cite{} even if the range is split into multiple polygons.
+The width covered by each study was the distance between the most distant sampling sites.
+When this was not explicit in the paper, the centre of the lowest level of geographic area was used.
+
+
+
+\subsection{Statistical analysis}
+
+Statistical analysis for both dependant variables were conducted using a information theory/model averaging approach \cite{burnham2002model} specifically following \cite{whittingham2005habitat, whittingham2006we}.
+I chose a credible set of models including all combinations of independent variables.
+In the analysis using the number of subspecies dependant variable I also included an interaction term between study effort and number of subspecies as I believe \emph{a priori} that this interaction may be present.
+The interaction was only included in models with both study effort and number of subspecies as an individual term.
+
+I fitted phylogenetic regressions using caper \cite{nlme} to all models.
+In each case I simultaneously fitted the $\lambda$ parameter as this avoids mispecifying the model \cite{revell2010phylogenetic}.
+$\kappa$ and $\delta$ were constrained to one.
+
+As the number of data points is close to or much less than the number of variables times 40 I calculated small sample corrected AIC (AICc) for each model and then calculated Akaiki weights.
+This value can be interpreted as the probability that a model would be the best model if the data were recollected.
+For each variable, the sum of the Akaiki weights for models containing that variable are summed.
+This value can be interpreted as the probability that the given variable is in the best model.
+Following \cite{whittingham2005habitat} I included a uniformally random variable as a null variable as even unimportant variables can have Akaiki weights significantly greater than zero.
+The whole analysis was run 50 times, resampling the random variable each time.
+We calculated $\bar{AICc}$ by averaging AICc scores within models.
+$\Delta\text{AICc}$ was calculated as $\text{min}(\bar{AICc}) - \bar{AICc}$, not the mean of the individual $\Delta\text{AICc}$ scores, to guarantee that the best model has $\Delta\text{AICc} = 0$.
+
+
+Plots were created with a combination of \cite{ggplot2, palettetown, dotwhisker, ggtree}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\clearpage
+\section{Results}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Number of Subspecies}
+\tmpsection{More descriptive}
+
+After data cleaning there was data for 196 bat species in 11 families.
+The number of described virus species for a bat host ranged up to 15 viruses in \emph{Carollia perspicillata}.
+Figure~\ref{fig:treePlot} shows the phylogeny used and the number of viruses for each species.
+The mean number of viruses across families is fairly constant with a lower range of 1.67 for Nycteridae.
+The highest mean is Mormoopidae with 5 virus species per bat species, but this is based on a sample size of 3.
+The Phyllostomidae have the second highest mean (n = 37) of 3.49.
+
+The small change in mean pathogen richness across families and the lack of clear pattern in Figure~\ref{fig:treePlot} implies that viral richness is not strongly phylogenetic. 
+This is corroborated by the small estimated size of $\lambda$ ($\lambda$ = 0.04, $p$ = 0.21).
+This fact implies that other factors must control pathogen richness.
+It also implies that pathogens are not directly inherited down the phylogeny, although this is to be expected by the fast evolution of viruses.
+
+Of the explanatory variables, the number of subspecies has no phylogenetic autocorrelation ($\lambda$ = \ensuremath{10^{-6}}, $p$ = 1), study effort and distribution size have weak but significant autocorrelation (Study Effort: $\lambda$ = 0.1, $p$ = \ensuremath{9.12\times 10^{-3}}, Distribution size: $\lambda$ = 0.32, $p$ = \ensuremath{8.82\times 10^{-8}}) and mass is strongly phylogenetic ($\lambda$ = 0.93, $p$ = 0).
+
+\tmpsection{Model results}
+%See Figure \ref{fig:plotSubspeciesCoefs} for a display of estimated coefficients for the two models using number of viruses as the response variable. 
+%The main model with mass, study effort and number of subspecies as predictors found study effort to be highly significant ($\beta = $ subspeciesJoint$model$coef['log(pubmedRefs + 1)'], $p = $ subJoint.summary$coefficients[2,'Pr(>|t|)']). 
+%The number of subspecies was marginally significant ($\beta = $  subspeciesJoint$model$coef['NumberOfSubspecies'], $p = $ subJoint.summary$coefficients[3,'Pr(>|t|)']). 
+%The effect of nonindependance due to phylogeny was very small ($\lambda = $ subJoint.summary$param['lambda'], $p = $ subspeciesJoint$param.CI$lambda$bounds.p[1]).
+
+%The interaction term between study effort and number of subspecies, when included, was significant ($\beta = $  subspeciesInter$model$coef['NumberOfSubspecies:log(scholarRefs)'], $p = $ subInter.summary$coefficients[5,'Pr(>|t|)']).
+
+
+
+\subsection{Gene Flow}
+
+Due to the low number of studies and the restrictive requirements imposed on study design, there are only data for 23 bat species in 7 families.
+The number of described virus species for a bat host ranged up to 12 viruses in \emph{Rhinolophus ferrumequinum}.
+Figure~\ref{fig:fstTreePlot} shows the phylogeny used and the number of viruses for each species.
+
+As with the Number of Subspecies dataset, there is no phylogenetic signal in the number of virus species ($\lambda$ = \ensuremath{10^{-6}}, $p$ = 1). 
+Gene flow also has no phylogenetic autocorrelation ($\lambda$ = \ensuremath{10^{-6}}, $p$ = 1).
+Due to the low sample size, significance tests are unlikely to have much power.
+However, study effort has some phylogenetic autocorrelation ($\lambda$ = 0.15, $p$ = 0.56) while distribution size and mass seem to show phylogenetic signal (Distribution size: $\lambda$ = 0.67, $p$ = 0.53, Mass: $\lambda$ = 0.79, $p$ = \ensuremath{2.69\times 10^{-3}}).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%\begin{table}[t]
+%  \rowcolors{2}{gray!25}{white}
+%  \begin{tabular}{lrr}
+% \hline
+%  Covariate & Estimate (95\% CI) & $p$ value\\
+%  \hline
+%  Number of subspecies & tableM[2,1] (tableM[2, 2] -- tableM[2, 3]) & tableM[2, 4]\\
+%  Mass & tableM[3,1] (tableM[3, 2] -- tableM[3, 3]) & tableM[3, 4]\\
+%  Study effort & tableM[4,1] (tableM[4, 2] -- tableM[4, 3]) & tableM[4, 4]\\
+%  Intercept & tableM[1,1] (tableM[1, 2] -- tableM[1, 3]) & tableM[1, 4]\\
+%  \end{tabular}
+%\caption{Table of parameter estimates.}
+%\label{t:params}
+%\end{table}
+
+
+\begin{table}[t]
+\rowcolors{2}{gray!25}{white}
+\begin{tabular}{>{\small}lrrrr}
+
+\normalsize{Model} & $\bar{\text{AICc}}$ & $\Delta$AICc & $w_i$ & $\sum w_i$\\
+\hline
+log(Scholar)*NSubspecies + rand & 
+896 & 0.00 &
+0.14 & 0.14\\
+log(Scholar)*NSubspecies & 
+896 & 0.15 &
+0.13 & 0.27\\
+log(Scholar)*NSubspecies + rand + log(Mass) & 
+896 & 0.15 &
+0.13 & 0.40\\
+log(Scholar)*NSubspecies  + log(Mass) & 
+896 & 0.35 &
+0.12 & 0.52\\
+log(Scholar)*NSubspecies  + log(Mass) + log(RangeSize) & 
+897 & 0.95 &
+0.09 & 0.61\\
+log(Scholar)*NSubspecies  + rand + log(RangeSize) & 
+898 & 2.03 &
+0.05 & 0.66\\
+log(Scholar)*NSubspecies  + log(RangeSize) & 
+898 & 2.15 &
+0.05 & 0.71\\
+log(Scholar) + NSubspecies & 
+898 & 2.35 &
+0.04 & 0.75\\
+log(Scholar) + NSubspecies + log(Mass) & 
+899 & 2.51 &
+0.04 & 0.79
+\end{tabular}
+\caption[Model selection results for number of subspecies analysis]{
+Model selection results for number of subspecies analysis. 
+$\bar{\text{AICc}}$ is the mean AICc score across 50 resamplings of the null random variable. 
+$\Delta$AICc is the $\bar{\text{AICc}}$ score minus the lowest score. 
+$w_i$ is the Akaike weight and can be interpreted as the probability that the model is the best model (of those in the plausible set).
+$\sum w_i$ is the cumulative sum of the Akaike weights.}
+\label{t:subsmodels}
+\end{table}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\clearpage
+\section{Discussion}  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\clearpage
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Repeat analysis with bat clocks and rocks                  %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section{Appendix}
+
+
+
+
+
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[t]
+
+{\centering \includegraphics[width=\textwidth]{figure/treePlot2-1} 
+
+}
+
+\caption[Pruned phylogeny \cite{jones2005bats} with dot size showing number of pathogens and colour showing family]{Pruned phylogeny \cite{jones2005bats} with dot size showing number of pathogens and colour showing family.}\label{fig:treePlot2}
+\end{figure}
+
+
+\end{knitrout}
 
 
 

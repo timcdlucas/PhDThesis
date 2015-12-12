@@ -11,7 +11,7 @@
 
 # Compilation options
 # Run simulations? This will take many hours
-runAllSims <- FALSE
+runAllSims <- TRUE
 
 # Save raw simulation output
 # This will take ~10GB or so.

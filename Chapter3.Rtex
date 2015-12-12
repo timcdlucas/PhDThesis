@@ -213,7 +213,7 @@ Furthermore there is a potential bias with island living species being given sea
 \subsection{The gap}
 
 There is a lack of studies using multiple measures of population structure and larger datasets to robustly estimate the importance of population structure.
-
+Furthermore, the
 
 \subsection{What I did}
 
@@ -901,180 +901,180 @@ The $R^2$ value give is for the full model (not the loess curve).',
 
 %%begin.rcode, subsAnalysis, fig.show = extraFigs, fig.cap = diagCapts, fig.height = 4
 
-# Fit phylogenetic models and look at diagnostic plots.
+## Fit phylogenetic models and look at diagnostic plots.
 
-# N Virus ~ log(subs + cites + mass)
+## N Virus ~ log(subs + cites + mass)
 
-subspeciesJoint <- pgls(
-  virusSpecies ~ log(scholarRefs) + log(NumberOfSubspecies) +  log(mass) , 
-  data = compSubspecies, lambda = 'ML')
+#subspeciesJoint <- pgls(
+#  virusSpecies ~ log(scholarRefs) + log(NumberOfSubspecies) +  log(mass) , 
+#  data = compSubspecies, lambda = 'ML')
 
-subJoint.summary <- summary(subspeciesJoint)
+#subJoint.summary <- summary(subspeciesJoint)
 
-# Create dataframe for diagnostic residuals plot.
-jointDiag <- data.frame(
-   PhylogeneticResiduals = subspeciesJoint$phyres,
-   FittedValue = subspeciesJoint$fitted,
-   Subspecies = subspeciesJoint$x[, 'log(NumberOfSubspecies)'],
-   Mass = subspeciesJoint$x[, 'log(mass)'],
-   StudyEffort = subspeciesJoint$x[, 'log(scholarRefs)'])
+## Create dataframe for diagnostic residuals plot.
+#jointDiag <- data.frame(
+#   PhylogeneticResiduals = subspeciesJoint$phyres,
+#   FittedValue = subspeciesJoint$fitted,
+#   Subspecies = subspeciesJoint$x[, 'log(NumberOfSubspecies)'],
+#   Mass = subspeciesJoint$x[, 'log(mass)'],
+#   StudyEffort = subspeciesJoint$x[, 'log(scholarRefs)'])
 
-# Plot residuals.
-          
-ggplot(jointDiag, aes(x = FittedValue, y = PhylogeneticResiduals)) +
-  geom_point() +
-  geom_smooth(method = 'loess') +
-   geom_text(aes(x = 6, y = -1, 
-    label =  paste("R^2 == ", round(subJoint.summary$r.squared, 2),sep="")), 
-    parse = TRUE) 
-
-
-ggplot(jointDiag, aes(x = StudyEffort, y = PhylogeneticResiduals)) +
-  geom_point() +
-  geom_smooth(method = 'loess')
-
-ggplot(jointDiag, aes(x = Mass, y = PhylogeneticResiduals)) +
-  geom_point() +
-  geom_smooth(method = 'loess')
-
-# Create data to check heteroscadasticity
-jointSD <- data.frame(
-  Subspecies = unique(jointDiag$Subspecies),
-  SD = sapply(unique(jointDiag$Subspecies), function(x)
-        jointDiag %>%
-          filter(Subspecies == x) %>%
-          dplyr::select(PhylogeneticResiduals) %>%
-          .[,1] %>%
-          sd
-      ),
-  Mean = sapply(unique(jointDiag$Subspecies), function(x)
-        jointDiag %>%
-          filter(Subspecies == x) %>%
-          dplyr::select(PhylogeneticResiduals) %>%
-          .[,1] %>%
-          mean
-      )
-)
-# Look at heteroscedasticity.
-
-ggplot(jointSD, aes(x = Subspecies)) +
-  geom_ribbon(aes(ymax = Mean + 1.96*SD, ymin = Mean - 1.96*SD),
-    alpha = 0.4) +
-  geom_line(aes(y = Mean), colour = 'SteelBlue') +
-  geom_point(data = jointDiag, 
-    aes(x = Subspecies, y = PhylogeneticResiduals))
+## Plot residuals.
+#          
+#ggplot(jointDiag, aes(x = FittedValue, y = PhylogeneticResiduals)) +
+#  geom_point() +
+#  geom_smooth(method = 'loess') +
+#   geom_text(aes(x = 6, y = -1, 
+#    label =  paste("R^2 == ", round(subJoint.summary$r.squared, 2),sep="")), 
+#    parse = TRUE) 
 
 
+#ggplot(jointDiag, aes(x = StudyEffort, y = PhylogeneticResiduals)) +
+#  geom_point() +
+#  geom_smooth(method = 'loess')
 
-#################################################################################
-# N Virus ~ subs + log(cites + mass)
+#ggplot(jointDiag, aes(x = Mass, y = PhylogeneticResiduals)) +
+#  geom_point() +
+#  geom_smooth(method = 'loess')
 
-subspeciesJointUnlog <- pgls(
-  virusSpecies ~ log(scholarRefs) + NumberOfSubspecies +  log(mass), 
-  data = compSubspecies, lambda = 'ML')
+## Create data to check heteroscadasticity
+#jointSD <- data.frame(
+#  Subspecies = unique(jointDiag$Subspecies),
+#  SD = sapply(unique(jointDiag$Subspecies), function(x)
+#        jointDiag %>%
+#          filter(Subspecies == x) %>%
+#          dplyr::select(PhylogeneticResiduals) %>%
+#          .[,1] %>%
+#          sd
+#      ),
+#  Mean = sapply(unique(jointDiag$Subspecies), function(x)
+#        jointDiag %>%
+#          filter(Subspecies == x) %>%
+#          dplyr::select(PhylogeneticResiduals) %>%
+#          .[,1] %>%
+#          mean
+#      )
+#)
+## Look at heteroscedasticity.
 
-
-subspeciesJointUnlog.summary <- summary(subspeciesJointUnlog)
-
-#par(mfrow = c(2, 2))
-plot(subspeciesJointUnlog)
-
-lambda.profile <- pgls.profile(subspeciesJointUnlog, "lambda")
-#plot(lambda.profile)
-
-
-jointDiagUnlog <- data.frame(
-   PhylogeneticResiduals = subspeciesJointUnlog$phyres,
-   FittedValue = subspeciesJointUnlog$fitted,
-   Subspecies = subspeciesJointUnlog$x[, 'NumberOfSubspecies'],
-   Mass = subspeciesJointUnlog$x[, 'log(mass)'],
-   StudyEffort = subspeciesJointUnlog$x[, 'log(scholarRefs)'])
-
-
-           
-ggplot(jointDiagUnlog, aes(x = FittedValue, y = PhylogeneticResiduals)) +
-  geom_point() +
-  geom_smooth(method = 'loess') +
-  geom_text(aes(x = 6, y = -1, 
-    label =  paste("R^2 == ", round(subspeciesJointUnlog.summary$r.squared, 2),sep="")), 
-    parse = TRUE) 
-
-
-ggplot(jointDiagUnlog, aes(x = StudyEffort, y = PhylogeneticResiduals)) +
-  geom_point() +
-  geom_smooth(method = 'loess')
-
-ggplot(jointDiagUnlog, aes(x = Mass, y = PhylogeneticResiduals)) +
-  geom_point() +
-  geom_smooth(method = 'loess')
-
-jointSDUnlog <- data.frame(
-  Subspecies = unique(jointDiagUnlog$Subspecies),
-  SD = sapply(unique(jointDiagUnlog$Subspecies), function(x)
-        jointDiagUnlog %>%
-          filter(Subspecies == x) %>%
-          dplyr::select(PhylogeneticResiduals) %>%
-          .[,1] %>%
-          sd
-      ),
-  Mean = sapply(unique(jointDiagUnlog$Subspecies), function(x)
-        jointDiagUnlog %>%
-          filter(Subspecies == x) %>%
-          dplyr::select(PhylogeneticResiduals) %>%
-          .[,1] %>%
-          mean
-      )
-)
-
-ggplot(jointSDUnlog, aes(x = Subspecies)) +
-  geom_ribbon(aes(ymax = Mean + 1.96*SD, ymin = Mean - 1.96*SD),
-    alpha = 0.4) +
-  geom_line(aes(y = Mean), colour = 'SteelBlue') +
-  geom_point(data = jointDiagUnlog, 
-    aes(x = Subspecies, y = PhylogeneticResiduals))
+#ggplot(jointSD, aes(x = Subspecies)) +
+#  geom_ribbon(aes(ymax = Mean + 1.96*SD, ymin = Mean - 1.96*SD),
+#    alpha = 0.4) +
+#  geom_line(aes(y = Mean), colour = 'SteelBlue') +
+#  geom_point(data = jointDiag, 
+#    aes(x = Subspecies, y = PhylogeneticResiduals))
 
 
 
+##################################################################################
+## N Virus ~ subs + log(cites + mass)
 
-# N Virus ~ subs + log(cites + mass) + subs*log(cites)
-
-subspeciesInter <- pgls(
-  virusSpecies ~ log(mass) + 
-  NumberOfSubspecies*log(scholarRefs), 
-  data = compSubspecies, lambda = 'ML')
-
-subInter.summary <- summary(subspeciesInter)
+#subspeciesJointUnlog <- pgls(
+#  virusSpecies ~ log(scholarRefs) + NumberOfSubspecies +  log(mass), 
+#  data = compSubspecies, lambda = 'ML')
 
 
-# Model using residuals from first model going into second model
-# I don't use this model in the analysis in the end.
-# It gives precedence to study effort when it's better to fit at the same time.
-# glm(N Virus ~ cites)$resid ~ subs + subs*cites
+#subspeciesJointUnlog.summary <- summary(subspeciesJointUnlog)
 
-subspeciesEffort <- pgls(virusSpecies ~ log(scholarRefs), 
-  data = compSubspecies, lambda = 'ML')
+##par(mfrow = c(2, 2))
+#plot(subspeciesJointUnlog)
 
-nSpecies$pubmedResid <- subspeciesEffort$phyres[order(rownames(subspeciesEffort$residuals))]
-
-compSubspeciesResid <- comparative.data(data = nSpecies, phy = pruneTree, names.col = 'binomial')
-
-subspeciesResid <- pgls(pubmedResid ~ log(NumberOfSubspecies) + log(mass), 
-  data = compSubspeciesResid, lambda = 'ML')
-
-summary(subspeciesResid)
-#plot(subspeciesResid)
+#lambda.profile <- pgls.profile(subspeciesJointUnlog, "lambda")
+##plot(lambda.profile)
 
 
-# Compare AICs
+#jointDiagUnlog <- data.frame(
+#   PhylogeneticResiduals = subspeciesJointUnlog$phyres,
+#   FittedValue = subspeciesJointUnlog$fitted,
+#   Subspecies = subspeciesJointUnlog$x[, 'NumberOfSubspecies'],
+#   Mass = subspeciesJointUnlog$x[, 'log(mass)'],
+#   StudyEffort = subspeciesJointUnlog$x[, 'log(scholarRefs)'])
 
-nSubSpAIC <- AIC(subspeciesJoint, subspeciesJointUnlog, subspeciesInter)
+
+#           
+#ggplot(jointDiagUnlog, aes(x = FittedValue, y = PhylogeneticResiduals)) +
+#  geom_point() +
+#  geom_smooth(method = 'loess') +
+#  geom_text(aes(x = 6, y = -1, 
+#    label =  paste("R^2 == ", round(subspeciesJointUnlog.summary$r.squared, 2),sep="")), 
+#    parse = TRUE) 
+
+
+#ggplot(jointDiagUnlog, aes(x = StudyEffort, y = PhylogeneticResiduals)) +
+#  geom_point() +
+#  geom_smooth(method = 'loess')
+
+#ggplot(jointDiagUnlog, aes(x = Mass, y = PhylogeneticResiduals)) +
+#  geom_point() +
+#  geom_smooth(method = 'loess')
+
+#jointSDUnlog <- data.frame(
+#  Subspecies = unique(jointDiagUnlog$Subspecies),
+#  SD = sapply(unique(jointDiagUnlog$Subspecies), function(x)
+#        jointDiagUnlog %>%
+#          filter(Subspecies == x) %>%
+#          dplyr::select(PhylogeneticResiduals) %>%
+#          .[,1] %>%
+#          sd
+#      ),
+#  Mean = sapply(unique(jointDiagUnlog$Subspecies), function(x)
+#        jointDiagUnlog %>%
+#          filter(Subspecies == x) %>%
+#          dplyr::select(PhylogeneticResiduals) %>%
+#          .[,1] %>%
+#          mean
+#      )
+#)
+
+#ggplot(jointSDUnlog, aes(x = Subspecies)) +
+#  geom_ribbon(aes(ymax = Mean + 1.96*SD, ymin = Mean - 1.96*SD),
+#    alpha = 0.4) +
+#  geom_line(aes(y = Mean), colour = 'SteelBlue') +
+#  geom_point(data = jointDiagUnlog, 
+#    aes(x = Subspecies, y = PhylogeneticResiduals))
 
 
 
-# Look at Variance inflation factors.
-#   Couple of help messages imply lm vif is fine.
 
-sqrt(vif(lm(virusSpecies ~ log(scholarRefs) + NumberOfSubspecies +  log(mass) + log(distrSize), data = nSpecies)))
+## N Virus ~ subs + log(cites + mass) + subs*log(cites)
+
+#subspeciesInter <- pgls(
+#  virusSpecies ~ log(mass) + 
+#  NumberOfSubspecies*log(scholarRefs), 
+#  data = compSubspecies, lambda = 'ML')
+
+#subInter.summary <- summary(subspeciesInter)
+
+
+## Model using residuals from first model going into second model
+## I don't use this model in the analysis in the end.
+## It gives precedence to study effort when it's better to fit at the same time.
+## glm(N Virus ~ cites)$resid ~ subs + subs*cites
+
+#subspeciesEffort <- pgls(virusSpecies ~ log(scholarRefs), 
+#  data = compSubspecies, lambda = 'ML')
+
+#nSpecies$pubmedResid <- subspeciesEffort$phyres[order(rownames(subspeciesEffort$residuals))]
+
+#compSubspeciesResid <- comparative.data(data = nSpecies, phy = pruneTree, names.col = 'binomial')
+
+#subspeciesResid <- pgls(pubmedResid ~ log(NumberOfSubspecies) + log(mass), 
+#  data = compSubspeciesResid, lambda = 'ML')
+
+#summary(subspeciesResid)
+##plot(subspeciesResid)
+
+
+## Compare AICs
+
+#nSubSpAIC <- AIC(subspeciesJoint, subspeciesJointUnlog, subspeciesInter)
+
+
+
+## Look at Variance inflation factors.
+##   Couple of help messages imply lm vif is fine.
+
+#sqrt(vif(lm(virusSpecies ~ log(scholarRefs) + NumberOfSubspecies +  log(mass) + log(distrSize), data = nSpecies)))
 
 %%end.rcode
 %\clearpage
@@ -1302,7 +1302,7 @@ familyMeans <- nSpecies %>%
 
 %%begin.rcode univariatePGLS
 
-orderedNSpecies <- nSpecies[sapply(pruneTree$tip.label, function(x) which(nSpecies$binomial == x)),]
+#orderedNSpecies <- nSpecies[sapply(pruneTree$tip.label, function(x) which(nSpecies$binomial == x)),]
 
 
 sspLambda <- summary(pgls(NumberOfSubspecies ~ 1, data = compSubspecies, lambda = 'ML'))
@@ -1489,9 +1489,9 @@ allozymeBool <- fst$Measure == 'Fst' & fst$Marker == 'allozyme'
 fst$Nm[allozymeBool] <- fstallozyme(fst$Value[allozymeBool])
 fst$fnc[allozymeBool] <- 'fstallozyme'
 
-mtDNABool <- fst$Measure == 'Fst' & fst$Marker == 'mtDNA'
-fst$Nm[mtDNABool] <- fstmtDNA(fst$Value[mtDNABool])
-fst$fnc[mtDNABool] <- 'fstmtDNA'
+#mtDNABool <- fst$Measure == 'Fst' & fst$Marker == 'mtDNA'
+#fst$Nm[mtDNABool] <- fstmtDNA(fst$Value[mtDNABool])
+#fst$fnc[mtDNABool] <- 'fstmtDNA'
 
 phistBool <- fst$Measure == 'Phist' & fst$Marker == 'mtDNA'
 fst$Nm[phistBool] <- phist(fst$Value[phistBool])
@@ -1577,6 +1577,7 @@ fstTree <- drop.tip(tr1, fstUnneededTips)
 # Plot tree 
 p <- ggtree(fstTree) 
 
+
 fstFinal$lengthNames <- fstFinal$binomial %>%
                           as.character %>%
                           paste0('  ', .)
@@ -1608,9 +1609,10 @@ p %<+% fstFinal[, c('binomial', 'virusSpecies')] +
 ggplot(fstFinal, aes(x = Nm, y = virusSpecies, colour = Marker)) +
   geom_point(size = 3.5) +
   scale_colour_poke(pokemon = 'oddish', spread = 3) +
-  scale_x_log10() +
+  #scale_x_log10() +
   xlab('Gene flow (per gen.)') +
-  ylab('Viral Richness') #+ geom_smooth(method = 'lm', aes(colour = 'a'))
+  ylab('Viral Richness') #+ geom_smooth(method = 'lm', aes(colour = 'a')) 
+
 
 %%end.rcode
 
@@ -1843,6 +1845,20 @@ sqrt(vif(lm(virusSpecies ~ log(scholarRefs) + Nm +  log(mass) + log(distrSize), 
 
 %%end.rcode
 
+
+%%begin.rcode univariateFstPGLS
+
+#orderedFst <- fstFinal[sapply(fstTree$tip.label, function(x) which(fstFinal$binomial == x)),]
+
+compFst <- comparative.data(data = fstFinal, phy = fstTree, names.col = 'binomial')
+
+nmFstLambda <- summary(pgls(log(Nm) ~ 1, data = compFst, lambda = 'ML'))
+massFstLambda <- summary(pgls(log(mass) ~ 1, data = compFst, lambda = 'ML'))
+scholarFstLambda <- summary(pgls(log(scholarRefs) ~ 1, data = compFst, lambda = 'ML'))
+virusFstLambda <- summary(pgls(virusSpecies ~ 1, data = compFst, lambda = 'ML'))
+distrFstLambda <- summary(pgls(distrSize ~ 1, data = compFst, lambda = 'ML'))
+%%end.rcode
+
 $F_{ST}$ studies are conducted at a range of spatial scales, but $F_{ST}$ often increases with distance studied \cite{}.
 To minimise the effects of this I only used data from studies that cover \rinline{rangeUseable * 100}\% of the diameter of the species range.
 This is a largely arbitrary value that could be considered to reflect a `global' estimate of $F_{ST}$ while keeping a reasonable number of datapoints available.
@@ -1908,75 +1924,63 @@ Of the explanatory variables, the number of subspecies has no phylogenetic autoc
 
 
 
-\subsection{$F_{ST}$}
+\subsection{Gene Flow}
+
+Due to the low number of studies and the restrictive requirements imposed on study design, there are only data for \rinline{nrow(fstFinal)} bat species in \rinline{length(unique(fstFinal$Family))} families.
+The number of described virus species for a bat host ranged up to \rinline{max(fstFinal$virusSpecies)} viruses in \emph{\rinline{fstFinal$binomial[which.max(fstFinal$virusSpecies)]}}.
+Figure~\ref{fig:fstTreePlot} shows the phylogeny used and the number of viruses for each species.
+
+As with the Number of Subspecies dataset, there is no phylogenetic signal in the number of virus species ($\lambda$ = \rinline{virusFstLambda$param['lambda']}, $p$ = \rinline{virusFstLambda$param.CI$lambda$bounds.p[1]}). 
+Gene flow also has no phylogenetic autocorrelation ($\lambda$ = \rinline{nmFstLambda$param['lambda']}, $p$ = \rinline{nmFstLambda$param.CI$lambda$bounds.p[1]}).
+Due to the low sample size, significance tests are unlikely to have much power.
+However, study effort has some phylogenetic autocorrelation ($\lambda$ = \rinline{scholarFstLambda$param['lambda']}, $p$ = \rinline{scholarFstLambda$param.CI$lambda$bounds.p[1]}) while distribution size and mass seem to show phylogenetic signal (Distribution size: $\lambda$ = \rinline{distrFstLambda$param['lambda']}, $p$ = \rinline{distrFstLambda$param.CI$lambda$bounds.p[1]}, Mass: $\lambda$ = \rinline{massFstLambda$param['lambda']}, $p$ = \rinline{massFstLambda$param.CI$lambda$bounds.p[1]}).
+
+
+
+
+
+
+
+
 
 %%begin.rcode dwplotCap
-dwplotCap <- '
-Plot of coefficient estimates and 95\\% confidence intervals for phylogenetic model with and without interactions between study effort and number of subspecies. 
-Without interactions, number of subspecies is significant.
-'
+#dwplotCap <- '
+#Plot of coefficient estimates and 95\\% confidence intervals for phylogenetic model with and without interactions between study effort and number of subspecies. 
+#Without interactions, number of subspecies is significant.
+#'
 
 %%end.rcode
 
 %%begin.rcode plotSubspeciesCoefs, fig.cap = dwplotCap, fig.height = 2, fig.show = extraFigs
 
 
-subspeciesCoefs <- data.frame(
-  estimate = c(subspeciesJointUnlog$model$coef, subspeciesInter$model$coef),
-  std.error = c(subspeciesJointUnlog$sterr, subspeciesInter$sterr),
-  term = names(c(subspeciesJointUnlog$model$coef, subspeciesInter$model$coef)),
-  model = rep(c('joint', 'inter'), 
-    c(length(subspeciesJointUnlog$model$coef), length(subspeciesInter$model$coef)))
-)
-
-x <- rbind(subspeciesCoefs, 
-  c(NA, NA, 'NumberOfSubspecies:log(scholarRefs)', 'joint')) %>%
-  filter(term != '(Intercept)') %>%
-  arrange(model, term) 
-
-x$term <- plyr::mapvalues(x$term, from = levels(x$term)[2:5], 
-  to = c('Mass', 'Cites', 'Subspecies', 'Cites*Subspecies'))
-
-
-
-dwplot(x) +
-  theme(legend.position="right",
-        axis.text.y = element_text(color = "black", size = 13, family  =  "Lato Light", vjust = 0.3)) +
-  scale_colour_manual(values = pokepal('Nidorina')[c(4, 10)], 
-    labels = c('Interaction', 'No Interaction'), name = 'Model') +
-  xlab('Coefficient Estimate')
-    
-%%end.rcode
-
-%%begin.rcode tableParams
-
-
-#tableV <- c(coef(subspeciesJointUnlog)['(Intercept)'], 
-#            coef(subspeciesJointUnlog)['(Intercept)'] - 1.96 * (summary(subspeciesJointUnlog))$coefficients['(Intercept)', 'Std. Error'],
-#            coef(subspeciesJointUnlog)['(Intercept)'] + 1.96 * (summary(subspeciesJointUnlog))$coefficients['(Intercept)', 'Std. Error'],
-#            (summary(subspeciesJointUnlog))$coefficients['(Intercept)', 'Pr(>|t|)'],
-
-#            coef(subspeciesJointUnlog)['NumberOfSubspecies'], 
-#            coef(subspeciesJointUnlog)['NumberOfSubspecies'] - 1.96 * (summary(subspeciesJointUnlog))$coefficients['NumberOfSubspecies', 'Std. Error'],
-#            coef(subspeciesJointUnlog)['NumberOfSubspecies'] + 1.96 * (summary(subspeciesJointUnlog))$coefficients['NumberOfSubspecies', 'Std. Error'],
-#            (summary(subspeciesJointUnlog))$coefficients['NumberOfSubspecies', 'Pr(>|t|)'],
-
-
-#            coef(subspeciesJointUnlog)['log(mass)'], 
-#            coef(subspeciesJointUnlog)['log(mass)'] - 1.96 * (summary(subspeciesJointUnlog))$coefficients['log(mass)', 'Std. Error'],
-#            coef(subspeciesJointUnlog)['log(mass)'] + 1.96 * (summary(subspeciesJointUnlog))$coefficients['log(mass)', 'Std. Error'],
-#            (summary(subspeciesJointUnlog))$coefficients['log(mass)', 'Pr(>|t|)'],
-
-#            coef(subspeciesJointUnlog)['log(scholarRefs)'], 
-#            coef(subspeciesJointUnlog)['log(scholarRefs)'] - 1.96 * (summary(subspeciesJointUnlog))$coefficients['log(scholarRefs)', 'Std. Error'],
-#            coef(subspeciesJointUnlog)['log(scholarRefs)'] + 1.96 * (summary(subspeciesJointUnlog))$coefficients['log(scholarRefs)', 'Std. Error'],
-#            (summary(subspeciesJointUnlog))$coefficients['log(scholarRefs)', 'Pr(>|t|)']
+#subspeciesCoefs <- data.frame(
+#  estimate = c(subspeciesJointUnlog$model$coef, subspeciesInter$model$coef),
+#  std.error = c(subspeciesJointUnlog$sterr, subspeciesInter$sterr),
+#  term = names(c(subspeciesJointUnlog$model$coef, subspeciesInter$model$coef)),
+#  model = rep(c('joint', 'inter'), 
+#    c(length(subspeciesJointUnlog$model$coef), length(subspeciesInter$model$coef)))
 #)
 
-#tableM <- matrix(tableV, ncol = 4, nrow = 4, byrow = TRUE)
+#x <- rbind(subspeciesCoefs, 
+#  c(NA, NA, 'NumberOfSubspecies:log(scholarRefs)', 'joint')) %>%
+#  filter(term != '(Intercept)') %>%
+#  arrange(model, term) 
+
+#x$term <- plyr::mapvalues(x$term, from = levels(x$term)[2:5], 
+#  to = c('Mass', 'Cites', 'Subspecies', 'Cites*Subspecies'))
 
 
+
+#dwplot(x) +
+#  theme(legend.position="right",
+#        axis.text.y = element_text(color = "black", size = 13, family  =  "Lato Light", vjust = 0.3)) +
+#  scale_colour_manual(values = pokepal('Nidorina')[c(4, 10)], 
+#    labels = c('Interaction', 'No Interaction'), name = 'Model') +
+#  xlab('Coefficient Estimate')
+#    
 %%end.rcode
+
 
 
 
