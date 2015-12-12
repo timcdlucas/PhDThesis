@@ -15,7 +15,7 @@ runFstScrape <- FALSE
 
 
 # Run slow bootstrapping?
-subBoots <- FALSE
+subBoots <- TRUE
 fstBoots <- TRUE
 batclocksBoots <- TRUE
 
@@ -969,9 +969,9 @@ The $R^2$ value give is for the full model (not the loess curve).',
 ##################################################################################
 ## N Virus ~ subs + log(cites + mass)
 
-#subspeciesJointUnlog <- pgls(
-#  virusSpecies ~ log(scholarRefs) + NumberOfSubspecies +  log(mass), 
-#  data = compSubspecies, lambda = 'ML')
+subspeciesJointUnlog <- pgls(
+  virusSpecies ~ log(scholarRefs) + NumberOfSubspecies +  log(mass), 
+  data = compSubspecies, lambda = 'ML')
 
 
 #subspeciesJointUnlog.summary <- summary(subspeciesJointUnlog)
@@ -1038,10 +1038,10 @@ The $R^2$ value give is for the full model (not the loess curve).',
 
 ## N Virus ~ subs + log(cites + mass) + subs*log(cites)
 
-#subspeciesInter <- pgls(
-#  virusSpecies ~ log(mass) + 
-#  NumberOfSubspecies*log(scholarRefs), 
-#  data = compSubspecies, lambda = 'ML')
+subspeciesInter <- pgls(
+  virusSpecies ~ log(mass) + 
+  NumberOfSubspecies*log(scholarRefs), 
+  data = compSubspecies, lambda = 'ML')
 
 #subInter.summary <- summary(subspeciesInter)
 
@@ -1190,14 +1190,37 @@ modelSelect <- function(allForm, data, phy, boot, allModelMat, varList){
   results <- apply(allModelMat, 1, function(x) sapply(c(varList, "log(scholarRefs):NumberOfSubspecies"), function(y) y %in% x)) %>%
                t %>%
                data.frame %>%
-               cbind(AIC = NA, boot = boot, lambda = NA)
+               cbind(AIC = NA, boot = boot, lambda = NA, attempt = NA, coef = NA)
 
   for(m in 1:length(allForm)){
-    model <- gls(allForm[[m]], correlation = corPagel(value = 0.5, phy = phy), data = bootData, method = 'ML')    
+if(exists('model')){
+      rm(model)
+    }
+    try({
+      model <- gls(allForm[[m]], correlation = corPagel(value = 0.4, phy = phy), data = bootData, method = 'ML')  
+      results$attempt[m] <- 1
+    }) 
+    if(!exists('model')){
+      try({
+        model <- gls(allForm[[m]], correlation = corPagel(value = 0.3, phy = phy), data = bootData, method = 'ML')  
+        results$attempt[m] <- 2
+      }) 
+    }
+    if(!exists('model')){
+      try({
+        model <- gls(allForm[[m]], correlation = corPagel(value = 0.2, phy = phy), data = bootData, method = 'ML')  
+        results$attempt[m] <- 3
+      }) 
+    }
     #model <- pgls(allForm[[m]], data = compBootData, lambda = 'ML')
     results$AIC[m] <- AICc(model)
     results$lambda[m] <- model$modelStruct$corStruct[1]
     results$predictors[m] <- allForm[[m]] %>% as.character %>% .[3]
+  
+    if(results$NumberOfSubspecies[m]){
+      results$coef[m] <- model$coef['NumberOfSubspecies']
+    }
+
     message(paste('Boot:', boot, ', m:', m, '\n'))
   }
 
@@ -1606,10 +1629,11 @@ p %<+% fstFinal[, c('binomial', 'virusSpecies')] +
 %%begin.rcode fstRawData, fig.height = 3, fig.cap = 'Gene flow per generation (on a log scale) against viral richness with the genetic marker used shown with colour.'
 
 # Plot raw fstdata
+
 ggplot(fstFinal, aes(x = Nm, y = virusSpecies, colour = Marker)) +
   geom_point(size = 3.5) +
   scale_colour_poke(pokemon = 'oddish', spread = 3) +
-  #scale_x_log10() +
+  scale_x_log10() +
   xlab('Gene flow (per gen.)') +
   ylab('Viral Richness') #+ geom_smooth(method = 'lm', aes(colour = 'a')) 
 
@@ -1648,7 +1672,7 @@ fstModelSelect <- function(allForm, data, phy, boot, allModelMat, varList){
   results <- apply(allModelMat, 1, function(x) sapply(varList, function(y) y %in% x)) %>%
                t %>%
                data.frame %>%
-               cbind(AIC = NA, boot = boot, lambda = NA, attempt = NA, predictors = NA)
+               cbind(AIC = NA, boot = boot, lambda = NA, attempt = NA, predictors = NA, coef = NA)
 
 
 
@@ -1692,6 +1716,11 @@ fstModelSelect <- function(allForm, data, phy, boot, allModelMat, varList){
 
     results$AIC[m] <- AICc(model)
     results$predictors[m] <- allForm[[m]] %>% as.character %>% .[3]
+
+    if(results$log.Nm.[m]){
+      results$coef[m] <- model$coef['log(Nm)']
+    }
+
     if(inherits(model, 'gls')){
         results$lambda[m] <- model$modelStruct$corStruct[1]
     }
@@ -1701,7 +1730,7 @@ fstModelSelect <- function(allForm, data, phy, boot, allModelMat, varList){
   results$dAIC <- results$AIC - min(results$AIC)
   results$weight <- exp(- 0.5 * results$dAIC) / sum(exp(- 0.5 * results$dAIC))
 
-
+  
   return(results)
 
 }
@@ -2339,7 +2368,7 @@ modelSelect2 <- function(allForm, data, phy, boot, allModelMat, varList){
   results <- apply(allModelMat, 1, function(x) sapply(c(varList, "log(scholarRefs):NumberOfSubspecies"), function(y) y %in% x)) %>%
                t %>%
                data.frame %>%
-               cbind(AIC = NA, boot = boot, lambda = NA)
+               cbind(AIC = NA, boot = boot, lambda = NA, coef = NA)
 
 
 
@@ -2383,6 +2412,11 @@ modelSelect2 <- function(allForm, data, phy, boot, allModelMat, varList){
 
     results$AIC[m] <- AICc(model)
     results$predictors[m] <- allForm[[m]] %>% as.character %>% .[3]
+  
+    if(results$NumberOfSubspecies[m]){
+      results$coef[m] <- model$coef['NumberOfSubspecies']
+    }
+
     if(inherits(model, 'gls')){
         results$lambda[m] <- model$modelStruct$corStruct[1]
     }
