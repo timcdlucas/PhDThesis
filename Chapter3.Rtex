@@ -15,9 +15,9 @@ runFstScrape <- FALSE
 
 
 # Run slow bootstrapping?
-subBoots <- TRUE
-fstBoots <- TRUE
-batclocksBoots <- TRUE
+subBoots <- FALSE
+fstBoots <- FALSE
+batclocksBoots <- FALSE
 
 # There are figures created in the data analysis which are not in the final chapter document.
 #   If TRUE, they will be included in the output.
@@ -1212,9 +1212,26 @@ if(exists('model')){
         results$attempt[m] <- 3
       }) 
     }
+    if(!exists('model')){
+        try({
+          model <- gls(allForm[[m]], correlation = corPagel(value = 0.1, phy = phy), data = bootData, method = 'ML')  
+          results$attempt[m] <- 4
+        }) 
+      }
+    if(!exists('model')){
+      try({
+        model <- lm(allForm[[m]], data = bootData) 
+        results$attempt[m] <- 5
+        message('Running lm')
+      }) 
+    }
     #model <- pgls(allForm[[m]], data = compBootData, lambda = 'ML')
     results$AIC[m] <- AICc(model)
-    results$lambda[m] <- model$modelStruct$corStruct[1]
+
+    if(inherits(model, 'gls')){
+        results$lambda[m] <- model$modelStruct$corStruct[1]
+    }
+
     results$predictors[m] <- allForm[[m]] %>% as.character %>% .[3]
   
     if(results$NumberOfSubspecies[m]){
@@ -1700,7 +1717,6 @@ fstModelSelect <- function(allForm, data, phy, boot, allModelMat, varList){
       try({
         model <- gls(allForm[[m]], correlation = corPagel(value = 0.1, phy = phy), data = bootData, method = 'ML')  
         results$attempt[m] <- 4
-        message('Running lm')
       }) 
     }
     if(!exists('model')){
@@ -1973,10 +1989,10 @@ However, study effort has some phylogenetic autocorrelation ($\lambda$ = \rinlin
 
 
 %%begin.rcode dwplotCap
-#dwplotCap <- '
-#Plot of coefficient estimates and 95\\% confidence intervals for phylogenetic model with and without interactions between study effort and number of subspecies. 
-#Without interactions, number of subspecies is significant.
-#'
+dwplotCap <- '
+Plot of coefficient estimates and 95\\% confidence intervals for phylogenetic model with and without interactions between study effort and number of subspecies. 
+Without interactions, number of subspecies is significant.
+'
 
 %%end.rcode
 
@@ -2250,11 +2266,11 @@ ggplot(nSpecies,
 %%begin.rcode pubmedresidPlot, fig.show = extraFigs,  fig.cap = 'Plot using residuals from number of viruses against number of citations (study effort). Nonphylogenetic trend line added. '
 
 
-ggplot(nSpecies, aes(y = pubmedResid, x = log(NumberOfSubspecies))) + 
-  geom_point(aes(colour = familyPlotCol)) +
-  geom_smooth(method = 'lm') +
-  labs(colour = 'Family') +
-  scale_colour_hc()
+#ggplot(nSpecies, aes(y = pubmedResid, x = log(NumberOfSubspecies))) + 
+#  geom_point(aes(colour = familyPlotCol)) +
+#  geom_smooth(method = 'lm') +
+#  labs(colour = 'Family') +
+#  scale_colour_hc()
 
 %%end.rcode
 
@@ -2396,7 +2412,6 @@ modelSelect2 <- function(allForm, data, phy, boot, allModelMat, varList){
       try({
         model <- gls(allForm[[m]], correlation = corPagel(value = 0.1, phy = phy), data = bootData, method = 'ML')  
         results$attempt[m] <- 4
-        message('Running lm')
       }) 
     }
     if(!exists('model')){
