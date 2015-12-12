@@ -210,6 +210,8 @@
 				uniquename=false, uniquelist=false, %
 				style=authoryear, firstinits=true, dashed=false %
 				maxcitenames=2, maxbibnames=99]{biblatex}
+\renewcommand{\cite}[1]{\parencite{#1}}
+
 				
 % bibliography paragraphs
 \setlength{\bibhang}{\parindent}
