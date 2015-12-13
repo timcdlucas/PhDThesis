@@ -341,6 +341,7 @@ The models shown are thos with (pink) and without (red) an interaction between s
 
 
 
+
 \clearpage
 
 
@@ -439,6 +440,7 @@ The models shown are thos with (pink) and without (red) an interaction between s
 
 
 
+
 $F_{ST}$ studies are conducted at a range of spatial scales, but $F_{ST}$ often increases with distance studied \cite{}.
 To minimise the effects of this I only used data from studies that cover 20\% of the diameter of the species range.
 This is a largely arbitrary value that could be considered to reflect a `global' estimate of $F_{ST}$ while keeping a reasonable number of datapoints available.
@@ -469,7 +471,6 @@ We calculated $\bar{AICc}$ by averaging AICc scores within models.
 $\Delta\text{AICc}$ was calculated as $\text{min}(\bar{AICc}) - \bar{AICc}$, not the mean of the individual $\Delta\text{AICc}$ scores, to guarantee that the best model has $\Delta\text{AICc} = 0$.
 
 
-Plots were created with a combination of \cite{ggplot2, palettetown, dotwhisker, ggtree}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \clearpage
@@ -501,6 +502,11 @@ Of the explanatory variables, the number of subspecies has no phylogenetic autoc
 %The effect of nonindependance due to phylogeny was very small ($\lambda = $ subJoint.summary$param['lambda'], $p = $ subspeciesJoint$param.CI$lambda$bounds.p[1]).
 
 %The interaction term between study effort and number of subspecies, when included, was significant ($\beta = $  subspeciesInter$model$coef['NumberOfSubspecies:log(scholarRefs)'], $p = $ subInter.summary$coefficients[5,'Pr(>|t|)']).
+
+Summing the Akaiki weights of all models with a given variable in gives a probability that the variable would be in the best model if the data were recollected \cite{whittingham2006we}.
+The number of subspecies is very likely in the best model ($P(\text{in best model}) = $ 1, 1, 0.8, 0.66, 0.2, 0.97).
+When models with an interaction term are removed, on average (mean weighted by Akaiki weights) there is a positive relationship between the number of subspecies and viral richness ($\beta = $ 0.19, variance = \ensuremath{1.24\times 10^{-4}}).
+Models with an interaction between number of subspecies and study effort have a positive interaction term ($\beta = $ 0.14, variance = \ensuremath{3.94\times 10^{-6}}) and a negative linear term ($\beta = $ \ensuremath{-0.78}, variance = \ensuremath{2.37\times 10^{-4}}) which in total is a postive relationship for most of the range of the study effort data.
 
 
 

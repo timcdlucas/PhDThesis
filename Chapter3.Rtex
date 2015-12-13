@@ -15,8 +15,8 @@ runFstScrape <- FALSE
 
 
 # Run slow bootstrapping?
-subBoots <- FALSE
-fstBoots <- FALSE
+subBoots <- TRUE
+fstBoots <- TRUE
 batclocksBoots <- FALSE
 
 # There are figures created in the data analysis which are not in the final chapter document.
@@ -54,6 +54,9 @@ library(phytools)
 library(nlme)
 library(qpcR)
 library(car)
+
+# weighted means + var
+library(Hmisc)
 
 # Plotting
 library(ggplot2)
@@ -1190,10 +1193,10 @@ modelSelect <- function(allForm, data, phy, boot, allModelMat, varList){
   results <- apply(allModelMat, 1, function(x) sapply(c(varList, "log(scholarRefs):NumberOfSubspecies"), function(y) y %in% x)) %>%
                t %>%
                data.frame %>%
-               cbind(AIC = NA, boot = boot, lambda = NA, attempt = NA, coef = NA)
+               cbind(AIC = NA, boot = boot, lambda = NA, attempt = NA, coef = NA, interCoef = NA)
 
   for(m in 1:length(allForm)){
-if(exists('model')){
+    if(exists('model')){
       rm(model)
     }
     try({
@@ -1238,6 +1241,11 @@ if(exists('model')){
       results$coef[m] <- model$coef['NumberOfSubspecies']
     }
 
+
+    if(results$log.scholarRefs..NumberOfSubspecies[m]){
+      results$interCoef[m] <- model$coef['log(scholarRefs):NumberOfSubspecies']
+    }
+
     message(paste('Boot:', boot, ', m:', m, '\n'))
   }
 
@@ -1270,7 +1278,6 @@ write.csv(allResults, file = 'data/Chapter3/modelSelectSubspecies.csv')
 allResults <- read.csv('data/Chapter3/modelSelectSubspecies.csv', row.names = 1)
 
 varWeights <- sapply(names(allResults)[1:6], function(x) sum(allResults$weight[allResults[, x]])/nBoots)
-
 
 sepVarWeights <- lapply(1:nBoots, function(b) 
                       sapply(names(allResults)[1:6], 
@@ -1330,6 +1337,56 @@ ggplot(sepVarWeights, aes(x = variable, y = estimate, colour = col, fill = col))
 
 %%end.rcode
 
+%%begin.rcode nSpeciesCoef, fig.show = extraFigs
+
+ggplot(allResults, aes(x = coef)) +
+  geom_histogram()
+
+
+ggplot(allResults, aes(x = coef, colour = log.scholarRefs.)) +
+  geom_density()
+
+
+ggplot(allResults, aes(x = coef, colour = log.scholarRefs..NumberOfSubspecies)) +
+  geom_density()
+
+
+ggplot(allResults, aes(x = coef, colour =log.distrSize.)) +
+  geom_density()
+
+mean(allResults$coef, na.rm = TRUE)
+
+
+nSpeciesCoefMean <- wtd.mean(allResults$coef[!allResults$log.scholarRefs..NumberOfSubspecies], 
+                             allResults$weight[!allResults$log.scholarRefs..NumberOfSubspecies], na.rm = TRUE)
+nSpeciesCoefMeanI <- wtd.mean(allResults$coef[allResults$log.scholarRefs..NumberOfSubspecies], 
+                             allResults$weight[allResults$log.scholarRefs..NumberOfSubspecies], na.rm = TRUE)
+nSpeciesInterMean <- wtd.mean(allResults$interCoef, allResults$weight, na.rm = TRUE)
+
+
+nSpeciesCoefVar <- wtd.var(allResults$coef[!allResults$log.scholarRefs..NumberOfSubspecies], 
+                             allResults$weight[!allResults$log.scholarRefs..NumberOfSubspecies], na.rm = TRUE)
+nSpeciesCoefVarI <- wtd.var(allResults$coef[allResults$log.scholarRefs..NumberOfSubspecies], 
+                             allResults$weight[allResults$log.scholarRefs..NumberOfSubspecies], na.rm = TRUE)
+nSpeciesInterVar <- wtd.var(allResults$interCoef, allResults$weight, na.rm = TRUE)
+
+
+
+# Direction of interaction models
+
+min(nSpecies$NumberOfSubspecies)
+
+max(nSpecies$NumberOfSubspecies)
+
+# At minimum study effort
+nSpeciesInterMean*log(min(nSpecies$scholarRefs)) + nSpeciesCoefMeanI
+nSpeciesInterMean*log(max(nSpecies$scholarRefs)) + nSpeciesCoefMeanI
+
+mean(nSpeciesInterMean*log(nSpecies$scholarRefs) + nSpeciesCoefMeanI > 0)
+
+
+
+%%end.rcode
 
 %%begin.rcode familyMeans
 
@@ -1752,6 +1809,7 @@ fstModelSelect <- function(allForm, data, phy, boot, allModelMat, varList){
 }
 
 
+
 fstModelsBootStrap <- mclapply(1:nBoots, function(b) fstModelSelect(fstAllFormulae, fstFinal, fstTree, b, fstModelMat, fstVarList), mc.cores = nCores)
 
 fstAllResults <- do.call(rbind, fstModelsBootStrap)
@@ -1885,10 +1943,26 @@ ggplot(aes(x, L)) +
 %%end.rcode
 
 
-%%begin.rcode fstVIF
-sqrt(vif(lm(virusSpecies ~ log(scholarRefs) + Nm +  log(mass) + log(distrSize), data = fstFinal)))
+%%begin.rcode fstCoef, fig.show = extraFigs
+
+ggplot(fstAllResults, aes(x = coef)) +
+  geom_histogram()
+
+
+ggplot(fstAllResults, aes(x = coef, colour = log.scholarRefs.)) +
+  geom_density()
+
+
+
+ggplot(fstAllResults, aes(x = coef, colour =log.distrSize.)) +
+  geom_density()
+
+
+fstCoefMean <- wtd.mean(fstAllResults$coef, fstAllResults$weight, na.rm = TRUE)
+fstCoefVar <- wtd.var(fstAllResults$coef, fstAllResults$weight, na.rm = TRUE)
 
 %%end.rcode
+
 
 
 %%begin.rcode univariateFstPGLS
@@ -1934,7 +2008,6 @@ We calculated $\bar{AICc}$ by averaging AICc scores within models.
 $\Delta\text{AICc}$ was calculated as $\text{min}(\bar{AICc}) - \bar{AICc}$, not the mean of the individual $\Delta\text{AICc}$ scores, to guarantee that the best model has $\Delta\text{AICc} = 0$.
 
 
-Plots were created with a combination of \cite{ggplot2, palettetown, dotwhisker, ggtree}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \clearpage
@@ -1966,6 +2039,11 @@ Of the explanatory variables, the number of subspecies has no phylogenetic autoc
 %The effect of nonindependance due to phylogeny was very small ($\lambda = $ \rinline{subJoint.summary$param['lambda']}, $p = $ \rinline{subspeciesJoint$param.CI$lambda$bounds.p[1]}).
 
 %The interaction term between study effort and number of subspecies, when included, was significant ($\beta = $ \rinline{ subspeciesInter$model$coef['NumberOfSubspecies:log(scholarRefs)']}, $p = $ \rinline{subInter.summary$coefficients[5,'Pr(>|t|)']}).
+
+Summing the Akaiki weights of all models with a given variable in gives a probability that the variable would be in the best model if the data were recollected \cite{whittingham2006we}.
+The number of subspecies is very likely in the best model ($P(\text{in best model}) = $ \rinline{varWeights['NumberOfSubspecies']}) as is the interaction between number of species and study effort ($P(\text{in best model}) = $ \rinline{varWeights['log.scholarRefs..NumberOfSubspecies']})
+When models with an interaction term are removed, on average (mean weighted by Akaiki weights) there is a positive relationship between the number of subspecies and viral richness ($\beta = $ \rinline{nSpeciesCoefMean}, variance = \rinline{nSpeciesCoefVar}).
+Models with an interaction between number of subspecies and study effort have a positive interaction term ($\beta = $ \rinline{nSpeciesInterMean}, variance = \rinline{nSpeciesInterVar}) and a negative linear term ($\beta = $ \rinline{nSpeciesCoefMeanI}, variance = \rinline{nSpeciesCoefVarI}) which in total is a postive relationship for most of the range of the study effort data.
 
 
 
