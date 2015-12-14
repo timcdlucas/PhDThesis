@@ -169,7 +169,7 @@ Finally, when a global $F_{ST}$ value is not given they use the mean of all pair
 It is not clear that this is correct as from global $F_{ST}$ we expect migration rates of $M = \frac{1-F_{ST}}{8F_{ST}}$ while from $F_{ST}$ between pairs of populations we expect migration rates of $M = \frac{1-F_{ST}}{16F_{ST}}$ where $M$ is the absolute number of diploid inviduals dispersing per generation \cite{slatkin1995measure}.
 As it is in fact the movement of individuals that is epidemiologically relavent, using these studies is probably not correct without attempting to correct for these difference.
 
-Studies on single pathogens, notably rabies, have also shown that for virulent pathogens, space can allow persistence where a well mixed population ould experience a single, large epidemic then pathogen extinction \cite{rabiespaper, colizza, pons2014insights}.
+Studies on single pathogens, notably rabies, have also shown that for virulent pathogens, space can allow persistence where a well mixed population ould experience a single, large epidemic then pathogen extinction \cite{blackwood2013resolving, colizza, pons2014insights}.
 
 \subsection{Rates}
 
@@ -1936,6 +1936,8 @@ ggplot(fstAllResults, aes(x = coef, colour =log.distrSize.)) +
 fstCoefMean <- wtd.mean(fstAllResults$coef, fstAllResults$weight, na.rm = TRUE)
 fstCoefVar <- wtd.var(fstAllResults$coef, fstAllResults$weight, na.rm = TRUE)
 
+pcCoefLzero <- 100*sum(na.omit(fstAllResults$coef) < 0) / length(na.omit(fstAllResults$coef))
+
 %%end.rcode
 
 
@@ -1964,28 +1966,27 @@ When this was not explicit in the paper, the centre of the lowest level of geogr
 
 \subsection{Statistical analysis}
 
-Statistical analysis for both dependant variables were conducted using a information theory/model averaging approach \cite{burnham2002model} specifically following \cite{whittingham2005habitat, whittingham2006we}.
+Statistical analysis for both dependant variables was conducted using a information theory/model averaging approach \cite{burnham2002model} specifically following \cite{whittingham2005habitat, whittingham2006we}.
 I chose a credible set of models including all combinations of independent variables.
 In the analysis using the number of subspecies dependant variable I also included an interaction term between study effort and number of subspecies as I believe \emph{a priori} that this interaction may be present.
 The interaction was only included in models with both study effort and number of subspecies as an individual term.
 
-I fitted phylogenetic regressions using caper \cite{nlme} to all models.
+I fitted phylogenetic regressions using nlme \cite{nlme} to all models.
 In each case I simultaneously fitted the $\lambda$ parameter as this avoids mispecifying the model \cite{revell2010phylogenetic}.
 $\kappa$ and $\delta$ were constrained to one.
 
-As the number of data points is close to or much less than the number of variables times 40 I calculated small sample corrected AIC (AICc) for each model and then calculated Akaiki weights.
+I calculated AICc for each model and then calculated Akaiki weights.
 This value can be interpreted as the probability that a model would be the best model if the data were recollected.
-For each variable, the sum of the Akaiki weights for models containing that variable are summed.
+For each variable, the sum of the Akaiki weights of models containing that variable are summed.
 This value can be interpreted as the probability that the given variable is in the best model.
-Following \cite{whittingham2005habitat} I included a uniformally random variable as a null variable as even unimportant variables can have Akaiki weights significantly greater than zero.
+Following \cite{whittingham2005habitat} I included a uniformally random variable as a null variable as even unimportant variables can have Akaiki weights notably greater than zero.
 The whole analysis was run \rinline{nBoots} times, resampling the random variable each time.
-We calculated $\bar{AICc}$ by averaging AICc scores within models.
-$\Delta\text{AICc}$ was calculated as $\text{min}(\bar{AICc}) - \bar{AICc}$, not the mean of the individual $\Delta\text{AICc}$ scores, to guarantee that the best model has $\Delta\text{AICc} = 0$.
+I calculated the average AICc, $\bar{\text{AICc}}$, by averaging AICc scores within models.
+$\Delta\text{AICc}$ was calculated as $\text{min}(\bar{\text{AICc}}) - \bar{\text{AICc}}$, not the mean of the individual $\Delta\text{AICc}$ scores, to guarantee that the best model has $\Delta\text{AICc} = 0$.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\clearpage
 \section{Results}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2015,11 +2016,11 @@ Of the explanatory variables, the number of subspecies has no phylogenetic autoc
 
 %The interaction term between study effort and number of subspecies, when included, was significant ($\beta = $ \rinline{ subspeciesInter$model$coef['NumberOfSubspecies:log(scholarRefs)']}, $p = $ \rinline{subInter.summary$coefficients[5,'Pr(>|t|)']}).
 
-Summing the Akaiki weights of all models with a given variable in gives a probability that the variable would be in the best model if the data were recollected \cite{whittingham2006we}.
-The number of subspecies is very likely in the best model ($P(\text{in best model}) = $ \rinline{varWeights['NumberOfSubspecies']}) as is the interaction between number of species and study effort ($P(\text{in best model}) = $ \rinline{varWeights['log.scholarRefs..NumberOfSubspecies']})
-When models with an interaction term are removed, on average (mean weighted by Akaiki weights) there is a positive relationship between the number of subspecies and viral richness ($\beta = $ \rinline{nSpeciesCoefMean}, variance = \rinline{nSpeciesCoefVar}).
+Summing the Akaiki weights of all models that contain a given variable gives a probability that the variable would be in the best model (Figure~\ref{fig:ITPlots}) if the data were recollected \cite{whittingham2006we}.
+The number of subspecies is very likely in the best model ($P(\text{in best model}) > $ \rinline{sprintf("%.3f", varWeights['NumberOfSubspecies'])}) as is the interaction between number of species and study effort ($P(\text{in best model}) = $ \rinline{varWeights['log.scholarRefs..NumberOfSubspecies']}) compared to the benchmark random variable which has $P(\text{in best model}) = $ \rinline{varWeights['rand']}.
+When models with the interaction term are removed, on average (mean weighted by Akaiki weights) there is a positive relationship between the number of subspecies and viral richness ($\beta = $ \rinline{nSpeciesCoefMean}, variance = \rinline{nSpeciesCoefVar}).
 Models with an interaction between number of subspecies and study effort have a positive interaction term ($\beta = $ \rinline{nSpeciesInterMean}, variance = \rinline{nSpeciesInterVar}) and a negative linear term ($\beta = $ \rinline{nSpeciesCoefMeanI}, variance = \rinline{nSpeciesCoefVarI}) which in total is a postive relationship for most of the range of the study effort data.
-
+As seen in Figure~\ref{fig:ITPlots}, study effort is very likely in the best model ($P(\text{in best model}) = $ \rinline{varWeights['log.scholarRefs.']}) body mass and range size are also probably in the best model ($P(\text{in best model}) = $ \rinline{varWeights['log.mass.']} and $P(\text{in best model}) = $ \rinline{varWeights['log.distrSize.']}).
 
 
 \subsection{Gene Flow}
@@ -2028,12 +2029,19 @@ Due to the low number of studies and the restrictive requirements imposed on stu
 The number of described virus species for a bat host ranged up to \rinline{max(fstFinal$virusSpecies)} viruses in \emph{\rinline{fstFinal$binomial[which.max(fstFinal$virusSpecies)]}}.
 Figure~\ref{fig:fstTreePlot} shows the phylogeny used and the number of viruses for each species.
 
+\tmpsection{Model results}
+
 As with the Number of Subspecies dataset, there is no phylogenetic signal in the number of virus species ($\lambda$ = \rinline{virusFstLambda$param['lambda']}, $p$ = \rinline{virusFstLambda$param.CI$lambda$bounds.p[1]}). 
 Gene flow also has no phylogenetic autocorrelation ($\lambda$ = \rinline{nmFstLambda$param['lambda']}, $p$ = \rinline{nmFstLambda$param.CI$lambda$bounds.p[1]}).
 Due to the low sample size, significance tests are unlikely to have much power.
 However, study effort has some phylogenetic autocorrelation ($\lambda$ = \rinline{scholarFstLambda$param['lambda']}, $p$ = \rinline{scholarFstLambda$param.CI$lambda$bounds.p[1]}) while distribution size and mass seem to show phylogenetic signal (Distribution size: $\lambda$ = \rinline{distrFstLambda$param['lambda']}, $p$ = \rinline{distrFstLambda$param.CI$lambda$bounds.p[1]}, Mass: $\lambda$ = \rinline{massFstLambda$param['lambda']}, $p$ = \rinline{massFstLambda$param.CI$lambda$bounds.p[1]}).
 
-
+While less strongly supported than the number of subspecies, gene flow is likely in the best model ($P(\text{in best model}) = $ \rinline{fstVarWeights['log.Nm.']}) compared to the benchmark random variable which has $P(\text{in best model}) = $ \rinline{fstVarWeights['rand']} as shown in Figure~\ref{fig:fstITPlots}.
+On average (mean weighted by Akaiki weights) there is a negative relationship between gene flow and viral richness ($\beta = $ \rinline{fstCoefMean}, variance = \rinline{fstCoefVar}) despite the apparent positive relationship in Figure~\ref{fig:fstRawData}.
+This supports the hypothesis that population structure promotes viral richness.
+Possibly due to the smaller sample size, or a weaker relationship, this coefficient is much more varied than the number of subspecies coeficient with \rinline{pcCoefLzero}\% of models estimating a positive relationship.
+As in the number of subspecies analysis, study effort is very likely in the best model ($P(\text{in best model}) = $ \rinline{fstVarWeights['log.scholarRefs.']}) as is body mass ($P(\text{in best model}) = $ \rinline{fstVarWeights['log.mass.']}).
+In contrast to the number of subspecies analysis, range size is almost certainly not in the best model with $P(\text{in best model}) = $ \rinline{fstVarWeights['log.distrSize.']} being much less than the random variable.
 
 
 
