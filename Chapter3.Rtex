@@ -15,7 +15,7 @@ runFstScrape <- FALSE
 
 
 # Run slow bootstrapping?
-subBoots <- TRUE
+subBoots <- FALSE
 fstBoots <- TRUE
 batclocksBoots <- FALSE
 
@@ -166,7 +166,7 @@ However, this study included measures using mtDNA which only measures female dis
 Furthermore, this study used measures of $F_{ST}$ irrespective of the study scale with studies covering from tens \cite{mccracken1981social} to thousands \cite{petit1999male} of kilometers.
 As isolation by distance has been shown in a number of bat species \cite{burland1999population, hulva2010mechanisms, o2015genetic, vonhof2015range} this could bias results further.
 Finally, when a global $F_{ST}$ value is not given they use the mean of all pairwise $F_{ST}$ between sites.
-It is not clear that this is correct as from global $F_{ST}$ we expect migration rates of $M = \frac{1-F_{ST}}{8F_{ST}}$ while from $F_{ST}$ between pairs of populations we expect migration rates of $M = \frac{1-F_{ST}}{8F_{ST}}$ where $M$ is the absolute number of diploid inviduals dispersing per generation \cite{slatkin1995measure}.
+It is not clear that this is correct as from global $F_{ST}$ we expect migration rates of $M = \frac{1-F_{ST}}{8F_{ST}}$ while from $F_{ST}$ between pairs of populations we expect migration rates of $M = \frac{1-F_{ST}}{16F_{ST}}$ where $M$ is the absolute number of diploid inviduals dispersing per generation \cite{slatkin1995measure}.
 As it is in fact the movement of individuals that is epidemiologically relavent, using these studies is probably not correct without attempting to correct for these difference.
 
 Studies on single pathogens, notably rabies, have also shown that for virulent pathogens, space can allow persistence where a well mixed population ould experience a single, large epidemic then pathogen extinction \cite{rabiespaper, colizza, pons2014insights}.
@@ -1521,6 +1521,10 @@ fstStudy <- sqldf("
 
 %%begin.rcode fstScrape, eval = runFstScrape
 
+########################################################
+#### Sloow bit that might get you blocked by google ####
+########################################################
+
 fstNewStudy <- fstStudy[is.na(fstStudy[,2]),1] %>%
                  lapply(., function(x) c(x, scrapeScholar(x), scrapePub(x))) %>%
                  do.call(rbind, .)
@@ -1558,41 +1562,12 @@ fst <- fst[fst$Marker != 'mtDNA', ]
 
 %%begin.rcode convertFst
 
-# define functions for phist mtDNA, fst minisatellite and fst allozyme
+calcNm <- function(Fst){ (1 - Fst)/(8 * Fst) }
 
 
-fstallozyme <- function(fst){
-  Nm <- 0.5 * (1 / fst - 1)
-}
-
-# eqn 15a in slatkin 1995 A measure of population subdivision based on microsatellite allele frequencies.
-fstmicrosat <- function(fst, pops){
-  Nm <- (pops - 1) * (4 * pops)^(-1) * (1 / fst - 1) 
-}
+fst$Nm <- calcNm(fst$Value)
 
 
-phist <- function(phist){
-  Nm <-  0.5 * (1 / phist - 1)
-}
-
-fst$Nm <- NA
-fst$fnc <-NA
-
-microsatBool <- fst$Measure == 'Fst' & fst$Marker == 'microsatellites'
-fst$Nm[microsatBool] <- fstmicrosat(fst$Value[microsatBool], fst$nPops[microsatBool])
-fst$fnc[microsatBool] <- 'fstmicrosat'
-
-allozymeBool <- fst$Measure == 'Fst' & fst$Marker == 'allozyme'
-fst$Nm[allozymeBool] <- fstallozyme(fst$Value[allozymeBool])
-fst$fnc[allozymeBool] <- 'fstallozyme'
-
-#mtDNABool <- fst$Measure == 'Fst' & fst$Marker == 'mtDNA'
-#fst$Nm[mtDNABool] <- fstmtDNA(fst$Value[mtDNABool])
-#fst$fnc[mtDNABool] <- 'fstmtDNA'
-
-phistBool <- fst$Measure == 'Phist' & fst$Marker == 'mtDNA'
-fst$Nm[phistBool] <- phist(fst$Value[phistBool])
-fst$fnc[phistBool] <- 'phist'
 
 fst <- fst[!is.na(fst$Nm) & !(fst$Nm == Inf), ]
 
@@ -1644,11 +1619,11 @@ fstFinal[, c('mass', 'scholarRefs', 'rangeWidth', 'Nm')] %>%
 
 %%begin.rcode compareNm, fig.show = extraFigs
 
-ggplot(fstFinal, aes(x = fnc, y = Nm)) +
+ggplot(fstFinal, aes(x = Marker, y = Nm)) +
   geom_point() +
   scale_y_log10()
 
-lm(fstFinal$Nm ~ fstFinal$fnc) %>% aov %>% summary
+lm(fstFinal$Nm ~ fstFinal$Marker) %>% aov %>% summary
 
 
 %%end.rcode
