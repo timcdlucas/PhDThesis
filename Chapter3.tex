@@ -59,10 +59,10 @@ Given the weakness of any association between population structure and pathogen 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\clearpage
 \section{Introduction}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \subsection{General Intro}
 The number of pathogen species carried by a host species has important consequences for the ecology of the host and the probability that the host will be a reservoir of a zoonotic pathogen.
 However, the factors that affect pathogen richness are poorly understood.
@@ -75,10 +75,10 @@ However, the factors that affect pathogen richness are poorly understood.
 
 \subsection{Theoretical background}
 
-
-Single pathogen models show that increasing population structure simply slows disease spread and makes establishment less likely \cite{}.
-In the ecological literature this is often taken as predicting that increased population structure will decrease pathogen richness \cite{}.
-However, models of competition between multiple pathogens show that in unstructured populations a competitive exclusion process occurs but that splitting the population into two patches allows coexistence \cite{}.
+%Think this ref is right but need to check.
+Single pathogen models show that increasing population structure simply slows disease spread and makes establishment less likely \cite{colizza2007invasion, vespignani2008reaction}.
+In the ecological literature this is often taken as predicting that increased population structure will decrease pathogen richness \cite{nunn2003comparative}.
+However, models of competition between multiple pathogens show that in unstructured populations a competitive exclusion process occurs but that splitting the population into two patches allows coexistence \cite{qiu2013vector,allen2004sis, nunes2006localized}.
 
 
 \subsection{Previous Studies}
@@ -270,12 +270,12 @@ The counts were scraped using the rvest package \cite{rvest}.
 I log transformed these variables as they were strongly right skewed.
 The log number of citations on Pubmed and Google scholar were highly correlated (pgls: $t$ = 19.32, df = 194, $p$ = 0).
 The results here are for analyses using only Google Scholar citations.
-See the appendix for analyses run using Pubmed citations.
+%See the appendix for analyses run using Pubmed citations.
 
 Measures of body mass are taken from Pantheria \cite{jones2009pantheria} and primary literature \cite{canals2005relative, arita1993rarity, lopez2014echolocation, orr2013does, , lim2001bat, aldridge1987turning, ma2003dietary, owen2003home, henderson2008movements, heaney2012nyctalus, oleksy2015high, zhang2009recent}. 
 \emph{Pipistrellus pygmaeus} was assigned the same mass as \emph{P. pipistrellus} as they indistinguishable by mass.
 Body mass measurements were log transformed due to the strong right skew.
-Distribution size was estimated by downloading range maps for all species from IUCN \cite{} and were also logged due to right skew.
+Distribution size was estimated by downloading range maps for all species from IUCN \cite{iucn} and were also logged due to right skew.
 
 %Pubmed was scraped on pubmedScrapeDate and Google Scholar was scraped on scholarScrapeDate
 
@@ -441,10 +441,10 @@ The models shown are thos with (pink) and without (red) an interaction between s
 
 
 
-$F_{ST}$ studies are conducted at a range of spatial scales, but $F_{ST}$ often increases with distance studied \cite{}.
+$F_{ST}$ studies are conducted at a range of spatial scales, but $F_{ST}$ often increases with distance studied \cite{burland1999population, hulva2010mechanisms, o2015genetic, vonhof2015range}.
 To minimise the effects of this I only used data from studies that cover 20\% of the diameter of the species range.
-This is a largely arbitrary value that could be considered to reflect a `global' estimate of $F_{ST}$ while keeping a reasonable number of datapoints available.
-I calculated the diameter of the species range by finding the furthest apart points in the IUCN species range \cite{} even if the range is split into multiple polygons.
+This is a largely arbitrary value that could be considered to reflect a ``global'' estimate of $F_{ST}$ while keeping a reasonable number of datapoints available.
+I calculated the diameter of the species range by finding the furthest apart points in the IUCN species range \cite{iucn} even if the range is split into multiple polygons.
 The width covered by each study was the distance between the most distant sampling sites.
 When this was not explicit in the paper, the centre of the lowest level of geographic area was used.
 
@@ -515,12 +515,14 @@ Due to the low number of studies and the restrictive requirements imposed on stu
 The number of described virus species for a bat host ranged up to 12 viruses in \emph{Miniopterus schreibersii}.
 Figure~\ref{fig:fstTreePlot} shows the phylogeny used and the number of viruses for each species.
 
-\tmpsection{Model results}
 
 As with the Number of Subspecies dataset, there is no phylogenetic signal in the number of virus species ($\lambda$ = \ensuremath{10^{-6}}, $p$ = 1). 
 Gene flow also has no phylogenetic autocorrelation ($\lambda$ = \ensuremath{10^{-6}}, $p$ = 1).
 Due to the low sample size, significance tests are unlikely to have much power.
 However, study effort has some phylogenetic autocorrelation ($\lambda$ = 0.15, $p$ = 0.56) while distribution size and mass seem to show phylogenetic signal (Distribution size: $\lambda$ = 0.67, $p$ = 0.53, Mass: $\lambda$ = 0.79, $p$ = \ensuremath{2.69\times 10^{-3}}).
+
+
+\tmpsection{Model results}
 
 While less strongly supported than the number of subspecies, gene flow is likely in the best model ($Pr = $ 0.61) compared to the benchmark random variable which has $Pr = $ 0.37 as shown in Figure~\ref{fig:fstITPlots}.
 On average (mean weighted by Akaiki weights) there is a negative relationship between gene flow and viral richness ($\beta = $ NA, variance = NA) despite the apparent positive relationship in Figure~\ref{fig:fstRawData}.
@@ -593,8 +595,7 @@ log(Scholar) + NSubspecies &
 0.01 & 0.97\\
 log(Scholar) + NSubspecies + log(Mass) & 
 890 & 7.80 &
-0.01 & 0.98\\
-&&&&
+0.01 & 0.98
 \end{tabular}
 \caption[Model selection results for number of subspecies analysis]{
 Model selection results for number of subspecies analysis. 
@@ -624,8 +625,7 @@ log(Mass) + log(Range size) &
 0.02 & 1.00\\
 log(Scholar) + log(Gene flow) + log(Mass) + rand &
 94 & 24.15 &
-0.00 & 1.00\\
-&&&&
+0.00 & 1.00
 \end{tabular}
 \caption[Model selection results for gene flow analysis]{
 Model selection results for gene flow analysis. 
@@ -694,18 +694,7 @@ $\sum w_i$ is the cumulative sum of the Akaike weights.}
 
 
 
-\begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[t]
 
-{\centering \includegraphics[width=\textwidth]{figure/treePlot2-1} 
-
-}
-
-\caption[Pruned phylogeny \cite{jones2005bats} with dot size showing number of pathogens and colour showing family]{Pruned phylogeny \cite{jones2005bats} with dot size showing number of pathogens and colour showing family.}\label{fig:treePlot2}
-\end{figure}
-
-
-\end{knitrout}
 
 
 

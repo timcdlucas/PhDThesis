@@ -135,10 +135,10 @@ Given the weakness of any association between population structure and pathogen 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\clearpage
 \section{Introduction}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \subsection{General Intro}
 The number of pathogen species carried by a host species has important consequences for the ecology of the host and the probability that the host will be a reservoir of a zoonotic pathogen.
 However, the factors that affect pathogen richness are poorly understood.
@@ -151,10 +151,10 @@ However, the factors that affect pathogen richness are poorly understood.
 
 \subsection{Theoretical background}
 
-
-Single pathogen models show that increasing population structure simply slows disease spread and makes establishment less likely \cite{}.
-In the ecological literature this is often taken as predicting that increased population structure will decrease pathogen richness \cite{}.
-However, models of competition between multiple pathogens show that in unstructured populations a competitive exclusion process occurs but that splitting the population into two patches allows coexistence \cite{}.
+%Think this ref is right but need to check.
+Single pathogen models show that increasing population structure simply slows disease spread and makes establishment less likely \cite{colizza2007invasion, vespignani2008reaction}.
+In the ecological literature this is often taken as predicting that increased population structure will decrease pathogen richness \cite{nunn2003comparative}.
+However, models of competition between multiple pathogens show that in unstructured populations a competitive exclusion process occurs but that splitting the population into two patches allows coexistence \cite{qiu2013vector,allen2004sis, nunes2006localized}.
 
 
 \subsection{Previous Studies}
@@ -1960,7 +1960,7 @@ virusFstLambda <- summary(pgls(virusSpecies ~ 1, data = compFst, lambda = 'ML'))
 distrFstLambda <- summary(pgls(distrSize ~ 1, data = compFst, lambda = 'ML'))
 %%end.rcode
 
-$F_{ST}$ studies are conducted at a range of spatial scales, but $F_{ST}$ often increases with distance studied \cite{}.
+$F_{ST}$ studies are conducted at a range of spatial scales, but $F_{ST}$ often increases with distance studied \cite{burland1999population, hulva2010mechanisms, o2015genetic, vonhof2015range}.
 To minimise the effects of this I only used data from studies that cover \rinline{rangeUseable * 100}\% of the diameter of the species range.
 This is a largely arbitrary value that could be considered to reflect a ``global'' estimate of $F_{ST}$ while keeping a reasonable number of datapoints available.
 I calculated the diameter of the species range by finding the furthest apart points in the IUCN species range \cite{iucn} even if the range is split into multiple polygons.
@@ -2034,12 +2034,14 @@ Due to the low number of studies and the restrictive requirements imposed on stu
 The number of described virus species for a bat host ranged up to \rinline{max(fstFinal$virusSpecies)} viruses in \emph{\rinline{fstFinal$binomial[which.max(fstFinal$virusSpecies)]}}.
 Figure~\ref{fig:fstTreePlot} shows the phylogeny used and the number of viruses for each species.
 
-\tmpsection{Model results}
 
 As with the Number of Subspecies dataset, there is no phylogenetic signal in the number of virus species ($\lambda$ = \rinline{virusFstLambda$param['lambda']}, $p$ = \rinline{virusFstLambda$param.CI$lambda$bounds.p[1]}). 
 Gene flow also has no phylogenetic autocorrelation ($\lambda$ = \rinline{nmFstLambda$param['lambda']}, $p$ = \rinline{nmFstLambda$param.CI$lambda$bounds.p[1]}).
 Due to the low sample size, significance tests are unlikely to have much power.
 However, study effort has some phylogenetic autocorrelation ($\lambda$ = \rinline{scholarFstLambda$param['lambda']}, $p$ = \rinline{scholarFstLambda$param.CI$lambda$bounds.p[1]}) while distribution size and mass seem to show phylogenetic signal (Distribution size: $\lambda$ = \rinline{distrFstLambda$param['lambda']}, $p$ = \rinline{distrFstLambda$param.CI$lambda$bounds.p[1]}, Mass: $\lambda$ = \rinline{massFstLambda$param['lambda']}, $p$ = \rinline{massFstLambda$param.CI$lambda$bounds.p[1]}).
+
+
+\tmpsection{Model results}
 
 While less strongly supported than the number of subspecies, gene flow is likely in the best model ($Pr = $ \rinline{fstVarWeights['log.Nm.']}) compared to the benchmark random variable which has $Pr = $ \rinline{fstVarWeights['rand']} as shown in Figure~\ref{fig:fstITPlots}.
 On average (mean weighted by Akaiki weights) there is a negative relationship between gene flow and viral richness ($\beta = $ \rinline{fstCoefMeans['beta log(Nm)']}, variance = \rinline{fstCoefVars['beta log(Nm)']}) despite the apparent positive relationship in Figure~\ref{fig:fstRawData}.
@@ -2450,20 +2452,22 @@ rm(t2)
 
 %%begin.rcode treePlot2, show.figs = 'hide', out.width = '\\textwidth', fig.cap = 'Pruned phylogeny \\cite{jones2005bats} with dot size showing number of pathogens and colour showing family.'
 
-# Plot tree 
-p2 <- ggtree(pruneTree2, layout = 'fan') 
 
-p2 %<+% nSpecies2[, 1:6] +
-  geom_point(aes(size = virusSpecies, colour = Family), subset=.(isTip)) +
-  scale_size(range = c(0.8, 3)) +
-  scale_colour_manual(values = c(pokepal('oddish')[c(1,3,5,6,9,10)],    pokepal('Carvanha')[c(1,2,4, 13, 12)])) +
-  theme_tcdl +
-  theme(plot.margin = unit(c(-1, 3, -2.5, -2), "lines")) +
-  theme(legend.position = 'right') +
-  labs(size = 'Virus Richness') +
-  theme(legend.key.size = unit(0.6, "lines"),
-              legend.text = element_text(size = 6),
-              legend.title = element_text(size = 8))
+
+## Plot tree 
+#p2 <- ggtree(pruneTree2, layout = 'fan') 
+
+#p2 %<+% nSpecies2[, 1:6] +
+#  geom_point(aes(size = virusSpecies, colour = Family), subset=.(isTip)) +
+#  scale_size(range = c(0.8, 3)) +
+#  scale_colour_manual(values = c(pokepal('oddish')[c(1,3,5,6,9,10)],    pokepal('Carvanha')[c(1,2,4, 13, 12)])) +
+#  theme_tcdl +
+#  theme(plot.margin = unit(c(-1, 3, -2.5, -2), "lines")) +
+#  theme(legend.position = 'right') +
+#  labs(size = 'Virus Richness') +
+#  theme(legend.key.size = unit(0.6, "lines"),
+#              legend.text = element_text(size = 6),
+#              legend.title = element_text(size = 8))
 
 
 
