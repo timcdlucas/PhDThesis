@@ -16,7 +16,7 @@ runFstScrape <- FALSE
 
 # Run slow bootstrapping?
 subBoots <- FALSE
-fstBoots <- TRUE
+fstBoots <- FALSE
 batclocksBoots <- FALSE
 
 # There are figures created in the data analysis which are not in the final chapter document.
@@ -868,12 +868,12 @@ The counts were scraped using the rvest package \cite{rvest}.
 I log transformed these variables as they were strongly right skewed.
 The log number of citations on Pubmed and Google scholar were highly correlated (pgls: $t$ = \rinline{studyEffortCor$coefficients['log(pubmedRefs + 1)', 't value']}, df = \rinline{studyEffortCor$df[2]}, $p$ = \rinline{studyEffortCor$coefficients['log(pubmedRefs + 1)', 'Pr(>|t|)']}).
 The results here are for analyses using only Google Scholar citations.
-See the appendix for analyses run using Pubmed citations.
+%See the appendix for analyses run using Pubmed citations.
 
 Measures of body mass are taken from Pantheria \cite{jones2009pantheria} and primary literature \cite{canals2005relative, arita1993rarity, lopez2014echolocation, orr2013does, , lim2001bat, aldridge1987turning, ma2003dietary, owen2003home, henderson2008movements, heaney2012nyctalus, oleksy2015high, zhang2009recent}. 
 \emph{Pipistrellus pygmaeus} was assigned the same mass as \emph{P. pipistrellus} as they indistinguishable by mass.
 Body mass measurements were log transformed due to the strong right skew.
-Distribution size was estimated by downloading range maps for all species from IUCN \cite{} and were also logged due to right skew.
+Distribution size was estimated by downloading range maps for all species from IUCN \cite{iucn} and were also logged due to right skew.
 
 %Pubmed was scraped on \rinline{pubmedScrapeDate} and Google Scholar was scraped on \rinline{scholarScrapeDate}
 
@@ -1188,13 +1188,18 @@ modelSelect <- function(allForm, data, phy, boot, allModelMat, varList){
   
   set.seed(paste0('123', boot))
   bootData <- cbind(data, rand = runif(nrow(data)))
-  #compBootData <- comparative.data(data = bootData, phy = phy, names.col = 'binomial')
+
+
+  coefs <- matrix(NA, ncol = length(varList) + 2, nrow = nrow(allModelMat), 
+             dimnames = list(NULL, paste('beta', c('(Intercept)', varList, 'log(scholarRefs):NumberOfSubspecies'))))
 
   results <- apply(allModelMat, 1, function(x) sapply(c(varList, "log(scholarRefs):NumberOfSubspecies"), function(y) y %in% x)) %>%
                t %>%
                data.frame %>%
-               cbind(AIC = NA, boot = boot, lambda = NA, attempt = NA, coef = NA, interCoef = NA)
+               cbind(AIC = NA, boot = boot, lambda = NA, attempt = NA, predictors = NA, coefs)
 
+  # Fit each model 
+  # I'm having problems with convergence so sometimes have to try different starting values.
   for(m in 1:length(allForm)){
     if(exists('model')){
       rm(model)
@@ -1236,15 +1241,9 @@ modelSelect <- function(allForm, data, phy, boot, allModelMat, varList){
     }
 
     results$predictors[m] <- allForm[[m]] %>% as.character %>% .[3]
-  
-    if(results$NumberOfSubspecies[m]){
-      results$coef[m] <- model$coef['NumberOfSubspecies']
-    }
 
 
-    if(results$log.scholarRefs..NumberOfSubspecies[m]){
-      results$interCoef[m] <- model$coef['log(scholarRefs):NumberOfSubspecies']
-    }
+    results[m, paste('beta', names(coef(model)))] <- coef(model)
 
     message(paste('Boot:', boot, ', m:', m, '\n'))
   }
@@ -1339,36 +1338,39 @@ ggplot(sepVarWeights, aes(x = variable, y = estimate, colour = col, fill = col))
 
 %%begin.rcode nSpeciesCoef, fig.show = extraFigs
 
-ggplot(allResults, aes(x = coef)) +
+ggplot(allResults, aes(x = beta.NumberOfSubspecies)) +
   geom_histogram()
 
 
-ggplot(allResults, aes(x = coef, colour = log.scholarRefs.)) +
+ggplot(allResults, aes(x = beta.NumberOfSubspecies, colour = log.scholarRefs.)) +
   geom_density()
 
 
-ggplot(allResults, aes(x = coef, colour = log.scholarRefs..NumberOfSubspecies)) +
+ggplot(allResults, aes(x = beta.NumberOfSubspecies, colour = log.scholarRefs..NumberOfSubspecies)) +
   geom_density()
 
 
-ggplot(allResults, aes(x = coef, colour =log.distrSize.)) +
+ggplot(allResults, aes(x = beta.NumberOfSubspecies, colour =log.distrSize.)) +
   geom_density()
 
-mean(allResults$coef, na.rm = TRUE)
+mean(allResults$NumberOfSubspecies, na.rm = TRUE)
 
 
-nSpeciesCoefMean <- wtd.mean(allResults$coef[!allResults$log.scholarRefs..NumberOfSubspecies], 
+varCoefMeans <- apply(allResults[, grep('beta', names(allResults))], 2, function(x) wtd.mean(x, allResults$weight, na.rm = TRUE))
+varCoefVars  <- apply(allResults[, grep('beta', names(allResults))], 2, function(x) wtd.var(x, allResults$weight, na.rm = TRUE))
+
+nSpeciesCoefMean <- wtd.mean(allResults$beta.NumberOfSubspecies[!allResults$log.scholarRefs..NumberOfSubspecies], 
                              allResults$weight[!allResults$log.scholarRefs..NumberOfSubspecies], na.rm = TRUE)
-nSpeciesCoefMeanI <- wtd.mean(allResults$coef[allResults$log.scholarRefs..NumberOfSubspecies], 
+nSpeciesCoefMeanI <- wtd.mean(allResults$beta.NumberOfSubspecies[allResults$log.scholarRefs..NumberOfSubspecies], 
                              allResults$weight[allResults$log.scholarRefs..NumberOfSubspecies], na.rm = TRUE)
-nSpeciesInterMean <- wtd.mean(allResults$interCoef, allResults$weight, na.rm = TRUE)
+nSpeciesInterMean <- wtd.mean(allResults$beta.log.scholarRefs..NumberOfSubspecies, allResults$weight, na.rm = TRUE)
 
 
-nSpeciesCoefVar <- wtd.var(allResults$coef[!allResults$log.scholarRefs..NumberOfSubspecies], 
+nSpeciesCoefVar <- wtd.var(allResults$beta.NumberOfSubspecies[!allResults$log.scholarRefs..NumberOfSubspecies], 
                              allResults$weight[!allResults$log.scholarRefs..NumberOfSubspecies], na.rm = TRUE)
-nSpeciesCoefVarI <- wtd.var(allResults$coef[allResults$log.scholarRefs..NumberOfSubspecies], 
+nSpeciesCoefVarI <- wtd.var(allResults$beta.NumberOfSubspecies[allResults$log.scholarRefs..NumberOfSubspecies], 
                              allResults$weight[allResults$log.scholarRefs..NumberOfSubspecies], na.rm = TRUE)
-nSpeciesInterVar <- wtd.var(allResults$interCoef, allResults$weight, na.rm = TRUE)
+nSpeciesInterVar <- wtd.var(allResults$beta.log.scholarRefs..NumberOfSubspecies, allResults$weight, na.rm = TRUE)
 
 
 
@@ -1381,6 +1383,7 @@ max(nSpecies$NumberOfSubspecies)
 # At minimum study effort
 nSpeciesInterMean*log(min(nSpecies$scholarRefs)) + nSpeciesCoefMeanI
 nSpeciesInterMean*log(max(nSpecies$scholarRefs)) + nSpeciesCoefMeanI
+nSpeciesInterMean*log(median(nSpecies$scholarRefs)) + nSpeciesCoefMeanI
 
 mean(nSpeciesInterMean*log(nSpecies$scholarRefs) + nSpeciesCoefMeanI > 0)
 
@@ -1711,20 +1714,23 @@ fstAllFormulae <- c(as.formula('virusSpecies ~ 1'), fstAllFormulae)
 %%begin.rcode fstModelSelectBoots, eval = fstBoots
 
 
+
 fstModelSelect <- function(allForm, data, phy, boot, allModelMat, varList){
   
-  set.seed(paste0('22311', boot))
+  set.seed(paste0('2388', boot))
   bootData <- cbind(data, rand = runif(nrow(data)))
-  rownames(bootData) <- bootData$binomial
-  #compBootData <- comparative.data(data = bootData, phy = phy, names.col = 'binomial')
+  row.names(bootData) <- bootData$binomial
+
+  coefs <- matrix(NA, ncol = length(varList) + 1, nrow = nrow(allModelMat), 
+             dimnames = list(NULL, paste('beta', c('(Intercept)', varList))))
 
   results <- apply(allModelMat, 1, function(x) sapply(varList, function(y) y %in% x)) %>%
                t %>%
                data.frame %>%
-               cbind(AIC = NA, boot = boot, lambda = NA, attempt = NA, predictors = NA, coef = NA)
+               cbind(AIC = NA, boot = boot, lambda = NA, attempt = NA, predictors = NA, coefs)
 
-
-
+  # Fit each model 
+  # I'm having problems with convergence so sometimes have to try different starting values.
   for(m in 1:length(allForm)){
     if(exists('model')){
       rm(model)
@@ -1746,11 +1752,11 @@ fstModelSelect <- function(allForm, data, phy, boot, allModelMat, varList){
       }) 
     }
     if(!exists('model')){
-      try({
-        model <- gls(allForm[[m]], correlation = corPagel(value = 0.1, phy = phy), data = bootData, method = 'ML')  
-        results$attempt[m] <- 4
-      }) 
-    }
+        try({
+          model <- gls(allForm[[m]], correlation = corPagel(value = 0.1, phy = phy), data = bootData, method = 'ML')  
+          results$attempt[m] <- 4
+        }) 
+      }
     if(!exists('model')){
       try({
         model <- lm(allForm[[m]], data = bootData) 
@@ -1758,30 +1764,29 @@ fstModelSelect <- function(allForm, data, phy, boot, allModelMat, varList){
         message('Running lm')
       }) 
     }
-    #model <- lm(allForm[[m]], data = bootData)
     #model <- pgls(allForm[[m]], data = compBootData, lambda = 'ML')
-
-
     results$AIC[m] <- AICc(model)
-    results$predictors[m] <- allForm[[m]] %>% as.character %>% .[3]
-
-    if(results$log.Nm.[m]){
-      results$coef[m] <- model$coef['log(Nm)']
-    }
 
     if(inherits(model, 'gls')){
         results$lambda[m] <- model$modelStruct$corStruct[1]
     }
+
+    results$predictors[m] <- allForm[[m]] %>% as.character %>% .[3]
+
+
+    results[m, paste('beta', names(coef(model)))] <- coef(model)
+
     message(paste('Boot:', boot, ', m:', m, '\n'))
   }
 
   results$dAIC <- results$AIC - min(results$AIC)
   results$weight <- exp(- 0.5 * results$dAIC) / sum(exp(- 0.5 * results$dAIC))
 
-  
+
   return(results)
 
 }
+
 
 
 
@@ -1920,23 +1925,23 @@ ggplot(aes(x, L)) +
 
 %%begin.rcode fstCoef, fig.show = extraFigs
 
-ggplot(fstAllResults, aes(x = coef)) +
+ggplot(fstAllResults, aes(x = beta.log.Nm.)) +
   geom_histogram()
 
 
-ggplot(fstAllResults, aes(x = coef, colour = log.scholarRefs.)) +
+ggplot(fstAllResults, aes(x = beta.log.Nm., colour = log.scholarRefs.)) +
   geom_density()
 
 
 
-ggplot(fstAllResults, aes(x = coef, colour =log.distrSize.)) +
+ggplot(fstAllResults, aes(x = beta.log.Nm., colour =log.distrSize.)) +
   geom_density()
 
 
-fstCoefMean <- wtd.mean(fstAllResults$coef, fstAllResults$weight, na.rm = TRUE)
-fstCoefVar <- wtd.var(fstAllResults$coef, fstAllResults$weight, na.rm = TRUE)
+fstCoefMeans <- apply(fstAllResults[, grep('beta', names(fstAllResults))], 2, function(x) wtd.mean(x, fstAllResults$weight, na.rm = TRUE))
+fstCoefVars  <- apply(fstAllResults[, grep('beta', names(fstAllResults))], 2, function(x) wtd.var(x, fstAllResults$weight, na.rm = TRUE))
 
-pcCoefLzero <- 100*sum(na.omit(fstAllResults$coef) < 0) / length(na.omit(fstAllResults$coef))
+pcCoefLzero <- 100*sum(na.omit(fstAllResults$beta.log.Nm.) < 0) / length(na.omit(fstAllResults$beta.log.Nm.))
 
 %%end.rcode
 
@@ -1957,8 +1962,8 @@ distrFstLambda <- summary(pgls(distrSize ~ 1, data = compFst, lambda = 'ML'))
 
 $F_{ST}$ studies are conducted at a range of spatial scales, but $F_{ST}$ often increases with distance studied \cite{}.
 To minimise the effects of this I only used data from studies that cover \rinline{rangeUseable * 100}\% of the diameter of the species range.
-This is a largely arbitrary value that could be considered to reflect a `global' estimate of $F_{ST}$ while keeping a reasonable number of datapoints available.
-I calculated the diameter of the species range by finding the furthest apart points in the IUCN species range \cite{} even if the range is split into multiple polygons.
+This is a largely arbitrary value that could be considered to reflect a ``global'' estimate of $F_{ST}$ while keeping a reasonable number of datapoints available.
+I calculated the diameter of the species range by finding the furthest apart points in the IUCN species range \cite{iucn} even if the range is split into multiple polygons.
 The width covered by each study was the distance between the most distant sampling sites.
 When this was not explicit in the paper, the centre of the lowest level of geographic area was used.
 
@@ -2006,25 +2011,25 @@ This is corroborated by the small estimated size of $\lambda$ ($\lambda$ = \rinl
 This fact implies that other factors must control pathogen richness.
 It also implies that pathogens are not directly inherited down the phylogeny, although this is to be expected by the fast evolution of viruses.
 
-Of the explanatory variables, the number of subspecies has no phylogenetic autocorrelation ($\lambda$ = \rinline{sspLambda$param['lambda']}, $p$ = \rinline{sspLambda$param.CI$lambda$bounds.p[1]}), study effort and distribution size have weak but significant autocorrelation (Study Effort: $\lambda$ = \rinline{scholarLambda$param['lambda']}, $p$ = \rinline{scholarLambda$param.CI$lambda$bounds.p[1]}, Distribution size: $\lambda$ = \rinline{distrLambda$param['lambda']}, $p$ = \rinline{distrLambda$param.CI$lambda$bounds.p[1]}) and mass is strongly phylogenetic ($\lambda$ = \rinline{massLambda$param['lambda']}, $p$ = \rinline{massLambda$param.CI$lambda$bounds.p[1]}).
+Of the explanatory variables, the number of subspecies has no phylogenetic autocorrelation ($\lambda$ = \rinline{sspLambda$param['lambda']}, $p$ = \rinline{sspLambda$param.CI$lambda$bounds.p[1]}), study effort and distribution size have weak but significant autocorrelation (Study Effort: $\lambda$ = \rinline{scholarLambda$param['lambda']}, $p$ = \rinline{scholarLambda$param.CI$lambda$bounds.p[1]}, Distribution size: $\lambda$ = \rinline{distrLambda$param['lambda']}, $p$ = \rinline{distrLambda$param.CI$lambda$bounds.p[1]}) and mass is strongly phylogenetic ($\lambda$ = \rinline{massLambda$param['lambda']}, $p$ = \rinline{massLambda$param.CI$lambda$bounds.p[1]}). 
+The parameter $\lambda$ is fitted and governs how important the phylogeny is in the model.
+Across all models the mean value of $\lambda$ is \rinline{mean(na.omit(allResults$lambda))} implying the residuals from the model are weakly phylogenetic.
+A small number of models (\rinline{mean(na.omit(allResults$lambda < 0))*100}\%)  had negatively phylogenetically distributed residuals.
 
 \tmpsection{Model results}
-%See Figure \ref{fig:plotSubspeciesCoefs} for a display of estimated coefficients for the two models using number of viruses as the response variable. 
-%The main model with mass, study effort and number of subspecies as predictors found study effort to be highly significant ($\beta = $ \rinline{subspeciesJoint$model$coef['log(pubmedRefs + 1)']}, $p = $ \rinline{subJoint.summary$coefficients[2,'Pr(>|t|)']}). 
-%The number of subspecies was marginally significant ($\beta = $ \rinline{ subspeciesJoint$model$coef['NumberOfSubspecies']}, $p = $ \rinline{subJoint.summary$coefficients[3,'Pr(>|t|)']}). 
-%The effect of nonindependance due to phylogeny was very small ($\lambda = $ \rinline{subJoint.summary$param['lambda']}, $p = $ \rinline{subspeciesJoint$param.CI$lambda$bounds.p[1]}).
 
-%The interaction term between study effort and number of subspecies, when included, was significant ($\beta = $ \rinline{ subspeciesInter$model$coef['NumberOfSubspecies:log(scholarRefs)']}, $p = $ \rinline{subInter.summary$coefficients[5,'Pr(>|t|)']}).
-
-Summing the Akaiki weights of all models that contain a given variable gives a probability that the variable would be in the best model (Figure~\ref{fig:ITPlots}) if the data were recollected \cite{whittingham2006we}.
-The number of subspecies is very likely in the best model ($P(\text{in best model}) > $ \rinline{sprintf("%.3f", varWeights['NumberOfSubspecies'])}) as is the interaction between number of species and study effort ($P(\text{in best model}) = $ \rinline{varWeights['log.scholarRefs..NumberOfSubspecies']}) compared to the benchmark random variable which has $P(\text{in best model}) = $ \rinline{varWeights['rand']}.
+Summing the Akaiki weights of all models that contain a given variable gives a probability, $Pr$, that the variable would be in the best model (Figure~\ref{fig:ITPlots}) if the data were recollected \cite{whittingham2006we}.
+The number of subspecies is very likely in the best model ($Pr > $ \rinline{substring(as.character( varWeights['NumberOfSubspecies']), 1, 4)}) as is the interaction between number of species and study effort ($Pr = $ \rinline{varWeights['log.scholarRefs..NumberOfSubspecies']}) compared to the benchmark random variable which has $Pr = $ \rinline{varWeights['rand']}.
 When models with the interaction term are removed, on average (mean weighted by Akaiki weights) there is a positive relationship between the number of subspecies and viral richness ($\beta = $ \rinline{nSpeciesCoefMean}, variance = \rinline{nSpeciesCoefVar}).
-Models with an interaction between number of subspecies and study effort have a positive interaction term ($\beta = $ \rinline{nSpeciesInterMean}, variance = \rinline{nSpeciesInterVar}) and a negative linear term ($\beta = $ \rinline{nSpeciesCoefMeanI}, variance = \rinline{nSpeciesCoefVarI}) which in total is a postive relationship for most of the range of the study effort data.
-As seen in Figure~\ref{fig:ITPlots}, study effort is very likely in the best model ($P(\text{in best model}) = $ \rinline{varWeights['log.scholarRefs.']}) body mass and range size are also probably in the best model ($P(\text{in best model}) = $ \rinline{varWeights['log.mass.']} and $P(\text{in best model}) = $ \rinline{varWeights['log.distrSize.']}).
+Models with an interaction between number of subspecies and study effort have a positive interaction term ($\beta = $ \rinline{nSpeciesInterMean}, variance = \rinline{nSpeciesInterVar}) and a negative linear term ($\beta = $ \rinline{nSpeciesCoefMeanI}, variance = \rinline{nSpeciesCoefVarI}) which in total is a positive relationship for most of the range of the study effort data.
+This supports the hypothesis that population structure promotes pathogen richness.
+As seen in Figure~\ref{fig:ITPlots}, study effort is very likely in the best model ($\beta = $ \rinline{varCoefMeans['beta.log.scholarRefs.']}, $Pr > $ \rinline{substring(as.character(varWeights['log.scholarRefs.']), 1, 4)}) body mass and range size are also probably in the best model ($\beta = $ \rinline{varCoefMeans['beta.log.mass.']}, $Pr = $ \rinline{varWeights['log.mass.']} and $\beta = $ \rinline{varCoefMeans['beta.log.distrSize.']}, $Pr = $ \rinline{varWeights['log.distrSize.']}).
+
 
 
 \subsection{Gene Flow}
 
+\tmpsection{More Descriptive}
 Due to the low number of studies and the restrictive requirements imposed on study design, there are only data for \rinline{nrow(fstFinal)} bat species in \rinline{length(unique(fstFinal$Family))} families.
 The number of described virus species for a bat host ranged up to \rinline{max(fstFinal$virusSpecies)} viruses in \emph{\rinline{fstFinal$binomial[which.max(fstFinal$virusSpecies)]}}.
 Figure~\ref{fig:fstTreePlot} shows the phylogeny used and the number of viruses for each species.
@@ -2036,14 +2041,15 @@ Gene flow also has no phylogenetic autocorrelation ($\lambda$ = \rinline{nmFstLa
 Due to the low sample size, significance tests are unlikely to have much power.
 However, study effort has some phylogenetic autocorrelation ($\lambda$ = \rinline{scholarFstLambda$param['lambda']}, $p$ = \rinline{scholarFstLambda$param.CI$lambda$bounds.p[1]}) while distribution size and mass seem to show phylogenetic signal (Distribution size: $\lambda$ = \rinline{distrFstLambda$param['lambda']}, $p$ = \rinline{distrFstLambda$param.CI$lambda$bounds.p[1]}, Mass: $\lambda$ = \rinline{massFstLambda$param['lambda']}, $p$ = \rinline{massFstLambda$param.CI$lambda$bounds.p[1]}).
 
-While less strongly supported than the number of subspecies, gene flow is likely in the best model ($P(\text{in best model}) = $ \rinline{fstVarWeights['log.Nm.']}) compared to the benchmark random variable which has $P(\text{in best model}) = $ \rinline{fstVarWeights['rand']} as shown in Figure~\ref{fig:fstITPlots}.
-On average (mean weighted by Akaiki weights) there is a negative relationship between gene flow and viral richness ($\beta = $ \rinline{fstCoefMean}, variance = \rinline{fstCoefVar}) despite the apparent positive relationship in Figure~\ref{fig:fstRawData}.
+While less strongly supported than the number of subspecies, gene flow is likely in the best model ($Pr = $ \rinline{fstVarWeights['log.Nm.']}) compared to the benchmark random variable which has $Pr = $ \rinline{fstVarWeights['rand']} as shown in Figure~\ref{fig:fstITPlots}.
+On average (mean weighted by Akaiki weights) there is a negative relationship between gene flow and viral richness ($\beta = $ \rinline{fstCoefMeans['beta log(Nm)']}, variance = \rinline{fstCoefVars['beta log(Nm)']}) despite the apparent positive relationship in Figure~\ref{fig:fstRawData}.
 This supports the hypothesis that population structure promotes viral richness.
 Possibly due to the smaller sample size, or a weaker relationship, this coefficient is much more varied than the number of subspecies coeficient with \rinline{pcCoefLzero}\% of models estimating a positive relationship.
-As in the number of subspecies analysis, study effort is very likely in the best model ($P(\text{in best model}) = $ \rinline{fstVarWeights['log.scholarRefs.']}) as is body mass ($P(\text{in best model}) = $ \rinline{fstVarWeights['log.mass.']}).
-In contrast to the number of subspecies analysis, range size is almost certainly not in the best model with $P(\text{in best model}) = $ \rinline{fstVarWeights['log.distrSize.']} being much less than the random variable.
+As in the number of subspecies analysis, study effort is very likely in the best model ($Pr = $ \rinline{fstVarWeights['log.scholarRefs.']}) as is body mass ($Pr = $ \rinline{fstVarWeights['log.mass.']}).
+In contrast to the number of subspecies analysis, range size is almost certainly not in the best model with $Pr = $ \rinline{fstVarWeights['log.distrSize.']} being much less than the random variable.
 
-
+Across all models the mean value of $\lambda$ is \rinline{mean(na.omit(fstAllResults$lambda))} and a large number of individual models (\rinline{mean(na.omit(fstAllResults$lambda < 0))*100}\%)  had negatively phylogenetically distributed residuals implying the residuals from the model are strongly negatively phylogenetic.
+Due to the small sample size this is probably due to a small number of data points with large residuals being distant on the tree.
 
 
 
@@ -2149,6 +2155,39 @@ $\Delta$AICc is the $\bar{\text{AICc}}$ score minus the lowest score.
 $w_i$ is the Akaike weight and can be interpreted as the probability that the model is the best model (of those in the plausible set).
 $\sum w_i$ is the cumulative sum of the Akaike weights.}
 \label{t:subsmodels}
+\end{table}
+
+
+
+\begin{table}[t]
+\rowcolors{2}{gray!25}{white}
+\begin{tabular}{>{\small}lrrrr}
+
+\normalsize{Model} & $\bar{\text{AICc}}$ & $\Delta$AICc & $w_i$ & $\sum w_i$\\
+\hline
+log(Scholar) + log(Gene flow) + log(Mass) & 
+\rinline{round(fstModelWeights[1 ,2])} & \rinline{sprintf("%.2f", round(fstModelWeights[1, 3], 2))} &
+\rinline{sprintf("%.2f", round(fstModelWeights[1, 4], 2))} & \rinline{sprintf("%.2f", round(fstModelWeights[1, 5], 2))}\\
+log(Scholar) + log(Mass) & 
+\rinline{round(fstModelWeights[2 ,2])} & \rinline{sprintf("%.2f", round(fstModelWeights[2, 3], 2))} &
+\rinline{sprintf("%.2f", round(fstModelWeights[2, 4], 2))} & \rinline{sprintf("%.2f", round(fstModelWeights[2, 5], 2))}\\
+log(Mass) + log(Range size) & 
+\rinline{round(fstModelWeights[3 ,2])} & \rinline{sprintf("%.2f", round(fstModelWeights[3, 3], 2))} &
+\rinline{sprintf("%.2f", round(fstModelWeights[3, 4], 2))} & \rinline{sprintf("%.2f", round(fstModelWeights[3, 5], 2))}\\
+log(Scholar) + log(Gene flow) + log(Mass) + rand &
+\rinline{round(fstModelWeights[4 ,2])} & \rinline{sprintf("%.2f", round(fstModelWeights[4, 3], 2))} &
+\rinline{sprintf("%.2f", round(fstModelWeights[4, 4], 2))} & \rinline{sprintf("%.2f", round(fstModelWeights[4, 5], 2))}
+\end{tabular}
+\caption[Model selection results for gene flow analysis]{
+Model selection results for gene flow analysis. 
+The top two models are considerably better than the other models; there is a \rinline{100*round(fstModelWeights[2, 4] +fstModelWeights[1, 4], 2)}\% chance that one of them is the best model.
+As body mass and study effort are in both these models these variables are very likely in the best model.
+Gene flow is in the top model, implying it may well be in the best model.
+$\bar{\text{AICc}}$ is the mean AICc score across \rinline{nBoots} resamplings of the null random variable. 
+$\Delta$AICc is the $\bar{\text{AICc}}$ score minus the lowest score. 
+$w_i$ is the Akaike weight and can be interpreted as the probability that the model is the best model (of those in the plausible set).
+$\sum w_i$ is the cumulative sum of the Akaike weights.}
+\label{t:fstmodels}
 \end{table}
 
 
@@ -2409,7 +2448,7 @@ rm(t2)
 %%end.rcode
 
 
-%%begin.rcode treePlot2, show.figs = extraFigs, out.width = '\\textwidth', fig.cap = 'Pruned phylogeny \\cite{jones2005bats} with dot size showing number of pathogens and colour showing family.'
+%%begin.rcode treePlot2, show.figs = 'hide', out.width = '\\textwidth', fig.cap = 'Pruned phylogeny \\cite{jones2005bats} with dot size showing number of pathogens and colour showing family.'
 
 # Plot tree 
 p2 <- ggtree(pruneTree2, layout = 'fan') 

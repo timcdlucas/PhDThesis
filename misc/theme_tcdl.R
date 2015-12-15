@@ -9,6 +9,7 @@
 library(ggplot2)
 library(grid)
 
+library(extrafont)
 
 theme_tcdl <-theme(text = element_text(family = "Lato Light", size = 12),
         panel.grid.major.x = element_line(colour = "#ECECEC", size = 0.3, linetype = 1),

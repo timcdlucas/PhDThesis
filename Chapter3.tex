@@ -492,25 +492,25 @@ This is corroborated by the small estimated size of $\lambda$ ($\lambda$ = 0.04,
 This fact implies that other factors must control pathogen richness.
 It also implies that pathogens are not directly inherited down the phylogeny, although this is to be expected by the fast evolution of viruses.
 
-Of the explanatory variables, the number of subspecies has no phylogenetic autocorrelation ($\lambda$ = \ensuremath{10^{-6}}, $p$ = 1), study effort and distribution size have weak but significant autocorrelation (Study Effort: $\lambda$ = 0.1, $p$ = \ensuremath{9.12\times 10^{-3}}, Distribution size: $\lambda$ = 0.32, $p$ = \ensuremath{8.82\times 10^{-8}}) and mass is strongly phylogenetic ($\lambda$ = 0.93, $p$ = 0).
+Of the explanatory variables, the number of subspecies has no phylogenetic autocorrelation ($\lambda$ = \ensuremath{10^{-6}}, $p$ = 1), study effort and distribution size have weak but significant autocorrelation (Study Effort: $\lambda$ = 0.1, $p$ = \ensuremath{9.12\times 10^{-3}}, Distribution size: $\lambda$ = 0.32, $p$ = \ensuremath{8.82\times 10^{-8}}) and mass is strongly phylogenetic ($\lambda$ = 0.93, $p$ = 0). 
+The parameter $\lambda$ is fitted and governs how important the phylogeny is in the model.
+Across all models the mean value of $\lambda$ is 0.08 implying the residuals from the model are weakly phylogenetic.
+A small number of models (0.35\%)  had negatively phylogenetically distributed residuals.
 
 \tmpsection{Model results}
-%See Figure \ref{fig:plotSubspeciesCoefs} for a display of estimated coefficients for the two models using number of viruses as the response variable. 
-%The main model with mass, study effort and number of subspecies as predictors found study effort to be highly significant ($\beta = $ subspeciesJoint$model$coef['log(pubmedRefs + 1)'], $p = $ subJoint.summary$coefficients[2,'Pr(>|t|)']). 
-%The number of subspecies was marginally significant ($\beta = $  subspeciesJoint$model$coef['NumberOfSubspecies'], $p = $ subJoint.summary$coefficients[3,'Pr(>|t|)']). 
-%The effect of nonindependance due to phylogeny was very small ($\lambda = $ subJoint.summary$param['lambda'], $p = $ subspeciesJoint$param.CI$lambda$bounds.p[1]).
 
-%The interaction term between study effort and number of subspecies, when included, was significant ($\beta = $  subspeciesInter$model$coef['NumberOfSubspecies:log(scholarRefs)'], $p = $ subInter.summary$coefficients[5,'Pr(>|t|)']).
-
-Summing the Akaiki weights of all models that contain a given variable gives a probability that the variable would be in the best model (Figure~\ref{fig:ITPlots}) if the data were recollected \cite{whittingham2006we}.
-The number of subspecies is very likely in the best model ($P(\text{in best model}) > $ 0.999) as is the interaction between number of species and study effort ($P(\text{in best model}) = $ 0.97) compared to the benchmark random variable which has $P(\text{in best model}) = $ 0.2.
+Summing the Akaiki weights of all models that contain a given variable gives a probability, $Pr$, that the variable would be in the best model (Figure~\ref{fig:ITPlots}) if the data were recollected \cite{whittingham2006we}.
+The number of subspecies is very likely in the best model ($Pr > $ 0.99) as is the interaction between number of species and study effort ($Pr = $ 0.97) compared to the benchmark random variable which has $Pr = $ 0.2.
 When models with the interaction term are removed, on average (mean weighted by Akaiki weights) there is a positive relationship between the number of subspecies and viral richness ($\beta = $ 0.19, variance = \ensuremath{1.24\times 10^{-4}}).
-Models with an interaction between number of subspecies and study effort have a positive interaction term ($\beta = $ 0.14, variance = \ensuremath{3.94\times 10^{-6}}) and a negative linear term ($\beta = $ \ensuremath{-0.78}, variance = \ensuremath{2.37\times 10^{-4}}) which in total is a postive relationship for most of the range of the study effort data.
-As seen in Figure~\ref{fig:ITPlots}, study effort is very likely in the best model ($P(\text{in best model}) = $ 1) body mass and range size are also probably in the best model ($P(\text{in best model}) = $ 0.8 and $P(\text{in best model}) = $ 0.66).
+Models with an interaction between number of subspecies and study effort have a positive interaction term ($\beta = $ 0.14, variance = \ensuremath{3.94\times 10^{-6}}) and a negative linear term ($\beta = $ \ensuremath{-0.78}, variance = \ensuremath{2.37\times 10^{-4}}) which in total is a positive relationship for most of the range of the study effort data.
+This supports the hypothesis that population structure promotes pathogen richness.
+As seen in Figure~\ref{fig:ITPlots}, study effort is very likely in the best model ($\beta = $ 0.35, $Pr > $ 0.99) body mass and range size are also probably in the best model ($\beta = $ 0.38, $Pr = $ 0.8 and $\beta = $ 0.26, $Pr = $ 0.66).
+
 
 
 \subsection{Gene Flow}
 
+\tmpsection{More Descriptive}
 Due to the low number of studies and the restrictive requirements imposed on study design, there are only data for 24 bat species in 7 families.
 The number of described virus species for a bat host ranged up to 12 viruses in \emph{Miniopterus schreibersii}.
 Figure~\ref{fig:fstTreePlot} shows the phylogeny used and the number of viruses for each species.
@@ -522,14 +522,15 @@ Gene flow also has no phylogenetic autocorrelation ($\lambda$ = \ensuremath{10^{
 Due to the low sample size, significance tests are unlikely to have much power.
 However, study effort has some phylogenetic autocorrelation ($\lambda$ = 0.15, $p$ = 0.56) while distribution size and mass seem to show phylogenetic signal (Distribution size: $\lambda$ = 0.67, $p$ = 0.53, Mass: $\lambda$ = 0.79, $p$ = \ensuremath{2.69\times 10^{-3}}).
 
-While less strongly supported than the number of subspecies, gene flow is likely in the best model ($P(\text{in best model}) = $ 0.56) compared to the benchmark random variable which has $P(\text{in best model}) = $ 0.38 as shown in Figure~\ref{fig:fstITPlots}.
-On average (mean weighted by Akaiki weights) there is a negative relationship between gene flow and viral richness ($\beta = $ \ensuremath{-0.21}, variance = 0.01) despite the apparent positive relationship in Figure~\ref{fig:fstRawData}.
+While less strongly supported than the number of subspecies, gene flow is likely in the best model ($Pr = $ 0.61) compared to the benchmark random variable which has $Pr = $ 0.37 as shown in Figure~\ref{fig:fstITPlots}.
+On average (mean weighted by Akaiki weights) there is a negative relationship between gene flow and viral richness ($\beta = $ NA, variance = NA) despite the apparent positive relationship in Figure~\ref{fig:fstRawData}.
 This supports the hypothesis that population structure promotes viral richness.
-Possibly due to the smaller sample size, or a weaker relationship, this coefficient is much more varied than the number of subspecies coeficient with 23.5\% of models estimating a positive relationship.
-As in the number of subspecies analysis, study effort is very likely in the best model ($P(\text{in best model}) = $ 0.94) as is body mass ($P(\text{in best model}) = $ 0.9).
-In contrast to the number of subspecies analysis, range size is almost certainly not in the best model with $P(\text{in best model}) = $ 0.07 being much less than the random variable.
+Possibly due to the smaller sample size, or a weaker relationship, this coefficient is much more varied than the number of subspecies coeficient with 24.25\% of models estimating a positive relationship.
+As in the number of subspecies analysis, study effort is very likely in the best model ($Pr = $ 0.96) as is body mass ($Pr = $ 0.94).
+In contrast to the number of subspecies analysis, range size is almost certainly not in the best model with $Pr = $ 0.05 being much less than the random variable.
 
-
+Across all models the mean value of $\lambda$ is \ensuremath{-2.88} and a large number of individual models (66.58\%)  had negatively phylogenetically distributed residuals implying the residuals from the model are strongly negatively phylogenetic.
+Due to the small sample size this is probably due to a small number of data points with large residuals being distant on the tree.
 
 
 
@@ -592,7 +593,8 @@ log(Scholar) + NSubspecies &
 0.01 & 0.97\\
 log(Scholar) + NSubspecies + log(Mass) & 
 890 & 7.80 &
-0.01 & 0.98
+0.01 & 0.98\\
+&&&&
 \end{tabular}
 \caption[Model selection results for number of subspecies analysis]{
 Model selection results for number of subspecies analysis. 
@@ -601,6 +603,40 @@ $\Delta$AICc is the $\bar{\text{AICc}}$ score minus the lowest score.
 $w_i$ is the Akaike weight and can be interpreted as the probability that the model is the best model (of those in the plausible set).
 $\sum w_i$ is the cumulative sum of the Akaike weights.}
 \label{t:subsmodels}
+\end{table}
+
+
+
+\begin{table}[t]
+\rowcolors{2}{gray!25}{white}
+\begin{tabular}{>{\small}lrrrr}
+
+\normalsize{Model} & $\bar{\text{AICc}}$ & $\Delta$AICc & $w_i$ & $\sum w_i$\\
+\hline
+log(Scholar) + log(Gene flow) + log(Mass) & 
+70 & 0.00 &
+0.60 & 0.60\\
+log(Scholar) + log(Mass) & 
+71 & 0.94 &
+0.38 & 0.98\\
+log(Mass) + log(Range size) & 
+77 & 6.73 &
+0.02 & 1.00\\
+log(Scholar) + log(Gene flow) + log(Mass) + rand &
+94 & 24.15 &
+0.00 & 1.00\\
+&&&&
+\end{tabular}
+\caption[Model selection results for gene flow analysis]{
+Model selection results for gene flow analysis. 
+The top two models are considerably better than the other models; there is a 98\% chance that one of them is the best model.
+As body mass and study effort are in both these models these variables are very likely in the best model.
+Gene flow is in the top model, implying it may well be in the best model.
+$\bar{\text{AICc}}$ is the mean AICc score across 50 resamplings of the null random variable. 
+$\Delta$AICc is the $\bar{\text{AICc}}$ score minus the lowest score. 
+$w_i$ is the Akaike weight and can be interpreted as the probability that the model is the best model (of those in the plausible set).
+$\sum w_i$ is the cumulative sum of the Akaike weights.}
+\label{t:fstmodels}
 \end{table}
 
 
