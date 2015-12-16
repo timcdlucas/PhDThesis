@@ -2031,19 +2031,21 @@ As seen in Figure~\ref{fig:ITPlots}, study effort is very likely in the best mod
 
 
 \begin{table}[t]
+\caption[Estimated variable weights and coefficients]{
+Estimated variable weights (probability that a variable is in the best model) and their estimated coefficients.
+}
 %\rowcolors{2}{gray!25}{white}
 \begin{tabular}{>{\small}l rrrr}
+\toprule
 & \multicolumn{2}{c}{\textit{Number of Subspecies}} & \multicolumn{2}{c}{\textit{Gene flow}}\\\cmidrule{2-5}
 \normalsize{Variable} & Weight & Coefficient & Weight & Coefficient\\
-\toprule
+\midrule
 Number of subspecies &&&&\\
 \hspace{3mm}Total & \rinline{varWeights['NumberOfSubspecies']} & \rinline{varCoefMeans['beta.NumberOfSubspecies']} &&\\
 \hspace{3mm}Models without interaction term &&  \rinline{nSpeciesCoefMean} &&\\
 \hspace{3mm}Models with interaction term &&  \rinline{nSpeciesCoefMeanI} &&\\
-Number of subspecies:log(Scholar) &  \rinline{varWeights['log.scholarRefs..NumberOfSubspecies']} &  \rinline{nSpeciesInterMean} && \\
-&&&&\\
-Gene flow & & &  \rinline{fstVarWeights['log.Nm.']} &  \rinline{fstCoefVars['beta.log.Nm.']}\\
-&&&&\\
+Number of subspecies:log(Scholar) &  \rinline{varWeights['log.scholarRefs..NumberOfSubspecies']} &  \rinline{nSpeciesInterMean} && \\[2mm]  
+Gene flow & & &  \rinline{fstVarWeights['log.Nm.']} &  \rinline{fstCoefVars['beta.log.Nm.']}\\[2mm]  
 log(Scholar) &  \rinline{varWeights['log.scholarRefs.']} &  \rinline{varCoefMeans['beta.log.scholarRefs.']} & 
    \rinline{fstVarWeights['log.scholarRefs.']} &  \rinline{fstCoefVars['beta.log.scholarRefs.']}\\
 log(Mass) &  \rinline{varWeights['log.mass.']} &  \rinline{varCoefMeans['beta.log.mass.']} & 
@@ -2054,9 +2056,7 @@ Random &  \rinline{varWeights['rand']} &  \rinline{varCoefMeans['beta.rand']}&
    \rinline{fstVarWeights['rand']} &  \rinline{fstCoefVars['beta.rand']}\\
 \bottomrule
 \end{tabular}
-\caption[Estimated variable weights and coefficients]{
-Estimated variable weights (probability that a variable is in the best model) and their estimated coefficients.
-}
+
 \label{t:fstmodels}
 \end{table}
 
