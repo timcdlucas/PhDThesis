@@ -516,24 +516,24 @@ As seen in Figure~\ref{fig:ITPlots}, study effort is very likely in the best mod
 Estimated variable weights (probability that a variable is in the best model) and their estimated coefficients.
 }
 %\rowcolors{2}{gray!25}{white}
-\begin{tabular}{>{\small}l rrrr}
+\begin{tabular}{@{}>{\small}l rrrr@{}}
 \toprule
-& \multicolumn{2}{c}{\textit{Number of Subspecies}} & \multicolumn{2}{c}{\textit{Gene flow}}\\\cmidrule{2-5}
+& \multicolumn{2}{c}{\textit{Number of Subspecies}} & \multicolumn{2}{c}{\textit{Gene flow}}\\\cmidrule(rl){2-3}\cmidrule(rl){4-5}
 \normalsize{Variable} & Weight & Coefficient & Weight & Coefficient\\
 \midrule
 Number of subspecies &&&&\\
-\hspace{3mm}Total & 1 & \ensuremath{-0.75} &&\\
+\hspace{3mm}Total & 1.00 & \ensuremath{-0.75} &&\\
 \hspace{3mm}Models without interaction term &&  0.19 &&\\
 \hspace{3mm}Models with interaction term &&  \ensuremath{-0.78} &&\\
 Number of subspecies:log(Scholar) &  0.97 &  0.14 && \\[2mm]  
 Gene flow & & &  0.61 &  0.02\\[2mm]  
-log(Scholar) &  1 &  0.35 & 
+log(Scholar) &  1.00 &  0.35 & 
    0.96 &  0.07\\
-log(Mass) &  0.8 &  0.38 & 
+log(Mass) &  0.80 &  0.38 & 
    0.94 &  0.13\\
 log(Range size) &  0.66 &  0.26& 
    0.05 &  0.21\\
-Random &  0.2 &  0.17& 
+Random &  0.20 &  0.17& 
    0.37 &  12.56\\
 \bottomrule
 \end{tabular}
