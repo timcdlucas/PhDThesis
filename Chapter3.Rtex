@@ -905,69 +905,6 @@ The $R^2$ value give is for the full model (not the loess curve).',
 
 %%begin.rcode, subsAnalysis, fig.show = extraFigs, fig.cap = diagCapts, fig.height = 4
 
-## Fit phylogenetic models and look at diagnostic plots.
-
-## N Virus ~ log(subs + cites + mass)
-
-#subspeciesJoint <- pgls(
-#  virusSpecies ~ log(scholarRefs) + log(NumberOfSubspecies) +  log(mass) , 
-#  data = compSubspecies, lambda = 'ML')
-
-#subJoint.summary <- summary(subspeciesJoint)
-
-## Create dataframe for diagnostic residuals plot.
-#jointDiag <- data.frame(
-#   PhylogeneticResiduals = subspeciesJoint$phyres,
-#   FittedValue = subspeciesJoint$fitted,
-#   Subspecies = subspeciesJoint$x[, 'log(NumberOfSubspecies)'],
-#   Mass = subspeciesJoint$x[, 'log(mass)'],
-#   StudyEffort = subspeciesJoint$x[, 'log(scholarRefs)'])
-
-## Plot residuals.
-#          
-#ggplot(jointDiag, aes(x = FittedValue, y = PhylogeneticResiduals)) +
-#  geom_point() +
-#  geom_smooth(method = 'loess') +
-#   geom_text(aes(x = 6, y = -1, 
-#    label =  paste("R^2 == ", round(subJoint.summary$r.squared, 2),sep="")), 
-#    parse = TRUE) 
-
-
-#ggplot(jointDiag, aes(x = StudyEffort, y = PhylogeneticResiduals)) +
-#  geom_point() +
-#  geom_smooth(method = 'loess')
-
-#ggplot(jointDiag, aes(x = Mass, y = PhylogeneticResiduals)) +
-#  geom_point() +
-#  geom_smooth(method = 'loess')
-
-## Create data to check heteroscadasticity
-#jointSD <- data.frame(
-#  Subspecies = unique(jointDiag$Subspecies),
-#  SD = sapply(unique(jointDiag$Subspecies), function(x)
-#        jointDiag %>%
-#          filter(Subspecies == x) %>%
-#          dplyr::select(PhylogeneticResiduals) %>%
-#          .[,1] %>%
-#          sd
-#      ),
-#  Mean = sapply(unique(jointDiag$Subspecies), function(x)
-#        jointDiag %>%
-#          filter(Subspecies == x) %>%
-#          dplyr::select(PhylogeneticResiduals) %>%
-#          .[,1] %>%
-#          mean
-#      )
-#)
-## Look at heteroscedasticity.
-
-#ggplot(jointSD, aes(x = Subspecies)) +
-#  geom_ribbon(aes(ymax = Mean + 1.96*SD, ymin = Mean - 1.96*SD),
-#    alpha = 0.4) +
-#  geom_line(aes(y = Mean), colour = 'SteelBlue') +
-#  geom_point(data = jointDiag, 
-#    aes(x = Subspecies, y = PhylogeneticResiduals))
-
 
 
 ##################################################################################
@@ -1002,21 +939,7 @@ subspeciesInter <- pgls(
 
 
 
-%begin.rcode boxplotCapt
-
-# Caption for the main boxploit of subspecies vs virus
-
-boxplotCapt <- 'Number of virus species against number of subspecies. 
-The top panel shows the distribution of the data, with most species having few subspecies.
-Data within a number of subspecies are plotted as boxplots with the dark bar showing the median, the box showing the interquartile range, vertical lines showing the range and outliers shown as seperate points.
-Regression lines are from multivariate phylogenetic models with all other independant variables set at their median value.
-The models shown are those with (pink) and without (red) an interaction between study effort and number of subspecies.
-'
-
-%%end.rcode
-
-
-%%begin.rcode boxplot, fig.cap = boxplotCapt
+%%begin.rcode boxplot
 
 
 # Make a boxplot of subspecies vs virus
