@@ -1093,7 +1093,7 @@ subspeciesInter <- pgls(
 boxplotCapt <- 'Number of virus species against number of subspecies. 
 The top panel shows the distribution of the data, with most species having few subspecies.
 Data within a number of subspecies are plotted as boxplots with the dark bar showing the median, the box showing the interquartile range, vertical lines showing the range and outliers shown as seperate points.
-Regression lines are from multivariate phylogenetic models with other independant variables set at their median value.
+Regression lines are from multivariate phylogenetic models with all other independant variables set at their median value.
 The models shown are those with (pink) and without (red) an interaction between study effort and number of subspecies.
 '
 
@@ -1147,13 +1147,13 @@ nSpeciesBox <- ggplot(nSpecies, aes(SubspeciesFactor, virusSpecies, colour = 'a'
   xlab('Number of Subspecies') +
   ylab('Viral Richness') +
   geom_line(data = lines, aes(x = NumberOfSubspecies, y = virusSpecies, group = 1),
-    colour = pokepal('nidorina')[10], lwd = 1) +
+    colour = pokepal('nidorina')[10], lwd = 0.7) +
   geom_line(data = linesInter, aes(x = NumberOfSubspecies, y = virusSpecies, group = 1),
-    colour = pokepal('nidorina')[13], lwd = 1) +
-    annotate('text', x = c(11.8, 12.2), y = c(5.2, 2.7), 
-      label = c('No interaction', 'Interaction'),
-      colour = pokepal('nidorina')[c(10,13)], size = c(3, 3),
-      family = 'Lato Light')
+    colour = pokepal('nidorina')[13], lwd = 0.7) +
+  annotate('text', x = c(11.8, 12.2), y = c(5.4, 2.5), 
+    label = c('No interaction', 'Interaction'),
+    colour = pokepal('nidorina')[c(10,13)], size = c(3, 3),
+    family = 'Lato Light')
 
 
 nSpeciesHist <- ggplot(nSpecies, aes(x = SubspeciesFactor)) +
@@ -1661,7 +1661,7 @@ fstTree <- drop.tip(tr1, fstUnneededTips)
 %%end.rcode
 
 
-%%begin.rcode fstTreePlot, out.width = '\\textwidth', fig.cap = 'Pruned phylogeny with dot size showing number of pathogens and colour showing family.', fig.height = 3.6
+%%begin.rcode fstTreePlot, fig.show = extraFigs, out.width = '\\textwidth', fig.cap = 'Pruned phylogeny with dot size showing number of pathogens and colour showing family.', fig.height = 3.6
 
 # Plot tree 
 p <- ggtree(fstTree) 
@@ -1692,7 +1692,7 @@ p %<+% fstFinal[, c('binomial', 'virusSpecies')] +
 
 %%end.rcode
 
-%%begin.rcode fstRawData, fig.height = 3, fig.cap = 'Gene flow per generation (on a log scale) against viral richness with the genetic marker used shown with colour.'
+%%begin.rcode fstRawData, fig.height = 2.6, fig.cap = 'Gene flow per generation (on a log scale) against viral richness with the genetic marker used shown with colour.'
 
 # Plot raw fstdata
 
@@ -2042,7 +2042,7 @@ This supports the hypothesis that population structure promotes pathogen richnes
 The strong support for a positive interaction term implies that strong population structure only predicts high known pathogen richness in the presence of high study effort.
 One interpretation of this is that population structure alone does not predict high known richness; reasonable study effort is still needed to turn the expected high richness into known and recorded viral richness.
 Another interpretation is that having few subspecies does not predict low viral richness unless the species has been suitable sampled; the low number of subspecies is probably due to a lack of study rather than an accurate measurement.
-As seen in Figure~\ref{fig:ITPlots}, study effort is very likely in the best model ($\beta = $ \rinline{varCoefMeans['beta.log.scholarRefs.']}, $Pr > $ \rinline{substring(as.character(varWeights['log.scholarRefs.']), 1, 4)}) body mass and range size are also probably in the best model ($\beta = $ \rinline{varCoefMeans['beta.log.mass.']}, $Pr = $ \rinline{varWeights['log.mass.']} and $\beta = $ \rinline{varCoefMeans['beta.log.distrSize.']}, $Pr = $ \rinline{varWeights['log.distrSize.']}).
+As seen in Figure~\ref{fig:fstITPlots}a, study effort is very likely in the best model ($\beta = $ \rinline{varCoefMeans['beta.log.scholarRefs.']}, $Pr > $ \rinline{substring(as.character(varWeights['log.scholarRefs.']), 1, 4)}) body mass and range size are also probably in the best model ($\beta = $ \rinline{varCoefMeans['beta.log.mass.']}, $Pr = $ \rinline{varWeights['log.mass.']} and $\beta = $ \rinline{varCoefMeans['beta.log.distrSize.']}, $Pr = $ \rinline{varWeights['log.distrSize.']}).
 
 
 
