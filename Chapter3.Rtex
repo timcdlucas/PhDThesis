@@ -2070,6 +2070,55 @@ The number of described virus species for a bat host ranged up to \rinline{max(f
 Figure~\ref{fig:fstTreePlot} shows the phylogeny used and the number of viruses for each species.
 
 
+
+\begin{table}[t]
+%\rowcolors{2}{gray!25}{white}
+\caption[Model selection results for number of subspecies analysis]{
+Model selection results for number of subspecies analysis. 
+$\bar{\text{AICc}}$ is the mean AICc score across \rinline{nBoots} resamplings of the null random variable. 
+$\Delta$AICc is the $\bar{\text{AICc}}$ score minus the lowest score. 
+$w_i$ is the Akaike weight and can be interpreted as the probability that the model is the best model (of those in the plausible set).
+$\sum w_i$ is the cumulative sum of the Akaike weights.
+`*' indicates the interaction term and both linear terms.
+}
+
+\begin{tabular}{@{}>{\small}lrrrr@{}}
+\toprule
+\normalsize{Model} & $\bar{\text{AICc}}$ & $\Delta$AICc & $w_i$ & $\sum w_i$\\
+\midrule
+log(Scholar)*NSubspecies + rand & 
+\rinline{round(modelWeights[1 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[1, 3], 2))} &
+\rinline{sprintf("%.2f", round(modelWeights[1, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[1, 5], 2))}\\
+log(Scholar)*NSubspecies & 
+\rinline{round(modelWeights[2 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[2, 3], 2))} &
+\rinline{sprintf("%.2f", round(modelWeights[2, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[2, 5], 2))}\\
+log(Scholar)*NSubspecies + rand + log(Mass) & 
+\rinline{round(modelWeights[3 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[3, 3], 2))} &
+\rinline{sprintf("%.2f", round(modelWeights[3, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[3, 5], 2))}\\
+log(Scholar)*NSubspecies  + log(Mass) & 
+\rinline{round(modelWeights[4 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[4, 3], 2))} &
+\rinline{sprintf("%.2f", round(modelWeights[4, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[4, 5], 2))}\\
+log(Scholar)*NSubspecies  + log(Mass) + log(RangeSize) & 
+\rinline{round(modelWeights[5 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[5, 3], 2))} &
+\rinline{sprintf("%.2f", round(modelWeights[5, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[5, 5], 2))}\\
+log(Scholar)*NSubspecies  + rand + log(RangeSize) & 
+\rinline{round(modelWeights[6 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[6, 3], 2))} &
+\rinline{sprintf("%.2f", round(modelWeights[6, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[6, 5], 2))}\\
+log(Scholar)*NSubspecies  + log(RangeSize) & 
+\rinline{round(modelWeights[7 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[7, 3], 2))} &
+\rinline{sprintf("%.2f", round(modelWeights[7, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[7, 5], 2))}\\
+log(Scholar) + NSubspecies & 
+\rinline{round(modelWeights[8 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[8, 3], 2))} &
+\rinline{sprintf("%.2f", round(modelWeights[8, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[8, 5], 2))}\\
+log(Scholar) + NSubspecies + log(Mass) & 
+\rinline{round(modelWeights[9 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[9, 3], 2))} &
+\rinline{sprintf("%.2f", round(modelWeights[9, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[9, 5], 2))}\\
+\bottomrule
+\end{tabular}
+
+\label{t:subsmodels}
+\end{table}
+
 As with the Number of Subspecies dataset, there is no phylogenetic signal in the number of virus species ($\lambda$ = \rinline{virusFstLambda$param['lambda']}, $p$ = \rinline{virusFstLambda$param.CI$lambda$bounds.p[1]})
 Gene flow also has no phylogenetic autocorrelation ($\lambda$ = \rinline{nmFstLambda$param['lambda']}, $p$ = \rinline{nmFstLambda$param.CI$lambda$bounds.p[1]}).
 Due to the low sample size, significance tests are unlikely to have much power.
@@ -2131,77 +2180,23 @@ Without interactions, number of subspecies is significant.
 %%end.rcode
 
 
-
-
-
-
-%\begin{table}[t]
-%  \rowcolors{2}{gray!25}{white}
-%  \begin{tabular}{lrr}
-% \hline
-%  Covariate & Estimate (95\% CI) & $p$ value\\
-%  \hline
-%  Number of subspecies & \rinline{tableM[2,1]} (\rinline{tableM[2, 2]} -- \rinline{tableM[2, 3]}) & \rinline{tableM[2, 4]}\\
-%  Mass & \rinline{tableM[3,1]} (\rinline{tableM[3, 2]} -- \rinline{tableM[3, 3]}) & \rinline{tableM[3, 4]}\\
-%  Study effort & \rinline{tableM[4,1]} (\rinline{tableM[4, 2]} -- \rinline{tableM[4, 3]}) & \rinline{tableM[4, 4]}\\
-%  Intercept & \rinline{tableM[1,1]} (\rinline{tableM[1, 2]} -- \rinline{tableM[1, 3]}) & \rinline{tableM[1, 4]}\\
-%  \end{tabular}
-%\caption{Table of parameter estimates.}
-%\label{t:params}
-%\end{table}
-
-
 \begin{table}[t]
-\rowcolors{2}{gray!25}{white}
-\begin{tabular}{>{\small}lrrrr}
-
-\normalsize{Model} & $\bar{\text{AICc}}$ & $\Delta$AICc & $w_i$ & $\sum w_i$\\
-\hline
-log(Scholar)*NSubspecies + rand & 
-\rinline{round(modelWeights[1 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[1, 3], 2))} &
-\rinline{sprintf("%.2f", round(modelWeights[1, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[1, 5], 2))}\\
-log(Scholar)*NSubspecies & 
-\rinline{round(modelWeights[2 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[2, 3], 2))} &
-\rinline{sprintf("%.2f", round(modelWeights[2, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[2, 5], 2))}\\
-log(Scholar)*NSubspecies + rand + log(Mass) & 
-\rinline{round(modelWeights[3 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[3, 3], 2))} &
-\rinline{sprintf("%.2f", round(modelWeights[3, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[3, 5], 2))}\\
-log(Scholar)*NSubspecies  + log(Mass) & 
-\rinline{round(modelWeights[4 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[4, 3], 2))} &
-\rinline{sprintf("%.2f", round(modelWeights[4, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[4, 5], 2))}\\
-log(Scholar)*NSubspecies  + log(Mass) + log(RangeSize) & 
-\rinline{round(modelWeights[5 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[5, 3], 2))} &
-\rinline{sprintf("%.2f", round(modelWeights[5, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[5, 5], 2))}\\
-log(Scholar)*NSubspecies  + rand + log(RangeSize) & 
-\rinline{round(modelWeights[6 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[6, 3], 2))} &
-\rinline{sprintf("%.2f", round(modelWeights[6, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[6, 5], 2))}\\
-log(Scholar)*NSubspecies  + log(RangeSize) & 
-\rinline{round(modelWeights[7 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[7, 3], 2))} &
-\rinline{sprintf("%.2f", round(modelWeights[7, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[7, 5], 2))}\\
-log(Scholar) + NSubspecies & 
-\rinline{round(modelWeights[8 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[8, 3], 2))} &
-\rinline{sprintf("%.2f", round(modelWeights[8, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[8, 5], 2))}\\
-log(Scholar) + NSubspecies + log(Mass) & 
-\rinline{round(modelWeights[9 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[9, 3], 2))} &
-\rinline{sprintf("%.2f", round(modelWeights[9, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[9, 5], 2))}
-\end{tabular}
-\caption[Model selection results for number of subspecies analysis]{
-Model selection results for number of subspecies analysis. 
+%\rowcolors{2}{gray!25}{white}
+\caption[Model selection results for gene flow analysis]{
+Model selection results for gene flow analysis. 
+The top two models are considerably better than the other models; there is a \rinline{100*round(fstModelWeights[2, 4] +fstModelWeights[1, 4], 2)}\% chance that one of them is the best model.
+As body mass and study effort are in both these models these variables are very likely in the best model.
+Gene flow is in the top model, implying it may well be in the best model.
 $\bar{\text{AICc}}$ is the mean AICc score across \rinline{nBoots} resamplings of the null random variable. 
 $\Delta$AICc is the $\bar{\text{AICc}}$ score minus the lowest score. 
 $w_i$ is the Akaike weight and can be interpreted as the probability that the model is the best model (of those in the plausible set).
-$\sum w_i$ is the cumulative sum of the Akaike weights.}
-\label{t:subsmodels}
-\end{table}
-
-
-
-\begin{table}[t]
-\rowcolors{2}{gray!25}{white}
-\begin{tabular}{>{\small}lrrrr}
-
+$\sum w_i$ is the cumulative sum of the Akaike weights.
+`*' indicates the interaction term and both linear terms.
+}
+\begin{tabular}{@{}>{\small}lrrrr@{}}
+\toprule
 \normalsize{Model} & $\bar{\text{AICc}}$ & $\Delta$AICc & $w_i$ & $\sum w_i$\\
-\hline
+\midrule
 log(Scholar) + log(Gene flow) + log(Mass) & 
 \rinline{round(fstModelWeights[1 ,2])} & \rinline{sprintf("%.2f", round(fstModelWeights[1, 3], 2))} &
 \rinline{sprintf("%.2f", round(fstModelWeights[1, 4], 2))} & \rinline{sprintf("%.2f", round(fstModelWeights[1, 5], 2))}\\
@@ -2214,16 +2209,9 @@ log(Mass) + log(Range size) &
 log(Scholar) + log(Gene flow) + log(Mass) + rand &
 \rinline{round(fstModelWeights[4 ,2])} & \rinline{sprintf("%.2f", round(fstModelWeights[4, 3], 2))} &
 \rinline{sprintf("%.2f", round(fstModelWeights[4, 4], 2))} & \rinline{sprintf("%.2f", round(fstModelWeights[4, 5], 2))}
+\bottomrule
 \end{tabular}
-\caption[Model selection results for gene flow analysis]{
-Model selection results for gene flow analysis. 
-The top two models are considerably better than the other models; there is a \rinline{100*round(fstModelWeights[2, 4] +fstModelWeights[1, 4], 2)}\% chance that one of them is the best model.
-As body mass and study effort are in both these models these variables are very likely in the best model.
-Gene flow is in the top model, implying it may well be in the best model.
-$\bar{\text{AICc}}$ is the mean AICc score across \rinline{nBoots} resamplings of the null random variable. 
-$\Delta$AICc is the $\bar{\text{AICc}}$ score minus the lowest score. 
-$w_i$ is the Akaike weight and can be interpreted as the probability that the model is the best model (of those in the plausible set).
-$\sum w_i$ is the cumulative sum of the Akaike weights.}
+
 \label{t:fstmodels}
 \end{table}
 

@@ -582,28 +582,20 @@ Due to the small sample size this is probably due to a small number of data poin
 
 
 
-%\begin{table}[t]
-%  \rowcolors{2}{gray!25}{white}
-%  \begin{tabular}{lrr}
-% \hline
-%  Covariate & Estimate (95\% CI) & $p$ value\\
-%  \hline
-%  Number of subspecies & tableM[2,1] (tableM[2, 2] -- tableM[2, 3]) & tableM[2, 4]\\
-%  Mass & tableM[3,1] (tableM[3, 2] -- tableM[3, 3]) & tableM[3, 4]\\
-%  Study effort & tableM[4,1] (tableM[4, 2] -- tableM[4, 3]) & tableM[4, 4]\\
-%  Intercept & tableM[1,1] (tableM[1, 2] -- tableM[1, 3]) & tableM[1, 4]\\
-%  \end{tabular}
-%\caption{Table of parameter estimates.}
-%\label{t:params}
-%\end{table}
-
 
 \begin{table}[t]
-\rowcolors{2}{gray!25}{white}
-\begin{tabular}{>{\small}lrrrr}
+%\rowcolors{2}{gray!25}{white}
+\caption[Model selection results for number of subspecies analysis]{
+Model selection results for number of subspecies analysis. 
+$\bar{\text{AICc}}$ is the mean AICc score across 50 resamplings of the null random variable. 
+$\Delta$AICc is the $\bar{\text{AICc}}$ score minus the lowest score. 
+$w_i$ is the Akaike weight and can be interpreted as the probability that the model is the best model (of those in the plausible set).
+$\sum w_i$ is the cumulative sum of the Akaike weights.}
 
+\begin{tabular}{@{}>{\small}lrrrr@{}}
+\toprule
 \normalsize{Model} & $\bar{\text{AICc}}$ & $\Delta$AICc & $w_i$ & $\sum w_i$\\
-\hline
+\midrule
 log(Scholar)*NSubspecies + rand & 
 882 & 0.00 &
 0.38 & 0.38\\
@@ -630,14 +622,10 @@ log(Scholar) + NSubspecies &
 0.01 & 0.97\\
 log(Scholar) + NSubspecies + log(Mass) & 
 890 & 7.80 &
-0.01 & 0.98
+0.01 & 0.98\\
+\bottomrule
 \end{tabular}
-\caption[Model selection results for number of subspecies analysis]{
-Model selection results for number of subspecies analysis. 
-$\bar{\text{AICc}}$ is the mean AICc score across 50 resamplings of the null random variable. 
-$\Delta$AICc is the $\bar{\text{AICc}}$ score minus the lowest score. 
-$w_i$ is the Akaike weight and can be interpreted as the probability that the model is the best model (of those in the plausible set).
-$\sum w_i$ is the cumulative sum of the Akaike weights.}
+
 \label{t:subsmodels}
 \end{table}
 
