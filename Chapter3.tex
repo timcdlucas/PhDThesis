@@ -306,9 +306,10 @@ The importance of the phylogeny on each variable separately was estimated using 
 }
 
 \caption[Number of virus species against number of subspecies]{Number of virus species against number of subspecies. 
+The top panel shows the distribution of the data, with most species having few subspecies.
 Data within a number of subspecies are plotted as boxplots with the dark bar showing the median, the box showing the interquartile range, vertical lines showing the range and outliers shown as seperate points.
 Regression lines are from multivariate phylogenetic models with other independant variables set at their median value.
-The models shown are thos with (pink) and without (red) an interaction between study effort and number of subspecies.
+The models shown are those with (pink) and without (red) an interaction between study effort and number of subspecies.
 }\label{fig:boxplot}
 \end{figure}
 
@@ -323,18 +324,7 @@ The models shown are thos with (pink) and without (red) an interaction between s
 
 
 
-\begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[t]
 
-{\centering \includegraphics[width=0.8\textwidth]{figure/ITPlots-1} 
-
-}
-
-\caption[Akaika variable weights for number of subspecies analysis]{Akaika variable weights for number of subspecies analysis. The probability that each variable will be in the best model if the data were recollected is shown for each of the bootstrap analyses. The purple ``Null'' box is a uniform random variable used as a null. Population structure (Number of subspecies) and the interaction between subspecies and study effort, shown in red, are more likely to be in the best model than this random variable.}\label{fig:ITPlots}
-\end{figure}
-
-
-\end{knitrout}
 
 
 
@@ -416,11 +406,11 @@ The models shown are thos with (pink) and without (red) an interaction between s
 \begin{knitrout}\footnotesize
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[t]
 
-{\centering \includegraphics[width=0.8\textwidth]{figure/fstITPlots-1} 
+{\centering \includegraphics[width=\textwidth,trim = 0 1cm 0 0]{figure/fstITPlots-1} 
 
 }
 
-\caption[Akaika variable weights for $F_{ST}$ analysis.]{Akaika variable weights for $F_{ST}$ analysis. The probability that each variable will be in the best model if the data were recollected is shown for each of the bootstrap analyses. The purple ``Null'' box is a uniform random variable used as a null. Population structure ($F_{ST}$), shown in red, is much less likely to be in the best model than this random variable.}\label{fig:fstITPlots}
+\caption[Akaika variable weights for $F_{ST}$ analysis.]{Akaika variable weights for both analyses. The probability that each variable will be in the best model if the data were recollected is shown for each of the bootstrap analyses. The purple ``Random'' box is a uniform random variable used as a null. Population structure (Number of subspecies and Gene flow), shown in red, is likely to be in the best model in both analyses.}\label{fig:fstITPlots}
 \end{figure}
 
 
@@ -499,7 +489,7 @@ A small number of models (0.35\%)  had negatively phylogenetically distributed r
 
 \tmpsection{Model results}
 
-Summing the Akaiki weights of all models that contain a given variable gives a probability, $Pr$, that the variable would be in the best model (Figure~\ref{fig:ITPlots}) if the data were recollected \cite{whittingham2006we}.
+Summing the Akaiki weights of all models that contain a given variable gives a probability, $Pr$, that the variable would be in the best model (Figure~\ref{fig:fstITPlots}a) if the data were recollected \cite{whittingham2006we}.
 The number of subspecies is very likely in the best model ($Pr > $ 0.99) as is the interaction between number of species and study effort ($Pr = $ 0.97) compared to the benchmark random variable which has $Pr = $ 0.2.
 When models with the interaction term are removed, on average (mean weighted by Akaiki weights) there is a positive relationship between the number of subspecies and viral richness ($\beta = $ 0.19, variance = \ensuremath{1.24\times 10^{-4}}).
 Models with an interaction between number of subspecies and study effort have a positive interaction term ($\beta = $ 0.14, variance = \ensuremath{3.94\times 10^{-6}}) and a negative linear term ($\beta = $ \ensuremath{-0.78}, variance = \ensuremath{2.37\times 10^{-4}}) which in total is a positive relationship for most of the range of the study effort data.
@@ -551,37 +541,6 @@ The number of described virus species for a bat host ranged up to 12 viruses in 
 Figure~\ref{fig:fstTreePlot} shows the phylogeny used and the number of viruses for each species.
 
 
-As with the Number of Subspecies dataset, there is no phylogenetic signal in the number of virus species ($\lambda$ = \ensuremath{10^{-6}}, $p$ = 1)
-Gene flow also has no phylogenetic autocorrelation ($\lambda$ = \ensuremath{10^{-6}}, $p$ = 1).
-Due to the low sample size, significance tests are unlikely to have much power.
-However, study effort has some phylogenetic autocorrelation ($\lambda$ = 0.15, $p$ = 0.56) while distribution size and mass seem to show phylogenetic signal (Distribution size: $\lambda$ = 0.67, $p$ = 0.53, Mass: $\lambda$ = 0.79, $p$ = \ensuremath{2.69\times 10^{-3}}).
-
-
-\tmpsection{Model results}
-
-While less strongly supported than the number of subspecies, gene flow is likely in the best model ($Pr = $ 0.61) compared to the benchmark random variable which has $Pr = $ 0.37 as shown in Figure~\ref{fig:fstITPlots}.
-On average (mean weighted by Akaiki weights) there is a negative relationship between gene flow and viral richness ($\beta = $ NA, variance = NA) despite the apparent positive relationship in Figure~\ref{fig:fstRawData}.
-This supports the hypothesis that population structure promotes viral richness.
-Possibly due to the smaller sample size, or a weaker relationship, this coefficient is much more varied than the number of subspecies coeficient with 24.25\% of models estimating a positive relationship.
-As in the number of subspecies analysis, study effort is very likely in the best model ($Pr = $ 0.96) as is body mass ($Pr = $ 0.94).
-In contrast to the number of subspecies analysis, range size is almost certainly not in the best model with $Pr = $ 0.05 being much less than the random variable.
-
-Across all models the mean value of $\lambda$ is \ensuremath{-2.88} and a large number of individual models (66.58\%)  had negatively phylogenetically distributed residuals implying the residuals from the model are strongly negatively phylogenetic.
-Due to the small sample size this is probably due to a small number of data points with large residuals being distant on the tree.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 \begin{table}[t]
 %\rowcolors{2}{gray!25}{white}
@@ -590,7 +549,8 @@ Model selection results for number of subspecies analysis.
 $\bar{\text{AICc}}$ is the mean AICc score across 50 resamplings of the null random variable. 
 $\Delta$AICc is the $\bar{\text{AICc}}$ score minus the lowest score. 
 $w_i$ is the Akaike weight and can be interpreted as the probability that the model is the best model (of those in the plausible set).
-$\sum w_i$ is the cumulative sum of the Akaike weights.}
+$\sum w_i$ is the cumulative sum of the Akaike weights.
+}
 
 \begin{tabular}{@{}>{\small}lrrrr@{}}
 \toprule
@@ -629,14 +589,50 @@ log(Scholar) + NSubspecies + log(Mass) &
 \label{t:subsmodels}
 \end{table}
 
+As with the Number of Subspecies dataset, there is no phylogenetic signal in the number of virus species ($\lambda$ = \ensuremath{10^{-6}}, $p$ = 1)
+Gene flow also has no phylogenetic autocorrelation ($\lambda$ = \ensuremath{10^{-6}}, $p$ = 1).
+Due to the low sample size, significance tests are unlikely to have much power.
+However, study effort has some phylogenetic autocorrelation ($\lambda$ = 0.15, $p$ = 0.56) while distribution size and mass seem to show phylogenetic signal (Distribution size: $\lambda$ = 0.67, $p$ = 0.53, Mass: $\lambda$ = 0.79, $p$ = \ensuremath{2.69\times 10^{-3}}).
+
+
+\tmpsection{Model results}
+
+While less strongly supported than the number of subspecies, gene flow is likely in the best model ($Pr = $ 0.61) compared to the benchmark random variable which has $Pr = $ 0.37 as shown in Figure~\ref{fig:fstITPlots}b.
+On average (mean weighted by Akaiki weights) there is a negative relationship between gene flow and viral richness ($\beta = $ NA, variance = NA) despite the apparent positive relationship in Figure~\ref{fig:fstRawData}.
+This supports the hypothesis that population structure promotes viral richness.
+Possibly due to the smaller sample size, or a weaker relationship, this coefficient is much more varied than the number of subspecies coeficient with 24.25\% of models estimating a positive relationship.
+As in the number of subspecies analysis, study effort is very likely in the best model ($Pr = $ 0.96) as is body mass ($Pr = $ 0.94).
+In contrast to the number of subspecies analysis, range size is almost certainly not in the best model with $Pr = $ 0.05 being much less than the random variable.
+
+Across all models the mean value of $\lambda$ is \ensuremath{-2.88} and a large number of individual models (66.58\%)  had negatively phylogenetically distributed residuals implying the residuals from the model are strongly negatively phylogenetic.
+Due to the small sample size this is probably due to a small number of data points with large residuals being distant on the tree.
+
+
+
+
+
+
+
+
 
 
 \begin{table}[t]
-\rowcolors{2}{gray!25}{white}
-\begin{tabular}{>{\small}lrrrr}
-
+%\rowcolors{2}{gray!25}{white}
+\caption[Model selection results for gene flow analysis]{
+Model selection results for gene flow analysis. 
+The top two models are considerably better than the other models; there is a 98\% chance that one of them is the best model.
+As body mass and study effort are in both these models these variables are very likely in the best model.
+Gene flow is in the top model, implying it may well be in the best model.
+$\bar{\text{AICc}}$ is the mean AICc score across 50 resamplings of the null random variable. 
+$\Delta$AICc is the $\bar{\text{AICc}}$ score minus the lowest score. 
+$w_i$ is the Akaike weight and can be interpreted as the probability that the model is the best model (of those in the plausible set).
+$\sum w_i$ is the cumulative sum of the Akaike weights.
+`*' indicates the interaction term and both linear terms.
+}
+\begin{tabular}{@{}>{\small}lrrrr@{}}
+\toprule
 \normalsize{Model} & $\bar{\text{AICc}}$ & $\Delta$AICc & $w_i$ & $\sum w_i$\\
-\hline
+\midrule
 log(Scholar) + log(Gene flow) + log(Mass) & 
 70 & 0.00 &
 0.60 & 0.60\\
@@ -648,17 +644,10 @@ log(Mass) + log(Range size) &
 0.02 & 1.00\\
 log(Scholar) + log(Gene flow) + log(Mass) + rand &
 94 & 24.15 &
-0.00 & 1.00
+0.00 & 1.00\\
+\bottomrule
 \end{tabular}
-\caption[Model selection results for gene flow analysis]{
-Model selection results for gene flow analysis. 
-The top two models are considerably better than the other models; there is a 98\% chance that one of them is the best model.
-As body mass and study effort are in both these models these variables are very likely in the best model.
-Gene flow is in the top model, implying it may well be in the best model.
-$\bar{\text{AICc}}$ is the mean AICc score across 50 resamplings of the null random variable. 
-$\Delta$AICc is the $\bar{\text{AICc}}$ score minus the lowest score. 
-$w_i$ is the Akaike weight and can be interpreted as the probability that the model is the best model (of those in the plausible set).
-$\sum w_i$ is the cumulative sum of the Akaike weights.}
+
 \label{t:fstmodels}
 \end{table}
 
