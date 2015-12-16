@@ -978,67 +978,6 @@ subspeciesJointUnlog <- pgls(
   data = compSubspecies, lambda = 'ML')
 
 
-#subspeciesJointUnlog.summary <- summary(subspeciesJointUnlog)
-
-##par(mfrow = c(2, 2))
-#plot(subspeciesJointUnlog)
-
-#lambda.profile <- pgls.profile(subspeciesJointUnlog, "lambda")
-##plot(lambda.profile)
-
-
-#jointDiagUnlog <- data.frame(
-#   PhylogeneticResiduals = subspeciesJointUnlog$phyres,
-#   FittedValue = subspeciesJointUnlog$fitted,
-#   Subspecies = subspeciesJointUnlog$x[, 'NumberOfSubspecies'],
-#   Mass = subspeciesJointUnlog$x[, 'log(mass)'],
-#   StudyEffort = subspeciesJointUnlog$x[, 'log(scholarRefs)'])
-
-
-#           
-#ggplot(jointDiagUnlog, aes(x = FittedValue, y = PhylogeneticResiduals)) +
-#  geom_point() +
-#  geom_smooth(method = 'loess') +
-#  geom_text(aes(x = 6, y = -1, 
-#    label =  paste("R^2 == ", round(subspeciesJointUnlog.summary$r.squared, 2),sep="")), 
-#    parse = TRUE) 
-
-
-#ggplot(jointDiagUnlog, aes(x = StudyEffort, y = PhylogeneticResiduals)) +
-#  geom_point() +
-#  geom_smooth(method = 'loess')
-
-#ggplot(jointDiagUnlog, aes(x = Mass, y = PhylogeneticResiduals)) +
-#  geom_point() +
-#  geom_smooth(method = 'loess')
-
-#jointSDUnlog <- data.frame(
-#  Subspecies = unique(jointDiagUnlog$Subspecies),
-#  SD = sapply(unique(jointDiagUnlog$Subspecies), function(x)
-#        jointDiagUnlog %>%
-#          filter(Subspecies == x) %>%
-#          dplyr::select(PhylogeneticResiduals) %>%
-#          .[,1] %>%
-#          sd
-#      ),
-#  Mean = sapply(unique(jointDiagUnlog$Subspecies), function(x)
-#        jointDiagUnlog %>%
-#          filter(Subspecies == x) %>%
-#          dplyr::select(PhylogeneticResiduals) %>%
-#          .[,1] %>%
-#          mean
-#      )
-#)
-
-#ggplot(jointSDUnlog, aes(x = Subspecies)) +
-#  geom_ribbon(aes(ymax = Mean + 1.96*SD, ymin = Mean - 1.96*SD),
-#    alpha = 0.4) +
-#  geom_line(aes(y = Mean), colour = 'SteelBlue') +
-#  geom_point(data = jointDiagUnlog, 
-#    aes(x = Subspecies, y = PhylogeneticResiduals))
-
-
-
 
 ## N Virus ~ subs + log(cites + mass) + subs*log(cites)
 
@@ -1049,29 +988,6 @@ subspeciesInter <- pgls(
 
 #subInter.summary <- summary(subspeciesInter)
 
-
-## Model using residuals from first model going into second model
-## I don't use this model in the analysis in the end.
-## It gives precedence to study effort when it's better to fit at the same time.
-## glm(N Virus ~ cites)$resid ~ subs + subs*cites
-
-#subspeciesEffort <- pgls(virusSpecies ~ log(scholarRefs), 
-#  data = compSubspecies, lambda = 'ML')
-
-#nSpecies$pubmedResid <- subspeciesEffort$phyres[order(rownames(subspeciesEffort$residuals))]
-
-#compSubspeciesResid <- comparative.data(data = nSpecies, phy = pruneTree, names.col = 'binomial')
-
-#subspeciesResid <- pgls(pubmedResid ~ log(NumberOfSubspecies) + log(mass), 
-#  data = compSubspeciesResid, lambda = 'ML')
-
-#summary(subspeciesResid)
-##plot(subspeciesResid)
-
-
-## Compare AICs
-
-#nSubSpAIC <- AIC(subspeciesJoint, subspeciesJointUnlog, subspeciesInter)
 
 
 
@@ -1692,7 +1608,7 @@ p %<+% fstFinal[, c('binomial', 'virusSpecies')] +
 
 %%end.rcode
 
-%%begin.rcode fstRawData, fig.height = 2.6, fig.cap = 'Gene flow per generation (on a log scale) against viral richness with the genetic marker used shown with colour.'
+%%begin.rcode fstRawData, fig.height = 2.3, fig.cap = 'Gene flow per generation (on a log scale) against viral richness with the genetic marker used shown with colour.'
 
 # Plot raw fstdata
 
@@ -1849,7 +1765,7 @@ fstModelWeights <- fstAllResults %>%
 %%end.rcode
 
 
-%%begin.rcode fstITPlots, fig.cap = "Akaika variable weights for both analyses. The probability that each variable will be in the best model if the data were recollected is shown for each of the bootstrap analyses. The purple ``Random'' box is a uniform random variable used as a null. Population structure (Number of subspecies and Gene flow), shown in red, is likely to be in the best model in both analyses.", fig.height = 3, fig.scap = 'Akaika variable weights for $F_{ST}$ analysis.', out.width = '\\textwidth', out.extra = 'trim = 0 1cm 0 0'
+%%begin.rcode fstITPlots, fig.cap = "Akaika variable weights for both analyses. The probability that each variable will be in the best model if the data were recollected is shown for each of the bootstrap analyses. The purple ``Random'' box is a uniform random variable used as a null. Population structure (Number of subspecies and Gene flow), shown in red, is likely to be in the best model in both analyses.", fig.height = 2.5, fig.scap = 'Akaika variable weights for $F_{ST}$ analysis.', out.width = '\\textwidth', out.extra = 'trim = 0 1cm 0 0'
 
 fstIT <- ggplot(fstSepVarWeights, aes(x = variable, y = estimate, colour = col, fill = col)) +
   geom_boxplot(outlier.colour = grey(0.3), notch = FALSE, width = 0.5, outlier.size = 1) +
