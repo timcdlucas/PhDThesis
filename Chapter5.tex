@@ -5,7 +5,7 @@
 
 
 
-
+  
 
 
 
@@ -201,7 +201,8 @@ The profile width $p$ for $\pi$ radians of rotation (from directly towards the s
 Average profile width $\bar{p}$ is calculated by integrating these profiles over their appropriate intervals of $x_1$ and dividing by $\pi$ which gives
 
 \begin{align}
-    \bar{p} &=\frac{1}{\pi} \left(\int\limits_{\frac{\pi}{2}}^{\frac{\pi}{2} + \frac{\theta}{2} - \frac{\alpha}{2}}2 r \sin{\frac{\alpha}{2} }\;\mathrm{d}x_1+\int\limits_{\frac{\pi}{2} + \frac{\theta}{2} - \frac{\alpha}{2}}^{\frac{5 \pi}{2} - \frac{\theta}{2} - \frac{\alpha}{2}}r \sin{\frac{\alpha}{2} } + r \cos{\left (x_1 - \frac{\theta}{2} \right )}\;\mathrm{d}x_1+\int\limits_{\frac{5 \pi}{2} - \frac{\theta}{2} - \frac{\alpha}{2}}^{\frac{3 \pi}{2}}2 r \sin{\frac{\alpha}{2} }\;\mathrm{d}x_1\right) \label{e:SE2int}  \\
+    \bar{p} &=\frac{1}{\pi} \left(\int\limits_{\frac{\pi}{2}}^{\frac{\pi}{2} + \frac{\theta}{2} - \frac{\alpha}{2}}2 r \sin{\frac{\alpha}{2} }\;\mathrm{d}x_1+\int\limits_{\frac{\pi}{2} + \frac{\theta}{2} - \frac{\alpha}{2}}^{\frac{5 \pi}{2} - \frac{\theta}{2} - \frac{\alpha}{2}}r \sin{\frac{\alpha}{2} } + r \cos{\left (x_1 - \frac{\theta}{2} \right )}\;\mathrm{d}x_1\right.\notag\\
+ &\left.+\int\limits_{\frac{5 \pi}{2} - \frac{\theta}{2} - \frac{\alpha}{2}}^{\frac{3 \pi}{2}}2 r \sin{\frac{\alpha}{2} }\;\mathrm{d}x_1\right) \label{e:SE2int}  \\
      &= \frac{r}{\pi} \left(\theta \sin{\frac{\alpha}{2} } - \cos{\frac{\alpha}{2} } + \cos{\left (\frac{\alpha}{2} + \theta \right )}\right) \label{e:SE2result}
 \end{align}
 
@@ -362,8 +363,8 @@ The colour of each box plot corresponds to the expressions for average profile w
 \subsubsection{Movement models}
 
 Within the four gREM submodels tested (NW1, SW1, SE3, NE1), neither the accuracy or precision was affected by the average amount of time spent stationary.
-The median difference between the estimated and true values was less than 2\% for each category of stationary time (0, 0.25, 0.5 and 0.75) (Figure~\ref{fig:movtFig1}).
-Altering the maximum change in direction in each step (0, $\pi/3$, $2\pi/3$, and $\pi$) did not affect the accuracy or precision of the four gREM submodels (Figure~\ref{fig:movtFig2}). 
+The median difference between the estimated and true values was less than 2\% for each category of stationary time (0, 0.25, 0.5 and 0.75) (Figure~\ref{fig:movtFig}).
+Altering the maximum change in direction in each step (0, $\pi/3$, $2\pi/3$, and $\pi$) did not affect the accuracy or precision of the four gREM submodels (Figure~\ref{fig:movtFig}). 
 
 \subsubsection{Impact of parameter error}
 
@@ -376,8 +377,7 @@ However, in all cases the percentage error in the density estimate is not more t
 \begin{knitrout}\footnotesize
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[t]
 
-{\centering \subfloat[\label{fig:movtFig1}]{\includegraphics[width=0.45\textwidth]{figure/movtFig-1} }
-\subfloat[\label{fig:movtFig2}]{\includegraphics[width=0.45\textwidth]{figure/movtFig-2} }
+{\centering \includegraphics[width=0.7\textwidth]{figure/movtFig-1} 
 
 }
 
@@ -393,24 +393,6 @@ The colour of each box plot corresponds to the expressions for average profile w
 
 \end{knitrout}
 
-%\begin{figure}[t]
-%	\centering
-%	\subfloat[\label{f:Perch}]{
-%		\includegraphics[width=60mm]{imgs/lucas_et_al_figure7a.pdf}
-%  }
-%  \subfloat[\label{f:Tort}]{
-%		\includegraphics[width=60mm]{imgs/lucas_et_al_figure7b.pdf}
-%  }
-%	\label{f:BreakAssump}
-%	\caption[Simulation model results of the accuracy and precision of four gREM submodels]{
-%Simulation model results of the accuracy and precision of four gREM submodels (NW1, SW1, SE3 and NE1) given different movement models where (a) average amount of time spent stationary (stop-start movement) and (b) maximum change in direction at each step (correlated random walk model).
-%The percentage error between estimated and true density within each gREM sub model for the different movement models is shown within each box plot, where the black line represents the median percentage error across all simulations, boxes represent the middle 50\% of the data, whiskers represent variability outside the upper and lower quartiles with outliers plotted as individual points.
-%The simple model is represented where time and maximum change in direction equals 0.
-%The colour of each box plot corresponds to the expressions for average profile width $\bar{p}$ given in Figure 4.} 
-%\end{figure}
-%
-
-                  
                   
 %%%% ------- Discussion ---------%%%%
 \section{Discussion}

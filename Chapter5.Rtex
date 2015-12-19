@@ -33,11 +33,12 @@ library(extrafont)
 
 # Convert latex strings to expression.
 library(latex2exp)
-
 library(RColorBrewer)
+library(cowplot)
+library(palettetown)
 
 %%end.rcode
-
+  
 
 
 
@@ -300,7 +301,8 @@ The profile width $p$ for $\pi$ radians of rotation (from directly towards the s
 Average profile width $\bar{p}$ is calculated by integrating these profiles over their appropriate intervals of $x_1$ and dividing by $\pi$ which gives
 
 \begin{align}
-    \bar{p} &=\frac{1}{\pi} \left(\int\limits_{\frac{\pi}{2}}^{\frac{\pi}{2} + \frac{\theta}{2} - \frac{\alpha}{2}}2 r \sin{\frac{\alpha}{2} }\;\mathrm{d}x_1+\int\limits_{\frac{\pi}{2} + \frac{\theta}{2} - \frac{\alpha}{2}}^{\frac{5 \pi}{2} - \frac{\theta}{2} - \frac{\alpha}{2}}r \sin{\frac{\alpha}{2} } + r \cos{\left (x_1 - \frac{\theta}{2} \right )}\;\mathrm{d}x_1+\int\limits_{\frac{5 \pi}{2} - \frac{\theta}{2} - \frac{\alpha}{2}}^{\frac{3 \pi}{2}}2 r \sin{\frac{\alpha}{2} }\;\mathrm{d}x_1\right) \label{e:SE2int}  \\
+    \bar{p} &=\frac{1}{\pi} \left(\int\limits_{\frac{\pi}{2}}^{\frac{\pi}{2} + \frac{\theta}{2} - \frac{\alpha}{2}}2 r \sin{\frac{\alpha}{2} }\;\mathrm{d}x_1+\int\limits_{\frac{\pi}{2} + \frac{\theta}{2} - \frac{\alpha}{2}}^{\frac{5 \pi}{2} - \frac{\theta}{2} - \frac{\alpha}{2}}r \sin{\frac{\alpha}{2} } + r \cos{\left (x_1 - \frac{\theta}{2} \right )}\;\mathrm{d}x_1\right.\notag\\
+ &\left.+\int\limits_{\frac{5 \pi}{2} - \frac{\theta}{2} - \frac{\alpha}{2}}^{\frac{3 \pi}{2}}2 r \sin{\frac{\alpha}{2} }\;\mathrm{d}x_1\right) \label{e:SE2int}  \\
      &= \frac{r}{\pi} \left(\theta \sin{\frac{\alpha}{2} } - \cos{\frac{\alpha}{2} } + \cos{\left (\frac{\alpha}{2} + \theta \right )}\right) \label{e:SE2result}
 \end{align}
 
@@ -382,10 +384,12 @@ type = c(8, 5, 5, 6, 7, 2, 2, 2, 2, 2, 2, 2, 4, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 
 reg$cols <- type[as.numeric(reg$model)]
 
+combPalette <- c(pokepal('nidoking')[c(2, 10)],pokepal('magnemite')[c(12, 8, 4, 14, 2, 13)])
+
+
 
 w <-ggplot(reg, aes(x = x, y = y, fill = factor(cols))) +
   geom_polygon(aes(group = model), colour = NA, alpha = 0.4) +
-  thesis_fill() +
   ylab(expression(paste('Signal width, ', alpha))) +
   xlab(expression(paste('Sensor width, ', theta))) +
   scale_x_continuous(breaks = c(0, pi, 2*pi),
@@ -449,17 +453,19 @@ allMods$expression <- factor(allMods$expression)
 allMods$model <- factor(allMods$model, levels =  modelLevels)
 
 
+
 ggplot(allMods, aes(x = model, y = percentageerror, colour = expression, fill = expression)) + 
   geom_boxplot(outlier.size = 1, size = 0.3, outlier.colour = grey(0.3), 
     notch = TRUE, notchwidth = 0.7, alpha = 0.7) +
-  thesis_fill() +
-  thesis_colour() +
+  scale_fill_manual(values = combPalette) +
+  scale_colour_manual(values = combPalette) +
   stat_summary(geom = "crossbar", width = 0.3, fatten = 0, color = "white", 
     fun.data = function(x){ return(c(y = median(x), ymin = median(x), ymax = median(x))) }) +
   theme(legend.position = 'none') + 
   xlab('gREM Submodel') +
-  ylab('Percentage Error') +
+  ylab('Percent Error') +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, size = 9))
+
 
 
 
@@ -516,11 +522,11 @@ ggplot(captures, aes(x = count, y = percentageerror,
   stat_summary(geom = "crossbar", width = 0.4, fatten = 0, color = "white", 
     fun.data = function(x){ return(c(y = median(x), ymin = median(x), ymax = median(x))) }) +
   facet_grid(. ~ model) +
-  scale_colour_manual(values = brewer.pal(8, 'Set1')[c(5, 2, 1)]) +
-  scale_fill_manual(values = brewer.pal(8, 'Set1')[c(5, 2, 1)]) +
+  scale_colour_manual(values = combPalette[c(7, 3, 1)]) +
+  scale_fill_manual(values = combPalette[c(7, 3, 1)]) +
   theme(legend.position = 'none') + 
   scale_x_discrete("Captures", labels = xlabels) + 
-  ylab('Percentage Error') +
+  ylab('Percent Error') +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, size = 8))
 
 
@@ -541,8 +547,8 @@ ggplot(captures, aes(x = count, y = percentageerror,
 \subsubsection{Movement models}
 
 Within the four gREM submodels tested (NW1, SW1, SE3, NE1), neither the accuracy or precision was affected by the average amount of time spent stationary.
-The median difference between the estimated and true values was less than 2\% for each category of stationary time (0, 0.25, 0.5 and 0.75) (Figure~\ref{fig:movtFig1}).
-Altering the maximum change in direction in each step (0, $\pi/3$, $2\pi/3$, and $\pi$) did not affect the accuracy or precision of the four gREM submodels (Figure~\ref{fig:movtFig2}). 
+The median difference between the estimated and true values was less than 2\% for each category of stationary time (0, 0.25, 0.5 and 0.75) (Figure~\ref{fig:movtFig}).
+Altering the maximum change in direction in each step (0, $\pi/3$, $2\pi/3$, and $\pi$) did not affect the accuracy or precision of the four gREM submodels (Figure~\ref{fig:movtFig}). 
 
 \subsubsection{Impact of parameter error}
 
@@ -563,7 +569,7 @@ movtTitle <- 'Simulation model results of the accuracy and precision of four gRE
 
 %%end.rcode
 
-%%begin.rcode movtFig, fig.cap = movtCapt, fig.height = 4, fig.scap = movtTitle, fig.subcap = c('', ''), out.width = '0.45\\textwidth'
+%%begin.rcode movtFig, fig.cap = movtCapt, fig.height = 5, fig.scap = movtTitle,  out.width = '0.7\\textwidth'
 
 wait <- read.csv('data/Chapter5/prop_time_still_tidy.csv')
 
@@ -574,15 +580,14 @@ wait$expression <- wait$model
 # SW1 and SE3 have the same expression, so give them the same name.
 wait$expression[wait$expression == 'SW1'] <- 'SE3' 
 
-ggplot(wait, aes(x = wait, y = percentageerror, colour = expression, fill = expression)) + 
+waitPlot <- ggplot(wait, aes(x = wait, y = percentageerror, colour = expression, fill = expression)) + 
   facet_grid(. ~ model) +
   geom_boxplot(outlier.colour = grey(0.3), notch = TRUE, notchwidth = 0.7, alpha = 0.7) +
-  scale_colour_manual(values = brewer.pal(8, 'Set1')[c(5, 2, 1)]) +
-  scale_fill_manual(values = brewer.pal(8, 'Set1')[c(5, 2, 1)]) +
+  scale_colour_manual(values = combPalette[c(7, 3, 1)]) +
+  scale_fill_manual(values = combPalette[c(7, 3, 1)]) +
   stat_summary(geom = "crossbar", width=0.45, fatten=0, color="white", 
     fun.data = function(x){ return(c(y=median(x), ymin=median(x), ymax=median(x))) }) +
-  theme(legend.position = 'none', axis.title.x = element_text(vjust = -4),
-    plot.margin  =  unit(c(0.3,0.1,2.3,1.3), "lines")) +
+  theme(legend.position = 'none', axis.title.x = element_text(vjust = 1), plot.margin  =  unit(c(0.3, 0.1, 1, 1.3), "lines")) +
   ylab('Percentage Error') +
   xlab('Prop. Time Stationary')
 
@@ -598,15 +603,15 @@ tort$expression[tort$expression == 'SW1'] <- 'SE3'
 # Reorder maxAngle factor 
 tort$maxAngle <- factor(tort$maxAngle, levels(tort$maxAngle)[c(1, 4, 2, 3)])
 
-ggplot(tort, aes(x = maxAngle, y = percentageerror, colour = expression, fill = expression)) + 
+tortPlot <- ggplot(tort, aes(x = maxAngle, y = percentageerror, colour = expression, fill = expression)) + 
   facet_grid(. ~ model) +
   geom_boxplot(outlier.colour = grey(0.3), notch = TRUE, notchwidth = 0.7, alpha = 0.7) +
-  scale_colour_manual(values = brewer.pal(8, 'Set1')[c(5, 2, 1)]) +
-  scale_fill_manual(values = brewer.pal(8, 'Set1')[c(5, 2, 1)]) +
+  scale_colour_manual(values = combPalette[c(7, 3, 1)]) +
+  scale_fill_manual(values = combPalette[c(7, 3, 1)]) +
   stat_summary(geom = "crossbar", width=0.45, fatten=0, color="white", 
     fun.data = function(x){ return(c(y=median(x), ymin=median(x), ymax=median(x))) }) +
   theme(legend.position = 'none') +
-  ylab('Percentage Error') +
+  ylab('Percent Error') +
   xlab('Max Angle') +
   scale_x_discrete(breaks=c("0", "pi/3", "2pi/3", "pi"),
                       labels=c(expression(phantom(over(0, 0))*0*phantom(0)), 
@@ -615,28 +620,10 @@ ggplot(tort, aes(x = maxAngle, y = percentageerror, colour = expression, fill = 
                         expression(phantom(over(0, 0))*pi*phantom(0))))
 
 
-
+plot_grid(waitPlot, tortPlot, labels = c("A", "B"), align = 'h', label_size = 10, ncol = 1)
 
 %%end.rcode
 
-%\begin{figure}[t]
-%	\centering
-%	\subfloat[\label{f:Perch}]{
-%		\includegraphics[width=60mm]{imgs/lucas_et_al_figure7a.pdf}
-%  }
-%  \subfloat[\label{f:Tort}]{
-%		\includegraphics[width=60mm]{imgs/lucas_et_al_figure7b.pdf}
-%  }
-%	\label{f:BreakAssump}
-%	\caption[Simulation model results of the accuracy and precision of four gREM submodels]{
-%Simulation model results of the accuracy and precision of four gREM submodels (NW1, SW1, SE3 and NE1) given different movement models where (a) average amount of time spent stationary (stop-start movement) and (b) maximum change in direction at each step (correlated random walk model).
-%The percentage error between estimated and true density within each gREM sub model for the different movement models is shown within each box plot, where the black line represents the median percentage error across all simulations, boxes represent the middle 50\% of the data, whiskers represent variability outside the upper and lower quartiles with outliers plotted as individual points.
-%The simple model is represented where time and maximum change in direction equals 0.
-%The colour of each box plot corresponds to the expressions for average profile width $\bar{p}$ given in Figure 4.} 
-%\end{figure}
-%
-
-                  
                   
 %%%% ------- Discussion ---------%%%%
 \section{Discussion}
