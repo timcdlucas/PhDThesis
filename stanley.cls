@@ -251,7 +251,12 @@
 
 \RequirePackage{hyperref}
 \hypersetup{final, colorlinks, linkcolor=black, citecolor=black,
-			urlcolor=black}
+			  urlcolor=black,
+        pdfsubject={PhD Thesis on pathogen richness in bats},
+        pdfkeywords={chiroptera, bats, zoonotic disease, pathogen richness, ecology},
+        pdfauthor={Tim Lucas},
+        pdftitle={The role of social ecology in Chiropteran pathogen richness and zoonotic potential},
+    }
 \urlstyle{same} % same font for hyperlinks
 
 \RequirePackage[noabbrev]{cleveref}
@@ -269,7 +274,7 @@
 \def\theprimarysv{}
 \def\thesecondarysv{}
 \newcommand{\university}[1]{\def\theuniversity{#1}}
-\newcommand{\degree}[1]{\def\thedegree{#1}}
+\newcommand{\unidegree}[1]{\def\thedegree{#1}}
 \newcommand{\primarysupervisor}[1]{\def\theprimarysv{#1}}
 \newcommand{\secondarysupervisor}[1]{\def\thesecondarysv{#1}}
 

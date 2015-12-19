@@ -8,16 +8,8 @@
 % See: http://tex.stackexchange.com/questions/65348/clash-between-bibentry-and-hyperref-with-bibstyle-elsart-harv
 \usepackage{bibentry}
 \makeatletter\let\saved@bibitem\@bibitem\makeatother
-\usepackage[pdftex,hidelinks]{hyperref}
 \makeatletter\let\@bibitem\saved@bibitem\makeatother
 \makeatletter
-\AtBeginDocument{
-    \hypersetup{
-        pdfsubject={Thesis Subject},
-        pdfkeywords={Thesis Keywords},
-        pdfauthor={Tim Lucas},
-        pdftitle={The role of social ecology in Chiropteran pathogen richness and zoonotic potential},
-    }
-}
+
 \makeatother
     
