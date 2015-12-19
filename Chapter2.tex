@@ -552,7 +552,7 @@ This is a trade off between getting a reasonable proportion of invasions, while 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-The proportion of invasions was not different across dispersal rates across \ensuremath{1.2\times 10^{3}} simulations run (Figure \ref{f:invasionPropPlots1}).
+The proportion of invasions was not different across dispersal rates across \ensuremath{1.2\times 10^{3}} simulations run (Figure \ref{f:invasionPropPlots}A).
 This was true at all transmission levels ($\chi^2$ test. $\beta = 0.1$: $\chi^2 = 1.98$, $\text{df} = 2$, $p = 0.37$. $\beta = 0.2$: $\chi^2 = 9.44$, $\text{df} = 2$, $p = \ensuremath{8.9\times 10^{-3}}$. $\beta = 0.3$: $\chi^2 = 0.29$, $\text{df} = 2$, $p = 0.87$, $\beta = 0.4$: $\chi^2 = 0.83$, $\text{df} = 2$, $p = 0.66$).
 
 
@@ -560,14 +560,14 @@ This was true at all transmission levels ($\chi^2$ test. $\beta = 0.1$: $\chi^2 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 I ran 800 simulations over 4 transmission values ($\beta = $ 0.1, 0.2, 0.3, 0.4).
-The proportion of invasions was not different between highly connected and largely unconnected metapopulations (Figure~\ref{f:invasionPropPlots2}). 
+The proportion of invasions was not different between highly connected and largely unconnected metapopulations (Figure~\ref{f:invasionPropPlots}B). 
 This was true at all transmission levels ($\chi^2$ test. $\beta = 0.1$: $\chi^2 = \ensuremath{5.23\times 10^{-31}}$, $\text{df} = 1$, $p = 1$. $\beta = 0.2$: $\chi^2 = 0.02$, $\text{df} = 1$, $p = 0.88$. $\beta = 0.3$: $\chi^2 = 1.53$, $\text{df} = 1$, $p = 0.22$. $\beta = 0.4$: $\chi^2 = 0.26$, $\text{df} = 1$, $p = 0.61$).
 
  
 \subsection{Transmission}
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Inline with theory, increasing the transmission rate increased the probability of invasion (Figure~\ref{f:invasionPropPlots1}--\ref{f:invasionPropPlots2}).
+Inline with theory, increasing the transmission rate increased the probability of invasion (Figure~\ref{f:invasionPropPlots}).
 This is true for all three dispersal values ($\chi^2$ test. $\lambda = 0.001$: $\chi^2 = 243.56$, $\text{df} = 3$, $p = \ensuremath{1.62\times 10^{-52}}$. $\lambda = 0.01$: $\chi^2 = 265.4$, $\text{df} = 3$, $p = \ensuremath{3.05\times 10^{-57}}$. $\lambda = 0.1$: $\chi^2 = 244.95$, $\text{df} = 3$, $p = \ensuremath{8.1\times 10^{-53}}$) and both network structures ($\chi^2$ test. Fully connected: $\chi^2 = 267.3$, $\text{df} = 3$, $p = \ensuremath{1.18\times 10^{-57}}$. Minimally connected: $\chi^2 =  267.3$, $\text{df} = 3$, $p = \ensuremath{1.18\times 10^{-57}}$).
 
 
@@ -578,13 +578,12 @@ This is true for all three dispersal values ($\chi^2$ test. $\lambda = 0.001$: $
 \begin{knitrout}\footnotesize
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[t]
 
-{\centering \subfloat[Dispersal\label{f:invasionPropPlots1}]{\includegraphics[width=0.45\textwidth]{figure/invasionPropPlots-1} }
-\subfloat[Network topology\label{f:invasionPropPlots2}]{\includegraphics[width=0.45\textwidth]{figure/invasionPropPlots-2} }
+{\centering \includegraphics[width=\textwidth]{figure/invasionPropPlots-1} 
 
 }
 
 \caption[The probability of invasion across different dispersal rates and network topologies.]{The probability of successful invasion. 
-  For three different transmission rates, the probability of invasion does not change between different a) dispersal rates or b) network structures. 
+  For three different transmission rates, the probability of invasion does not change between different a) dispersal rates or b) network topologies (with network topologies A and B refering to the    fully and minimally connected topologies in Figure~\ref{f:net}). 
   Error bars are 95\% confidence intervals. 
   100 simulations were run for each treatment.
   Other parameters are kept constant at: $N = 10,\, \, b = d = 0.05,\, \gamma = 0.1,\, \alpha = 0.1$. 

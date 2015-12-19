@@ -258,11 +258,11 @@ $F_{ST}$ and other measures were collated from the literature.
 Studies are from a wide range of spatial scales, from local ($\sim\SI{10}{\kilo\metre}$) to continental.
 As $F_{ST}$ inevitably increases with spatial scale I controlled for this by only using data from studies where a large proportion of the species range was studied.
 I used the ratio of the furthest distance between $F_{ST}$ samples (measured with \url{http://www.distancefromto.net/} if not stated) to the width of the IUCN species range and only used studies if this ratio was greater than 0.2.
-To allow comparison between different measures ($F_{ST}, \phi_{ST}$) and data from different molecular regions I converted all data to diploid gene flow.
-WILL ADD EXTRA METHODS LATER.
-These two measures of population structure were analysed separately as the number of subspecies has 196 data points while there is only $F_{ST}$ data for $\sim 30$ bat species.
+I converted all $F_{ST}$ value to migration using $M = \frac{1-F_{ST}}{8F_{ST}}$.
+This removes the $(0, 1)$ bounds of $F_{ST}$ and is more easily interpretable though the results are unaffected. 
+These two measures of population structure were analysed separately as the number of subspecies has 196 data points while there is only $F_{ST}$ data for 24 bat species.
 
-To control for study bias I collected the number of Pubmed and Google Scholar citations for each bat species including synonyms from ITIS \cite{itis} via the taxize package \cite{chamberlain2013taxize}.
+To control for study bias I collected the number of Pubmed and Google Scholar citations for each bat species name and synonyms from ITIS \cite{itis} via the taxize package \cite{chamberlain2013taxize}.
 The counts were scraped using the rvest package \cite{rvest}.
 I log transformed these variables as they were strongly right skewed.
 The log number of citations on Pubmed and Google scholar were highly correlated (pgls: $t$ = 19.32, df = 194, $p$ = 0).
@@ -274,14 +274,10 @@ Measures of body mass are taken from Pantheria \cite{jones2009pantheria} and pri
 Body mass measurements were log transformed due to the strong right skew.
 Distribution size was estimated by downloading range maps for all species from IUCN \cite{iucn} and were also logged due to right skew.
 
-%Pubmed was scraped on pubmedScrapeDate and Google Scholar was scraped on scholarScrapeDate
 
 To control for phylogenetic nonindependance I used the best-supported phylogeny from \cite{fritz2009geographical} which is the supertree from \cite{bininda2007delayed} with names updated to match the Wilson \& Reeder taxonomy \cite{wilson2005mammal}.
 Phylogenetic manipulation was performed using the ape package \cite{ape}.
 The importance of the phylogeny on each variable separately was estimated using \cite{phytools}.
-
-
-
 
 
 
@@ -453,7 +449,8 @@ $\Delta\text{AICc}$ was calculated as $\text{min}(\bar{\text{AICc}}) - \bar{\tex
 \tmpsection{More descriptive}
 
 After data cleaning there was data for 196 bat species in 11 families.
-The number of described virus species for a bat host ranged up to 15 viruses in \emph{Carollia perspicillata}.
+There appears to be a positive relationship between the number of subspecies and viral richness (Figure~\ref{fig:boxplot}) though few species have more than four subspecies. 
+The number of described virus  for a bat host raspeciesnged up to 15 viruses in \emph{Carollia perspicillata}.
 Figure~\ref{fig:treePlot} shows the phylogeny used and the number of viruses for each species.
 The mean number of viruses across families is fairly constant with a lower range of 1.67 for Nycteridae.
 The highest mean is Mormoopidae with 5 virus species per bat species, but this is based on a sample size of 3.
@@ -484,6 +481,7 @@ As seen in Figure~\ref{fig:fstITPlots}a, study effort is very likely in the best
 
 
 \begin{table}[t]
+\centering
 \caption[Estimated variable weights and coefficients]{
 Estimated variable weights (probability that a variable is in the best model) and their estimated coefficients.
 }
@@ -520,11 +518,12 @@ Random &  0.20 &  0.17&
 \tmpsection{More Descriptive}
 Due to the low number of studies and the restrictive requirements imposed on study design, there are only data for 24 bat species in 7 families.
 The number of described virus species for a bat host ranged up to 12 viruses in \emph{Miniopterus schreibersii}.
-Figure~\ref{fig:fstTreePlot} shows the phylogeny used and the number of viruses for each species.
+%Figure~\ref{fig:fstTreePlot} shows the phylogeny used and the number of viruses for each species.
 
 
 
 \begin{table}[t]
+\centering
 %\rowcolors{2}{gray!25}{white}
 \caption[Model selection results for number of subspecies analysis]{
 Model selection results for number of subspecies analysis. 
@@ -535,6 +534,7 @@ $\sum w_i$ is the cumulative sum of the Akaike weights.
 }
 
 \begin{tabular}{@{}>{\small}lrrrr@{}}
+
 \toprule
 \normalsize{Model} & $\bar{\text{AICc}}$ & $\Delta$AICc & $w_i$ & $\sum w_i$\\
 \midrule
@@ -600,6 +600,7 @@ Due to the small sample size this is probably due to a small number of data poin
 
 \begin{table}[t]
 %\rowcolors{2}{gray!25}{white}
+\centering
 \caption[Model selection results for gene flow analysis]{
 Model selection results for gene flow analysis. 
 The top two models are considerably better than the other models; there is a 98\% chance that one of them is the best model.
@@ -645,17 +646,39 @@ log(Scholar) + log(Gene flow) + log(Mass) + rand &
 
 \tmpsection{Restate results}
 
-By analysing data on two measures of population structure, and using larger datasets than previous studies, I have tested the hypothesis that population structure promotes pathogen richness in bats.
+I have tested the hypothesis that population structure promotes pathogen richness in bats.
+By analysing data on two measures of population structure, and using larger datasets than previous studies, it is hoped that any conclusions may be more robust than the conflicting results in the literature \cite{}.
 I have found that a positive effect of the number of subspecies and a negative effect of gene flow are likely to be in the best models for explaining viral richness.
-Study effort is also clearly supported confirming the expectation that additional study of a bat species yields more known viruses infecting that species.
-
-
+Study effort is also clearly supported confirming the expectation that additional study of a bat species yields more known viruses infecting that species and highlighting again that this bias cannot be ignored in studies using known pathogen richness as a proxy for total pathogen richness.
 
 
 \tmpsection{Weaknesses and limitations}
 
+Although I have used measures of study effort to try to control for biases in the viral richness data, this bias could still make the results here unreliable --- this is especially true as study effort is by far the strongest predictor of viral richness is both datasets.
+It is hoped that as untargeted sequencing of viral genetic material (e.g. \cite{anthonyPaper} becomes cheaper and more common this bias can be reduced.
+The strength of the relationship between study effort and known viral richness also highlights the number of virus species and bat-virus host-pathogen relationships yet to be discovered.
 
 \tmpsection{Broader context of results}
+
+The results here suggest that there is a positive relationship between population structure and pathogen richness in bats.
+This is in agreement with \cite{} but in disagreement with \cite{}.
+Furthermore it contradicts the assumption that factors that promote high $R_0$ will automatically promote high pathogen richness \cite{}.
+
+This relationship implies that direct or indirect competitive mechanisms are acting such that population structure is needed in order to allow escape from competition.
+Another potential mechanism by which structure might be promoting increased richness is by slowing the spread of highly virulent viruses such as rabies and preventing them from having short, intense epidemics followed by extinction \cite{}.
+This mechanism has interesting parallel to metapopulation theory in ecology in which a metapopulation structure can allow persistence of species that would otherwise go extinct.
+
+The relationship between population structure and pathogen richness suggests that population structure has a least some potential as being predictive of high pathogen richness and therefore of a species likelihood of being a reservoir of a potentially zoonotic pathogen. 
+However given that it is difficult to measure population structure and given that the relationship appears to be weak at best, this trait on it's own is unlikely to be useful in predicting zoonotic risk.
+However, as a number of other factors are also associated with pathogen richness (body mass and to a lesser extent range size here but also other traits elsewhere), using a combination traits in a predictive (i.e. machine learning) framework has potential to be used in prioritising zoonotic disease surveillance.
+The main hurdle in this approach is finding a way to validate models --- due to the study effort bias in current data, predictive models will also be biased.
+
+The relationship between pathogen richness and population structure also has implications for habitat fragmentation and range shifts due to global change.
+In short habitat fragmentation and range shifts that reduce movement between populations would be predicted to increase pathogen richness.
+However, depending on the mechanisms by which population structure increase pathogen richness this may not be a cause for concern.
+I the main mechanism is one that reduces pathogen extinction rates, a newly fragmented population is unlikely to increase it's pathogen richness over any appreciable timescale.
+If however population structure actively promotes the evolution of new pathogen strains or allows the persistence of more virulent strains this could have important public health implications.
+Therefore further study on the exact mechanisms by which population structure affects pathogen richness is needed. 
 
 \tmpsection{Conclusions}
 

@@ -858,7 +858,7 @@ Studies are from a wide range of spatial scales, from local ($\sim\SI{10}{\kilo\
 As $F_{ST}$ inevitably increases with spatial scale I controlled for this by only using data from studies where a large proportion of the species range was studied.
 I used the ratio of the furthest distance between $F_{ST}$ samples (measured with \url{http://www.distancefromto.net/} if not stated) to the width of the IUCN species range and only used studies if this ratio was greater than \rinline{rangeUseable}.
 I converted all $F_{ST}$ value to migration using $M = \frac{1-F_{ST}}{8F_{ST}}$.
-This removes the $\[0, 1\]$ bounds of $F_{ST}$ and is more easily interpretable though the results are unaffected. 
+This removes the $(0, 1)$ bounds of $F_{ST}$ and is more easily interpretable though the results are unaffected. 
 These two measures of population structure were analysed separately as the number of subspecies has \rinline{nrow(nSpecies)} data points while there is only $F_{ST}$ data for \rinline{nrow(fstFinal)} bat species.
 
 To control for study bias I collected the number of Pubmed and Google Scholar citations for each bat species name and synonyms from ITIS \cite{itis} via the taxize package \cite{chamberlain2013taxize}.
@@ -1911,7 +1911,7 @@ Random &  \rinline{sprintf('%.2f', varWeights['rand'])} &  \rinline{varCoefMeans
 \tmpsection{More Descriptive}
 Due to the low number of studies and the restrictive requirements imposed on study design, there are only data for \rinline{nrow(fstFinal)} bat species in \rinline{length(unique(fstFinal$Family))} families.
 The number of described virus species for a bat host ranged up to \rinline{max(fstFinal$virusSpecies)} viruses in \emph{\rinline{fstFinal$binomial[which.max(fstFinal$virusSpecies)]}}.
-Figure~\ref{fig:fstTreePlot} shows the phylogeny used and the number of viruses for each species.
+%Figure~\ref{fig:fstTreePlot} shows the phylogeny used and the number of viruses for each species.
 
 
 
