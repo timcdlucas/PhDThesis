@@ -307,22 +307,23 @@ I have studied two metrics for population structure, dispersal rate and metapopu
 Here I show that given the assumptions of a metapopulation, population structure does not affect the rate of invasion of new pathogens.
 
 
-\begin{table}[t]
-\begin{tabular}{>{\it}lp{8cm}l}
-\normalfont{Term} & Definition & Synonyms \\
-\hline
-Metapopulation & A group of subpopulations with rare movement of animals between them. Closed to outside migration. & Network\\
-Subpopulation & A group of animals. Social interactions within a subpopulation is likely high. & Node, colony\\
-Dispersal & Movement from one subpopulation to another  & Migration\\
-Population & A closed group of animals. No epidemiological affects from outside the group on epidemiological timescale (years -- decades.) & \\
-Pathogen diversity & The number of species or strains of pathogens in a host & Pathogen richness\\
-Connectedness &  & \\
-
-\end{tabular}
-\caption{Glossary of terms}
-\label{t:glossary}
-\end{table}
-
+%\begin{table}[t]
+%\centering
+%\caption{Glossary of terms}
+%\begin{tabular}{@{}>{\it}lp{8cm}l@{}}
+%\toprule
+%\normalfont{Term} & Definition & Synonyms \\
+%\midrule
+%Metapopulation & A group of subpopulations with rare movement of animals between them. Closed to outside migration. & Network\\
+%Subpopulation & A group of animals. Social interactions within a subpopulation is likely high. & Node, colony\\
+%Dispersal & Movement from one subpopulation to another  & Migration\\
+%Population & A closed group of animals. No epidemiological affects from outside the group on epidemiological timescale (years -- decades.) & \\
+%Pathogen diversity & The number of species or strains of pathogens in a host & Pathogen richness\\
+%Connectedness &  & \\
+%\bottomrule
+%\end{tabular}
+%\label{t:glossary}
+%\end{table}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1074,10 +1075,12 @@ It is clear however that there are a number of factors that affect pathogen rich
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{table}[b!]
-
-\begin{tabular}{lp{5.7cm}p{4.3cm}l}
- & Explanation & Units&Value\\
-\hline
+\centering
+\caption{All symbols used.}
+\begin{tabular}{@{}lp{5.4cm}p{3.9cm}r@{}}
+\toprule
+Symbol & Explanation & Units&Value\\
+\midrule
 $S$ & Susceptible individuals &&\\
 $I_q$ & Infectious with diseases $q$ &&\\
 $I^+_p$ & Sum of classes infected with pathogen $p$ &\\
@@ -1102,9 +1105,9 @@ $\bm{A}_{mn}$ & Adjacency matrix. & Distance &\\
 $\mu$ & Maximum distance for edge to exist & km& 40, 100\\
 $\sigma$ & Invading pathogen seed size & & 10\\
 $r_i$ & The rate that event $i$ occurs. & Days$^{-1}$&\\
-&&&\\
+\bottomrule
 \end{tabular}
-\caption{All symbols used.}
+
 \label{t:params}
 \end{table}
 

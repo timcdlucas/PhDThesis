@@ -6,8 +6,11 @@
 %move to appendix
 \begin{table}[h!]
 \centering
-\begin{tabular}{lll}
-Symbol 	& Description & Units\\\hline
+\caption[List of symbols used to describe the gREM and simulations]{List of symbols used to describe the gREM and simulations. `-' means the quantity has no units.}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Symbol 	& Description & Units\\
+\midrule
 $\theta$	& Sensor width & \SI{}{\radian} \\
 $\alpha$	& Animal signal width & \SI{}{\radian} \\
 $x_i$	        & Focal angle, $i \in \{1,2,3,4\} $ 	& \SI{}{\radian}\\
@@ -23,9 +26,8 @@ $N$ 		& Number of steps per simulation & -\\
 $d$ 		& Distance moved in a time step & \SI{}{\meter}\\
 $S$ 		& Probability of remaining stationary & -\\
 $A$ 		& Maximum turning angle & \SI{}{\radian}\\
-\\
+\bottomrule
 \end{tabular}
-\caption[List of symbols used to describe the gREM and simulations]{List of symbols used to describe the gREM and simulations. `-' means the quantity has no units.}
 \label{t:paras}
 \end{table}
 
