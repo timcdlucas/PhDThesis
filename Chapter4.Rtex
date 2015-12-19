@@ -681,10 +681,9 @@ write.csv(z, file = 'data/Chapter4/PopSims.csv')
 
 
 
-
-In each simulation the population is seeded with 200 infected individuals of disease 1 in each colony. 
+In each simulation the population is seeded with 20 infected individuals of disease 1 in each colony. 
 Disease 1 is then allowed to spread and reach equilibrium. 
-After \rinline{invadeT} events, 10 individuals infected with disease 2 are added to one colony. 
+After \rinline{invadeT} events, 5 individuals infected with disease 2 are added to one colony. 
 After another \rinline{nEvent - invadeT} events the invasion of disease 2 is considered successful if any individuals with disease 2 still remain.
 
 
