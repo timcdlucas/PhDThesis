@@ -27,10 +27,21 @@
 
 % Change title styles with titlesec
 \usepackage{titlesec}
-\titleformat*{\section}{\bf\huge\sf\color[HTML]{151515}}
-\titleformat*{\subsection}{\LARGE\color{cemph}}
-\titleformat*{\subsubsection}{\color{cemph}\it}
+%\titleformat*{\section}{\huge\color{cemph}}
+%\titleformat*{\subsection}{\LARGE\color{cemph}}
+%\titleformat*{\subsubsection}{\color[HTML]{151515}}
 
+\titleformat{\chapter}[display]
+  {\Huge\color{cemph}\sffamily}{\chaptertitlename\ \thechapter}{20pt}{\Huge\sffamily}
+
+\titleformat{\section}[display]
+  {\LARGE\color{cemph}}{\chaptertitlename\ \thesection}{15pt}{\LARGE}
+
+\titleformat{\subsection}[display]
+  {\large\color[HTML]{151515}}{\chaptertitlename\ \thechapter}{14pt}{\large}
+
+\titleformat{\subsubsection}[display]
+  {\normalsize\color[HTML]{151515}}{\chaptertitlename\ \thechapter}{12pt}{\normalsize}
 
 
 % Override spacing value from MainPackage
@@ -44,7 +55,7 @@
 
 
 % Redefine cite so that we get references in footnotes.
-\usepackage[backend=biber]{biblatex} %style=mla for footnotes.
+%\usepackage[backend=biber]{biblatex} %style=mla for footnotes.
 %\renewcommand{\cite}[1]{\footcite{#1}}
 %\renewcommand{\cite}[1]{\supercite{#1}}
 
