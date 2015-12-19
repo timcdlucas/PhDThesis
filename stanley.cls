@@ -178,17 +178,19 @@
 \RequirePackage[figuresright]{rotating} % rotated figures
 \RequirePackage{array,booktabs} % more table options
 
-\DisemulatePackage{caption}
-\RequirePackage{caption,subcaption}	% better (sub)caption controls
+%\DisemulatePackage{caption}
+%\RequirePackage{caption}	% better (sub)caption controls
 
-\DeclareCaptionSubType*{figure}
-\DeclareCaptionSubType*{table}
+%\DeclareCaptionSubType*{figure}
+%\DeclareCaptionSubType*{table}
+
+\RequirePackage{subfig}
 
 % make floats appear quickly
 \renewcommand{\floatpagefraction}{.1}
 
 % make subfigures capital lettered
-\renewcommand\thesubfigure{\Alph{subfigure}}
+\renewcommand\thesubfigure{\textsf{\Alph{subfigure}}}
 \makeatletter\renewcommand\p@subfigure{\thefigure}\makeatother
 
 % setup captions
@@ -197,10 +199,10 @@
 % setup subcaptions
 \captionsetup[subfigure]{labelformat=simple, labelsep=quad,
 						 labelfont=bf, singlelinecheck=off,
-						 justification=raggedright}
+						 justification=centering}
 					
 % \subcap for referring to subcaptions in the main caption
-\newcommand{\subcap}[1]{\textbf{\protect\subref{#1}}\xspace}
+%\newcommand{\subcap}[1]{\textbf{\protect\subref{#1}}\xspace}
 
 %-------------------------------------------------------------------------------
 % Bibliography

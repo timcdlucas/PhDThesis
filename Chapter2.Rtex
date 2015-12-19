@@ -1101,7 +1101,7 @@ $k_i$ & Degree of node $i$ &&\\
 $\delta$ & Waiting time until next event & Days&\\
 $\alpha$ & Cross immunity & Proportion& 0.1\\
 $n, m$ & Colony index &&\\
-$\bm{A}_{mn}$ & Adjacency matrix. & Distance &\\
+%$\bm{A}_{mn}$ & Adjacency matrix. & Distance &\\
 $\mu$ & Maximum distance for edge to exist & km& 40, 100\\
 $\sigma$ & Invading pathogen seed size & & 10\\
 $r_i$ & The rate that event $i$ occurs. & Days$^{-1}$&\\
