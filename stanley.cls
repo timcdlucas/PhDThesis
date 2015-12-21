@@ -208,10 +208,18 @@
 % Bibliography
 %-------------------------------------------------------------------------------
 
-\RequirePackage[backend=biber, bibencoding=utf8, useprefix=true,%
-				uniquename=false, uniquelist=false, %
-				style=authoryear, firstinits=true, dashed=false %
-				maxcitenames=1, maxbibnames=99]{biblatex}
+\RequirePackage[
+  backend=biber, 
+  bibencoding=utf8, 
+  useprefix=true,%
+	uniquename=false, 
+  uniquelist=false, %
+	style=authoryear, 
+  firstinits=true, 
+  dashed=false, %
+	maxcitenames=1, 
+  maxbibnames=99
+]{biblatex}
 \renewcommand{\cite}[1]{\parencite{#1}}
 
 				

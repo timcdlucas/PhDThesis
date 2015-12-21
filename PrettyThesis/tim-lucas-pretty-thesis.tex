@@ -65,11 +65,12 @@
 % Sets up links within your document, for e.g. contents page entries
 %  and references, and also PDF metadata.
 % You should edit this!
-\input{PrettyLinksAndMetadata}
+%\input{PrettyLinksAndMetadata}
+\input{../LinksAndMetadata}
 
 % And then some settings in separate files.
 \input{../FloatSettings} % For things like figures and tables
-\input{../BibSettings}   % For bibliographies
+\input{BibSettings}   % For bibliographies
 
 % Title Settings
 \setcounter{secnumdepth}{0}
@@ -91,10 +92,6 @@
 % This file has the normal knitr stuff. Should therefore be able to knit content only files and \include{} them.
 
 \input{PrettyKnitrSettings}
-
-% biblatex does bibs like this.
-% This didn't work, so copied epilit to this folder instead.
-%\addbibresource{../epilit.bib}
 
 
 \renewcommand{\mddefault}{l}
@@ -129,22 +126,22 @@
 \input{../Introduction}
 
 
-\chapter[Network structure and diversity]{Does network structure of bat populations promote viral diversity?}
+\chapter{The role of population structure in pathogen diversity in wild bat populations}
 \label{chapterlabel2}
 \begin{center}
 \includegraphics[width=0.7\textwidth]{imgs/fullyConnected.pdf}
 \end{center}
-\input{../Chapter2}
+\input{../Chapter3}
 
 
-\chapter[Social structure in wild populations]{Does social structure affect viral diversity in wild bat populations?}
+\chapter{Population structure does not increase pathogen diversity in theoretical bat populations}
 \label{chapterlabel3}
 \begin{center}
 \includegraphics[width=\textwidth]{figure/treePlot-1.pdf}
 \end{center}
-\input{../Chapter3}
+\input{../Chapter2}
 
-\chapter[Population Size]{Does population size affect viral diversity in bat populations?}
+\chapter{The interactions between population structure and density in pathogen diversity}
 \label{chapterlabel4}
 \input{../Chapter4}
 
