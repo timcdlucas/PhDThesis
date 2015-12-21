@@ -39,10 +39,16 @@ maxcitenames=2
 \input{KnitrSettings}
 
 
-\usepackage{caption}
+\usepackage[font=footnotesize, labelfont=bf]{caption}
 \usepackage{verbatim, fancyhdr,  graphicx, xcomment, microtype, array}
 %\usepackage{amsmath}
 
+%Make floats appear quickly maybe.
+\renewcommand{\topfraction}{0.6}
+
+\makeatletter
+\@fpsep\textheight
+\makeatother
 
 
 \usepackage[pdftex,hidelinks]{hyperref}
