@@ -88,7 +88,7 @@ However, this study included measures using mtDNA which only measures female dis
 Furthermore, this study used measures of $F_{ST}$ irrespective of the study scale with studies covering from tens \cite{mccracken1981social} to thousands \cite{petit1999male} of kilometers.
 As isolation by distance has been shown in a number of bat species \cite{burland1999population, hulva2010mechanisms, o2015genetic, vonhof2015range} this could bias results further.
 Finally, when a global $F_{ST}$ value is not given they use the mean of all pairwise $F_{ST}$ between sites.
-It is not clear that this is correct as from global $F_{ST}$ we expect migration rates of $M = \frac{1-F_{ST}}{8F_{ST}}$ while from $F_{ST}$ between pairs of populations we expect migration rates of $M = \frac{1-F_{ST}}{16F_{ST}}$ where $M$ is the absolute number of diploid inviduals dispersing per generation \cite{slatkin1995measure}.
+It is not clear that this is correct as from global $F_{ST}$ we expect migration rates of $M = (1-F_{ST})/8F_{ST}$ while from $F_{ST}$ between pairs of populations we expect migration rates of $M = (1-F_{ST})/16F_{ST}$ where $M$ is the absolute number of diploid inviduals dispersing per generation \cite{slatkin1995measure}.
 As it is in fact the movement of individuals that is epidemiologically relavent, using these studies is probably not correct without attempting to correct for these difference.
 
 Studies on single pathogens, notably rabies, have also shown that for virulent pathogens, space can allow persistence where a well mixed population ould experience a single, large epidemic then pathogen extinction \cite{blackwood2013resolving, colizza, pons2014insights}.
@@ -260,7 +260,7 @@ As $F_{ST}$ inevitably increases with spatial scale I controlled for this by onl
 I used the ratio of the furthest distance between $F_{ST}$ samples (measured with \url{http://www.distancefromto.net/} if not stated) to the width of the IUCN species range and only used studies if this ratio was greater than 0.2.
 I converted all $F_{ST}$ value to migration using $M = \frac{1-F_{ST}}{8F_{ST}}$.
 This removes the $(0, 1)$ bounds of $F_{ST}$ and is more easily interpretable though the results are unaffected. 
-These two measures of population structure were analysed separately as the number of subspecies has 196 data points while there is only $F_{ST}$ data for 24 bat species.
+These two measures of population structure were analysed separately as the number of subspecies has 196 data points while there is only $F_{ST}$ data for 22 bat species.
 
 To control for study bias I collected the number of Pubmed and Google Scholar citations for each bat species name and synonyms from ITIS \cite{itis} via the taxize package \cite{chamberlain2013taxize}.
 The counts were scraped using the rvest package \cite{rvest}.
@@ -295,10 +295,11 @@ The importance of the phylogeny on each variable separately was estimated using 
 
 }
 
-\caption[Number of virus species against number of subspecies]{Number of virus species against number of subspecies. 
-Data within a number of subspecies are plotted as boxplots with the dark bar showing the median, the box showing the interquartile range, vertical lines showing the range and outliers shown as seperate points.
-Regression lines are from multivariate phylogenetic models with other independant variables set at their median value.
-The models shown are thos with (pink) and without (red) an interaction between study effort and number of subspecies.
+\caption[Number of virus species against number of subspecies]{Number of virus species against number of subspecies. 		
+The top panel shows the distribution of the data, with most species having few subspecies.		
+Data within a number of subspecies are plotted as boxplots with the dark bar showing the median, the box showing the interquartile range, vertical lines showing the range and outliers shown as seperate points.		
+Regression lines are from multivariate phylogenetic models with all other independant variables set at their median value.		
+The models shown are those with (pink) and without (red) an interaction between study effort and number of subspecies.		
 }\label{fig:boxplot}
 \end{figure}
 
@@ -450,7 +451,7 @@ $\Delta\text{AICc}$ was calculated as $\text{min}(\bar{\text{AICc}}) - \bar{\tex
 
 After data cleaning there was data for 196 bat species in 11 families.
 There appears to be a positive relationship between the number of subspecies and viral richness (Figure~\ref{fig:boxplot}) though few species have more than four subspecies. 
-The number of described virus  for a bat host raspeciesnged up to 15 viruses in \emph{Carollia perspicillata}.
+The number of described virus  for a bat host ranged up to 15 viruses in \emph{Carollia perspicillata}.
 Figure~\ref{fig:treePlot} shows the phylogeny used and the number of viruses for each species.
 The mean number of viruses across families is fairly constant with a lower range of 1.67 for Nycteridae.
 The highest mean is Mormoopidae with 5 virus species per bat species, but this is based on a sample size of 3.

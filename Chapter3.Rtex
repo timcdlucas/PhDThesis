@@ -61,7 +61,7 @@ library(ggplot2)
 library(dotwhisker)
 library(ggtree)
 library(palettetown)
-library(ggthemes)
+#library(ggthemes)
 library(GGally)
 library(cowplot)
 
@@ -165,7 +165,7 @@ However, this study included measures using mtDNA which only measures female dis
 Furthermore, this study used measures of $F_{ST}$ irrespective of the study scale with studies covering from tens \cite{mccracken1981social} to thousands \cite{petit1999male} of kilometers.
 As isolation by distance has been shown in a number of bat species \cite{burland1999population, hulva2010mechanisms, o2015genetic, vonhof2015range} this could bias results further.
 Finally, when a global $F_{ST}$ value is not given they use the mean of all pairwise $F_{ST}$ between sites.
-It is not clear that this is correct as from global $F_{ST}$ we expect migration rates of $M = \frac{1-F_{ST}}{8F_{ST}}$ while from $F_{ST}$ between pairs of populations we expect migration rates of $M = \frac{1-F_{ST}}{16F_{ST}}$ where $M$ is the absolute number of diploid inviduals dispersing per generation \cite{slatkin1995measure}.
+It is not clear that this is correct as from global $F_{ST}$ we expect migration rates of $M = (1-F_{ST})/8F_{ST}$ while from $F_{ST}$ between pairs of populations we expect migration rates of $M = (1-F_{ST})/16F_{ST}$ where $M$ is the absolute number of diploid inviduals dispersing per generation \cite{slatkin1995measure}.
 As it is in fact the movement of individuals that is epidemiologically relavent, using these studies is probably not correct without attempting to correct for these difference.
 
 Studies on single pathogens, notably rabies, have also shown that for virulent pathogens, space can allow persistence where a well mixed population ould experience a single, large epidemic then pathogen extinction \cite{blackwood2013resolving, colizza, pons2014insights}.
@@ -328,7 +328,7 @@ subs[order(subs$NumberOfSubspecies, decreasing = TRUE ),] %>% head
 
 # Quick look at the number of subspecies.
 ggplot(subs, aes(x = NumberOfSubspecies)) +
-  geom_histogram() +
+  geom_histogram(binwidth = 2) +
   xlab('Number of Subspecies') +
   ylab('Count')
 
@@ -734,8 +734,8 @@ rm(t)
 p <- ggtree(pruneTree, layout = 'fan') 
 
 p %<+% nSpecies[, 1:6] +
-  geom_point(aes(size = virusSpecies, colour = Family), subset=.(isTip)) +
-  scale_size(range = c(0.8, 3)) +
+  geom_point2(aes(size = virusSpecies, colour = Family, subset = isTip)) +
+  scale_size(range = c(0.2, 2)) +
   scale_colour_manual(values = c(pokepal('oddish')[c(1,3,5,6,9,10)],    pokepal('Carvanha')[c(1,2,4, 13, 12)])) +
   theme_tcdl +
   theme(plot.margin = unit(c(-1, 3, -2.5, -2), "lines")) +
@@ -859,7 +859,7 @@ As $F_{ST}$ inevitably increases with spatial scale I controlled for this by onl
 I used the ratio of the furthest distance between $F_{ST}$ samples (measured with \url{http://www.distancefromto.net/} if not stated) to the width of the IUCN species range and only used studies if this ratio was greater than \rinline{rangeUseable}.
 I converted all $F_{ST}$ value to migration using $M = \frac{1-F_{ST}}{8F_{ST}}$.
 This removes the $(0, 1)$ bounds of $F_{ST}$ and is more easily interpretable though the results are unaffected. 
-These two measures of population structure were analysed separately as the number of subspecies has \rinline{nrow(nSpecies)} data points while there is only $F_{ST}$ data for \rinline{nrow(fstFinal)} bat species.
+These two measures of population structure were analysed separately as the number of subspecies has \rinline{nrow(nSpecies)} data points while there is only $F_{ST}$ data for 22 bat species.
 
 To control for study bias I collected the number of Pubmed and Google Scholar citations for each bat species name and synonyms from ITIS \cite{itis} via the taxize package \cite{chamberlain2013taxize}.
 The counts were scraped using the rvest package \cite{rvest}.
@@ -916,7 +916,7 @@ subspeciesInter <- pgls(
 		
 # Caption for the main boxplot of subspecies vs virus		
 		
-boxplotCapt < 'Number of virus species against number of subspecies. 		
+boxplotCapt <- 'Number of virus species against number of subspecies. 		
 The top panel shows the distribution of the data, with most species having few subspecies.		
 Data within a number of subspecies are plotted as boxplots with the dark bar showing the median, the box showing the interquartile range, vertical lines showing the range and outliers shown as seperate points.		
 Regression lines are from multivariate phylogenetic models with all other independant variables set at their median value.		
@@ -983,9 +983,9 @@ nSpeciesBox <- ggplot(nSpecies, aes(SubspeciesFactor, virusSpecies, colour = 'a'
 
 
 nSpeciesHist <- ggplot(nSpecies, aes(x = SubspeciesFactor)) +
-  scale_x_discrete(limits = levels(nSpecies$SubspeciesFactor), drop = FALSE, labels = '') +
+  scale_x_discrete(limits = levels(nSpecies$SubspeciesFactor), drop = FALSE, labels = rep('', max(nSpecies$NumberOfSubspecies))) +
   scale_y_continuous(breaks = c(20, 60)) +
-  geom_histogram() +
+  geom_bar(stat = 'count') +
   xlab('') +
   ylab('Count') +
   theme(plot.margin  =  unit(c(0.3, 0.1, -1.6, 1.3), "lines"))
@@ -1500,11 +1500,13 @@ fstFinal$lengthNames <- fstFinal$binomial %>%
 
 p %<+% fstFinal[, c('binomial', 'virusSpecies')] + 
   #geom_tiplab(family = 'lato light', align = FALSE) +
-  geom_text(aes(x = x + 15, label = as.character(label)), subset=.(isTip), 
+  geom_text2(aes(x = x + 15, label = as.character(label), subset = isTip), 
     family = 'Lato light', hjust = 0, size = 3.3) +
+  #geom_text(aes(x = x + 15, label = as.character(label)), subset=.(isTip), 
+  #  family = 'Lato light', hjust = 0, size = 3.3) +
   ggplot2::xlim(0, 210) +
   theme_tcdl +
-  geom_point(aes(x = x + 8, size = virusSpecies), subset=.(isTip)) +
+  geom_point2(aes(x = x + 8, size = virusSpecies, subset = isTip)) +
   scale_size(range = c(0, 4)) +
   theme(legend.key.size = unit(0.8, "lines"),
               legend.text = element_text(size = 9),
