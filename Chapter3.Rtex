@@ -694,6 +694,13 @@ write.csv(nSpecies, file = 'data/Chapter3/nSpecies.csv')
 
 %%end.rcode
 
+
+To test for an association between pathogen richness I have performed multivariate regression using a model selection framework to establish whether or not two measures of pathogen richness are likely to be in a `best model' and therefore important.
+As species cannot be considered independant due to shared evolutionary history, phylogeny was controlled for in all regressions.
+A number of other potentially important factors (body mass, range size and study effort) were included as additional independant variables.
+This was to attempt to avoid spurious positive results occuring simply due to correlation between pathogen richness and a different, causal factor.
+I have completed this analysis using the number of subspecies a bat species has and estimates of gene flow separately as measures of population structure.
+
 To measure pathogen richness I used data from \cite{luis2013comparison}. 
 These simply include known infections of a bat species with a pathogen species. 
 Only species with at least one pathogen were included in the analysis.
@@ -848,27 +855,25 @@ nSpecies %>%
 %%end.rcode
 
 
-
-
 I used two measures of population structure. 
-$F_{ST}$ and the number of subspecies.
+Gene flow and the number of subspecies.
 The number of subspecies was counted using the Wilson and Reeder taxonomy \cite{wilson2005mammal}.
-$F_{ST}$ and other measures were collated from the literature.
+Gene flow is calculated from estimates of $F_{ST}$ collated from the literature.
 Studies are from a wide range of spatial scales, from local ($\sim\SI{10}{\kilo\metre}$) to continental.
-As $F_{ST}$ inevitably increases with spatial scale I controlled for this by only using data from studies where a large proportion of the species range was studied.
-I used the ratio of the furthest distance between $F_{ST}$ samples (measured with \url{http://www.distancefromto.net/} if not stated) to the width of the IUCN species range and only used studies if this ratio was greater than \rinline{rangeUseable}.
+As $F_{ST}$ often increases with spatial scale \cite{burland1999population, hulva2010mechanisms, o2015genetic, vonhof2015range} I controlled for this by only using data from studies where a large proportion of the species range was studied.
+I used the ratio of the furthest distance between $F_{ST}$ samples (measured with \url{http://www.distancefromto.net/} if not stated) to the width of the IUCN species range \cite{iucn} and only used studies if this ratio was greater than \rinline{rangeUseable}.
 I converted all $F_{ST}$ value to migration using $M = \frac{1-F_{ST}}{8F_{ST}}$.
 This removes the $(0, 1)$ bounds of $F_{ST}$ and is more easily interpretable though the results are unaffected. 
 These two measures of population structure were analysed separately as the number of subspecies has \rinline{nrow(nSpecies)} data points while there is only $F_{ST}$ data for 22 bat species.
 
-To control for study bias I collected the number of Pubmed and Google Scholar citations for each bat species name and synonyms from ITIS \cite{itis} via the taxize package \cite{chamberlain2013taxize}.
+To control for study bias I collected the number of Pubmed and Google Scholar citations for each bat species name including synonyms from ITIS \cite{itis} via the taxize package \cite{chamberlain2013taxize}.
 The counts were scraped using the rvest package \cite{rvest}.
 I log transformed these variables as they were strongly right skewed.
 The log number of citations on Pubmed and Google scholar were highly correlated (pgls: $t$ = \rinline{studyEffortCor$coefficients['log(pubmedRefs + 1)', 't value']}, df = \rinline{studyEffortCor$df[2]}, $p$ = \rinline{studyEffortCor$coefficients['log(pubmedRefs + 1)', 'Pr(>|t|)']}).
-The results here are for analyses using only Google Scholar citations.
+As this corelation is strong, the results here are for analyses using only Google Scholar citations.
 %See the appendix for analyses run using Pubmed citations.
 
-Measures of body mass are taken from Pantheria \cite{jones2009pantheria} and primary literature \cite{canals2005relative, arita1993rarity, lopez2014echolocation, orr2013does, , lim2001bat, aldridge1987turning, ma2003dietary, owen2003home, henderson2008movements, heaney2012nyctalus, oleksy2015high, zhang2009recent}. 
+Measures of body mass are taken from Pantheria \cite{jones2009pantheria} and primary literature \cite{canals2005relative, arita1993rarity, lopez2014echolocation, orr2013does, lim2001bat, aldridge1987turning, ma2003dietary, owen2003home, henderson2008movements, heaney2012nyctalus, oleksy2015high, zhang2009recent}. 
 \emph{Pipistrellus pygmaeus} was assigned the same mass as \emph{P. pipistrellus} as they indistinguishable by mass.
 Body mass measurements were log transformed due to the strong right skew.
 Distribution size was estimated by downloading range maps for all species from IUCN \cite{iucn} and were also logged due to right skew.
@@ -877,7 +882,8 @@ Distribution size was estimated by downloading range maps for all species from I
 To control for phylogenetic nonindependance I used the best-supported phylogeny from \cite{fritz2009geographical} which is the supertree from \cite{bininda2007delayed} with names updated to match the Wilson \& Reeder taxonomy \cite{wilson2005mammal}.
 Phylogenetic manipulation was performed using the ape package \cite{ape}.
 The importance of the phylogeny on each variable separately was estimated using \cite{phytools}.
-
+I also performed the analysis using the tree from \cite{jones2005bats} as this has some broad changes with families in different places.
+However the phylogeny did not affect the analysis.
 
 %%begin.rcode, subsAnalysis, fig.show = extraFigs
 
@@ -1804,21 +1810,21 @@ virusFstLambda <- summary(pgls(virusSpecies ~ 1, data = compFst, lambda = 'ML'))
 distrFstLambda <- summary(pgls(distrSize ~ 1, data = compFst, lambda = 'ML'))
 %%end.rcode
 
-$F_{ST}$ studies are conducted at a range of spatial scales, but $F_{ST}$ often increases with distance studied \cite{burland1999population, hulva2010mechanisms, o2015genetic, vonhof2015range}.
-To minimise the effects of this I only used data from studies that cover \rinline{rangeUseable * 100}\% of the diameter of the species range.
-This is a largely arbitrary value that could be considered to reflect a ``global'' estimate of $F_{ST}$ while keeping a reasonable number of datapoints available.
-I calculated the diameter of the species range by finding the furthest apart points in the IUCN species range \cite{iucn} even if the range is split into multiple polygons.
-The width covered by each study was the distance between the most distant sampling sites.
-When this was not explicit in the paper, the centre of the lowest level of geographic area was used.
+%$F_{ST}$ studies are conducted at a range of spatial scales, but $F_{ST}$ often increases with distance studied \cite{burland1999population, hulva2010mechanisms, o2015genetic, vonhof2015range}.
+%To minimise the effects of this I only used data from studies that cover \rinline{rangeUseable * 100}\% of the diameter of the species range.
+%This is a largely arbitrary value that could be considered to reflect a ``global'' estimate of $F_{ST}$ while keeping a reasonable number of datapoints available.
+%I calculated the diameter of the species range by finding the furthest apart points in the IUCN species range \cite{iucn} even if the range is split into multiple polygons.
+%The width covered by each study was the distance between the most distant sampling sites.
+%When this was not explicit in the paper, the centre of the lowest level of geographic area was used.
 
 
 
 \subsection{Statistical analysis}
 
-Statistical analysis for both dependant variables was conducted using a information theory/model averaging approach \cite{burnham2002model} specifically following \cite{whittingham2005habitat, whittingham2006we}.
-I chose a credible set of models including all combinations of independent variables.
-In the analysis using the number of subspecies dependant variable I also included an interaction term between study effort and number of subspecies as I believe \emph{a priori} that this interaction may be present.
-The interaction was only included in models with both study effort and number of subspecies as an individual term.
+Statistical analysis for both dependant variables was conducted using a information theoretical/model averaging approach \cite{burnham2002model} specifically following \cite{whittingham2005habitat, whittingham2006we}.
+I chose a credible set of models including all combinations of independent variables and a model with just an intercept.
+In the analysis using the number of subspecies dependant variable I also included an interaction term between study effort and number of subspecies as I believed \emph{a priori} that this interaction may be present.
+The interaction was only included in models with both study effort and number of subspecies as individual terms.
 
 I fitted phylogenetic regressions using nlme \cite{nlme} to all models.
 In each case I simultaneously fitted the $\lambda$ parameter as this avoids mispecifying the model \cite{revell2010phylogenetic}.
