@@ -222,6 +222,9 @@
 ]{biblatex}
 \renewcommand{\cite}[1]{\parencite{#1}}
 
+\renewcommand*{\multicitedelim}{\addcomma\space}
+
+
 				
 % bibliography paragraphs
 \setlength{\bibhang}{\parindent}
