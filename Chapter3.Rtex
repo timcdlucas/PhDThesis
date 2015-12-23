@@ -152,7 +152,7 @@ However, the factors that affect pathogen richness are poorly understood.
 
 %Think this ref is right but need to check.
 Single pathogen models show that increasing population structure simply slows disease spread and makes establishment less likely \cite{colizza2007invasion, vespignani2008reaction}.
-In the ecological literature this is often taken as predicting that increased population structure will decrease pathogen richness \cite{nunn2003comparative}.
+In the ecological literature this is often taken as predicting that increased population structure will decrease pathogen richness \cite{nunn2003comparative, morand2000wormy}.
 However, models of competition between multiple pathogens show that in unstructured populations a competitive exclusion process occurs but that splitting the population into two patches allows coexistence \cite{qiu2013vector,allen2004sis, nunes2006localized}.
 
 
@@ -168,7 +168,7 @@ Finally, when a global $F_{ST}$ value is not given they use the mean of all pair
 It is not clear that this is correct as from global $F_{ST}$ we expect migration rates of $M = (1-F_{ST})/8F_{ST}$ while from $F_{ST}$ between pairs of populations we expect migration rates of $M = (1-F_{ST})/16F_{ST}$ where $M$ is the absolute number of diploid inviduals dispersing per generation \cite{slatkin1995measure}.
 As it is in fact the movement of individuals that is epidemiologically relavent, using these studies is probably not correct without attempting to correct for these difference.
 
-Studies on single pathogens, notably rabies, have also shown that for virulent pathogens, space can allow persistence where a well mixed population ould experience a single, large epidemic then pathogen extinction \cite{blackwood2013resolving, colizza, pons2014insights}.
+Studies on single pathogens, notably rabies, have also shown that for virulent pathogens, space can allow persistence where a well mixed population ould experience a single, large epidemic then pathogen extinction \cite{blackwood2013resolving, pons2014insights}.
 
 \tmpsection{Rates}
 
@@ -215,7 +215,7 @@ Furthermore there is a potential bias with island living species being given sea
 \tmpsection{The gap}
 
 There is a lack of studies using multiple measures of population structure and larger datasets to robustly estimate the importance of population structure.
-Furthermore, the
+
 
 \tmpsection{What I did}
 
@@ -2145,26 +2145,32 @@ Without interactions, number of subspecies is significant.
 \tmpsection{Restate results}
 
 I have tested the hypothesis that population structure promotes pathogen richness in bats.
-By analysing data on two measures of population structure, and using larger datasets than previous studies, it is hoped that any conclusions may be more robust than the conflicting results in the literature \cite{}.
-I have found that a positive effect of the number of subspecies and a negative effect of gene flow are likely to be in the best models for explaining viral richness.
+By analysing data on two measures of population structure, and using larger datasets than previous studies, it is hoped that any conclusions may be more robust than the conflicting results in the literature \cite{gay2014parasite, turmelle2009correlates, maganga2014bat}.
+I have found that a positive affect of population structure (a positive effect of the number of subspecies and a negative effect of gene flow) are likely to be in the best models for explaining viral richness.
 Study effort is also clearly supported confirming the expectation that additional study of a bat species yields more known viruses infecting that species and highlighting again that this bias cannot be ignored in studies using known pathogen richness as a proxy for total pathogen richness.
 
 
 \tmpsection{Weaknesses and limitations}
 
-Although I have used measures of study effort to try to control for biases in the viral richness data, this bias could still make the results here unreliable --- this is especially true as study effort is by far the strongest predictor of viral richness is both datasets.
-It is hoped that as untargeted sequencing of viral genetic material (e.g. \cite{anthony2013strategy} becomes cheaper and more common this bias can be reduced.
+Although I have used measures of study effort to try to control for biases in the viral richness data, this bias could still make the results here unreliable --- this is especially true as study effort is by far the strongest predictor of viral richness in both datasets.
+It is hoped that as untargeted sequencing of viral genetic material (e.g. \cite{anthony2013strategy}) becomes cheaper and more common this bias can be reduced.
 The strength of the relationship between study effort and known viral richness also highlights the number of virus species and bat-virus host-pathogen relationships yet to be discovered.
+
+I have used two measures of pathogen richness and the number of subspecies dataset is larger than those used in previous studies.
+However it is clear that the gene flow dataset is small (n = \rinline{nrow(fstFinal)}).
+Furthermore, while the model averaging approach has given a negative model averaged coefficient, the univariate model of gene flow against viral richness gave a positive coefficient.
+It is not easy to interpret these contradictions but it is clear that the results from the gene flow analysis alone should not be considered strong evidence for a relationship between pathogen richness and population structure.
+The sensitivity of this analysis reiterates the need to use large datasets where possible and use different measures of population structure to promote robust conclusions.
 
 \tmpsection{Broader context of results}
 
 The results here suggest that there is a positive relationship between population structure and pathogen richness in bats.
-This is in agreement with \cite{} but in disagreement with \cite{}.
-Furthermore it contradicts the assumption that factors that promote high $R_0$ will automatically promote high pathogen richness \cite{}.
+This is in agreement with \cite{maganga2014bat, turmelle2009correlates} but in disagreement with \cite{gay2014parasite}.
+Furthermore it contradicts the assumption that factors that promote high $R_0$ will automatically promote high pathogen richness \cite{nunn2003comparative, morand2000wormy}.
 
 This relationship implies that direct or indirect competitive mechanisms are acting such that population structure is needed in order to allow escape from competition.
-Another potential mechanism by which structure might be promoting increased richness is by slowing the spread of highly virulent viruses such as rabies and preventing them from having short, intense epidemics followed by extinction \cite{}.
-This mechanism has interesting parallel to metapopulation theory in ecology in which a metapopulation structure can allow persistence of species that would otherwise go extinct.
+%Another potential mechanism by which structure might be promoting increased richness is by slowing the spread of highly virulent viruses such as rabies and preventing them from having short, intense epidemics followed by extinction \cite{}.
+%This mechanism has interesting parallel to metapopulation theory in ecology in which a metapopulation structure can allow persistence of species that would otherwise go extinct.
 
 The relationship between population structure and pathogen richness suggests that population structure has a least some potential as being predictive of high pathogen richness and therefore of a species likelihood of being a reservoir of a potentially zoonotic pathogen. 
 However given that it is difficult to measure population structure and given that the relationship appears to be weak at best, this trait on it's own is unlikely to be useful in predicting zoonotic risk.
@@ -2179,6 +2185,7 @@ If however population structure actively promotes the evolution of new pathogen 
 Therefore further study on the exact mechanisms by which population structure affects pathogen richness is needed. 
 
 \tmpsection{Conclusions}
+
 
 
 
