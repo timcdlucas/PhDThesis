@@ -61,17 +61,17 @@ Given the weakness of any association between population structure and pathogen 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{General Intro}
+\tmpsection{General Intro}
 The number of pathogen species carried by a host species has important consequences for the ecology of the host and the probability that the host will be a reservoir of a zoonotic pathogen.
 However, the factors that affect pathogen richness are poorly understood.
 
 
 
-\subsection{Specific Intro}
+\tmpsection{Specific Intro}
 
 
 
-\subsection{Theoretical background}
+\tmpsection{Theoretical background}
 
 %Think this ref is right but need to check.
 Single pathogen models show that increasing population structure simply slows disease spread and makes establishment less likely \cite{colizza2007invasion, vespignani2008reaction}.
@@ -79,7 +79,7 @@ In the ecological literature this is often taken as predicting that increased po
 However, models of competition between multiple pathogens show that in unstructured populations a competitive exclusion process occurs but that splitting the population into two patches allows coexistence \cite{qiu2013vector,allen2004sis, nunes2006localized}.
 
 
-\subsection{Previous Studies}
+\tmpsection{Previous Studies}
 
 Three studies have used comparative data to test for an association between population structure and viral richness.
 A study on 15 African bats found a positive relationship between distribution fragmentation and viral richness \cite{maganga2014bat} while a study on 20 South-East Asian bats found the opposite relationship \cite{gay2014parasite}. 
@@ -93,11 +93,11 @@ As it is in fact the movement of individuals that is epidemiologically relavent,
 
 Studies on single pathogens, notably rabies, have also shown that for virulent pathogens, space can allow persistence where a well mixed population ould experience a single, large epidemic then pathogen extinction \cite{blackwood2013resolving, colizza, pons2014insights}.
 
-\subsection{Rates}
+\tmpsection{Rates}
 
 
 
-\subsection{Choice of measure of population structure}
+\tmpsection{Choice of measure of population structure}
 
 A number of measurments of population structure have been used and each has it's own shortcomings.
 In particular, the better, more direct measurements tend to be very work intensive which consequently means data is available for few species.
@@ -135,17 +135,17 @@ The ratio between the perimeter of the range and the area (or similar values) ar
 Range maps are very course for many species.
 Furthermore there is a potential bias with island living species being given sea based edges where continental species might be assumed to live everywhere in between locations where it is known to live, without considering the different terrestrial habitats in these areas.
 
-\subsection{The gap}
+\tmpsection{The gap}
 
 There is a lack of studies using multiple measures of population structure and larger datasets to robustly estimate the importance of population structure.
 Furthermore, the
 
-\subsection{What I did}
+\tmpsection{What I did}
 
 Here I use two measures of population structure --- the number of subspecies and gene flow --- to robustly test for an association between population structure and pathogen richness.
 Furthermore, I use a much larger dataset for one of these analyses, further promoting robustness of results.
 
-\subsection{What I found}
+\tmpsection{What I found}
 
 
 
@@ -212,6 +212,14 @@ Furthermore, I use a much larger dataset for one of these analyses, further prom
 
 
 
+
+To test for an association between pathogen richness I have performed multivariate regression using a model selection framework to establish whether or not two measures of pathogen richness are likely to be in a `best model' and therefore important.
+As species cannot be considered independant due to shared evolutionary history, phylogeny was controlled for in all regressions.
+A number of other potentially important factors (body mass, range size and study effort) were included as additional independant variables.
+This was to attempt to avoid spurious positive results occuring simply due to correlation between pathogen richness and a different, causal factor.
+I have completed this analysis using the number of subspecies a bat species has and estimates of gene flow separately as measures of population structure.
+All analyses were run in R \cite{R}
+
 To measure pathogen richness I used data from \cite{luis2013comparison}. 
 These simply include known infections of a bat species with a pathogen species. 
 Only species with at least one pathogen were included in the analysis.
@@ -249,36 +257,35 @@ In this case, this would be counted as one virus species.
 
 
 
-
-
 I used two measures of population structure. 
-$F_{ST}$ and the number of subspecies.
+Gene flow and the number of subspecies.
 The number of subspecies was counted using the Wilson and Reeder taxonomy \cite{wilson2005mammal}.
-$F_{ST}$ and other measures were collated from the literature.
+Gene flow is calculated from estimates of $F_{ST}$ collated from the literature.
 Studies are from a wide range of spatial scales, from local ($\sim\SI{10}{\kilo\metre}$) to continental.
-As $F_{ST}$ inevitably increases with spatial scale I controlled for this by only using data from studies where a large proportion of the species range was studied.
-I used the ratio of the furthest distance between $F_{ST}$ samples (measured with \url{http://www.distancefromto.net/} if not stated) to the width of the IUCN species range and only used studies if this ratio was greater than 0.2.
+As $F_{ST}$ often increases with spatial scale \cite{burland1999population, hulva2010mechanisms, o2015genetic, vonhof2015range} I controlled for this by only using data from studies where a large proportion of the species range was studied.
+I used the ratio of the furthest distance between $F_{ST}$ samples (measured with \url{http://www.distancefromto.net/} if not stated) to the width of the IUCN species range \cite{iucn} and only used studies if this ratio was greater than 0.2.
 I converted all $F_{ST}$ value to migration using $M = \frac{1-F_{ST}}{8F_{ST}}$.
 This removes the $(0, 1)$ bounds of $F_{ST}$ and is more easily interpretable though the results are unaffected. 
 These two measures of population structure were analysed separately as the number of subspecies has 196 data points while there is only $F_{ST}$ data for 22 bat species.
 
-To control for study bias I collected the number of Pubmed and Google Scholar citations for each bat species name and synonyms from ITIS \cite{itis} via the taxize package \cite{chamberlain2013taxize}.
+To control for study bias I collected the number of Pubmed and Google Scholar citations for each bat species name including synonyms from ITIS \cite{itis} via the taxize package \cite{chamberlain2013taxize}.
 The counts were scraped using the rvest package \cite{rvest}.
 I log transformed these variables as they were strongly right skewed.
 The log number of citations on Pubmed and Google scholar were highly correlated (pgls: $t$ = 19.32, df = 194, $p$ = 0).
-The results here are for analyses using only Google Scholar citations.
+As this corelation is strong, the results here are for analyses using only Google Scholar citations.
 %See the appendix for analyses run using Pubmed citations.
 
-Measures of body mass are taken from Pantheria \cite{jones2009pantheria} and primary literature \cite{canals2005relative, arita1993rarity, lopez2014echolocation, orr2013does, , lim2001bat, aldridge1987turning, ma2003dietary, owen2003home, henderson2008movements, heaney2012nyctalus, oleksy2015high, zhang2009recent}. 
+Measures of body mass are taken from Pantheria \cite{jones2009pantheria} and primary literature \cite{canals2005relative, arita1993rarity, lopez2014echolocation, orr2013does, lim2001bat, aldridge1987turning, ma2003dietary, owen2003home, henderson2008movements, heaney2012nyctalus, oleksy2015high, zhang2009recent}. 
 \emph{Pipistrellus pygmaeus} was assigned the same mass as \emph{P. pipistrellus} as they indistinguishable by mass.
 Body mass measurements were log transformed due to the strong right skew.
 Distribution size was estimated by downloading range maps for all species from IUCN \cite{iucn} and were also logged due to right skew.
 
 
-To control for phylogenetic nonindependance I used the best-supported phylogeny from \cite{fritz2009geographical} which is the supertree from \cite{bininda2007delayed} with names updated to match the Wilson \& Reeder taxonomy \cite{wilson2005mammal}.
+To control for phylogenetic nonindependance I used the best-supported phylogeny from \textcite{fritz2009geographical} (shown in Figure~\ref{fig:treePlot}) which is the supertree from \cite{bininda2007delayed} with names updated to match the Wilson \& Reeder taxonomy \cite{wilson2005mammal}.
 Phylogenetic manipulation was performed using the ape package \cite{ape}.
-The importance of the phylogeny on each variable separately was estimated using \cite{phytools}.
-
+The importance of the phylogeny on each variable separately was estimated using \cite{caper}.
+I also performed the analysis using the tree from \cite{jones2005bats} as this has some broad changes with families in different places.
+However the phylogeny did not affect the analysis.
 
 
 
@@ -288,6 +295,29 @@ The importance of the phylogeny on each variable separately was estimated using 
 
 		
 		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \begin{knitrout}\footnotesize
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[t]
 
@@ -306,23 +336,6 @@ The models shown are those with (pink) and without (red) an interaction between 
 
 \end{knitrout}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-%\clearpage
 
 
 
@@ -357,6 +370,33 @@ The models shown are those with (pink) and without (red) an interaction between 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \begin{knitrout}\footnotesize
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[t]
 
@@ -364,21 +404,11 @@ The models shown are those with (pink) and without (red) an interaction between 
 
 }
 
-\caption[Gene flow per generation (on a log scale) against viral richness with the genetic marker used shown with colour]{Gene flow per generation (on a log scale) against viral richness with the genetic marker used shown with colour.}\label{fig:fstRawData}
+\caption[Gene flow per generation (on a log scale) against viral richness]{Gene flow per generation (on a log scale) against viral richness. The genetic marker used is shown with colour. The red line shows the univariate phylogenetic model.}\label{fig:fstRawData}
 \end{figure}
 
 
 \end{knitrout}
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -397,38 +427,26 @@ The models shown are those with (pink) and without (red) an interaction between 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-$F_{ST}$ studies are conducted at a range of spatial scales, but $F_{ST}$ often increases with distance studied \cite{burland1999population, hulva2010mechanisms, o2015genetic, vonhof2015range}.
-To minimise the effects of this I only used data from studies that cover 20\% of the diameter of the species range.
-This is a largely arbitrary value that could be considered to reflect a ``global'' estimate of $F_{ST}$ while keeping a reasonable number of datapoints available.
-I calculated the diameter of the species range by finding the furthest apart points in the IUCN species range \cite{iucn} even if the range is split into multiple polygons.
-The width covered by each study was the distance between the most distant sampling sites.
-When this was not explicit in the paper, the centre of the lowest level of geographic area was used.
+%$F_{ST}$ studies are conducted at a range of spatial scales, but $F_{ST}$ often increases with distance studied \cite{burland1999population, hulva2010mechanisms, o2015genetic, vonhof2015range}.
+%To minimise the effects of this I only used data from studies that cover rangeUseable * 100\% of the diameter of the species range.
+%This is a largely arbitrary value that could be considered to reflect a ``global'' estimate of $F_{ST}$ while keeping a reasonable number of datapoints available.
+%I calculated the diameter of the species range by finding the furthest apart points in the IUCN species range \cite{iucn} even if the range is split into multiple polygons.
+%The width covered by each study was the distance between the most distant sampling sites.
+%When this was not explicit in the paper, the centre of the lowest level of geographic area was used.
 
 
 
 \subsection{Statistical analysis}
 
-Statistical analysis for both dependant variables was conducted using a information theory/model averaging approach \cite{burnham2002model} specifically following \cite{whittingham2005habitat, whittingham2006we}.
-I chose a credible set of models including all combinations of independent variables.
-In the analysis using the number of subspecies dependant variable I also included an interaction term between study effort and number of subspecies as I believe \emph{a priori} that this interaction may be present.
-The interaction was only included in models with both study effort and number of subspecies as an individual term.
+Statistical analysis for both dependant variables was conducted using a information theoretical/model averaging approach \cite{burnham2002model} specifically following \cite{whittingham2005habitat, whittingham2006we}.
+I chose a credible set of models including all combinations of independent variables and a model with just an intercept.
+In the analysis using the number of subspecies dependant variable I also included an interaction term between study effort and number of subspecies.
+This interaction was included as I believed \emph{a priori} that this interaction may be present as subspecies in well studied species are more likely to be identified.
+The interaction was only included in models with both study effort and number of subspecies as individual terms.
 
 I fitted phylogenetic regressions using nlme \cite{nlme} to all models.
 In each case I simultaneously fitted the $\lambda$ parameter as this avoids mispecifying the model \cite{revell2010phylogenetic}.
-$\kappa$ and $\delta$ were constrained to one.
+$\kappa$ and $\delta$ parameters were constrained to one as they are more concerned with when along a branch evolution occurs and because fitting multiple parameters makes interpretation difficult. 
 
 I calculated AICc for each model and then calculated Akaiki weights.
 This value can be interpreted as the probability that a model would be the best model if the data were recollected.
@@ -451,11 +469,11 @@ $\Delta\text{AICc}$ was calculated as $\text{min}(\bar{\text{AICc}}) - \bar{\tex
 
 After data cleaning there was data for 196 bat species in 11 families.
 There appears to be a positive relationship between the number of subspecies and viral richness (Figure~\ref{fig:boxplot}) though few species have more than four subspecies. 
-The number of described virus  for a bat host ranged up to 15 viruses in \emph{Carollia perspicillata}.
+The number of described virus species for a bat host ranged up to 15 viruses in \emph{Carollia perspicillata}.
 Figure~\ref{fig:treePlot} shows the phylogeny used and the number of viruses for each species.
 The mean number of viruses across families is fairly constant with a lower range of 1.67 for Nycteridae.
 The highest mean is Mormoopidae with 5 virus species per bat species, but this is based on a sample size of 3.
-The Phyllostomidae have the second highest mean (n = 37) of 3.49.
+The Phyllostomidae have the second highest mean  of 3.49 (n = 37).
 
 The small change in mean pathogen richness across families and the lack of clear pattern in Figure~\ref{fig:treePlot} implies that viral richness is not strongly phylogenetic. 
 This is corroborated by the small estimated size of $\lambda$ ($\lambda$ = 0.04, $p$ = 0.21).
@@ -484,7 +502,9 @@ As seen in Figure~\ref{fig:fstITPlots}a, study effort is very likely in the best
 \begin{table}[t]
 \centering
 \caption[Estimated variable weights and coefficients]{
-Estimated variable weights (probability that a variable is in the best model) and their estimated coefficients.
+Estimated variable weights (probability that a variable is in the best model) and their estimated coefficients for both number of subspecies and gene flow analyses.
+The coefficients for number of subspecies are also seperated for models with and without the interaction term because this term strongly changes the coefficient.
+However, there are no weights for these seperated terms as they are not directly compared in the model selection framework.
 }
 %\rowcolors{2}{gray!25}{white}
 \begin{tabular}{@{}>{\small}l rrrr@{}}
@@ -697,7 +717,7 @@ Study effort is also clearly supported confirming the expectation that additiona
 \tmpsection{Weaknesses and limitations}
 
 Although I have used measures of study effort to try to control for biases in the viral richness data, this bias could still make the results here unreliable --- this is especially true as study effort is by far the strongest predictor of viral richness is both datasets.
-It is hoped that as untargeted sequencing of viral genetic material (e.g. \cite{anthonyPaper} becomes cheaper and more common this bias can be reduced.
+It is hoped that as untargeted sequencing of viral genetic material (e.g. \cite{anthony2013strategy} becomes cheaper and more common this bias can be reduced.
 The strength of the relationship between study effort and known viral richness also highlights the number of virus species and bat-virus host-pathogen relationships yet to be discovered.
 
 \tmpsection{Broader context of results}

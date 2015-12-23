@@ -138,17 +138,17 @@ Given the weakness of any association between population structure and pathogen 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{General Intro}
+\tmpsection{General Intro}
 The number of pathogen species carried by a host species has important consequences for the ecology of the host and the probability that the host will be a reservoir of a zoonotic pathogen.
 However, the factors that affect pathogen richness are poorly understood.
 
 
 
-\subsection{Specific Intro}
+\tmpsection{Specific Intro}
 
 
 
-\subsection{Theoretical background}
+\tmpsection{Theoretical background}
 
 %Think this ref is right but need to check.
 Single pathogen models show that increasing population structure simply slows disease spread and makes establishment less likely \cite{colizza2007invasion, vespignani2008reaction}.
@@ -156,7 +156,7 @@ In the ecological literature this is often taken as predicting that increased po
 However, models of competition between multiple pathogens show that in unstructured populations a competitive exclusion process occurs but that splitting the population into two patches allows coexistence \cite{qiu2013vector,allen2004sis, nunes2006localized}.
 
 
-\subsection{Previous Studies}
+\tmpsection{Previous Studies}
 
 Three studies have used comparative data to test for an association between population structure and viral richness.
 A study on 15 African bats found a positive relationship between distribution fragmentation and viral richness \cite{maganga2014bat} while a study on 20 South-East Asian bats found the opposite relationship \cite{gay2014parasite}. 
@@ -170,11 +170,11 @@ As it is in fact the movement of individuals that is epidemiologically relavent,
 
 Studies on single pathogens, notably rabies, have also shown that for virulent pathogens, space can allow persistence where a well mixed population ould experience a single, large epidemic then pathogen extinction \cite{blackwood2013resolving, colizza, pons2014insights}.
 
-\subsection{Rates}
+\tmpsection{Rates}
 
 
 
-\subsection{Choice of measure of population structure}
+\tmpsection{Choice of measure of population structure}
 
 A number of measurments of population structure have been used and each has it's own shortcomings.
 In particular, the better, more direct measurements tend to be very work intensive which consequently means data is available for few species.
@@ -212,17 +212,17 @@ The ratio between the perimeter of the range and the area (or similar values) ar
 Range maps are very course for many species.
 Furthermore there is a potential bias with island living species being given sea based edges where continental species might be assumed to live everywhere in between locations where it is known to live, without considering the different terrestrial habitats in these areas.
 
-\subsection{The gap}
+\tmpsection{The gap}
 
 There is a lack of studies using multiple measures of population structure and larger datasets to robustly estimate the importance of population structure.
 Furthermore, the
 
-\subsection{What I did}
+\tmpsection{What I did}
 
 Here I use two measures of population structure --- the number of subspecies and gene flow --- to robustly test for an association between population structure and pathogen richness.
 Furthermore, I use a much larger dataset for one of these analyses, further promoting robustness of results.
 
-\subsection{What I found}
+\tmpsection{What I found}
 
 
 
@@ -697,9 +697,11 @@ write.csv(nSpecies, file = 'data/Chapter3/nSpecies.csv')
 
 To test for an association between pathogen richness I have performed multivariate regression using a model selection framework to establish whether or not two measures of pathogen richness are likely to be in a `best model' and therefore important.
 As species cannot be considered independant due to shared evolutionary history, phylogeny was controlled for in all regressions.
-A number of other potentially important factors (body mass, range size and study effort) were included as additional independant variables.
+A number of other factors that have previously been found to be important were included as additional independant variables (body mass \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat}, range size \cite{kamiya2014determines, turmelle2009correlates, maganga2014bat} and study effort \cite{turmelle2009correlates, gay2014parasite, maganga2014bat}).
 This was to attempt to avoid spurious positive results occuring simply due to correlation between pathogen richness and a different, causal factor.
-I have completed this analysis using the number of subspecies a bat species has and estimates of gene flow separately as measures of population structure.
+Despite commonly bein associated with pathogen richness \cite{arneberg2002host, kamiya2014determines, nunn2003comparative}, population density is not included in the analysis as there is very little data for bat densities --- however Chapter 4 examines the relationship between density and population structure and Chapter 5 presents a method that allows the estimation of density from acoustic surveys.
+I have both the number of subspecies a bat species has and estimates of gene flow (analysed separately) as measures of population structure.
+All analyses were run in R \cite{R}
 
 To measure pathogen richness I used data from \cite{luis2013comparison}. 
 These simply include known infections of a bat species with a pathogen species. 
@@ -879,9 +881,9 @@ Body mass measurements were log transformed due to the strong right skew.
 Distribution size was estimated by downloading range maps for all species from IUCN \cite{iucn} and were also logged due to right skew.
 
 
-To control for phylogenetic nonindependance I used the best-supported phylogeny from \cite{fritz2009geographical} which is the supertree from \cite{bininda2007delayed} with names updated to match the Wilson \& Reeder taxonomy \cite{wilson2005mammal}.
+To control for phylogenetic nonindependance I used the best-supported phylogeny from \textcite{fritz2009geographical} (shown in Figure~\ref{fig:treePlot}) which is the supertree from \cite{bininda2007delayed} with names updated to match the Wilson \& Reeder taxonomy \cite{wilson2005mammal}.
 Phylogenetic manipulation was performed using the ape package \cite{ape}.
-The importance of the phylogeny on each variable separately was estimated using \cite{phytools}.
+The importance of the phylogeny on each variable separately was estimated using \cite{caper}.
 I also performed the analysis using the tree from \cite{jones2005bats} as this has some broad changes with families in different places.
 However the phylogeny did not affect the analysis.
 
@@ -932,75 +934,6 @@ The models shown are those with (pink) and without (red) an interaction between 
 %%end.rcode		
 		
 		
-%%begin.rcode boxplot, fig.cap = boxplotCapt		
-
-
-# Make a boxplot of subspecies vs virus
-# Add model lines for pgls models.
-
-# Make predictions of model w/out interactions using median values of other variables.
-
-predData <- data.frame(scholarRefs = quantile(nSpecies$scholarRefs, 0.5),
-                       mass = quantile(nSpecies$mass, 0.5),
-                       NumberOfSubspecies =
-                         seq(min(nSpecies$NumberOfSubspecies), max(nSpecies$NumberOfSubspecies), 
-                         length.out = 200)
-                       )
-
-
-lines <- data.frame(NumberOfSubspecies = predData$NumberOfSubspecies, 
-               virusSpecies = predict(subspeciesJointUnlog, newdata = predData))
-
-# Make predictions of model w/ interactions using median values of other variables.
-
-predDataInter <- data.frame(scholarRefs = quantile(nSpecies$scholarRefs, 0.5),
-                       mass = quantile(nSpecies$mass, 0.5),
-                       NumberOfSubspecies =
-                         seq(min(nSpecies$NumberOfSubspecies), max(nSpecies$NumberOfSubspecies), 
-                         length.out = 200)
-                       )
-
-
-linesInter <- data.frame(NumberOfSubspecies = predData$NumberOfSubspecies, 
-               virusSpecies = predict(subspeciesInter, newdata = predDataInter))
-
-
-# Make plot
-
-nSpeciesBox <- ggplot(nSpecies, aes(SubspeciesFactor, virusSpecies, colour = 'a', fill = 'a')) + 
-  geom_boxplot(outlier.size = 1, size = 0.3, outlier.colour = grey(0.3), 
-    notch = FALSE) +
-  scale_colour_manual(values = pokepal('nidorina')[4]) +
-  scale_fill_manual(values = pokepal('nidorina')[2]) +
-  stat_summary(geom = "crossbar", width = 0.7, fatten = 2, 
-    fun.data = function(x){ return(c(y = median(x), ymin = median(x), ymax = median(x))) }) +
-  theme(legend.position = 'none') + 
-  scale_x_discrete(limits = levels(nSpecies$SubspeciesFactor), drop = FALSE) +
-  xlab('Number of Subspecies') +
-  ylab('Viral Richness') +
-  geom_line(data = lines, aes(x = NumberOfSubspecies, y = virusSpecies, group = 1),
-    colour = pokepal('nidorina')[10], lwd = 0.7) +
-  geom_line(data = linesInter, aes(x = NumberOfSubspecies, y = virusSpecies, group = 1),
-    colour = pokepal('nidorina')[13], lwd = 0.7) +
-  annotate('text', x = c(11.8, 12.2), y = c(5.4, 2.5), 
-    label = c('No interaction', 'Interaction'),
-    colour = pokepal('nidorina')[c(10,13)], size = c(3, 3),
-    family = 'Lato Light')
-
-
-nSpeciesHist <- ggplot(nSpecies, aes(x = SubspeciesFactor)) +
-  scale_x_discrete(limits = levels(nSpecies$SubspeciesFactor), drop = FALSE, labels = rep('', max(nSpecies$NumberOfSubspecies))) +
-  scale_y_continuous(breaks = c(20, 60)) +
-  geom_bar(stat = 'count') +
-  xlab('') +
-  ylab('Count') +
-  theme(plot.margin  =  unit(c(0.3, 0.1, -1.6, 1.3), "lines"))
-
-ggdraw() +
-  draw_plot(nSpeciesHist, 0, 0.75, 1, 0.25) +
-  draw_plot(nSpeciesBox, 0, 0, 1, 0.75)
-
-%%end.rcode
 
 %%begin.rcode ITanalysis
 
@@ -1169,7 +1102,7 @@ allResults %>%
 %%begin.rcode ITPlots
 
 ITPlot <- ggplot(sepVarWeights, aes(x = variable, y = estimate, colour = col, fill = col)) +
-  geom_boxplot(outlier.colour = grey(0.3), notch = FALSE, width = 0.5, outlier.size = 1) +
+  geom_boxplot(outlier.colour = grey(0.3), notch = FALSE, width = 0.5, outlier.size = 1, lwd = 0.4) +
   scale_colour_manual(values = pokepal('nidorino')[c(2, 5, 11)]) +
   scale_fill_manual(values = pokepal('nidorino')[c(3, 6, 10)]) +
   theme(legend.position = 'none', axis.text.x = element_text(size = 10, angle = 40, hjust = 1, colour = 'black', family = 'lato light'),
@@ -1237,6 +1170,8 @@ mean(nSpeciesInterMean*log(nSpecies$scholarRefs) + nSpeciesCoefMeanI > 0)
 
 %%end.rcode
 
+
+
 %%begin.rcode familyMeans
 
 familyMeans <- nSpecies %>%
@@ -1256,8 +1191,85 @@ massLambda <- summary(pgls(log(mass) ~ 1, data = compSubspecies, lambda = 'ML'))
 scholarLambda <- summary(pgls(log(scholarRefs) ~ 1, data = compSubspecies, lambda = 'ML'))
 virusLambda <- summary(pgls(virusSpecies ~ 1, data = compSubspecies, lambda = 'ML'))
 distrLambda <- summary(pgls(distrSize ~ 1, data = compSubspecies, lambda = 'ML'))
+
+sspUni <- summary(pgls(virusSpecies ~ NumberOfSubspecies, data = compSubspecies, lambda = 'ML'))
+
+
 %%end.rcode
-%\clearpage
+
+
+
+
+%%begin.rcode boxplot, fig.cap = boxplotCapt		
+
+
+# Make a boxplot of subspecies vs virus
+# Add model lines for pgls models.
+
+# Make predictions of model w/out interactions using median values of other variables.
+
+predData <- data.frame(scholarRefs = quantile(nSpecies$scholarRefs, 0.5),
+                       mass = quantile(nSpecies$mass, 0.5),
+                       NumberOfSubspecies =
+                         seq(min(nSpecies$NumberOfSubspecies), max(nSpecies$NumberOfSubspecies), 
+                         length.out = 200)
+                       )
+
+
+lines <- data.frame(NumberOfSubspecies = predData$NumberOfSubspecies, 
+               virusSpecies = predict(subspeciesJointUnlog, newdata = predData))
+
+## Make predictions of model w/ interactions using median values of other variables.
+
+predDataInter <- data.frame(scholarRefs = quantile(nSpecies$scholarRefs, 0.5),
+                       mass = quantile(nSpecies$mass, 0.5),
+                       NumberOfSubspecies =
+                         seq(min(nSpecies$NumberOfSubspecies), max(nSpecies$NumberOfSubspecies), 
+                         length.out = 200)
+                       )
+
+
+linesInter <- data.frame(NumberOfSubspecies = predData$NumberOfSubspecies, 
+               virusSpecies = predict(subspeciesInter, newdata = predDataInter))
+
+
+# Make plot
+
+nSpeciesBox <- ggplot(nSpecies, aes(SubspeciesFactor, virusSpecies, colour = 'a', fill = 'a')) + 
+  geom_boxplot(outlier.size = 1, size = 0.3, outlier.colour = grey(0.3), 
+    notch = FALSE) +
+  scale_colour_manual(values = pokepal('nidorina')[4]) +
+  scale_fill_manual(values = pokepal('nidorina')[2]) +
+  stat_summary(geom = "crossbar", width = 0.7, fatten = 2, 
+    fun.data = function(x){ return(c(y = median(x), ymin = median(x), ymax = median(x))) }) +
+  theme(legend.position = 'none') + 
+  scale_x_discrete(limits = levels(nSpecies$SubspeciesFactor), drop = FALSE) +
+  xlab('Number of Subspecies') +
+  ylab('Viral Richness') +
+  geom_line(data = lines, aes(x = NumberOfSubspecies, y = virusSpecies, group = 1),
+    colour = pokepal('nidorina')[10], lwd = 0.7) +
+  geom_line(data = linesInter, aes(x = NumberOfSubspecies, y = virusSpecies, group = 1),
+    colour = pokepal('nidorina')[13], lwd = 0.7) +
+  annotate('text', x = c(11.8, 12.2), y = c(5.4, 2.5), 
+    label = c('No interaction', 'Interaction'),
+    colour = pokepal('nidorina')[c(10,13)], size = c(3, 3),
+    family = 'Lato Light')
+
+
+nSpeciesHist <- ggplot(nSpecies, aes(x = SubspeciesFactor)) +
+  scale_x_discrete(limits = levels(nSpecies$SubspeciesFactor), drop = FALSE, labels = rep('', max(nSpecies$NumberOfSubspecies))) +
+  scale_y_continuous(breaks = c(20, 60)) +
+  geom_bar(stat = 'count') +
+  xlab('') +
+  ylab('Count') +
+  theme(plot.margin  =  unit(c(0.3, 0.1, -1.6, 1.3), "lines"))
+
+ggdraw() +
+  draw_plot(nSpeciesHist, 0, 0.75, 1, 0.25) +
+  draw_plot(nSpeciesBox, 0, 0, 1, 0.75)
+
+%%end.rcode
+
 
 
 
@@ -1526,22 +1538,6 @@ p %<+% fstFinal[, c('binomial', 'virusSpecies')] +
 
 %%end.rcode
 
-%%begin.rcode fstRawData, fig.height = 2.3, fig.cap = 'Gene flow per generation (on a log scale) against viral richness with the genetic marker used shown with colour.'
-
-# Plot raw fstdata
-
-ggplot(fstFinal, aes(x = Nm, y = virusSpecies, colour = Marker)) +
-  geom_point(size = 3.5) +
-  scale_colour_poke(pokemon = 'oddish', spread = 3) +
-  scale_x_log10() +
-  xlab('Gene flow (per gen.)') +
-  ylab('Viral Richness') #+ geom_smooth(method = 'lm', aes(colour = 'a')) 
-
-
-%%end.rcode
-
-
-
 
 
 
@@ -1683,22 +1679,6 @@ fstModelWeights <- fstAllResults %>%
 %%end.rcode
 
 
-%%begin.rcode fstITPlots, fig.cap = "Akaika variable weights for both analyses. The probability that each variable will be in the best model if the data were recollected is shown for each of the bootstrap analyses. The purple ``Random'' box is a uniform random variable used as a null. Population structure (Number of subspecies and Gene flow), shown in red, is likely to be in the best model in both analyses.", fig.height = 2.5, fig.scap = 'Akaika variable weights for $F_{ST}$ analysis.', out.width = '\\textwidth', out.extra = 'trim = 0 1cm 0 0'
-
-fstIT <- ggplot(fstSepVarWeights, aes(x = variable, y = estimate, colour = col, fill = col)) +
-  geom_boxplot(outlier.colour = grey(0.3), notch = FALSE, width = 0.5, outlier.size = 1) +
-  scale_colour_manual(values = pokepal('nidorino')[c(2, 5, 11)]) +
-  scale_fill_manual(values = pokepal('nidorino')[c(3, 6, 10)]) +
-  theme(legend.position = 'none', axis.text.x = element_text(size = 10, angle = 40, hjust = 1, colour = 'black', family = 'lato light'),
-    axis.text.y = element_text(size = 8)) +
-  scale_x_discrete(labels = c('Scholar', 'Gene flow', 'Mass', 'Range size', 'Random'))+
-  ylab('P(in best model)') +
-  xlab('')
-
-plot_grid(ITPlot, fstIT, labels = c("A", "B"), align = 'h', label_size = 10)
-
-
-%%end.rcode
 
 
 %%begin.rcode fstITlambda, fig.show = extraFigs, fig.cap = 'Values of $\\lambda$ found in $F_{ST}$ analysis.', fig.height = 3
@@ -1808,7 +1788,46 @@ massFstLambda <- summary(pgls(log(mass) ~ 1, data = compFst, lambda = 'ML'))
 scholarFstLambda <- summary(pgls(log(scholarRefs) ~ 1, data = compFst, lambda = 'ML'))
 virusFstLambda <- summary(pgls(virusSpecies ~ 1, data = compFst, lambda = 'ML'))
 distrFstLambda <- summary(pgls(distrSize ~ 1, data = compFst, lambda = 'ML'))
+
+nmFstUni <- summary(pgls(virusSpecies ~ log(Nm), data = compFst, lambda = 'ML'))
+	
 %%end.rcode
+
+
+%%begin.rcode fstRawData, fig.height = 2.3, fig.cap = 'Gene flow per generation (on a log scale) against viral richness. The genetic marker used is shown with colour. The red line shows the univariate phylogenetic model.'
+
+# Plot raw fstdata
+
+ggplot(fstFinal, aes(x = Nm, y = virusSpecies, colour = Marker)) +
+  geom_point(size = 2) +
+  scale_colour_poke(pokemon = 'oddish', spread = 3) +
+  scale_x_log10() +
+  geom_abline(intercept = nmFstUni$coef[1, 1], slope = nmFstUni$coef[2, 1], lwd = 0.7, colour = pokepal('nidorina')[10]) +
+  xlab('Gene flow (per gen.)') +
+  ylab('Viral Richness') 
+
+%%end.rcode
+
+
+
+%%begin.rcode fstITPlots, fig.cap = "Akaika variable weights for both analyses. The probability that each variable will be in the best model if the data were recollected is shown for each of the bootstrap analyses. The purple ``Random'' box is a uniform random variable used as a null. Population structure (Number of subspecies and Gene flow), shown in red, is likely to be in the best model in both analyses.", fig.height = 2.5, fig.scap = 'Akaika variable weights for $F_{ST}$ analysis.', out.width = '\\textwidth', out.extra = 'trim = 0 1cm 0 0'
+
+fstIT <- ggplot(fstSepVarWeights, aes(x = variable, y = estimate, colour = col, fill = col)) +
+  geom_boxplot(outlier.colour = grey(0.3), notch = FALSE, width = 0.5, outlier.size = 1, lwd = 0.4) +
+  scale_colour_manual(values = pokepal('nidorino')[c(2, 5, 11)]) +
+  scale_fill_manual(values = pokepal('nidorino')[c(3, 6, 10)]) +
+  theme(legend.position = 'none', axis.text.x = element_text(size = 10, angle = 40, hjust = 1, colour = 'black', family = 'lato light'),
+    axis.text.y = element_text(size = 8)) +
+  scale_x_discrete(labels = c('Scholar', 'Gene flow', 'Mass', 'Range size', 'Random'))+
+  ylab('P(in best model)') +
+  xlab('')
+
+plot_grid(ITPlot, fstIT, labels = c("A", "B"), align = 'h', label_size = 10)
+
+
+%%end.rcode
+
+
 
 %$F_{ST}$ studies are conducted at a range of spatial scales, but $F_{ST}$ often increases with distance studied \cite{burland1999population, hulva2010mechanisms, o2015genetic, vonhof2015range}.
 %To minimise the effects of this I only used data from studies that cover \rinline{rangeUseable * 100}\% of the diameter of the species range.
@@ -1823,12 +1842,13 @@ distrFstLambda <- summary(pgls(distrSize ~ 1, data = compFst, lambda = 'ML'))
 
 Statistical analysis for both dependant variables was conducted using a information theoretical/model averaging approach \cite{burnham2002model} specifically following \cite{whittingham2005habitat, whittingham2006we}.
 I chose a credible set of models including all combinations of independent variables and a model with just an intercept.
-In the analysis using the number of subspecies dependant variable I also included an interaction term between study effort and number of subspecies as I believed \emph{a priori} that this interaction may be present.
+In the analysis using the number of subspecies dependant variable I also included an interaction term between study effort and number of subspecies.
+This interaction was included as I believed \emph{a priori} that this interaction may be present as subspecies in well studied species are more likely to be identified.
 The interaction was only included in models with both study effort and number of subspecies as individual terms.
 
 I fitted phylogenetic regressions using nlme \cite{nlme} to all models.
 In each case I simultaneously fitted the $\lambda$ parameter as this avoids mispecifying the model \cite{revell2010phylogenetic}.
-$\kappa$ and $\delta$ were constrained to one.
+$\kappa$ and $\delta$ parameters were constrained to one as they are more concerned with when along a branch evolution occurs and because fitting multiple parameters makes interpretation difficult. 
 
 I calculated AICc for each model and then calculated Akaiki weights.
 This value can be interpreted as the probability that a model would be the best model if the data were recollected.
@@ -1851,11 +1871,11 @@ $\Delta\text{AICc}$ was calculated as $\text{min}(\bar{\text{AICc}}) - \bar{\tex
 
 After data cleaning there was data for \rinline{nrow(nSpecies)} bat species in \rinline{length(unique(nSpecies$Family))} families.
 There appears to be a positive relationship between the number of subspecies and viral richness (Figure~\ref{fig:boxplot}) though few species have more than four subspecies. 
-The number of described virus  for a bat host ranged up to \rinline{max(nSpecies$virusSpecies)} viruses in \emph{\rinline{nSpecies$binomial[which.max(nSpecies$virusSpecies)]}}.
+The number of described virus species for a bat host ranged up to \rinline{max(nSpecies$virusSpecies)} viruses in \emph{\rinline{nSpecies$binomial[which.max(nSpecies$virusSpecies)]}}.
 Figure~\ref{fig:treePlot} shows the phylogeny used and the number of viruses for each species.
 The mean number of viruses across families is fairly constant with a lower range of \rinline{min(familyMeans$mean)} for \rinline{familyMeans$Family[which.min(familyMeans$mean)]}.
 The highest mean is \rinline{familyMeans$Family[which.max(familyMeans$mean)]} with \rinline{max(familyMeans$mean)} virus species per bat species, but this is based on a sample size of \rinline{familyMeans$n[which.max(familyMeans$mean)]}.
-The \rinline{familyMeans$Family[order(familyMeans$mean, decreasing = TRUE)[2]]} have the second highest mean (n = \rinline{familyMeans$n[order(familyMeans$mean, decreasing = TRUE)[2]]}) of \rinline{familyMeans$mean[order(familyMeans$mean, decreasing = TRUE)[2]]}.
+The \rinline{familyMeans$Family[order(familyMeans$mean, decreasing = TRUE)[2]]} have the second highest mean  of \rinline{familyMeans$mean[order(familyMeans$mean, decreasing = TRUE)[2]]} (n = \rinline{familyMeans$n[order(familyMeans$mean, decreasing = TRUE)[2]]}).
 
 The small change in mean pathogen richness across families and the lack of clear pattern in Figure~\ref{fig:treePlot} implies that viral richness is not strongly phylogenetic. 
 This is corroborated by the small estimated size of $\lambda$ ($\lambda$ = \rinline{virusLambda$param['lambda']}, $p$ = \rinline{virusLambda$param.CI$lambda$bounds.p[1]}).
@@ -2133,7 +2153,7 @@ Study effort is also clearly supported confirming the expectation that additiona
 \tmpsection{Weaknesses and limitations}
 
 Although I have used measures of study effort to try to control for biases in the viral richness data, this bias could still make the results here unreliable --- this is especially true as study effort is by far the strongest predictor of viral richness is both datasets.
-It is hoped that as untargeted sequencing of viral genetic material (e.g. \cite{anthonyPaper} becomes cheaper and more common this bias can be reduced.
+It is hoped that as untargeted sequencing of viral genetic material (e.g. \cite{anthony2013strategy} becomes cheaper and more common this bias can be reduced.
 The strength of the relationship between study effort and known viral richness also highlights the number of virus species and bat-virus host-pathogen relationships yet to be discovered.
 
 \tmpsection{Broader context of results}
