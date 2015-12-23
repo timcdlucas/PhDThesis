@@ -20,7 +20,8 @@ opts_chunk$set(
   #fig.showtext = TRUE, # Embeds fonts.
   out.width = paste0(propOfTextwidth,'\\textwidth'),
   dev.args=list(bg="transparent"),
-  size = 'footnotesize'
+  size = 'footnotesize',
+  cache.extra = list(R.version)
   )
 options(digits=2)
 
