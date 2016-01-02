@@ -18,6 +18,9 @@ runAllSims <- FALSE
 # If false, summary statistics of each simulation are saved instead.
 saveData <- FALSE
 
+# Display extra figures in final documents?
+extraFigs <- FALSE
+
 
 # How many cores do you want to use to run simulations?
 nCores <- 7
@@ -781,6 +784,13 @@ dens1Means <- dens1 %>%
 dens1Means <- dens1Means %>%
                 cbind(., vary = 'colonySize', binom.confint(.$success, .$sampleSize, conf.level = 0.95, methods = "exact"))
 
+# fit glms to each transmission value
+
+dens1Model <- dens1 %>%
+               mutate(invasion = as.numeric(nExtantDis == 2)) %>%
+               group_by(transmission) %>%
+               do(fit = glm(invasion ~ pop, data = ., family = 'binomial')) %>%
+               mutate(vary = 'colonySize')
 
 
 # Constant density, altered colony number
@@ -794,8 +804,13 @@ dens2Means <- dens2 %>%
 
 dens2Means <- dens2Means %>%
                 cbind(., vary = 'colonyNumber',  binom.confint(.$success, .$sampleSize, conf.level = 0.95, methods = "exact"))
-                
 
+# Fit glms to each transmission value
+dens2Model <- dens2 %>%
+               mutate(invasion = as.numeric(nExtantDis == 2)) %>%
+               group_by(transmission) %>%
+               do(fit = glm(invasion ~ pop, data = ., family = 'binomial')) %>%
+               mutate(vary = 'colonyNumber')
 
 # Constant population, altered area
 
@@ -809,13 +824,26 @@ popMeans <- pop %>%
 popMeans <- popMeans %>%
                 cbind(., binom.confint(.$success, .$sampleSize, conf.level = 0.95, methods = "exact"))
 
+#popModels <- pop %>%
+#               mutate(invasion = as.numeric(nExtantDis == 2)) %>%
+#               group_by(transmission) %>%
+#               do(glm(.$invasion ~ .$dens, family = 'binomial') %>% tidy)
+
+
+# fit glms to each transmission value
+popModel <- pop %>%
+               mutate(invasion = as.numeric(nExtantDis == 2)) %>%
+               group_by(transmission) %>%
+               do(fit = glm(invasion ~ dens, data = ., family = binomial(link = logit))) %>%
+               mutate(vary = 'Density')
+
 
 
 %%end.rcode
 
 
 
-%%begin.rcode plotMeans
+%%begin.rcode plotMeans, fig.show = extraFigs
 
 
 ggplot(dens1Means, aes(x = factor(transmission), y = mean, fill = factor(colonySize))) +
@@ -862,25 +890,77 @@ ggplot(popMeans, aes(x = factor(transmission), y = mean, fill = factor(area))) +
 %%end.rcode
 
 
+%%begin.rcode fitModels 
 
-%%begin.rcode plotTransMeans
+
+# Fit combined glms for statistical comparison
+
+%%end.rcode
+
+
+%%begin.rcode predictModels
+
+# Predict seperate glms for plotting
+
+popPred <- seq(min(dens2$pop), max(dens2$pop), length.out = 200)
+
+densPreds <- rbind(dens1Model, dens2Model) %>%
+               apply(., 1, 
+                 function(m) predict(m['fit'][[1]], newdata = data.frame(pop = popPred), type = 'response') %>%
+                               data.frame(pred = ., pop = popPred, transmission = m$transmission, vary = m$vary)
+               ) %>%
+               do.call(rbind, .)
+
+
+%%end.rcode
+
+
+%%begin.rcode transMeansCapt
+
+transMeansCapt <- '
+Comparison of the effect of population size on probability of invasion when population size is altered by changing colony size or colony number.
+Relationship is shown seperately for each transmission value.
+It can be seen that changes in colony size give a much greater increase in invasion probability thatn changes in colony number.
+'
+
+transMeansTitle <- 'Comparison of the probability of invasion when population size is altered by changing colony size or colony number.'
+
+%%end.rcode
+
+%%begin.rcode plotTransMeans, fig.cap = transMeansCapt, fig.scap = transMeansTitle
 
 
 ggplot(rbind(dens1Means, dens2Means), aes(x = pop, y = mean, colour = vary)) +
+  geom_line(data = densPreds, aes(x = pop, y = pred, colour = vary)) +
   facet_grid(transmission ~ .) +
   geom_point() +
   geom_errorbar(aes(ymin = lower, ymax = upper),
               width=.2) +
   ylab('Prop. Invasions') +
   xlab('Population size') +
-  geom_smooth(method = 'glm', se=F) +
   ylim(0, 1) +
   scale_colour_poke(name="Variable varied", 
                labels=c('Colony Size', 'Colony Number'), 
                pokemon = 'Swampert',
                spread = 2)
 
+%%end.rcode
 
+
+
+%%begin.rcode valueChangeMeansCapt
+
+valueChangeMeansCapt <- '
+Relationship is shown seperately for each transmission value.
+'
+
+valueChangeMeansTitle <- 'Comparison of the probability of invasion when population size is altered by changing colony size or colony number.'
+
+%%end.rcode
+
+%%begin.rcode plotValueChangeMeans, fig.cap = valueChangeMeansCapt, fig.scap = valueChangeMeansTitle
+
+# Convert to percentage change in density, colonysize or colony number.
 
 d <- rbind(popMeans %>% 
              mutate(ValueChange = as.numeric(as.character(area))/median(as.numeric(as.character(area))), vary = 'Density') %>%
@@ -894,6 +974,8 @@ d <- rbind(popMeans %>%
      )
 
 
+
+
 ggplot(d, aes(x = ValueChange, y = mean, colour = vary)) +
   facet_grid(transmission ~ .) +
   geom_point() +
@@ -901,16 +983,13 @@ ggplot(d, aes(x = ValueChange, y = mean, colour = vary)) +
               width=.01) +
   ylab('Prop. Invasions') +
   xlab('Amount Varied') +
-  geom_smooth(method = 'glm', se=F) +
   ylim(0, 1) +
   scale_colour_poke(name="Variable varied", 
                labels=c( 'Colony Number', 'Colony Size', 'Density'), 
                pokemon = 'Swampert',
                spread = 3)
 
-
 %%end.rcode
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1002,7 +1081,7 @@ $k_i$ & Degree of node $i$ &&\\
 $\delta$ & Waiting time until next event & Days&\\
 $\alpha$ & Cross immunity & Proportion& 0.1\\
 $n, m$ & Colony index &&\\
-$\bm{A}_{mn}$ & Adjacency matrix. & Distance &\\
+%$\bm{A}_{mn}$ & Adjacency matrix. & Distance &\\
 $\mu$ & Maximum distance for edge to exist & km& 40, 100\\
 $\sigma$ & Invading pathogen seed size & & 10\\
 $r_i$ & The rate that event $i$ occurs. & Days$^{-1}$&\\
