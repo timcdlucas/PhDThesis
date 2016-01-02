@@ -38,6 +38,7 @@ source('misc/KnitrOptions.R')
 %%begin.rcode libs, cache = FALSE, result = FALSE
 
 # My package. For running and analysing Epidemiological sims.
+#   https://github.com/timcdlucas/metapopepi
 library(MetapopEpi)
 
 # Data manipulations
