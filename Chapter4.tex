@@ -252,11 +252,9 @@ Finally, recovery from any infectious class occurs at a rate $\gamma$
 
 
 
-
-
-In each simulation the population is seeded with 200 infected individuals of disease 1 in each colony. 
+In each simulation the population is seeded with 20 infected individuals of disease 1 in each colony. 
 Disease 1 is then allowed to spread and reach equilibrium. 
-After \ensuremath{7\times 10^{5}} events, 10 individuals infected with disease 2 are added to one colony. 
+After \ensuremath{7\times 10^{5}} events, 5 individuals infected with disease 2 are added to one colony. 
 After another \ensuremath{3\times 10^{5}} events the invasion of disease 2 is considered successful if any individuals with disease 2 still remain.
 
 
@@ -342,6 +340,153 @@ For simulations studying extinction rates, half of the subpopulation were seeded
 
 
 
+
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=0.8\textwidth]{figure/plotMeans-1} 
+
+}
+
+
+
+
+{\centering \includegraphics[width=0.8\textwidth]{figure/plotMeans-2} 
+
+}
+
+
+
+
+{\centering \includegraphics[width=0.8\textwidth]{figure/plotMeans-3} 
+
+}
+
+
+
+\end{knitrout}
+
+
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=0.8\textwidth]{figure/plotTransMeans-1} 
+
+}
+
+
+
+
+{\centering \includegraphics[width=0.8\textwidth]{figure/plotTransMeans-2} 
+
+}
+
+
+
+\end{knitrout}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\clearpage
+\section{Discussion}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Restate the gap and the main result}
+
+Empirical studies on the role of population structure on the are equivocal and cannot examine the specific mechanisms by which pathogen communities are created and maintained.
+I have used mechanistic, metapopulation models to test whether increased population structure can promote pathogen richness by facilitating invasion of new pathogens.
+
+
+
+\subsection{Link results to consequences}
+
+\subsubsection{Population structure does not affect pathogen richness}
+
+Probably because dynamics are dominated by local processes.
+This goes against many predictions that increasing $R_0$ increases pathogen richness.
+Further work could examine reduced col  ony sizes to test when global structure become more important.
+Measures of population structure should not be used to predict zoonotic potential.
+
+\subsubsection{Dispersal does not affect pathogen richness}
+
+
+
+\subsubsection{Network connectedness does not affect pathogen richness}
+
+This is in direct contrast to \cite{campos2006pathogen}. 
+However, the model in \cite{campos2006pathogen} is a contact network, so increasing the connectedness increases the chance of succesful transmission events for the first few transmission generations.
+This lends support to the idea that I found now affect of connectedness due to the dominance of local dynamics.
+
+Network connectedness can be seen as a function of average dispersal distance, density and colony size.
+A high density species with small colony sizes must have colonies relatively close together.
+Therefore colonies would be more likely to be connected for a given dispersal distance. 
+
+
+\subsection{Discuss assumptions}
+
+\subsubsection{Complete cross-immunity}
+
+I have assumed that once recovered, individuals are immune to both pathogens. 
+Furthermore, when a coinfected individual recovers from one pathogen, it immediately recovers from the other as well.
+This is probably a fairly reasonable assumption given that I am modelling a newly evolved strain.
+However, further work could relax this assumption using a model similar to \cite{poletto2015characterising} which contains additional classes for `infected with pathogen one, immune to pathogen two' and `infected with pathogen two, immune to pathogen one'.
+The model here was formulated such that the study of systems with greater than two pathogens is still computationally feasible while a model such as used in \cite{poletto2015characterising} contains $3^\rho$ classes for a system with $\rho$ pathogen species.
+This quickly becomes computationally restrictive.
+
+\subsubsection{Identical strains}
+
+Many papers on pathogen richness have focussed on the evolution of pathogen traits and have considered a trade off between transmission rate and virulence \cite{nowak1994superinfection, nowak1994superinfection} or infectious period \cite{poletto2013host}.
+However, here we are interested in host traits.
+Therefore we have assumed that pathogen strains are identical.
+It is clear however that there are a number of factors that affect pathogen richness and our focus on host population structure does not imply that pathogen traits are not important.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\clearpage
+\section{Appendix}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{table}[b!]
+
+\begin{tabular}{lp{5.6cm}p{4.3cm}l}
+ & Explanation & Units&Value\\
+\hline
+$S$ & Susceptible individuals &&\\
+$I_q$ & Infectious with diseases $q$ &&\\
+$I^+_p$ & Sum of classes infected with pathogen $p$ &\\
+$N$ & Number of colonies&& 10\\
+$\bar{n}$ & Mean colony starting size && 3000\\
+$\beta$ & Transmission rate & Transmission events per year per individual& 2, 5, 10\\
+$\gamma$ & Recovery rate & Recovery events per year. & 0.1\\
+$\lambda$ & Dispersal & Dispersal events per day per individual& 0.001--0.1\\
+$b$ & Birth rate & Births per year per individual& 0.05\\
+$d$ & Death rate & Deaths per year per individual & 0.05\\
+$d_I$ & Infectious death rate & Additional deaths per day per individual&\\
+$\rho$ & No. pathogens && 2\\
+$p$ &  Pathogen index i.e. $p\in\{1,2\}$ for pathogens 1 and 2 & &\\
+$q$ & Disease class i.e., $q\in\{1,2,12\}$&\\
+$\mathcal{V}$ & Neighbourhood of a node &&\\
+$t, t^\prime$ & Time and time plus waiting time i.e., $t+\delta$ & Days&\\
+$k_i$ & Degree of node $i$ &&\\
+$\delta$ & Waiting time until next event & Days&\\
+$\alpha$ & Cross immunity & Proportion& 0.1\\
+$n, m$ & Colony index &&\\
+$\bm{A}_{mn}$ & Adjacency matrix. & Distance &\\
+$\mu$ & Maximum distance for edge to exist & km& 40, 100\\
+$\sigma$ & Invading pathogen seed size & & 10\\
+$r_i$ & The rate that event $i$ occurs. & Days$^{-1}$&\\
+&&&\\
+\end{tabular}
+\caption{All symbols used.}
+\label{t:params}
+\end{table}
 
 
 

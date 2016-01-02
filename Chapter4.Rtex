@@ -11,7 +11,7 @@
 
 # Compilation options
 # Run simulations? This will take many hours
-runAllSims <- TRUE
+runAllSims <- FALSE
 
 # Save raw simulation output
 # This will take ~10GB or so.
@@ -770,7 +770,7 @@ For simulations studying extinction rates, half of the subpopulation were seeded
 %%begin.rcode calcMeans
 # Constant density, altered colony size
 
-dens1 <- read.csv('data/Chapter4/DensSims.csv', row.names = 1)
+dens1 <- read.csv('data/Chapter4/DensSims.csv') %>% dplyr::select(-X)
 
 dens1Means <- dens1 %>%
                 group_by(transmission, colonySize, colonyNumber) %>%
@@ -784,7 +784,7 @@ dens1Means <- dens1Means %>%
 
 # Constant density, altered colony number
 
-dens2 <- read.csv('data/Chapter4/Dens2Sims.csv', row.names = 1)
+dens2 <- read.csv('data/Chapter4/Dens2Sims.csv') %>% dplyr::select(-X)
 
 dens2Means <- dens2 %>%
                 group_by(transmission, colonySize, colonyNumber) %>%
@@ -798,7 +798,7 @@ dens2Means <- dens2Means %>%
 
 # Constant population, altered area
 
-pop <- read.csv('data/Chapter4/PopSims.csv', row.names = 1)
+pop <- read.csv('data/Chapter4/PopSims.csv') %>% dplyr::select(-X)
 
 popMeans <- pop %>%
                 group_by(transmission, area) %>%
@@ -872,7 +872,7 @@ ggplot(rbind(dens1Means, dens2Means), aes(x = pop, y = mean, colour = vary)) +
               width=.2) +
   ylab('Prop. Invasions') +
   xlab('Population size') +
-  geom_smooth(method = 'glm', family = 'binomial', se=F) +
+  geom_smooth(method = 'glm', se=F) +
   ylim(0, 1) +
   scale_colour_poke(name="Variable varied", 
                labels=c('Colony Size', 'Colony Number'), 
@@ -883,13 +883,13 @@ ggplot(rbind(dens1Means, dens2Means), aes(x = pop, y = mean, colour = vary)) +
 
 d <- rbind(popMeans %>% 
              mutate(ValueChange = as.numeric(as.character(area))/median(as.numeric(as.character(area))), vary = 'Density') %>%
-             select(ValueChange, transmission, mean, lower, upper, vary),
+             dplyr::select(ValueChange, transmission, mean, lower, upper, vary),
            dens1Means %>% 
              mutate(ValueChange = as.numeric(as.character(colonySize))/median(as.numeric(as.character(colonySize))), vary = 'colonySize') %>%
-             select(ValueChange, transmission, mean, lower, upper, vary),
+             dplyr::select(ValueChange, transmission, mean, lower, upper, vary),
            dens2Means %>% 
              mutate(ValueChange = as.numeric(as.character(colonyNumber))/median(as.numeric(as.character(colonyNumber))), vary = 'colonyNumber')%>%
-             select(ValueChange, transmission, mean, lower, upper, vary)
+             dplyr::select(ValueChange, transmission, mean, lower, upper, vary)
      )
 
 
@@ -900,7 +900,7 @@ ggplot(d, aes(x = ValueChange, y = mean, colour = vary)) +
               width=.01) +
   ylab('Prop. Invasions') +
   xlab('Amount Varied') +
-  geom_smooth(method = 'glm', family = 'binomial', se=F) +
+  geom_smooth(method = 'glm', se=F) +
   ylim(0, 1) +
   scale_colour_poke(name="Variable varied", 
                labels=c( 'Colony Number', 'Colony Size', 'Density'), 
