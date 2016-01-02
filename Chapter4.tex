@@ -369,24 +369,48 @@ For simulations studying extinction rates, half of the subpopulation were seeded
 
 
 
+
+
+
+
+
+
+
 \begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[t]
 
 {\centering \includegraphics[width=0.8\textwidth]{figure/plotTransMeans-1} 
 
 }
 
-
-
-
-{\centering \includegraphics[width=0.8\textwidth]{figure/plotTransMeans-2} 
-
-}
-
+\caption[Comparison of the probability of invasion when population size is altered by changing colony size or colony number.]{
+Comparison of the effect of population size on probability of invasion when population size is altered by changing colony size or colony number.
+Relationship is shown seperately for each transmission value.
+It can be seen that changes in colony size give a much greater increase in invasion probability thatn changes in colony number.
+}\label{fig:plotTransMeans}
+\end{figure}
 
 
 \end{knitrout}
 
+
+
+
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[t]
+
+{\centering \includegraphics[width=0.8\textwidth]{figure/plotValueChangeMeans-1} 
+
+}
+
+\caption[Comparison of the probability of invasion when population size is altered by changing colony size or colony number.]{
+Relationship is shown seperately for each transmission value.
+}\label{fig:plotValueChangeMeans}
+\end{figure}
+
+
+\end{knitrout}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -478,7 +502,7 @@ $k_i$ & Degree of node $i$ &&\\
 $\delta$ & Waiting time until next event & Days&\\
 $\alpha$ & Cross immunity & Proportion& 0.1\\
 $n, m$ & Colony index &&\\
-$\bm{A}_{mn}$ & Adjacency matrix. & Distance &\\
+%$\bm{A}_{mn}$ & Adjacency matrix. & Distance &\\
 $\mu$ & Maximum distance for edge to exist & km& 40, 100\\
 $\sigma$ & Invading pathogen seed size & & 10\\
 $r_i$ & The rate that event $i$ occurs. & Days$^{-1}$&\\

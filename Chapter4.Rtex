@@ -969,14 +969,49 @@ d <- rbind(popMeans %>%
              mutate(ValueChange = as.numeric(as.character(colonySize))/median(as.numeric(as.character(colonySize))), vary = 'colonySize') %>%
              dplyr::select(ValueChange, transmission, mean, lower, upper, vary),
            dens2Means %>% 
-             mutate(ValueChange = as.numeric(as.character(colonyNumber))/median(as.numeric(as.character(colonyNumber))), vary = 'colonyNumber')%>%
+             mutate(ValueChange = as.numeric(as.character(colonyNumber))/median(as.numeric(as.character(colonyNumber))), vary = 'colonyNumber') %>%
              dplyr::select(ValueChange, transmission, mean, lower, upper, vary)
      )
 
+# Refit all glms
+#   First convert all raw data to percentage change, then fit.
 
 
+percChange <- rbind(pop %>% 
+                      mutate(ValueChange = as.numeric(as.character(area))/median(as.numeric(as.character(area))), 
+                             invasion = as.numeric(nExtantDis == 2),
+                             vary = 'Density') %>%
+                      dplyr::select(ValueChange, transmission, invasion, vary),
+                    dens1 %>% 
+                      mutate(ValueChange = as.numeric(as.character(colonySize))/median(as.numeric(as.character(colonySize))), 
+                             invasion = as.numeric(nExtantDis == 2),
+                             vary = 'colonySize') %>%
+                      dplyr::select(ValueChange, transmission, invasion, vary),
+                    dens2 %>% 
+                      mutate(ValueChange = as.numeric(as.character(colonyNumber))/median(as.numeric(as.character(colonyNumber))), 
+                             invasion = as.numeric(nExtantDis == 2),
+                             vary = 'colonyNumber') %>%
+                      dplyr::select(ValueChange, transmission, invasion, vary)
+               )
+
+# Fit glms to value change data
+percChangeModels <- percChange %>%
+                      group_by(transmission, vary) %>%
+                      do(fit = glm(invasion ~ ValueChange, data = ., family = binomial(link = logit)))
+
+# Predict from glms for plotting
+
+percChangeNew <- seq(min(percChange$ValueChange), max(percChange$ValueChange), length.out = 200)
+
+percChangePreds <- percChangeModels %>%
+                       apply(., 1, 
+                     function(m) predict(m['fit'][[1]], newdata = data.frame(ValueChange = percChangeNew), type = 'response') %>%
+                                   data.frame(pred = ., ValueChange = percChangeNew, transmission = m$transmission, vary = m$vary)
+                   ) %>%
+                   do.call(rbind, .)
 
 ggplot(d, aes(x = ValueChange, y = mean, colour = vary)) +
+  #geom_line(data = percChangePreds, aes(x = ValueChange, y = pred, colour = vary)) +
   facet_grid(transmission ~ .) +
   geom_point() +
   geom_errorbar(aes(ymin = lower, ymax = upper),
