@@ -13,9 +13,13 @@ runFstScrape <- FALSE
 
 
 # Run slow bootstrapping?
-subBoots <- FALSE
+subBoots <- TRUE
 fstBoots <- FALSE
 batclocksBoots <- FALSE
+
+
+# Run slow fst data wrangling as some is slow.
+fstComb <- FALSE
 
 # There are figures created in the data analysis which are not in the final chapter document.
 #   If TRUE, they will be included in the output.
@@ -123,7 +127,7 @@ They contradict the assumption commonly made in the ecological literature that f
 
 \tmpsection{One or two sentences to put the results into a more general context.}
 
-Although my analysis implies that population structure does promote pathogen richness in bats, the weakness of the relationship and the difficulty in obtaining some measurements means this is probably not a usefully predictive factor on it's own for optimising zoonotic surveillance..
+Although my analysis implies that population structure does promote pathogen richness in bats, the weakness of the relationship and the difficulty in obtaining some measurements means this is probably not a usefully predictive factor on it's own for optimising zoonotic surveillance.
 However, the relationship has implications for global change, implying that increased habitat fragmentation might promote greater viral richness in bats.
 
 
@@ -934,7 +938,7 @@ The models shown are those with (pink) and without (red) an interaction between 
 
 %%begin.rcode ITanalysis
 
-varList <- c('log(scholarRefs)', 'NumberOfSubspecies', 'log(mass)', 'log(distrSize)', 'rand')
+varList <- c('scholarRefs', 'NumberOfSubspecies', 'mass', 'distrSize', 'rand')
 
 findCombs <- function(k, vars, longest){
   x <- t(combn(vars, k))
@@ -946,9 +950,9 @@ findCombs <- function(k, vars, longest){
 modelList <- lapply(0:5, function(k) findCombs(k, varList, 6))
 modelMat <- do.call(rbind, modelList)
 
-interMat <- modelMat[apply(modelMat, 1, function(x) "log(scholarRefs)" %in% x & "NumberOfSubspecies" %in% x), ]
+interMat <- modelMat[apply(modelMat, 1, function(x) "scholarRefs" %in% x & "NumberOfSubspecies" %in% x), ]
 interMat[, 2:5] <- interMat[, 1:4]
-interMat[, 1] <- "log(scholarRefs):NumberOfSubspecies"
+interMat[, 1] <- "scholarRefs:NumberOfSubspecies"
 
 allModelMat <- rbind(modelMat, interMat)
 
@@ -964,11 +968,16 @@ modelSelect <- function(allForm, data, phy, boot, allModelMat, varList){
   set.seed(paste0('123', boot))
   bootData <- cbind(data, rand = runif(nrow(data)))
 
-
+  # log some predictors
+  bootData[, c('mass', 'scholarRefs', 'distrSize')] <- log(bootData[, c('mass', 'scholarRefs', 'distrSize')])
+  
+  # scale
+  bootData[, c('mass', 'scholarRefs', 'distrSize', 'rand', 'NumberOfSubspecies')] <- base::scale(bootData[, c('mass', 'scholarRefs', 'distrSize', 'rand', 'NumberOfSubspecies')])
+  
   coefs <- matrix(NA, ncol = length(varList) + 2, nrow = nrow(allModelMat), 
-             dimnames = list(NULL, paste('beta', c('(Intercept)', varList, 'log(scholarRefs):NumberOfSubspecies'))))
+             dimnames = list(NULL, paste0('beta.', c('(Intercept)', varList, 'scholarRefs:NumberOfSubspecies'))))
 
-  results <- apply(allModelMat, 1, function(x) sapply(c(varList, "log(scholarRefs):NumberOfSubspecies"), function(y) y %in% x)) %>%
+  results <- apply(allModelMat, 1, function(x) sapply(c(varList, "scholarRefs:NumberOfSubspecies"), function(y) y %in% x)) %>%
                t %>%
                data.frame %>%
                cbind(AIC = NA, boot = boot, lambda = NA, attempt = NA, predictors = NA, coefs)
@@ -1018,7 +1027,7 @@ modelSelect <- function(allForm, data, phy, boot, allModelMat, varList){
     results$predictors[m] <- allForm[[m]] %>% as.character %>% .[3]
 
 
-    results[m, paste('beta', names(coef(model)))] <- coef(model)
+    results[m, paste0('beta.', names(coef(model)))] <- coef(model)
 
     message(paste('Boot:', boot, ', m:', m, '\n'))
   }
@@ -1076,11 +1085,11 @@ modelWeights <- allResults %>%
                   mutate(dAIC = AICc - min(AICc), modelWeight = exp(- 0.5 * dAIC) / sum(exp(- 0.5 * dAIC))) %>%
                   arrange(desc(modelWeight)) %>%
                   mutate(cumulativeWeight = cumsum(modelWeight)) %>%
-                  mutate(string = levels(predictors)[predictors])
+                  mutate(string = predictors)
 
 
 allResults %>% 
-  filter(rand, !log.scholarRefs..NumberOfSubspecies, NumberOfSubspecies) %>%
+  filter(rand, !`scholarRefs.NumberOfSubspecies`, NumberOfSubspecies) %>%
 ggplot(., aes(x = lambda, colour = predictors)) + 
   geom_density() +
   scale_colour_hc()
@@ -1114,20 +1123,10 @@ ITPlot <- ggplot(sepVarWeights, aes(x = variable, y = estimate, colour = col, fi
 
 %%begin.rcode nSpeciesCoef, fig.show = extraFigs
 
-ggplot(allResults, aes(x = beta.NumberOfSubspecies)) +
-  geom_histogram()
-
-
-ggplot(allResults, aes(x = beta.NumberOfSubspecies, colour = log.scholarRefs.)) +
+ggplot(allResults, aes(x = 'beta.NumberOfSubspecies', colour = scholarRefs)) +
   geom_density()
 
 
-ggplot(allResults, aes(x = beta.NumberOfSubspecies, colour = log.scholarRefs..NumberOfSubspecies)) +
-  geom_density()
-
-
-ggplot(allResults, aes(x = beta.NumberOfSubspecies, colour =log.distrSize.)) +
-  geom_density()
 
 mean(allResults$NumberOfSubspecies, na.rm = TRUE)
 
@@ -1135,18 +1134,18 @@ mean(allResults$NumberOfSubspecies, na.rm = TRUE)
 varCoefMeans <- apply(allResults[, grep('beta', names(allResults))], 2, function(x) wtd.mean(x, allResults$weight, na.rm = TRUE))
 varCoefVars  <- apply(allResults[, grep('beta', names(allResults))], 2, function(x) wtd.var(x, allResults$weight, na.rm = TRUE))
 
-nSpeciesCoefMean <- wtd.mean(allResults$beta.NumberOfSubspecies[!allResults$log.scholarRefs..NumberOfSubspecies], 
-                             allResults$weight[!allResults$log.scholarRefs..NumberOfSubspecies], na.rm = TRUE)
-nSpeciesCoefMeanI <- wtd.mean(allResults$beta.NumberOfSubspecies[allResults$log.scholarRefs..NumberOfSubspecies], 
-                             allResults$weight[allResults$log.scholarRefs..NumberOfSubspecies], na.rm = TRUE)
-nSpeciesInterMean <- wtd.mean(allResults$beta.log.scholarRefs..NumberOfSubspecies, allResults$weight, na.rm = TRUE)
+nSpeciesCoefMean <- wtd.mean(allResults$beta.NumberOfSubspecies[!allResults$scholarRefs.NumberOfSubspecies], 
+                             allResults$weight[!allResults$scholarRefs.NumberOfSubspecies], na.rm = TRUE)
+nSpeciesCoefMeanI <- wtd.mean(allResults$beta.NumberOfSubspecies[allResults$scholarRefs.NumberOfSubspecies], 
+                             allResults$weight[allResults$scholarRefs.NumberOfSubspecies], na.rm = TRUE)
+nSpeciesInterMean <- wtd.mean(allResults$`beta.scholarRefs.NumberOfSubspecies`, allResults$weight, na.rm = TRUE)
 
 
-nSpeciesCoefVar <- wtd.var(allResults$beta.NumberOfSubspecies[!allResults$log.scholarRefs..NumberOfSubspecies], 
-                             allResults$weight[!allResults$log.scholarRefs..NumberOfSubspecies], na.rm = TRUE)
-nSpeciesCoefVarI <- wtd.var(allResults$beta.NumberOfSubspecies[allResults$log.scholarRefs..NumberOfSubspecies], 
-                             allResults$weight[allResults$log.scholarRefs..NumberOfSubspecies], na.rm = TRUE)
-nSpeciesInterVar <- wtd.var(allResults$beta.log.scholarRefs..NumberOfSubspecies, allResults$weight, na.rm = TRUE)
+nSpeciesCoefVar <- wtd.var(allResults$beta.NumberOfSubspecies[!allResults$scholarRefs.NumberOfSubspecies], 
+                             allResults$weight[!allResults$scholarRefs.NumberOfSubspecies], na.rm = TRUE)
+nSpeciesCoefVarI <- wtd.var(allResults$beta.NumberOfSubspecies[allResults$scholarRefs.NumberOfSubspecies], 
+                             allResults$weight[allResults$scholarRefs.NumberOfSubspecies], na.rm = TRUE)
+nSpeciesInterVar <- wtd.var(allResults$`beta.scholarRefs.NumberOfSubspecies`, allResults$weight, na.rm = TRUE)
 
 
 
@@ -1187,7 +1186,7 @@ sspLambda <- summary(pgls(NumberOfSubspecies ~ 1, data = compSubspecies, lambda 
 massLambda <- summary(pgls(log(mass) ~ 1, data = compSubspecies, lambda = 'ML'))
 scholarLambda <- summary(pgls(log(scholarRefs) ~ 1, data = compSubspecies, lambda = 'ML'))
 virusLambda <- summary(pgls(virusSpecies ~ 1, data = compSubspecies, lambda = 'ML'))
-distrLambda <- summary(pgls(distrSize ~ 1, data = compSubspecies, lambda = 'ML'))
+distrLambda <- summary(pgls(log(distrSize) ~ 1, data = compSubspecies, lambda = 'ML'))
 
 sspUni <- summary(pgls(virusSpecies ~ NumberOfSubspecies, data = compSubspecies, lambda = 'ML'))
 
@@ -1277,7 +1276,7 @@ ggdraw() +
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-%%begin.rcode fstRead
+%%begin.rcode fstRead, eval = fstComb
 
 # Read in Fst data.
 # Then add extra columns needed.
@@ -1365,7 +1364,7 @@ fst$Useable[is.na(fst$Useable)] <- FALSE
 
 
 
-%%begin.rcode fstStudyEffort
+%%begin.rcode fstStudyEffort, eval = fstComb
 
 # First take what data we can from nSpecies analysis.
 fstStudy <- sqldf("	
@@ -1393,7 +1392,8 @@ write.csv(fstNewStudy, file = 'data/Chapter3/fstScrape.csv')
 
 %%end.rcode
 
-%%begin.rcode fstCombine
+
+%%begin.rcode fstCombine, eval = fstComb
 
 fstNewStudy <- read.csv('data/Chapter3/fstScrape.csv', row.names = 1)
 names(fstNewStudy) <- c('binomial', 'scholarRefs', 'pubmedRefs')
@@ -1418,7 +1418,7 @@ fst <- fst[fst$Marker != 'mtDNA', ]
 
 %%end.rcode
 
-%%begin.rcode convertFst
+%%begin.rcode convertFst, eval = fstComb
 
 calcNm <- function(Fst){ (1 - Fst)/(8 * Fst) }
 
@@ -1454,6 +1454,9 @@ mass <- sqldf("
   ON fstFinal.binomial=pantheria.MSW05_Binomial
   ")
 
+# Don't need pantheria data anymore
+rm(pantheria)
+
 fstFinal$mass <- mass[, 1]
 
 fstFinal$mass[fstFinal$binomial == 'Myotis ricketti'] <- meanAdditionalMass$mass[meanAdditionalMass$binomial == 'Myotis ricketti']
@@ -1461,6 +1464,22 @@ fstFinal$mass[fstFinal$binomial == 'Myotis ricketti'] <- meanAdditionalMass$mass
 fstFinal$mass[fstFinal$binomial == 'Myotis macropus'] <- 9.8
 
 fstFinal <- fstFinal[!is.na(fstFinal$mass), ]
+
+
+#############################
+### fst data is finished  ###
+#############################
+
+write.csv(fstFinal, 'data/Chapter3/fstFinal.csv')
+%%end.rcode
+
+
+%%begind.rcode
+
+#### Read is full fstFinal dataframe
+
+fstFinal <- read.csv('data/Chapter3/fstFinal.csv', row.names = 1)
+
 %%end.rcode
 
 %%begin.rcode fstCors, fig.show = extraFigs
@@ -1540,7 +1559,7 @@ p %<+% fstFinal[, c('binomial', 'virusSpecies')] +
 
 %%begin.rcode fstITanalysis
 
-fstVarList <- c('log(scholarRefs)', 'log(Nm)', 'log(mass)', 'log(distrSize)', 'rand')
+fstVarList <- c('scholarRefs', 'Nm', 'mass', 'distrSize', 'rand')
 
 
 fstModelList <- lapply(0:5, function(k) findCombs(k, fstVarList, 5))
@@ -1552,6 +1571,8 @@ fstAllFormulae <- c(as.formula('virusSpecies ~ 1'), fstAllFormulae)
 
 %%end.rcode
 
+
+
 %%begin.rcode fstModelSelectBoots, eval = fstBoots
 
 
@@ -1562,8 +1583,16 @@ fstModelSelect <- function(allForm, data, phy, boot, allModelMat, varList){
   bootData <- cbind(data, rand = runif(nrow(data)))
   row.names(bootData) <- bootData$binomial
 
+
+  # log some predictors
+  bootData[, c('mass', 'scholarRefs', 'distrSize')] <- log(bootData[, c('mass', 'scholarRefs', 'distrSize')])
+  
+  # scale
+  bootData[, c('mass', 'scholarRefs', 'distrSize', 'rand', 'Nm')] <- base::scale(bootData[, c('mass', 'scholarRefs', 'distrSize', 'rand', 'Nm')])
+  
+
   coefs <- matrix(NA, ncol = length(varList) + 1, nrow = nrow(allModelMat), 
-             dimnames = list(NULL, paste('beta', c('(Intercept)', varList))))
+             dimnames = list(NULL, paste0('beta.', c('(Intercept)', varList))))
 
   results <- apply(allModelMat, 1, function(x) sapply(varList, function(y) y %in% x)) %>%
                t %>%
@@ -1615,7 +1644,7 @@ fstModelSelect <- function(allForm, data, phy, boot, allModelMat, varList){
     results$predictors[m] <- allForm[[m]] %>% as.character %>% .[3]
 
 
-    results[m, paste('beta', names(coef(model)))] <- coef(model)
+    results[m, paste0('beta.', names(coef(model)))] <- coef(model)
 
     message(paste('Boot:', boot, ', m:', m, '\n'))
   }
@@ -1656,7 +1685,7 @@ fstSepVarWeights <- do.call(rbind, fstSepVarWeights) %>%
                       reshape2::melt(., value.name = 'estimate', id.vars = 'boot')
 
 fstSepVarWeights$col <- 'Other Variables'
-fstSepVarWeights$col[fstSepVarWeights$variable == 'log.Nm.'] <- 'Population Structure'
+fstSepVarWeights$col[fstSepVarWeights$variable == 'Nm'] <- 'Population Structure'
 fstSepVarWeights$col[fstSepVarWeights$variable == 'rand'] <- 'Null'
 
 
@@ -1691,33 +1720,33 @@ ggplot(fstAllResults, aes(x = lambda)) +
 %%begin.rcode fstITlambdaFacets, fig.show = extraFigs, fig.height = 4
 
 
-transform(fstAllResults, log.mass. = c('Other', 'Mass' )[factor(log.mass.)]) %>%
+transform(fstAllResults, mass = c('Other', 'Mass' )[factor(mass)]) %>%
 ggplot(aes(x = lambda)) + 
-  facet_grid(. ~ log.mass.) +
+  facet_grid(. ~ mass) +
   geom_histogram() +
   ylab('Count') +
   xlab(expression(paste('Phylogenetic Signal, ', lambda)))
 
 
-transform(fstAllResults, log.Nm. = c('Other', 'Nm' )[factor(log.Nm.)]) %>%
+transform(fstAllResults, Nm = c('Other', 'Nm' )[factor(Nm)]) %>%
 ggplot(aes(x = lambda)) + 
-  facet_grid(. ~ log.Nm.) +
+  facet_grid(. ~ Nm) +
   geom_histogram() +
   ylab('Count') +
   xlab(expression(paste('Phylogenetic Signal, ', lambda)))
 
 
-transform(fstAllResults, log.distrSize. = c('Other', 'distrSize' )[factor(log.distrSize.)]) %>%
+transform(fstAllResults, distrSize = c('Other', 'distrSize' )[factor(distrSize)]) %>%
 ggplot(aes(x = lambda)) + 
-  facet_grid(. ~ log.distrSize.) +
+  facet_grid(. ~ distrSize) +
   geom_histogram() +
   ylab('Count') +
   xlab(expression(paste('Phylogenetic Signal, ', lambda)))
 
 
-transform(fstAllResults, log.scholarRefs. = factor(c('Scholar Refs', 'Other')[factor(!log.scholarRefs.)], levels = c('Scholar Refs', 'Other'))) %>%
+transform(fstAllResults, scholarRefs = factor(c('Scholar Refs', 'Other')[factor(!scholarRefs)], levels = c('Scholar Refs', 'Other'))) %>%
 ggplot(aes(x = lambda)) + 
-  facet_grid(. ~ log.scholarRefs.) +
+  facet_grid(. ~ scholarRefs) +
   geom_histogram() +
   ylab('Count') +
   xlab(expression(paste('Phylogenetic Signal, ', lambda)))
@@ -1752,23 +1781,23 @@ ggplot(aes(x, L)) +
 
 %%begin.rcode fstCoef, fig.show = extraFigs
 
-ggplot(fstAllResults, aes(x = beta.log.Nm.)) +
+ggplot(fstAllResults, aes(x = beta.Nm)) +
   geom_histogram()
 
 
-ggplot(fstAllResults, aes(x = beta.log.Nm., colour = log.scholarRefs.)) +
+ggplot(fstAllResults, aes(x = beta.Nm, colour = scholarRefs)) +
   geom_density()
 
 
 
-ggplot(fstAllResults, aes(x = beta.log.Nm., colour =log.distrSize.)) +
+ggplot(fstAllResults, aes(x = beta.Nm, colour = distrSize)) +
   geom_density()
 
 
 fstCoefMeans <- apply(fstAllResults[, grep('beta', names(fstAllResults))], 2, function(x) wtd.mean(x, fstAllResults$weight, na.rm = TRUE))
 fstCoefVars  <- apply(fstAllResults[, grep('beta', names(fstAllResults))], 2, function(x) wtd.var(x, fstAllResults$weight, na.rm = TRUE))
 
-pcCoefLzero <- 100*sum(na.omit(fstAllResults$beta.log.Nm.) < 0) / length(na.omit(fstAllResults$beta.log.Nm.))
+pcCoefLzero <- 100*sum(na.omit(fstAllResults$beta.Nm) < 0) / length(na.omit(fstAllResults$beta.Nm))
 
 %%end.rcode
 
@@ -1887,14 +1916,14 @@ A small number of models (\rinline{mean(na.omit(allResults$lambda < 0))*100}\%) 
 \tmpsection{Model results}
 
 Summing the Akaiki weights of all models that contain a given variable gives a probability, $Pr$, that the variable would be in the best model (Figure~\ref{fig:fstITPlots}a) if the data were recollected \cite{whittingham2006we}.
-The number of subspecies is very likely in the best model ($Pr > $ \rinline{substring(as.character( varWeights['NumberOfSubspecies']), 1, 4)}) as is the interaction between number of species and study effort ($Pr = $ \rinline{varWeights['log.scholarRefs..NumberOfSubspecies']}) compared to the benchmark random variable which has $Pr = $ \rinline{varWeights['rand']}.
+The number of subspecies is very likely in the best model ($Pr > $ \rinline{substring(as.character( varWeights['NumberOfSubspecies']), 1, 4)}) as is the interaction between number of species and study effort ($Pr = $ \rinline{varWeights['scholarRefs.NumberOfSubspecies']}) compared to the benchmark random variable which has $Pr = $ \rinline{varWeights['rand']}.
 When models with the interaction term are removed, on average (mean weighted by Akaiki weights) there is a positive relationship between the number of subspecies and viral richness ($\beta = $ \rinline{nSpeciesCoefMean}, variance = \rinline{nSpeciesCoefVar}).
 Models with an interaction between number of subspecies and study effort have a positive interaction term ($\beta = $ \rinline{nSpeciesInterMean}, variance = \rinline{nSpeciesInterVar}) and a negative linear term ($\beta = $ \rinline{nSpeciesCoefMeanI}, variance = \rinline{nSpeciesCoefVarI}) which in total is a positive relationship for most of the range of the study effort data.
 This supports the hypothesis that population structure promotes pathogen richness.
 The strong support for a positive interaction term implies that strong population structure only predicts high known pathogen richness in the presence of high study effort.
 One interpretation of this is that population structure alone does not predict high known richness; reasonable study effort is still needed to turn the expected high richness into known and recorded viral richness.
 Another interpretation is that having few subspecies does not predict low viral richness unless the species has been suitable sampled; the low number of subspecies is probably due to a lack of study rather than an accurate measurement.
-As seen in Figure~\ref{fig:fstITPlots}a, study effort is very likely in the best model ($\beta = $ \rinline{varCoefMeans['beta.log.scholarRefs.']}, $Pr > $ \rinline{substring(as.character(varWeights['log.scholarRefs.']), 1, 4)}) body mass and range size are also probably in the best model ($\beta = $ \rinline{varCoefMeans['beta.log.mass.']}, $Pr = $ \rinline{varWeights['log.mass.']} and $\beta = $ \rinline{varCoefMeans['beta.log.distrSize.']}, $Pr = $ \rinline{varWeights['log.distrSize.']}).
+As seen in Figure~\ref{fig:fstITPlots}a, study effort is very likely in the best model ($\beta = $ \rinline{varCoefMeans['beta.scholarRefs']}, $Pr > $ \rinline{substring(as.character(varWeights['scholarRefs']), 1, 4)}) body mass and range size are also probably in the best model ($\beta = $ \rinline{varCoefMeans['beta.mass']}, $Pr = $ \rinline{varWeights['mass']} and $\beta = $ \rinline{varCoefMeans['beta.distrSize']}, $Pr = $ \rinline{varWeights['distrSize']}).
 
 
 
@@ -1915,14 +1944,14 @@ Number of subspecies &&&&\\
 \hspace{3mm}Total & \rinline{sprintf('%.2f', varWeights['NumberOfSubspecies'])} & \rinline{varCoefMeans['beta.NumberOfSubspecies']} &&\\
 \hspace{3mm}Models without interaction term &&  \rinline{nSpeciesCoefMean} &&\\
 \hspace{3mm}Models with interaction term &&  \rinline{nSpeciesCoefMeanI} &&\\
-Number of subspecies:log(Scholar) &  \rinline{varWeights['log.scholarRefs..NumberOfSubspecies']} &  \rinline{nSpeciesInterMean} && \\[2mm]  
-Gene flow & & &  \rinline{fstVarWeights['log.Nm.']} &  \rinline{fstCoefVars['beta.log.Nm.']}\\[2mm]  
-log(Scholar) &  \rinline{sprintf('%.2f', varWeights['log.scholarRefs.'])} &  \rinline{varCoefMeans['beta.log.scholarRefs.']} & 
-   \rinline{fstVarWeights['log.scholarRefs.']} &  \rinline{fstCoefVars['beta.log.scholarRefs.']}\\
-log(Mass) &  \rinline{sprintf('%.2f', varWeights['log.mass.'])} &  \rinline{varCoefMeans['beta.log.mass.']} & 
-   \rinline{fstVarWeights['log.mass.']} &  \rinline{fstCoefVars['beta.log.mass.']}\\
-log(Range size) &  \rinline{sprintf('%.2f', varWeights['log.distrSize.'])} &  \rinline{varCoefMeans['beta.log.distrSize.']}& 
-   \rinline{fstVarWeights['log.distrSize.']} &  \rinline{fstCoefVars['beta.log.distrSize.']}\\
+Number of subspecies:log(Scholar) &  \rinline{varWeights['scholarRefs.NumberOfSubspecies']} &  \rinline{nSpeciesInterMean} && \\[2mm]  
+Gene flow & & &  \rinline{fstVarWeights['Nm']} &  \rinline{fstCoefVars['beta.Nm']}\\[2mm]  
+log(Scholar) &  \rinline{sprintf('%.2f', varWeights['scholarRefs'])} &  \rinline{varCoefMeans['beta.scholarRefs']} & 
+   \rinline{fstVarWeights['scholarRefs']} &  \rinline{fstCoefVars['beta.scholarRefs']}\\
+log(Mass) &  \rinline{sprintf('%.2f', varWeights['mass'])} &  \rinline{varCoefMeans['beta.mass']} & 
+   \rinline{fstVarWeights['mass']} &  \rinline{fstCoefVars['beta.mass']}\\
+log(Range size) &  \rinline{sprintf('%.2f', varWeights['distrSize'])} &  \rinline{varCoefMeans['beta.distrSize']}& 
+   \rinline{fstVarWeights['distrSize']} &  \rinline{fstCoefVars['beta.distrSize']}\\
 Random &  \rinline{sprintf('%.2f', varWeights['rand'])} &  \rinline{varCoefMeans['beta.rand']}& 
    \rinline{fstVarWeights['rand']} &  \rinline{fstCoefVars['beta.rand']}\\
 \bottomrule
@@ -2018,12 +2047,12 @@ However, study effort has some phylogenetic autocorrelation ($\lambda$ = \rinlin
 
 \tmpsection{Model results}
 
-While less strongly supported than the number of subspecies, gene flow is likely in the best model ($Pr = $ \rinline{fstVarWeights['log.Nm.']}) compared to the benchmark random variable which has $Pr = $ \rinline{fstVarWeights['rand']} as shown in Figure~\ref{fig:fstITPlots}b.
+While less strongly supported than the number of subspecies, gene flow is likely in the best model ($Pr = $ \rinline{fstVarWeights['Nm']}) compared to the benchmark random variable which has $Pr = $ \rinline{fstVarWeights['rand']} as shown in Figure~\ref{fig:fstITPlots}b.
 On average (mean weighted by Akaiki weights) there is a negative relationship between gene flow and viral richness ($\beta = $ \rinline{fstCoefMeans['beta log(Nm)']}, variance = \rinline{fstCoefVars['beta log(Nm)']}) despite the apparent positive relationship in Figure~\ref{fig:fstRawData}.
 This supports the hypothesis that population structure promotes viral richness.
 Possibly due to the smaller sample size, or a weaker relationship, this coefficient is much more varied than the number of subspecies coeficient with \rinline{pcCoefLzero}\% of models estimating a positive relationship.
-As in the number of subspecies analysis, study effort is very likely in the best model ($Pr = $ \rinline{fstVarWeights['log.scholarRefs.']}) as is body mass ($Pr = $ \rinline{fstVarWeights['log.mass.']}).
-In contrast to the number of subspecies analysis, range size is almost certainly not in the best model with $Pr = $ \rinline{fstVarWeights['log.distrSize.']} being much less than the random variable.
+As in the number of subspecies analysis, study effort is very likely in the best model ($Pr = $ \rinline{fstVarWeights['scholarRefs']}) as is body mass ($Pr = $ \rinline{fstVarWeights['mass']}).
+In contrast to the number of subspecies analysis, range size is almost certainly not in the best model with $Pr = $ \rinline{fstVarWeights['distrSize']} being much less than the random variable.
 
 Across all models the mean value of $\lambda$ is \rinline{mean(na.omit(fstAllResults$lambda))} and a large number of individual models (\rinline{mean(na.omit(fstAllResults$lambda < 0))*100}\%)  had negatively phylogenetically distributed residuals implying the residuals from the model are strongly negatively phylogenetic.
 Due to the small sample size this is probably due to a small number of data points with large residuals being distant on the tree.
@@ -2604,7 +2633,7 @@ fstSepVarWeights2 <- do.call(rbind, fstSepVarWeights2) %>%
                       reshape2::melt(., value.name = 'estimate', id.vars = 'boot')
 
 fstSepVarWeights2$col <- 'Other Variables'
-fstSepVarWeights2$col[fstSepVarWeights2$variable == 'log.Nm.'] <- 'Population Structure'
+fstSepVarWeights2$col[fstSepVarWeights2$variable == 'Nm'] <- 'Population Structure'
 fstSepVarWeights2$col[fstSepVarWeights2$variable == 'rand'] <- 'Null'
 
 
