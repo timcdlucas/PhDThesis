@@ -13,7 +13,7 @@ runFstScrape <- FALSE
 
 
 # Run slow bootstrapping?
-subBoots <- TRUE
+subBoots <- FALSE
 fstBoots <- FALSE
 batclocksBoots <- FALSE
 
@@ -35,7 +35,7 @@ source('misc/theme_tcdl.R')
 
 
 # Choose the number of cores to use
-nCores <- 7
+nCores <- 4
 
 %%end.rcode
 
@@ -62,10 +62,9 @@ library(Hmisc)
 
 # Plotting
 library(ggplot2)
-library(dotwhisker)
 library(ggtree)
 library(palettetown)
-#library(ggthemes)
+library(ggthemes)
 library(GGally)
 library(cowplot)
 
@@ -1474,7 +1473,7 @@ write.csv(fstFinal, 'data/Chapter3/fstFinal.csv')
 %%end.rcode
 
 
-%%begind.rcode
+%%begin.rcode
 
 #### Read is full fstFinal dataframe
 

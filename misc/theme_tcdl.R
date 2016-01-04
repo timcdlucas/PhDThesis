@@ -59,8 +59,7 @@ theme_pres <- theme(text = element_text(family = "Lato Light", size = 12),
         strip.background = element_rect(colour = 'grey', fill = 'grey')
         )
 
-
-
+theme_set(theme_grey())
 theme_set(theme_grey() + theme_tcdl)
 
 #theme_set(theme_grey() + theme_pres)
