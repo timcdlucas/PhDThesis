@@ -1875,7 +1875,8 @@ In the analysis using the number of subspecies dependant variable I also include
 This interaction was included as I believed \emph{a priori} that this interaction may be present as subspecies in well studied species are more likely to be identified.
 The interaction was only included in models with both study effort and number of subspecies as individual terms.
 
-I fitted phylogenetic regressions using nlme \cite{nlme} to all models.
+I fitted phylogenetic regressions of all models using nlme \cite{nlme}.
+The independant variables were centered and scaled to allow direct comparison of the coefficients.
 In each case I simultaneously fitted the $\lambda$ parameter as this avoids mispecifying the model \cite{revell2010phylogenetic}.
 $\kappa$ and $\delta$ parameters were constrained to one as they are more concerned with when along a branch evolution occurs and because fitting multiple parameters makes interpretation difficult. 
 
