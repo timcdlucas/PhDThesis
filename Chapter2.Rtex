@@ -31,6 +31,7 @@ opts_chunk$set(cache.path = '.Ch2Cache/')
 
 source('misc/theme_tcdl.R')
 source('misc/KnitrOptions.R')
+theme_set(theme_grey() + theme_tcdl)
 
 %%end.rcode
 

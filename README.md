@@ -6,7 +6,7 @@ This is a repo containing my PhD Thesis.
 The template is taken from [here](https://github.com/ucl/ucl-latex-thesis-templates).
 The style file is taken from Robert Stanley [here](https://github.com/robjstan/latex-phdthesis).
 There was a few edits to get the template and Rob's style to work together.
-The style file requires xelatex (or lautex) so the thesis is now compiled wit xelatex.
+The style file requires xelatex (or lautex) so the thesis is now compiled with xelatex.
 
 The main file is [tim-lucas-thesis.tex](tim-lucas-thesis.tex) and [tim-lucas-thesis.pdf](tim-lucas-thesis.pdf) is the compiled pdf which should render in github (maybe slowly).
 

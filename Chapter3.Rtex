@@ -32,7 +32,7 @@ source('misc/KnitrOptions.R')
 
 # ggplot2 theme.
 source('misc/theme_tcdl.R')
-
+theme_set(theme_grey() + theme_tcdl)
 
 # Choose the number of cores to use
 nCores <- 4
@@ -169,7 +169,7 @@ Finally, when a global $F_{ST}$ value is not given they used the mean of all pai
 This is not correct as from global $F_{ST}$ we expect migration rates of $M = (1-F_{ST})/8F_{ST}$ while from $F_{ST}$ between pairs of populations we expect migration rates of $M = (1-F_{ST})/16F_{ST}$ where $M$ is the absolute number of diploid inviduals dispersing per generation \cite{slatkin1995measure}.
 To use studies that only present pairwise $F_{ST}$ values the raw data would have to be gathered and global $F_{ST}$ calculated from those.
 As it is in fact the movement of individuals that is epidemiologically relavent, using these studies is probably not correct without attempting to correct for these difference.
-Studies on single pathogens, notably rabies, have also shown that for virulent pathogens, space can allow persistence where a well mixed population ould experience a single, large epidemic then pathogen extinction \cite{blackwood2013resolving, pons2014insights}.
+Studies on single pathogens have also shown that space can allow persistence where a well mixed population ould experience a single, large epidemic followed by pathogen extinction \cite{blackwood2013resolving, pons2014insights, plowright2011urban}.
 
 
 \tmpsection{Choice of measure of population structure}
