@@ -700,15 +700,15 @@ As species cannot be considered independant due to shared evolutionary history, 
 A number of other factors that have previously been found to be important were included as additional independant variables (body mass \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat}, range size \cite{kamiya2014determines, turmelle2009correlates, maganga2014bat} and study effort \cite{turmelle2009correlates, gay2014parasite, maganga2014bat}).
 This was to attempt to avoid spurious positive results occuring simply due to correlation between pathogen richness and a different, causal factor.
 Despite commonly bein associated with pathogen richness \cite{arneberg2002host, kamiya2014determines, nunn2003comparative}, population density is not included in the analysis as there is very little data for bat densities --- however Chapter 4 examines the relationship between density and population structure and Chapter 5 presents a method that allows the estimation of density from acoustic surveys.
-I have both the number of subspecies a bat species has and estimates of gene flow (analysed separately) as measures of population structure.
+I used both the number of subspecies a bat species has and estimates of gene flow (analysed separately) as measures of population structure.
 All analyses were run in R \cite{R}
 
 To measure pathogen richness I used data from \cite{luis2013comparison}. 
 These simply include known infections of a bat species with a pathogen species. 
 Only species with at least one pathogen were included in the analysis.
 Rows with host species that were not identified to species level were removed.
-Many viruses were not identified to species level or their identified species was not in the ICTV virus taxonomy \cite{ICTV}.
-I counted a virus if it was the only virus, for that host species, in the lowest taxonomic level identified in the ICTV taxonomy.
+Many viruses were not identified to species level or their specified species names were not in the ICTV virus taxonomy \cite{ICTV}.
+I counted a virus if it was the only virus, for that host species, in the lowest taxonomic level (present in the ICTV taxonomy) identified.
 That is, if a host carries an unknown Paramyxoviridae virus, then it must carry at least one Paramyxoviridae virus.
 If a host carries an unknown Paramyxoviridae virus and a known Paramyxoviridae virus, then it is hard to confirm that the unknown virus is not another record of the known virus.
 In this case, this would be counted as one virus species.
@@ -864,26 +864,30 @@ Gene flow is calculated from estimates of $F_{ST}$ collated from the literature.
 Studies are from a wide range of spatial scales, from local ($\sim\SI{10}{\kilo\metre}$) to continental.
 As $F_{ST}$ often increases with spatial scale \cite{burland1999population, hulva2010mechanisms, o2015genetic, vonhof2015range} I controlled for this by only using data from studies where a large proportion of the species range was studied.
 I used the ratio of the furthest distance between $F_{ST}$ samples (measured with \url{http://www.distancefromto.net/} if not stated) to the width of the IUCN species range \cite{iucn} and only used studies if this ratio was greater than \rinline{rangeUseable}.
+This is an arbitrary value that was a comprimise between retaining a reasonable number of data points and controlling for the bias in spatial scale.
 I converted all $F_{ST}$ value to migration using $M = \frac{1-F_{ST}}{8F_{ST}}$.
 This removes the $(0, 1)$ bounds of $F_{ST}$ and is more easily interpretable though the results are unaffected. 
 These two measures of population structure were analysed separately as the number of subspecies has \rinline{nrow(nSpecies)} data points while there is only $F_{ST}$ data for 22 bat species.
+For the subspecies analysis all bat species in \textcite{luis2013comparison} were used (i.e. all species with at least one known virus species).
+However, for the gene flow analysis, all bat species with suitable $F_{ST}$ estimates were used.
+As this included some species not present in \texcite{luis2013comparison} this includes some bat species with zero known virus species. 
 
 To control for study bias I collected the number of Pubmed and Google Scholar citations for each bat species name including synonyms from ITIS \cite{itis} via the taxize package \cite{chamberlain2013taxize}.
 The counts were scraped using the rvest package \cite{rvest}.
 I log transformed these variables as they were strongly right skewed.
 The log number of citations on Pubmed and Google scholar were highly correlated (pgls: $t$ = \rinline{studyEffortCor$coefficients['log(pubmedRefs + 1)', 't value']}, df = \rinline{studyEffortCor$df[2]}, $p$ = \rinline{studyEffortCor$coefficients['log(pubmedRefs + 1)', 'Pr(>|t|)']}).
-As this corelation is strong, the results here are for analyses using only Google Scholar citations.
+As this correlation is strong, the results here are for analyses using only Google Scholar citations.
 %See the appendix for analyses run using Pubmed citations.
 
 Measures of body mass are taken from Pantheria \cite{jones2009pantheria} and primary literature \cite{canals2005relative, arita1993rarity, lopez2014echolocation, orr2013does, lim2001bat, aldridge1987turning, ma2003dietary, owen2003home, henderson2008movements, heaney2012nyctalus, oleksy2015high, zhang2009recent}. 
 \emph{Pipistrellus pygmaeus} was assigned the same mass as \emph{P. pipistrellus} as they indistinguishable by mass.
-Body mass measurements were log transformed due to the strong right skew.
+Body mass measurements were log transformed as they were strongly right skewed.
 Distribution size was estimated by downloading range maps for all species from IUCN \cite{iucn} and were also logged due to right skew.
 
 
 To control for phylogenetic nonindependance I used the best-supported phylogeny from \textcite{fritz2009geographical} (shown in Figure~\ref{fig:treePlot}) which is the supertree from \cite{bininda2007delayed} with names updated to match the Wilson \& Reeder taxonomy \cite{wilson2005mammal}.
 Phylogenetic manipulation was performed using the ape package \cite{ape}.
-The importance of the phylogeny on each variable separately was estimated using \cite{caper}.
+The importance of the phylogeny on each variable separately was estimated using caper \cite{caper}.
 I also performed the analysis using the tree from \cite{jones2005bats} as this has some broad changes with families in different places.
 However the phylogeny did not affect the analysis.
 
@@ -1875,14 +1879,21 @@ I fitted phylogenetic regressions using nlme \cite{nlme} to all models.
 In each case I simultaneously fitted the $\lambda$ parameter as this avoids mispecifying the model \cite{revell2010phylogenetic}.
 $\kappa$ and $\delta$ parameters were constrained to one as they are more concerned with when along a branch evolution occurs and because fitting multiple parameters makes interpretation difficult. 
 
-I calculated AICc for each model and then calculated Akaiki weights.
+To establish the importance of variables I calculated the probability that each variable would be in the best model if the data were recollected.
+This value is called the variables weight.
+For each variable the mean of it's coefficient, $\beta$, in all models that contained that variable was also calculated to determine the direction and strength of the variables.
+In the subspecies analysis, this mean of $\beta$ was calculated for all models, only models with a interaction term and only models without an interaction.
+As the interaction term greatly affects the estimated value of $\beta$, considering these value seperately aids interpretation.
+Following \cite{whittingham2005habitat} I included a uniformally random variable as a null variable as even unimportant variables can have Akaiki weights notably greater than zero.
+The whole analysis was run \rinline{nBoots} times, resampling the random variable each time.
+I calculated AICc for each model.
+I calculated the average AICc, $\bar{\text{AICc}}$, by averaging AICc scores within models.
+$\Delta\text{AICc}$ was calculated as $\text{min}(\bar{\text{AICc}}) - \bar{\text{AICc}}$, not the mean of the individual $\Delta\text{AICc}$ scores, to guarantee that the best model has $\Delta\text{AICc} = 0$.
+From these $\Delta\text{AICc}$ calculated Akaiki weights.
 This value can be interpreted as the probability that a model would be the best model if the data were recollected.
 For each variable, the sum of the Akaiki weights of models containing that variable are summed.
 This value can be interpreted as the probability that the given variable is in the best model.
-Following \cite{whittingham2005habitat} I included a uniformally random variable as a null variable as even unimportant variables can have Akaiki weights notably greater than zero.
-The whole analysis was run \rinline{nBoots} times, resampling the random variable each time.
-I calculated the average AICc, $\bar{\text{AICc}}$, by averaging AICc scores within models.
-$\Delta\text{AICc}$ was calculated as $\text{min}(\bar{\text{AICc}}) - \bar{\text{AICc}}$, not the mean of the individual $\Delta\text{AICc}$ scores, to guarantee that the best model has $\Delta\text{AICc} = 0$.
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2185,7 +2196,8 @@ I have used two measures of pathogen richness and the number of subspecies datas
 However it is clear that the gene flow dataset is small (n = \rinline{nrow(fstFinal)}).
 Furthermore, while the model averaging approach has given a negative model averaged coefficient, the univariate model of gene flow against viral richness gave a positive coefficient.
 It is not easy to interpret these contradictions but it is clear that the results from the gene flow analysis alone should not be considered strong evidence for a relationship between pathogen richness and population structure.
-The sensitivity of this analysis reiterates the need to use large datasets where possible and use different measures of population structure to promote robust conclusions.
+The sensitivity of this analysis reiterates the need to use large datasets where possible and use 
+ measures of population structure to promote robust conclusions.
 
 \tmpsection{Broader context of results}
 
