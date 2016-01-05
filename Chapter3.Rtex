@@ -870,7 +870,7 @@ This removes the $(0, 1)$ bounds of $F_{ST}$ and is more easily interpretable th
 These two measures of population structure were analysed separately as the number of subspecies has \rinline{nrow(nSpecies)} data points while there is only $F_{ST}$ data for 22 bat species.
 For the subspecies analysis all bat species in \textcite{luis2013comparison} were used (i.e. all species with at least one known virus species).
 However, for the gene flow analysis, all bat species with suitable $F_{ST}$ estimates were used.
-As this included some species not present in \texcite{luis2013comparison} this includes some bat species with zero known virus species. 
+As this included some species not present in \textcite{luis2013comparison} this includes some bat species with zero known virus species. 
 
 To control for study bias I collected the number of Pubmed and Google Scholar citations for each bat species name including synonyms from ITIS \cite{itis} via the taxize package \cite{chamberlain2013taxize}.
 The counts were scraped using the rvest package \cite{rvest}.
@@ -887,7 +887,7 @@ Distribution size was estimated by downloading range maps for all species from I
 
 To control for phylogenetic nonindependance I used the best-supported phylogeny from \textcite{fritz2009geographical} (shown in Figure~\ref{fig:treePlot}) which is the supertree from \cite{bininda2007delayed} with names updated to match the Wilson \& Reeder taxonomy \cite{wilson2005mammal}.
 Phylogenetic manipulation was performed using the ape package \cite{ape}.
-The importance of the phylogeny on each variable separately was estimated using caper \cite{caper}.
+The importance of the phylogeny on each variable separately (the $\lambda$ parameter of the variable regressed against an intercept) was estimated and tested against the null of $\lambda = 0$ with log-likelihood ratio tests using caper \cite{caper}.
 I also performed the analysis using the tree from \cite{jones2005bats} as this has some broad changes with families in different places.
 However the phylogeny did not affect the analysis.
 
@@ -1954,8 +1954,8 @@ Number of subspecies &&&&\\
 \hspace{3mm}Total & \rinline{sprintf('%.2f', varWeights['NumberOfSubspecies'])} & \rinline{varCoefMeans['beta.NumberOfSubspecies']} &&\\
 \hspace{3mm}Models without interaction term &&  \rinline{nSpeciesCoefMean} &&\\
 \hspace{3mm}Models with interaction term &&  \rinline{nSpeciesCoefMeanI} &&\\
-Number of subspecies:log(Scholar) &  \rinline{varWeights['scholarRefs.NumberOfSubspecies']} &  \rinline{nSpeciesInterMean} && \\[2mm]  
-Gene flow & & &  \rinline{fstVarWeights['Nm']} &  \rinline{fstCoefVars['beta.Nm']}\\[2mm]  
+Number of subspecies:log(Scholar) &  \rinline{varWeights['scholarRefs.NumberOfSubspecies']} &  \rinline{sprintf('%.2f', nSpeciesInterMean)} && \\[2mm]  
+Gene flow & & &  \rinline{fstVarWeights['Nm']} &  \rinline{sprintf('%.3f', fstCoefVars['beta.Nm'])}\\[2mm]  
 log(Scholar) &  \rinline{sprintf('%.2f', varWeights['scholarRefs'])} &  \rinline{varCoefMeans['beta.scholarRefs']} & 
    \rinline{fstVarWeights['scholarRefs']} &  \rinline{fstCoefVars['beta.scholarRefs']}\\
 log(Mass) &  \rinline{sprintf('%.2f', varWeights['mass'])} &  \rinline{varCoefMeans['beta.mass']} & 
@@ -2189,15 +2189,14 @@ Study effort is also clearly supported confirming the expectation that additiona
 \tmpsection{Weaknesses and limitations}
 
 Although I have used measures of study effort to try to control for biases in the viral richness data, this bias could still make the results here unreliable --- this is especially true as study effort is by far the strongest predictor of viral richness in both datasets.
-It is hoped that as untargeted sequencing of viral genetic material (e.g. \cite{anthony2013strategy}) becomes cheaper and more common this bias can be reduced.
+It is hoped that as untargeted sequencing of viral genetic material (e.g. \textcite{anthony2013strategy}) becomes cheaper and more common this bias can be reduced.
 The strength of the relationship between study effort and known viral richness also highlights the number of virus species and bat-virus host-pathogen relationships yet to be discovered.
 
 I have used two measures of pathogen richness and the number of subspecies dataset is larger than those used in previous studies.
 However it is clear that the gene flow dataset is small (n = \rinline{nrow(fstFinal)}).
 Furthermore, while the model averaging approach has given a negative model averaged coefficient, the univariate model of gene flow against viral richness gave a positive coefficient.
 It is not easy to interpret these contradictions but it is clear that the results from the gene flow analysis alone should not be considered strong evidence for a relationship between pathogen richness and population structure.
-The sensitivity of this analysis reiterates the need to use large datasets where possible and use 
- measures of population structure to promote robust conclusions.
+The sensitivity of this analysis reiterates the need to use large datasets where possible and use mutliple measures of population structure to promote robust conclusions.
 
 \tmpsection{Broader context of results}
 
