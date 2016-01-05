@@ -8,7 +8,7 @@ propOfTextwidth = 0.8
 opts_chunk$set(
   echo = FALSE, 
   error = FALSE,
-  cache = 1, 
+  cache = TRUE, 
   dev = 'cairo_pdf', 
   warning = FALSE,
   results = 'hide',
@@ -23,7 +23,7 @@ opts_chunk$set(
   size = 'footnotesize',
   cache.extra = list(R.version)
   )
-options(digits=2)
+options(digits = 2)
 
 
 

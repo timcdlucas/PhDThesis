@@ -21,7 +21,10 @@ This includes data used as inputs to the analysis as well as derived data and re
 
 ## Derived data
 
+### Final products
+
 [nSpecies.csv](nSpecies.csv) Full, combined, cleaned dataset used for number of subspecies analysis.
+[fstFinal.csv](fstFinal.csv) Full, combined, cleaned dataset used for gene flow analysis.
 
 [modelSelectSubspecies.csv](modelSelectSubspecies.csv) Output data (model selection bootstraps) for Number of Subspecies analysis.
 

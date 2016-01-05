@@ -453,7 +453,7 @@ This interaction was included as I believed \emph{a priori} that this interactio
 The interaction was only included in models with both study effort and number of subspecies as individual terms.
 
 I fitted phylogenetic regressions of all models using nlme \cite{nlme}.
-The independant variables were centered and scaled to allow direct comparison of the coefficients.
+The independant variables were centered and scaled to allow direct comparison of the coefficients \cite{schielzeth2010simple}.
 In each case I simultaneously fitted the $\lambda$ parameter as this avoids mispecifying the model \cite{revell2010phylogenetic}.
 $\kappa$ and $\delta$ parameters were constrained to one as they are more concerned with when along a branch evolution occurs and because fitting multiple parameters makes interpretation difficult. 
 
@@ -533,15 +533,15 @@ Number of subspecies &&&&\\
 \hspace{3mm}Models without interaction term &&  0.54 &&\\
 \hspace{3mm}Models with interaction term &&  0.31 &&\\
 Number of subspecies:log(Scholar) &  0.97 &  0.50 && \\[2mm]  
-Gene flow & & &  0.89 &  0.005\\[2mm]  
+Gene flow & & &  0.89 &  \ensuremath{-0.67}\\[2mm]  
 log(Scholar) &  1.00 &  0.99 & 
-   0.99 &  0.08\\
+   0.99 &  2.49\\
 log(Mass) &  0.80 &  0.48 & 
-   0.98 &  0.04\\
+   0.98 &  \ensuremath{-0.35}\\
 log(Range size) &  0.66 &  0.34& 
-   0.06 &  0.59\\
+   0.06 &  1.57\\
 Random &  0.20 &  0.05& 
-   0.18 &  0.85\\
+   0.18 &  0.23\\
 \bottomrule
 \end{tabular}
 

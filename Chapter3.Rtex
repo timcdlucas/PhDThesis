@@ -1876,7 +1876,7 @@ This interaction was included as I believed \emph{a priori} that this interactio
 The interaction was only included in models with both study effort and number of subspecies as individual terms.
 
 I fitted phylogenetic regressions of all models using nlme \cite{nlme}.
-The independant variables were centered and scaled to allow direct comparison of the coefficients.
+The independant variables were centered and scaled to allow direct comparison of the coefficients \cite{schielzeth2010simple}.
 In each case I simultaneously fitted the $\lambda$ parameter as this avoids mispecifying the model \cite{revell2010phylogenetic}.
 $\kappa$ and $\delta$ parameters were constrained to one as they are more concerned with when along a branch evolution occurs and because fitting multiple parameters makes interpretation difficult. 
 
@@ -1955,16 +1955,16 @@ Number of subspecies &&&&\\
 \hspace{3mm}Total & \rinline{sprintf('%.2f', varWeights['NumberOfSubspecies'])} & \rinline{varCoefMeans['beta.NumberOfSubspecies']} &&\\
 \hspace{3mm}Models without interaction term &&  \rinline{nSpeciesCoefMean} &&\\
 \hspace{3mm}Models with interaction term &&  \rinline{nSpeciesCoefMeanI} &&\\
-Number of subspecies:log(Scholar) &  \rinline{varWeights['scholarRefs.NumberOfSubspecies']} &  \rinline{sprintf('%.2f', nSpeciesInterMean)} && \\[2mm]  
-Gene flow & & &  \rinline{fstVarWeights['Nm']} &  \rinline{sprintf('%.3f', fstCoefVars['beta.Nm'])}\\[2mm]  
+Number of subspecies:log(Scholar) &  \rinline{varWeights['scholarRefs.NumberOfSubspecies']} &  \rinline{sprintf('%.2f', varCoefMeans['beta.scholarRefs.NumberOfSubspecies'])} && \\[2mm]  
+Gene flow & & &  \rinline{fstVarWeights['Nm']} &  \rinline{fstCoefMeans['beta.Nm']}\\[2mm]  
 log(Scholar) &  \rinline{sprintf('%.2f', varWeights['scholarRefs'])} &  \rinline{varCoefMeans['beta.scholarRefs']} & 
-   \rinline{fstVarWeights['scholarRefs']} &  \rinline{fstCoefVars['beta.scholarRefs']}\\
+   \rinline{fstVarWeights['scholarRefs']} &  \rinline{fstCoefMeans['beta.scholarRefs']}\\
 log(Mass) &  \rinline{sprintf('%.2f', varWeights['mass'])} &  \rinline{varCoefMeans['beta.mass']} & 
-   \rinline{fstVarWeights['mass']} &  \rinline{fstCoefVars['beta.mass']}\\
+   \rinline{fstVarWeights['mass']} &  \rinline{fstCoefMeans['beta.mass']}\\
 log(Range size) &  \rinline{sprintf('%.2f', varWeights['distrSize'])} &  \rinline{varCoefMeans['beta.distrSize']}& 
-   \rinline{fstVarWeights['distrSize']} &  \rinline{fstCoefVars['beta.distrSize']}\\
+   \rinline{fstVarWeights['distrSize']} &  \rinline{fstCoefMeans['beta.distrSize']}\\
 Random &  \rinline{sprintf('%.2f', varWeights['rand'])} &  \rinline{varCoefMeans['beta.rand']}& 
-   \rinline{fstVarWeights['rand']} &  \rinline{fstCoefVars['beta.rand']}\\
+   \rinline{fstVarWeights['rand']} &  \rinline{fstCoefMeans['beta.rand']}\\
 \bottomrule
 \end{tabular}
 
