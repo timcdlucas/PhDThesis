@@ -20,7 +20,7 @@ batclocksBoots <- FALSE
 
 # Run slow fst data wrangling as some is slow.
 fstComb <- FALSE
-runIucn <- TRUE
+runIucn <- FALSE
 
 # There are figures created in the data analysis which are not in the final chapter document.
 #   If TRUE, they will be included in the output.
