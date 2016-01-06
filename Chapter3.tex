@@ -215,7 +215,7 @@ Further, I found that the role of phylogeny is very weak in the models and in th
 
 To test for an association between pathogen richness I have performed multivariate regression using a model selection framework to establish whether or not two measures of pathogen richness are likely to be in a `best model' and therefore important.
 As species cannot be considered independant due to shared evolutionary history, phylogeny was controlled for in all regressions.
-A number of other factors that have previously been found to be important were included as additional independant variables (body mass \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat}, range size \cite{kamiya2014determines, turmelle2009correlates, maganga2014bat} and study effort \cite{turmelle2009correlates, gay2014parasite, maganga2014bat}).
+A number of other factors that have previously been found to be important were included as additional independant variables: body mass \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat}, range size \cite{kamiya2014determines, turmelle2009correlates, maganga2014bat} and study effort \cite{turmelle2009correlates, gay2014parasite, maganga2014bat}.
 This was to attempt to avoid spurious positive results occuring simply due to correlation between pathogen richness and a different, causal factor.
 Despite commonly bein associated with pathogen richness \cite{arneberg2002host, kamiya2014determines, nunn2003comparative}, population density is not included in the analysis as there is very little data for bat densities --- however Chapter 4 examines the relationship between density and population structure and Chapter 5 presents a method that allows the estimation of density from acoustic surveys.
 I used both the number of subspecies a bat species has and estimates of gene flow (analysed separately) as measures of population structure.
@@ -460,8 +460,7 @@ The independant variables were centered and scaled to allow direct comparison of
 In each case I simultaneously fitted the $\lambda$ parameter as this avoids mispecifying the model \cite{revell2010phylogenetic}.
 $\kappa$ and $\delta$ parameters were constrained to one as they are more concerned with when along a branch evolution occurs and because fitting multiple parameters makes interpretation difficult. 
 
-To establish the importance of variables I calculated the probability that each variable would be in the best model if the data were recollected.
-This value is called the variables weight.
+To establish the importance of variables I calculated the probability, $Pr$, that each variable would be in the best model if the data were recollected.
 For each variable the mean of it's coefficient, $\beta$, in all models that contained that variable was also calculated to determine the direction and strength of the variables.
 In the subspecies analysis, this mean of $\beta$ was calculated for all models, only models with a interaction term and only models without an interaction.
 As the interaction term greatly affects the estimated value of $\beta$, considering these value seperately aids interpretation.
@@ -470,9 +469,9 @@ The whole analysis was run 50 times, resampling the random variable each time.
 I calculated AICc for each model.
 I calculated the average AICc, $\bar{\text{AICc}}$, by averaging AICc scores within models.
 $\Delta\text{AICc}$ was calculated as $\text{min}(\bar{\text{AICc}}) - \bar{\text{AICc}}$, not the mean of the individual $\Delta\text{AICc}$ scores, to guarantee that the best model has $\Delta\text{AICc} = 0$.
-From these $\Delta\text{AICc}$ calculated Akaiki weights.
+From these $\Delta\text{AICc}$ I calculated Akaiki weights, $w$.
 This value can be interpreted as the probability that a model would be the best model if the data were recollected.
-For each variable, the sum of the Akaiki weights of models containing that variable are summed.
+For each variable, the sum of the Akaiki weights of models containing that variable are summed to give $Pr$.
 This value can be interpreted as the probability that the given variable is in the best model.
 
 
@@ -522,21 +521,21 @@ As seen in Figure~\ref{fig:fstITPlots}A, study effort is very likely in the best
 \centering
 \caption[Estimated variable weights and coefficients]{
 Estimated variable weights (probability that a variable is in the best model) and their estimated coefficients for both number of subspecies and gene flow analyses.
-The coefficients for number of subspecies are also seperated for models with and without the interaction term because this term strongly changes the coefficient.
+The coefficients for number of subspecies are also seperated for models with and without the interaction term because this term strongly changes the coefficient. 
 However, there are no weights for these seperated terms as they are not directly compared in the model selection framework.
 }
 %\rowcolors{2}{gray!25}{white}
 \begin{tabular}{@{}>{\small}l rrrr@{}}
 \toprule
 & \multicolumn{2}{c}{\textit{Number of Subspecies}} & \multicolumn{2}{c}{\textit{Gene flow}}\\\cmidrule(rl){2-3}\cmidrule(rl){4-5}
-\normalsize{Variable} & Weight & Coefficient & Weight & Coefficient\\
+\normalsize{Variable} & $Pr$ & Coefficient & $Pr$ & Coefficient\\
 \midrule
 Number of subspecies &&&&\\
 \hspace{3mm}Total & 1.00 & 0.32 &&\\
 \hspace{3mm}Models without interaction term &&  0.63 &&\\
 \hspace{3mm}Models with interaction term &&  0.31 &&\\
-Number of subspecies:log(Scholar) &  0.96 &  0.50 && \\[2mm]  
-Gene flow & & &  0.89 &  \ensuremath{-0.67}\\[2mm]  
+Number of subspecies:log(Scholar) &  0.96 &  0.50 && \\[2.5mm]  
+Gene flow & & &  0.89 &  \ensuremath{-0.67}\\[2.5mm]  
 log(Scholar) &  0.98 &  0.99 & 
    0.99 &  2.49\\
 log(Mass) &  0.80 &  0.48 & 
@@ -569,18 +568,17 @@ The number of described virus species for a bat host ranged up to 12 viruses in 
 Model selection results for number of subspecies and gene flow analysis. 
 $\bar{\text{AICc}}$ is the mean AICc score across 50 resamplings of the null random variable. 
 $\Delta$AICc is the $\bar{\text{AICc}}$ score minus the lowest score. 
-$w_i$ is the Akaike weight and can be interpreted as the probability that the model is the best model (of those in the plausible set).
+$w$ is the Akaike weight and can be interpreted as the probability that the model is the best model (of those in the plausible set).
 $\sum w_i$ is the cumulative sum of the Akaike weights.
+log(Scholar)*NSubspecies implies the interaction term between study effort and number of subspecies as well as both of the individual linear terms.
 In the number of subspecies analysis there are many models with low $\Delta$AICc scores suggesting there there is no single `best model'.
 In the gene flow analysis, only the top model is supported.
-As body mass and study effort are in both these models these variables are very likely in the best model.
-Gene flow is in the top model, implying it may well be in the best model.
 }
 
 \begin{tabular}{@{}>{\small}lrrrr@{}}
 
 \toprule
-\normalsize{Model} & $\bar{\text{AICc}}$ & $\Delta$AICc & $w_i$ & $\sum w_i$\\
+\normalsize{Model} & $\bar{\text{AICc}}$ & $\Delta$AICc & $w$ & $\sum w$\\
 \midrule
 &&&&\\[-3mm]
 \textit{Number of Subspecies} &&&&\\
@@ -621,9 +619,9 @@ log(Scholar) + log(Mass) &
 log(Mass) + log(Range size) & 
 106 & 35.06 &
 0.00 & 1.00\\
-log(Scholar) + log(Gene flow) + log(Mass) + rand &
-107 & 36.88 &
-0.00 & 1.00\\
+%log(Scholar) + log(Gene flow) + log(Mass) + rand &
+%round(fstModelWeights[4 ,2]) & sprintf("%.2f", round(fstModelWeights[4, 3], 2)) &
+%sprintf("%.2f", round(fstModelWeights[4, 4], 2)) & sprintf("%.2f", round(fstModelWeights[4, 5], 2))\\
 \bottomrule
 \end{tabular}
 
@@ -639,11 +637,12 @@ However, study effort has some phylogenetic autocorrelation ($\lambda$ = 0.15, $
 \tmpsection{Model results}
 
 While less strongly supported than the number of subspecies, gene flow is likely in the best model ($Pr = $ 0.89) compared to the benchmark random variable which has $Pr = $ 0.18 as shown in Figure~\ref{fig:fstITPlots}B.
-On average (mean weighted by Akaiki weights) there is a negative relationship between gene flow and viral richness ($\beta = $ NA, variance = NA) despite the apparent positive relationship (see Figure~\ref{fig:fstRawData}) weakly suggested by the bivariate model (pgls: $\beta$ = 0.63, $t$ = 1.16, df = 13, $p$ = 0.27).
-
+On average (mean weighted by Akaiki weights) there is a negative relationship between gene flow and viral richness ($\beta = $ \ensuremath{-0.67}, variance = \ensuremath{5.48\times 10^{-3}}) despite the apparent positive relationship (see Figure~\ref{fig:fstRawData}) weakly suggested by the bivariate model (pgls: $\beta$ = 0.63, $t$ = 1.16, df = 13, $p$ = 0.27).
 This supports the hypothesis that population structure promotes viral richness.
 Possibly due to the smaller sample size, or a weaker relationship, this coefficient is much more varied than the number of subspecies coeficient with 21.75\% of models estimating a positive relationship.
+
 As in the number of subspecies analysis, study effort is very likely in the best model ($Pr = $ 0.99) as is body mass ($Pr = $ 0.98).
+However, body mass has a negative average coefficient ($\beta = $ \ensuremath{-0.35}, variance = 0.04) which is in contrast to number of subspecies analysis, many studies in the literature \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat} and the bivariate model (pgls: $\beta$ = 0.6, $t$ = 0.38, df = 13, $p$ = 0.71).
 In contrast to the number of subspecies analysis, range size is almost certainly not in the best model with $Pr = $ 0.06 being much less than the random variable.
 This variable being less supported than the random variable is probably because range size is closely correlated with study effort (pgls: $\beta$ = 0.6, $t$ = 4.45, df = 13, $p$ = \ensuremath{6.58\times 10^{-4}}).
 

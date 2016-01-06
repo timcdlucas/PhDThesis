@@ -1834,6 +1834,8 @@ nmFstUni <- summary(pgls(virusSpecies ~ log(Nm), data = compFst, lambda = 'ML'))
 massFstUni <- summary(pgls(virusSpecies ~ log(mass), data = compFst, lambda = 'ML'))
 fstDistrStudyEffort <- summary(pgls(log(scholarRefs) ~ log(distrSize), data = compFst, lambda = 'ML'))
 
+fstMassStudyEffort <- summary(pgls(log(scholarRefs) ~ log(mass), data = compFst, lambda = 'ML'))
+
 %%end.rcode
 
 
@@ -1894,8 +1896,7 @@ The independant variables were centered and scaled to allow direct comparison of
 In each case I simultaneously fitted the $\lambda$ parameter as this avoids mispecifying the model \cite{revell2010phylogenetic}.
 $\kappa$ and $\delta$ parameters were constrained to one as they are more concerned with when along a branch evolution occurs and because fitting multiple parameters makes interpretation difficult. 
 
-To establish the importance of variables I calculated the probability that each variable would be in the best model if the data were recollected.
-This value is called the variables weight.
+To establish the importance of variables I calculated the probability, $Pr$, that each variable would be in the best model if the data were recollected.
 For each variable the mean of it's coefficient, $\beta$, in all models that contained that variable was also calculated to determine the direction and strength of the variables.
 In the subspecies analysis, this mean of $\beta$ was calculated for all models, only models with a interaction term and only models without an interaction.
 As the interaction term greatly affects the estimated value of $\beta$, considering these value seperately aids interpretation.
@@ -1904,9 +1905,9 @@ The whole analysis was run \rinline{nBoots} times, resampling the random variabl
 I calculated AICc for each model.
 I calculated the average AICc, $\bar{\text{AICc}}$, by averaging AICc scores within models.
 $\Delta\text{AICc}$ was calculated as $\text{min}(\bar{\text{AICc}}) - \bar{\text{AICc}}$, not the mean of the individual $\Delta\text{AICc}$ scores, to guarantee that the best model has $\Delta\text{AICc} = 0$.
-From these $\Delta\text{AICc}$ calculated Akaiki weights.
+From these $\Delta\text{AICc}$ I calculated Akaiki weights, $w$.
 This value can be interpreted as the probability that a model would be the best model if the data were recollected.
-For each variable, the sum of the Akaiki weights of models containing that variable are summed.
+For each variable, the sum of the Akaiki weights of models containing that variable are summed to give $Pr$.
 This value can be interpreted as the probability that the given variable is in the best model.
 
 
@@ -1956,21 +1957,21 @@ As seen in Figure~\ref{fig:fstITPlots}A, study effort is very likely in the best
 \centering
 \caption[Estimated variable weights and coefficients]{
 Estimated variable weights (probability that a variable is in the best model) and their estimated coefficients for both number of subspecies and gene flow analyses.
-The coefficients for number of subspecies are also seperated for models with and without the interaction term because this term strongly changes the coefficient.
+The coefficients for number of subspecies are also seperated for models with and without the interaction term because this term strongly changes the coefficient. 
 However, there are no weights for these seperated terms as they are not directly compared in the model selection framework.
 }
 %\rowcolors{2}{gray!25}{white}
 \begin{tabular}{@{}>{\small}l rrrr@{}}
 \toprule
 & \multicolumn{2}{c}{\textit{Number of Subspecies}} & \multicolumn{2}{c}{\textit{Gene flow}}\\\cmidrule(rl){2-3}\cmidrule(rl){4-5}
-\normalsize{Variable} & Weight & Coefficient & Weight & Coefficient\\
+\normalsize{Variable} & $Pr$ & Coefficient & $Pr$ & Coefficient\\
 \midrule
 Number of subspecies &&&&\\
 \hspace{3mm}Total & \rinline{sprintf('%.2f', varWeights['NumberOfSubspecies'])} & \rinline{varCoefMeans['beta.NumberOfSubspecies']} &&\\
 \hspace{3mm}Models without interaction term &&  \rinline{nSpeciesCoefMean} &&\\
 \hspace{3mm}Models with interaction term &&  \rinline{nSpeciesCoefMeanI} &&\\
-Number of subspecies:log(Scholar) &  \rinline{varWeights['scholarRefs.NumberOfSubspecies']} &  \rinline{sprintf('%.2f', varCoefMeans['beta.scholarRefs.NumberOfSubspecies'])} && \\[2mm]  
-Gene flow & & &  \rinline{fstVarWeights['Nm']} &  \rinline{fstCoefMeans['beta.Nm']}\\[2mm]  
+Number of subspecies:log(Scholar) &  \rinline{varWeights['scholarRefs.NumberOfSubspecies']} &  \rinline{sprintf('%.2f', varCoefMeans['beta.scholarRefs.NumberOfSubspecies'])} && \\[2.5mm]  
+Gene flow & & &  \rinline{fstVarWeights['Nm']} &  \rinline{fstCoefMeans['beta.Nm']}\\[2.5mm]  
 log(Scholar) &  \rinline{sprintf('%.2f', varWeights['scholarRefs'])} &  \rinline{varCoefMeans['beta.scholarRefs']} & 
    \rinline{fstVarWeights['scholarRefs']} &  \rinline{fstCoefMeans['beta.scholarRefs']}\\
 log(Mass) &  \rinline{sprintf('%.2f', varWeights['mass'])} &  \rinline{varCoefMeans['beta.mass']} & 
@@ -2003,18 +2004,17 @@ The number of described virus species for a bat host ranged up to \rinline{max(f
 Model selection results for number of subspecies and gene flow analysis. 
 $\bar{\text{AICc}}$ is the mean AICc score across \rinline{nBoots} resamplings of the null random variable. 
 $\Delta$AICc is the $\bar{\text{AICc}}$ score minus the lowest score. 
-$w_i$ is the Akaike weight and can be interpreted as the probability that the model is the best model (of those in the plausible set).
+$w$ is the Akaike weight and can be interpreted as the probability that the model is the best model (of those in the plausible set).
 $\sum w_i$ is the cumulative sum of the Akaike weights.
+log(Scholar)*NSubspecies implies the interaction term between study effort and number of subspecies as well as both of the individual linear terms.
 In the number of subspecies analysis there are many models with low $\Delta$AICc scores suggesting there there is no single `best model'.
 In the gene flow analysis, only the top model is supported.
-As body mass and study effort are in both these models these variables are very likely in the best model.
-Gene flow is in the top model, implying it may well be in the best model.
 }
 
 \begin{tabular}{@{}>{\small}lrrrr@{}}
 
 \toprule
-\normalsize{Model} & $\bar{\text{AICc}}$ & $\Delta$AICc & $w_i$ & $\sum w_i$\\
+\normalsize{Model} & $\bar{\text{AICc}}$ & $\Delta$AICc & $w$ & $\sum w$\\
 \midrule
 &&&&\\[-3mm]
 \textit{Number of Subspecies} &&&&\\
@@ -2055,9 +2055,9 @@ log(Scholar) + log(Mass) &
 log(Mass) + log(Range size) & 
 \rinline{round(fstModelWeights[3 ,2])} & \rinline{sprintf("%.2f", round(fstModelWeights[3, 3], 2))} &
 \rinline{sprintf("%.2f", round(fstModelWeights[3, 4], 2))} & \rinline{sprintf("%.2f", round(fstModelWeights[3, 5], 2))}\\
-log(Scholar) + log(Gene flow) + log(Mass) + rand &
-\rinline{round(fstModelWeights[4 ,2])} & \rinline{sprintf("%.2f", round(fstModelWeights[4, 3], 2))} &
-\rinline{sprintf("%.2f", round(fstModelWeights[4, 4], 2))} & \rinline{sprintf("%.2f", round(fstModelWeights[4, 5], 2))}\\
+%log(Scholar) + log(Gene flow) + log(Mass) + rand &
+%\rinline{round(fstModelWeights[4 ,2])} & \rinline{sprintf("%.2f", round(fstModelWeights[4, 3], 2))} &
+%\rinline{sprintf("%.2f", round(fstModelWeights[4, 4], 2))} & \rinline{sprintf("%.2f", round(fstModelWeights[4, 5], 2))}\\
 \bottomrule
 \end{tabular}
 
@@ -2082,7 +2082,7 @@ However, body mass has a negative average coefficient ($\beta = $ \rinline{fstCo
 In contrast to the number of subspecies analysis, range size is almost certainly not in the best model with $Pr = $ \rinline{fstVarWeights['distrSize']} being much less than the random variable.
 This variable being less supported than the random variable is probably because range size is closely correlated with study effort (pgls: $\beta$ = \rinline{fstDistrStudyEffort$coefficients['log(distrSize)', 'Estimate']}, $t$ = \rinline{fstDistrStudyEffort$coefficients['log(distrSize)', 't value']}, df = \rinline{fstDistrStudyEffort$df[2]}, $p$ = \rinline{fstDistrStudyEffort$coefficients['log(distrSize)', 'Pr(>|t|)']}).
 
-Across all models the mean value of $\lambda$ is \rinline{mean(na.omit(fstAllResults$lambda))} and a large number of individual models (\rinline{mean(na.omit(fstAllResults$lambda < 0))*100}\%)  had negatively phylogenetically distributed residuals implying the residuals from the model are strongly negatively phylogenetic.
+Across all models the mean value of $\lambda$ is \rinline{mean(na.omit(fstAllResults$lambda))} and a large number of individual models (\rinline{round(mean(na.omit(fstAllResults$lambda < 0))*100)}\%)  had negatively phylogenetically distributed residuals implying the residuals from the model are strongly negatively phylogenetic.
 Due to the small sample size this is probably due to a small number of data points with large residuals being distant on the tree.
 
 
