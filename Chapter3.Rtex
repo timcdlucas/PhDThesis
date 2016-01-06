@@ -239,7 +239,7 @@ Further, I found that the role of phylogeny is very weak in the models and in th
 #   This is useful at the top so that it can go in text.
 
 # How many bootstraps for model selection NULL variable
-nBoots <- 10
+nBoots <- 50
 
 
 # What proportion of a species range should be covered for an Fst study to count as valid.
@@ -1830,7 +1830,10 @@ virusFstLambda <- summary(pgls(virusSpecies ~ 1, data = compFst, lambda = 'ML'))
 distrFstLambda <- summary(pgls(distrSize ~ 1, data = compFst, lambda = 'ML'))
 
 nmFstUni <- summary(pgls(virusSpecies ~ log(Nm), data = compFst, lambda = 'ML'))
-	
+
+massFstUni <- summary(pgls(virusSpecies ~ log(mass), data = compFst, lambda = 'ML'))
+fstDistrStudyEffort <- summary(pgls(log(scholarRefs) ~ log(distrSize), data = compFst, lambda = 'ML'))
+
 %%end.rcode
 
 
@@ -1937,7 +1940,7 @@ A small number of models (\rinline{mean(na.omit(allResults$lambda < 0))*100}\%) 
 
 \tmpsection{Model results}
 
-Summing the Akaiki weights of all models that contain a given variable gives a probability, $Pr$, that the variable would be in the best model (Figure~\ref{fig:fstITPlots}a) if the data were recollected \cite{whittingham2006we}.
+Summing the Akaiki weights of all models that contain a given variable gives a probability, $Pr$, that the variable would be in the best model (Figure~\ref{fig:fstITPlots}A) if the data were recollected \cite{whittingham2006we}.
 The number of subspecies is very likely in the best model ($Pr > $ \rinline{substring(as.character( varWeights['NumberOfSubspecies']), 1, 4)}) as is the interaction between number of species and study effort ($Pr = $ \rinline{varWeights['scholarRefs.NumberOfSubspecies']}) compared to the benchmark random variable which has $Pr = $ \rinline{varWeights['rand']}.
 When models with the interaction term are removed, on average (mean weighted by Akaiki weights) there is a positive relationship between the number of subspecies and viral richness ($\beta = $ \rinline{nSpeciesCoefMean}, variance = \rinline{nSpeciesCoefVar}).
 Models with an interaction between number of subspecies and study effort have a positive interaction term ($\beta = $ \rinline{nSpeciesInterMean}, variance = \rinline{nSpeciesInterVar}) and a negative linear term ($\beta = $ \rinline{nSpeciesCoefMeanI}, variance = \rinline{nSpeciesCoefVarI}) which in total is a positive relationship for most of the range of the study effort data.
@@ -1945,7 +1948,7 @@ This supports the hypothesis that population structure promotes pathogen richnes
 The strong support for a positive interaction term implies that strong population structure only predicts high known pathogen richness in the presence of high study effort.
 One interpretation of this is that population structure alone does not predict high known richness; reasonable study effort is still needed to turn the expected high richness into known and recorded viral richness.
 Another interpretation is that having few subspecies does not predict low viral richness unless the species has been suitable sampled; the low number of subspecies is probably due to a lack of study rather than an accurate measurement.
-As seen in Figure~\ref{fig:fstITPlots}a, study effort is very likely in the best model ($\beta = $ \rinline{varCoefMeans['beta.scholarRefs']}, $Pr > $ \rinline{substring(as.character(varWeights['scholarRefs']), 1, 4)}) body mass and range size are also probably in the best model ($\beta = $ \rinline{varCoefMeans['beta.mass']}, $Pr = $ \rinline{varWeights['mass']} and $\beta = $ \rinline{varCoefMeans['beta.distrSize']}, $Pr = $ \rinline{varWeights['distrSize']}).
+As seen in Figure~\ref{fig:fstITPlots}A, study effort is very likely in the best model ($\beta = $ \rinline{varCoefMeans['beta.scholarRefs']}, $Pr > $ \rinline{substring(as.character(varWeights['scholarRefs']), 1, 4)}) body mass and range size are also probably in the best model ($\beta = $ \rinline{varCoefMeans['beta.mass']}, $Pr = $ \rinline{varWeights['mass']} and $\beta = $ \rinline{varCoefMeans['beta.distrSize']}, $Pr = $ \rinline{varWeights['distrSize']}).
 
 
 
@@ -2003,7 +2006,7 @@ $\Delta$AICc is the $\bar{\text{AICc}}$ score minus the lowest score.
 $w_i$ is the Akaike weight and can be interpreted as the probability that the model is the best model (of those in the plausible set).
 $\sum w_i$ is the cumulative sum of the Akaike weights.
 In the number of subspecies analysis there are many models with low $\Delta$AICc scores suggesting there there is no single `best model'.
-In the gene flow analysis, the top two models are considerably better than the other models; there is a \rinline{100*round(fstModelWeights[2, 4] +fstModelWeights[1, 4], 2)}\% chance that one of them is the best model.
+In the gene flow analysis, only the top model is supported.
 As body mass and study effort are in both these models these variables are very likely in the best model.
 Gene flow is in the top model, implying it may well be in the best model.
 }
@@ -2069,12 +2072,13 @@ However, study effort has some phylogenetic autocorrelation ($\lambda$ = \rinlin
 
 \tmpsection{Model results}
 
-While less strongly supported than the number of subspecies, gene flow is likely in the best model ($Pr = $ \rinline{fstVarWeights['Nm']}) compared to the benchmark random variable which has $Pr = $ \rinline{fstVarWeights['rand']} as shown in Figure~\ref{fig:fstITPlots}b.
+While less strongly supported than the number of subspecies, gene flow is likely in the best model ($Pr = $ \rinline{fstVarWeights['Nm']}) compared to the benchmark random variable which has $Pr = $ \rinline{fstVarWeights['rand']} as shown in Figure~\ref{fig:fstITPlots}B.
 On average (mean weighted by Akaiki weights) there is a negative relationship between gene flow and viral richness ($\beta = $ \rinline{fstCoefMeans['beta log(Nm)']}, variance = \rinline{fstCoefVars['beta log(Nm)']}) despite the apparent positive relationship in Figure~\ref{fig:fstRawData}.
 This supports the hypothesis that population structure promotes viral richness.
 Possibly due to the smaller sample size, or a weaker relationship, this coefficient is much more varied than the number of subspecies coeficient with \rinline{pcCoefLzero}\% of models estimating a positive relationship.
 As in the number of subspecies analysis, study effort is very likely in the best model ($Pr = $ \rinline{fstVarWeights['scholarRefs']}) as is body mass ($Pr = $ \rinline{fstVarWeights['mass']}).
 In contrast to the number of subspecies analysis, range size is almost certainly not in the best model with $Pr = $ \rinline{fstVarWeights['distrSize']} being much less than the random variable.
+This variable being less supported than the random variable is probably because range size is closely correlated with study effort (pgls: $t$ = \rinline{fstDistrStudyEffort$coefficients['log(pubmedRefs + 1)', 't value']}, df = \rinline{fstDistrStudyEffort$df[2]}, $p$ = \rinline{fstDistrStudyEffort$coefficients['log(pubmedRefs + 1)', 'Pr(>|t|)']}).
 
 Across all models the mean value of $\lambda$ is \rinline{mean(na.omit(fstAllResults$lambda))} and a large number of individual models (\rinline{mean(na.omit(fstAllResults$lambda < 0))*100}\%)  had negatively phylogenetically distributed residuals implying the residuals from the model are strongly negatively phylogenetic.
 Due to the small sample size this is probably due to a small number of data points with large residuals being distant on the tree.
