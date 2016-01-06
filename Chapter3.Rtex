@@ -1949,11 +1949,13 @@ log(Mass) and log(Range Size) and the random variable are all in three of the to
 Summing the Akaiki weights of all models that contain a given variable gives a probability, $Pr$, that the variable would be in the best model (Figure~\ref{fig:fstITPlots}A) if the data were recollected \cite{whittingham2006we}.
 The number of subspecies is very likely in the best model ($Pr > $ \rinline{substring(as.character( varWeights['NumberOfSubspecies']), 1, 4)}) as is the interaction between number of species and study effort ($Pr = $ \rinline{varWeights['scholarRefs.NumberOfSubspecies']}) compared to the benchmark random variable which has $Pr = $ \rinline{varWeights['rand']} (see Figure~\ref{fig:fstITPlots}A and Table~\ref{t:variables}).
 When models with the interaction term are removed, on average (mean weighted by Akaiki weights) there is a positive relationship between the number of subspecies and viral richness ($\beta = $ \rinline{nSpeciesCoefMean}, variance = \rinline{nSpeciesCoefVar}).
-Models with an interaction between number of subspecies and study effort have a positive interaction term ($\beta = $ \rinline{nSpeciesInterMean}, variance = \rinline{nSpeciesInterVar}) and a negative linear term ($\beta = $ \rinline{nSpeciesCoefMeanI}, variance = \rinline{nSpeciesCoefVarI}) which in total is a positive relationship for most of the range of the study effort data.
+Models with an interaction between number of subspecies and study effort have a positive interaction term ($\beta = $ \rinline{nSpeciesInterMean}, variance = \rinline{nSpeciesInterVar}) and linear term ($\beta = $ \rinline{nSpeciesCoefMeanI}, variance = \rinline{nSpeciesCoefVarI}).
 This supports the hypothesis that population structure promotes pathogen richness.
-The strong support for a positive interaction term implies that strong population structure only predicts high known pathogen richness in the presence of high study effort.
-One interpretation of this is that population structure alone does not predict high known richness; reasonable study effort is still needed to turn the expected high richness into known and recorded viral richness.
-Another interpretation is that having few subspecies does not predict low viral richness unless the species has been suitable sampled; the low number of subspecies is probably due to a lack of study rather than an accurate measurement.
+The strong support for a positive interaction term implies that population structure has a stronger relationship with known pathogen richness in the presence of study effort.
+only predicts high known pathogen richness in the presence of high study effort.
+One interpretation of this is that population structure alone does not predict high known richness; reasonable study effort is also needed to turn the expected high richness into known and recorded viral richness.
+Another interpretation is that having few subspecies does not predict low viral richness unless the species has been suitable sampley as the low number of subspecies is probably due to a lack of study rather than an accurate measurement.
+
 
 As seen in Figure~\ref{fig:fstITPlots}A, study effort is very likely in the best model ($\beta = $ \rinline{varCoefMeans['beta.scholarRefs']}, $Pr > $ \rinline{substring(as.character(varWeights['scholarRefs']), 1, 4)}).
 Body mass and range size are also probably in the best model ($\beta = $ \rinline{varCoefMeans['beta.mass']}, $Pr = $ \rinline{varWeights['mass']} and $\beta = $ \rinline{varCoefMeans['beta.distrSize']}, $Pr = $ \rinline{varWeights['distrSize']}) with positive relationships of slightly lower strength than the number of subspecies in models without an interaction term ($\beta = $ \rinline{nSpeciesCoefMean}, variance = \rinline{nSpeciesCoefVar}).	
@@ -2012,19 +2014,19 @@ Model selection results for number of subspecies and gene flow analysis.
 $\bar{\text{AICc}}$ is the mean AICc score across \rinline{nBoots} resamplings of the null random variable. 
 $\Delta$AICc is the $\bar{\text{AICc}}$ score minus the lowest score. 
 $w$ is the Akaike weight and can be interpreted as the probability that the model is the best model (of those in the plausible set).
-$\sum w_i$ is the cumulative sum of the Akaike weights.
+$\sum w$ is the cumulative sum of the Akaike weights.
 log(Scholar)*NSubspecies implies the interaction term between study effort and number of subspecies as well as both of the individual linear terms.
 In the number of subspecies analysis there are many models with low $\Delta$AICc scores suggesting there there is no single `best model'.
 In the gene flow analysis, only the top model is supported.
 }
 
-\begin{tabular}{@{}>{\small}p{8cm}rrrr@{}}
+\begin{tabular}{@{}>{\footnotesize}p{8cm}rrrr@{}}
 
 \toprule
 \normalsize{Model} & $\bar{\text{AICc}}$ & $\Delta$AICc & $w$ & $\sum w$\\
 \midrule
 &&&&\\[-3mm]
-\textit{Number of Subspecies} &&&&\\
+\textit{\small{Number of Subspecies}} &&&&\\
 %1
 log(Scholar)*NSubspecies  + log(Mass) + log(RangeSize) & 
 \rinline{round(modelWeights[1 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[1, 3], 2))} &
@@ -2061,7 +2063,7 @@ log(Scholar) + NSubspecies log(Mass) + rand &
 log(Scholar) + NSubspecies + log(Mass) + log(RangeSize) + rand& 
 \rinline{round(modelWeights[9 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[9, 3], 2))} &
 \rinline{sprintf("%.2f", round(modelWeights[9, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[9, 5], 2))}\\[3mm]
-\textit{Gene flow} &&&&\\
+\textit{\small{Gene flow}} &&&&\\
 log(Scholar) + log(Gene flow) + log(Mass) & 
 \rinline{round(fstModelWeights[1 ,2])} & \rinline{sprintf("%.2f", round(fstModelWeights[1, 3], 2))} &
 \rinline{sprintf("%.2f", round(fstModelWeights[1, 4], 2))} & \rinline{sprintf("%.2f", round(fstModelWeights[1, 5], 2))}\\
