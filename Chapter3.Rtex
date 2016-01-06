@@ -2073,12 +2073,13 @@ However, study effort has some phylogenetic autocorrelation ($\lambda$ = \rinlin
 \tmpsection{Model results}
 
 While less strongly supported than the number of subspecies, gene flow is likely in the best model ($Pr = $ \rinline{fstVarWeights['Nm']}) compared to the benchmark random variable which has $Pr = $ \rinline{fstVarWeights['rand']} as shown in Figure~\ref{fig:fstITPlots}B.
-On average (mean weighted by Akaiki weights) there is a negative relationship between gene flow and viral richness ($\beta = $ \rinline{fstCoefMeans['beta log(Nm)']}, variance = \rinline{fstCoefVars['beta log(Nm)']}) despite the apparent positive relationship in Figure~\ref{fig:fstRawData}.
+On average (mean weighted by Akaiki weights) there is a negative relationship between gene flow and viral richness ($\beta = $ \rinline{fstCoefMeans['beta log(Nm)']}, variance = \rinline{fstCoefVars['beta log(Nm)']}) despite the apparent positive relationship (see Figure~\ref{fig:fstRawData}) weakly suggested by the bivariate model (pgls: $\beta$ = \rinline{nmFstUni$coefficients['log(Nm)', 'Estimate']}, $t$ = \rinline{nmFstUni$coefficients['log(Nm)', 't value']}, df = \rinline{nmFstUni$df[2]}, $p$ = \rinline{nmFstUni$coefficients['log(Nm)', 'Pr(>|t|)']}).
+
 This supports the hypothesis that population structure promotes viral richness.
 Possibly due to the smaller sample size, or a weaker relationship, this coefficient is much more varied than the number of subspecies coeficient with \rinline{pcCoefLzero}\% of models estimating a positive relationship.
 As in the number of subspecies analysis, study effort is very likely in the best model ($Pr = $ \rinline{fstVarWeights['scholarRefs']}) as is body mass ($Pr = $ \rinline{fstVarWeights['mass']}).
 In contrast to the number of subspecies analysis, range size is almost certainly not in the best model with $Pr = $ \rinline{fstVarWeights['distrSize']} being much less than the random variable.
-This variable being less supported than the random variable is probably because range size is closely correlated with study effort (pgls: $t$ = \rinline{fstDistrStudyEffort$coefficients['log(pubmedRefs + 1)', 't value']}, df = \rinline{fstDistrStudyEffort$df[2]}, $p$ = \rinline{fstDistrStudyEffort$coefficients['log(pubmedRefs + 1)', 'Pr(>|t|)']}).
+This variable being less supported than the random variable is probably because range size is closely correlated with study effort (pgls: $\beta$ = \rinline{fstDistrStudyEffort$coefficients['log(distrSize)', 'Estimate']}, $t$ = \rinline{fstDistrStudyEffort$coefficients['log(distrSize)', 't value']}, df = \rinline{fstDistrStudyEffort$df[2]}, $p$ = \rinline{fstDistrStudyEffort$coefficients['log(distrSize)', 'Pr(>|t|)']}).
 
 Across all models the mean value of $\lambda$ is \rinline{mean(na.omit(fstAllResults$lambda))} and a large number of individual models (\rinline{mean(na.omit(fstAllResults$lambda < 0))*100}\%)  had negatively phylogenetically distributed residuals implying the residuals from the model are strongly negatively phylogenetic.
 Due to the small sample size this is probably due to a small number of data points with large residuals being distant on the tree.
