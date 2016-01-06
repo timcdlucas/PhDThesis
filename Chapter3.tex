@@ -513,11 +513,13 @@ log(Mass) and log(Range Size) and the random variable are all in three of the to
 Summing the Akaiki weights of all models that contain a given variable gives a probability, $Pr$, that the variable would be in the best model (Figure~\ref{fig:fstITPlots}A) if the data were recollected \cite{whittingham2006we}.
 The number of subspecies is very likely in the best model ($Pr > $ 0.99) as is the interaction between number of species and study effort ($Pr = $ 0.96) compared to the benchmark random variable which has $Pr = $ 0.21 (see Figure~\ref{fig:fstITPlots}A and Table~\ref{t:variables}).
 When models with the interaction term are removed, on average (mean weighted by Akaiki weights) there is a positive relationship between the number of subspecies and viral richness ($\beta = $ 0.63, variance = 0.02).
-Models with an interaction between number of subspecies and study effort have a positive interaction term ($\beta = $ 0.5, variance = \ensuremath{5.11\times 10^{-5}}) and a negative linear term ($\beta = $ 0.31, variance = \ensuremath{2.13\times 10^{-4}}) which in total is a positive relationship for most of the range of the study effort data.
+Models with an interaction between number of subspecies and study effort have a positive interaction term ($\beta = $ 0.5, variance = \ensuremath{5.11\times 10^{-5}}) and linear term ($\beta = $ 0.31, variance = \ensuremath{2.13\times 10^{-4}}).
 This supports the hypothesis that population structure promotes pathogen richness.
-The strong support for a positive interaction term implies that strong population structure only predicts high known pathogen richness in the presence of high study effort.
-One interpretation of this is that population structure alone does not predict high known richness; reasonable study effort is still needed to turn the expected high richness into known and recorded viral richness.
-Another interpretation is that having few subspecies does not predict low viral richness unless the species has been suitable sampled; the low number of subspecies is probably due to a lack of study rather than an accurate measurement.
+The strong support for a positive interaction term implies that population structure has a stronger relationship with known pathogen richness in the presence of study effort.
+only predicts high known pathogen richness in the presence of high study effort.
+One interpretation of this is that population structure alone does not predict high known richness; reasonable study effort is also needed to turn the expected high richness into known and recorded viral richness.
+Another interpretation is that having few subspecies does not predict low viral richness unless the species has been suitable sampley as the low number of subspecies is probably due to a lack of study rather than an accurate measurement.
+
 
 As seen in Figure~\ref{fig:fstITPlots}A, study effort is very likely in the best model ($\beta = $ 0.99, $Pr > $ 0.98).
 Body mass and range size are also probably in the best model ($\beta = $ 0.48, $Pr = $ 0.8 and $\beta = $ 0.35, $Pr = $ 0.66) with positive relationships of slightly lower strength than the number of subspecies in models without an interaction term ($\beta = $ 0.63, variance = 0.02).	
@@ -576,7 +578,7 @@ Model selection results for number of subspecies and gene flow analysis.
 $\bar{\text{AICc}}$ is the mean AICc score across 50 resamplings of the null random variable. 
 $\Delta$AICc is the $\bar{\text{AICc}}$ score minus the lowest score. 
 $w$ is the Akaike weight and can be interpreted as the probability that the model is the best model (of those in the plausible set).
-$\sum w_i$ is the cumulative sum of the Akaike weights.
+$\sum w$ is the cumulative sum of the Akaike weights.
 log(Scholar)*NSubspecies implies the interaction term between study effort and number of subspecies as well as both of the individual linear terms.
 In the number of subspecies analysis there are many models with low $\Delta$AICc scores suggesting there there is no single `best model'.
 In the gene flow analysis, only the top model is supported.
@@ -652,8 +654,8 @@ However, study effort has some phylogenetic autocorrelation ($\lambda$ = 0.15, $
 
 \tmpsection{Model results}
 
-Only the model with study effort, gene flow and mass is well supported with the second model having an $\Delta\text{AICc}$ of 1.00 (Table \ref{t:models}).
-While less strongly supported than the number of subspecies, gene flow is likely in the best model ($Pr = $ 0.89) compared to the benchmark random variable which has $Pr = $ 0.18 as shown in Figure~\ref{fig:fstITPlots}B.
+Only the model with study effort, gene flow and mass is well supported with the second model having an $\Delta\text{AICc}$ of 34 (Table \ref{t:models}).
+While less strongly supported than the number of subspecies, gene flow is likely in the best model ($Pr = $ 0.89) compared to the benchmark random variable which has $Pr = $ 0.18 (Figure~\ref{fig:fstITPlots}B and Table~\ref{t:variables}).
 On average (mean weighted by Akaiki weights) there is a negative relationship between gene flow and viral richness ($\beta = $ \ensuremath{-0.67}, variance = \ensuremath{5.48\times 10^{-3}}) despite the apparent positive relationship (see Figure~\ref{fig:fstRawData}) weakly suggested by the bivariate model (pgls: $\beta$ = 0.63, $t$ = 1.16, df = 13, $p$ = 0.27).
 This supports the hypothesis that population structure promotes viral richness.
 Possibly due to the smaller sample size, or a weaker relationship, this coefficient is much more varied than the number of subspecies coeficient with 21.75\% of models estimating a positive relationship.

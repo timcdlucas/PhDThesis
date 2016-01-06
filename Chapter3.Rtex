@@ -2002,6 +2002,7 @@ Random &  \rinline{sprintf('%.2f', varWeights['rand'])} &  \rinline{varCoefMeans
 \tmpsection{More Descriptive}
 Due to the low number of studies and the restrictive requirements imposed on study design, there are only data for \rinline{nrow(fstFinal)} bat species in \rinline{length(unique(fstFinal$Family))} families.
 The number of described virus species for a bat host ranged up to \rinline{max(fstFinal$virusSpecies)} viruses in \emph{\rinline{fstFinal$binomial[which.max(fstFinal$virusSpecies)]}}.
+Figure~\ref{fig:fstRawData} shows the raw data for the relationship between pathogen richness and log gene flow.
 %Figure~\ref{fig:fstTreePlot} shows the phylogeny used and the number of viruses for each species.
 
 
@@ -2090,8 +2091,8 @@ However, study effort has some phylogenetic autocorrelation ($\lambda$ = \rinlin
 
 \tmpsection{Model results}
 
-Only the model with study effort, gene flow and mass is well supported with the second model having an $\Delta\text{AICc}$ of \rinline{sprintf("%.2f", round(fstModelWeights[2, 5], 2))} (Table \ref{t:models}).
-While less strongly supported than the number of subspecies, gene flow is likely in the best model ($Pr = $ \rinline{fstVarWeights['Nm']}) compared to the benchmark random variable which has $Pr = $ \rinline{fstVarWeights['rand']} as shown in Figure~\ref{fig:fstITPlots}B.
+Only the model with study effort, gene flow and mass is well supported with the second model having an $\Delta\text{AICc}$ of \rinline{round(fstModelWeights[2, 3])} (Table \ref{t:models}).
+While less strongly supported than the number of subspecies, gene flow is likely in the best model ($Pr = $ \rinline{fstVarWeights['Nm']}) compared to the benchmark random variable which has $Pr = $ \rinline{fstVarWeights['rand']} (Figure~\ref{fig:fstITPlots}B and Table~\ref{t:variables}).
 On average (mean weighted by Akaiki weights) there is a negative relationship between gene flow and viral richness ($\beta = $ \rinline{fstCoefMeans['beta.Nm']}, variance = \rinline{fstCoefVars['beta.Nm']}) despite the apparent positive relationship (see Figure~\ref{fig:fstRawData}) weakly suggested by the bivariate model (pgls: $\beta$ = \rinline{nmFstUni$coefficients['log(Nm)', 'Estimate']}, $t$ = \rinline{nmFstUni$coefficients['log(Nm)', 't value']}, df = \rinline{nmFstUni$df[2]}, $p$ = \rinline{nmFstUni$coefficients['log(Nm)', 'Pr(>|t|)']}).
 This supports the hypothesis that population structure promotes viral richness.
 Possibly due to the smaller sample size, or a weaker relationship, this coefficient is much more varied than the number of subspecies coeficient with \rinline{pcCoefLzero}\% of models estimating a positive relationship.
