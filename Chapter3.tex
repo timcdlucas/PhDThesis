@@ -505,15 +505,22 @@ A small number of models (0.4\%)  had negatively phylogenetically distributed re
 
 \tmpsection{Model results}
 
+The top seven models all have $\Delta\text{AICc} < 4$ meaning there is no clear best model (Table~\ref{t:models}).
+These top seven models have a combined weight of 0.96 meaning that there is a 0.96\% chance that one of these models would be the best model if the data was recollected.
+However these top seven models all contain study effort, number of subspecies and the interaction between these two variables.
+log(Mass) and log(Range Size) and the random variable are all in three of the top seven models.
+
 Summing the Akaiki weights of all models that contain a given variable gives a probability, $Pr$, that the variable would be in the best model (Figure~\ref{fig:fstITPlots}A) if the data were recollected \cite{whittingham2006we}.
-The number of subspecies is very likely in the best model ($Pr > $ 0.99) as is the interaction between number of species and study effort ($Pr = $ 0.96) compared to the benchmark random variable which has $Pr = $ 0.21.
+The number of subspecies is very likely in the best model ($Pr > $ 0.99) as is the interaction between number of species and study effort ($Pr = $ 0.96) compared to the benchmark random variable which has $Pr = $ 0.21 (see Figure~\ref{fig:fstITPlots}A and Table~\ref{t:variables}).
 When models with the interaction term are removed, on average (mean weighted by Akaiki weights) there is a positive relationship between the number of subspecies and viral richness ($\beta = $ 0.63, variance = 0.02).
 Models with an interaction between number of subspecies and study effort have a positive interaction term ($\beta = $ 0.5, variance = \ensuremath{5.11\times 10^{-5}}) and a negative linear term ($\beta = $ 0.31, variance = \ensuremath{2.13\times 10^{-4}}) which in total is a positive relationship for most of the range of the study effort data.
 This supports the hypothesis that population structure promotes pathogen richness.
 The strong support for a positive interaction term implies that strong population structure only predicts high known pathogen richness in the presence of high study effort.
 One interpretation of this is that population structure alone does not predict high known richness; reasonable study effort is still needed to turn the expected high richness into known and recorded viral richness.
 Another interpretation is that having few subspecies does not predict low viral richness unless the species has been suitable sampled; the low number of subspecies is probably due to a lack of study rather than an accurate measurement.
-As seen in Figure~\ref{fig:fstITPlots}A, study effort is very likely in the best model ($\beta = $ 0.99, $Pr > $ 0.98) body mass and range size are also probably in the best model ($\beta = $ 0.48, $Pr = $ 0.8 and $\beta = $ 0.35, $Pr = $ 0.66).
+
+As seen in Figure~\ref{fig:fstITPlots}A, study effort is very likely in the best model ($\beta = $ 0.99, $Pr > $ 0.98).
+Body mass and range size are also probably in the best model ($\beta = $ 0.48, $Pr = $ 0.8 and $\beta = $ 0.35, $Pr = $ 0.66) with positive relationships of slightly lower strength than the number of subspecies in models without an interaction term ($\beta = $ 0.63, variance = 0.02).	
 
 
 
@@ -547,7 +554,7 @@ Random &  0.21 &  0.05&
 \bottomrule
 \end{tabular}
 
-\label{t:fstmodels}
+\label{t:variables}
 \end{table}
 
 
@@ -575,48 +582,57 @@ In the number of subspecies analysis there are many models with low $\Delta$AICc
 In the gene flow analysis, only the top model is supported.
 }
 
-\begin{tabular}{@{}>{\small}lrrrr@{}}
+\begin{tabular}{@{}>{\small}p{8cm}rrrr@{}}
 
 \toprule
 \normalsize{Model} & $\bar{\text{AICc}}$ & $\Delta$AICc & $w$ & $\sum w$\\
 \midrule
 &&&&\\[-3mm]
 \textit{Number of Subspecies} &&&&\\
-log(Scholar)*NSubspecies + rand & 
+%1
+log(Scholar)*NSubspecies  + log(Mass) + log(RangeSize) & 
 882 & 0.00 &
 0.38 & 0.38\\
-log(Scholar)*NSubspecies & 
+%2
+log(Scholar)*NSubspecies  + log(Mass) & 
 884 & 1.39 &
 0.19 & 0.57\\
+%3
 log(Scholar)*NSubspecies + rand + log(Mass) & 
 885 & 2.24 &
 0.12 & 0.70\\
-log(Scholar)*NSubspecies  + log(Mass) & 
+%4
+log(Scholar)*NSubspecies  & 
 885 & 3.14 &
 0.08 & 0.78\\
-log(Scholar)*NSubspecies  + log(Mass) + log(RangeSize) & 
+%5
+log(Scholar)*NSubspecies  + log(RangeSize) & 
 886 & 3.18 &
 0.08 & 0.86\\
+%6
 log(Scholar)*NSubspecies  + rand + log(RangeSize) & 
 886 & 3.94 &
 0.05 & 0.91\\
-log(Scholar)*NSubspecies  + log(RangeSize) & 
+%7
+log(Scholar)*NSubspecies  + rand & 
 886 & 3.95 &
 0.05 & 0.96\\
-log(Scholar) + NSubspecies & 
+%8
+log(Scholar) + NSubspecies log(Mass) + rand & 
 889 & 6.93 &
 0.01 & 0.97\\
-log(Scholar) + NSubspecies + log(Mass) & 
+%9
+log(Scholar) + NSubspecies + log(Mass) + log(RangeSize) + rand& 
 890 & 7.80 &
-0.01 & 0.98\\[2mm]
+0.01 & 0.98\\[3mm]
 \textit{Gene flow} &&&&\\
 log(Scholar) + log(Gene flow) + log(Mass) & 
 71 & 0.00 &
 1.00 & 1.00\\
-log(Scholar) + log(Mass) & 
+log(Range size) & 
 105 & 34.09 &
 0.00 & 1.00\\
-log(Mass) + log(Range size) & 
+log(Mass) & 
 106 & 35.06 &
 0.00 & 1.00\\
 %log(Scholar) + log(Gene flow) + log(Mass) + rand &
@@ -625,7 +641,7 @@ log(Mass) + log(Range size) &
 \bottomrule
 \end{tabular}
 
-\label{t:subsmodels}
+\label{t:models}
 \end{table}
 
 As with the Number of Subspecies dataset, there is no phylogenetic signal in the number of virus species ($\lambda$ = \ensuremath{10^{-6}}, $p$ = 1)
@@ -636,6 +652,7 @@ However, study effort has some phylogenetic autocorrelation ($\lambda$ = 0.15, $
 
 \tmpsection{Model results}
 
+Only the model with study effort, gene flow and mass is well supported with the second model having an $\Delta\text{AICc}$ of 1.00 (Table \ref{t:models}).
 While less strongly supported than the number of subspecies, gene flow is likely in the best model ($Pr = $ 0.89) compared to the benchmark random variable which has $Pr = $ 0.18 as shown in Figure~\ref{fig:fstITPlots}B.
 On average (mean weighted by Akaiki weights) there is a negative relationship between gene flow and viral richness ($\beta = $ \ensuremath{-0.67}, variance = \ensuremath{5.48\times 10^{-3}}) despite the apparent positive relationship (see Figure~\ref{fig:fstRawData}) weakly suggested by the bivariate model (pgls: $\beta$ = 0.63, $t$ = 1.16, df = 13, $p$ = 0.27).
 This supports the hypothesis that population structure promotes viral richness.
@@ -646,76 +663,11 @@ However, body mass has a negative average coefficient ($\beta = $ \ensuremath{-0
 In contrast to the number of subspecies analysis, range size is almost certainly not in the best model with $Pr = $ 0.06 being much less than the random variable.
 This variable being less supported than the random variable is probably because range size is closely correlated with study effort (pgls: $\beta$ = 0.6, $t$ = 4.45, df = 13, $p$ = \ensuremath{6.58\times 10^{-4}}).
 
-Across all models the mean value of $\lambda$ is \ensuremath{-1.64} and a large number of individual models (58.09\%)  had negatively phylogenetically distributed residuals implying the residuals from the model are strongly negatively phylogenetic.
+Across all models the mean value of $\lambda$ is \ensuremath{-1.64} and a large number of individual models (58\%)  had negatively phylogenetically distributed residuals implying the residuals from the model are strongly negatively phylogenetic.
 Due to the small sample size this is probably due to a small number of data points with large residuals being distant on the tree.
 
 
 
-
-
-
-
-
-
-%\begin{table}[t]
-%\centering
-%%\rowcolors{2}{gray!25}{white}
-%\caption[Model selection results for number of subspecies analysis]{
-%Model selection results for number of subspecies analysis. 
-%$\bar{\text{AICc}}$ is the mean AICc score across nBoots resamplings of the null random variable. 
-%$\Delta$AICc is the $\bar{\text{AICc}}$ score minus the lowest score. 
-%$w_i$ is the Akaike weight and can be interpreted as the probability that the model is the best model (of those in the plausible set).
-%$\sum w_i$ is the cumulative sum of the Akaike weights.
-%}
-%
-%\begin{tabular}{@{}>{\small}lrrrr@{}}
-%
-%\toprule
-%\normalsize{Model} & $\bar{\text{AICc}}$ & $\Delta$AICc & $w_i$ & $\sum w_i$\\[2em]
-%\midrule
-%\textit{Number of Subspecies} &&&&\\
-%log(Scholar)*NSubspecies + rand & 
-%round(modelWeights[1 ,2]) & sprintf("%.2f", round(modelWeights[1, 3], 2)) &
-%sprintf("%.2f", round(modelWeights[1, 4], 2)) & sprintf("%.2f", round(modelWeights[1, 5], 2))\\
-%log(Scholar)*NSubspecies & 
-%round(modelWeights[2 ,2]) & sprintf("%.2f", round(modelWeights[2, 3], 2)) &
-%sprintf("%.2f", round(modelWeights[2, 4], 2)) & sprintf("%.2f", round(modelWeights[2, 5], 2))\\
-%log(Scholar)*NSubspecies + rand + log(Mass) & 
-%round(modelWeights[3 ,2]) & sprintf("%.2f", round(modelWeights[3, 3], 2)) &
-%sprintf("%.2f", round(modelWeights[3, 4], 2)) & sprintf("%.2f", round(modelWeights[3, 5], 2))\\
-%log(Scholar)*NSubspecies  + log(Mass) & 
-%round(modelWeights[4 ,2]) & sprintf("%.2f", round(modelWeights[4, 3], 2)) &
-%sprintf("%.2f", round(modelWeights[4, 4], 2)) & sprintf("%.2f", round(modelWeights[4, 5], 2))\\
-%log(Scholar)*NSubspecies  + log(Mass) + log(RangeSize) & 
-%round(modelWeights[5 ,2]) & sprintf("%.2f", round(modelWeights[5, 3], 2)) &
-%sprintf("%.2f", round(modelWeights[5, 4], 2)) & sprintf("%.2f", round(modelWeights[5, 5], 2))\\
-%log(Scholar)*NSubspecies  + rand + log(RangeSize) & 
-%round(modelWeights[6 ,2]) & sprintf("%.2f", round(modelWeights[6, 3], 2)) &
-%sprintf("%.2f", round(modelWeights[6, 4], 2)) & sprintf("%.2f", round(modelWeights[6, 5], 2))\\
-%log(Scholar)*NSubspecies  + log(RangeSize) & 
-%round(modelWeights[7 ,2]) & sprintf("%.2f", round(modelWeights[7, 3], 2)) &
-%sprintf("%.2f", round(modelWeights[7, 4], 2)) & sprintf("%.2f", round(modelWeights[7, 5], 2))\\
-%log(Scholar) + NSubspecies & 
-%round(modelWeights[8 ,2]) & sprintf("%.2f", round(modelWeights[8, 3], 2)) &
-%sprintf("%.2f", round(modelWeights[8, 4], 2)) & sprintf("%.2f", round(modelWeights[8, 5], 2))\\
-%log(Scholar) + NSubspecies + log(Mass) & 
-%round(modelWeights[9 ,2]) & sprintf("%.2f", round(modelWeights[9, 3], 2)) &
-%sprintf("%.2f", round(modelWeights[9, 4], 2)) & sprintf("%.2f", round(modelWeights[9, 5], 2))\\[2em]
-%\textit{Gene Flow} &&&&
-%log(Scholar) + log(Gene flow) + log(Mass) & 
-%round(fstModelWeights[1 ,2]) & sprintf("%.2f", round(fstModelWeights[1, 3], 2)) &
-%sprintf("%.2f", round(fstModelWeights[1, 4], 2)) & sprintf("%.2f", round(fstModelWeights[1, 5], 2))\\
-%log(Scholar) + log(Mass) & 
-%round(fstModelWeights[2 ,2]) & sprintf("%.2f", round(fstModelWeights[2, 3], 2)) &
-%sprintf("%.2f", round(fstModelWeights[2, 4], 2)) & sprintf("%.2f", round(fstModelWeights[2, 5], 2))\\
-%log(Mass) + log(Range size) & 
-%round(fstModelWeights[3 ,2]) & sprintf("%.2f", round(fstModelWeights[3, 3], 2)) &
-%sprintf("%.2f", round(fstModelWeights[3, 4], 2)) & sprintf("%.2f", round(fstModelWeights[3, 5], 2))\\
-%log(Scholar) + log(Gene flow) + log(Mass) + rand &
-%round(fstModelWeights[4 ,2]) & sprintf("%.2f", round(fstModelWeights[4, 3], 2)) &
-%sprintf("%.2f", round(fstModelWeights[4, 4], 2)) & sprintf("%.2f", round(fstModelWeights[4, 5], 2))\\
-%\bottomrule
-%\end{tabular}
 
 
 

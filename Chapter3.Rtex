@@ -1941,15 +1941,22 @@ A small number of models (\rinline{mean(na.omit(allResults$lambda < 0))*100}\%) 
 
 \tmpsection{Model results}
 
+The top seven models all have $\Delta\text{AICc} < 4$ meaning there is no clear best model (Table~\ref{t:models}).
+These top seven models have a combined weight of \rinline{sprintf("%.2f", round(modelWeights[7, 5], 2))} meaning that there is a \rinline{sprintf("%.2f", round(modelWeights[7, 5], 2))}\% chance that one of these models would be the best model if the data was recollected.
+However these top seven models all contain study effort, number of subspecies and the interaction between these two variables.
+log(Mass) and log(Range Size) and the random variable are all in three of the top seven models.
+
 Summing the Akaiki weights of all models that contain a given variable gives a probability, $Pr$, that the variable would be in the best model (Figure~\ref{fig:fstITPlots}A) if the data were recollected \cite{whittingham2006we}.
-The number of subspecies is very likely in the best model ($Pr > $ \rinline{substring(as.character( varWeights['NumberOfSubspecies']), 1, 4)}) as is the interaction between number of species and study effort ($Pr = $ \rinline{varWeights['scholarRefs.NumberOfSubspecies']}) compared to the benchmark random variable which has $Pr = $ \rinline{varWeights['rand']}.
+The number of subspecies is very likely in the best model ($Pr > $ \rinline{substring(as.character( varWeights['NumberOfSubspecies']), 1, 4)}) as is the interaction between number of species and study effort ($Pr = $ \rinline{varWeights['scholarRefs.NumberOfSubspecies']}) compared to the benchmark random variable which has $Pr = $ \rinline{varWeights['rand']} (see Figure~\ref{fig:fstITPlots}A and Table~\ref{t:variables}).
 When models with the interaction term are removed, on average (mean weighted by Akaiki weights) there is a positive relationship between the number of subspecies and viral richness ($\beta = $ \rinline{nSpeciesCoefMean}, variance = \rinline{nSpeciesCoefVar}).
 Models with an interaction between number of subspecies and study effort have a positive interaction term ($\beta = $ \rinline{nSpeciesInterMean}, variance = \rinline{nSpeciesInterVar}) and a negative linear term ($\beta = $ \rinline{nSpeciesCoefMeanI}, variance = \rinline{nSpeciesCoefVarI}) which in total is a positive relationship for most of the range of the study effort data.
 This supports the hypothesis that population structure promotes pathogen richness.
 The strong support for a positive interaction term implies that strong population structure only predicts high known pathogen richness in the presence of high study effort.
 One interpretation of this is that population structure alone does not predict high known richness; reasonable study effort is still needed to turn the expected high richness into known and recorded viral richness.
 Another interpretation is that having few subspecies does not predict low viral richness unless the species has been suitable sampled; the low number of subspecies is probably due to a lack of study rather than an accurate measurement.
-As seen in Figure~\ref{fig:fstITPlots}A, study effort is very likely in the best model ($\beta = $ \rinline{varCoefMeans['beta.scholarRefs']}, $Pr > $ \rinline{substring(as.character(varWeights['scholarRefs']), 1, 4)}) body mass and range size are also probably in the best model ($\beta = $ \rinline{varCoefMeans['beta.mass']}, $Pr = $ \rinline{varWeights['mass']} and $\beta = $ \rinline{varCoefMeans['beta.distrSize']}, $Pr = $ \rinline{varWeights['distrSize']}).
+
+As seen in Figure~\ref{fig:fstITPlots}A, study effort is very likely in the best model ($\beta = $ \rinline{varCoefMeans['beta.scholarRefs']}, $Pr > $ \rinline{substring(as.character(varWeights['scholarRefs']), 1, 4)}).
+Body mass and range size are also probably in the best model ($\beta = $ \rinline{varCoefMeans['beta.mass']}, $Pr = $ \rinline{varWeights['mass']} and $\beta = $ \rinline{varCoefMeans['beta.distrSize']}, $Pr = $ \rinline{varWeights['distrSize']}) with positive relationships of slightly lower strength than the number of subspecies in models without an interaction term ($\beta = $ \rinline{nSpeciesCoefMean}, variance = \rinline{nSpeciesCoefVar}).	
 
 
 
@@ -1983,7 +1990,7 @@ Random &  \rinline{sprintf('%.2f', varWeights['rand'])} &  \rinline{varCoefMeans
 \bottomrule
 \end{tabular}
 
-\label{t:fstmodels}
+\label{t:variables}
 \end{table}
 
 
@@ -2011,48 +2018,57 @@ In the number of subspecies analysis there are many models with low $\Delta$AICc
 In the gene flow analysis, only the top model is supported.
 }
 
-\begin{tabular}{@{}>{\small}lrrrr@{}}
+\begin{tabular}{@{}>{\small}p{8cm}rrrr@{}}
 
 \toprule
 \normalsize{Model} & $\bar{\text{AICc}}$ & $\Delta$AICc & $w$ & $\sum w$\\
 \midrule
 &&&&\\[-3mm]
 \textit{Number of Subspecies} &&&&\\
-log(Scholar)*NSubspecies + rand & 
+%1
+log(Scholar)*NSubspecies  + log(Mass) + log(RangeSize) & 
 \rinline{round(modelWeights[1 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[1, 3], 2))} &
 \rinline{sprintf("%.2f", round(modelWeights[1, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[1, 5], 2))}\\
-log(Scholar)*NSubspecies & 
+%2
+log(Scholar)*NSubspecies  + log(Mass) & 
 \rinline{round(modelWeights[2 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[2, 3], 2))} &
 \rinline{sprintf("%.2f", round(modelWeights[2, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[2, 5], 2))}\\
+%3
 log(Scholar)*NSubspecies + rand + log(Mass) & 
 \rinline{round(modelWeights[3 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[3, 3], 2))} &
 \rinline{sprintf("%.2f", round(modelWeights[3, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[3, 5], 2))}\\
-log(Scholar)*NSubspecies  + log(Mass) & 
+%4
+log(Scholar)*NSubspecies  & 
 \rinline{round(modelWeights[4 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[4, 3], 2))} &
 \rinline{sprintf("%.2f", round(modelWeights[4, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[4, 5], 2))}\\
-log(Scholar)*NSubspecies  + log(Mass) + log(RangeSize) & 
+%5
+log(Scholar)*NSubspecies  + log(RangeSize) & 
 \rinline{round(modelWeights[5 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[5, 3], 2))} &
 \rinline{sprintf("%.2f", round(modelWeights[5, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[5, 5], 2))}\\
+%6
 log(Scholar)*NSubspecies  + rand + log(RangeSize) & 
 \rinline{round(modelWeights[6 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[6, 3], 2))} &
 \rinline{sprintf("%.2f", round(modelWeights[6, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[6, 5], 2))}\\
-log(Scholar)*NSubspecies  + log(RangeSize) & 
+%7
+log(Scholar)*NSubspecies  + rand & 
 \rinline{round(modelWeights[7 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[7, 3], 2))} &
 \rinline{sprintf("%.2f", round(modelWeights[7, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[7, 5], 2))}\\
-log(Scholar) + NSubspecies & 
+%8
+log(Scholar) + NSubspecies log(Mass) + rand & 
 \rinline{round(modelWeights[8 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[8, 3], 2))} &
 \rinline{sprintf("%.2f", round(modelWeights[8, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[8, 5], 2))}\\
-log(Scholar) + NSubspecies + log(Mass) & 
+%9
+log(Scholar) + NSubspecies + log(Mass) + log(RangeSize) + rand& 
 \rinline{round(modelWeights[9 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[9, 3], 2))} &
-\rinline{sprintf("%.2f", round(modelWeights[9, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[9, 5], 2))}\\[2mm]
+\rinline{sprintf("%.2f", round(modelWeights[9, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[9, 5], 2))}\\[3mm]
 \textit{Gene flow} &&&&\\
 log(Scholar) + log(Gene flow) + log(Mass) & 
 \rinline{round(fstModelWeights[1 ,2])} & \rinline{sprintf("%.2f", round(fstModelWeights[1, 3], 2))} &
 \rinline{sprintf("%.2f", round(fstModelWeights[1, 4], 2))} & \rinline{sprintf("%.2f", round(fstModelWeights[1, 5], 2))}\\
-log(Scholar) + log(Mass) & 
+log(Range size) & 
 \rinline{round(fstModelWeights[2 ,2])} & \rinline{sprintf("%.2f", round(fstModelWeights[2, 3], 2))} &
 \rinline{sprintf("%.2f", round(fstModelWeights[2, 4], 2))} & \rinline{sprintf("%.2f", round(fstModelWeights[2, 5], 2))}\\
-log(Mass) + log(Range size) & 
+log(Mass) & 
 \rinline{round(fstModelWeights[3 ,2])} & \rinline{sprintf("%.2f", round(fstModelWeights[3, 3], 2))} &
 \rinline{sprintf("%.2f", round(fstModelWeights[3, 4], 2))} & \rinline{sprintf("%.2f", round(fstModelWeights[3, 5], 2))}\\
 %log(Scholar) + log(Gene flow) + log(Mass) + rand &
@@ -2061,7 +2077,7 @@ log(Mass) + log(Range size) &
 \bottomrule
 \end{tabular}
 
-\label{t:subsmodels}
+\label{t:models}
 \end{table}
 
 As with the Number of Subspecies dataset, there is no phylogenetic signal in the number of virus species ($\lambda$ = \rinline{virusFstLambda$param['lambda']}, $p$ = \rinline{virusFstLambda$param.CI$lambda$bounds.p[1]})
@@ -2072,6 +2088,7 @@ However, study effort has some phylogenetic autocorrelation ($\lambda$ = \rinlin
 
 \tmpsection{Model results}
 
+Only the model with study effort, gene flow and mass is well supported with the second model having an $\Delta\text{AICc}$ of \rinline{sprintf("%.2f", round(fstModelWeights[2, 5], 2))} (Table \ref{t:models}).
 While less strongly supported than the number of subspecies, gene flow is likely in the best model ($Pr = $ \rinline{fstVarWeights['Nm']}) compared to the benchmark random variable which has $Pr = $ \rinline{fstVarWeights['rand']} as shown in Figure~\ref{fig:fstITPlots}B.
 On average (mean weighted by Akaiki weights) there is a negative relationship between gene flow and viral richness ($\beta = $ \rinline{fstCoefMeans['beta.Nm']}, variance = \rinline{fstCoefVars['beta.Nm']}) despite the apparent positive relationship (see Figure~\ref{fig:fstRawData}) weakly suggested by the bivariate model (pgls: $\beta$ = \rinline{nmFstUni$coefficients['log(Nm)', 'Estimate']}, $t$ = \rinline{nmFstUni$coefficients['log(Nm)', 't value']}, df = \rinline{nmFstUni$df[2]}, $p$ = \rinline{nmFstUni$coefficients['log(Nm)', 'Pr(>|t|)']}).
 This supports the hypothesis that population structure promotes viral richness.
@@ -2087,105 +2104,6 @@ Due to the small sample size this is probably due to a small number of data poin
 
 
 
-
-
-%%begin.rcode dwplotCap
-dwplotCap <- '
-Plot of coefficient estimates and 95\\% confidence intervals for phylogenetic model with and without interactions between study effort and number of subspecies. 
-Without interactions, number of subspecies is significant.
-'
-
-%%end.rcode
-
-%%begin.rcode plotSubspeciesCoefs, fig.cap = dwplotCap, fig.height = 2, fig.show = extraFigs
-
-
-#subspeciesCoefs <- data.frame(
-#  estimate = c(subspeciesJointUnlog$model$coef, subspeciesInter$model$coef),
-#  std.error = c(subspeciesJointUnlog$sterr, subspeciesInter$sterr),
-#  term = names(c(subspeciesJointUnlog$model$coef, subspeciesInter$model$coef)),
-#  model = rep(c('joint', 'inter'), 
-#    c(length(subspeciesJointUnlog$model$coef), length(subspeciesInter$model$coef)))
-#)
-
-#x <- rbind(subspeciesCoefs, 
-#  c(NA, NA, 'NumberOfSubspecies:log(scholarRefs)', 'joint')) %>%
-#  filter(term != '(Intercept)') %>%
-#  arrange(model, term) 
-
-#x$term <- plyr::mapvalues(x$term, from = levels(x$term)[2:5], 
-#  to = c('Mass', 'Cites', 'Subspecies', 'Cites*Subspecies'))
-
-
-
-#dwplot(x) +
-#  theme(legend.position="right",
-#        axis.text.y = element_text(color = "black", size = 13, family  =  "Lato Light", vjust = 0.3)) +
-#  scale_colour_manual(values = pokepal('Nidorina')[c(4, 10)], 
-#    labels = c('Interaction', 'No Interaction'), name = 'Model') +
-#  xlab('Coefficient Estimate')
-#    
-%%end.rcode
-
-%\begin{table}[t]
-%\centering
-%%\rowcolors{2}{gray!25}{white}
-%\caption[Model selection results for number of subspecies analysis]{
-%Model selection results for number of subspecies analysis. 
-%$\bar{\text{AICc}}$ is the mean AICc score across \rinline{nBoots} resamplings of the null random variable. 
-%$\Delta$AICc is the $\bar{\text{AICc}}$ score minus the lowest score. 
-%$w_i$ is the Akaike weight and can be interpreted as the probability that the model is the best model (of those in the plausible set).
-%$\sum w_i$ is the cumulative sum of the Akaike weights.
-%}
-%
-%\begin{tabular}{@{}>{\small}lrrrr@{}}
-%
-%\toprule
-%\normalsize{Model} & $\bar{\text{AICc}}$ & $\Delta$AICc & $w_i$ & $\sum w_i$\\[2em]
-%\midrule
-%\textit{Number of Subspecies} &&&&\\
-%log(Scholar)*NSubspecies + rand & 
-%\rinline{round(modelWeights[1 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[1, 3], 2))} &
-%\rinline{sprintf("%.2f", round(modelWeights[1, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[1, 5], 2))}\\
-%log(Scholar)*NSubspecies & 
-%\rinline{round(modelWeights[2 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[2, 3], 2))} &
-%\rinline{sprintf("%.2f", round(modelWeights[2, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[2, 5], 2))}\\
-%log(Scholar)*NSubspecies + rand + log(Mass) & 
-%\rinline{round(modelWeights[3 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[3, 3], 2))} &
-%\rinline{sprintf("%.2f", round(modelWeights[3, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[3, 5], 2))}\\
-%log(Scholar)*NSubspecies  + log(Mass) & 
-%\rinline{round(modelWeights[4 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[4, 3], 2))} &
-%\rinline{sprintf("%.2f", round(modelWeights[4, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[4, 5], 2))}\\
-%log(Scholar)*NSubspecies  + log(Mass) + log(RangeSize) & 
-%\rinline{round(modelWeights[5 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[5, 3], 2))} &
-%\rinline{sprintf("%.2f", round(modelWeights[5, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[5, 5], 2))}\\
-%log(Scholar)*NSubspecies  + rand + log(RangeSize) & 
-%\rinline{round(modelWeights[6 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[6, 3], 2))} &
-%\rinline{sprintf("%.2f", round(modelWeights[6, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[6, 5], 2))}\\
-%log(Scholar)*NSubspecies  + log(RangeSize) & 
-%\rinline{round(modelWeights[7 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[7, 3], 2))} &
-%\rinline{sprintf("%.2f", round(modelWeights[7, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[7, 5], 2))}\\
-%log(Scholar) + NSubspecies & 
-%\rinline{round(modelWeights[8 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[8, 3], 2))} &
-%\rinline{sprintf("%.2f", round(modelWeights[8, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[8, 5], 2))}\\
-%log(Scholar) + NSubspecies + log(Mass) & 
-%\rinline{round(modelWeights[9 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[9, 3], 2))} &
-%\rinline{sprintf("%.2f", round(modelWeights[9, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[9, 5], 2))}\\[2em]
-%\textit{Gene Flow} &&&&
-%log(Scholar) + log(Gene flow) + log(Mass) & 
-%\rinline{round(fstModelWeights[1 ,2])} & \rinline{sprintf("%.2f", round(fstModelWeights[1, 3], 2))} &
-%\rinline{sprintf("%.2f", round(fstModelWeights[1, 4], 2))} & \rinline{sprintf("%.2f", round(fstModelWeights[1, 5], 2))}\\
-%log(Scholar) + log(Mass) & 
-%\rinline{round(fstModelWeights[2 ,2])} & \rinline{sprintf("%.2f", round(fstModelWeights[2, 3], 2))} &
-%\rinline{sprintf("%.2f", round(fstModelWeights[2, 4], 2))} & \rinline{sprintf("%.2f", round(fstModelWeights[2, 5], 2))}\\
-%log(Mass) + log(Range size) & 
-%\rinline{round(fstModelWeights[3 ,2])} & \rinline{sprintf("%.2f", round(fstModelWeights[3, 3], 2))} &
-%\rinline{sprintf("%.2f", round(fstModelWeights[3, 4], 2))} & \rinline{sprintf("%.2f", round(fstModelWeights[3, 5], 2))}\\
-%log(Scholar) + log(Gene flow) + log(Mass) + rand &
-%\rinline{round(fstModelWeights[4 ,2])} & \rinline{sprintf("%.2f", round(fstModelWeights[4, 3], 2))} &
-%\rinline{sprintf("%.2f", round(fstModelWeights[4, 4], 2))} & \rinline{sprintf("%.2f", round(fstModelWeights[4, 5], 2))}\\
-%\bottomrule
-%\end{tabular}
 
 
 
