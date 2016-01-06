@@ -566,6 +566,7 @@ Random &  0.21 &  0.05&
 \tmpsection{More Descriptive}
 Due to the low number of studies and the restrictive requirements imposed on study design, there are only data for 24 bat species in 7 families.
 The number of described virus species for a bat host ranged up to 12 viruses in \emph{Miniopterus schreibersii}.
+Figure~\ref{fig:fstRawData} shows the raw data for the relationship between pathogen richness and log gene flow.
 %Figure~\ref{fig:fstTreePlot} shows the phylogeny used and the number of viruses for each species.
 
 
@@ -658,12 +659,14 @@ Only the model with study effort, gene flow and mass is well supported with the 
 While less strongly supported than the number of subspecies, gene flow is likely in the best model ($Pr = $ 0.89) compared to the benchmark random variable which has $Pr = $ 0.18 (Figure~\ref{fig:fstITPlots}B and Table~\ref{t:variables}).
 On average (mean weighted by Akaiki weights) there is a negative relationship between gene flow and viral richness ($\beta = $ \ensuremath{-0.67}, variance = \ensuremath{5.48\times 10^{-3}}) despite the apparent positive relationship (see Figure~\ref{fig:fstRawData}) weakly suggested by the bivariate model (pgls: $\beta$ = 0.63, $t$ = 1.16, df = 13, $p$ = 0.27).
 This supports the hypothesis that population structure promotes viral richness.
-Possibly due to the smaller sample size, or a weaker relationship, this coefficient is much more varied than the number of subspecies coeficient with 21.75\% of models estimating a positive relationship.
+Possibly due to the smaller sample size, or a weaker relationship, this coefficient is much more varied than the number of subspecies coeficient with 22\% of models estimating a positive relationship.
 
 As in the number of subspecies analysis, study effort is very likely in the best model ($Pr = $ 0.99) as is body mass ($Pr = $ 0.98).
 However, body mass has a negative average coefficient ($\beta = $ \ensuremath{-0.35}, variance = 0.04) which is in contrast to number of subspecies analysis, many studies in the literature \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat} and the bivariate model (pgls: $\beta$ = 0.6, $t$ = 0.38, df = 13, $p$ = 0.71).
 In contrast to the number of subspecies analysis, range size is almost certainly not in the best model with $Pr = $ 0.06 being much less than the random variable.
 This variable being less supported than the random variable is probably because range size is closely correlated with study effort (pgls: $\beta$ = 0.6, $t$ = 4.45, df = 13, $p$ = \ensuremath{6.58\times 10^{-4}}).
+Of the three independant variables in the best model, study effort has the largest effect ($\beta = $ 2.49, variance = 0.08).
+The effect size of gene flow ($\beta = $ \ensuremath{-0.67}, variance = \ensuremath{5.48\times 10^{-3}}) is approximately twice the size of that of body mass ($\beta = $ \ensuremath{-0.35}, variance = 0.04)
 
 Across all models the mean value of $\lambda$ is \ensuremath{-1.64} and a large number of individual models (58\%)  had negatively phylogenetically distributed residuals implying the residuals from the model are strongly negatively phylogenetic.
 Due to the small sample size this is probably due to a small number of data points with large residuals being distant on the tree.
