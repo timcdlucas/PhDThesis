@@ -10,15 +10,30 @@
 
 % Redefine cite so that we get references in footnotes.
 \usepackage[
-backend=biber,
-citestyle=authoryear,
-bibstyle=authoryear,
-sorting=none,
-firstinits=true,
-maxcitenames=2
+  backend=biber, 
+  bibencoding=utf8, 
+  useprefix=true,%
+	uniquename=false, 
+  uniquelist=false, %
+	style=authoryear, 
+  firstinits=true, 
+  dashed=false, %
+	maxcitenames=2, 
+  maxbibnames=99
 ]{biblatex} %style=mla for footnotes.
 %\renewcommand{\cite}[1]{\footcite{#1}}
 \renewcommand{\cite}[1]{\parencite{#1}}
+
+
+% final and = &
+\renewcommand*{\finalnamedelim}{%
+  \ifnumgreater{\value{liststop}}{2}{\addcomma}{}%
+  \addspace\&\space}
+
+% no "In: "
+\renewbibmacro{in:}{%
+  \ifentrytype{article}{}{\printtext{\bibstring{in}\intitlepunct}}}
+
 
 \addbibresource{epilit.bib}
 

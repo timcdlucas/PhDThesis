@@ -217,7 +217,7 @@
 	style=authoryear, 
   firstinits=true, 
   dashed=false, %
-	maxcitenames=1, 
+	maxcitenames=2, 
   maxbibnames=99
 ]{biblatex}
 \renewcommand{\cite}[1]{\parencite{#1}}
