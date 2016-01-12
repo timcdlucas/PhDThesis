@@ -260,6 +260,7 @@
 
 % Try for smaller dois in bib
 
+
 % remove final dot. This is nicer for dois.
 \renewcommand{\finentrypunct}{}
 
@@ -276,7 +277,17 @@
         pdfauthor={Tim Lucas},
         pdftitle={The role of social ecology in Chiropteran pathogen richness and zoonotic potential},
     }
-\urlstyle{same} % same font for hyperlinks
+
+\usepackage{url}
+
+%% Define a new 'leo' style for the package that will use a smaller font.
+\makeatletter
+\def\url@leostyle{%
+  \@ifundefined{selectfont}{\def\UrlFont{\sf}}{\def\UrlFont{\small\rmfamily}}}
+\makeatother
+%% Now actually use the newly defined style.
+\urlstyle{leo}
+
 
 \RequirePackage[noabbrev]{cleveref}
 \creflabelformat{equation}{#2#1#3}
