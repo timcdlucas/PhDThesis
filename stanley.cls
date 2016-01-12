@@ -257,6 +257,12 @@
 
 % all names last-first
 \DeclareNameAlias{sortname}{last-first}
+
+% Try for smaller dois in bib
+
+% remove final dot. This is nicer for dois.
+\renewcommand{\finentrypunct}{}
+
                                		
 %-------------------------------------------------------------------------------
 % Labels
