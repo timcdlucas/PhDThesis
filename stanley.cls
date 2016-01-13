@@ -218,12 +218,15 @@
   firstinits=true, 
   dashed=false, %
 	maxcitenames=2, 
+  terseinits=true,
   maxbibnames=99
 ]{biblatex}
 \renewcommand{\cite}[1]{\parencite{#1}}
 
 \renewcommand*{\multicitedelim}{\addcomma\space}
 
+% Remove comma between name and initials in bib.
+\renewcommand*{\revsdnamepunct}{}
 
 				
 % bibliography paragraphs
