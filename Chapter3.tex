@@ -62,7 +62,9 @@ However, the relationship has implications for global change, implying that incr
 \tmpsection{General Intro}
 
 Zoonotic pathogens make up the majority of newly emerging diseases and have profound consequences for public health, economics and international development \cite{jones2008global, smith2014global, ebolaWorldbank}.
-
+A better understanding of the factors that control which wild host species are potential reservoires of zoonotic diseases would allow us to effectively optimize zoonotic disease surveillance and anticipate how the risks of disease spillover might change with global change.
+The chance that a host species will be the source of an outbreak depends on a number of factors including it's proximity and interactions with humans and the prevalence and diversity of pathogens it carries.
+Our understanding of the factors that control the diversity of pathogens in a wild species is still poor.
 
 
 \tmpsection{Specific Intro}
@@ -73,7 +75,7 @@ Zoonotic pathogens make up the majority of newly emerging diseases and have prof
 
 %Think this ref is right but need to check.
 Single pathogen models show that increasing population structure simply slows disease spread and makes establishment less likely \cite{colizza2007invasion, vespignani2008reaction}.
-In the ecological literature this is often taken as predicting that increased population structure will decrease pathogen richness \cite{nunn2003comparative, morand2000wormy}.
+In the ecological literature this is often taken as predicting that increased population structure will decrease pathogen richness \cite{nunn2003comparative, morand2000wormy, poulin2014parasite, poulin2000diversity}.
 However, models of competition between multiple pathogens show that in unstructured populations a competitive exclusion process occurs but that splitting the population into two patches allows coexistence \cite{qiu2013vector,allen2004sis, nunes2006localized}.
 
 
@@ -217,7 +219,7 @@ To test for an association between pathogen richness I have performed multivaria
 As species cannot be considered independant due to shared evolutionary history, phylogeny was controlled for in all regressions.
 A number of other factors that have previously been found to be important were included as additional independant variables: body mass \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat}, range size \cite{kamiya2014determines, turmelle2009correlates, maganga2014bat} and study effort \cite{turmelle2009correlates, gay2014parasite, maganga2014bat}.
 This was to attempt to avoid spurious positive results occuring simply due to correlation between pathogen richness and a different, causal factor.
-Despite commonly bein associated with pathogen richness \cite{arneberg2002host, kamiya2014determines, nunn2003comparative}, population density is not included in the analysis as there is very little data for bat densities --- however Chapter 4 examines the relationship between density and population structure and Chapter 5 presents a method that allows the estimation of density from acoustic surveys.
+Despite commonly being associated with pathogen richness \cite{arneberg2002host, kamiya2014determines, nunn2003comparative}, population density is not included in the analysis as there is very little data for bat densities --- however Chapter~\ref{ch:sims2} examines the relationship between density and population structure and Chapter~\ref{ch:grem} presents a method that allows the estimation of density from acoustic surveys.
 I used both the number of subspecies a bat species has and estimates of gene flow (analysed separately) as measures of population structure.
 All analyses were run in R \cite{R}
 
@@ -266,7 +268,7 @@ Studies are from a wide range of spatial scales, from local ($\sim\SI{10}{\kilo\
 As $F_{ST}$ often increases with spatial scale \cite{burland1999population, hulva2010mechanisms, o2015genetic, vonhof2015range} I controlled for this by only using data from studies where a large proportion of the species range was studied.
 I used the ratio of the furthest distance between $F_{ST}$ samples (measured with \url{http://www.distancefromto.net/} if not stated) to the width of the IUCN species range \cite{iucn} and only used studies if this ratio was greater than 0.2.
 This is an arbitrary value that was a comprimise between retaining a reasonable number of data points and controlling for the bias in spatial scale.
-I converted all $F_{ST}$ value to migration using $M = \frac{1-F_{ST}}{8F_{ST}}$.
+I converted all $F_{ST}$ value to migration using $M = (1-F_{ST})/8F_{ST}$.
 This removes the $(0, 1)$ bounds of $F_{ST}$ and is more easily interpretable though the results are unaffected. 
 These two measures of population structure were analysed separately as the number of subspecies has 196 data points while there is only $F_{ST}$ data for 22 bat species.
 For the subspecies analysis all bat species in \textcite{luis2013comparison} were used (i.e. all species with at least one known virus species).
@@ -281,7 +283,7 @@ As this correlation is strong, the results here are for analyses using only Goog
 %See the appendix for analyses run using Pubmed citations.
 
 Measures of body mass are taken from Pantheria \cite{jones2009pantheria} and primary literature \cite{canals2005relative, arita1993rarity, lopez2014echolocation, orr2013does, lim2001bat, aldridge1987turning, ma2003dietary, owen2003home, henderson2008movements, heaney2012nyctalus, oleksy2015high, zhang2009recent}. 
-\emph{Pipistrellus pygmaeus} was assigned the same mass as \emph{P. pipistrellus} as they indistinguishable by mass.
+\emph{Pipistrellus pygmaeus} was assigned the same mass as \emph{P. pipistrellus} as they are indistinguishable by mass.
 Body mass measurements were log transformed as they were strongly right skewed.
 Distribution size was estimated by downloading range maps for all species from IUCN \cite{iucn} and were also logged due to right skew.
 
@@ -505,9 +507,9 @@ A small number of models (0.4\%)  had negatively phylogenetically distributed re
 
 \tmpsection{Model results}
 
-The top seven models all have $\Delta\text{AICc} < 4$ meaning there is no clear best model (Table~\ref{t:models}).
-These top seven models have a combined weight of 0.96 meaning that there is a 0.96\% chance that one of these models would be the best model if the data was recollected.
-However these top seven models all contain study effort, number of subspecies and the interaction between these two variables.
+The top seven models all had $\Delta\text{AICc} < 4$ meaning there was no clear best model (Table~\ref{t:models}).
+These top seven models had a combined weight of 0.96 meaning that there was a 0.96\% chance that one of these models would be the best model if the data was recollected.
+However these top seven models all contained study effort, number of subspecies and the interaction between these two variables.
 log(Mass) and log(Range Size) and the random variable are all in three of the top seven models.
 
 Summing the Akaiki weights of all models that contain a given variable gives a probability, $Pr$, that the variable would be in the best model (Figure~\ref{fig:fstITPlots}A) if the data were recollected \cite{whittingham2006we}.
@@ -564,7 +566,7 @@ Random &  0.21 &  0.05&
 \subsection{Gene Flow}
 
 \tmpsection{More Descriptive}
-Due to the low number of studies and the restrictive requirements imposed on study design, there are only data for 24 bat species in 7 families.
+Due to the low number of studies and the restrictive requirements imposed on study design, there was only data for 24 bat species in 7 families.
 The number of described virus species for a bat host ranged up to 12 viruses in \emph{Miniopterus schreibersii}.
 Figure~\ref{fig:fstRawData} shows the raw data for the relationship between pathogen richness and log gene flow.
 %Figure~\ref{fig:fstTreePlot} shows the phylogeny used and the number of viruses for each species.
@@ -647,29 +649,29 @@ log(Mass) &
 \label{t:models}
 \end{table}
 
-As with the Number of Subspecies dataset, there is no phylogenetic signal in the number of virus species ($\lambda$ = \ensuremath{10^{-6}}, $p$ = 1)
-Gene flow also has no phylogenetic autocorrelation ($\lambda$ = \ensuremath{10^{-6}}, $p$ = 1).
+As with the Number of Subspecies dataset, there was no phylogenetic signal in the number of virus species ($\lambda$ = \ensuremath{10^{-6}}, $p$ = 1)
+Gene flow also had no phylogenetic autocorrelation ($\lambda$ = \ensuremath{10^{-6}}, $p$ = 1).
 Due to the low sample size, significance tests are unlikely to have much power.
-However, study effort has some phylogenetic autocorrelation ($\lambda$ = 0.15, $p$ = 0.56) while distribution size and mass seem to show phylogenetic signal (Distribution size: $\lambda$ = 0.67, $p$ = 0.53, Mass: $\lambda$ = 0.79, $p$ = \ensuremath{2.69\times 10^{-3}}).
+However, study effort had some phylogenetic autocorrelation ($\lambda$ = 0.15, $p$ = 0.56) while distribution size and mass seemed to show phylogenetic signal (Distribution size: $\lambda$ = 0.67, $p$ = 0.53, Mass: $\lambda$ = 0.79, $p$ = \ensuremath{2.69\times 10^{-3}}).
 
 
 \tmpsection{Model results}
 
-Only the model with study effort, gene flow and mass is well supported with the second model having an $\Delta\text{AICc}$ of 34 (Table \ref{t:models}).
-While less strongly supported than the number of subspecies, gene flow is likely in the best model ($Pr = $ 0.89) compared to the benchmark random variable which has $Pr = $ 0.18 (Figure~\ref{fig:fstITPlots}B and Table~\ref{t:variables}).
-On average (mean weighted by Akaiki weights) there is a negative relationship between gene flow and viral richness ($\beta = $ \ensuremath{-0.67}, variance = \ensuremath{5.48\times 10^{-3}}) despite the apparent positive relationship (see Figure~\ref{fig:fstRawData}) weakly suggested by the bivariate model (pgls: $\beta$ = 0.63, $t$ = 1.16, df = 13, $p$ = 0.27).
+Only the model with study effort, gene flow and mass was well supported with the second model having an $\Delta\text{AICc}$ of 34 (Table \ref{t:models}).
+While less strongly supported than the number of subspecies, gene flow was likely in the best model ($Pr = $ 0.89) compared to the benchmark random variable which has $Pr = $ 0.18 (Figure~\ref{fig:fstITPlots}B and Table~\ref{t:variables}).
+On average (mean weighted by Akaiki weights) there was a negative relationship between gene flow and viral richness ($\beta = $ \ensuremath{-0.67}, variance = \ensuremath{5.48\times 10^{-3}}) despite the apparent positive relationship (see Figure~\ref{fig:fstRawData}) weakly suggested by the bivariate model (pgls: $\beta$ = 0.63, $t$ = 1.16, df = 13, $p$ = 0.27).
 This supports the hypothesis that population structure promotes viral richness.
-Possibly due to the smaller sample size, or a weaker relationship, this coefficient is much more varied than the number of subspecies coeficient with 22\% of models estimating a positive relationship.
+Possibly due to the smaller sample size, or a weaker relationship, this coefficient was much more varied than the number of subspecies coeficient with 22\% of models estimating a positive relationship.
 
-As in the number of subspecies analysis, study effort is very likely in the best model ($Pr = $ 0.99) as is body mass ($Pr = $ 0.98).
+As in the number of subspecies analysis, study effort was very likely in the best model ($Pr = $ 0.99) as was body mass ($Pr = $ 0.98).
 However, body mass has a negative average coefficient ($\beta = $ \ensuremath{-0.35}, variance = 0.04) which is in contrast to number of subspecies analysis, many studies in the literature \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat} and the bivariate model (pgls: $\beta$ = 0.6, $t$ = 0.38, df = 13, $p$ = 0.71).
-In contrast to the number of subspecies analysis, range size is almost certainly not in the best model with $Pr = $ 0.06 being much less than the random variable.
-This variable being less supported than the random variable is probably because range size is closely correlated with study effort (pgls: $\beta$ = 0.6, $t$ = 4.45, df = 13, $p$ = \ensuremath{6.58\times 10^{-4}}).
-Of the three independant variables in the best model, study effort has the largest effect ($\beta = $ 2.49, variance = 0.08).
-The effect size of gene flow ($\beta = $ \ensuremath{-0.67}, variance = \ensuremath{5.48\times 10^{-3}}) is approximately twice the size of that of body mass ($\beta = $ \ensuremath{-0.35}, variance = 0.04)
+In contrast to the number of subspecies analysis, range size was almost certainly not in the best model with $Pr = $ 0.06 being much less than the random variable.
+This variable being less supported than the random variable was probably because range size is closely correlated with study effort (pgls: $\beta$ = 0.6, $t$ = 4.45, df = 13, $p$ = \ensuremath{6.58\times 10^{-4}}).
+Of the three independant variables in the best model, study effort had the largest effect ($\beta = $ 2.49, variance = 0.08).
+The effect size of gene flow ($\beta = $ \ensuremath{-0.67}, variance = \ensuremath{5.48\times 10^{-3}}) was approximately twice the size of that of body mass ($\beta = $ \ensuremath{-0.35}, variance = 0.04)
 
 Across all models the mean value of $\lambda$ is \ensuremath{-1.64} and a large number of individual models (58\%)  had negatively phylogenetically distributed residuals implying the residuals from the model are strongly negatively phylogenetic.
-Due to the small sample size this is probably due to a small number of data points with large residuals being distant on the tree.
+Due to the small sample size this was probably due to a small number of data points with large residuals being distant on the tree.
 
 
 

@@ -173,7 +173,7 @@ However, the assumption that population structures that yield high $R_0$ will al
 %One commonly taken assumption is that factors that promote high disease spread automatically promotes high diversity. 
 This assumption ignores competitive mechanisms such as cross-immunity and depletion of susceptible hosts.
 
-A number of authors have demonstrated a competitive exclusion principle where only the most optimally spreading disease will survive when infection with one pathogen prevents infection with another pathogen \cite{bremermann1989competitive, martcheva2013competitive, ackleh2003competitive, ackleh2014robust, turner2002impact}.
+A number of authors have demonstrated a competitive exclusion principle where only the most optimally spreading disease will survive when infection with one pathogen prevents infection with another pathogen \cite{bremermann1989competitive, martcheva2013competitive, ackleh2003competitive, ackleh2014robust, turner2002impact, castillo1995dynamics}.
 If competitive mechanisms are strong, pathogens in populations structured such that $R_0$ will be high will be able to easily out-compete invading pathogens.
 Only if competitive mechanisms are weak will high $R_0$  enable the invasion of new pathogens and allow higher pathogen diversity.
 
