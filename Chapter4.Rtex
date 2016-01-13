@@ -227,12 +227,12 @@ This means that the length of each simulation is stochastic.
 We define the number of events we wish to simulate instead.
 
 
-\begin{figure}[t]
-\centering
-  \includegraphics[width=0.4\textwidth]{imgs/SIRoption1.pdf}
-  \caption{The SIR model used.}
-  \label{f:sir}
-\end{figure}
+%\begin{figure}[t]
+%\centering
+%  \includegraphics[width=0.4\textwidth]{imgs/SIRoption1.pdf}
+%  \caption{The SIR model used.}
+%  \label{f:sir}
+%\end{figure}
 
 
 We can now write down the rates of all events. 
@@ -1127,7 +1127,7 @@ $r_i$ & The rate that event $i$ occurs. & Days$^{-1}$&\\
 &&&\\
 \end{tabular}
 \caption{All symbols used.}
-\label{t:params}
+\label{t:params2}
 \end{table}
 
 
