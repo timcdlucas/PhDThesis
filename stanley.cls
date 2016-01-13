@@ -237,7 +237,7 @@
 % final and = &
 \renewcommand*{\finalnamedelim}{%
   \ifnumgreater{\value{liststop}}{2}{}{}%
-  \addspace and \space}
+  \addspace \& \space}
   
 % no "In: "
 \renewbibmacro{in:}{%
