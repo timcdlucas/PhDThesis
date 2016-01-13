@@ -928,7 +928,7 @@ transMeansTitle <- 'Comparison of the probability of invasion when population si
 
 %%end.rcode
 
-%%begin.rcode plotTransMeans, fig.cap = transMeansCapt, fig.scap = transMeansTitle
+%%begin.rcode plotTransMeans, fig.cap = transMeansCapt, fig.scap = transMeansTitle, out.width = '0.9\\textwidth'
 
 
 ggplot(rbind(dens1Means, dens2Means), aes(x = pop, y = mean, colour = vary)) +
@@ -943,7 +943,8 @@ ggplot(rbind(dens1Means, dens2Means), aes(x = pop, y = mean, colour = vary)) +
   scale_colour_poke(name="Variable varied", 
                labels=c('Colony Size', 'Colony Number'), 
                pokemon = 'Swampert',
-               spread = 2)
+               spread = 2) +
+  scale_y_continuous(breaks = c(0, 0.5, 1), labels = c('0', '0.5', '1')) 
 
 %%end.rcode
 
@@ -959,7 +960,7 @@ valueChangeMeansTitle <- 'Comparison of the probability of invasion when populat
 
 %%end.rcode
 
-%%begin.rcode plotValueChangeMeans, fig.cap = valueChangeMeansCapt, fig.scap = valueChangeMeansTitle
+%%begin.rcode plotValueChangeMeans, fig.cap = valueChangeMeansCapt, fig.scap = valueChangeMeansTitle, out.width = '\\textwidth'
 
 # Convert to percentage change in density, colonysize or colony number.
 
@@ -1023,7 +1024,9 @@ ggplot(d, aes(x = ValueChange, y = mean, colour = vary)) +
   scale_colour_poke(name="Variable varied", 
                labels=c( 'Colony Number', 'Colony Size', 'Density'), 
                pokemon = 'Swampert',
-               spread = 3)
+               spread = 3) +
+  scale_y_continuous(breaks = c(0, 0.5, 1), labels = c('0', '0.5', '1')) +
+  scale_x_continuous(breaks = c(0.25, 0.5, 1, 2, 4), labels = c(0.25, 0.5, 1, 2, 4), trans = 'log10')
 
 %%end.rcode
 
