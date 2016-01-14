@@ -219,7 +219,8 @@
   dashed=false, %
 	maxcitenames=2, 
   terseinits=true,
-  maxbibnames=99
+  maxbibnames=99,
+  sortcites=true
 ]{biblatex}
 \renewcommand{\cite}[1]{\parencite{#1}}
 

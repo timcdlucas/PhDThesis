@@ -19,10 +19,17 @@
   firstinits=true, 
   dashed=false, %
 	maxcitenames=2, 
-  maxbibnames=99
+  terseinits=true,
+  maxbibnames=99,
+  sortcites=true
 ]{biblatex} %style=mla for footnotes.
 %\renewcommand{\cite}[1]{\footcite{#1}}
 \renewcommand{\cite}[1]{\parencite{#1}}
+
+
+% Want commas not semi colons for multi cite
+\renewcommand*{\multicitedelim}{\addcomma\space}
+
 
 
 % final and = &
