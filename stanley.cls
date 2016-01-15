@@ -312,6 +312,10 @@
 \newcommand{\primarysupervisor}[1]{\def\theprimarysv{#1}}
 \newcommand{\secondarysupervisor}[1]{\def\thesecondarysv{#1}}
 
+% Used to print the full reference for chapters that are already published.
+\newcommand{\printpublication}[1]{\AtNextCite{\defcounter{maxnames}{99}}\fullcite{#1}}
+
+
 \renewcommand{\maketitle}[1]{%
 \begin{titlingpage*}%
     \vspace*{\fill}%
@@ -339,7 +343,14 @@
 \begin{quote}
     \textit{I, \theauthor, confirm that the work presented in this thesis
 is my own. Where information has been derived from other sources,
-I confirm that this has been indicated in the thesis.}
+I confirm that this has been indicated in the thesis.}\\\vspace{0.5cm}
+\\
+Chapter \ref{ch:grem} contains results from simulations written by a collaborator, Elizabeth Moorecroft.
+The work in Chapter 5 has been published in Methods in Ecology and Evolution and the text, figures and tables are reproduced here as published, with some minor
+formatting changes made for inclusion in the thesis.
+I have included the electronic supplementary material from this publication as an appendix (Appendix~\ref{gremAppendix}).\\\vspace{0.1cm}
+\\
+\printpublication{lucas2015generalised}
 \end{quote}%
 \vspace*{\stretch{2}}}
                                		
