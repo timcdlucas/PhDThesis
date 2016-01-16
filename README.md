@@ -25,10 +25,26 @@ Text only chapters are written directly in a .tex file.
 
 While [tim-lucas-thesis.pdf](tim-lucas-thesis.pdf) is the full thesis pdf, most chapters are also compiled seperately. These files are 
 
+- [intro_draft.pdf](intro_draft.pdf)
 - [Chapter_2_draft.pdf](Chapter_2_draft.pdf)
 - [Chapter_3_draft.pdf](Chapter_3_draft.pdf)
+- [Chapter_4_draft.pdf](Chapter_4_draft.pdf)
 - [Chapter_5_draft.pdf](Chapter_5_draft.pdf)
+- [discussion_draft.pdf](discussion_draft.pdf)
 
+### Other files
+
+[Chapter5DataReformat.R](Chapter5DataReformat.R) takes data from simulations for Chapter 5 and reformats them ready for plotting.
+
+[lucas_et_al_supplementarymaterial_2015-01-20.tex](lucas_et_al_supplementarymaterial_2015-01-20.tex), [REM-methods.tex](REM-methods.tex) and files in [latexFiles/](latexFiles/) make up additional methods for Chapter 5 and are included as an appendix.
+
+[data/](data/) contains all raw and processed data for each chapter in seperate folders.
+Each folder should contain a README describing the data files in more detail.
+
+Figures created directly from Chapter analyses by knitr are in [figure/](figure/).
+Figures created by older analyses and manually with inkscape are in [imgs/](imgs/)
+
+[misc/](misc/) contains additional files such as my [misc/theme_tcdl.R](ggplot2 themes) and [misc/KnitrOptions.R](global knitr options).
 
 Reproducibility
 ----------------
