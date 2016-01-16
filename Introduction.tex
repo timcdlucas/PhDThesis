@@ -36,7 +36,7 @@ Knowing which species are likely to have many pathogens allows us to sample and 
 Suggested factors that might control pathogen richness include individual traits (body mass \cite{kamiya2014determines, arneberg2002host, poulin1995phylogeny} and longevity \cite{nunn2003comparative, ezenwa2006host}) as well as environmental factors such as latitude \cite{poulin2010latitudinal, kamiya2014determines}.
 Furthermore, population level traits that affect the dynamics of disease spread have also been studied (animal density \cite{kamiya2014determines, nunn2003comparative, arneberg2002host}, sociality \cite{bordes2007rodent, vitone2004body, altizer2003social, ezenwa2006host}, population structure \cite{nunes2006localized, maganga2014bat, gay2014parasite, turmelle2009correlates} and  species range size \cite{kamiya2014determines, nunn2003comparative}).
 This understanding provides a basis for predicting which species will have high pathogen richness and should be prioritised for sampling and surveillance.
-Furthermore, given a good mechanistic understanding of how pathogen richness is created and maintained we can start to predict how pathogen richness (and zoonotic disease risk) will respond to global change.
+Furthermore, given a good mechanistic understanding of how pathogen richness is created and maintained we can start to predict how pathogen richness, and therefore zoonotic disease risk, will respond to global change.
 
 
 
@@ -67,18 +67,38 @@ Finally, their ability to fly means populations can be well mixed across large d
 
 
 
-\section{Population structure and density as factors that influence pathogen richness}
+\section{Population density and structure as factors that influence pathogen richness}
 
 
 \tmpsection{Theoretical evidence that structure and density increase richness}
 
 % Density
 
-
+The role of population density and abundance in disease dynamics is well established \cite{may1979population, anderson1979population, heesterbeek2002brief, lloyd2005should}.
+Broadly, larger populations can maintain diseases more easily, due to having a larger pool of susceptible individuals (individuals without acquired immunity) and having a greater number of new susceptible individuals enter the population by birth or immigration \cite{may1979population, anderson1979population}.
+High density populations are expected to have a greater number of contacts between individuals and so promote disease spread (though there is much discussion on when the number of contacts might scale independantly of density \cite{mccallum2001should}).
 
 % Structure
 
-\tmpsection{Empirical evidence from mammals}
+There is a large literature on the role of population structure on disease dynamics (see review by \textcite{pastor2015epidemic}) driven by applications to computer viruses \cite{pastor2001epidemic} and the social spread of information \cite{daley1964epidemics, goffman1964generalization}, as well as health applications.
+In particular work has concentrated on how structure affects the invasion threshold, $R_0$ \cite{colizza2007invasion, barthelemy2010fluctuation, wu2013threshold, may2001infection, pastor2001epidemic}. 
+This value combines relevent parameters to yield a threshold above which a disease is expected to infect a significant proportion of the population \cite{may1979population, anderson1979population}.
+Below the threshold, only small outbreaks that quickly die out are expected.
+
+However, the majority of theoretical work considers single pathogens.
+Single pathogen models suggest whether a pathogen can spread and persist in a population, ignoring all other pathogens.
+A number of studies examine competing epidemics --- when two pathogens spread at the same time, which pathogen infects more individuals? --- and have found increasing population structure reduces dominance of one strain \cite{van2014domination, poletto2013host, poletto2015characterising}.
+However, this again tells us little about how pathogen communities form and what factors control total pathogen richness.
+Many fewer papers explicitely study the longer term competition between two or more pathogens.
+Those that do commonly find that competitive exclusion is likely \cite{castillo1995dynamics, bremermann1989competitive, martcheva2013competitive, ackleh2003competitive, ackleh2014robust, turner2002impact}.
+Mechanisms that have been shown to allow pathogen coexistence include superinfection \cite{may1994superinfection, li2010age}, density-dependant deaths \cite{ackleh2003competitive, kirupaharan2004coexistence} and differing transmission routes \cite{allen2003dynamics}.
+
+The specific role of density on the ability of pathogens to coexist has not been theoretically studied though it is commonly foudn to promote pathogen richness in comparative empirical studies \cite{kamiya2014determines, nunn2003comparative, arneberg2002host}.
+The few papers that have directly studied how coexistence of pathogens responds to population structure have found population structure can allow pathogens to coexist when competitive exclusion would occur in a fully mixed population \cite{qiu2013vector,allen2004sis,nunes2006localized}.
+The roles of population structure and social group size have been examined in comparative studies \cite{maganga2014bat, gay2014parasite, turmelle2009correlates, altizer2003social, bordes2007rodent, ezenwa2006host, rifkin2012animals, vitone2004body}.
+There is much disagreement between these studies with population structure being shown to promote \cite{maganga2014bat, turmelle2009correlates} and inhibit pathogen richness \cite{gay2014parasite} and similarly group size being shown to promote \cite{rifkin2012animals, bordes2007rodent} and inhibit \cite{ezenwa2006host} richness.
+While increased group size should generally decrease population structure the literature is rarely clear on how these variables relate.
+
 
 
 
@@ -120,7 +140,7 @@ I found that population size is more important than population density and that 
 Given the importance of population size on pathogen richness it is important to have good estimates of these for wild bat populations.
 However, there are currently very few measurements of bat abundance due to their small size, nocturnal habit and difficulties in identification.
 Therefore I aimed to develop a method for estimating bat abundance from acoustic data, specifically data collected by the iBats project \cite{jones2011indicator}.
-In Chapter 5 I present a generally applicable method (based on random encounter models \cite{rowcliffe2008estimating, yapp1956theory}) for estimating abundance of animal populations using camera traps or acoustic deteectors.
+In Chapter 5 I present a generally applicable method --- based on random encounter models \cite{rowcliffe2008estimating, yapp1956theory} --- for estimating abundance of animal populations using camera traps or acoustic deteectors.
 I used spatial simulations to test the method for biases and to assess it's precision.
 I found that the method is unbiased and precise as long as a reasonable amount of data is collected.
 

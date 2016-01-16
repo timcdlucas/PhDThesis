@@ -63,7 +63,7 @@ As the required formatting for a UCL thesis is rather uninspiring I am also crea
 Since including Rob's style file, the pretty thesis is much less necessary. 
 But I'll still play with it.
 
-The files for this version are in [PrettyThesis](PrettyThesis) and the combined pdf is [PrettyThesis/tim-lucas-pretty-thesis.pdf](PrettyThesis/tim-lucas-pretty-thesis.pdf).
+The files for this version are in [PrettyThesis/](PrettyThesis/) and the combined pdf is [PrettyThesis/tim-lucas-pretty-thesis.pdf](PrettyThesis/tim-lucas-pretty-thesis.pdf).
 
 
 ![Network image](/imgs/fullyConnected.png)
