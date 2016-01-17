@@ -399,7 +399,7 @@ That is, recovery from one pathogen causes immediate recovery from the other pat
 
 
 We can now write down the rates of all events. 
-I define $I^+_p$ to be the sum of all classes that are infectious with pathogen $p$, for example $I^+_1 = I_1 + I_{12}$. 
+I defined $I^+_p$ to be the sum of all classes that are infectious with pathogen $p$, for example $I^+_1 = I_1 + I_{12}$. 
 Assuming asexual reproduction, that all classes reproduce at the same rate and that individuals are born into the susceptible class we get
 \begin{align}
   P\left( S_{nt^\prime} = S_{nt} +1\right) &= b\left( S_{nt}+\sum_q I_{qnt} + R_{nt}\right) 
@@ -411,7 +411,10 @@ The rates of death, given a death rate $d$ are given by
   P\left( I_{qnt^\prime} = I_{qnt}-1 \right) &= dI_{qnt},\\
   P\left( R_{nt^\prime} = R_{nt}-1 \right) &= dR_{nt}.
 \end{align}
-Infection of a susceptible with either pathogen 1 or 2, $S \rightarrow I_p$ where $p\in \{1,2\}$, is given by
+I modelled transmission as density-dependant.
+This assumption is more suitable than frequency-dependant transmission as I am modelling a disease transmitted by saliva or urine in highly dense populations confined to caves, building or potentially a small number of tree roosts.
+I am notably not modelling an STD as these diseases are not expected to be commonly zoonotic.
+Infection of a susceptible with either pathogen 1 or 2, $S \rightarrow I_p$ where $p\in \{1,2\}$, is therefore given by
 \begin{align}
   P\left( I_{pnt^\prime} = I_{pnt}+1, S_{nt^\prime} = S_{nt}-1 \right) &= \beta S_{nt}I^+_{pnt},
 \end{align}
