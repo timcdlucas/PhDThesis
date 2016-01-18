@@ -447,7 +447,7 @@ Finally, recovery from any infectious class occurs at a rate $\gamma$
 }
 }
 \caption[Network topologies used to compare network connectedness]{
-The two network topologies used to test whether network connectedness influences a viruses ability to invade.
+The two network topologies used to test whether network connectedness influences a pathogens ability to invade.
 A) Dispersal can occur between any subpopulation.
 B) Animals can only disperse to neighbouring subpopulations. 
 Blue circles are subpopulations of 3,000 individuals.
@@ -1037,7 +1037,11 @@ This has implications for human epidemics as well --- if there is strong competi
 
 \subsubsection{Population structure does not affect pathogen richness}
 
-Probably because dynamics are dominated by local processes.
+I have found no evidence that population structure aids the invasion and establishment of newly evolved pathogen species.
+Instead it seems that invasion relies solely on the local dynamics of the disease.
+If the transmission rate is high, a pathogen has a good chance of spreading immediately after it's introduction when it is at very density.
+Once the pathogen has infected a large number of individuals in the local metapopulation, it is bound to spread throughout the metapopulation without going extinct.
+
 This goes against many predictions that increasing $R_0$ increases pathogen richness.
 Further work could examine reduced col  ony sizes to test when global structure become more important.
 Measures of population structure should not be used to predict zoonotic potential.
@@ -1073,6 +1077,27 @@ However, here I am interested in host traits.
 Therefore we have assumed that pathogen strains are identical.
 It is clear however that there are a number of factors that affect pathogen richness and our focus on host population structure does not imply that pathogen traits are not important.
 
+\subsection{Complex social structure and behaviour}
+
+With the models here I have aimed to tread a middle ground between the overly simple models employed in analytical studies \cite{allen2004sis} and the full complexity and variety of true bat social systems \cite{kerth2008causes}.
+Omissions include seasonal migration,  maternity roosts, hibernation roosts and swarming sites \cite{kerth2008causes, fleming2003ecology, richter2008first, cryan2014continental}. 
+While future models might aim to model this complexity more fully the number of parameters that are required to be estimated and varied becomes very large.
+Furthermore, not all of these social complexities exist in all bat species, so in limiting my analysis to the simpler end of bat social systems it is hoped that the results are more broadly representative of the order.
+
+Furthermore, I have considered a single host species in isolation.
+In some cases, treating multiple host species as identical could be appropriate.
+However, more generally, it seems likely that sympatry in bats is epidemiologically important \cite{brierley2016quantifying, luis2013comparison} but was beyond the scope of this study.
+There is potential for this to be effectively modelled as a multilayered network \cite{wang2016structural, funk2010interacting} and this would be expected to act to reduce population structure.
+
+Finally, many species of bat exhibit strong seasonal birth pulses which are known to affect disease dynamics \cite{hayman2015biannual,peel2014effect,amman2012seasonal}.
+This would be expected to facilitate the invasion of new pathogen species; if a new strain evolved or entered the population by migration during a period of low population immunity, it would have a higher chance of invading and establishing in the population.
+
+\subsection{Conclusions}
+
+In conclusion I have found no evidence that population structure aids the invasion and establishment of newly evolved pathogen species.
+This suggests that if population structure does have a role in shaping pathogen communities, it is not by this specific mechanism.
+Practically, this implies that population structure is not a useful metric for predicting pathogen richness in wild bats.
+Furthermore it implies that population fragmentation by global change will not promote an increase in pathogen richness.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
