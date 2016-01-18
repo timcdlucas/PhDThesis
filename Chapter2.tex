@@ -1,5 +1,5 @@
 
-\clearpage
+
 
 
 
@@ -64,7 +64,7 @@ This also implies that population structure is not a useful proxy for pathogen d
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\clearpage
+
 \section{Introduction}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -83,8 +83,7 @@ Over 50\% of emerging infectious diseases have an animal source \cite{jones2008g
 Zoonotic pathogens can be highly virulent \cite{luby2009recurrent, lefebvre2014case} and potentially have huge public health impacts \cite{granich2015trends}, economic costs \cite{knobler2004learning} and slow down international development \cite{ebolaWorldbank}.
 Therefore understanding and predicting changes in the process of zoonotic spillover is a global health priority \cite{taylor2001risk}.
 The number of pathogen species hosted a wild animal species affects the chance that a disease from that species will infect humans.
-
-
+However, the factors that control the diversity of pathogens in a wild animal population are still unclear \cite{metcalf2015five}; in particular our mechanistic understanding of how population processes inhibit or promote pathogen richness is poor.
 
 
 
@@ -96,12 +95,8 @@ The number of pathogen species hosted a wild animal species affects the chance t
 
 \tmpsection{We know some factors that correlate with pathogen diversity}
 %population density, longevity, body size and population structure
-However, the factors that control the diversity of pathogens in a wild animal population are still unclear \cite{metcalf2015five}.
-As 
+
 A number of host traits have been shown to correlate with pathogen richness including body size \cite{kamiya2014determines, arneberg2002host}, population density \cite{nunn2003comparative, arneberg2002host} and range size \cite{bordes2011impact, kamiya2014determines}.
-
-\tmpsection{But we do not understand the mechanistic processes}
-
 However, empirical, correlative studies are often contradictory due to small sample sizes, noisy data and because empirical relationships often do not generalise across taxa (though see \cite{kamiya2014determines} for a meta-analysis).
 The correlation between many traits (e.g. \textcite{nunn2015infectious}) also makes it hard to clearly distinguish which factors are important.
 Furthermore, knowing which factors correlate with pathogen richness does not tell us how they controls richness. 
@@ -109,21 +104,16 @@ Mechanisms by which a trait could increase pathogen diversity include promoting 
 These separate mechanisms have not been examined and it is difficult to see how they could be approached through comparative methods.
 We need explicit mechanistic models in order to tease apart these factors.
 
-
-
 \tmpsection{Population structure could be important}
 One host-species trait that has been largely understudied with respect to pathogen diversity is population structure.
-
 
 \tmpsection{Empirical evidence that structure might affect diversity}
 
 % Mammals
-
 % Bats
 Few studies focus on bats, despite their role in recent zoonoses.
 Maganga \emph{et al.} found that distribution fragmentation predicts viral richness \cite{maganga2014bat}, but \cite{gay2014parasite} finds the opposite relationship. 
 While the data set in \cite{gay2014parasite} is larger, the analysis in \cite{maganga2014bat} is much more focused on fragmentation.
-
 Genetic correlates of population structure have also been used.
 Turmelle \emph{et al.} \cite{turmelle2009correlates}, in a small analysis, find that high $F_{st}$ (i.e. a structured population) correlates with high richness.
 However, they do not account for the widely different spatial scales found in population structure studies, nor do they deal with the differences between $F_{ST}$, $\phi_{ST}$ and other measures appropriately. 
@@ -275,12 +265,48 @@ This is true whether population structure is altered by changing the dispersal r
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\clearpage
 \section{Methods}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%
+
+\begin{table}[b!]
+\centering
+\caption{All symbols used.}
+\begin{tabular}{@{}lp{5cm}p{3.9cm}r@{}}
+\toprule
+Symbol & Explanation & Units & Value\\
+\midrule
+$S$ & Number of susceptible individuals &&\\
+$I_q$ & N. individuals infectious with diseases $q$ &&\\
+$I^+_p$ & Sum of classes infected with pathogen $p$ &\\
+%$N$ & Number of colonies&& 10\\
+$\bar{n}$ & Colony starting size && 3,000\\
+$\beta$ & Transmission rate & Transmission events per year per individual& 2, 5, 10\\
+$\gamma$ & Recovery rate & Recovery events per year per individual. & 1\\
+$\lambda$ & Dispersal & Dispersal events per day per individual& 0.001--0.1\\
+$b$ & Birth rate & Births per year per individual& 0.05\\
+$d$ & Death rate & Deaths per year per individual & 0.05\\
+%$d_I$ & Infectious death rate & Additional deaths per day per individual&\\
+$\rho$ & No. pathogens && 2\\
+$p$ &  Pathogen index i.e. $p\in\{1,2\}$ for pathogens 1 and 2 & &\\
+$q$ & Disease class i.e., $q\in\{1,2,12\}$&\\
+%$\mathcal{V}$ & Neighbourhood of a node &&\\
+$t, t^\prime$ & Time and time plus waiting time i.e., $t+\delta$ & Days&\\
+$k_i$ & Degree of node $i$ &&\\
+$\delta$ & Waiting time until next event & Days&\\
+$\alpha$ & Cross immunity & Proportion& 0.1\\
+$n, m$ & Colony index &&\\
+%$\bm{A}_{mn}$ & Adjacency matrix. & Distance &\\
+%$\mu$ & Maximum distance for edge to exist & km& 40, 100\\
+$\sigma$ & Invading pathogen seed size & & 10\\
+$r_i$ & The rate that event $i$ occurs. & Days$^{-1}$&\\
+\bottomrule
+\end{tabular}
+
+\label{t:params}
+\end{table}
 
 
 
@@ -292,7 +318,7 @@ This is true whether population structure is altered by changing the dispersal r
 
 \subsubsection{Two pathogen SIR model}
 
-I examine a multipathogen SIR model. 
+I examine a multipathogen SIR model with vital dynamics. 
 This is a compartment model with individuals being classed as susceptible, infected or recovered with immunity (Figure~\ref{f:sir}).
 Susceptible individuals are counted in class $S$.
 There are three infected classes, $I_1$, $I_2$ and $I_{12}$, being individuals infected with pathogen 1, pathogen 2 or both respectively.
@@ -301,8 +327,9 @@ Furthermore, recovery from one pathogen moves an individual straight into the re
 This modelling choice allows the model to be easily expanded to include more than two pathogens.
 The assumption of immediate recovery from all other diseases is likely to be quite accurate for very closely related pathogens as is being studied here as once an acquired immune response is activated, all infections are likely to be cleared quickly.
 
-The coinfection rate (the rate at which an infected individual is infected with a second pathogen) is adjusted compared to the infection rate by a factor $\alpha$ (i.e. $\alpha = 0.5$ means coinfection happens at half the rate of infections).
-Birth and death rates are assumed to be equal, $b = d$ (see Table~\ref{t:params} for a list of symbols used).
+The coinfection rate (the rate at which an infected individual is infected with a second pathogen) is adjusted compared to the infection rate by a factor $\alpha$ (here I used $\alpha = 0.1$ which means coinfection happens at a tenth the rate of first infections).
+In the application of long term existence of pathogens it is vital to include vital dynamics (births and deaths) as the SIR without vital dynamics has no endemic state.
+Birth and death rates are assumed to be equal, $b = d$ (see Table~\ref{t:params} for a list of symbols and values used).
 The time scale of the simulations are set by setting b = 0.05 per year, yielding an average host generation time of 20 years.
 
 
@@ -354,7 +381,7 @@ That is, recovery from one pathogen causes immediate recovery from the other pat
 
 
 We can now write down the rates of all events. 
-I define $I^+_p$ to be the sum of all classes that are infectious with pathogen $p$, for example $I^+_1 = I_1 + I_{12}$. 
+I defined $I^+_p$ to be the sum of all classes that are infectious with pathogen $p$, for example $I^+_1 = I_1 + I_{12}$. 
 Assuming asexual reproduction, that all classes reproduce at the same rate and that individuals are born into the susceptible class we get
 \begin{align}
   P\left( S_{nt^\prime} = S_{nt} +1\right) &= b\left( S_{nt}+\sum_q I_{qnt} + R_{nt}\right) 
@@ -366,7 +393,10 @@ The rates of death, given a death rate $d$ are given by
   P\left( I_{qnt^\prime} = I_{qnt}-1 \right) &= dI_{qnt},\\
   P\left( R_{nt^\prime} = R_{nt}-1 \right) &= dR_{nt}.
 \end{align}
-Infection of a susceptible with either pathogen 1 or 2, $S \rightarrow I_p$ where $p\in \{1,2\}$, is given by
+I modelled transmission as density-dependant.
+This assumption is more suitable than frequency-dependant transmission as I am modelling a disease transmitted by saliva or urine in highly dense populations confined to caves, building or potentially a small number of tree roosts.
+I am notably not modelling an STD as these diseases are not expected to be commonly zoonotic.
+Infection of a susceptible with either pathogen 1 or 2, $S \rightarrow I_p$ where $p\in \{1,2\}$, is therefore given by
 \begin{align}
   P\left( I_{pnt^\prime} = I_{pnt}+1, S_{nt^\prime} = S_{nt}-1 \right) &= \beta S_{nt}I^+_{pnt},
 \end{align}
@@ -398,7 +428,7 @@ Finally, recovery from any infectious class occurs at a rate $\gamma$
 }
 }
 \caption[Network topologies used to compare network connectedness]{
-The two network topologies used to test whether network connectedness influences a viruses ability to invade.
+The two network topologies used to test whether network connectedness influences a pathogens ability to invade.
 A) Dispersal can occur between any subpopulation.
 B) Animals can only disperse to neighbouring subpopulations. 
 Blue circles are subpopulations of 3,000 individuals.
@@ -422,14 +452,14 @@ The dispersal rate is held constant between the two topologies.
 
 
 
-In each simulation the population was seeded with 10 sets of 200 infected individuals of disease 1.
+In each simulation the population was seeded with 10 sets of 200 infected individuals of pathogen 1.
 There groups were seeded into randomly selected colonies with replacement.
 For each 200 infected individuals added, 200 susceptible individuals were removed to keep starting colony sizes constant. 
-Disease 1 was then allowed to spread and reach equilibrium. 
-After \ensuremath{3\times 10^{5}} events, 5 individuals infected with disease 2 were added to one colony. 
+Pathogen 1 was then allowed to spread and reach equilibrium. 
+After \ensuremath{3\times 10^{5}} events, 5 individuals infected with pathogen 2 were added to one colony. 
 Visual inspection of preliminary simulations was used to decide on \ensuremath{3\times 10^{5}} as being long enough for the epidemic to reach an equilibrium state.
-After another \ensuremath{5\times 10^{5}} events the invasion of disease 2 is considered successful if any individuals are still infected with pathogen 2.
-Again visual inspection of preliminary simulations was used to determine whether this was long enough to be confident that an invading disease 
+After another \ensuremath{5\times 10^{5}} events the invasion of pathgen 2 is considered successful if any individuals are still infected with pathogen 2.
+Again visual inspection of preliminary simulations was used to determine whether this was long enough to be confident that an invading pathogen. 
 
 
 \subsection{Dispersal}
@@ -467,13 +497,13 @@ This is therefore a long lasting infection but not a chronic infection.
 It is very difficult to directly estimate infection durations in wild populations.
 But it seems that these infections might be long lasting \cite{}.
 
-Cross immunity is set to 0.1 so that an individual infected with one disease is 90\% less likely to be infected with another.
+Cross immunity is set to 0.1 so that an individual infected with one pathogen is 90\% less likely to be infected with another.
 This is a rather arbitrary value.
 However, the rationale of the model is that the invading species might be a newly speciated strain of the endemic species.
-Furthermore, the model assumes complete cross immunity after infection.
-Therefore cross immunity is likely to be very strong.
+Furthermore, the model assumes complete cross immunity after recovery from infection.
+Therefore cross immunity to coinfection is likely to be very strong as well.
 
-The population size of each subpopulation is set to 3000. 
+The population size of each subpopulation is set to 3,000. 
 This is appropriate for many bat species \cite{jones2009pantheria}, especially the large, frugivorous \emph{Pteropodidae} that have been particularly associated with recent zoonotic diseases.
 
 
@@ -483,9 +513,12 @@ Given the recovery, birth and death rates we can calculate an approximation of $
 That is, this is $R_0$ for the local, within-subpopulation dynamics.
 Furthermore, it is $R_0$ for the first pathogen; $R_0$ of the invading pathogen will be lower due to competition.
 We can calculate that $R_0 \approx \frac{\beta b}{d(d+ \gamma)}$.
-For our four values of $\beta = 0.1, 0.2, 0.3, 0.4$ we therefore get $R_0 \approx 13.3, 33.3, 66.6$.
+For our four values of $\beta = 0.1, 0.2, 0.3, 0.4$ we therefore get $R_0 \approx 2.9, 4.8, 6.7, 8.6$.
 These values are very high in part to again find a reasonable trade off between the number of simulations and the reasonableness of the parameters.
-$R_0 \approx 13.3$ is similar to a highly contagious disease such as measles or pertussis. 
+$R_0 \approx 13.3$ is similar to a highly contagious pathogen such as measles or pertussis. 
+
+% R_\ast (R_0 - 1)\frac{\langle k^2 \rangle - \langle k \rangle}{\langle k^2 \rangle} \frac{p\bar{N}\alpha}{\mu} > 1
+% N = avg pop size, p = migration, mu = recovery, \alpha N_k is number of individuals infected. So think this is not with vital dynamics.
 
 
 For the simulations where an invading pathogen is added to the populations the number of invading pathogens added is set to 10. 
@@ -503,7 +536,7 @@ This is a trade off between getting a reasonable proportion of invasions, while 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\clearpage
+
 \section{Results}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -600,7 +633,7 @@ This is true for all three dispersal values ($\chi^2$ test. $\lambda = 0.001$: $
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\clearpage
+
 \section{Discussion}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -625,7 +658,11 @@ This has implications for human epidemics as well --- if there is strong competi
 
 \subsubsection{Population structure does not affect pathogen richness}
 
-Probably because dynamics are dominated by local processes.
+I have found no evidence that population structure aids the invasion and establishment of newly evolved pathogen species.
+Instead it seems that invasion relies solely on the local dynamics of the disease.
+If the transmission rate is high, a pathogen has a good chance of spreading immediately after it's introduction when it is at very density.
+Once the pathogen has infected a large number of individuals in the local metapopulation, it is bound to spread throughout the metapopulation without going extinct.
+
 This goes against many predictions that increasing $R_0$ increases pathogen richness.
 Further work could examine reduced col  ony sizes to test when global structure become more important.
 Measures of population structure should not be used to predict zoonotic potential.
@@ -661,51 +698,28 @@ However, here I am interested in host traits.
 Therefore we have assumed that pathogen strains are identical.
 It is clear however that there are a number of factors that affect pathogen richness and our focus on host population structure does not imply that pathogen traits are not important.
 
+\subsection{Complex social structure and behaviour}
 
+With the models here I have aimed to tread a middle ground between the overly simple models employed in analytical studies \cite{allen2004sis} and the full complexity and variety of true bat social systems \cite{kerth2008causes}.
+Omissions include seasonal migration,  maternity roosts, hibernation roosts and swarming sites \cite{kerth2008causes, fleming2003ecology, richter2008first, cryan2014continental}. 
+While future models might aim to model this complexity more fully the number of parameters that are required to be estimated and varied becomes very large.
+Furthermore, not all of these social complexities exist in all bat species, so in limiting my analysis to the simpler end of bat social systems it is hoped that the results are more broadly representative of the order.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Furthermore, I have considered a single host species in isolation.
+In some cases, treating multiple host species as identical could be appropriate.
+However, more generally, it seems likely that sympatry in bats is epidemiologically important \cite{brierley2016quantifying, luis2013comparison} but was beyond the scope of this study.
+There is potential for this to be effectively modelled as a multilayered network \cite{wang2016structural, funk2010interacting} and this would be expected to act to reduce population structure.
 
-\clearpage
-\section{Appendix}
+Finally, many species of bat exhibit strong seasonal birth pulses which are known to affect disease dynamics \cite{hayman2015biannual,peel2014effect,amman2012seasonal}.
+This would be expected to facilitate the invasion of new pathogen species; if a new strain evolved or entered the population by migration during a period of low population immunity, it would have a higher chance of invading and establishing in the population.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Conclusions}
 
-\begin{table}[b!]
-\centering
-\caption{All symbols used.}
-\begin{tabular}{@{}lp{5.4cm}p{3.9cm}r@{}}
-\toprule
-Symbol & Explanation & Units & Value\\
-\midrule
-$S$ & Number of susceptible individuals &&\\
-$I_q$ & N. individuals infectious with diseases $q$ &&\\
-$I^+_p$ & Sum of classes infected with pathogen $p$ &\\
-%$N$ & Number of colonies&& 10\\
-%$\bar{n}$ & Mean colony starting size && 3,000\\
-$\beta$ & Transmission rate & Transmission events per year per individual& 2, 5, 10\\
-$\gamma$ & Recovery rate & Recovery events per year per individual. & 1\\
-$\lambda$ & Dispersal & Dispersal events per day per individual& 0.001--0.1\\
-$b$ & Birth rate & Births per year per individual& 0.05\\
-$d$ & Death rate & Deaths per year per individual & 0.05\\
-%$d_I$ & Infectious death rate & Additional deaths per day per individual&\\
-$\rho$ & No. pathogens && 2\\
-$p$ &  Pathogen index i.e. $p\in\{1,2\}$ for pathogens 1 and 2 & &\\
-$q$ & Disease class i.e., $q\in\{1,2,12\}$&\\
-%$\mathcal{V}$ & Neighbourhood of a node &&\\
-$t, t^\prime$ & Time and time plus waiting time i.e., $t+\delta$ & Days&\\
-$k_i$ & Degree of node $i$ &&\\
-$\delta$ & Waiting time until next event & Days&\\
-$\alpha$ & Cross immunity & Proportion& 0.1\\
-$n, m$ & Colony index &&\\
-%$\bm{A}_{mn}$ & Adjacency matrix. & Distance &\\
-%$\mu$ & Maximum distance for edge to exist & km& 40, 100\\
-$\sigma$ & Invading pathogen seed size & & 10\\
-$r_i$ & The rate that event $i$ occurs. & Days$^{-1}$&\\
-\bottomrule
-\end{tabular}
+In conclusion I have found no evidence that population structure aids the invasion and establishment of newly evolved pathogen species.
+This suggests that if population structure does have a role in shaping pathogen communities, it is not by this specific mechanism.
+Practically, this implies that population structure is not a useful metric for predicting pathogen richness in wild bats.
+Furthermore it implies that population fragmentation by global change will not promote an increase in pathogen richness.
 
-\label{t:params}
-\end{table}
 
 
 
