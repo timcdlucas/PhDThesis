@@ -744,13 +744,13 @@ This is appropriate for many bat species \cite{jones2009pantheria}, especially t
 
 Four values of the transmission rate $\beta$ are used, 0.1, 0.2, 0.3 and 0.4.
 All simulations are run under all four transmission rates as this is such a fundamental parameter.
-Given the recovery, birth and death rates we can calculate an approximation of $R_0$ that ignores spatial structure.
-That is, this is $R_0$ for the local, within-subpopulation dynamics.
-Furthermore, it is $R_0$ for the first pathogen; $R_0$ of the invading pathogen will be lower due to competition.
-We can calculate that $R_0 \approx \frac{\beta b}{d(d+ \gamma)}$.
-For our four values of $\beta = 0.1, 0.2, 0.3, 0.4$ we therefore get $R_0 \approx 2.9, 4.8, 6.7, 8.6$.
-These values are very high in part to again find a reasonable trade off between the number of simulations and the reasonableness of the parameters.
-$R_0 \approx 13.3$ is similar to a highly contagious pathogen such as measles or pertussis. 
+%Given the recovery, birth and death rates we can calculate an approximation of $R_0$ that ignores spatial structure.
+%That is, this is $R_0$ for the local, within-subpopulation dynamics.
+%Furthermore, it is $R_0$ for the first pathogen; $R_0$ of the invading pathogen will be lower due to competition.
+%We can calculate that $R_0 \approx \frac{\beta b}{d(d+ \gamma)}$.
+%For our four values of $\beta = 0.1, 0.2, 0.3, 0.4$ we therefore get $R_0 \approx 2.9, 4.8, 6.7, 8.6$.
+%These values are very high in part to again find a reasonable trade off between the number of simulations and the reasonableness of the parameters.
+%$R_0 \approx 13.3$ is similar to a highly contagious pathogen such as measles or pertussis. 
 
 % R_\ast (R_0 - 1)\frac{\langle k^2 \rangle - \langle k \rangle}{\langle k^2 \rangle} \frac{p\bar{N}\alpha}{\mu} > 1
 % N = avg pop size, p = migration, mu = recovery, \alpha N_k is number of individuals infected. So think this is not with vital dynamics.
@@ -956,14 +956,17 @@ This was true at all transmission levels ($\chi^2$ test. $\beta = 0.1$: $\chi^2 
 
 I ran \rinline{nTopoSims} simulations over \rinline{length(unique(propsTopo$transmission))} transmission values ($\beta = $ \rinline{unique(propsTopo$transmission)}).
 The proportion of invasions was not different between highly connected and largely unconnected metapopulations (Figure~\ref{f:invasionPropPlots}B). 
-This was true at all transmission levels ($\chi^2$ test. $\beta = 0.1$: $\chi^2 = \rinline{TopoTest1$statistic}$, $\text{df} = \rinline{TopoTest1$parameter}$, $p = \rinline{p(TopoTest1$p.value)}$. $\beta = 0.2$: $\chi^2 = \rinline{TopoTest2$statistic}$, $\text{df} = \rinline{TopoTest2$parameter}$, $p = \rinline{p(TopoTest2$p.value)}$. $\beta = 0.3$: $\chi^2 = \rinline{TopoTest3$statistic}$, $\text{df} = \rinline{TopoTest3$parameter}$, $p = \rinline{p(TopoTest3$p.value)}$. $\beta = 0.4$: $\chi^2 = \rinline{TopoTest4$statistic}$, $\text{df} = \rinline{TopoTest4$parameter}$, $p = \rinline{p(TopoTest4$p.value)}$).
+This was true at all transmission levels ($\chi^2$ test. $\beta = 0.1$: $\chi^2 < 10^{-5}$, $\text{df} = \rinline{TopoTest1$parameter}$, $p > 0.9999$. $\beta = 0.2$: $\chi^2 = \rinline{TopoTest2$statistic}$, $\text{df} = \rinline{TopoTest2$parameter}$, $p = \rinline{p(TopoTest2$p.value)}$. $\beta = 0.3$: $\chi^2 = \rinline{TopoTest3$statistic}$, $\text{df} = \rinline{TopoTest3$parameter}$, $p = \rinline{p(TopoTest3$p.value)}$. $\beta = 0.4$: $\chi^2 = \rinline{TopoTest4$statistic}$, $\text{df} = \rinline{TopoTest4$parameter}$, $p = \rinline{p(TopoTest4$p.value)}$).
 
  
 \subsection{Transmission}
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Inline with theory, increasing the transmission rate increased the probability of invasion (Figure~\ref{f:invasionPropPlots}).
-This is true for all three dispersal values ($\chi^2$ test. $\lambda = 0.001$: $\chi^2 = \rinline{DispTransTest1$statistic}$, $\text{df} = \rinline{DispTransTest1$parameter}$, $p = p < 10^{-5}$. $\lambda = 0.01$: $\chi^2 = \rinline{DispTransTest2$statistic}$, $\text{df} = \rinline{DispTransTest2$parameter}$, $p < 10^{-5}$. $\lambda = 0.1$: $\chi^2 = \rinline{DispTransTest3$statistic}$, $\text{df} = \rinline{DispTransTest3$parameter}$, $p < 10^{-5}$) and both network structures ($\chi^2$ test. Fully connected: $\chi^2 = \rinline{TopoTransTest2$statistic}$, $\text{df} = \rinline{TopoTransTest2$parameter}$, $p < 10^{-5}$. Minimally connected: $\chi^2 =  \rinline{TopoTransTest2$statistic}$, $\text{df} = \rinline{TopoTransTest2$parameter}$, $p < 10^{-5}$).
+This is true for all three dispersal values ($\chi^2$ test. $\lambda = 0.001$: $\chi^2 = \rinline{DispTransTest1$statistic}$, $\text{df} = \rinline{DispTransTest1$parameter}$, $p < 10^{-5}$. $\lambda = 0.01$: $\chi^2 = \rinline{DispTransTest2$statistic}$, $\text{df} = \rinline{DispTransTest2$parameter}$, $p < 10^{-5}$. $\lambda = 0.1$: $\chi^2 = \rinline{DispTransTest3$statistic}$, $\text{df} = \rinline{DispTransTest3$parameter}$, $p < 10^{-5}$) and both network structures ($\chi^2$ test. Fully connected: $\chi^2 = \rinline{TopoTransTest2$statistic}$, $\text{df} = \rinline{TopoTransTest2$parameter}$, $p < 10^{-5}$. Minimally connected: $\chi^2 =  \rinline{TopoTransTest2$statistic}$, $\text{df} = \rinline{TopoTransTest2$parameter}$, $p < 10^{-5}$).
+
+
+
 
 
 
@@ -1058,7 +1061,7 @@ Instead it seems that invasion relies solely on the local dynamics of the diseas
 If the transmission rate is high, a pathogen has a good chance of spreading immediately after it's introduction when it is at very density.
 Once the pathogen has infected a large number of individuals in the local metapopulation, it is bound to spread throughout the metapopulation without going extinct.
 
-This goes against many predictions that increasing $R_0$ increases pathogen richness.
+This goes against many predictions that increasing $R_0$ increases pathogen richness .
 Further work could examine reduced col  ony sizes to test when global structure become more important.
 Measures of population structure should not be used to predict zoonotic potential.
 
