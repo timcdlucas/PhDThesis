@@ -142,7 +142,7 @@ However, the factors that control the diversity of pathogens in a wild animal po
 
 
 
-\subsection{Specific Intro}
+\tmpsection{Specific Intro}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % more detailed background}
 % comprehensible to scientists in related disciplines.
@@ -235,7 +235,7 @@ A number of traits have been suggested as predisposing bats towards being reserv
 
 
 
-\subsection{The gap}
+\tmpsection{The gap}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % One sentence clearly stating the general problem
 % being addressed by this particular study.
@@ -254,7 +254,7 @@ Specifically we use these models to test the affects of population structure on 
 We test two aspects of structure, dispersal rate and connectedness of the metapopulation network.
 
 
-\subsection{What I did}
+\tmpsection{What I did}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -262,12 +262,12 @@ To this end I have run metapopulation, multipathogen, epidemiological simulation
 Although still simplified, the model is complex enough that if good measurements of bat populations could be found, simulations of the real world bat population could be run.
 
 I have studied the invasion of new pathogens as a mechanisms for increasing pathogen richness.
+I have studied two metrics for population structure, dispersal rate and metapopulation network topology, to test for effects of population structure on pathogen richness.
 In particular I have focussed on studying the invasion of a newly evolved pathogen that is therefore identical in epidemiological parameters to the endemic pathogen.
 Furthermore, this close evolutionary relationship means that cross immunity is strong.
 
-I have studied two metrics for population structure, dispersal rate and metapopulation network topology, to test for effects of population structure on pathogen richness.
 
-\subsection{What I found}
+\tmpsection{What I found}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % One sentence summarising the main result
 % (with the words “here we show” or their equivalent).
