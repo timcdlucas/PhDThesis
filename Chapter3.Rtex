@@ -1936,7 +1936,7 @@ This is corroborated by the small estimated size of $\lambda$ ($\lambda$ = \rinl
 This fact implies that other factors must control pathogen richness.
 It also implies that pathogens are not directly inherited down the phylogeny, although this is to be expected by the fast evolution of viruses.
 
-Of the explanatory variables, the number of subspecies has no phylogenetic autocorrelation ($\lambda$ = \rinline{sspLambda$param['lambda']}, $p$ = \rinline{sspLambda$param.CI$lambda$bounds.p[1]}), study effort and distribution size have weak but significant autocorrelation (Study Effort: $\lambda$ = \rinline{scholarLambda$param['lambda']}, $p$ = \rinline{scholarLambda$param.CI$lambda$bounds.p[1]}, Distribution size: $\lambda$ = \rinline{distrLambda$param['lambda']}, $p$ = \rinline{distrLambda$param.CI$lambda$bounds.p[1]}) and mass is strongly phylogenetic ($\lambda$ = \rinline{massLambda$param['lambda']}, $p$ = \rinline{massLambda$param.CI$lambda$bounds.p[1]}). 
+Of the explanatory variables, the number of subspecies has no phylogenetic autocorrelation ($\lambda$ = \rinline{sspLambda$param['lambda']}, $p$ = \rinline{sspLambda$param.CI$lambda$bounds.p[1]}), study effort and distribution size have weak but significant autocorrelation (Study Effort: $\lambda$ = \rinline{scholarLambda$param['lambda']}, $p$ = \rinline{scholarLambda$param.CI$lambda$bounds.p[1]}, Distribution size: $\lambda$ = \rinline{distrLambda$param['lambda']}, $p < 10^{-5}$) and mass is strongly phylogenetic ($\lambda$ = \rinline{massLambda$param['lambda']}, $p < 10^{-5}$). 
 The parameter $\lambda$ is fitted and governs how important the phylogeny is in the model.
 Across all models the mean value of $\lambda$ is \rinline{mean(na.omit(allResults$lambda))} implying the residuals from the model are weakly phylogenetic.
 A small number of models (\rinline{mean(na.omit(allResults$lambda < 0))*100}\%)  had negatively phylogenetically distributed residuals.
@@ -2085,8 +2085,8 @@ log(Mass) &
 \label{t:models}
 \end{table}
 
-As with the Number of Subspecies dataset, there was no phylogenetic signal in the number of virus species ($\lambda$ = \rinline{virusFstLambda$param['lambda']}, $p$ = \rinline{virusFstLambda$param.CI$lambda$bounds.p[1]})
-Gene flow also had no phylogenetic autocorrelation ($\lambda$ = \rinline{nmFstLambda$param['lambda']}, $p$ = \rinline{nmFstLambda$param.CI$lambda$bounds.p[1]}).
+As with the Number of Subspecies dataset, there was no phylogenetic signal in the number of virus species ($\lambda$ = \rinline{virusFstLambda$param['lambda']}, $p > 0.999$)
+Gene flow also had no phylogenetic autocorrelation ($\lambda$ = \rinline{nmFstLambda$param['lambda']},  $p > 0.999$).
 Due to the low sample size, significance tests are unlikely to have much power.
 However, study effort had some phylogenetic autocorrelation ($\lambda$ = \rinline{scholarFstLambda$param['lambda']}, $p$ = \rinline{scholarFstLambda$param.CI$lambda$bounds.p[1]}) while distribution size and mass seemed to show phylogenetic signal (Distribution size: $\lambda$ = \rinline{distrFstLambda$param['lambda']}, $p$ = \rinline{distrFstLambda$param.CI$lambda$bounds.p[1]}, Mass: $\lambda$ = \rinline{massFstLambda$param['lambda']}, $p$ = \rinline{massFstLambda$param.CI$lambda$bounds.p[1]}).
 
