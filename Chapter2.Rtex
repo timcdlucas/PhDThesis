@@ -687,13 +687,13 @@ write.csv(z, file = 'data/Chapter2/TopoSims.csv')
 
 
 In each simulation the population was seeded with 10 sets of 200 infected individuals of pathogen 1.
-There groups were seeded into randomly selected colonies with replacement.
+These groups were seeded into randomly selected colonies with replacement.
 For each 200 infected individuals added, 200 susceptible individuals were removed to keep starting colony sizes constant. 
 Pathogen 1 was then allowed to spread and reach equilibrium. 
-After \rinline{invadeT} events, 5 individuals infected with pathogen 2 were added to one colony. 
+After \rinline{invadeT} events, 5 individuals infected with pathogen 2 were added to one randomly selected colony. 
 Visual inspection of preliminary simulations was used to decide on \rinline{invadeT} as being long enough for the epidemic to reach an equilibrium state.
-After another \rinline{nEvent - invadeT} events the invasion of pathgen 2 is considered successful if any individuals are still infected with pathogen 2.
-Again visual inspection of preliminary simulations was used to determine whether this was long enough to be confident that an invading pathogen. 
+After another \rinline{nEvent - invadeT} events the invasion of pathgen 2 was considered successful if any individuals are still infected with pathogen 2.
+Again visual inspection of preliminary simulations was used to determine that after \rinline{nEvent - invadeT} events, if an invading pathogen was still present, it was well established. 
 
 
 \subsection{Dispersal}
