@@ -165,6 +165,10 @@ Furthermore, knowing which factors correlate with pathogen richness does not tel
 Mechanisms by which a trait could increase pathogen diversity include promoting the evolution of new strains within a species \cite{buckee2004effects}, reduction of the rate of pathogen extinction \cite{rand1995invasion} and an increased probability of pathogen invasion from other host species \cite{nunes2006localized}.
 These separate mechanisms have not been examined and it is difficult to see how they could be approached through comparative methods.
 We need explicit mechanistic models in order to tease apart these factors.
+Furthermore, a solid mechanistic understanding of these processes will allow us to predict how wild populations will respond to increased human pressure and global change.
+As habitats fragment we expect wild populations to become smaller and less well connected.
+Understanding how these population changes interact reqiures a mechanistic understanding of disease dynamics.
+Different specific mechanisms predict responses to climate change at different rates --- the extinction of parasites could occur relatively rapidly, whereas processes whereby invasive pathogens can persist more easily are likely to change pathogen community competition relatively slowly.
 
 \tmpsection{Population structure could be important}
 
@@ -223,17 +227,6 @@ However, other measures that take into account second-order structure in the net
 
 
 
-\tmpsection{Why bats}
-Bats have an unusually large variety of social structures.
-Colony sizes range from 10 to 1 million \cite{jones2009pantheria}.
-Many bats also have interesting seasonal behaviour such as migration \cite{richter2008first, fleming2003ecology}, hibernation, birth puleses and swarming behaviours.
-Furthermore, bats have, over the last decade, become a focus for disease research  \cite{calisher2006bats, hughes2007emerging}.
-Recently they have been implicated in a number of high profile diseases such as Ebola, SARS, Hendra and Nipah  \cite{calisher2006bats, li2005bats}.
-
-A number of traits have been suggested as predisposing bats towards being reservoirs of zoonotic diseases: high sympatry \cite{luis2013comparison}, flight \cite{wang2011mass} and longevity \cite{wang2011mass}.
-
-
-
 
 \tmpsection{The gap}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -241,31 +234,38 @@ A number of traits have been suggested as predisposing bats towards being reserv
 % being addressed by this particular study.
 % By this stage, must have defined/introduced all terms used within.
 
-We have very abstract, simplified models that predict zero or infinite diversity depending on specifics.
+Currently the literature contains very abstract, simplified models \cite{qiu2013vector, allen2004sis, nunes2006localized}.
 These cannot be easily applied to real data.
-They also do not easily predict quantitative or even relative diversity as they often predict either zero or infinite diversity with nothing in between.
-
-We need models that can quantitatively or at least relatively predict diversity in a populations.
+They also do not easily quantitative predict pathogen pathogen; typically they predict either no pathogen coexistence \cite{bremermann1989competitive, martcheva2013competitive} or infinite pathogen diversity \cite{may1994superinfection}.
+We need models that can give quantative predictions of pathogen richness in wild populations.
+While predicting an absolute value of pathogen richness is likely to be impossible, we should aim for models that attempt to rank species from highest to lowest pathogen richness.
 This requires a middle ground of model complexity.
 
-There are no studies that directly model bat pathogen diversity.
 
-Specifically we use these models to test the affects of population structure on the ability of a new pathogen to invade a population.
-We test two aspects of structure, dispersal rate and connectedness of the metapopulation network.
+To this end I have run metapopulation, multipathogen, epidemiological simulations based broadly on real-world bat populations.
+Although still simplified, the model is complex enough that if good measurements of bat populations could be found, simulations of the real world bat population could be run.
+Specifically I used these models to test the affects of population structure on the ability of a new pathogen to invade a population.
+I tested two aspects of structure, dispersal rate and connectedness of the metapopulation network.
+
+
+\tmpsection{Why bats}
+I have used bats as a case study as they have an unusually large variety of social structures.
+Colony sizes range from 10 to 1 million \cite{jones2009pantheria}.
+Many bats also have interesting seasonal behaviour such as migration \cite{richter2008first, fleming2003ecology}, hibernation, birth puleses and swarming behaviours.
+A number of traits have been suggested as predisposing bats towards being reservoirs of zoonotic diseases: high sympatry \cite{luis2013comparison}, flight \cite{wang2011mass}, longevity \cite{wang2011mass} as well as population structure \cite{maganga2014bat, turmelle2009correlates, gay2014parasite}.
+Furthermore, bats have, over the last decade, become a focus for disease research  \cite{calisher2006bats, hughes2007emerging}.
+Recently they have been implicated in a number of high profile diseases such as Ebola, SARS, Hendra and Nipah  \cite{calisher2006bats, li2005bats}.
+
+
 
 
 \tmpsection{What I did}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-To this end I have run metapopulation, multipathogen, epidemiological simulations based broadly on real-world bat populations.
-Although still simplified, the model is complex enough that if good measurements of bat populations could be found, simulations of the real world bat population could be run.
-
 I have studied the invasion of new pathogens as a mechanisms for increasing pathogen richness.
 I have studied two metrics for population structure, dispersal rate and metapopulation network topology, to test for effects of population structure on pathogen richness.
 In particular I have focussed on studying the invasion of a newly evolved pathogen that is therefore identical in epidemiological parameters to the endemic pathogen.
 Furthermore, this close evolutionary relationship means that cross immunity is strong.
-
 
 \tmpsection{What I found}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
