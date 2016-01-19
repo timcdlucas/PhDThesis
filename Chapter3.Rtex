@@ -708,25 +708,6 @@ write.csv(nSpecies, file = 'data/Chapter3/nSpecies.csv')
 %%end.rcode
 
 
-To test for an association between pathogen richness I have performed multivariate regression using a model selection framework to establish whether or not two measures of pathogen richness are likely to be in a `best model' and therefore important.
-As species cannot be considered independant due to shared evolutionary history, phylogeny was controlled for in all regressions.
-A number of other factors that have previously been found to be important were included as additional independant variables: body mass \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat}, range size \cite{kamiya2014determines, turmelle2009correlates, maganga2014bat} and study effort \cite{turmelle2009correlates, gay2014parasite, maganga2014bat}.
-This was to attempt to avoid spurious positive results occuring simply due to correlation between pathogen richness and a different, causal factor.
-Despite commonly being associated with pathogen richness \cite{arneberg2002host, kamiya2014determines, nunn2003comparative}, population density is not included in the analysis as there is very little data for bat densities --- however Chapter~\ref{ch:sims2} examines the relationship between density and population structure and Chapter~\ref{ch:grem} presents a method that allows the estimation of density from acoustic surveys.
-I used both the number of subspecies a bat species has and estimates of gene flow (analysed separately) as measures of population structure.
-All analyses were run in R \cite{R}
-
-To measure pathogen richness I used data from \cite{luis2013comparison}. 
-These simply include known infections of a bat species with a pathogen species. 
-Only species with at least one pathogen were included in the analysis.
-Rows with host species that were not identified to species level were removed.
-Many viruses were not identified to species level or their specified species names were not in the ICTV virus taxonomy \cite{ICTV}.
-I counted a virus if it was the only virus, for that host species, in the lowest taxonomic level (present in the ICTV taxonomy) identified.
-That is, if a host carries an unknown Paramyxoviridae virus, then it must carry at least one Paramyxoviridae virus.
-If a host carries an unknown Paramyxoviridae virus and a known Paramyxoviridae virus, then it is hard to confirm that the unknown virus is not another record of the known virus.
-In this case, this would be counted as one virus species.
-
-
 
 %%begin.rcode treeRead
 
@@ -749,8 +730,7 @@ rm(t)
 
 %%end.rcode
 
-
-%%begin.rcode treePlot, out.width = '\\textwidth', fig.cap = 'Pruned phylogeny with dot size showing number of pathogens and colour showing family.'
+%%begin.rcode nSpeciesTreePlot, out.width = '\\textwidth', fig.cap = 'Pruned phylogeny with dot size showing number of pathogens and colour showing family.', fig.show = extraFigs
 
 # Plot tree 
 p <- ggtree(pruneTree, layout = 'fan') 
@@ -870,39 +850,6 @@ nSpecies %>%
 %%end.rcode
 
 
-I used two measures of population structure. 
-Gene flow and the number of subspecies.
-The number of subspecies was counted using the Wilson and Reeder taxonomy \cite{wilson2005mammal}.
-Gene flow is calculated from estimates of $F_{ST}$ collated from the literature.
-Studies are from a wide range of spatial scales, from local ($\sim\SI{10}{\kilo\metre}$) to continental.
-As $F_{ST}$ often increases with spatial scale \cite{burland1999population, hulva2010mechanisms, o2015genetic, vonhof2015range} I controlled for this by only using data from studies where a large proportion of the species range was studied.
-I used the ratio of the furthest distance between $F_{ST}$ samples (measured with \url{http://www.distancefromto.net/} if not stated) to the width of the IUCN species range \cite{iucn} and only used studies if this ratio was greater than \rinline{rangeUseable}.
-This is an arbitrary value that was a comprimise between retaining a reasonable number of data points and controlling for the bias in spatial scale.
-I converted all $F_{ST}$ value to migration using $M = (1-F_{ST})/8F_{ST}$.
-This removes the $(0, 1)$ bounds of $F_{ST}$ and is more easily interpretable though the results are unaffected. 
-These two measures of population structure were analysed separately as the number of subspecies has \rinline{nrow(nSpecies)} data points while there is only $F_{ST}$ data for 22 bat species.
-For the subspecies analysis all bat species in \textcite{luis2013comparison} were used (i.e. all species with at least one known virus species).
-However, for the gene flow analysis, all bat species with suitable $F_{ST}$ estimates were used.
-As this included some species not present in \textcite{luis2013comparison} this includes some bat species with zero known virus species. 
-
-To control for study bias I collected the number of Pubmed and Google Scholar citations for each bat species name including synonyms from ITIS \cite{itis} via the taxize package \cite{chamberlain2013taxize}.
-The counts were scraped using the rvest package \cite{rvest}.
-I log transformed these variables as they were strongly right skewed.
-The log number of citations on Pubmed and Google scholar were highly correlated (pgls: $t$ = \rinline{studyEffortCor$coefficients['log(pubmedRefs + 1)', 't value']}, df = \rinline{studyEffortCor$df[2]}, $p$ = \rinline{studyEffortCor$coefficients['log(pubmedRefs + 1)', 'Pr(>|t|)']}).
-As this correlation is strong, the results here are for analyses using only Google Scholar citations.
-%See the appendix for analyses run using Pubmed citations.
-
-Measures of body mass are taken from Pantheria \cite{jones2009pantheria} and primary literature \cite{canals2005relative, arita1993rarity, lopez2014echolocation, orr2013does, lim2001bat, aldridge1987turning, ma2003dietary, owen2003home, henderson2008movements, heaney2012nyctalus, oleksy2015high, zhang2009recent}. 
-\emph{Pipistrellus pygmaeus} was assigned the same mass as \emph{P. pipistrellus} as they are indistinguishable by mass.
-Body mass measurements were log transformed as they were strongly right skewed.
-Distribution size was estimated by downloading range maps for all species from IUCN \cite{iucn} and were also logged due to right skew.
-
-
-To control for phylogenetic nonindependance I used the best-supported phylogeny from \textcite{fritz2009geographical} (shown in Figure~\ref{fig:treePlot}) which is the supertree from \cite{bininda2007delayed} with names updated to match the Wilson \& Reeder taxonomy \cite{wilson2005mammal}.
-Phylogenetic manipulation was performed using the ape package \cite{ape}.
-The importance of the phylogeny on each variable separately (the $\lambda$ parameter of the variable regressed against an intercept) was estimated and tested against the null of $\lambda = 0$ with log-likelihood ratio tests using caper \cite{caper}.
-I also performed the analysis using the tree from \cite{jones2005bats} as this has some broad changes with families in different places.
-However the phylogeny did not affect the analysis.
 
 %%begin.rcode, subsAnalysis, fig.show = extraFigs
 
@@ -1284,6 +1231,26 @@ ggdraw() +
 
 
 
+To test for an association between pathogen richness I have performed multivariate regression using a model selection framework to establish whether or not two measures of pathogen richness are likely to be in a `best model' and therefore important.
+As species cannot be considered independant due to shared evolutionary history, phylogeny was controlled for in all regressions.
+A number of other factors that have previously been found to be important were included as additional independant variables: body mass \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat}, range size \cite{kamiya2014determines, turmelle2009correlates, maganga2014bat} and study effort \cite{turmelle2009correlates, gay2014parasite, maganga2014bat}.
+This was to attempt to avoid spurious positive results occuring simply due to correlation between pathogen richness and a different, causal factor.
+Despite commonly being associated with pathogen richness \cite{arneberg2002host, kamiya2014determines, nunn2003comparative}, population density is not included in the analysis as there is very little data for bat densities --- however Chapter~\ref{ch:sims2} examines the relationship between density and population structure and Chapter~\ref{ch:grem} presents a method that allows the estimation of density from acoustic surveys.
+I used both the number of subspecies a bat species has and estimates of gene flow (analysed separately) as measures of population structure.
+All analyses were run in R \cite{R}
+
+To measure pathogen richness I used data from \cite{luis2013comparison}. 
+These simply include known infections of a bat species with a pathogen species. 
+Only species with at least one pathogen were included in the analysis.
+Rows with host species that were not identified to species level were removed.
+Many viruses were not identified to species level or their specified species names were not in the ICTV virus taxonomy \cite{ICTV}.
+I counted a virus if it was the only virus, for that host species, in the lowest taxonomic level (present in the ICTV taxonomy) identified.
+That is, if a host carries an unknown Paramyxoviridae virus, then it must carry at least one Paramyxoviridae virus.
+If a host carries an unknown Paramyxoviridae virus and a known Paramyxoviridae virus, then it is hard to confirm that the unknown virus is not another record of the known virus.
+In this case, this would be counted as one virus species.
+
+
+
 
 
 
@@ -1571,6 +1538,54 @@ p %<+% fstFinal[, c('binomial', 'virusSpecies')] +
 %%end.rcode
 
 
+%%begin.rcode treeCapt
+
+treeCapt <- '
+Phylogeny from \\cite{bininda2007delayed} pruned to include all species used in either the number of subspecies of gene flow analysis.
+Dot size shows the number of known viruses for that species and colour shows family.
+'
+
+treeTitle <- 'Pruned phylogeny with dot size showing number of pathogens and colour showing family.'
+
+%%end.rcode
+
+%%begin.rcode treePlot, out.width = '1.2\\textwidth', fig.cap = treeCapt, fig.scap = treeTitle
+
+
+# Plot tree 
+p <- ggtree(pruneTree, layout = 'fan') 
+
+p %<+% nSpecies[, 1:6] +
+  geom_point2(aes(size = virusSpecies, colour = Family, subset = isTip)) +
+  scale_size(range = c(0.2, 2)) +
+  scale_colour_manual(values = c(pokepal('oddish')[c(1,3,5,6,9,10)],    pokepal('Carvanha')[c(1,2,4, 13, 12)])) +
+  theme_tcdl +
+  theme(plot.margin = unit(c(-1, 3, -1.5, -2), "lines")) +
+  theme(legend.position = 'right') +
+  labs(size = 'Virus Richness') +
+  theme(legend.key.size = unit(0.6, "lines"),
+              legend.text = element_text(size = 6),
+              legend.title = element_text(size = 8))
+
+
+%%end.rcode
+
+
+
+I used two measures of population structure. 
+Gene flow and the number of subspecies.
+The number of subspecies was counted using the Wilson and Reeder taxonomy \cite{wilson2005mammal}.
+Gene flow is calculated from estimates of $F_{ST}$ collated from the literature.
+Studies are from a wide range of spatial scales, from local ($\sim\SI{10}{\kilo\metre}$) to continental.
+As $F_{ST}$ often increases with spatial scale \cite{burland1999population, hulva2010mechanisms, o2015genetic, vonhof2015range} I controlled for this by only using data from studies where a large proportion of the species range was studied.
+I used the ratio of the furthest distance between $F_{ST}$ samples (measured with \url{http://www.distancefromto.net/} if not stated) to the width of the IUCN species range \cite{iucn} and only used studies if this ratio was greater than \rinline{rangeUseable}.
+This is an arbitrary value that was a comprimise between retaining a reasonable number of data points and controlling for the bias in spatial scale.
+I converted all $F_{ST}$ value to migration using $M = (1-F_{ST})/8F_{ST}$.
+This removes the $(0, 1)$ bounds of $F_{ST}$ and is more easily interpretable though the results are unaffected. 
+These two measures of population structure were analysed separately as the number of subspecies has \rinline{nrow(nSpecies)} data points while there is only $F_{ST}$ data for 22 bat species.
+For the subspecies analysis all bat species in \textcite{luis2013comparison} were used (i.e. all species with at least one known virus species).
+However, for the gene flow analysis, all bat species with suitable $F_{ST}$ estimates were used.
+As this included some species not present in \textcite{luis2013comparison} this includes some bat species with zero known virus species. 
 
 
 %%begin.rcode fstITanalysis
@@ -1855,6 +1870,18 @@ ggplot(fstFinal, aes(x = Nm, y = virusSpecies, colour = Marker)) +
 
 %%end.rcode
 
+To control for study bias I collected the number of Pubmed and Google Scholar citations for each bat species name including synonyms from ITIS \cite{itis} via the taxize package \cite{chamberlain2013taxize}.
+The counts were scraped using the rvest package \cite{rvest}.
+I log transformed these variables as they were strongly right skewed.
+The log number of citations on Pubmed and Google scholar were highly correlated (pgls: $t$ = \rinline{studyEffortCor$coefficients['log(pubmedRefs + 1)', 't value']}, df = \rinline{studyEffortCor$df[2]}, $p$ = \rinline{studyEffortCor$coefficients['log(pubmedRefs + 1)', 'Pr(>|t|)']}).
+As this correlation is strong, the results here are for analyses using only Google Scholar citations.
+%See the appendix for analyses run using Pubmed citations.
+
+Measures of body mass are taken from Pantheria \cite{jones2009pantheria} and primary literature \cite{canals2005relative, arita1993rarity, lopez2014echolocation, orr2013does, lim2001bat, aldridge1987turning, ma2003dietary, owen2003home, henderson2008movements, heaney2012nyctalus, oleksy2015high, zhang2009recent}. 
+\emph{Pipistrellus pygmaeus} was assigned the same mass as \emph{P. pipistrellus} as they are indistinguishable by mass.
+Body mass measurements were log transformed as they were strongly right skewed.
+Distribution size was estimated by downloading range maps for all species from IUCN \cite{iucn} and were also logged due to right skew.
+
 
 
 %%begin.rcode fstITPlots, fig.cap = "Akaika variable weights for both analyses. The probability that each variable will be in the best model if the data were recollected is shown for each of the bootstrap analyses. The purple ``Random'' box is a uniform random variable used as a null. Population structure (Number of subspecies and Gene flow), shown in red, is likely to be in the best model in both analyses.", fig.height = 2.5, fig.scap = 'Akaika variable weights for $F_{ST}$ analysis.', out.width = '\\textwidth', out.extra = 'trim = 0 1cm 0 0'
@@ -1875,6 +1902,13 @@ plot_grid(ITPlot, fstIT, labels = c("A", "B"), align = 'h', label_size = 10)
 %%end.rcode
 
 
+
+
+To control for phylogenetic nonindependance I used the best-supported phylogeny from \textcite{fritz2009geographical} (shown in Figure~\ref{fig:treePlot}) which is the supertree from \cite{bininda2007delayed} with names updated to match the Wilson \& Reeder taxonomy \cite{wilson2005mammal}.
+Phylogenetic manipulation was performed using the ape package \cite{ape}.
+The importance of the phylogeny on each variable separately (the $\lambda$ parameter of the variable regressed against an intercept) was estimated and tested against the null of $\lambda = 0$ with log-likelihood ratio tests using caper \cite{caper}.
+I also performed the analysis using the tree from \cite{jones2005bats} as this has some broad changes with families in different places.
+However the phylogeny did not affect the analysis.
 
 %$F_{ST}$ studies are conducted at a range of spatial scales, but $F_{ST}$ often increases with distance studied \cite{burland1999population, hulva2010mechanisms, o2015genetic, vonhof2015range}.
 %To minimise the effects of this I only used data from studies that cover \rinline{rangeUseable * 100}\% of the diameter of the species range.
@@ -2137,7 +2171,7 @@ The strength of the relationship between study effort and known viral richness a
 
 I have used two measures of pathogen richness and the number of subspecies dataset is larger than those used in previous studies.
 However it is clear that the gene flow dataset is small (n = \rinline{nrow(fstFinal)}).
-Furthermore, while the model averaging approach has given a negative model averaged coefficient, the univariate model of gene flow against viral richness gave a positive coefficient.
+Furthermore, while the model averaging approach has given a negative model averaged coefficient for gene flow, the univariate model of gene flow against viral richness gave a positive coefficient.
 It is not easy to interpret these contradictions but it is clear that the results from the gene flow analysis alone should not be considered strong evidence for a relationship between pathogen richness and population structure.
 The sensitivity of this analysis reiterates the need to use large datasets where possible and use mutliple measures of population structure to promote robust conclusions.
 
