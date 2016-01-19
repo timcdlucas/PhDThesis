@@ -2171,7 +2171,10 @@ The strength of the relationship between study effort and known viral richness a
 
 I have used two measures of pathogen richness and the number of subspecies dataset is larger than those used in previous studies.
 However it is clear that the gene flow dataset is small (n = \rinline{nrow(fstFinal)}).
-Furthermore, while the model averaging approach has given a negative model averaged coefficient for gene flow, the univariate model of gene flow against viral richness gave a positive coefficient.
+This leads to some unexpected results.
+While the model averaging approach has given a negative model averaged coefficient for gene flow, the univariate model of gene flow against viral richness gave a positive coefficient.
+Furthermore body mass has a negative average coefficient.
+This is in contrast to number of subspecies analysis, many studies in the literature \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat} and the bivariate model.
 It is not easy to interpret these contradictions but it is clear that the results from the gene flow analysis alone should not be considered strong evidence for a relationship between pathogen richness and population structure.
 The sensitivity of this analysis reiterates the need to use large datasets where possible and use mutliple measures of population structure to promote robust conclusions.
 
