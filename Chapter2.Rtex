@@ -186,7 +186,7 @@ This area is related to the study of pathogen richness in that they indicate tha
 However, the results for short term epidemic competition do not directly transfer to the study of long term disease persistence which is the relative time scale when looking at zoonotic potential of a host species.
 
 
-One commonly taken assumption in the ecological literature is that factors that promote high disease spread automatically promotes high diversity; this is contrary to the predictions from analytical models \cite{qiu2013vector, allen2004sis, nunes2006localized}. 
+One commonly taken assumption in the ecological literature is that factors that promote high disease spread automatically promotes high diversity \cite{nunn2003comparative, morand2000wormy, poulin2014parasite, poulin2000diversity, altizer2003social}; this is contrary to the predictions from analytical models \cite{qiu2013vector, allen2004sis, nunes2006localized}. 
 Furthermore, this assumption ignores competitive mechanisms such as cross-immunity and depletion of susceptible hosts.
 If competitive mechanisms are strong, pathogens in populations structured such that $R_0$ will be high will be able to easily out-compete invading pathogens.
 Only if competitive mechanisms are weak will high $R_0$  enable the invasion of new pathogens and allow higher pathogen diversity.
@@ -1036,49 +1036,39 @@ plot_grid(dispPlot, topoPlot, labels = c('A', 'B'), align = 'h', label_size = 10
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Restate the gap and the main result}
+\tmpsection{Restate the gap and the main result}
 
 Empirical studies on the role of population structure on pathogen richness are equivocal and cannot examine the specific mechanisms by which pathogen communities are created and maintained.
 I have used mechanistic, metapopulation models to test whether increased population structure can promote pathogen richness by facilitating invasion of new pathogens.
 I find that population structure does not affect the ability of a new pathogen to invade and persist in a population.
 Instead I find that only transmission rate affects the chance of pathogen invasion.
-
-
-\subsection{Link results to consequences}
-
-Given that we find no affect of population structure on the ability of a new pathogen to invade, this host-trait is not a useful host trait for predicting the probability that a wild species has many pathogens.
-This means it cannot be used as a proxy for the probability that a species carries a zoonotic pathogen.
-
-However my simulations do highlight the importance of competition for the spread of a new pathogen.
-All parameters used correspong to pathogens with $R_0>1$.
-However, the competition with the endemic pathogen means that for some transmission rates the chance of epidemic spread and persistence is close to zero.
-This has implications for human epidemics as well --- if there is strong competiton between a newly evolved strain and an endemicstrain, we ar3 unlikely to see the new strain spread, irregardless of population structure.
-
-\subsubsection{Population structure does not affect pathogen richness}
+That population structure does not affect pathogen richness goes against many predictions that increasing $R_0$ increases pathogen richness \cite{nunn2003comparative, morand2000wormy, poulin2014parasite, poulin2000diversity, altizer2003social}.
+However, simple analytical models suggest that population structure should increase pathogen richness \cite{qiu2013vector, allen2004sis, nunes2006localized} and I find no evidence of this either.
 
 I have found no evidence that population structure aids the invasion and establishment of newly evolved pathogen species.
 Instead it seems that invasion relies solely on the local dynamics of the disease.
-If the transmission rate is high, a pathogen has a good chance of spreading immediately after it's introduction when it is at very density.
+If the transmission rate is high, a pathogen has a good chance of spreading immediately after its introduction when it is at low density.
 Once the pathogen has infected a large number of individuals in the local metapopulation, it is bound to spread throughout the metapopulation without going extinct.
 
-This goes against many predictions that increasing $R_0$ increases pathogen richness .
-Further work could examine reduced col  ony sizes to test when global structure become more important.
-Measures of population structure should not be used to predict zoonotic potential.
+\tmpsection{Link results to consequences}
 
-\subsubsection{Dispersal does not affect pathogen richness}
+These results imply that if population structure does in fact affect pathogen richness \cite{maganga2014bat, turmelle2009correlates, gay2014parasite} it must occur by a mechanism other than the one studied here.
+Therefore it is not the spread and persistance of a newly evolved pathogen that is facilitated by population structure.
+Other mechanisms that should be examined include reduced competitive exclusion of already established pathogens or increased invasion of less closely and less strongly competiting pathogens, perhaps mediated by ecological competition of pathogens (i.e. reducuction of the susceptible pool by disease induced mortality).
+Furthermore, single pathogen dynamics could have an important role such as population structure causing a much slower, asynchronous epidemic preventing acquired herd immunity \cite{plowright2011urban}.
 
-Irrespective of the network topology used, at very high dispersal rates a population will be well mixed.
+Given that we find no affect of population structure on the ability of a new pathogen to invade, this host trait is not useful for predicting the probability that a wild species has many pathogens.
+This implies it should not be used as a proxy for the probability that a species carries a zoonotic pathogen.
+
+However, my simulations do highlight the importance of competition for the spread of a new pathogen.
+All parameters used correspond to pathogens with $R_0>1$.
+However, the competition with the endemic pathogen means that for some transmission rates the chance of epidemic spread and persistence is close to zero.
+This has implications for human epidemics as well --- if there is strong competiton between a newly evolved strain and an endemic strain, we are unlikely to see the new strain spread, irregardless of population structure.
 
 
-\subsubsection{Network connectedness does not affect pathogen richness}
-
-This is in direct contrast to \cite{campos2006pathogen}. 
-However, the model in \cite{campos2006pathogen} is a contact network, so increasing the connectedness increases the chance of succesful transmission events for the first few transmission generations.
-This lends support to the idea that I found no affect of connectedness due to the dominance of local dynamics.
- 
 
 
-\subsection{Discuss assumptions}
+\subsection{Model assumptions}
 
 \subsubsection{Complete cross-immunity}
 
@@ -1096,7 +1086,7 @@ However, here I am interested in host traits.
 Therefore we have assumed that pathogen strains are identical.
 It is clear however that there are a number of factors that affect pathogen richness and our focus on host population structure does not imply that pathogen traits are not important.
 
-\subsection{Complex social structure and behaviour}
+\subsubsection{Complex social structure and behaviour}
 
 With the models here I have aimed to tread a middle ground between the overly simple models employed in analytical studies \cite{allen2004sis} and the full complexity and variety of true bat social systems \cite{kerth2008causes}.
 Omissions include seasonal migration,  maternity roosts, hibernation roosts and swarming sites \cite{kerth2008causes, fleming2003ecology, richter2008first, cryan2014continental}. 

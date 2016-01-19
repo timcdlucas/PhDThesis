@@ -82,12 +82,12 @@ This also implies that population structure is not a useful proxy for pathogen d
 Over 50\% of emerging infectious diseases have an animal source \cite{jones2008global, smith2014global}.
 Zoonotic pathogens can be highly virulent \cite{luby2009recurrent, lefebvre2014case} and potentially have huge public health impacts \cite{granich2015trends}, economic costs \cite{knobler2004learning} and slow down international development \cite{ebolaWorldbank}.
 Therefore understanding and predicting changes in the process of zoonotic spillover is a global health priority \cite{taylor2001risk}.
-The number of pathogen species hosted a wild animal species affects the chance that a disease from that species will infect humans.
+The number of pathogen species hosted by a wild animal species affects the chance that a disease from that species will infect humans.
 However, the factors that control the diversity of pathogens in a wild animal population are still unclear \cite{metcalf2015five}; in particular our mechanistic understanding of how population processes inhibit or promote pathogen richness is poor.
 
 
 
-\subsection{Specific Intro}
+\tmpsection{Specific Intro}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % more detailed background}
 % comprehensible to scientists in related disciplines.
@@ -97,34 +97,22 @@ However, the factors that control the diversity of pathogens in a wild animal po
 %population density, longevity, body size and population structure
 
 A number of host traits have been shown to correlate with pathogen richness including body size \cite{kamiya2014determines, arneberg2002host}, population density \cite{nunn2003comparative, arneberg2002host} and range size \cite{bordes2011impact, kamiya2014determines}.
-However, empirical, correlative studies are often contradictory due to small sample sizes, noisy data and because empirical relationships often do not generalise across taxa (though see \cite{kamiya2014determines} for a meta-analysis).
-The correlation between many traits (e.g. \textcite{nunn2015infectious}) also makes it hard to clearly distinguish which factors are important.
-Furthermore, knowing which factors correlate with pathogen richness does not tell us how they controls richness. 
-Mechanisms by which a trait could increase pathogen diversity include promoting the evolution of new strains within a species \cite{buckee2004effects}, reduction of the rate of pathogen extinction \cite{rand1995invasion} and an increased probability of pathogen invasion from other host species \cite{nunes2006localized}.
-These separate mechanisms have not been examined and it is difficult to see how they could be approached through comparative methods.
-We need explicit mechanistic models in order to tease apart these factors.
-
-\tmpsection{Population structure could be important}
-One host-species trait that has been largely understudied with respect to pathogen diversity is population structure.
-
-\tmpsection{Empirical evidence that structure might affect diversity}
-
-% Mammals
-% Bats
-Few studies focus on bats, despite their role in recent zoonoses.
+There are few studies that study population structure in a comparative framework.
 Maganga \emph{et al.} found that distribution fragmentation predicts viral richness \cite{maganga2014bat}, but \cite{gay2014parasite} finds the opposite relationship. 
 While the data set in \cite{gay2014parasite} is larger, the analysis in \cite{maganga2014bat} is much more focused on fragmentation.
 Genetic correlates of population structure have also been used.
 Turmelle \emph{et al.} \cite{turmelle2009correlates}, in a small analysis, find that high $F_{st}$ (i.e. a structured population) correlates with high richness.
 However, they do not account for the widely different spatial scales found in population structure studies, nor do they deal with the differences between $F_{ST}$, $\phi_{ST}$ and other measures appropriately. 
 
+Empirical, correlative studies are often contradictory due to small sample sizes, noisy data and because empirical relationships often do not extrapolate well to other taxa (though see \cite{kamiya2014determines} for a meta-analysis).
+The correlation between many traits (e.g. \textcite{nunn2015infectious}) also makes it hard to clearly distinguish which factors are important.
+Furthermore, knowing which factors correlate with pathogen richness does not tell us how they control richness. 
+Mechanisms by which a trait could increase pathogen diversity include promoting the evolution of new strains within a species \cite{buckee2004effects}, reduction of the rate of pathogen extinction \cite{rand1995invasion} and an increased probability of pathogen invasion from other host species \cite{nunes2006localized}.
+These separate mechanisms have not been examined and it is difficult to see how they could be approached through comparative methods.
+We need explicit mechanistic models in order to tease apart these factors.
 
-%\tmpsection{We cannot assume high $R_0$ gives high diversity}
-%The processes by which a single disease spreads through a population are very well studied.
-%One commonly taken assumption is that factors that promote high disease spread automatically promotes high diversity. 
-%This assumption ignores competitive mechanisms such as cross-immunity and depletion of susceptible hosts.
+\tmpsection{Population structure could be important}
 
-A number of authors have demonstrated a competitive exclusion principle where only the most optimally spreading disease will survive when infection with one pathogen prevents infection with another pathogen \cite{bremermann1989competitive, martcheva2013competitive, ackleh2003competitive, ackleh2014robust, turner2002impact, castillo1995dynamics}.
 
 
 \tmpsection{Network structure has been studied}
@@ -136,37 +124,27 @@ Studies of the role of population structure on pathogen diversity have been in v
 These have been so simple that empirical data cannot easily be applied to them to predict pathogen diversity of real wild animal populations.
 There is a need for models that can be carefully and fully explored, while still capturing the complexities of the real world.
 
-Analytical models of well mixed populations have widely different outcomes: infinite pathogen diversity \cite{may1994superinfection, ackleh2014robust} or competitive exclusion have both been predicted \cite{ackleh2003competitive, bremermann1989competitive, martcheva2013competitive, qiu2013vector, allen2004sis}.
+In analytical models of well mixed populations competitive exclusion has been predicted \cite{ackleh2003competitive, bremermann1989competitive, martcheva2013competitive, qiu2013vector, allen2004sis}.
 When competitive exclusion occurs, population structure has sometimes been shown to allow coexistence \cite{qiu2013vector, allen2004sis, nunes2006localized}.
-
 Competing epidemics, or two pathogens spreading at the same time in a population, is a well studied area \cite{poletto2013host, poletto2015characterising, karrer2011competing}. 
 This area is related to the study of pathogen richness in that they indicate that dynamics of multiple pathogens in a population do depend on population structure.
 However, the results for short term epidemic competition do not directly transfer to the study of long term disease persistence which is the relative time scale when looking at zoonotic potential of a host species.
 
 
-
-
-
+One commonly taken assumption in the ecological literature is that factors that promote high disease spread automatically promotes high diversity; this is contrary to the predictions from analytical models \cite{qiu2013vector, allen2004sis, nunes2006localized}. 
+Furthermore, this assumption ignores competitive mechanisms such as cross-immunity and depletion of susceptible hosts.
 If competitive mechanisms are strong, pathogens in populations structured such that $R_0$ will be high will be able to easily out-compete invading pathogens.
 Only if competitive mechanisms are weak will high $R_0$  enable the invasion of new pathogens and allow higher pathogen diversity.
-
-Competitive affects are likely to be more or less important depending on the mechanism by which pathogen diversity is created.
-Competition is likely to be very strong between a newly evolved strain and the existing strain of a pathogen. 
-In this case, there is likely to be strong cross immunity between strains.
-In the case of pathogens invading from other hosts species, cross immunity is likely to be less strong due to the evolutionary distance between the new and endemic pathogens.
-However, competition could still occur as disease induced mortality of host individuals reduces host density which promotes pathogen persistence.
-Finally, it is unclear how competition would affect the persistence of pathogens once they are established, though it seems that cross-immunity can keep a pathogen at a low prevalence in the population (e.g. monkey pox \cite{rimoin2010major} and monkey malaria \cite{cox2008knowlesi}). 
-This would make stochastic extinction more likely.
-
-%The important affects of population structure on single disease epidemic spread and competing epidemics shows the important role structure has on disease dynamics.
-%We can therefore expect it to have an important role in the dynamics of multidisease systems as well.
-
-
 
 \tmpsection{Types of population structure}
 
 How structured a population is can be defined in many ways on many scales.
-The most relevant scale is that of an epidemiological population.
+Social group size is often examined as an indicator of population in large because the data are readily available.
+However, group size is only one aspect of population structure.
+Dispersal between is also a vital component of population structure.
+Furthermore, many species exhibit fission-fusion social structures or other less clearly defined groupings.
+
+The most relevant scale to study is that of an epidemiological population.
 This is the population within which a pathogen can spread in an epidemiologically relevant time period (years or decades).
 It is therefore closely related to a population as defined by population genetics, but with movement defined on a shorter time scale.
 
@@ -202,7 +180,7 @@ A number of traits have been suggested as predisposing bats towards being reserv
 
 
 
-\subsection{The gap}
+\tmpsection{The gap}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % One sentence clearly stating the general problem
 % being addressed by this particular study.
@@ -221,7 +199,7 @@ Specifically we use these models to test the affects of population structure on 
 We test two aspects of structure, dispersal rate and connectedness of the metapopulation network.
 
 
-\subsection{What I did}
+\tmpsection{What I did}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -229,12 +207,12 @@ To this end I have run metapopulation, multipathogen, epidemiological simulation
 Although still simplified, the model is complex enough that if good measurements of bat populations could be found, simulations of the real world bat population could be run.
 
 I have studied the invasion of new pathogens as a mechanisms for increasing pathogen richness.
+I have studied two metrics for population structure, dispersal rate and metapopulation network topology, to test for effects of population structure on pathogen richness.
 In particular I have focussed on studying the invasion of a newly evolved pathogen that is therefore identical in epidemiological parameters to the endemic pathogen.
 Furthermore, this close evolutionary relationship means that cross immunity is strong.
 
-I have studied two metrics for population structure, dispersal rate and metapopulation network topology, to test for effects of population structure on pathogen richness.
 
-\subsection{What I found}
+\tmpsection{What I found}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % One sentence summarising the main result
 % (with the words “here we show” or their equivalent).
@@ -331,6 +309,7 @@ The coinfection rate (the rate at which an infected individual is infected with 
 In the application of long term existence of pathogens it is vital to include vital dynamics (births and deaths) as the SIR without vital dynamics has no endemic state.
 Birth and death rates are assumed to be equal, $b = d$ (see Table~\ref{t:params} for a list of symbols and values used).
 The time scale of the simulations are set by setting b = 0.05 per year, yielding an average host generation time of 20 years.
+Infection is assumed to cause no extra mortality as for a number of viruses, bats show no clinical signs of infection \cite{halpin2011pteropid}.
 
 
 \subsubsection{Metapopulation}
@@ -494,8 +473,9 @@ The death rate $d$ is set as 0.05 per year giving a generation time of 20 years.
 The birth rate $b$ is set to be equal to $d$ so that the population size is stable.
 The recovery rate $\gamma$ is set to 1 giving a average infection duration of 1 years. 
 This is therefore a long lasting infection but not a chronic infection. 
-It is very difficult to directly estimate infection durations in wild populations.
-But it seems that these infections might be long lasting \cite{}.
+It is very difficult to directly estimate infection durations in wild populations but it seems that these infections might sometimes be long lasting \cite{peel2012henipavirus, plowright2015ecological}.
+However, other studies have found much shorter infectious periods \cite{amengual2007temporal}.
+These shorter lived in infections are studied further here as preliminary simulations found that they could not persist in the relatively small populations being modelled here.
 
 Cross immunity is set to 0.1 so that an individual infected with one pathogen is 90\% less likely to be infected with another.
 This is a rather arbitrary value.
@@ -509,13 +489,13 @@ This is appropriate for many bat species \cite{jones2009pantheria}, especially t
 
 Four values of the transmission rate $\beta$ are used, 0.1, 0.2, 0.3 and 0.4.
 All simulations are run under all four transmission rates as this is such a fundamental parameter.
-Given the recovery, birth and death rates we can calculate an approximation of $R_0$ that ignores spatial structure.
-That is, this is $R_0$ for the local, within-subpopulation dynamics.
-Furthermore, it is $R_0$ for the first pathogen; $R_0$ of the invading pathogen will be lower due to competition.
-We can calculate that $R_0 \approx \frac{\beta b}{d(d+ \gamma)}$.
-For our four values of $\beta = 0.1, 0.2, 0.3, 0.4$ we therefore get $R_0 \approx 2.9, 4.8, 6.7, 8.6$.
-These values are very high in part to again find a reasonable trade off between the number of simulations and the reasonableness of the parameters.
-$R_0 \approx 13.3$ is similar to a highly contagious pathogen such as measles or pertussis. 
+%Given the recovery, birth and death rates we can calculate an approximation of $R_0$ that ignores spatial structure.
+%That is, this is $R_0$ for the local, within-subpopulation dynamics.
+%Furthermore, it is $R_0$ for the first pathogen; $R_0$ of the invading pathogen will be lower due to competition.
+%We can calculate that $R_0 \approx \frac{\beta b}{d(d+ \gamma)}$.
+%For our four values of $\beta = 0.1, 0.2, 0.3, 0.4$ we therefore get $R_0 \approx 2.9, 4.8, 6.7, 8.6$.
+%These values are very high in part to again find a reasonable trade off between the number of simulations and the reasonableness of the parameters.
+%$R_0 \approx 13.3$ is similar to a highly contagious pathogen such as measles or pertussis. 
 
 % R_\ast (R_0 - 1)\frac{\langle k^2 \rangle - \langle k \rangle}{\langle k^2 \rangle} \frac{p\bar{N}\alpha}{\mu} > 1
 % N = avg pop size, p = migration, mu = recovery, \alpha N_k is number of individuals infected. So think this is not with vital dynamics.
@@ -596,14 +576,17 @@ This was true at all transmission levels ($\chi^2$ test. $\beta = 0.1$: $\chi^2 
 
 I ran 800 simulations over 4 transmission values ($\beta = $ 0.1, 0.2, 0.3, 0.4).
 The proportion of invasions was not different between highly connected and largely unconnected metapopulations (Figure~\ref{f:invasionPropPlots}B). 
-This was true at all transmission levels ($\chi^2$ test. $\beta = 0.1$: $\chi^2 = \ensuremath{5.23\times 10^{-31}}$, $\text{df} = 1$, $p = 1$. $\beta = 0.2$: $\chi^2 = 0.02$, $\text{df} = 1$, $p = 0.88$. $\beta = 0.3$: $\chi^2 = 1.53$, $\text{df} = 1$, $p = 0.22$. $\beta = 0.4$: $\chi^2 = 0.26$, $\text{df} = 1$, $p = 0.61$).
+This was true at all transmission levels ($\chi^2$ test. $\beta = 0.1$: $\chi^2 < 10^{-5}$, $\text{df} = 1$, $p > 0.9999$. $\beta = 0.2$: $\chi^2 = 0.02$, $\text{df} = 1$, $p = 0.88$. $\beta = 0.3$: $\chi^2 = 1.53$, $\text{df} = 1$, $p = 0.22$. $\beta = 0.4$: $\chi^2 = 0.26$, $\text{df} = 1$, $p = 0.61$).
 
  
 \subsection{Transmission}
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Inline with theory, increasing the transmission rate increased the probability of invasion (Figure~\ref{f:invasionPropPlots}).
-This is true for all three dispersal values ($\chi^2$ test. $\lambda = 0.001$: $\chi^2 = 243.56$, $\text{df} = 3$, $p = p < 10^{-5}$. $\lambda = 0.01$: $\chi^2 = 265.4$, $\text{df} = 3$, $p < 10^{-5}$. $\lambda = 0.1$: $\chi^2 = 244.95$, $\text{df} = 3$, $p < 10^{-5}$) and both network structures ($\chi^2$ test. Fully connected: $\chi^2 = 267.3$, $\text{df} = 3$, $p < 10^{-5}$. Minimally connected: $\chi^2 =  267.3$, $\text{df} = 3$, $p < 10^{-5}$).
+This is true for all three dispersal values ($\chi^2$ test. $\lambda = 0.001$: $\chi^2 = 243.56$, $\text{df} = 3$, $p < 10^{-5}$. $\lambda = 0.01$: $\chi^2 = 265.4$, $\text{df} = 3$, $p < 10^{-5}$. $\lambda = 0.1$: $\chi^2 = 244.95$, $\text{df} = 3$, $p < 10^{-5}$) and both network structures ($\chi^2$ test. Fully connected: $\chi^2 = 267.3$, $\text{df} = 3$, $p < 10^{-5}$. Minimally connected: $\chi^2 =  267.3$, $\text{df} = 3$, $p < 10^{-5}$).
+
+
+
 
 
 
@@ -638,7 +621,7 @@ This is true for all three dispersal values ($\chi^2$ test. $\lambda = 0.001$: $
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Restate the gap and the main result}
+\tmpsection{Restate the gap and the main result}
 
 Empirical studies on the role of population structure on pathogen richness are equivocal and cannot examine the specific mechanisms by which pathogen communities are created and maintained.
 I have used mechanistic, metapopulation models to test whether increased population structure can promote pathogen richness by facilitating invasion of new pathogens.
@@ -646,7 +629,7 @@ I find that population structure does not affect the ability of a new pathogen t
 Instead I find that only transmission rate affects the chance of pathogen invasion.
 
 
-\subsection{Link results to consequences}
+\tmpsection{Link results to consequences}
 
 Given that we find no affect of population structure on the ability of a new pathogen to invade, this host-trait is not a useful host trait for predicting the probability that a wild species has many pathogens.
 This means it cannot be used as a proxy for the probability that a species carries a zoonotic pathogen.
@@ -656,23 +639,23 @@ All parameters used correspong to pathogens with $R_0>1$.
 However, the competition with the endemic pathogen means that for some transmission rates the chance of epidemic spread and persistence is close to zero.
 This has implications for human epidemics as well --- if there is strong competiton between a newly evolved strain and an endemicstrain, we ar3 unlikely to see the new strain spread, irregardless of population structure.
 
-\subsubsection{Population structure does not affect pathogen richness}
+\tmpsection{Population structure does not affect pathogen richness}
 
 I have found no evidence that population structure aids the invasion and establishment of newly evolved pathogen species.
 Instead it seems that invasion relies solely on the local dynamics of the disease.
 If the transmission rate is high, a pathogen has a good chance of spreading immediately after it's introduction when it is at very density.
 Once the pathogen has infected a large number of individuals in the local metapopulation, it is bound to spread throughout the metapopulation without going extinct.
 
-This goes against many predictions that increasing $R_0$ increases pathogen richness.
+This goes against many predictions that increasing $R_0$ increases pathogen richness .
 Further work could examine reduced col  ony sizes to test when global structure become more important.
 Measures of population structure should not be used to predict zoonotic potential.
 
-\subsubsection{Dispersal does not affect pathogen richness}
+\tmpsection{Dispersal does not affect pathogen richness}
 
 Irrespective of the network topology used, at very high dispersal rates a population will be well mixed.
 
 
-\subsubsection{Network connectedness does not affect pathogen richness}
+\tmpsection{Network connectedness does not affect pathogen richness}
 
 This is in direct contrast to \cite{campos2006pathogen}. 
 However, the model in \cite{campos2006pathogen} is a contact network, so increasing the connectedness increases the chance of succesful transmission events for the first few transmission generations.
@@ -680,7 +663,7 @@ This lends support to the idea that I found no affect of connectedness due to th
  
 
 
-\subsection{Discuss assumptions}
+\subsection{Model assumptions}
 
 \subsubsection{Complete cross-immunity}
 
@@ -698,7 +681,7 @@ However, here I am interested in host traits.
 Therefore we have assumed that pathogen strains are identical.
 It is clear however that there are a number of factors that affect pathogen richness and our focus on host population structure does not imply that pathogen traits are not important.
 
-\subsection{Complex social structure and behaviour}
+\subsubsection{Complex social structure and behaviour}
 
 With the models here I have aimed to tread a middle ground between the overly simple models employed in analytical studies \cite{allen2004sis} and the full complexity and variety of true bat social systems \cite{kerth2008causes}.
 Omissions include seasonal migration,  maternity roosts, hibernation roosts and swarming sites \cite{kerth2008causes, fleming2003ecology, richter2008first, cryan2014continental}. 
