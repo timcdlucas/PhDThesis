@@ -278,23 +278,6 @@ This is true whether population structure is altered by changing the dispersal r
 
 
 
-%\begin{table}[t]
-%\centering
-%\caption{Glossary of terms}
-%\begin{tabular}{@{}>{\textit}lp{8cm}l@{}}
-%\toprule
-%\normalfont{Term} & Definition & Synonyms \\
-%\midrule
-%Metapopulation & A group of subpopulations with rare movement of animals between them. Closed to outside migration. & Network\\
-%Subpopulation & A group of animals. Social interactions within a subpopulation is likely high. & Node, colony\\
-%Dispersal & Movement from one subpopulation to another  & Migration\\
-%Population & A closed group of animals. No epidemiological affects from outside the group on epidemiological timescale (years -- decades.) & \\
-%Pathogen diversity & The number of species or strains of pathogens in a host & Pathogen richness\\
-%Connectedness &  & \\
-%\bottomrule
-%\end{tabular}
-%\label{t:glossary}
-%\end{table}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -306,7 +289,7 @@ This is true whether population structure is altered by changing the dispersal r
 
 \begin{table}[b!]
 \centering
-\caption{All symbols used.}
+\caption[All symbols used.]{All symbols used and their units and values.}
 \begin{tabular}{@{}lp{5cm}p{3.9cm}r@{}}
 \toprule
 Symbol & Explanation & Units & Value\\
@@ -463,11 +446,11 @@ Finally, recovery from any infectious class occurs at a rate $\gamma$
 }
 \caption[Network topologies used to compare network connectedness]{
 The two network topologies used to test whether network connectedness influences a pathogens ability to invade.
-A) Dispersal can occur between any subpopulation.
-B) Animals can only disperse to neighbouring subpopulations. 
 Blue circles are subpopulations of 3,000 individuals.
 Dispersal only occurs between subpopulations connected by an edge (black line).
 The dispersal rate is held constant between the two topologies.
+A) Dispersal can occur between any subpopulation.
+B) Animals can only disperse to neighbouring subpopulations. 
 }
 \label{f:net}
 \end{figure}

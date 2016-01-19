@@ -889,12 +889,11 @@ subspeciesInter <- pgls(
 # Caption for the main boxplot of subspecies vs virus		
 		
 boxplotCapt <- 'Number of virus species against number of subspecies. 		
-The top panel shows the distribution of the data, with most species having few subspecies.		
+The top panel shows the univariate distribution of the data with most species having few subspecies.		
 Data within a number of subspecies are plotted as boxplots with the dark bar showing the median, the box showing the interquartile range, vertical lines showing the range and outliers shown as seperate points.		
 Regression lines are from multivariate phylogenetic models with all other independant variables set at their median value.		
 The models shown are those with (pink) and without (red) an interaction between study effort and number of subspecies.		
-'		
-		
+'
 %%end.rcode		
 		
 		
@@ -1071,7 +1070,7 @@ allResults %>%
 %%begin.rcode ITPlots
 
 ITPlot <- ggplot(sepVarWeights, aes(x = variable, y = estimate, colour = col, fill = col)) +
-  geom_boxplot(outlier.colour = grey(0.3), notch = FALSE, width = 0.5, outlier.size = 1, lwd = 0.4) +
+  geom_boxplot(outlier.colour = grey(0.3), notch = FALSE, width = 0.99, outlier.size = 1, lwd = 0.4) +
   scale_colour_manual(values = pokepal('nidorino')[c(2, 5, 11)]) +
   scale_fill_manual(values = pokepal('nidorino')[c(3, 6, 10)]) +
   theme(legend.position = 'none', axis.text.x = element_text(size = 10, angle = 40, hjust = 1, colour = 'black', family = 'lato light'),
@@ -1887,7 +1886,7 @@ Distribution size was estimated by downloading range maps for all species from I
 %%begin.rcode fstITPlots, fig.cap = "Akaika variable weights for both analyses. The probability that each variable will be in the best model if the data were recollected is shown for each of the bootstrap analyses. The purple ``Random'' box is a uniform random variable used as a null. Population structure (Number of subspecies and Gene flow), shown in red, is likely to be in the best model in both analyses.", fig.height = 2.5, fig.scap = 'Akaika variable weights for $F_{ST}$ analysis.', out.width = '\\textwidth', out.extra = 'trim = 0 1cm 0 0'
 
 fstIT <- ggplot(fstSepVarWeights, aes(x = variable, y = estimate, colour = col, fill = col)) +
-  geom_boxplot(outlier.colour = grey(0.3), notch = FALSE, width = 0.5, outlier.size = 1, lwd = 0.4) +
+  geom_boxplot(outlier.colour = grey(0.3), notch = FALSE, width = 0.7, outlier.size = 1, lwd = 0.4) +
   scale_colour_manual(values = pokepal('nidorino')[c(2, 5, 11)]) +
   scale_fill_manual(values = pokepal('nidorino')[c(3, 6, 10)]) +
   theme(legend.position = 'none', axis.text.x = element_text(size = 10, angle = 40, hjust = 1, colour = 'black', family = 'lato light'),
@@ -2002,7 +2001,7 @@ Body mass and range size are also probably in the best model ($\beta = $ \rinlin
 \centering
 \caption[Estimated variable weights and coefficients]{
 Estimated variable weights (probability that a variable is in the best model) and their estimated coefficients for both number of subspecies and gene flow analyses.
-The coefficients for number of subspecies are also seperated for models with and without the interaction term because this term strongly changes the coefficient. 
+The coefficients for number of subspecies variable are also seperated for models with and without the interaction term because this term strongly changes the coefficient and because the coefficient can only be usefully interpreted when estimated without the interaction. 
 However, there are no weights for these seperated terms as they are not directly compared in the model selection framework.
 }
 %\rowcolors{2}{gray!25}{white}
@@ -2093,13 +2092,13 @@ log(Scholar)*NSubspecies  + rand &
 \rinline{round(modelWeights[7 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[7, 3], 2))} &
 \rinline{sprintf("%.2f", round(modelWeights[7, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[7, 5], 2))}\\
 %8
-log(Scholar) + NSubspecies log(Mass) + rand & 
+log(Scholar) + NSubspecies + log(Mass) + rand & 
 \rinline{round(modelWeights[8 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[8, 3], 2))} &
 \rinline{sprintf("%.2f", round(modelWeights[8, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[8, 5], 2))}\\
 %9
 log(Scholar) + NSubspecies + log(Mass) + log(RangeSize) + rand& 
 \rinline{round(modelWeights[9 ,2])} & \rinline{sprintf("%.2f", round(modelWeights[9, 3], 2))} &
-\rinline{sprintf("%.2f", round(modelWeights[9, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[9, 5], 2))}\\[3mm]
+\rinline{sprintf("%.2f", round(modelWeights[9, 4], 2))} & \rinline{sprintf("%.2f", round(modelWeights[9, 5], 2))}\\[5mm]
 \textit{\small{Gene flow}} &&&&\\
 log(Scholar) + log(Gene flow) + log(Mass) & 
 \rinline{round(fstModelWeights[1 ,2])} & \rinline{sprintf("%.2f", round(fstModelWeights[1, 3], 2))} &
