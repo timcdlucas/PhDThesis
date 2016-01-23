@@ -89,6 +89,12 @@
 
 
 
+% See about beeline.
+% compile with lualatex to use
+\input{beegradients.tex}
+\definegradientgroup [red-grey-blue][10*10*10, 15*25*87, 10*10*10, 122*6*17]
+\usepackage {fontspec}
+
 % knitr
 % This file has the normal knitr stuff. Should therefore be able to knit content only files and \include{} them.
 
@@ -102,7 +108,7 @@
 
 \color{prettytext}
 
-
+\startbeegradients [red-grey-blue]
 
 % At last, content! Remember filenames are case-sensitive and 
 %  *must not* input spaces.
@@ -116,33 +122,40 @@
 \input{../Introduction}
 
 
-\chapter{The role of population structure in pathogen diversity in wild bat populations}
-\label{chapterlabel2}
+\chapter{The role of population structure in pathogen diversity in wild bat populations}{This work was conducted in collaboration with Kate Jones and Hilde Wilkinson-Herbots}
+
+\label{ch:empirical}
+
 \begin{center}
 \includegraphics[width=0.7\textwidth]{imgs/fullyConnected.pdf}
 \end{center}
 \input{../Chapter3}
 
 
-\chapter{Population structure does not increase pathogen diversity in theoretical bat populations}
-\label{chapterlabel3}
+\chapter{Population structure does not increase pathogen diversity in theoretical bat populations}{This work was conducted in collaboration with Kate Jones and Hilde Wilkinson-Herbots}
+\label{ch:sims1}
 \begin{center}
 \includegraphics[width=\textwidth]{figure/treePlot-1.pdf}
 \end{center}
 \input{../Chapter2}
 
-\chapter{The interactions between population structure and density in pathogen diversity}
-\label{chapterlabel4}
+\chapter{The interactions between population structure and density in pathogen diversity}{This work was conducted in collaboration with Kate Jones and Hilde Wilkinson-Herbots}
+\label{ch:sims2}
 \input{../Chapter4}
 
 
-\chapter[gREM for estimating animal density]{A generalised random encounter model for estimating animal density with remote sensor data}
-\label{chapterlabel5}
+\chapter[gREM for estimating animal density]{A generalised random encounter model for estimating animal density with remote sensor data}{
+This work was conducted in collaboration with Elizabeth Moorcroft, Robin Freeman, Marcus Rowcliffe and Kate Jones and is now published in Methods in Ecology and Evolution \cite{lucas2015generalised}.
+I formulated and analysed the analytical model.
+Elizabeth Moorcroft wrote the simulations.
+I lead the writing of the manuscript, but much of it was written by Elizabeth Moorcroft and other coauthors.
+}
+\label{ch:grem}
 \input{../Chapter5}
 
-\chapter{General Conclusions}
-\label{conclusions}
-\input{../Conclusions}
+\chapter{Discussion}
+\label{ch:discussion}
+\input{../Discussion}
 
 
 
@@ -153,7 +166,7 @@
 
 % Actually generates your bibliography.
 \printbibliography 
-
+\end {document}
 
 % All done. \o/
 \end{document}
