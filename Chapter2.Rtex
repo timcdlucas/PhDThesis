@@ -347,7 +347,7 @@ The coinfection rate (the rate at which an infected individual is infected with 
 In the application of long term existence of pathogens it is vital to include vital dynamics (births and deaths) as the SIR without vital dynamics has no endemic state.
 Birth and death rates are assumed to be equal, $b = d$ (see Table~\ref{t:params} for a list of symbols and values used).
 The time scale of the simulations are set by setting b = 0.05 per year, yielding an average host generation time of 20 years.
-Infection is assumed to cause no extra mortality as for a number of viruses, bats show no clinical signs of infection \cite{halpin2011pteropid}.
+Infection is assumed to cause no extra mortality as for a number of viruses, bats show no clinical signs of infection \cite{halpin2011pteropid, deThoisy2016bioecological}.
 
 
 \subsubsection{Metapopulation}
