@@ -1,5 +1,5 @@
 
-\clearpage
+
 
 
 
@@ -19,7 +19,7 @@ runAllSims <- FALSE
 saveData <- FALSE
 
 # Display extra figures in final documents?
-extraFigs <- FALSE
+extraFigs <- TRUE
 
 
 # How many cores do you want to use to run simulations?
@@ -35,6 +35,7 @@ opts_chunk$set(cache.path = '.Ch4Cache/')
 source('misc/theme_tcdl.R')
 source('misc/KnitrOptions.R')
 theme_set(theme_grey() + theme_tcdl)
+
 
 %%end.rcode
 
@@ -112,7 +113,7 @@ Here I use metapopulation SIR models to test whether it is density \emph{per se}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\clearpage
+
 \section{Introduction}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -164,7 +165,7 @@ Here I use metapopulation SIR models to test whether it is density \emph{per se}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\clearpage
+
 \section{Methods}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -767,7 +768,7 @@ For simulations studying extinction rates, half of the subpopulation were seeded
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\clearpage
+
 \section{Results}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -847,56 +848,52 @@ popModel <- pop %>%
 %%begin.rcode plotMeans, fig.show = extraFigs
 
 
-ggplot(dens1Means, aes(x = factor(transmission), y = mean, fill = factor(colonySize))) +
-  geom_bar(stat = 'identity', position=position_dodge()) +
-  geom_errorbar(aes(ymin = lower, ymax = upper),
-                width=.2,                   
-                position = position_dodge(.9)) +
-  xlab('Transmission') + 
-  ylab('Prop. Invasions') +
-  ylim(0, 1) +
-  scale_fill_poke(name="Colony Size", 
-                 #labels=c('0.001', '0.01', '0.1'), 
-                 pokemon = 'Swampert',
-                 spread = 5)
+
+#ggplot(dens1Means, aes(x = factor(transmission), y = mean, fill = factor(colonySize))) +
+#  geom_bar(stat = 'identity', position=position_dodge()) +
+#  geom_errorbar(aes(ymin = lower, ymax = upper),
+#                width=.2,                   
+#                position = position_dodge(.9)) +
+#  xlab('Transmission') + 
+#  ylab('Prop. Invasions') +
+#  ylim(0, 1) +
+#  scale_fill_poke(name="Colony Size", 
+#                 #labels=c('0.001', '0.01', '0.1'), 
+#                 pokemon = 'Swampert',
+#                 spread = 5)
 
 
-ggplot(dens2Means, aes(x = factor(transmission), y = mean, fill = factor(colonyNumber))) +
-  geom_bar(stat = 'identity', position=position_dodge()) +
-  geom_errorbar(aes(ymin = lower, ymax = upper),
-                width=.2,                   
-                position = position_dodge(.9)) +
-  ylim(0, 1) +
-  xlab('Transmission') + 
-  ylab('Prop. Invasions') +
-  scale_fill_poke(name="Colony Number", 
-                 #labels=c('0.001', '0.01', '0.1'), 
-                 pokemon = 'Swampert',
-                 spread = 5)
+
+#ggplot(dens2Means, aes(x = factor(transmission), y = mean, fill = factor(colonyNumber))) +
+#  geom_bar(stat = 'identity', position=position_dodge()) +
+#  geom_errorbar(aes(ymin = lower, ymax = upper),
+#                width=.2,                   
+#                position = position_dodge(.9)) +
+#  ylim(0, 1) +
+#  xlab('Transmission') + 
+#  ylab('Prop. Invasions') +
+#  scale_fill_poke(name="Colony Number", 
+#                 #labels=c('0.001', '0.01', '0.1'), 
+#                 pokemon = 'Swampert',
+#                 spread = 5)
 
 
-ggplot(popMeans, aes(x = factor(transmission), y = mean, fill = factor(area))) +
-  geom_bar(stat = 'identity', position=position_dodge()) +
-  geom_errorbar(aes(ymin = lower, ymax = upper),
-                width=.2,                   
-                position = position_dodge(.9)) +
-  xlab('Transmission') + 
-  ylab('Prop. Invasions') +
-  ylim(0, 1) +
-  scale_fill_poke(name="Area", 
-                 #labels=c('0.001', '0.01', '0.1'), 
-                 pokemon = 'Swampert',
-                 spread = 5) 
-
-%%end.rcode
-
-
-%%begin.rcode fitModels 
-
-
-# Fit combined glms for statistical comparison
+#ggplot(popMeans, aes(x = factor(transmission), y = mean, fill = factor(area))) +
+#  geom_bar(stat = 'identity', position=position_dodge()) +
+#  geom_errorbar(aes(ymin = lower, ymax = upper),
+#                width=.2,                   
+#                position = position_dodge(.9)) +
+#  xlab('Transmission') + 
+#  ylab('Prop. Invasions') +
+#  ylim(0, 1) +
+#  scale_fill_poke(name="Area", 
+#                 #labels=c('0.001', '0.01', '0.1'), 
+#                 pokemon = 'Swampert',
+#                 spread = 5) 
 
 %%end.rcode
+
+
 
 
 %%begin.rcode predictModels
@@ -944,7 +941,7 @@ ggplot(rbind(dens1Means, dens2Means), aes(x = pop, y = mean, colour = vary)) +
                labels=c('Colony Size', 'Colony Number'), 
                pokemon = 'Swampert',
                spread = 2) +
-  scale_y_continuous(breaks = c(0, 0.5, 1), labels = c('0', '0.5', '1')) 
+  scale_y_continuous(breaks = c(0, 0.5, 1), labels = c('0.0', '0.5', '0.1')) 
 
 %%end.rcode
 
@@ -1013,7 +1010,7 @@ percChangePreds <- percChangeModels %>%
                    do.call(rbind, .)
 
 ggplot(d, aes(x = ValueChange, y = mean, colour = vary)) +
-  #geom_line(data = percChangePreds, aes(x = ValueChange, y = pred, colour = vary)) +
+  geom_line(data = percChangePreds, aes(x = ValueChange, y = pred, colour = vary)) +
   facet_grid(transmission ~ .) +
   geom_point() +
   geom_errorbar(aes(ymin = lower, ymax = upper),
@@ -1025,14 +1022,34 @@ ggplot(d, aes(x = ValueChange, y = mean, colour = vary)) +
                labels=c( 'Colony Number', 'Colony Size', 'Density'), 
                pokemon = 'Swampert',
                spread = 3) +
-  scale_y_continuous(breaks = c(0, 0.5, 1), labels = c('0', '0.5', '1')) +
+  scale_y_continuous(breaks = c(0, 0.5, 1), labels = c('0.0', '0.5', '0.1')) +
   scale_x_continuous(breaks = c(0.25, 0.5, 1, 2, 4), labels = c(0.25, 0.5, 1, 2, 4), trans = 'log10')
 
 %%end.rcode
 
+
+%%begin.rcode statTests 
+
+
+#jointModel  <- rbind(
+#                 dens1 %>% mutate(vary = 'colonySize'), 
+#                 dens2 %>% mutate(vary = 'colonyNumber')
+#               ) %>%
+#               mutate(invasion = as.numeric(nExtantDis == 2)) %>%
+#               group_by(transmission) %>%
+#               do(fit = glm(invasion ~ colonySize + colonyNumber, data = ., family = 'binomial')) %>%
+
+
+
+%%end.rcode
+
+
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\clearpage
+
 \section{Discussion}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1090,7 +1107,7 @@ It is clear however that there are a number of factors that affect pathogen rich
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\clearpage
+
 \section{Appendix}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
