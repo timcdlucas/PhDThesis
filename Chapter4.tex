@@ -381,7 +381,13 @@ It can be seen that changes in colony size give a much greater increase in invas
 }
 
 \caption[Comparison of the probability of invasion when population size is altered by changing colony size or colony number.]{
-Relationship is shown seperately for each transmission value.
+Comparison of the effect of colony size, colony number and area on probability of invasion.
+Default values are: colony number = 20, colony size = 400 and density = 0.8 animals per unit area.
+The $x$-axis shows the relative change in each of these values ($\times 0.25, 0.5, 1, 2$ and $4$).
+For colony size and number, area is altered  so that density remains constant.
+For density, population size is constant at 8,000 and area is altered.
+Relationships are shown seperately for each transmission value.
+Each point is the mean of inline{each} simulations and bars are 95\% confidence intervals.
 }\label{fig:plotValueChangeMeans}
 \end{figure}
 
@@ -392,6 +398,41 @@ Relationship is shown seperately for each transmission value.
 
 
 
+\begin{table}
+
+\caption[Regression results]{
+Regression results comparing affects of colony size, colony number and area.
+Coefficients are from multiple logistic regressions with invasion as the dependant variable and all independant variables being scaled and centred.
+Colony size and colony number were varied while keeping density equal while density was varied by changing area while keeping population size equal.
+}
+\label{t:regrCoefs}
+\centering
+\begin{tabular}{@{}rlrrr@{}}
+\toprule
+$\beta$ & \emph{Variable} & \emph{Estimate} & (95\% \emph{CI}) & $p$\\
+\midrule
+0.1   &    Intercept     & \ensuremath{-3.52} & (\ensuremath{-3.87}, \ensuremath{-3.2}) & $< 10^{-5}$ \\
+      &    Colony Size   & 1.07 & (0.75, 1.49) & $< 10^{-5}$ \\
+      &    Colony Number & 0.35 & (\ensuremath{-0.02}, 0.79) & 0.08 \\
+      &    Density       & 0.01 & (\ensuremath{-0.66}, 0.52) & 0.97 \\[1em]
+0.2   &    Intercept     & \ensuremath{-2.84} & (\ensuremath{-3.12}, \ensuremath{-2.58}) & $< 10^{-5}$ \\
+      &    Colony Size   & 2.11 & (1.71, 2.6) & $< 10^{-5}$ \\
+      &    Colony Number & 0.51 & (0.16, 0.95) & \ensuremath{9\times 10^{-3}} \\
+      &    Density       & \ensuremath{-0.31} & (\ensuremath{-0.96}, 0.19) & 0.29 \\[1em]
+0.3   &    Intercept     & \ensuremath{-2.11} & (\ensuremath{-2.34}, \ensuremath{-1.9}) & $< 10^{-5}$ \\
+      &    Colony Size   & 2.74 & (2.35, 3.16) & $< 10^{-5}$ \\
+      &    Colony Number & 0.25 & (0.04, 0.48) & 0.02 \\
+      &    Density       & 0.27 & (\ensuremath{-0.06}, 0.57) & 0.09 \\
+
+\bottomrule
+
+
+
+\end{tabular}
+
+
+
+\end{table}
 
 
 

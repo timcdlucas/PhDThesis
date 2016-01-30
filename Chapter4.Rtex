@@ -931,7 +931,8 @@ transMeansTitle <- 'Comparison of the probability of invasion when population si
 
 %%end.rcode
 
-%%begin.rcode plotTransMeans, fig.cap = transMeansCapt, fig.scap = transMeansTitle, out.width = '0.9\\textwidth'
+%%begin.rcode plotTransMeans, fig.cap = transMeansCapt, fig.scap = transMeansTitle, out.width = '0.9\\textwidth', fig.show = extraFigs
+
 
 rbind(dens1Means, dens2Means) %>%
 ggplot(., aes(x = pop, y = mean, colour = vary)) +
@@ -956,7 +957,13 @@ ggplot(., aes(x = pop, y = mean, colour = vary)) +
 %%begin.rcode valueChangeMeansCapt
 
 valueChangeMeansCapt <- '
-Relationship is shown seperately for each transmission value.
+Comparison of the effect of colony size, colony number and area on probability of invasion.
+Default values are: colony number = 20, colony size = 400 and density = 0.8 animals per unit area.
+The $x$-axis shows the relative change in each of these values ($\\times 0.25, 0.5, 1, 2$ and $4$).
+For colony size and number, area is altered  so that density remains constant.
+For density, population size is constant at 8,000 and area is altered.
+Relationships are shown seperately for each transmission value.
+Each point is the mean of \rinline{each} simulations and bars are 95\\% confidence intervals.
 '
 
 valueChangeMeansTitle <- 'Comparison of the probability of invasion when population size is altered by changing colony size or colony number.'
@@ -966,6 +973,7 @@ valueChangeMeansTitle <- 'Comparison of the probability of invasion when populat
 %%begin.rcode plotValueChangeMeans, fig.cap = valueChangeMeansCapt, fig.scap = valueChangeMeansTitle, out.width = '\\textwidth'
 
 # Convert to percentage change in density, colonysize or colony number.
+
 
 d <- rbind(popMeans %>% 
              mutate(ValueChange = as.numeric(as.character(area))/median(as.numeric(as.character(area))), vary = 'Density') %>%
@@ -1018,9 +1026,29 @@ percChangePreds <- percChangeModels %>%
                    ) %>%
                    do.call(rbind, .)
 
-ggplot(d, aes(x = ValueChange, y = mean, colour = vary)) +
+#ggplot(d, aes(x = ValueChange, y = mean, colour = vary)) +
+#  geom_line(data = percChangePreds, aes(x = ValueChange, y = pred, colour = vary)) +
+#  geom_point() +
+#  geom_errorbar(aes(ymin = lower, ymax = upper),
+#              width=.01) +
+#  ylab('Prop. Invasions') +
+#  xlab('Amount Varied') +
+#  ylim(0, 1) +
+#  scale_colour_poke(name="Variable varied", 
+#               labels=c( 'Colony Number', 'Colony Size', 'Density'), 
+#               pokemon = 'Swampert',
+#               spread = 3) +
+#  scale_y_continuous(breaks = c(0, 0.5, 1), labels = c('0.0', '0.5', '0.1')) +
+#  scale_x_continuous(breaks = c(0.25, 0.5, 1, 2, 4), labels = c(0.25, 0.5, 1, 2, 4), trans = 'log10') +
+#  facet_grid(transmission ~ ., labeller = label_bquote(beta == .(transmission))) 
+
+
+d$transmission <- factor(d$transmission, labels = c('beta == 0.1', '0.2', '0.3'))
+percChangePreds$transmission <- factor(percChangePreds$transmission, labels = c('beta == 0.1', '0.2', '0.3'))
+
+ggplot(dPlot, aes(x = ValueChange, y = mean, colour = vary)) +
+  geom_point() +
   geom_line(data = percChangePreds, aes(x = ValueChange, y = pred, colour = vary)) +
-  facet_grid(transmission ~ .) +
   geom_point() +
   geom_errorbar(aes(ymin = lower, ymax = upper),
               width=.01) +
@@ -1032,7 +1060,9 @@ ggplot(d, aes(x = ValueChange, y = mean, colour = vary)) +
                pokemon = 'Swampert',
                spread = 3) +
   scale_y_continuous(breaks = c(0, 0.5, 1), labels = c('0.0', '0.5', '0.1')) +
-  scale_x_continuous(breaks = c(0.25, 0.5, 1, 2, 4), labels = c(0.25, 0.5, 1, 2, 4), trans = 'log10')
+  scale_x_continuous(breaks = c(0.25, 0.5, 1, 2, 4), labels = c(0.25, 0.5, 1, 2, 4), trans = 'log10') +
+  facet_grid(transmission ~ ., labeller = label_parsed) 
+
 
 %%end.rcode
 
@@ -1050,12 +1080,64 @@ ggplot(d, aes(x = ValueChange, y = mean, colour = vary)) +
 
 combDensModel <- rbind(dens1, dens2) %>% 
                    mutate(invasion = nExtantDis == 2 ) %>%
-                   glm(invasion ~ colonySize + colonyNumber, data = ., family = binomial)
+                   group_by(transmission) %>% 
+                   mutate(colonySize = scale(colonySize), colonyNumber = scale(colonyNumber)) %>% 
+                   do(glm(invasion ~ colonySize + colonyNumber, data = ., family = binomial) %>% tidy)
 
+
+combModel <- rbind(dens1, dens2, pop) %>% 
+               mutate(invasion = nExtantDis == 2 ) %>%
+               group_by(transmission) %>% 
+               mutate(colonySize = scale(colonySize), colonyNumber = scale(colonyNumber), area = scale(area)) %>% 
+               do(glm(invasion ~ colonySize + colonyNumber + area, data = ., family = binomial) %>% tidy)
+
+combModel <- rbind(dens1, dens2, pop) %>% 
+               mutate(invasion = nExtantDis == 2 ) %>%
+               group_by(transmission) %>% 
+               mutate(colonySize = scale(colonySize), colonyNumber = scale(colonyNumber), area = scale(area)) %>% 
+               do(glm(invasion ~ colonySize + colonyNumber + area, data = ., family = binomial) %>% confint_tidy) %>%
+               ungroup %>%
+               dplyr::select(conf.low, conf.high) %>%
+               cbind(combModel, .)
 
 %%end.rcode
 
 
+\begin{table}
+
+\caption[Regression results]{
+Regression results comparing affects of colony size, colony number and area.
+Coefficients are from multiple logistic regressions with invasion as the dependant variable and all independant variables being scaled and centred.
+Colony size and colony number were varied while keeping density equal while density was varied by changing area while keeping population size equal.
+}
+\label{t:regrCoefs}
+\centering
+\begin{tabular}{@{}rlrrr@{}}
+\toprule
+$\beta$ & \emph{Variable} & \emph{Estimate} & (95\% \emph{CI}) & $p$\\
+\midrule
+0.1   &    Intercept     & \rinline{combModel$estimate[1]} & (\rinline{combModel$conf.low[1]}, \rinline{combModel$conf.high[1]}) & $< 10^{-5}$ \\
+      &    Colony Size   & \rinline{combModel$estimate[2]} & (\rinline{combModel$conf.low[2]}, \rinline{combModel$conf.high[2]}) & $< 10^{-5}$ \\
+      &    Colony Number & \rinline{combModel$estimate[3]} & (\rinline{combModel$conf.low[3]}, \rinline{combModel$conf.high[3]}) & \rinline{combModel$p.value[3]} \\
+      &    Density       & \rinline{combModel$estimate[4]} & (\rinline{combModel$conf.low[4]}, \rinline{combModel$conf.high[4]}) & \rinline{combModel$p.value[4]} \\[1em]
+0.2   &    Intercept     & \rinline{combModel$estimate[5]} & (\rinline{combModel$conf.low[5]}, \rinline{combModel$conf.high[5]}) & $< 10^{-5}$ \\
+      &    Colony Size   & \rinline{combModel$estimate[6]} & (\rinline{combModel$conf.low[6]}, \rinline{combModel$conf.high[6]}) & $< 10^{-5}$ \\
+      &    Colony Number & \rinline{combModel$estimate[7]} & (\rinline{combModel$conf.low[7]}, \rinline{combModel$conf.high[7]}) & \rinline{combModel$p.value[7]} \\
+      &    Density       & \rinline{combModel$estimate[8]} & (\rinline{combModel$conf.low[8]}, \rinline{combModel$conf.high[8]}) & \rinline{combModel$p.value[8]} \\[1em]
+0.3   &    Intercept     & \rinline{combModel$estimate[9]} & (\rinline{combModel$conf.low[9]}, \rinline{combModel$conf.high[9]}) & $< 10^{-5}$ \\
+      &    Colony Size   & \rinline{combModel$estimate[10]} & (\rinline{combModel$conf.low[10]}, \rinline{combModel$conf.high[10]}) & $< 10^{-5}$ \\
+      &    Colony Number & \rinline{combModel$estimate[11]} & (\rinline{combModel$conf.low[11]}, \rinline{combModel$conf.high[11]}) & \rinline{combModel$p.value[11]} \\
+      &    Density       & \rinline{combModel$estimate[12]} & (\rinline{combModel$conf.low[12]}, \rinline{combModel$conf.high[12]}) & \rinline{combModel$p.value[12]} \\
+
+\bottomrule
+
+
+
+\end{tabular}
+
+
+
+\end{table}
 
 
 
