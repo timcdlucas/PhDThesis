@@ -19,7 +19,7 @@ runAllSims <- FALSE
 saveData <- FALSE
 
 # Display extra figures in final documents?
-extraFigs <- TRUE
+extraFigs <- 'hide'
 
 
 # How many cores do you want to use to run simulations?
@@ -855,18 +855,18 @@ popModel <- pop %>%
 
 
 
-#ggplot(dens1Means, aes(x = factor(transmission), y = mean, fill = factor(colonySize))) +
-#  geom_bar(stat = 'identity', position=position_dodge()) +
-#  geom_errorbar(aes(ymin = lower, ymax = upper),
-#                width=.2,                   
-#                position = position_dodge(.9)) +
-#  xlab('Transmission') + 
-#  ylab('Prop. Invasions') +
-#  ylim(0, 1) +
-#  scale_fill_poke(name="Colony Size", 
-#                 #labels=c('0.001', '0.01', '0.1'), 
-#                 pokemon = 'Swampert',
-#                 spread = 5)
+ggplot(dens1Means, aes(x = factor(transmission), y = mean, fill = factor(colonySize))) +
+  geom_bar(stat = 'identity', position=position_dodge()) +
+  geom_errorbar(aes(ymin = lower, ymax = upper),
+                width=.2,                   
+                position = position_dodge(.9)) +
+  xlab('Transmission') + 
+  ylab('Prop. Invasions') +
+  ylim(0, 1) +
+  scale_fill_poke(name="Colony Size", 
+                 #labels=c('0.001', '0.01', '0.1'), 
+                 pokemon = 'Swampert',
+                 spread = 5)
 
 
 
