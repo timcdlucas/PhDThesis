@@ -126,16 +126,11 @@ Here I use metapopulation SIR models to test whether it is density \emph{per se}
 % A basic introduction to the field,
 % comprehensible to a scientist in any discipline.
 
-
-\subsubsection{Why is pathogen diversity important?}
-
-
-\subsubsection{We know some factors that correlate with pathogen diversity}
-
-
-\subsubsection{But we do not understand the mechanistic processes}
-
-
+Zoonotic diseases are an increasingly important source of human infectious diseases \cite{jones2008global, woolhouse2006host, taylor2001risk}.
+The diversity of pathogens in wild animal populations is huge and largely unknown \cite{poulin2014parasite}.
+The factors that allow large numbers of pathogen species to coexist in a host \cite{anthony2013strategy, anthony2013strategy} are still unclear.
+It is likely that population level factors such as population density, range size and population structure have an important role in controlling pathogen community dynamics.
+Global change is strongly peturbing wild animal populations, but without clear mechanistic models of how these populations maintain pathogen species richness, we can not predict how pathogen communities, and the risks of zoonotic outbreaks, will change in the coming decades.
 
 
 
