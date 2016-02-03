@@ -121,7 +121,7 @@ Here I use metapopulation SIR models to test whether it is density \emph{per se}
 
 
 
-\subsection{General Intro}
+\tmpsection{General Intro}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % A basic introduction to the field,
 % comprehensible to a scientist in any discipline.
@@ -136,24 +136,65 @@ Global change is strongly peturbing wild animal populations, but without clear m
 
 
 
-\subsection{Specific Intro}
+\tmpsection{Specific Intro}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % more detailed background}
 % comprehensible to scientists in related disciplines.
 
+\tmpsection{Theoretical background}
+Variables that describe populations, such as population density and structure, are well established as having a central role in disease dynamics \cite{colizza2007invasion, barthelemy2010fluctuation, colizza2007invasion,  wu2013threshold, may1979population, anderson1979population}.
+More recently, the role of the population has been examined with respect to pathogen richness and the coexistence of competing pathogens \cite{qiu2013vector, allen2004sis, nunes2006localized}.
+Yet even in theoretical studies there is confusion as to how exactly we should measure populations.
+There is disagreement on whether population density (individuals per unit area) should be preferred over population abundance (number of individuals) \cite{dejong and begon?} and how exactly area should be incorporated \cite{}. 
+
+
+\tmpsection{Density/abundance in comparative research}
+With the increase of novel zoonotic pathogens \cite{} attention has turned to comparatively assessing the factors that are associated with high or low pathogen richness in wild animal species \cite{morand review}.
+Here again there is little clarity on the relationship between a number of species measurements.
+Population density is commonly studied \cite{} as is range size \cite{}.
+However it is rarely if ever acknowledge that these two values are intrinsically linked by $d = N/a$ where $d4 is density, $N$ is the population size and $a$ is area.
+In contrast, abundance has never been directly studied as a predictor of pathogen richness.
+This is  a glaring omission as abundance more closely aligns with the ``island-biogeography'' class of mechanisms posited to explain pathogen richness \cite{}.
+Furthermore, abundance is considered the more relevant measure in terms of disease dynamics, especially when area cannot be assumed to be constant \cite{begon} as is commonly the case in wild populations, especially in the face of global warming and habitat degradation.
+
+\tmpsection{Populatiion structure in comparative research}
+It is clear that individuals of an animal species are not randomly distributed in space: social groups are common \cite{} and geographic boundaries reduce contacts between isolated populations.
+In social species, measures such as global population density are largely meaningless with respect to the number of infectious contacts individuals may have.
+Rather, contacts are based on group size and rates of movements between groups.
+Two aspects of non-random transmission have been studied in particular: group size \cite{nunn and others} and global measures of population structure including genetic measures and measures derived from distribution shapes (\parencite{gay, maganga, turmelle} and see Chapter \ref{ch:}).
+Again however, the relationships between these terms and more the more global terms mentioned above are rarely examined.
+Population abundance can be decomposed into two components, the number of groups and the average size of a group with $N = nm$ where $n$ is group size and $m$ is the number of groups.
+The amount of movement between is largely dependant on the distance between groups.
+This depends on the number of groups per area $m/a$ or $N/na$ and the average distance between groups, if groups are randomly distributed in space scales as $something$.
+
+\tmpsection{But reaction to climate change, and predictions depend on which factor is actually important}
+
+
+Importantly, these factors, although interrelated, will respond differently to global change and the response will be species dependant.
+Some species may suffer large range contractions, and therefore large falls in absolute abundance, while their density remains fairly constant.
+Other species might be expected to retain their distribution but have a depressed population density across their range.
+Similarly with population structure, species particularly affected by habitat fragmentation can expect increased reduced movement of individuals between groups, while other species may be most affected by a reduction in group size.
+Furthermore, different mechanisms of maintenance and creation of pathogen richness will respond to changes in these factors differently as well.
+If pathogen richness ultimately depends on the ``island size'' of the host population, then falls in population abundance will reduce pathogen richness the most.
+If local group size affects the ability of new pathogens to invade (Chapter \ref{ch:sim1}) then changes in group size are likely to be most important.
+Finally, if increased population structure allows pathogens to coexist (\parencite{qiu2013vector, allen2004sis, nunes2006localized} and Chapter \ref{ch:}) increase habitat fragmentation could be expected to increase pathogen richness.
+
+As these factors are likely to be correlated, correlative comparative studies will struggle to distinguish between them.
+Furthermore, even if factors are supported or rejected, the specific mechanisms by which the promote pathogen richness will remain unknown, and these may suggest different responses to global change.
+Furthermore, mechanistic models are expected to be more predictive into the future and into hitherto unseen parameter space.
 
 
 
-\subsection{The gap}
+
+\tmpsection{The gap}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Therefore there is great need to mechanistic models that try to disentangle the interplay between these many factors: density, abundance, range size, population structure, group size and the number of groups.
+
+\tmpsection{What I did and found}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\subsection{What I did}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\subsection{What I found}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % One sentence summarising the main result
 % (with the words “here we show” or their equivalent).
 
