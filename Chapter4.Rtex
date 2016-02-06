@@ -152,7 +152,7 @@ There is disagreement on whether population density (individuals per unit area) 
 With the increase of novel zoonotic pathogens \cite{} attention has turned to comparatively assessing the factors that are associated with high or low pathogen richness in wild animal species \cite{morand review}.
 Here again there is little clarity on the relationship between a number of species measurements.
 Population density is commonly studied \cite{} as is range size \cite{}.
-However it is rarely if ever acknowledge that these two values are intrinsically linked by $d = N/a$ where $d4 is density, $N$ is the population size and $a$ is area.
+However it is rarely if ever acknowledge that these two values are intrinsically linked by $d = N/a$ where $d$ is density, $N$ is the population size and $a$ is area.
 In contrast, abundance has never been directly studied as a predictor of pathogen richness.
 This is  a glaring omission as abundance more closely aligns with the ``island-biogeography'' class of mechanisms posited to explain pathogen richness \cite{}.
 Furthermore, abundance is considered the more relevant measure in terms of disease dynamics, especially when area cannot be assumed to be constant \cite{begon} as is commonly the case in wild populations, especially in the face of global warming and habitat degradation.
@@ -161,7 +161,7 @@ Furthermore, abundance is considered the more relevant measure in terms of disea
 It is clear that individuals of an animal species are not randomly distributed in space: social groups are common \cite{} and geographic boundaries reduce contacts between isolated populations.
 In social species, measures such as global population density are largely meaningless with respect to the number of infectious contacts individuals may have.
 Rather, contacts are based on group size and rates of movements between groups.
-Two aspects of non-random transmission have been studied in particular: group size \cite{nunn and others} and global measures of population structure including genetic measures and measures derived from distribution shapes (\parencite{gay, maganga, turmelle} and see Chapter \ref{ch:}).
+Two aspects of non-random transmission have been studied in particular: group size \cite{nunn and others} and global measures of population structure including genetic measures and measures derived from distribution shapes (\textcite{gay, maganga, turmelle} and see Chapter \ref{ch:}).
 Again however, the relationships between these terms and more the more global terms mentioned above are rarely examined.
 Population abundance can be decomposed into two components, the number of groups and the average size of a group with $N = nm$ where $n$ is group size and $m$ is the number of groups.
 The amount of movement between is largely dependant on the distance between groups.
@@ -242,7 +242,7 @@ Therefore there is great need to mechanistic models that try to disentangle the 
   colonySize <- pop / 20
   
   # make a copy of colonySize for use in text.
-  dep1 <- colonySize
+  dep1 <- unique(colonySize)
 
   area <- pop / 0.8
   side <- sqrt(area)
@@ -375,7 +375,7 @@ write.csv(z, file = 'data/Chapter4/DensSims.csv')
   colonyNumber <- pop / colonySize
   
   # make a copy of colony number for use in text
-  dep2 <- colonyNumber 
+  dep2 <- unique(colonyNumber )
 
   area <- pop / 0.8
   side <- sqrt(area)
@@ -623,7 +623,20 @@ write.csv(z, file = 'data/Chapter4/PopSims.csv')
 %%end.rcode
 
 
-%%begin.rcode colonyNetworkPlots
+%%begin.rcode colonyNetCaptions
+
+colonyNetTitle <- 'Example metapopulation networks'
+
+colonyNetCapt <- '
+Examples of the metapopulation networks used.
+They show range of number of colonies and area.
+As area increases, the number of connections each subpopulation has decreases.
+'
+
+
+%%end.rcode
+
+%%begin.rcode colonyNetworkPlots, fig.height = 5, fig.cap = colonyNetCapt, fig.scap = colonyNetTitle, out.width = '0.9\\textwidth',
 
 set.seed(12)
 
@@ -647,7 +660,6 @@ p1 <- makePop(space = side[1],
              sample = 2,
              maxDistance = 100)
 
-plotColonyNet(p1)
 
 
 # Make the population.
@@ -690,7 +702,7 @@ plotColonyNet(p4)
 
 
 
-%%
+%%end.rcode
 
 
 
@@ -717,7 +729,7 @@ Specifically I let two identical pathogens (and endemic pathogen and an invading
 I used presistence or not of the second pathogen as my response variable.
 I test whether population abundance is more important than population density.
 I then test whether colony size or the number of colonies is the more important component of population abundance.
-The multpathogen SIR model is identical to that in Chapter \ref{ch:sims1} and is implemented in R \cite{R}..
+The multpathogen SIR model is identical to that in Chapter \ref{ch:sims1} and is implemented in R \cite{R}.
 
 
 
@@ -744,7 +756,7 @@ The values of area used were \rinline{dep3[-5]} and \rinline{dep3[5]} which gave
 
 The affects of area occur through changing the metapopulation network.
 The metapopulation structure was created for each simulation by randomly placing colonies in space.
-The spatiial scale of the simulations vary between \rinline{min(area)} and \rinline{max(area)} km$^2$ (space is given in kilometers even though they are oin fact arbitrary units for simplicity).
+The spatial scale of the simulations vary between \rinline{min(area)} and \rinline{max(area)} km$^2$ (space is given in kilometers even though they are oin fact arbitrary units for simplicity).
 This corresponds to square areas with sides of \rinline{sqrt(min(area))} to \rinline{sqrt(max(area))} km).
 Dispersal can occur between two colonies if they are within 100 kilometers of each other.
 This does not guarentee that the population is fully connected but as the endemic pathogen is seeded in all colonies, the invading pathogen cannot be seeded into a fully susceptible colony.
