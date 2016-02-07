@@ -636,10 +636,9 @@ As area increases, the number of connections each subpopulation has decreases.
 
 %%end.rcode
 
-%%begin.rcode colonyNetworkPlots, fig.height = 5, fig.cap = colonyNetCapt, fig.scap = colonyNetTitle, out.width = '0.9\\textwidth',
+%%begin.rcode colonyNetworkPlots, fig.height = 5, fig.cap = colonyNetCapt, fig.scap = colonyNetTitle, out.width = '0.9\\textwidth'
 
-set.seed(12)
-
+set.seed(44)
 
   #   Area and meanColonySize are the actal input arguments
   pop <- c(2000, 4000, 8000, 16000, 32000)
@@ -651,10 +650,10 @@ set.seed(12)
 
 
 # Make the population.
-p1 <- makePop(space = side[1], 
+p1 <- makePop(space = side[2], 
              transmission = 0.1, 
              meanColonySize = colonySize, 
-             nColonies = colonyNumber[1], 
+             nColonies = colonyNumber[2], 
              model = 'SIR', 
              events = 20,
              sample = 2,
@@ -663,10 +662,10 @@ p1 <- makePop(space = side[1],
 
 
 # Make the population.
-p2 <- makePop(space = side[5], 
+p2 <- makePop(space = side[3], 
              transmission = 0.1, 
              meanColonySize = colonySize, 
-             nColonies = colonyNumber[5], 
+             nColonies = colonyNumber[3], 
              model = 'SIR', 
              events = 20,
              sample = 2,
@@ -674,10 +673,10 @@ p2 <- makePop(space = side[5],
 
 
 # Make the population.
-p3 <- makePop(space = side[1], 
+p3 <- makePop(space = side[2], 
              transmission = 0.1, 
              meanColonySize = colonySize, 
-             nColonies = colonyNumber[5], 
+             nColonies = colonyNumber[3], 
              model = 'SIR', 
              events = 20,
              sample = 2,
@@ -685,20 +684,28 @@ p3 <- makePop(space = side[1],
 
 
 # Make the population.
-p4 <- makePop(space = side[5], 
+p4 <- makePop(space = side[3], 
              transmission = 0.1, 
              meanColonySize = colonySize, 
-             nColonies = colonyNumber[1], 
+             nColonies = colonyNumber[2], 
              model = 'SIR', 
              events = 20,
              sample = 2,
              maxDistance = 100)
+
 
 par(mfrow = c(2,2))
-plotColonyNet(p1)
-plotColonyNet(p2)
-plotColonyNet(p3)
-plotColonyNet(p4)
+plotColonyNet(p1, area = side[3], axes = TRUE, cex = 0.3)
+text(x = 1, y = 1, labels = paste('k =', sum(p1$adjacency != 0 )/p1$parameters['nColonies']))
+
+plotColonyNet(p4, area = side[3], axes = TRUE, cex = 0.3)
+text(x = 1, y = 1, labels = paste('k =', sum(p4$adjacency != 0 )/p4$parameters['nColonies']))
+
+plotColonyNet(p3, area = side[3], axes = TRUE, cex = 0.3)
+text(x = 1, y = 1, labels = paste('k =', sum(p3$adjacency != 0 )/p3$parameters['nColonies']))
+
+plotColonyNet(p2, area = side[3], axes = TRUE, cex = 0.3)
+text(x = 1, y = 1, labels = paste('k =', sum(p2$adjacency != 0 )/p2$parameters['nColonies']))
 
 
 
@@ -817,12 +824,6 @@ To test the second hypothesis I compared $b_2$ to $b_3$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%TODO
-
-%%begin.rcode plotKDistrs
-print('Dear tim, please make this plot')
-
-%%end.rcode
 
 %%begin.rcode calcMeans
 # Constant density, altered colony size
@@ -902,22 +903,22 @@ popModel <- pop %>%
 
 
 
-%%begin.rcode plotMeans, fig.show = extraFigs
+%%begin.rcode plotMeans, show.figs = extraFigs
 
 
 
-ggplot(dens1Means, aes(x = factor(transmission), y = mean, fill = factor(colonySize))) +
-  geom_bar(stat = 'identity', position=position_dodge()) +
-  geom_errorbar(aes(ymin = lower, ymax = upper),
-                width=.2,                   
-                position = position_dodge(.9)) +
-  xlab('Transmission') + 
-  ylab('Prop. Invasions') +
-  ylim(0, 1) +
-  scale_fill_poke(name="Colony Size", 
-                 #labels=c('0.001', '0.01', '0.1'), 
-                 pokemon = 'Swampert',
-                 spread = 5)
+#ggplot(dens1Means, aes(x = factor(transmission), y = mean, fill = factor(colonySize))) +
+#  geom_bar(stat = 'identity', position=position_dodge()) +
+#  geom_errorbar(aes(ymin = lower, ymax = upper),
+#                width=.2,                   
+#                position = position_dodge(.9)) +
+#  xlab('Transmission') + 
+#  ylab('Prop. Invasions') +
+#  ylim(0, 1) +
+#  scale_fill_poke(name="Colony Size", 
+#                 #labels=c('0.001', '0.01', '0.1'), 
+#                 pokemon = 'Swampert',
+#                 spread = 5)
 
 
 
@@ -1097,7 +1098,7 @@ percChangePreds <- percChangeModels %>%
 d$transmission <- factor(d$transmission, labels = c('beta == 0.1', '0.2', '0.3'))
 percChangePreds$transmission <- factor(percChangePreds$transmission, labels = c('beta == 0.1', '0.2', '0.3'))
 
-ggplot(dPlot, aes(x = ValueChange, y = mean, colour = vary)) +
+ggplot(d, aes(x = ValueChange, y = mean, colour = vary)) +
   geom_point() +
   geom_line(data = percChangePreds, aes(x = ValueChange, y = pred, colour = vary)) +
   geom_point() +
@@ -1114,6 +1115,51 @@ ggplot(dPlot, aes(x = ValueChange, y = mean, colour = vary)) +
   scale_x_continuous(breaks = c(0.25, 0.5, 1, 2, 4), labels = c(0.25, 0.5, 1, 2, 4), trans = 'log10') +
   facet_grid(transmission ~ ., labeller = label_parsed) 
 
+
+%%end.rcode
+
+
+%%begin.rcode plotKDistrs, show.figs = extraFigs
+
+
+#  ggplot(dens2, aes(x = factor(colonyNumber), y = meanK)) +
+#    geom_boxplot() 
+
+
+#  ggplot(dens2, aes(x = factor(area), y = meanK)) +
+#    geom_boxplot() 
+
+#  ggplot(dens1, aes(x = factor(area), y = meanK)) +
+#    geom_boxplot() 
+
+
+#  ggplot(pop, aes(x = factor(area), y = meanK)) +
+#    geom_boxplot() 
+
+%%end.rcode
+
+%%begin.rcode plotKcapt
+
+plotKcapt <- ''
+
+plotKtitle <- 'Change in average network degree with increasing area'
+
+
+%%begin.rcode plotK, fig.cap = plotKcapt, fig.scap = plotKtitle, out.width = '0.7\\textwidth'
+
+
+ggplot(dens1, aes(x = factor(area), y = meanK, colour = 'a', fill = 'a')) +
+  geom_boxplot(outlier.size = 1, size = 0.3, outlier.colour = grey(0.3), 
+    notch = TRUE, width = 0.4, notchwidth = 0.6) +
+  scale_colour_manual(values = pokepal('vileplume')[4]) +
+  scale_fill_manual(values = pokepal('vileplume')[7]) +
+  stat_summary(geom = "crossbar", width = 0.25, fatten = 2, 
+    fun.data = function(x){ return(c(y = median(x), ymin = median(x), ymax = median(x))) }) +
+  theme(legend.position = 'none') + 
+  scale_x_discrete(labels = c('2500', '5000', '10000', '20000', '40000')) +
+  xlab(expression(paste('Area ', (km^2)))) +
+  ylab(expression(paste('Mean degree, ', bar(k)))) +
+  ylim(0, 20)
 
 %%end.rcode
 
