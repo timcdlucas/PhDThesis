@@ -634,8 +634,9 @@ colonyNetTitle <- 'Example metapopulation networks'
 
 colonyNetCapt <- '
 Examples of the metapopulation networks used.
-They show range of number of colonies and area.
-As area increases, the number of connections each subpopulation has decreases.
+They show the smallest number of colonies (five) and the default (20).
+They also show the default ($10^4\\,\\text{km}^2$) and largest areas ($4\\times10^4\\,\\text{km}^2$).
+As area increases, the number of connections each subpopulation has decreases as seen by the changes in mean degree, $\\bar{k}$.
 '
 
 
