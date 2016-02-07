@@ -302,8 +302,8 @@ $\bar{n}$ & Colony starting size && 3,000\\
 $\beta$ & Transmission rate & Transmission events per year per individual& 2, 5, 10\\
 $\gamma$ & Recovery rate & Recovery events per year per individual. & 1\\
 $\lambda$ & Dispersal & Dispersal events per day per individual& 0.001--0.1\\
-$b$ & Birth rate & Births per year per individual& 0.05\\
-$d$ & Death rate & Deaths per year per individual & 0.05\\
+$\Lambda$ & Birth rate & Births per year per individual& 0.05\\
+$\mu$ & Death rate & Deaths per year per individual & 0.05\\
 %$d_I$ & Infectious death rate & Additional deaths per day per individual&\\
 $\rho$ & No. pathogens && 2\\
 $p$ &  Pathogen index i.e. $p\in\{1,2\}$ for pathogens 1 and 2 & &\\
@@ -345,8 +345,8 @@ The assumption of immediate recovery from all other diseases is likely to be qui
 
 The coinfection rate (the rate at which an infected individual is infected with a second pathogen) is adjusted compared to the infection rate by a factor $\alpha$ (here I used $\alpha = 0.1$ which means coinfection happens at a tenth the rate of first infections).
 In the application of long term existence of pathogens it is vital to include vital dynamics (births and deaths) as the SIR without vital dynamics has no endemic state.
-Birth and death rates are assumed to be equal, $b = d$ (see Table~\ref{t:params} for a list of symbols and values used).
-The time scale of the simulations are set by setting b = 0.05 per year, yielding an average host generation time of 20 years.
+Birth and death rates are assumed to be equal, $\mu = \Lambda$ (see Table~\ref{t:params} for a list of symbols and values used).
+The time scale of the simulations are set by setting $\mu$ = 0.05 per year, yielding an average host generation time of 20 years.
 Infection is assumed to cause no extra mortality as for a number of viruses, bats show no clinical signs of infection \cite{halpin2011pteropid, deThoisy2016bioecological}.
 
 
@@ -401,14 +401,14 @@ We can now write down the rates of all events.
 I defined $I^+_p$ to be the sum of all classes that are infectious with pathogen $p$, for example $I^+_1 = I_1 + I_{12}$. 
 Assuming asexual reproduction, that all classes reproduce at the same rate and that individuals are born into the susceptible class we get
 \begin{align}
-  P\left( S_{nt^\prime} = S_{nt} +1\right) &= b\left( S_{nt}+\sum_q I_{qnt} + R_{nt}\right) 
+  P\left( S_{nt^\prime} = S_{nt} +1\right) &= \Lambda\left( S_{nt}+\sum_q I_{qnt} + R_{nt}\right) 
 \end{align}
 where $P\left( S_{nt^\prime} = S_{nt} +1\right)$ is the probability that the number of susceptibles in subpopulation $n$ will increase by 1 (a single birth) in the time interval $t$ to $t^\prime$ and $\sum_q I_{qnt}$ is the sum of all infection classes $q \in {1, 2, 12}$.
 The rates of death, given a death rate $d$ are given by
 \begin{align}
-  P\left( S_{nt^\prime} = S_{nt}-1 \right) &= dS_{nt}, \\
-  P\left( I_{qnt^\prime} = I_{qnt}-1 \right) &= dI_{qnt},\\
-  P\left( R_{nt^\prime} = R_{nt}-1 \right) &= dR_{nt}.
+  P\left( S_{nt^\prime} = S_{nt}-1 \right) &= \mu S_{nt}, \\
+  P\left( I_{qnt^\prime} = I_{qnt}-1 \right) &= \mu I_{qnt},\\
+  P\left( R_{nt^\prime} = R_{nt}-1 \right) &= \mu R_{nt}.
 \end{align}
 I modelled transmission as density-dependant.
 This assumption is more suitable than frequency-dependant transmission as I am modelling a disease transmitted by saliva or urine in highly dense populations confined to caves, building or potentially a small number of tree roosts.
@@ -707,8 +707,8 @@ This value is artificially small compared to wildlife populations.
 
 
 The fixed parameters used are chosen to roughly reflect realistic wild bat populations. 
-The death rate $d$ is set as 0.05 per year giving a generation time of 20 years.
-The birth rate $b$ is set to be equal to $d$ so that the population size is stable.
+The death rate $\mu$ is set as 0.05 per year giving a generation time of 20 years.
+The birth rate $\Lambda$ is set to be equal to $\mu$ so that the population size is stable.
 The recovery rate $\gamma$ is set to 1 giving a average infection duration of 1 years. 
 This is therefore a long lasting infection but not a chronic infection. 
 It is very difficult to directly estimate infection durations in wild populations but it seems that these infections might sometimes be long lasting \cite{peel2012henipavirus, plowright2015ecological}.

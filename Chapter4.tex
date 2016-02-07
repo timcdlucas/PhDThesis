@@ -62,152 +62,83 @@ Here I use metapopulation SIR models to test whether it is density \emph{per se}
 
 
 
-\subsection{General Intro}
+\tmpsection{General Intro}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % A basic introduction to the field,
 % comprehensible to a scientist in any discipline.
 
-
-\subsubsection{Why is pathogen diversity important?}
-
-
-\subsubsection{We know some factors that correlate with pathogen diversity}
-
-
-\subsubsection{But we do not understand the mechanistic processes}
+Zoonotic diseases are an increasingly important source of human infectious diseases \cite{jones2008global, woolhouse2006host, taylor2001risk}.
+The diversity of pathogens in wild animal populations is huge and largely unknown \cite{poulin2014parasite}.
+The factors that allow large numbers of pathogen species to coexist in a host \cite{anthony2013strategy, anthony2013strategy} are still unclear.
+It is likely that population level factors such as population density, range size and population structure have an important role in controlling pathogen community dynamics.
+Global change is strongly peturbing wild animal populations, but without clear mechanistic models of how these populations maintain pathogen species richness, we can not predict how pathogen communities, and the risks of zoonotic outbreaks, will change in the coming decades.
 
 
 
 
 
-
-
-\subsection{Specific Intro}
+\tmpsection{Specific Intro}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % more detailed background}
 % comprehensible to scientists in related disciplines.
 
+\tmpsection{Theoretical background}
+Variables that describe populations, such as population density and structure, are well established as having a central role in pathogen dynamics \cite{colizza2007invasion, barthelemy2010fluctuation, colizza2007invasion,  wu2013threshold, may1979population, anderson1979population}.
+More recently, the role of the population has been examined with respect to pathogen richness and the coexistence of competing pathogens \cite{qiu2013vector, allen2004sis, nunes2006localized}.
+Yet even in theoretical studies there is confusion as to how exactly we should measure populations.
+There is disagreement on whether population density (individuals per unit area) should be preferred over population abundance (number of individuals) \cite{dejong and begon?} and how exactly area should be incorporated \cite{}. 
+
+
+\tmpsection{Density/abundance in comparative research}
+With the increase of novel zoonotic pathogens \cite{} attention has turned to comparatively assessing the factors that are associated with high or low pathogen richness in wild animal species \cite{morand review}.
+Here again there is little clarity on the relationship between a number of species measurements.
+Population density is commonly studied \cite{} as is range size \cite{}.
+However it is rarely if ever acknowledge that these two values are intrinsically linked by $d = N/a$ where $d$ is density, $N$ is the population size and $a$ is area.
+In contrast, abundance has never been directly studied as a predictor of pathogen richness.
+This is  a glaring omission as abundance more closely aligns with the ``island-biogeography'' class of mechanisms posited to explain pathogen richness \cite{}.
+Furthermore, abundance is considered the more relevant measure in terms of pathogen dynamics, especially when area cannot be assumed to be constant \cite{begon} as is commonly the case in wild populations, especially in the face of global warming and habitat degradation.
+
+\tmpsection{Populatiion structure in comparative research}
+It is clear that individuals of an animal species are not randomly distributed in space: social groups are common \cite{} and geographic boundaries reduce contacts between isolated populations.
+In social species, measures such as global population density are largely meaningless with respect to the number of infectious contacts individuals may have.
+Rather, contacts are based on group size and rates of movements between groups.
+Two aspects of non-random transmission have been studied in particular: group size \cite{nunn and others} and global measures of population structure including genetic measures and measures derived from distribution shapes (\textcite{gay, maganga, turmelle} and see Chapter \ref{ch:}).
+Again however, the relationships between these terms and more the more global terms mentioned above are rarely examined.
+Population abundance can be decomposed into two components, the number of groups and the average size of a group with $N = nm$ where $n$ is group size and $m$ is the number of groups.
+The amount of movement between is largely dependant on the distance between groups.
+This depends on the number of groups per area $m/a$ or $N/na$ and the average distance between groups, if groups are randomly distributed in space scales as $something$.
+
+\tmpsection{But reaction to climate change, and predictions depend on which factor is actually important}
+
+
+Importantly, these factors, although interrelated, will respond differently to global change and the response will be species dependant.
+Some species may suffer large range contractions, and therefore large falls in absolute abundance, while their density remains fairly constant.
+Other species might be expected to retain their distribution but have a depressed population density across their range.
+Similarly with population structure, species particularly affected by habitat fragmentation can expect increased reduced movement of individuals between groups, while other species may be most affected by a reduction in group size.
+Furthermore, different mechanisms of maintenance and creation of pathogen richness will respond to changes in these factors differently as well.
+If pathogen richness ultimately depends on the ``island size'' of the host population, then falls in population abundance will reduce pathogen richness the most.
+If local group size affects the ability of new pathogens to invade (Chapter \ref{ch:sim1}) then changes in group size are likely to be most important.
+Finally, if increased population structure allows pathogens to coexist (\parencite{qiu2013vector, allen2004sis, nunes2006localized} and Chapter \ref{ch:}) increase habitat fragmentation could be expected to increase pathogen richness.
+
+As these factors are likely to be correlated, correlative comparative studies will struggle to distinguish between them.
+Furthermore, even if factors are supported or rejected, the specific mechanisms by which the promote pathogen richness will remain unknown, and these may suggest different responses to global change.
+Furthermore, mechanistic models are expected to be more predictive into the future and into hitherto unseen parameter space.
 
 
 
-\subsection{The gap}
+
+\tmpsection{The gap}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Therefore there is great need to mechanistic models that try to disentangle the interplay between these many factors: density, abundance, range size, population structure, group size and the number of groups.
+
+\tmpsection{What I did and found}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\subsection{What I did}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\subsection{What I found}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % One sentence summarising the main result
 % (with the words “here we show” or their equivalent).
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\section{Methods}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%
-
-
-
-
-\subsection{Metapopulation model}
-
-
-
-
-\subsubsection{Two pathogen SIR model}
-
-We examine a multpathogen SIR model. 
-This is a compartment model with individuals being classed as susceptible, infected or recovered with immunity (Figure~\ref{f:sir}).
-Susceptible individuals are counted in class $S$.
-There are three infected classes, $I_1$, $I_2$ and $I_{12}$, being individuals infected with pathogen 1, pathogen 2 or both respectively.
-Recovered individuals, $R$, are immune to both pathogens, even if they have only been infected with one.
-Furthermore, recovery from a pathogen moves an individual straight into the recovered class, even if the individual is infected with both pathogen.
-This modelling choice allows the model to be easily expanded to included more than two pathogens.
-The assumption of immediate recovery from all other diseases is likely to be quite accurate for very closely related pathogens as is being studied here as once an acquired immune response is activated, all infections are likely to be cleared quickly.
-
-The coinfection rate is adjusted compared to the first infection rate by a factor $\alpha$.
-Birth and death rates are assumed to be equal, $b = d$.
-
-
-\subsubsection{Metapopulation}
-
-
-The population is divided into a number of subpopulations.
-This metapopulation is modelled as a network with subpopulations being nodes and dispersal between subpopulations being indicated by edges (Figure~\ref{f:net})
-Individuals with a subpopulation interact randomly so that the subpopulation is fully mixed.
-However, dispersal between subpopulations occurs at a rate $\lambda$.
-Individuals can only disperse to subpopulations connected to theirs in the network.
-The rate of dispersal is not affected by the number of edges a subpopulation has (the degree of the subpopulation).
-So the dispersal rate from a subpopulation $m$ with degree $k_m$ to subpopulation $n$ is $\frac{\lambda}{k_m}$.
-Note this rate is independent of the degree of subpopulation $n$.
-
-
-
-
-
-\subsubsection{Stochastic simulations}
-
-We examine this model using stochastic, continuous time simulations using the Gillespie algorithm.
-At each step in the simulation we calculate the rate that each possible event might occur.
-One event is then randomly chosen, weighted by it's rate
-\begin{align}
-  p(\text{event } i) = \frac{r_i}{\sum_i r_i}
-\end{align}
-where $r_i$ is the rate that event $i$ occurs.
-Finally, the length of the time step, $\delta$, is drawn from an exponential distribution 
-\begin{align}
-  \delta \sim \operatorname{Exp}\left(\sum_i r_i  \right).
-\end{align}
-This means that the length of each simulation is stochastic. 
-We define the number of events we wish to simulate instead.
-
-
-%\begin{figure}[t]
-%\centering
-%  \includegraphics[width=0.4\textwidth]{imgs/SIRoption1.pdf}
-%  \caption{The SIR model used.}
-%  \label{f:sir}
-%\end{figure}
-
-
-We can now write down the rates of all events. 
-I define $I^+_p$ to be the sum of all classes that are infectious with pathogen $p$, for example $I^+_1 = I_1 + I_{12}$. 
-Assuming asexual reproduction, that all classes reproduce at the same rate and that individuals are born into the susceptible class we get
-\begin{align}
-  P\left( S_{nt^\prime} = S_{nt} +1\right) &= b\left( S_{nt}+\sum_q I_{qnt} + R_{nt}\right) 
-\end{align}
-where $P\left( S_{nt^\prime} = S_{nt} +1\right)$ is the probability that the number of susceptibles in subpopulation $n$ will increase by 1 (a single birth) the short time interval $t$ to $t^\prime$ and $\sum_q I_{qnt}$ is the sum of all infection classes $q \in {1, 2, 12}$.
-The rates of death, given a death rate $d$ are given by
-\begin{align}
-  P\left( S_{nt^\prime} = S_{nt}-1 \right) &= dS_{nt} \\
-  P\left( I_{qnt^\prime} = I_{qnt}-1 \right) &= dI_{qnt}\\
-  P\left( R_{nt^\prime} = R_{nt}-1 \right) &= dR_{nt}.
-\end{align}
-Infection of a susceptible with either pathogen 1 or 2, $S \rightarrow I_p$ where $p\in \{1,2\}$, is given by
-\begin{align}
-  P\left( I_{pnt^\prime} = I_{pnt}+1, S_{nt^\prime} = S_{nt}-1 \right) &= \beta S_{nt}I^+_{pnt},
-\end{align}
-while coinfection, given a crossimmunity factor $\alpha$, is given by
-\begin{align}
-  P\left( I_{12,nt^\prime} = I_{12,nt}+1,\: I_{pnt^\prime} = I_{pnt}-1\right) = \alpha\beta I_{nt}I^+_{pnt}.
-\end{align}
-The probability of migration from colony $m$ (with degree $k_m$) to colony $n$, given a dispersal rate $\lambda$ is given by
-\begin{align}
-  P\left(S_{nt^\prime}=S_{nt}+1,\: S_{mt^\prime} = S_{mt}-1\right) &= \frac{\lambda S_{mt}}{k_m-1}\\
-  P\left(I_{qnt^\prime}=I_{qnt}+1,\: I_{qmt^\prime} = I_{qmt}-1\right) &= \frac{\lambda I_{qmt}}{k_m}\\
-  P\left(R_{nt^\prime}=S_{nt}+1,\: R_{mt^\prime} = R_{mt}-1\right) &= \frac{\lambda R_{mt}}{k_m}.
-\end{align}
-Finally, recovery from any infectious class occurs at a rate $\gamma$
-\begin{align}
-  P\left( I_{qnt^\prime} = I_{qnt}-1,\: R_{nt^\prime} = R_{nt}+1 \right) &= \gamma I_{qnt}.
-\end{align}
 
 
 
@@ -248,81 +179,126 @@ Finally, recovery from any infectious class occurs at a rate $\gamma$
 
 
 
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[t]
+
+{\centering \includegraphics[width=0.9\textwidth]{figure/colonyNetworkPlots-1} 
+
+}
+
+\caption[Example metapopulation networks]{
+Examples of the metapopulation networks used.
+They show the smallest number of colonies (five) and the default (20).
+They also show the default ($10^4\,\text{km}^2$) and largest areas ($4\times10^4\,\text{km}^2$), though all networks are plotted on the largest area.
+As area increases, the number of connections each subpopulation has decreases as seen by the changes in mean degree, $\bar{k}$.
+}\label{fig:colonyNetworkPlots}
+\end{figure}
+
+
+\end{knitrout}
 
 
 
 
-In each simulation the population is seeded with 20 infected individuals of disease 1 in each colony. 
-Disease 1 is then allowed to spread and reach equilibrium. 
-After \ensuremath{7\times 10^{5}} events, 5 individuals infected with disease 2 are added to one colony. 
-After another \ensuremath{3\times 10^{5}} events the invasion of disease 2 is considered successful if any individuals with disease 2 still remain.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+\section{Methods}
 
-\subsection{Dispersal}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The values used for the independant variables are chosen to highlight the affects of these variables. 
-Dispersal values are $\lambda = 0.1, 0.01$ and $ 0.001$ dispersals per individual per year. 
-$\lambda = 0.1$ relates to individuals moving between colonies on average twice per lifetime. 
-Therefore exclusively juvenile dispersal would have dispersal rates similar to this. 
-Otherwise it relates to dispersal being a rare event with animals often staying in a colony for many years.
-$\lambda = 0.01$ relates to 20\% of individuals dispersing once in their lifetime.
-This value is therefore close to male-biased dispersal, with female philopatry. 
-Finally, $\lambda = 0.001$ relates to 2\% of individuals dispersing in their lifetime.
-This therefore relates to a population that does not habitually disperse.
+%%
 
 
 
 
-\subsection{Network structure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The network structure is synthetically created to be either fully or minimally connected (See Figure~\ref{f:net}). 
-10 subpopulations was selected as a trade off between computation time and a network complicated enough that structure might have an effect. 
-This value is artificially small compared to wildlife populations. 
+\subsection{Metapopulation model}
+
+\tmpsection{Overview}
+
+
+I used two-pathogen, metapopulation SIR model to compare the roles of demograhic parameters on pathogen species richness.
+Specifically I let two identical pathogens (and endemic pathogen and an invading pathogen) compete.
+I used presistence or not of the second pathogen as my response variable.
+I test whether population abundance is more important than population density.
+I then test whether colony size or the number of colonies is the more important component of population abundance.
+The multpathogen SIR model is identical to that in Chapter \ref{ch:sims1} and is implemented in R \cite{R}.
 
 
 
-\subsection{Parameter selection}
+In each simulation the population is seeded with 20 individuals infected with pathogen 1 in each colony. 
+Pathogen 1 is then allowed to spread and reach equilibrium. 
+After \ensuremath{7\times 10^{5}} events, 5 individuals infected with pathogen 2 are added to one colony. 
+After another \ensuremath{3\times 10^{5}} events the invasion of pathogen 2 is considered successful if any individuals with pathogen 2 still remain.
 
+\subsection{Dependant variables}
+
+Three dependant variables were varied: colony size, number of colonies and area.
+From these parameters, population abundance and population density can be calculated.
+The default values of these parameters was a population size of 8000 individuals split into 20 colonies of 400.
+The default area of the simulations was 
+
+Three sets of simulations were run.
+First, colony size was varied using values 100, 200, 400, 800 and \ensuremath{1.6\times 10^{3}}.
+The number of colonies was kept constant and so population abundance varied with colony size.
+Area was scaled to keep population density constant. 
+Secondly, number of colonies (and therefore population abundance) was varied and again area was varied to keep density constant.
+5, 10, 20, 40 and 80 colonies were used.
+Finally, colony size and number of colonies were kept constant (therefore keeping population abundance constant) and area was varied alone to alter population density. 
+The values of area used were \ensuremath{4\times 10^{4}}, \ensuremath{2\times 10^{4}}, \ensuremath{10^{4}}, \ensuremath{5\times 10^{3}} and \ensuremath{2.5\times 10^{3}} which gave density values of 0.2, 0.4, 0.8, 1.6 and 3.2.
+
+The affects of area occur through changing the metapopulation network.
+The metapopulation structure was created for each simulation by randomly placing colonies in space.
+The spatial scale of the simulations vary between \ensuremath{2.5\times 10^{3}} and \ensuremath{4\times 10^{4}} km$^2$ (space is given in kilometers even though they are oin fact arbitrary units for simplicity).
+This corresponds to square areas with sides of 50 to 200 km).
+Dispersal can only occur between two colonies if they are within 100 kilometers of each other i.e. they are connected nodes in the metapopulation network.
+The number of connections each colony has is called its degree, $k$.
+How well connected the metapopulation network is overall is measured by the mean degree, $\bar{k}$.
+This does not guarentee that the population is fully connected but as the endemic pathogen is seeded in all colonies, the invading pathogen cannot be seeded into a fully susceptible colony.
+This was considered more realistic than repeatedly resampling the population until a fully connected population occured.
+Given this setup, simulations with low densities had relatively unconnected metapopulation networks.
+
+
+
+
+
+
+\subsection{Other Parameters}
+%TODO switch all b's to d or something else, so that b can be used for regression coeficients. In all eqns in +ch2 as well.
 
 The fixed parameters used are chosen to roughly reflect realistic wild bat populations. 
-The death rate $d$ is set as 0.05 per year giving a generation time of 20 years.
-The birth rate $b$ is set to be equal to $d$ so that the population size is stable.
-The recovery rate $\gamma$ is set to 0.1 giving a average infection duration of 10 years. 
-This is therefore a chronic infection. 
-It is very difficult to directly estimate infection durations in wild populations.
-But it seems that these infections might be long lasting \cite{}.
+The death rate $\Lambda$ is set as 0.05 per year giving a generation time of 20 years.
+The birth rate is set to be equal to $\mu$ so that the population size is stable.
+The recovery rate $\gamma$ is set to 1 giving a average infection duration of 1 years. 
+This is therefore a long lasting infection but not a chronic infection. 
+It is very difficult to directly estimate infection durations in wild populations but it seems that these infections might sometimes be long lasting \cite{peel2012henipavirus, plowright2015ecological}.
+However, other studies have found much shorter infectious periods \cite{amengual2007temporal}.
+These shorter lived in infections are studied further here as preliminary simulations found that they could not persist in the relatively small populations being modelled here.
 
-Cross immunity is set to 0.1 so that an individual infected with one disease is 90\% less likely to be infected with another.
+Cross immunity is set to 0.1 so that an individual infected with one pathogen is 90\% less likely to be infected with another.
 This is a rather arbitrary value.
-However, the model assumes complete cross immunity after infection.
-Furthermore, the rationale of the model is that the invading species might be a newly speciated strain of the endemic species.
-Therefore cross immunity is likely to be very strong.
+However, the rationale of the model is that the invading species might be a newly speciated strain of the endemic species.
+Furthermore, the model assumes complete cross immunity after recovery from infection.
+Therefore cross immunity to coinfection is likely to be very strong as well.
 
-The population size of each subpopulation is set to 3000. 
+
+The population size of each subpopulation is set to 3,000. 
 This is appropriate for many bat species \cite{jones2009pantheria}, especially the large, frugivorous \emph{Pteropodidae} that have been particularly associated with recent zoonotic diseases.
 
 
-Three values of the transmission rate $\beta$ are used, 2, 5 and 10.
-All simulations are run under all three transmission rates as this is such a fundamental parameter.
-Given the recovery, birth and death rates we can calculate an approximation of $R_0$ that ignores spatial structure.
-That is, this is $R_0$ for the local, within-subpopulation dynamics.
-Furthermore, it is $R_0$ for the first pathogen; $R_0$ of the invading pathogen will be lower due to competition.
-We can calculate that $R_0 \approx \frac{\beta d}{d(d+ \gamma)}$.
-For our three values of $\beta = 2, 5, 10$ we therefore get $R_0 \approx 13.3, 33.3, 66.6$.
-These values are very high in part to again find a reasonable trade off between the number of simulations and the reasonableness of the parameters.
-$R_0 \approx 13.3$ is similar to a highly contagious disease such as measles or pertussis. 
+Three values of the transmission rate $\beta$ are used, 0.1, 0.2 and 0.3.
+All simulations are run under all three transmission rates as this is a fundamental parameter that changes the broad dynamics of the pathogens.
 
 
-For the simulations where an invading pathogen is added to the populations the number of invading pathogens added is set to 10. 
-This is a trade off between getting a reasonable proportion of invasions, while still retaining the stochastic nature of invasion.
+\subsection{Statistical comparisons}
 
-For simulations studying extinction rates, half of the subpopulation were seeded with each pathogen.
-2000 susceptibles and 1000 infected individuals were placed in each subpopulation in order to quickly reach equilibrium.
-
-
-
+I tested two hypotheses.
+Firstly I tested the hypothesis that an increase in population abundance creates a stronger increase in invasion probability (of the second pathogen) than an equal increase in population density.
+Secondly I tested the hypothesis that ana increase in colony size creates a stronger increase in invasion probability an an equal increase in number of colonies.
+To statistically test these hypotheses I combined the results from different simulations and fitted multiple logistic regressions, centering and scaling the dependant variables.
+Specifically, I fitted the model $\text{invasion} = b_1 \text{density} + b_2 \text{colony size} + b_3 \text{number of colonies} + c + \epsilon$ where $c$ is a fitted intercept and $\epsilon$ is a binomially distributed error term.
+To test the first hypothesis I compared the size (and 95\% confidence intervals) of $b_1$ to $b_2$ and $b_3$.
+To test the second hypothesis I compared $b_2$ to $b_3$.
 
 
 
@@ -337,6 +313,7 @@ For simulations studying extinction rates, half of the subpopulation were seeded
 \section{Results}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 
 
@@ -383,18 +360,40 @@ Each point is the mean of inline{each} simulations and bars are 95\% confidence
 
 
 
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[t]
+
+{\centering \includegraphics[width=0.8\textwidth]{figure/plotK-1} 
+
+}
+
+\caption[Change in average network degree with increasing area]{
+Change in average metapopulation network degree ($\bar{k}$) with increasing area. 
+Bars show the median, boxes show the interquartile range, vertical lines show and range and grey dots indicate outlier values.
+Notches indicate the 95\% confidence interval of the mean.
+}\label{fig:plotK}
+\end{figure}
+
+
+\end{knitrout}
+
+
+
+
+
 \begin{table}
 
 \caption[Regression results]{
 Regression results comparing affects of colony size, colony number and area.
 Coefficients are from multiple logistic regressions with invasion as the dependant variable and all independant variables being scaled and centred.
 Colony size and colony number were varied while keeping density equal while density was varied by changing area while keeping population size equal.
+$p$ is for test against the null hypothesis that  $b = 0$.
 }
 \label{t:regrCoefs}
 \centering
 \begin{tabular}{@{}rlrrr@{}}
 \toprule
-$\beta$ & \emph{Variable} & \emph{Estimate} & (95\% \emph{CI}) & $p$\\
+$\beta$ & \emph{Variable} & \emph{Estimate} ($b$) & (95\% \emph{CI}) & $p$\\
 \midrule
 0.1   &    Intercept     & \ensuremath{-3.52} & (\ensuremath{-3.87}, \ensuremath{-3.2}) & $< 10^{-5}$ \\
       &    Colony Size   & 1.07 & (0.75, 1.49) & $< 10^{-5}$ \\
@@ -482,45 +481,45 @@ It is clear however that there are a number of factors that affect pathogen rich
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\section{Appendix}
+%\section{Appendix}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{table}[b!]
-
-\begin{tabular}{lp{5.6cm}p{4.3cm}l}
- & Explanation & Units&Value\\
-\hline
-$S$ & Susceptible individuals &&\\
-$I_q$ & Infectious with diseases $q$ &&\\
-$I^+_p$ & Sum of classes infected with pathogen $p$ &\\
-$N$ & Number of colonies&& 10\\
-$\bar{n}$ & Mean colony starting size && 3000\\
-$\beta$ & Transmission rate & Transmission events per year per individual& 2, 5, 10\\
-$\gamma$ & Recovery rate & Recovery events per year. & 0.1\\
-$\lambda$ & Dispersal & Dispersal events per day per individual& 0.001--0.1\\
-$b$ & Birth rate & Births per year per individual& 0.05\\
-$d$ & Death rate & Deaths per year per individual & 0.05\\
-$d_I$ & Infectious death rate & Additional deaths per day per individual&\\
-$\rho$ & No. pathogens && 2\\
-$p$ &  Pathogen index i.e. $p\in\{1,2\}$ for pathogens 1 and 2 & &\\
-$q$ & Disease class i.e., $q\in\{1,2,12\}$&\\
-$\mathcal{V}$ & Neighbourhood of a node &&\\
-$t, t^\prime$ & Time and time plus waiting time i.e., $t+\delta$ & Days&\\
-$k_i$ & Degree of node $i$ &&\\
-$\delta$ & Waiting time until next event & Days&\\
-$\alpha$ & Cross immunity & Proportion& 0.1\\
-$n, m$ & Colony index &&\\
-%$\bm{A}_{mn}$ & Adjacency matrix. & Distance &\\
-$\mu$ & Maximum distance for edge to exist & km& 40, 100\\
-$\sigma$ & Invading pathogen seed size & & 10\\
-$r_i$ & The rate that event $i$ occurs. & Days$^{-1}$&\\
-&&&\\
-\end{tabular}
-\caption{All symbols used.}
-\label{t:params2}
-\end{table}
-
-
+%\begin{table}[b!]
+%
+%\begin{tabular}{lp{5.6cm}p{4.3cm}l}
+% & Explanation & Units&Value\\
+%\hline
+%$S$ & Susceptible individuals &&\\
+%$I_q$ & Infectious with diseases $q$ &&\\
+%$I^+_p$ & Sum of classes infected with pathogen $p$ &\\
+%$N$ & Number of colonies&& 10\\
+%$\bar{n}$ & Mean colony starting size && 3000\\
+%$\beta$ & Transmission rate & Transmission events per year per individual& 2, 5, 10\\
+%$\gamma$ & Recovery rate & Recovery events per year. & 0.1\\
+%$\lambda$ & Dispersal & Dispersal events per day per individual& 0.001--0.1\\
+%$b$ & Birth rate & Births per year per individual& 0.05\\
+%$d$ & Death rate & Deaths per year per individual & 0.05\\
+%$d_I$ & Infectious death rate & Additional deaths per day per individual&\\
+%$\rho$ & No. pathogens && 2\\
+%$p$ &  Pathogen index i.e. $p\in\{1,2\}$ for pathogens 1 and 2 & &\\
+%$q$ & Disease class i.e., $q\in\{1,2,12\}$&\\
+%$\mathcal{V}$ & Neighbourhood of a node &&\\
+%$t, t^\prime$ & Time and time plus waiting time i.e., $t+\delta$ & Days&\\
+%$k_i$ & Degree of node $i$ &&\\
+%$\delta$ & Waiting time until next event & Days&\\
+%$\alpha$ & Cross immunity & Proportion& 0.1\\
+%$n, m$ & Colony index &&\\
+%%$\bm{A}_{mn}$ & Adjacency matrix. & Distance &\\
+%$\mu$ & Maximum distance for edge to exist & km& 40, 100\\
+%$\sigma$ & Invading pathogen seed size & & 10\\
+%$r_i$ & The rate that event $i$ occurs. & Days$^{-1}$&\\
+%&&&\\
+%\end{tabular}
+%\caption{All symbols used.}
+%\label{t:params2}
+%\end{table}
+%
+%
 
 
