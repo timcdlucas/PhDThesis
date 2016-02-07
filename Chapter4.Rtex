@@ -37,6 +37,7 @@ source('misc/KnitrOptions.R')
 theme_set(theme_grey() + theme_tcdl)
 
 
+
 %%end.rcode
 
 
@@ -64,6 +65,10 @@ library(parallel)
 # plotting
 library(ggplot2)
 library(palettetown)
+# Get nice fonts in base graphics
+library(showtext)
+
+
 
 %%end.rcode
 
@@ -636,9 +641,10 @@ As area increases, the number of connections each subpopulation has decreases.
 
 %%end.rcode
 
-%%begin.rcode colonyNetworkPlots, fig.height = 5, fig.cap = colonyNetCapt, fig.scap = colonyNetTitle, out.width = '0.9\\textwidth'
+%%begin.rcode colonyNetworkPlots, fig.height = 5, fig.cap = colonyNetCapt, fig.scap = colonyNetTitle, out.width = '0.9\\textwidth', fig.showtext = TRUE
+font.add.google('Lato', regular.wt = 300)
 
-set.seed(44)
+set.seed(3)
 
   #   Area and meanColonySize are the actal input arguments
   pop <- c(2000, 4000, 8000, 16000, 32000)
@@ -650,19 +656,19 @@ set.seed(44)
 
 
 # Make the population.
-p1 <- makePop(space = side[2], 
+p1 <- makePop(space = side[3], 
              transmission = 0.1, 
              meanColonySize = colonySize, 
-             nColonies = colonyNumber[2], 
+             nColonies = colonyNumber[1], 
              model = 'SIR', 
              events = 20,
              sample = 2,
              maxDistance = 100)
-
+k1 <- sum(p1$adjacency != 0 )/p1$parameters['nColonies']
 
 
 # Make the population.
-p2 <- makePop(space = side[3], 
+p2 <- makePop(space = side[5], 
              transmission = 0.1, 
              meanColonySize = colonySize, 
              nColonies = colonyNumber[3], 
@@ -670,10 +676,10 @@ p2 <- makePop(space = side[3],
              events = 20,
              sample = 2,
              maxDistance = 100)
-
+k2 <- sum(p2$adjacency != 0 )/p2$parameters['nColonies']
 
 # Make the population.
-p3 <- makePop(space = side[2], 
+p3 <- makePop(space = side[3], 
              transmission = 0.1, 
              meanColonySize = colonySize, 
              nColonies = colonyNumber[3], 
@@ -681,31 +687,54 @@ p3 <- makePop(space = side[2],
              events = 20,
              sample = 2,
              maxDistance = 100)
-
+k3 <- sum(p3$adjacency != 0 )/p3$parameters['nColonies']
 
 # Make the population.
-p4 <- makePop(space = side[3], 
+p4 <- makePop(space = side[5], 
              transmission = 0.1, 
              meanColonySize = colonySize, 
-             nColonies = colonyNumber[2], 
+             nColonies = colonyNumber[1], 
              model = 'SIR', 
              events = 20,
              sample = 2,
              maxDistance = 100)
+k4 <- sum(p4$adjacency != 0 )/p4$parameters['nColonies']
 
+
+labSz <- 1
+bigy <- 11.4
+bigx <- 10.6
+titleSz <- 5
+axSz <- 4
 
 par(mfrow = c(2,2))
-plotColonyNet(p1, area = side[3], axes = TRUE, cex = 0.3)
-text(x = 1, y = 1, labels = paste('k =', sum(p1$adjacency != 0 )/p1$parameters['nColonies']))
 
-plotColonyNet(p4, area = side[3], axes = TRUE, cex = 0.3)
-text(x = 1, y = 1, labels = paste('k =', sum(p4$adjacency != 0 )/p4$parameters['nColonies']))
 
-plotColonyNet(p3, area = side[3], axes = TRUE, cex = 0.3)
-text(x = 1, y = 1, labels = paste('k =', sum(p3$adjacency != 0 )/p3$parameters['nColonies']))
+plotColonyNet(p1, area = side[5], cex = 0.2, mar = c(bigx, bigy, 3, 2))
+axis(2, col = 'grey', cex.axis = axSz, col.axis = 'grey', family = 'Lato', font = 2)
+axis(1, col = 'grey', labels = FALSE)
+title(main = bquote(italic(bar(k)) ~ '='~ .(k1)), cex.main = titleSz, family = 'Lato',  line = 0.5)
+mtext(side = 2,  line = 7.8, text = 'Longitude', cex = labSz, family = 'Lato')
 
-plotColonyNet(p2, area = side[3], axes = TRUE, cex = 0.3)
-text(x = 1, y = 1, labels = paste('k =', sum(p2$adjacency != 0 )/p2$parameters['nColonies']))
+plotColonyNet(p4, area = side[5], cex = 0.2, mar = c(bigx, 6, 3, 2))
+axis(2, col = 'grey', labels = FALSE)
+axis(1, col = 'grey', labels = FALSE)
+title(main = bquote(italic(bar(k)) ~ '='~ .(k4)), cex.main = titleSz, family = 'Lato',  line = 0.5)
+
+plotColonyNet(p3, area = side[5], cex = 0.2, mar = c(bigx, bigy, 3, 2))
+axis(2, col = 'grey', cex.axis = axSz, col.axis = 'grey', family = 'Lato', font = 2)
+axis(1, col = 'grey', labels = FALSE)
+axis(1, col = 'grey', cex.axis = axSz, col.axis = 'grey', family = 'Lato', font = 2, line = 3, lwd = 0)
+title(main = bquote(italic(bar(k)) ~ '='~ .(k3)), cex.main = titleSz, family = 'Lato',  line = 0.5)
+mtext(side = 2,  line = 7.8, text = 'Longitude', cex = labSz, family = 'Lato')
+mtext(side = 1,  line = 9.8, text = 'Latitude', cex = labSz, family = 'Lato')
+
+plotColonyNet(p2, area = side[5], cex = 0.2, mar = c(bigx, 6, 3, 2))
+axis(1, col = 'grey', labels = FALSE)
+axis(1, col = 'grey', cex.axis = axSz, col.axis = 'grey', , family = 'Lato', font = 2, line = 3, lwd = 0)
+axis(2, col = 'grey', labels = FALSE)
+title(main = bquote(italic(bar(k)) ~ '='~ .(k2)), cex.main = titleSz, family = 'Lato',  line = 0.5)
+mtext(side = 1,  line = 9.8, text = 'Latitude', cex = labSz, family = 'Lato')
 
 
 
