@@ -289,7 +289,8 @@ This is true whether population structure is altered by changing the dispersal r
 
 \begin{table}[b!]
 \centering
-\caption[All symbols used.]{All symbols used and their units and values.}
+\caption[All symbols used in Chapters \ref{ch:sims1} and \ref{ch:sims2}.]{All symbols used in Chapters \ref{ch:sims1} and \ref{ch:sims2} along with their units and default values.}
+
 \begin{tabular}{@{}lp{5cm}p{3.9cm}r@{}}
 \toprule
 Symbol & Explanation & Units & Value\\
@@ -297,13 +298,16 @@ Symbol & Explanation & Units & Value\\
 $S$ & Number of susceptible individuals &&\\
 $I_q$ & N. individuals infectious with diseases $q$ &&\\
 $I^+_p$ & Sum of classes infected with pathogen $p$ &\\
-%$N$ & Number of colonies&& 10\\
-$\bar{n}$ & Colony starting size && 3,000\\
-$\beta$ & Transmission rate & Transmission events per year per individual& 2, 5, 10\\
-$\gamma$ & Recovery rate & Recovery events per year per individual. & 1\\
-$\lambda$ & Dispersal & Dispersal events per day per individual& 0.001--0.1\\
-$\Lambda$ & Birth rate & Births per year per individual& 0.05\\
-$\mu$ & Death rate & Deaths per year per individual & 0.05\\
+$R$ & Number of recovered/immune individuals &&\\
+$N$ & Total Population && 30,000\\
+$m$ & Number of colonies&& 10\\
+$n$ & Colony starting size && 3,000\\
+$a$ & Area & km$^2$& 10,000\\
+$\beta$ & Transmission rate & Per year per individual& 2, 5, 10\\
+$\gamma$ & Recovery rate & Per year per individual. & 1\\
+$\lambda$ & Dispersal & Per day per individual& 0.001--0.1\\
+$\Lambda$ & Birth rate & Per year per individual& 0.05\\
+$\mu$ & Death rate & Per year per individual & 0.05\\
 %$d_I$ & Infectious death rate & Additional deaths per day per individual&\\
 $\rho$ & No. pathogens && 2\\
 $p$ &  Pathogen index i.e. $p\in\{1,2\}$ for pathogens 1 and 2 & &\\
