@@ -157,7 +157,7 @@ There is disagreement on whether population density (individuals per unit area) 
 With the increase of novel zoonotic pathogens \cite{} attention has turned to comparatively assessing the factors that are associated with high or low pathogen richness in wild animal species \cite{morand review}.
 Here again there is little clarity on the relationship between a number of species measurements.
 Population density is commonly studied \cite{} as is range size \cite{}.
-However it is rarely if ever acknowledge that these two values are intrinsically linked by $d = N/a$ where $d$ is density, $N$ is the population size and $a$ is area.
+However it is rarely if ever acknowledge that these two values are intrinsically linked by $d = N/a$ where $d$ is density, $N$ is the population size and $a$ is area (See Table~\ref{t:params} for all parameters used).
 In contrast, abundance has never been directly studied as a predictor of pathogen richness.
 This is  a glaring omission as abundance more closely aligns with the ``island-biogeography'' class of mechanisms posited to explain pathogen richness \cite{}.
 Furthermore, abundance is considered the more relevant measure in terms of pathogen dynamics, especially when area cannot be assumed to be constant \cite{begon} as is commonly the case in wild populations, especially in the face of global warming and habitat degradation.
@@ -636,6 +636,7 @@ colonyNetCapt <- '
 Examples of the metapopulation networks used.
 They show the smallest number of colonies (five, A and B) and the default (20, C and D).
 They also show the default ($10^4\\,\\text{km}^2$, grey dashed lines, A and C) and largest areas ($4\\times10^4\\,\\text{km}^2$, full plot, B and C), though all networks are plotted on the same spatial scale.
+Colonies are connected if they are within 100km.
 As area increases, the number of connections each subpopulation has decreases as seen by the changes in mean degree, $\\bar{k}$.
 '
 
@@ -831,11 +832,6 @@ However, the rationale of the model is that the invading species might be a newl
 Furthermore, the model assumes complete cross immunity after recovery from infection.
 Therefore cross immunity to coinfection is likely to be very strong as well.
 
-
-The population size of each subpopulation is set to 3,000. 
-This is appropriate for many bat species \cite{jones2009pantheria}, especially the large, frugivorous \emph{Pteropodidae} that have been particularly associated with recent zoonotic diseases.
-
-
 Three values of the transmission rate $\beta$ are used, 0.1, 0.2 and 0.3.
 All simulations are run under all three transmission rates as this is a fundamental parameter that changes the broad dynamics of the pathogens.
 
@@ -846,7 +842,11 @@ I tested two hypotheses.
 Firstly I tested the hypothesis that an increase in population abundance creates a stronger increase in invasion probability (of the second pathogen) than an equal increase in population density.
 Secondly I tested the hypothesis that ana increase in colony size creates a stronger increase in invasion probability an an equal increase in number of colonies.
 To statistically test these hypotheses I combined the results from different simulations and fitted multiple logistic regressions, centering and scaling the dependant variables.
-Specifically, I fitted the model $\text{invasion} = b_1 \text{density} + b_2 \text{colony size} + b_3 \text{number of colonies} + c + \epsilon$ where $c$ is a fitted intercept and $\epsilon$ is a binomially distributed error term.
+Specifically, I fitted the model 
+\begin{align}
+\text{invasion} = b_1\cdot \text{density} + b_2\cdot  \text{colony size} + b_3\cdot  \text{number of colonies} + c + \epsilon
+\end{align}
+ where $c$ is a fitted intercept, $\epsilon$ is a binomially distributed error term and $b_i$ are the regression coefficients.
 To test the first hypothesis I compared the size (and 95\% confidence intervals) of $b_1$ to $b_2$ and $b_3$.
 To test the second hypothesis I compared $b_2$ to $b_3$.
 
@@ -1290,54 +1290,31 @@ $\beta$ & \emph{Variable} & \emph{Estimate} ($b$) & (95\% \emph{CI}) & $p$\\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Restate the gap and the main result}
-
-Empirical studies on the role of population structure on the are equivocal and cannot examine the specific mechanisms by which pathogen communities are created and maintained.
-I have used mechanistic, metapopulation models to test whether increased population structure can promote pathogen richness by facilitating invasion of new pathogens.
+\tmpsection{Restate results}
 
 
 
-\subsection{Link results to consequences}
 
-\subsubsection{Population structure does not affect pathogen richness}
-
-Probably because dynamics are dominated by local processes.
-This goes against many predictions that increasing $R_0$ increases pathogen richness.
-Further work could examine reduced col  ony sizes to test when global structure become more important.
-Measures of population structure should not be used to predict zoonotic potential.
-
-\subsubsection{Dispersal does not affect pathogen richness}
+\tmpsection{Assumptions}
 
 
 
-\subsubsection{Network connectedness does not affect pathogen richness}
-
-This is in direct contrast to \cite{campos2006pathogen}. 
-However, the model in \cite{campos2006pathogen} is a contact network, so increasing the connectedness increases the chance of succesful transmission events for the first few transmission generations.
-This lends support to the idea that I found now affect of connectedness due to the dominance of local dynamics.
-
-Network connectedness can be seen as a function of average dispersal distance, density and colony size.
-A high density species with small colony sizes must have colonies relatively close together.
-Therefore colonies would be more likely to be connected for a given dispersal distance. 
 
 
-\subsection{Discuss assumptions}
+\tmpsection{Contrast to the literature}
 
-\subsubsection{Complete cross-immunity}
 
-I have assumed that once recovered, individuals are immune to both pathogens. 
-Furthermore, when a coinfected individual recovers from one pathogen, it immediately recovers from the other as well.
-This is probably a fairly reasonable assumption given that I am modelling a newly evolved strain.
-However, further work could relax this assumption using a model similar to \cite{poletto2015characterising} which contains additional classes for `infected with pathogen one, immune to pathogen two' and `infected with pathogen two, immune to pathogen one'.
-The model here was formulated such that the study of systems with greater than two pathogens is still computationally feasible while a model such as used in \cite{poletto2015characterising} contains $3^\rho$ classes for a system with $\rho$ pathogen species.
-This quickly becomes computationally restrictive.
 
-\subsubsection{Identical strains}
 
-Many papers on pathogen richness have focussed on the evolution of pathogen traits and have considered a trade off between transmission rate and virulence \cite{nowak1994superinfection, nowak1994superinfection} or infectious period \cite{poletto2013host}.
-However, here we are interested in host traits.
-Therefore we have assumed that pathogen strains are identical.
-It is clear however that there are a number of factors that affect pathogen richness and our focus on host population structure does not imply that pathogen traits are not important.
+
+\tmpsection{conclusions}
+
+
+
+
+
+
+
 
 
 
