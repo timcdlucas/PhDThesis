@@ -635,7 +635,7 @@ colonyNetTitle <- 'Example metapopulation networks'
 colonyNetCapt <- '
 Examples of the metapopulation networks used.
 They show the smallest number of colonies (five) and the default (20).
-They also show the default ($10^4\\,\\text{km}^2$) and largest areas ($4\\times10^4\\,\\text{km}^2$), though all networks are plotted on the largest area.
+They also show the default ($10^4\\,\\text{km}^2$, grey dashed lines) and largest areas ($4\\times10^4\\,\\text{km}^2$, full plot), though all networks are plotted on the largest area.
 As area increases, the number of connections each subpopulation has decreases as seen by the changes in mean degree, $\\bar{k}$.
 '
 
@@ -705,8 +705,8 @@ k4 <- sum(p4$adjacency != 0 )/p4$parameters['nColonies']
 labSz <- 1
 bigy <- 11.4
 bigx <- 10.6
-titleSz <- 5
-axSz <- 4
+titleSz <- 4
+axSz <- 3
 
 par(mfrow = c(2,2))
 
@@ -716,11 +716,14 @@ axis(2, col = 'grey', cex.axis = axSz, at = c(0, 50, 100, 150, 200), labels = c(
 axis(1, col = 'grey', labels = FALSE)
 title(main = bquote(italic(bar(k)) ~ '='~ .(k1)), cex.main = titleSz, family = 'Lato',  line = 0.5)
 mtext(side = 2,  line = 7.8, text = 'Longitude', cex = labSz, family = 'Lato')
+lines(x = c(0, 100, 100), y = c(100, 100, 0), lty = 2, col = 'grey')
+mtext(side = 3,  line = -0.3, text = 'A', cex = 1.1, family = 'Lato', at = -62)
 
 plotColonyNet(p4, area = side[5], cex = 0.25, mar = c(bigx, 6, 3, 2))
 axis(2, col = 'grey', labels = FALSE)
 axis(1, col = 'grey', labels = FALSE)
 title(main = bquote(italic(bar(k)) ~ '='~ .(k4)), cex.main = titleSz, family = 'Lato',  line = 0.5)
+mtext(side = 3,  line = -0.3, text = 'B', cex = 1.1, family = 'Lato', at = -22)
 
 plotColonyNet(p3, area = side[5], cex = 0.25, mar = c(bigx, bigy, 3, 2))
 axis(2, col = 'grey', cex.axis = axSz, col.axis = 'grey', at = c(0, 50, 100, 150, 200), labels = c('0', '', '100', '', '200'), family = 'Lato', font = 2)
@@ -729,6 +732,8 @@ axis(1, col = 'grey', cex.axis = axSz, col.axis = 'grey', at = c(0, 100, 200), l
 title(main = bquote(italic(bar(k)) ~ '='~ .(k3)), cex.main = titleSz, family = 'Lato',  line = 0.5)
 mtext(side = 2,  line = 7.8, text = 'Longitude', cex = labSz, family = 'Lato')
 mtext(side = 1,  line = 9.8, text = 'Latitude', cex = labSz, family = 'Lato')
+lines(x = c(0, 100, 100), y = c(100, 100, 0), lty = 2, col = 'grey')
+mtext(side = 3,  line = -0.3, text = 'C', cex = 1.1, family = 'Lato', at = -62)
 
 plotColonyNet(p2, area = side[5], cex = 0.25, mar = c(bigx, 6, 3, 2))
 axis(1, col = 'grey', labels = FALSE)
@@ -736,6 +741,7 @@ axis(1, col = 'grey', cex.axis = axSz, col.axis = 'grey', at = c(0, 100, 200), l
 axis(2, col = 'grey', labels = FALSE)
 title(main = bquote(italic(bar(k)) ~ '='~ .(k2)), cex.main = titleSz, family = 'Lato',  line = 0.5)
 mtext(side = 1,  line = 9.8, text = 'Latitude', cex = labSz, family = 'Lato')
+mtext(side = 3,  line = -0.3, text = 'D', cex = 1.1, family = 'Lato', at = -22)
 
 
 
