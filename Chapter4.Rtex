@@ -634,8 +634,8 @@ colonyNetTitle <- 'Example metapopulation networks'
 
 colonyNetCapt <- '
 Examples of the metapopulation networks used.
-They show the smallest number of colonies (five) and the default (20).
-They also show the default ($10^4\\,\\text{km}^2$, grey dashed lines) and largest areas ($4\\times10^4\\,\\text{km}^2$, full plot), though all networks are plotted on the largest area.
+They show the smallest number of colonies (five, A and B) and the default (20, C and D).
+They also show the default ($10^4\\,\\text{km}^2$, grey dashed lines, A and C) and largest areas ($4\\times10^4\\,\\text{km}^2$, full plot, B and C), though all networks are plotted on the same spatial scale.
 As area increases, the number of connections each subpopulation has decreases as seen by the changes in mean degree, $\\bar{k}$.
 '
 
