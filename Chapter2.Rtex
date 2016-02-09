@@ -411,8 +411,8 @@ The rates of death, given a death rate $d$ are given by
   P\left( R_{nt^\prime} = R_{nt}-1 \right) &= \mu R_{nt}.
 \end{align}
 I modelled transmission as density-dependant.
-This assumption is more suitable than frequency-dependant transmission as I am modelling a disease transmitted by saliva or urine in highly dense populations confined to caves, building or potentially a small number of tree roosts.
-I am notably not modelling an STD as these diseases are not expected to be commonly zoonotic.
+This assumption was more suitable than frequency-dependant transmission as I am modelling a disease transmitted by saliva or urine in highly dense populations confined to caves, building or potentially a small number of tree roosts.
+I was notably not modelling an STD as these diseases are not expected to be commonly zoonotic.
 Infection of a susceptible with either pathogen 1 or 2, $S \rightarrow I_p$ where $p\in \{1,2\}$, is therefore given by
 \begin{align}
   P\left( I_{pnt^\prime} = I_{pnt}+1, S_{nt^\prime} = S_{nt}-1 \right) &= \beta S_{nt}I^+_{pnt},
@@ -697,7 +697,7 @@ This therefore relates to a population that does not habitually disperse.
 
 \subsection{Network structure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The network structure is synthetically created to be either fully or minimally connected (See Figure~\ref{f:net}). 
+The network structure was synthetically created to be either fully or minimally connected (See Figure~\ref{f:net}). 
 10 subpopulations was selected as a trade off between computation time and a network complicated enough that structure might have an effect. 
 This value is artificially small compared to wildlife populations. 
 
@@ -707,21 +707,21 @@ This value is artificially small compared to wildlife populations.
 
 
 The fixed parameters used are chosen to roughly reflect realistic wild bat populations. 
-The death rate $\mu$ is set as 0.05 per year giving a generation time of 20 years.
-The birth rate $\Lambda$ is set to be equal to $\mu$ so that the population size is stable.
-The recovery rate $\gamma$ is set to 1 giving a average infection duration of 1 years. 
+The death rate $\mu$ was set as 0.05 per year giving a generation time of 20 years.
+The birth rate $\Lambda$ was set to be equal to $\mu$ so that the population size was stable.
+The recovery rate $\gamma$ was set to 1 giving a average infection duration of 1 years. 
 This is therefore a long lasting infection but not a chronic infection. 
 It is very difficult to directly estimate infection durations in wild populations but it seems that these infections might sometimes be long lasting \cite{peel2012henipavirus, plowright2015ecological}.
 However, other studies have found much shorter infectious periods \cite{amengual2007temporal}.
 These shorter lived in infections are studied further here as preliminary simulations found that they could not persist in the relatively small populations being modelled here.
 
-Cross immunity is set to 0.1 so that an individual infected with one pathogen is 90\% less likely to be infected with another.
+Cross immunity was set to 0.1 so that an individual infected with one pathogen is 90\% less likely to be infected with another.
 This is a rather arbitrary value.
-However, the rationale of the model is that the invading species might be a newly speciated strain of the endemic species.
+However, the rationale of the model was that the invading species might be a newly speciated strain of the endemic species.
 Furthermore, the model assumes complete cross immunity after recovery from infection.
 Therefore cross immunity to coinfection is likely to be very strong as well.
 
-The population size of each subpopulation is set to 3,000. 
+The population size of each subpopulation was set to 3,000. 
 This is appropriate for many bat species \cite{jones2009pantheria}, especially the large, frugivorous \emph{Pteropodidae} that have been particularly associated with recent zoonotic diseases.
 
 
@@ -737,17 +737,6 @@ All simulations are run under all four transmission rates as this is such a fund
 
 % R_\ast (R_0 - 1)\frac{\langle k^2 \rangle - \langle k \rangle}{\langle k^2 \rangle} \frac{p\bar{N}\alpha}{\mu} > 1
 % N = avg pop size, p = migration, mu = recovery, \alpha N_k is number of individuals infected. So think this is not with vital dynamics.
-
-
-For the simulations where an invading pathogen is added to the populations the number of invading pathogens added is set to 10. 
-This is a trade off between getting a reasonable proportion of invasions, while still retaining the stochastic nature of invasion.
-
-
-
-
-
-
-
 
 
 
