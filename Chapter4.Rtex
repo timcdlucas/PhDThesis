@@ -154,9 +154,9 @@ There is disagreement on whether population density (individuals per unit area) 
 
 
 \tmpsection{Density/abundance in comparative research}
-With the increase of novel zoonotic pathogens \cite{} attention has turned to comparatively assessing the factors that are associated with high or low pathogen richness in wild animal species \cite{morand review}.
+With the increase of novel zoonotic pathogens \cite{jones2008global} attention has turned to comparatively assessing the factors that are associated with high or low pathogen richness in wild animal species \cite{poulin2000diversity}.
 Here again there is little clarity on the relationship between a number of species measurements.
-Population density is commonly studied \cite{} as is range size \cite{}.
+Population density is commonly studied \cite{morand1998density, kamiya2014determines, lindenfors2007parasite, nunn2003comparative, arneberg2002host} as is range size \cite{lindenfors2007parasite, nunn2003comparative, turmelle2009correlates, huang2015parasite, kamiya2014determines}.
 However it is rarely if ever acknowledge that these two values are intrinsically linked by $d = N/a$ where $d$ is density, $N$ is the population size and $a$ is area (See Table~\ref{t:params} for all parameters used).
 In contrast, abundance has never been directly studied as a predictor of pathogen richness.
 This is  a glaring omission as abundance more closely aligns with the ``island-biogeography'' class of mechanisms posited to explain pathogen richness \cite{}.
@@ -1016,7 +1016,7 @@ densPreds <- rbind(dens1Model, dens2Model) %>%
 transMeansCapt <- '
 Comparison of the effect of population size on probability of invasion when population size is altered by changing colony size or colony number.
 Relationship is shown seperately for each transmission value.
-It can be seen that changes in colony size give a much greater increase in invasion probability thatn changes in colony number.
+It can be seen that changes in colony size give a much greater increase in invasion probability than changes in colony number.
 '
 
 transMeansTitle <- 'Comparison of the probability of invasion when population size is altered by changing colony size or colony number.'
@@ -1184,6 +1184,7 @@ plotKcapt <- '
 Change in average metapopulation network degree ($\\bar{k}$) with increasing area. 
 Bars show the median, boxes show the interquartile range, vertical lines show and range and grey dots indicate outlier values.
 Notches indicate the 95\\% confidence interval of the mean.
+All simulations had 20 colonies, meaning 19 is the maximum value of $\\bar{k}$.
 '
 
 plotKtitle <- 'Change in average network degree with increasing area'
@@ -1292,16 +1293,49 @@ $\beta$ & \emph{Variable} & \emph{Estimate} ($b$) & (95\% \emph{CI}) & $p$\\
 
 \tmpsection{Restate results}
 
+Overall, my results suggest that population abundance promotes pathogen richness significantly more than population density in the context of metapopulations or group living.
+Furthermore, the component of population abundance that is important is group size.
+
+These results lead to a number of other conclusions.
+All else being equal, increasing range size (with density remaining constant) will not increase pathogen richness significantly unless the increased range size promotes larger groups.
+Furthermore, social species that live in large groups are likely to harbour more pathogen species, even if sociality promotes reduced interactions between groups due to territory defence or simply larger distances between groups due to groups needing larger home ranges.
+
+
+\tmpsection{Why are these results like that? What do they mean?}
+
+For related, strongly competing strains, the factor that allows new pathogens to invade is the number of susceptible individuals in the local group.
+As long as there are enough susceptible individuals that the new species persists through the stochastic, early stages of the epidemic, the new pathogen will persist.
+As dispersal is a very slow process compared to infection, the global pool of susceptibles is not important. 
+This is why increasing the number of number of colonies does not increase pathogen invasion as quickly as the size of a colony does.
+Similarly, the density --- at the global scale --- of the species has little affect.
+In these simulations, increasing density without increasing abundance implies a reduction in range size, which simply increases the number of colonies which are connected to the colony experiencing the invading pathogen.
+This increases the pool of susceptibles that are within one dispersal of the invading pathogen.
+However, again, this affect is very weak compared to the strong changes in local disease dynamics caused by increasing colony size.
 
 
 
-\tmpsection{Assumptions}
+\tmpsection{Relate back to global change}
+
+
+
 
 
 
 
 
 \tmpsection{Contrast to the literature}
+
+While some studies have found a relationship between social group size and pathogen richness \cite{vitone2004body, }, others have found negative relationships \cite{gay2014parasite}.
+Overall the empirical evidence is weak \cite{ezenwa2006host, rifkin2012animals}
+
+
+Density \cite{morand1998density, kamiya2014determines, lindenfors2007parasite, nunn2003comparative, arneberg2002host}
+Range Size \cite{lindenfors2007parasite, nunn2003comparative, turmelle2009correlates, huang2015parasite, kamiya2014determines}.
+
+
+
+\tmpsection{Assumptions}
+
 
 
 
