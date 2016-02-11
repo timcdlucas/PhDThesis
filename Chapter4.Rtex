@@ -160,13 +160,13 @@ Population density is commonly studied \cite{morand1998density, kamiya2014determ
 However it is rarely if ever acknowledge that these two values are intrinsically linked by $d = N/a$ where $d$ is density, $N$ is the population size and $a$ is area (See Table~\ref{t:params} for all parameters used).
 In contrast, abundance has never been directly studied as a predictor of pathogen richness.
 This is  a glaring omission as abundance more closely aligns with the ``island-biogeography'' class of mechanisms posited to explain pathogen richness \cite{}.
-Furthermore, abundance is considered the more relevant measure in terms of pathogen dynamics, especially when area cannot be assumed to be constant \cite{begon} as is commonly the case in wild populations, especially in the face of global warming and habitat degradation.
+Furthermore, abundance is considered the more relevant measure in terms of pathogen dynamics, especially when area cannot be assumed to be constant \cite{begon2002clarification} as is commonly the case in wild populations, especially in the face of global warming and habitat degradation.
 
 \tmpsection{Populatiion structure in comparative research}
 It is clear that individuals of an animal species are not randomly distributed in space: social groups are common \cite{} and geographic boundaries reduce contacts between isolated populations.
 In social species, measures such as global population density are largely meaningless with respect to the number of infectious contacts individuals may have.
 Rather, contacts are based on group size and rates of movements between groups.
-Two aspects of non-random transmission have been studied in particular: group size \cite{nunn and others} and global measures of population structure including genetic measures and measures derived from distribution shapes (\textcite{gay, maganga, turmelle} and see Chapter \ref{ch:}).
+Two aspects of non-random transmission have been studied in particular: group size \cite{vitone2004body, gay2014parasite, ezenwa2006host, rifkin2012animals, nunn2003comparative} and global measures of population structure including genetic measures and measures derived from distribution shapes (\textcite{gay2014parasite, maganga2014bat, turmelle2009correlates} and see Chapter \ref{ch:empirical}).
 Again however, the relationships between these terms and more the more global terms mentioned above are rarely examined.
 Population abundance can be decomposed into two components, the number of groups and the average size of a group with $N = nm$ where $n$ is group size and $m$ is the number of groups.
 The amount of movement between is largely dependant on the distance between groups.
@@ -1325,7 +1325,9 @@ However, again, this affect is very weak compared to the strong changes in local
 
 \tmpsection{Contrast to the literature}
 
-While some studies have found a relationship between social group size and pathogen richness \cite{vitone2004body, }, others have found negative relationships \cite{gay2014parasite}.
+%group size \cite{vitone2004body, gay2014parasite, ezenwa2006host, rifkin2012animals, nunn2003comparative}
+
+While some studies have found a relationship between social group size and pathogen richness \cite{vitone2004body}, others have found negative relationships \cite{gay2014parasite}.
 Overall the empirical evidence is weak \cite{ezenwa2006host, rifkin2012animals}
 
 
