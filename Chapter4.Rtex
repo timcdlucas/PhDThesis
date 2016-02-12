@@ -181,8 +181,8 @@ Other species might be expected to retain their distribution but have a depresse
 Similarly with population structure, species particularly affected by habitat fragmentation can expect increased reduced movement of individuals between groups, while other species may be most affected by a reduction in group size.
 Furthermore, different mechanisms of maintenance and creation of pathogen richness will respond to changes in these factors differently as well.
 If pathogen richness ultimately depends on the ``island size'' of the host population, then falls in population abundance will reduce pathogen richness the most.
-If local group size affects the ability of new pathogens to invade (Chapter \ref{ch:sim1}) then changes in group size are likely to be most important.
-Finally, if increased population structure allows pathogens to coexist (\parencite{qiu2013vector, allen2004sis, nunes2006localized} and Chapter \ref{ch:}) increase habitat fragmentation could be expected to increase pathogen richness.
+If local group size affects the ability of new pathogens to invade (Chapter \ref{ch:sims1}) then changes in group size are likely to be most important.
+Finally, if increased population structure allows pathogens to coexist (\parencite{qiu2013vector, allen2004sis, nunes2006localized} and Chapter \ref{ch:empirical}) increase habitat fragmentation could be expected to increase pathogen richness.
 
 As these factors are likely to be correlated, correlative comparative studies will struggle to distinguish between them.
 Furthermore, even if factors are supported or rejected, the specific mechanisms by which the promote pathogen richness will remain unknown, and these may suggest different responses to global change.
