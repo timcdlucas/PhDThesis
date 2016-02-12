@@ -159,11 +159,11 @@ Here again there is little clarity on the relationship between a number of speci
 Population density is commonly studied \cite{morand1998density, kamiya2014determines, lindenfors2007parasite, nunn2003comparative, arneberg2002host} as is range size \cite{lindenfors2007parasite, nunn2003comparative, turmelle2009correlates, huang2015parasite, kamiya2014determines}.
 However it is rarely if ever acknowledge that these two values are intrinsically linked by $d = N/a$ where $d$ is density, $N$ is the population size and $a$ is area (See Table~\ref{t:params} for all parameters used).
 In contrast, abundance has never been directly studied as a predictor of pathogen richness.
-This is  a glaring omission as abundance more closely aligns with the ``island-biogeography'' class of mechanisms posited to explain pathogen richness \cite{}.
+This is a glaring omission as abundance more closely aligns with the ``island-biogeography'' class of mechanisms posited to explain pathogen richness \cite{}.
 Furthermore, abundance is considered the more relevant measure in terms of pathogen dynamics, especially when area cannot be assumed to be constant \cite{begon2002clarification} as is commonly the case in wild populations, especially in the face of global warming and habitat degradation.
 
 \tmpsection{Populatiion structure in comparative research}
-It is clear that individuals of an animal species are not randomly distributed in space: social groups are common \cite{} and geographic boundaries reduce contacts between isolated populations.
+It is clear that individuals of an animal species are not randomly distributed in space: social groups are common \cite{kerth2008causes} and geographic boundaries reduce contacts between isolated populations.
 In social species, measures such as global population density are largely meaningless with respect to the number of infectious contacts individuals may have.
 Rather, contacts are based on group size and rates of movements between groups.
 Two aspects of non-random transmission have been studied in particular: group size \cite{vitone2004body, gay2014parasite, ezenwa2006host, rifkin2012animals, nunn2003comparative} and global measures of population structure including genetic measures and measures derived from distribution shapes (\textcite{gay2014parasite, maganga2014bat, turmelle2009correlates} and see Chapter \ref{ch:empirical}).
@@ -1316,9 +1316,10 @@ However, again, this affect is very weak compared to the strong changes in local
 
 \tmpsection{Relate back to global change}
 
+Group size changes with global change (decrease \cite{lehmann2010apes, zunino2007habitat, manor2003impact, atwood2006influence} and increase \cite{lehmann2010apes})
 
 
-
+Range size changes with global change \cite{thomas2004extinction} as does abundance \cite{craigie2010large}.
 
 
 
@@ -1341,6 +1342,11 @@ Range Size \cite{lindenfors2007parasite, nunn2003comparative, turmelle2009correl
 
 
 
+
+\tmpsection{Further correlations between factors}
+
+%For instance, various relationships between group size and home range size exist (Macdonald 1983). Kruuk and Macdonald (1985) predict that home range behaviour in group living species should conform to one of two strategies. They should either expand their range to encompass sufficient additional resources to support more group members (expansionism) or increase group size only up to the size that can be sustained on the resources within the smallest economically defendable range needed to support the minimum social unit (contractionism). http://onlinelibrary.wiley.com/enhanced/doi/10.1111/j.1600-0587.2009.05745.x
+% Badger Group size versus territory size http://onlinelibrary.wiley.com/doi/10.1034/j.1600-0706.2001.950208.x/abstract
 
 
 \tmpsection{conclusions}
