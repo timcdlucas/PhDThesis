@@ -566,7 +566,7 @@ Finally, colony size and number of colonies were kept constant (therefore keepin
 The values of area used were \rinline{dep3[-5]} and \rinline{dep3[5]} which gave density values of \rinline{depDens[-5]} and \rinline{depDens[5]}.
 
 The affects of area occur through changing the metapopulation network.
-The metapopulation structure was created for each simulation by randomly placing colonies in space.
+The metapopulation structure was created for each simulation by randomly placing colonies in space (Figure~\ref{fig:colonyNetworkPlots}).
 The spatial scale of the simulations vary between \rinline{min(area)} and \rinline{max(area)} km$^2$ (space is given in kilometers even though they are oin fact arbitrary units for simplicity).
 This corresponds to square areas with sides of \rinline{sqrt(min(area))} to \rinline{sqrt(max(area))} km).
 Dispersal can only occur between two colonies if they are within 100 kilometers of each other i.e. they are connected nodes in the metapopulation network.
@@ -574,10 +574,8 @@ The number of connections each colony has is called its degree, $k$.
 How well connected the metapopulation network is overall is measured by the mean degree, $\bar{k}$.
 This does not guarentee that the population is fully connected but as the endemic pathogen is seeded in all colonies, the invading pathogen cannot be seeded into a fully susceptible colony.
 This was considered more realistic than repeatedly resampling the population until a fully connected population occured.
-Given this setup, simulations with low densities had relatively unconnected metapopulation networks.
-
-
-
+The threshold of 100 kilometers was arbitrary but I aimed to maximise the range  of $\bar{k}$ (Figre~\ref{fig:plotK}) while not having many simulations with networks that were not fully connected.
+Given this setup, simulations with low densities had relatively unconnected metapopulation networks while high density populations had fully connected networks.
 
 
 
@@ -710,51 +708,103 @@ popModel <- pop %>%
 
 
 
+%%begin.rcode plotKDistrs, show.figs = extraFigs
+
+
+#  ggplot(dens2, aes(x = factor(colonyNumber), y = meanK)) +
+#    geom_boxplot() 
+
+
+#  ggplot(dens2, aes(x = factor(area), y = meanK)) +
+#    geom_boxplot() 
+
+#  ggplot(dens1, aes(x = factor(area), y = meanK)) +
+#    geom_boxplot() 
+
+
+#  ggplot(pop, aes(x = factor(area), y = meanK)) +
+#    geom_boxplot() 
+
+%%end.rcode
+
+%%begin.rcode plotKcapt
+
+plotKcapt <- '
+Change in average metapopulation network degree ($\\bar{k}$) with increasing area. 
+Bars show the median, boxes show the interquartile range, vertical lines show and range and grey dots indicate outlier values.
+Notches indicate the 95\\% confidence interval of the mean.
+All simulations had 20 colonies, meaning 19 is the maximum value of $\\bar{k}$.
+'
+
+plotKtitle <- 'Change in average network degree with increasing area'
+
+
+%%begin.rcode plotK, fig.cap = plotKcapt, fig.scap = plotKtitle, out.width = '0.8\\textwidth'
+
+
+ggplot(dens1, aes(x = factor(area), y = meanK, colour = 'a', fill = 'a')) +
+  geom_boxplot(outlier.size = 1, size = 0.3, outlier.colour = grey(0.3), 
+    notch = TRUE, width = 0.4, notchwidth = 0.6) +
+  scale_colour_manual(values = pokepal('vileplume')[4]) +
+  scale_fill_manual(values = pokepal('vileplume')[7]) +
+  stat_summary(geom = "crossbar", width = 0.2, fatten = 2, 
+    fun.data = function(x){ return(c(y = median(x), ymin = median(x), ymax = median(x))) }) +
+  theme(legend.position = 'none') + 
+  scale_x_discrete(labels = c('2500', '5000', '10000', '20000', '40000')) +
+  xlab(expression(paste('Area ', (km^2)))) +
+  ylab(expression(paste('Mean degree, ', italic(bar(k))))) +
+  ylim(0, 20)
+
+%%end.rcode
+
+
+
+
 %%begin.rcode plotMeans, show.figs = extraFigs
 
 
 
-ggplot(dens1Means, aes(x = factor(transmission), y = mean, fill = factor(colonySize))) +
-  geom_bar(stat = 'identity', position=position_dodge()) +
-  geom_errorbar(aes(ymin = lower, ymax = upper),
-                width=.2,                   
-                position = position_dodge(.9)) +
-  xlab('Transmission') + 
-  ylab('Prop. Invasions') +
-  ylim(0, 1) +
-  scale_fill_poke(name="Colony Size", 
-                 #labels=c('0.001', '0.01', '0.1'), 
-                 pokemon = 'Swampert',
-                 spread = 5)
+#ggplot(dens1Means, aes(x = factor(transmission), y = mean, fill = factor(colonySize))) +
+#  geom_bar(stat = 'identity', position=position_dodge()) +
+#  geom_errorbar(aes(ymin = lower, ymax = upper),
+#                width=.2,                   
+#                position = position_dodge(.9)) +
+#  xlab('Transmission') + 
+#  ylab('Prop. Invasions') +
+#  ylim(0, 1) +
+#  scale_fill_poke(name="Colony Size", 
+#                 #labels=c('0.001', '0.01', '0.1'), 
+#                 pokemon = 'Swampert',
+#                 spread = 5)
 
 
 
-ggplot(dens2Means, aes(x = factor(transmission), y = mean, fill = factor(colonyNumber))) +
-  geom_bar(stat = 'identity', position=position_dodge()) +
-  geom_errorbar(aes(ymin = lower, ymax = upper),
-                width=.2,                   
-                position = position_dodge(.9)) +
-  ylim(0, 1) +
-  xlab('Transmission') + 
-  ylab('Prop. Invasions') +
-  scale_fill_poke(name="Colony Number", 
-                 #labels=c('0.001', '0.01', '0.1'), 
-                 pokemon = 'Swampert',
-                 spread = 5)
+#ggplot(dens2Means, aes(x = factor(transmission), y = mean, fill = factor(colonyNumber))) +
+#  geom_bar(stat = 'identity', position=position_dodge()) +
+#  geom_errorbar(aes(ymin = lower, ymax = upper),
+#                width=.2,                   
+#                position = position_dodge(.9)) +
+#  ylim(0, 1) +
+#  xlab('Transmission') + 
+#  ylab('Prop. Invasions') +
+#  scale_fill_poke(name="Colony Number", 
+#                 #labels=c('0.001', '0.01', '0.1'), 
+#                 pokemon = 'Swampert',
+#                 spread = 5)
 
 
-ggplot(popMeans, aes(x = factor(transmission), y = mean, fill = factor(area))) +
-  geom_bar(stat = 'identity', position=position_dodge()) +
-  geom_errorbar(aes(ymin = lower, ymax = upper),
-                width=.2,                   
-                position = position_dodge(.9)) +
-  xlab('Transmission') + 
-  ylab('Prop. Invasions') +
-  ylim(0, 1) +
-  scale_fill_poke(name="Area", 
-                 #labels=c('0.001', '0.01', '0.1'), 
-                 pokemon = 'Swampert',
-                 spread = 5) 
+#ggplot(popMeans, aes(x = factor(transmission), y = mean, fill = factor(area))) +
+#  geom_bar(stat = 'identity', position=position_dodge()) +
+#  geom_errorbar(aes(ymin = lower, ymax = upper),
+#                width=.2,                   
+#                position = position_dodge(.9)) +
+#  xlab('Transmission') + 
+#  ylab('Prop. Invasions') +
+#  ylim(0, 1) +
+#  scale_fill_poke(name="Area", 
+#                 #labels=c('0.001', '0.01', '0.1'), 
+#                 pokemon = 'Swampert',
+#                 spread = 5) 
 
 %%end.rcode
 
@@ -926,55 +976,6 @@ ggplot(d, aes(x = ValueChange, y = mean, colour = vary)) +
 %%end.rcode
 
 
-%%begin.rcode plotKDistrs, show.figs = extraFigs
-
-
-#  ggplot(dens2, aes(x = factor(colonyNumber), y = meanK)) +
-#    geom_boxplot() 
-
-
-#  ggplot(dens2, aes(x = factor(area), y = meanK)) +
-#    geom_boxplot() 
-
-#  ggplot(dens1, aes(x = factor(area), y = meanK)) +
-#    geom_boxplot() 
-
-
-#  ggplot(pop, aes(x = factor(area), y = meanK)) +
-#    geom_boxplot() 
-
-%%end.rcode
-
-%%begin.rcode plotKcapt
-
-plotKcapt <- '
-Change in average metapopulation network degree ($\\bar{k}$) with increasing area. 
-Bars show the median, boxes show the interquartile range, vertical lines show and range and grey dots indicate outlier values.
-Notches indicate the 95\\% confidence interval of the mean.
-All simulations had 20 colonies, meaning 19 is the maximum value of $\\bar{k}$.
-'
-
-plotKtitle <- 'Change in average network degree with increasing area'
-
-
-%%begin.rcode plotK, fig.cap = plotKcapt, fig.scap = plotKtitle, out.width = '0.8\\textwidth'
-
-
-ggplot(dens1, aes(x = factor(area), y = meanK, colour = 'a', fill = 'a')) +
-  geom_boxplot(outlier.size = 1, size = 0.3, outlier.colour = grey(0.3), 
-    notch = TRUE, width = 0.4, notchwidth = 0.6) +
-  scale_colour_manual(values = pokepal('vileplume')[4]) +
-  scale_fill_manual(values = pokepal('vileplume')[7]) +
-  stat_summary(geom = "crossbar", width = 0.2, fatten = 2, 
-    fun.data = function(x){ return(c(y = median(x), ymin = median(x), ymax = median(x))) }) +
-  theme(legend.position = 'none') + 
-  scale_x_discrete(labels = c('2500', '5000', '10000', '20000', '40000')) +
-  xlab(expression(paste('Area ', (km^2)))) +
-  ylab(expression(paste('Mean degree, ', italic(bar(k))))) +
-  ylim(0, 20)
-
-%%end.rcode
-
 
 %%begin.rcode statTests 
 
@@ -1012,6 +1013,18 @@ combModel <- rbind(dens1, dens2, pop) %>%
 %%end.rcode
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Results text        %%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Population density or abundance}
+
+
+
+\subsection{Colony size or number of groups}
+
+
+
 \begin{table}
 
 \caption[Regression results]{
@@ -1041,12 +1054,7 @@ $\beta$ & \emph{Variable} & \emph{Estimate} ($b$) & (95\% \emph{CI}) & $p$\\
 
 \bottomrule
 
-
-
 \end{tabular}
-
-
-
 \end{table}
 
 
@@ -1108,8 +1116,22 @@ This suggests that the mechanism studied here---invasion of recently evolved pat
 
 
 
-\subsection{Assumptions}
+\subsection{Assumptions and limitation}
 
+Being based on the same model as Chapter~\ref{ch:sims2}, the work presented here relies on many of the same assumptions.
+Furthermore, as a comparison is being made between the affects of area and population size, the exact specifications of how the metapopulation is affected by area is important.
+I have conducted this study at one rate of dispersal, 0.01 dispersals per individual per year.
+In practice this related to only a 20 percent of individuals dispersing at all.
+This low rate of dispersal is expected to exagerate the affect of area; at high rates of dispersal the population is essentially well-mixed, despite the metapopulion.
+
+Here I have assumed that dispersal only occurs between colonies a certain distance apart.
+Based on \emph{a priori} considerations such as the time and energy required to disperse long distances this is a reasonable assumption.
+The exact threshold was chosen to attempt to maximise the range of $\bar{k}$ studied (Figure~\ref{fig:plotK}).
+However, a similar assumption could be made in other ways.
+Instead of a threshold distance, individuals could be expected to disperse in a random direction and stop at the first colony they encounter; this could create some long distance links in the network and increase network connectivity, potentially reducing the affects of area.
+Alternatively, the metapopulation could have been modelled as a weighted network with dispersal occuring at a higher rate to nearby colonies.
+Depending on the parameterisation of this distance-dispersal relationship this could serve to increase the affect of area---by exaggerating dispersal to very nearby colonies---or decrease the affect of area by allowing rare, but present, global dispersal.
+Ultimately, the modelling choices could increase or decrease the affects of area relative to colony size and the number of colonies.
 
 
 

@@ -3,14 +3,7 @@
 
 
 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in library(extrafont): there is no package called 'extrafont'}}
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in as.vector(y): object 'theme\_tcdl' not found}}\end{kframe}
-\end{knitrout}
 
 
 
@@ -256,7 +249,7 @@ Finally, colony size and number of colonies were kept constant (therefore keepin
 The values of area used were \ensuremath{4\times 10^{4}}, \ensuremath{2\times 10^{4}}, \ensuremath{10^{4}}, \ensuremath{5\times 10^{3}} and \ensuremath{2.5\times 10^{3}} which gave density values of 0.2, 0.4, 0.8, 1.6 and 3.2.
 
 The affects of area occur through changing the metapopulation network.
-The metapopulation structure was created for each simulation by randomly placing colonies in space.
+The metapopulation structure was created for each simulation by randomly placing colonies in space (Figure~\ref{fig:colonyNetworkPlots}).
 The spatial scale of the simulations vary between \ensuremath{2.5\times 10^{3}} and \ensuremath{4\times 10^{4}} km$^2$ (space is given in kilometers even though they are oin fact arbitrary units for simplicity).
 This corresponds to square areas with sides of 50 to 200 km).
 Dispersal can only occur between two colonies if they are within 100 kilometers of each other i.e. they are connected nodes in the metapopulation network.
@@ -264,10 +257,8 @@ The number of connections each colony has is called its degree, $k$.
 How well connected the metapopulation network is overall is measured by the mean degree, $\bar{k}$.
 This does not guarentee that the population is fully connected but as the endemic pathogen is seeded in all colonies, the invading pathogen cannot be seeded into a fully susceptible colony.
 This was considered more realistic than repeatedly resampling the population until a fully connected population occured.
-Given this setup, simulations with low densities had relatively unconnected metapopulation networks.
-
-
-
+The threshold of 100 kilometers was arbitrary but I aimed to maximise the range  of $\bar{k}$ (Figre~\ref{fig:plotK}) while not having many simulations with networks that were not fully connected.
+Given this setup, simulations with low densities had relatively unconnected metapopulation networks while high density populations had fully connected networks.
 
 
 
@@ -329,6 +320,30 @@ To test the second hypothesis I compared $b_2$ to $b_3$.
 
 
 
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[t]
+
+{\centering \includegraphics[width=0.8\textwidth]{figure/plotK-1} 
+
+}
+
+\caption[Change in average network degree with increasing area]{
+Change in average metapopulation network degree ($\bar{k}$) with increasing area. 
+Bars show the median, boxes show the interquartile range, vertical lines show and range and grey dots indicate outlier values.
+Notches indicate the 95\% confidence interval of the mean.
+All simulations had 20 colonies, meaning 19 is the maximum value of $\bar{k}$.
+}\label{fig:plotK}
+\end{figure}
+
+
+\end{knitrout}
+
+
+
+
+
+
+
 
 
 
@@ -353,7 +368,7 @@ To test the second hypothesis I compared $b_2$ to $b_3$.
 Comparison of the effect of colony size, colony number and area on probability of invasion.
 Default values are: colony number = 20, colony size = 400 and density = 0.8 animals per unit area.
 The $x$-axis shows the relative change in each of these values ($\times 0.25, 0.5, 1, 2$ and $4$).
-For colony size and number, area is altered  so that density remains constant.
+For colony size and number, area is altered so that density remains constant.
 For density, population size is constant at 8,000 and area is altered.
 Relationships are shown seperately for each transmission value.
 Each point is the mean of inline{each} simulations and bars are 95\% confidence intervals.
@@ -367,24 +382,10 @@ Each point is the mean of inline{each} simulations and bars are 95\% confidence
 
 
 
-\begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[t]
 
-{\centering \includegraphics[width=0.8\textwidth]{figure/plotK-1} 
-
-}
-
-\caption[Change in average network degree with increasing area]{
-Change in average metapopulation network degree ($\bar{k}$) with increasing area. 
-Bars show the median, boxes show the interquartile range, vertical lines show and range and grey dots indicate outlier values.
-Notches indicate the 95\% confidence interval of the mean.
-All simulations had 20 colonies, meaning 19 is the maximum value of $\bar{k}$.
-}\label{fig:plotK}
-\end{figure}
-
-
-\end{knitrout}
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Results text        %%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
@@ -458,36 +459,49 @@ However, again, this affect is very weak compared to the strong changes in local
 
 
 
-\tmpsection{Relate back to global change}
+\subsection{Global change}
 
 It is clear that many species are suffering strong population changes due to climate change \cite{thomas2004extinction}.
-However these changes might affect range size \cite{thomas2004extinction}, population abundance \cite{craigie2010large}, population connectivity \cite{} or group size \cite{lehmann2010apes, zunino2007habitat, manor2003impact, atwood2006influence}.
-My results suggest that pathogen communities will response differently depending on the change although it should be noted that the mechanism here---invasion of a new pathogen    is possibly more relevant in the longer term.
+However these changes might affect range size \cite{thomas2004extinction}, population abundance \cite{craigie2010large}, population connectivity \cite{} or group size \cite{lehmann2010apes, zunino2007habitat, manor2003impact, atwood2006influence} to different extents.
+My results suggest that pathogen communities will response differently depending on the change although it should be noted that the mechanism here---invasion of a new pathogen---is possibly more relevant in the longer term.
+In short, species suffering reductions in groups size \cite{lehmann2010apes, zunino2007habitat, manor2003impact, atwood2006influence} are predicted to experience decreases in pathogen richness in the long term.
+Species that are experience increases in group size \cite{lehmann2010apes} would be expected gain new pathogen species more quickly.
+In contrast, species suffering range contractions \cite{thomas2004extinction} and decreases in abundance \cite{craigie2010large} are expected to experience smaller changes in pathogen richness.
 
 
-Group size changes with global change (decrease \cite{lehmann2010apes, zunino2007habitat, manor2003impact, atwood2006influence} and increase \cite{lehmann2010apes})
+\subsection{Comparative studies}
 
+Many comparative studies measure some aspect of a species population size or structure, yet it is rarely discussed how these relate.
+Instead most studies use the data that is available, without considering how it may depend on other factors.
+Population density is often measured \cite{morand1998density, lindenfors2007parasite, nunn2003comparative, arneberg2002host} yet density is directly associated with abundance.
+This study suggests that it is in fact abundance that is important, expecially in the context of social species.
+Therefore, the density measures in these comparative studies are more likely to be proxies for abundance than the true causal factor.
+Similarly, this study suggests that host range size does not promote pathogen richness by the mechanism studied here yet a number of studies have found a relationship \cite{kamiya2014determines, nunn2003comparative}.
+This suggests that either the relationship found in comparative studies is in fact due to a correlation with another factor, or that other mechanisms than rate of invasion of new pathogens are important.
+Range size has been suggested to affect pathogen richness by a number of mechanisms such as increasing the diversity of sympatric species and these other mechanisms should be specifically tested.
 
-Range size changes with global change \cite{thomas2004extinction} as does abundance \cite{craigie2010large}.
-
-
-
-
-\tmpsection{Contrast to the literature}
-
-%group size \cite{vitone2004body, gay2014parasite, ezenwa2006host, rifkin2012animals, nunn2003comparative}
-
-While some studies have found a relationship between social group size and pathogen richness \cite{vitone2004body}, others have found negative relationships \cite{gay2014parasite}.
-Overall the empirical evidence is weak \cite{ezenwa2006host, rifkin2012animals}
-
-
-Density \cite{morand1998density, kamiya2014determines, lindenfors2007parasite, nunn2003comparative, arneberg2002host}
-Range Size \cite{lindenfors2007parasite, nunn2003comparative, turmelle2009correlates, huang2015parasite, kamiya2014determines}.
+The studies that have tested specifically the affect of group size have in fact found both positive \cite{vitone2004body} and negative associations \cite{gay2014parasite} or no relationship \cite{ezenwa2006host}.
+Metaanalyses suggest that the relationship between social group size and pathogen richness is weak \cite{rifkin2012animals}.
+This suggests that the mechanism studied here---invasion of recently evolved pathogens---is not the major cause of pathogen richness in wild populations.
 
 
 
-\tmpsection{Assumptions}
+\subsection{Assumptions and limitation}
 
+Being based on the same model as Chapter~\ref{ch:sims2}, the work presented here relies on many of the same assumptions.
+Furthermore, as a comparison is being made between the affects of area and population size, the exact specifications of how the metapopulation is affected by area is important.
+I have conducted this study at one rate of dispersal, 0.01 dispersals per individual per year.
+In practice this related to only a 20 percent of individuals dispersing at all.
+This low rate of dispersal is expected to exagerate the affect of area; at high rates of dispersal the population is essentially well-mixed, despite the metapopulion.
+
+Here I have assumed that dispersal only occurs between colonies a certain distance apart.
+Based on \emph{a priori} considerations such as the time and energy required to disperse long distances this is a reasonable assumption.
+The exact threshold was chosen to attempt to maximise the range of $\bar{k}$ studied (Figure~\ref{fig:plotK}).
+However, a similar assumption could be made in other ways.
+Instead of a threshold distance, individuals could be expected to disperse in a random direction and stop at the first colony they encounter; this could create some long distance links in the network and increase network connectivity, potentially reducing the affects of area.
+Alternatively, the metapopulation could have been modelled as a weighted network with dispersal occuring at a higher rate to nearby colonies.
+Depending on the parameterisation of this distance-dispersal relationship this could serve to increase the affect of area---by exaggerating dispersal to very nearby colonies---or decrease the affect of area by allowing rare, but present, global dispersal.
+Ultimately, the modelling choices could increase or decrease the affects of area relative to colony size and the number of colonies.
 
 
 
@@ -498,7 +512,7 @@ Range Size \cite{lindenfors2007parasite, nunn2003comparative, turmelle2009correl
 % Badger Group size versus territory size http://onlinelibrary.wiley.com/doi/10.1034/j.1600-0706.2001.950208.x/abstract
 
 
-\tmpsection{conclusions}
+\subsection{Conclusions}
 
 
 
