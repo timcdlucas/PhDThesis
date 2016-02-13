@@ -1093,14 +1093,18 @@ In contrast, species suffering range contractions \cite{thomas2004extinction} an
 
 \subsection{Comparative studies}
 
-Many comparative studies measure some aspect 
+Many comparative studies measure some aspect of a species population size or structure, yet it is rarely discussed how these relate.
+Instead most studies use the data that is available, without considering how it may depend on other factors.
+Population density is often measured \cite{morand1998density, lindenfors2007parasite, nunn2003comparative, arneberg2002host} yet density is directly associated with abundance.
+This study suggests that it is in fact abundance that is important, expecially in the context of social species.
+Therefore, the density measures in these comparative studies are more likely to be proxies for abundance than the true causal factor.
+Similarly, this study suggests that host range size does not promote pathogen richness by the mechanism studied here yet a number of studies have found a relationship \cite{kamiya2014determines, nunn2003comparative}.
+This suggests that either the relationship found in comparative studies is in fact due to a correlation with another factor, or that other mechanisms than rate of invasion of new pathogens are important.
+Range size has been suggested to affect pathogen richness by a number of mechanisms such as increasing the diversity of sympatric species and these other mechanisms should be specifically tested.
 
-While some studies have found a relationship between social group size and pathogen richness \cite{vitone2004body}, others have found negative relationships \cite{gay2014parasite}.
-Overall the empirical evidence is weak \cite{ezenwa2006host, rifkin2012animals}
-
-
-Density \cite{morand1998density, kamiya2014determines, lindenfors2007parasite, nunn2003comparative, arneberg2002host}
-Range Size \cite{lindenfors2007parasite, nunn2003comparative, turmelle2009correlates, huang2015parasite, kamiya2014determines}.
+The studies that have tested specifically the affect of group size have in fact found both positive \cite{vitone2004body} and negative associations \cite{gay2014parasite} or no relationship \cite{ezenwa2006host}.
+Metaanalyses suggest that the relationship between social group size and pathogen richness is weak \cite{rifkin2012animals}.
+This suggests that the mechanism studied here---invasion of recently evolved pathogens---is not the major cause of pathogen richness in wild populations.
 
 
 
