@@ -83,7 +83,7 @@ However, models of competition between multiple pathogens show that in unstructu
 
 Three studies have used comparative data to test for an association between population structure and viral richness.
 A study on 15 African bats found a positive relationship between distribution fragmentation and viral richness \cite{maganga2014bat} while a study on 20 South-East Asian bats found the opposite relationship \cite{gay2014parasite}. 
-A global study on 33 bats found a positive relationship between $F_{ST}$ --- a measure of genetic structure --- and viral richness \cite{turmelle2009correlates}. 
+A global study on 33 bats found a positive relationship between $F_{ST}$---a measure of genetic structure---and viral richness \cite{turmelle2009correlates}. 
 However, this study included measures using mtDNA which only measures female dispersal which may have biased the results many bat species show female philopatry \cite{kerth2002extreme, hulva2010mechanisms}.
 Furthermore, this study used measures of $F_{ST}$ irrespective of the study scale with studies covering from tens \cite{mccracken1981social} to thousands \cite{petit1999male} of kilometers.
 As isolation by distance has been shown in a number of bat species \cite{burland1999population, hulva2010mechanisms, o2015genetic, vonhof2015range} this could bias results further.
@@ -143,7 +143,7 @@ There is a lack of studies using multiple measures of population structure and l
 
 \tmpsection{What I did/found}
 
-Here I have used two measures of population structure --- the number of subspecies and gene flow --- to robustly test for an association between population structure and pathogen richness in bats.
+Here I have used two measures of population structure---the number of subspecies and gene flow---to robustly test for an association between population structure and pathogen richness in bats.
 Furthermore, I used a much larger dataset for one of these analyses, further promoting robustness of results.
 I found that both measures of population structure are positively associated with viral richness and are likely to be in the best models for describing viral richness.
 Further, I found that the role of phylogeny is very weak in the models and in the distribution of viral richness amongst taxa.
@@ -271,7 +271,7 @@ Further, I found that the role of phylogeny is very weak in the models and in th
 \caption[Number of virus species against number of subspecies]{Number of virus species against number of subspecies. 		
 The top panel shows the univariate distribution of the data with most species having few subspecies.		
 Data within a number of subspecies are plotted as boxplots with the dark bar showing the median, the box showing the interquartile range, vertical lines showing the range and outliers shown as seperate points.		
-Regression lines are from multivariate phylogenetic models with all other independant variables set at their median value.		
+Regression lines are from phylogenetic multiple regressions with all other independant variables set at their median value.		
 The models shown are those with (pink) and without (red) an interaction between study effort and number of subspecies.		
 }\label{fig:boxplot}
 \end{figure}
@@ -281,11 +281,11 @@ The models shown are those with (pink) and without (red) an interaction between 
 
 
 
-To test for an association between pathogen richness I have performed multivariate regression using a model selection framework to establish whether or not two measures of pathogen richness are likely to be in a `best model' and therefore important.
+To test for an association between pathogen richness I have performed multiple regression using a model selection framework to establish whether or not two measures of pathogen richness are likely to be in a `best model' and therefore important.
 As species cannot be considered independant due to shared evolutionary history, phylogeny was controlled for in all regressions.
 A number of other factors that have previously been found to be important were included as additional independant variables: body mass \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat}, range size \cite{kamiya2014determines, turmelle2009correlates, maganga2014bat} and study effort \cite{turmelle2009correlates, gay2014parasite, maganga2014bat}.
 This was to attempt to avoid spurious positive results occuring simply due to correlation between pathogen richness and a different, causal factor.
-Despite commonly being associated with pathogen richness \cite{arneberg2002host, kamiya2014determines, nunn2003comparative}, population density is not included in the analysis as there is very little data for bat densities --- however Chapter~\ref{ch:sims2} examines the relationship between density and population structure and Chapter~\ref{ch:grem} presents a method that allows the estimation of density from acoustic surveys.
+Despite commonly being associated with pathogen richness \cite{arneberg2002host, kamiya2014determines, nunn2003comparative}, population density is not included in the analysis as there is very little data for bat densities---however Chapter~\ref{ch:sims2} examines the relationship between density and population structure and Chapter~\ref{ch:grem} presents a method that allows the estimation of density from acoustic surveys.
 I used both the number of subspecies a bat species has and estimates of gene flow (analysed separately) as measures of population structure.
 All analyses were run in R \cite{R}
 
@@ -704,7 +704,7 @@ Study effort is also clearly supported confirming the expectation that additiona
 
 \tmpsection{Weaknesses and limitations}
 
-Although I have used measures of study effort to try to control for biases in the viral richness data, this bias could still make the results here unreliable --- this is especially true as study effort is by far the strongest predictor of viral richness in both datasets.
+Although I have used measures of study effort to try to control for biases in the viral richness data, this bias could still make the results here unreliable---this is especially true as study effort is by far the strongest predictor of viral richness in both datasets.
 It is hoped that as untargeted sequencing of viral genetic material (e.g. \textcite{anthony2013strategy}) becomes cheaper and more common this bias can be reduced.
 The strength of the relationship between study effort and known viral richness also highlights the number of virus species and bat-virus host-pathogen relationships yet to be discovered.
 
@@ -730,7 +730,7 @@ This relationship implies that direct or indirect competitive mechanisms are act
 The relationship between population structure and pathogen richness suggests that population structure has a least some potential as being predictive of high pathogen richness and therefore of a species likelihood of being a reservoir of a potentially zoonotic pathogen. 
 However given that it is difficult to measure population structure and given that the relationship appears to be weak at best, this trait on it's own is unlikely to be useful in predicting zoonotic risk.
 However, as a number of other factors are also associated with pathogen richness (body mass and to a lesser extent range size here but also other traits elsewhere), using a combination traits in a predictive (i.e. machine learning) framework has potential to be used in prioritising zoonotic disease surveillance.
-The main hurdle in this approach is finding a way to validate models --- due to the study effort bias in current data, predictive models will also be biased.
+The main hurdle in this approach is finding a way to validate models---due to the study effort bias in current data, predictive models will also be biased.
 
 The relationship between pathogen richness and population structure also has implications for habitat fragmentation and range shifts due to global change.
 In short habitat fragmentation and range shifts that reduce movement between populations would be predicted to increase pathogen richness.

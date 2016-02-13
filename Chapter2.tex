@@ -113,7 +113,7 @@ We need explicit mechanistic models in order to tease apart these factors.
 Furthermore, a solid mechanistic understanding of these processes will allow us to predict how wild populations will respond to increased human pressure and global change.
 As habitats fragment we expect wild populations to become smaller and less well connected.
 Understanding how these population changes interact reqiures a mechanistic understanding of disease dynamics.
-Different specific mechanisms predict responses to climate change at different rates --- the extinction of parasites could occur relatively rapidly, whereas processes whereby invasive pathogens can persist more easily are likely to change pathogen community competition relatively slowly.
+Different specific mechanisms predict responses to climate change at different rates---the extinction of parasites could occur relatively rapidly, whereas processes whereby invasive pathogens can persist more easily are likely to change pathogen community competition relatively slowly.
 
 \tmpsection{Population structure could be important}
 
@@ -129,7 +129,7 @@ These have been so simple that empirical data cannot easily be applied to them t
 There is a need for models that can be carefully and fully explored, while still capturing the complexities of the real world.
 
 In analytical models of well mixed populations competitive exclusion has been predicted \cite{ackleh2003competitive, bremermann1989competitive, martcheva2013competitive, qiu2013vector, allen2004sis}.
-When competitive exclusion occurs, population structure has sometimes been shown to allow coexistence \cite{qiu2013vector, allen2004sis, nunes2006localized}.
+When competitive exclusion occurs, population structure has sometimes been shown to allow coexistence \cite{qiu2013vector, allen2004sis, nunes2006localized, garmer2016multistrain}.
 Competing epidemics, or two pathogens spreading at the same time in a population, is a well studied area \cite{poletto2013host, poletto2015characterising, karrer2011competing}. 
 This area is related to the study of pathogen richness in that they indicate that dynamics of multiple pathogens in a population do depend on population structure.
 However, the results for short term epidemic competition do not directly transfer to the study of long term disease persistence which is the relative time scale when looking at zoonotic potential of a host species.
@@ -179,7 +179,7 @@ However, other measures that take into account second-order structure in the net
 % being addressed by this particular study.
 % By this stage, must have defined/introduced all terms used within.
 
-Currently the literature contains very abstract, simplified models \cite{qiu2013vector, allen2004sis, nunes2006localized}.
+Currently the literature contains very abstract, simplified models \cite{qiu2013vector, allen2004sis, nunes2006localized, garmer2016multistrain}.
 These cannot be easily applied to real data.
 They also do not easily quantitative predict pathogen pathogen; typically they predict either no pathogen coexistence \cite{bremermann1989competitive, martcheva2013competitive} or infinite pathogen diversity \cite{may1994superinfection}.
 We need models that can give quantative predictions of pathogen richness in wild populations.
@@ -234,7 +234,8 @@ This is true whether population structure is altered by changing the dispersal r
 
 \begin{table}[b!]
 \centering
-\caption[All symbols used.]{All symbols used and their units and values.}
+\caption[All symbols used in Chapters \ref{ch:sims1} and \ref{ch:sims2}.]{All symbols used in Chapters \ref{ch:sims1} and \ref{ch:sims2} along with their units and default values.}
+
 \begin{tabular}{@{}lp{5cm}p{3.9cm}r@{}}
 \toprule
 Symbol & Explanation & Units & Value\\
@@ -242,13 +243,16 @@ Symbol & Explanation & Units & Value\\
 $S$ & Number of susceptible individuals &&\\
 $I_q$ & N. individuals infectious with diseases $q$ &&\\
 $I^+_p$ & Sum of classes infected with pathogen $p$ &\\
-%$N$ & Number of colonies&& 10\\
-$\bar{n}$ & Colony starting size && 3,000\\
-$\beta$ & Transmission rate & Transmission events per year per individual& 2, 5, 10\\
-$\gamma$ & Recovery rate & Recovery events per year per individual. & 1\\
-$\lambda$ & Dispersal & Dispersal events per day per individual& 0.001--0.1\\
-$\Lambda$ & Birth rate & Births per year per individual& 0.05\\
-$\mu$ & Death rate & Deaths per year per individual & 0.05\\
+$R$ & Number of recovered/immune individuals &&\\
+$N$ & Total Population && 30,000\\
+$m$ & Number of colonies&& 10\\
+$n$ & Colony starting size && 3,000\\
+$a$ & Area & km$^2$& 10,000\\
+$\beta$ & Transmission rate & Per year per individual& 2, 5, 10\\
+$\gamma$ & Recovery rate & Per year per individual. & 1\\
+$\lambda$ & Dispersal & Per day per individual& 0.001--0.1\\
+$\Lambda$ & Birth rate & Per year per individual& 0.05\\
+$\mu$ & Death rate & Per year per individual & 0.05\\
 %$d_I$ & Infectious death rate & Additional deaths per day per individual&\\
 $\rho$ & No. pathogens && 2\\
 $p$ &  Pathogen index i.e. $p\in\{1,2\}$ for pathogens 1 and 2 & &\\
@@ -356,8 +360,8 @@ The rates of death, given a death rate $d$ are given by
   P\left( R_{nt^\prime} = R_{nt}-1 \right) &= \mu R_{nt}.
 \end{align}
 I modelled transmission as density-dependant.
-This assumption is more suitable than frequency-dependant transmission as I am modelling a disease transmitted by saliva or urine in highly dense populations confined to caves, building or potentially a small number of tree roosts.
-I am notably not modelling an STD as these diseases are not expected to be commonly zoonotic.
+This assumption was more suitable than frequency-dependant transmission as I am modelling a disease transmitted by saliva or urine in highly dense populations confined to caves, building or potentially a small number of tree roosts.
+I was notably not modelling an STD as these diseases are not expected to be commonly zoonotic.
 Infection of a susceptible with either pathogen 1 or 2, $S \rightarrow I_p$ where $p\in \{1,2\}$, is therefore given by
 \begin{align}
   P\left( I_{pnt^\prime} = I_{pnt}+1, S_{nt^\prime} = S_{nt}-1 \right) &= \beta S_{nt}I^+_{pnt},
@@ -442,7 +446,7 @@ This therefore relates to a population that does not habitually disperse.
 
 \subsection{Network structure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The network structure is synthetically created to be either fully or minimally connected (See Figure~\ref{f:net}). 
+The network structure was synthetically created to be either fully or minimally connected (See Figure~\ref{f:net}). 
 10 subpopulations was selected as a trade off between computation time and a network complicated enough that structure might have an effect. 
 This value is artificially small compared to wildlife populations. 
 
@@ -452,21 +456,21 @@ This value is artificially small compared to wildlife populations.
 
 
 The fixed parameters used are chosen to roughly reflect realistic wild bat populations. 
-The death rate $\mu$ is set as 0.05 per year giving a generation time of 20 years.
-The birth rate $\Lambda$ is set to be equal to $\mu$ so that the population size is stable.
-The recovery rate $\gamma$ is set to 1 giving a average infection duration of 1 years. 
+The death rate $\mu$ was set as 0.05 per year giving a generation time of 20 years.
+The birth rate $\Lambda$ was set to be equal to $\mu$ so that the population size was stable.
+The recovery rate $\gamma$ was set to 1 giving a average infection duration of 1 years. 
 This is therefore a long lasting infection but not a chronic infection. 
 It is very difficult to directly estimate infection durations in wild populations but it seems that these infections might sometimes be long lasting \cite{peel2012henipavirus, plowright2015ecological}.
 However, other studies have found much shorter infectious periods \cite{amengual2007temporal}.
 These shorter lived in infections are studied further here as preliminary simulations found that they could not persist in the relatively small populations being modelled here.
 
-Cross immunity is set to 0.1 so that an individual infected with one pathogen is 90\% less likely to be infected with another.
+Cross immunity was set to 0.1 so that an individual infected with one pathogen is 90\% less likely to be infected with another.
 This is a rather arbitrary value.
-However, the rationale of the model is that the invading species might be a newly speciated strain of the endemic species.
+However, the rationale of the model was that the invading species might be a newly speciated strain of the endemic species.
 Furthermore, the model assumes complete cross immunity after recovery from infection.
 Therefore cross immunity to coinfection is likely to be very strong as well.
 
-The population size of each subpopulation is set to 3,000. 
+The population size of each subpopulation was set to 3,000. 
 This is appropriate for many bat species \cite{jones2009pantheria}, especially the large, frugivorous \emph{Pteropodidae} that have been particularly associated with recent zoonotic diseases.
 
 
@@ -482,17 +486,6 @@ All simulations are run under all four transmission rates as this is such a fund
 
 % R_\ast (R_0 - 1)\frac{\langle k^2 \rangle - \langle k \rangle}{\langle k^2 \rangle} \frac{p\bar{N}\alpha}{\mu} > 1
 % N = avg pop size, p = migration, mu = recovery, \alpha N_k is number of individuals infected. So think this is not with vital dynamics.
-
-
-For the simulations where an invading pathogen is added to the populations the number of invading pathogens added is set to 10. 
-This is a trade off between getting a reasonable proportion of invasions, while still retaining the stochastic nature of invasion.
-
-
-
-
-
-
-
 
 
 
@@ -631,7 +624,7 @@ This implies it should not be used as a proxy for the probability that a species
 However, my simulations do highlight the importance of competition for the spread of a new pathogen.
 All parameters used correspond to pathogens with $R_0>1$.
 However, the competition with the endemic pathogen means that for some transmission rates the chance of epidemic spread and persistence is close to zero.
-This has implications for human epidemics as well --- if there is strong competiton between a newly evolved strain and an endemic strain, we are unlikely to see the new strain spread, irregardless of population structure.
+This has implications for human epidemics as well---if there is strong competiton between a newly evolved strain and an endemic strain, we are unlikely to see the new strain spread, irregardless of population structure.
 
 
 

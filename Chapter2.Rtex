@@ -168,7 +168,7 @@ We need explicit mechanistic models in order to tease apart these factors.
 Furthermore, a solid mechanistic understanding of these processes will allow us to predict how wild populations will respond to increased human pressure and global change.
 As habitats fragment we expect wild populations to become smaller and less well connected.
 Understanding how these population changes interact reqiures a mechanistic understanding of disease dynamics.
-Different specific mechanisms predict responses to climate change at different rates --- the extinction of parasites could occur relatively rapidly, whereas processes whereby invasive pathogens can persist more easily are likely to change pathogen community competition relatively slowly.
+Different specific mechanisms predict responses to climate change at different rates---the extinction of parasites could occur relatively rapidly, whereas processes whereby invasive pathogens can persist more easily are likely to change pathogen community competition relatively slowly.
 
 \tmpsection{Population structure could be important}
 
@@ -184,7 +184,7 @@ These have been so simple that empirical data cannot easily be applied to them t
 There is a need for models that can be carefully and fully explored, while still capturing the complexities of the real world.
 
 In analytical models of well mixed populations competitive exclusion has been predicted \cite{ackleh2003competitive, bremermann1989competitive, martcheva2013competitive, qiu2013vector, allen2004sis}.
-When competitive exclusion occurs, population structure has sometimes been shown to allow coexistence \cite{qiu2013vector, allen2004sis, nunes2006localized}.
+When competitive exclusion occurs, population structure has sometimes been shown to allow coexistence \cite{qiu2013vector, allen2004sis, nunes2006localized, garmer2016multistrain}.
 Competing epidemics, or two pathogens spreading at the same time in a population, is a well studied area \cite{poletto2013host, poletto2015characterising, karrer2011competing}. 
 This area is related to the study of pathogen richness in that they indicate that dynamics of multiple pathogens in a population do depend on population structure.
 However, the results for short term epidemic competition do not directly transfer to the study of long term disease persistence which is the relative time scale when looking at zoonotic potential of a host species.
@@ -234,7 +234,7 @@ However, other measures that take into account second-order structure in the net
 % being addressed by this particular study.
 % By this stage, must have defined/introduced all terms used within.
 
-Currently the literature contains very abstract, simplified models \cite{qiu2013vector, allen2004sis, nunes2006localized}.
+Currently the literature contains very abstract, simplified models \cite{qiu2013vector, allen2004sis, nunes2006localized, garmer2016multistrain}.
 These cannot be easily applied to real data.
 They also do not easily quantitative predict pathogen pathogen; typically they predict either no pathogen coexistence \cite{bremermann1989competitive, martcheva2013competitive} or infinite pathogen diversity \cite{may1994superinfection}.
 We need models that can give quantative predictions of pathogen richness in wild populations.
@@ -1039,7 +1039,7 @@ This implies it should not be used as a proxy for the probability that a species
 However, my simulations do highlight the importance of competition for the spread of a new pathogen.
 All parameters used correspond to pathogens with $R_0>1$.
 However, the competition with the endemic pathogen means that for some transmission rates the chance of epidemic spread and persistence is close to zero.
-This has implications for human epidemics as well --- if there is strong competiton between a newly evolved strain and an endemic strain, we are unlikely to see the new strain spread, irregardless of population structure.
+This has implications for human epidemics as well---if there is strong competiton between a newly evolved strain and an endemic strain, we are unlikely to see the new strain spread, irregardless of population structure.
 
 
 

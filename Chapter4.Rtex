@@ -1307,7 +1307,7 @@ For related, strongly competing strains, the factor that allows new pathogens to
 As long as there are enough susceptible individuals that the new species persists through the stochastic, early stages of the epidemic, the new pathogen will persist.
 As dispersal is a very slow process compared to infection, the global pool of susceptibles is not important. 
 This is why increasing the number of number of colonies does not increase pathogen invasion as quickly as the size of a colony does.
-Similarly, the density --- at the global scale --- of the species has little affect.
+Similarly, the density---at the global scale---of the species has little affect.
 In these simulations, increasing density without increasing abundance implies a reduction in range size, which simply increases the number of colonies which are connected to the colony experiencing the invading pathogen.
 This increases the pool of susceptibles that are within one dispersal of the invading pathogen.
 However, again, this affect is very weak compared to the strong changes in local disease dynamics caused by increasing colony size.
@@ -1315,6 +1315,11 @@ However, again, this affect is very weak compared to the strong changes in local
 
 
 \tmpsection{Relate back to global change}
+
+It is clear that many species are suffering strong population changes due to climate change \cite{thomas2004extinction}.
+However these changes might affect range size \cite{thomas2004extinction}, population abundance \cite{craigie2010large}, population connectivity \cite{} or group size \cite{lehmann2010apes, zunino2007habitat, manor2003impact, atwood2006influence}.
+My results suggest that pathogen communities will response differently depending on the change although it should be noted that the mechanism here---invasion of a new pathogen    is possibly more relevant in the longer term.
+
 
 Group size changes with global change (decrease \cite{lehmann2010apes, zunino2007habitat, manor2003impact, atwood2006influence} and increase \cite{lehmann2010apes})
 

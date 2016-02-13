@@ -3,7 +3,14 @@
 
 
 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in library(extrafont): there is no package called 'extrafont'}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in as.vector(y): object 'theme\_tcdl' not found}}\end{kframe}
+\end{knitrout}
 
 
 
@@ -90,19 +97,19 @@ There is disagreement on whether population density (individuals per unit area) 
 
 
 \tmpsection{Density/abundance in comparative research}
-With the increase of novel zoonotic pathogens \cite{} attention has turned to comparatively assessing the factors that are associated with high or low pathogen richness in wild animal species \cite{morand review}.
+With the increase of novel zoonotic pathogens \cite{jones2008global} attention has turned to comparatively assessing the factors that are associated with high or low pathogen richness in wild animal species \cite{poulin2000diversity}.
 Here again there is little clarity on the relationship between a number of species measurements.
-Population density is commonly studied \cite{} as is range size \cite{}.
-However it is rarely if ever acknowledge that these two values are intrinsically linked by $d = N/a$ where $d$ is density, $N$ is the population size and $a$ is area.
+Population density is commonly studied \cite{morand1998density, kamiya2014determines, lindenfors2007parasite, nunn2003comparative, arneberg2002host} as is range size \cite{lindenfors2007parasite, nunn2003comparative, turmelle2009correlates, huang2015parasite, kamiya2014determines}.
+However it is rarely if ever acknowledge that these two values are intrinsically linked by $d = N/a$ where $d$ is density, $N$ is the population size and $a$ is area (See Table~\ref{t:params} for all parameters used).
 In contrast, abundance has never been directly studied as a predictor of pathogen richness.
-This is  a glaring omission as abundance more closely aligns with the ``island-biogeography'' class of mechanisms posited to explain pathogen richness \cite{}.
-Furthermore, abundance is considered the more relevant measure in terms of pathogen dynamics, especially when area cannot be assumed to be constant \cite{begon} as is commonly the case in wild populations, especially in the face of global warming and habitat degradation.
+This is a glaring omission as abundance more closely aligns with the ``island-biogeography'' class of mechanisms posited to explain pathogen richness \cite{}.
+Furthermore, abundance is considered the more relevant measure in terms of pathogen dynamics, especially when area cannot be assumed to be constant \cite{begon2002clarification} as is commonly the case in wild populations, especially in the face of global warming and habitat degradation.
 
 \tmpsection{Populatiion structure in comparative research}
-It is clear that individuals of an animal species are not randomly distributed in space: social groups are common \cite{} and geographic boundaries reduce contacts between isolated populations.
+It is clear that individuals of an animal species are not randomly distributed in space: social groups are common \cite{kerth2008causes} and geographic boundaries reduce contacts between isolated populations.
 In social species, measures such as global population density are largely meaningless with respect to the number of infectious contacts individuals may have.
 Rather, contacts are based on group size and rates of movements between groups.
-Two aspects of non-random transmission have been studied in particular: group size \cite{nunn and others} and global measures of population structure including genetic measures and measures derived from distribution shapes (\textcite{gay, maganga, turmelle} and see Chapter \ref{ch:}).
+Two aspects of non-random transmission have been studied in particular: group size \cite{vitone2004body, gay2014parasite, ezenwa2006host, rifkin2012animals, nunn2003comparative} and global measures of population structure including genetic measures and measures derived from distribution shapes (\textcite{gay2014parasite, maganga2014bat, turmelle2009correlates} and see Chapter \ref{ch:empirical}).
 Again however, the relationships between these terms and more the more global terms mentioned above are rarely examined.
 Population abundance can be decomposed into two components, the number of groups and the average size of a group with $N = nm$ where $n$ is group size and $m$ is the number of groups.
 The amount of movement between is largely dependant on the distance between groups.
@@ -117,8 +124,8 @@ Other species might be expected to retain their distribution but have a depresse
 Similarly with population structure, species particularly affected by habitat fragmentation can expect increased reduced movement of individuals between groups, while other species may be most affected by a reduction in group size.
 Furthermore, different mechanisms of maintenance and creation of pathogen richness will respond to changes in these factors differently as well.
 If pathogen richness ultimately depends on the ``island size'' of the host population, then falls in population abundance will reduce pathogen richness the most.
-If local group size affects the ability of new pathogens to invade (Chapter \ref{ch:sim1}) then changes in group size are likely to be most important.
-Finally, if increased population structure allows pathogens to coexist (\parencite{qiu2013vector, allen2004sis, nunes2006localized} and Chapter \ref{ch:}) increase habitat fragmentation could be expected to increase pathogen richness.
+If local group size affects the ability of new pathogens to invade (Chapter \ref{ch:sims1}) then changes in group size are likely to be most important.
+Finally, if increased population structure allows pathogens to coexist (\parencite{qiu2013vector, allen2004sis, nunes2006localized} and Chapter \ref{ch:empirical}) increase habitat fragmentation could be expected to increase pathogen richness.
 
 As these factors are likely to be correlated, correlative comparative studies will struggle to distinguish between them.
 Furthermore, even if factors are supported or rejected, the specific mechanisms by which the promote pathogen richness will remain unknown, and these may suggest different responses to global change.
@@ -190,6 +197,7 @@ Therefore there is great need to mechanistic models that try to disentangle the 
 Examples of the metapopulation networks used.
 They show the smallest number of colonies (five, A and B) and the default (20, C and D).
 They also show the default ($10^4\,\text{km}^2$, grey dashed lines, A and C) and largest areas ($4\times10^4\,\text{km}^2$, full plot, B and C), though all networks are plotted on the same spatial scale.
+Colonies are connected if they are within 100km.
 As area increases, the number of connections each subpopulation has decreases as seen by the changes in mean degree, $\bar{k}$.
 }\label{fig:colonyNetworkPlots}
 \end{figure}
@@ -281,11 +289,6 @@ However, the rationale of the model is that the invading species might be a newl
 Furthermore, the model assumes complete cross immunity after recovery from infection.
 Therefore cross immunity to coinfection is likely to be very strong as well.
 
-
-The population size of each subpopulation is set to 3,000. 
-This is appropriate for many bat species \cite{jones2009pantheria}, especially the large, frugivorous \emph{Pteropodidae} that have been particularly associated with recent zoonotic diseases.
-
-
 Three values of the transmission rate $\beta$ are used, 0.1, 0.2 and 0.3.
 All simulations are run under all three transmission rates as this is a fundamental parameter that changes the broad dynamics of the pathogens.
 
@@ -296,7 +299,11 @@ I tested two hypotheses.
 Firstly I tested the hypothesis that an increase in population abundance creates a stronger increase in invasion probability (of the second pathogen) than an equal increase in population density.
 Secondly I tested the hypothesis that ana increase in colony size creates a stronger increase in invasion probability an an equal increase in number of colonies.
 To statistically test these hypotheses I combined the results from different simulations and fitted multiple logistic regressions, centering and scaling the dependant variables.
-Specifically, I fitted the model $\text{invasion} = b_1 \text{density} + b_2 \text{colony size} + b_3 \text{number of colonies} + c + \epsilon$ where $c$ is a fitted intercept and $\epsilon$ is a binomially distributed error term.
+Specifically, I fitted the model 
+\begin{align}
+\text{invasion} = b_1\cdot \text{density} + b_2\cdot  \text{colony size} + b_3\cdot  \text{number of colonies} + c + \epsilon
+\end{align}
+ where $c$ is a fitted intercept, $\epsilon$ is a binomially distributed error term and $b_i$ are the regression coefficients.
 To test the first hypothesis I compared the size (and 95\% confidence intervals) of $b_1$ to $b_2$ and $b_3$.
 To test the second hypothesis I compared $b_2$ to $b_3$.
 
@@ -371,6 +378,7 @@ Each point is the mean of inline{each} simulations and bars are 95\% confidence
 Change in average metapopulation network degree ($\bar{k}$) with increasing area. 
 Bars show the median, boxes show the interquartile range, vertical lines show and range and grey dots indicate outlier values.
 Notches indicate the 95\% confidence interval of the mean.
+All simulations had 20 colonies, meaning 19 is the maximum value of $\bar{k}$.
 }\label{fig:plotK}
 \end{figure}
 
@@ -427,54 +435,77 @@ $\beta$ & \emph{Variable} & \emph{Estimate} ($b$) & (95\% \emph{CI}) & $p$\\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Restate the gap and the main result}
+\tmpsection{Restate results}
 
-Empirical studies on the role of population structure on the are equivocal and cannot examine the specific mechanisms by which pathogen communities are created and maintained.
-I have used mechanistic, metapopulation models to test whether increased population structure can promote pathogen richness by facilitating invasion of new pathogens.
+Overall, my results suggest that population abundance promotes pathogen richness significantly more than population density in the context of metapopulations or group living.
+Furthermore, the component of population abundance that is important is group size.
 
-
-
-\subsection{Link results to consequences}
-
-\subsubsection{Population structure does not affect pathogen richness}
-
-Probably because dynamics are dominated by local processes.
-This goes against many predictions that increasing $R_0$ increases pathogen richness.
-Further work could examine reduced col  ony sizes to test when global structure become more important.
-Measures of population structure should not be used to predict zoonotic potential.
-
-\subsubsection{Dispersal does not affect pathogen richness}
+These results lead to a number of other conclusions.
+All else being equal, increasing range size (with density remaining constant) will not increase pathogen richness significantly unless the increased range size promotes larger groups.
+Furthermore, social species that live in large groups are likely to harbour more pathogen species, even if sociality promotes reduced interactions between groups due to territory defence or simply larger distances between groups due to groups needing larger home ranges.
 
 
+\tmpsection{Why are these results like that? What do they mean?}
 
-\subsubsection{Network connectedness does not affect pathogen richness}
+For related, strongly competing strains, the factor that allows new pathogens to invade is the number of susceptible individuals in the local group.
+As long as there are enough susceptible individuals that the new species persists through the stochastic, early stages of the epidemic, the new pathogen will persist.
+As dispersal is a very slow process compared to infection, the global pool of susceptibles is not important. 
+This is why increasing the number of number of colonies does not increase pathogen invasion as quickly as the size of a colony does.
+Similarly, the density---at the global scale---of the species has little affect.
+In these simulations, increasing density without increasing abundance implies a reduction in range size, which simply increases the number of colonies which are connected to the colony experiencing the invading pathogen.
+This increases the pool of susceptibles that are within one dispersal of the invading pathogen.
+However, again, this affect is very weak compared to the strong changes in local disease dynamics caused by increasing colony size.
 
-This is in direct contrast to \cite{campos2006pathogen}. 
-However, the model in \cite{campos2006pathogen} is a contact network, so increasing the connectedness increases the chance of succesful transmission events for the first few transmission generations.
-This lends support to the idea that I found now affect of connectedness due to the dominance of local dynamics.
-
-Network connectedness can be seen as a function of average dispersal distance, density and colony size.
-A high density species with small colony sizes must have colonies relatively close together.
-Therefore colonies would be more likely to be connected for a given dispersal distance. 
 
 
-\subsection{Discuss assumptions}
+\tmpsection{Relate back to global change}
 
-\subsubsection{Complete cross-immunity}
+It is clear that many species are suffering strong population changes due to climate change \cite{thomas2004extinction}.
+However these changes might affect range size \cite{thomas2004extinction}, population abundance \cite{craigie2010large}, population connectivity \cite{} or group size \cite{lehmann2010apes, zunino2007habitat, manor2003impact, atwood2006influence}.
+My results suggest that pathogen communities will response differently depending on the change although it should be noted that the mechanism here---invasion of a new pathogen    is possibly more relevant in the longer term.
 
-I have assumed that once recovered, individuals are immune to both pathogens. 
-Furthermore, when a coinfected individual recovers from one pathogen, it immediately recovers from the other as well.
-This is probably a fairly reasonable assumption given that I am modelling a newly evolved strain.
-However, further work could relax this assumption using a model similar to \cite{poletto2015characterising} which contains additional classes for `infected with pathogen one, immune to pathogen two' and `infected with pathogen two, immune to pathogen one'.
-The model here was formulated such that the study of systems with greater than two pathogens is still computationally feasible while a model such as used in \cite{poletto2015characterising} contains $3^\rho$ classes for a system with $\rho$ pathogen species.
-This quickly becomes computationally restrictive.
 
-\subsubsection{Identical strains}
+Group size changes with global change (decrease \cite{lehmann2010apes, zunino2007habitat, manor2003impact, atwood2006influence} and increase \cite{lehmann2010apes})
 
-Many papers on pathogen richness have focussed on the evolution of pathogen traits and have considered a trade off between transmission rate and virulence \cite{nowak1994superinfection, nowak1994superinfection} or infectious period \cite{poletto2013host}.
-However, here we are interested in host traits.
-Therefore we have assumed that pathogen strains are identical.
-It is clear however that there are a number of factors that affect pathogen richness and our focus on host population structure does not imply that pathogen traits are not important.
+
+Range size changes with global change \cite{thomas2004extinction} as does abundance \cite{craigie2010large}.
+
+
+
+
+\tmpsection{Contrast to the literature}
+
+%group size \cite{vitone2004body, gay2014parasite, ezenwa2006host, rifkin2012animals, nunn2003comparative}
+
+While some studies have found a relationship between social group size and pathogen richness \cite{vitone2004body}, others have found negative relationships \cite{gay2014parasite}.
+Overall the empirical evidence is weak \cite{ezenwa2006host, rifkin2012animals}
+
+
+Density \cite{morand1998density, kamiya2014determines, lindenfors2007parasite, nunn2003comparative, arneberg2002host}
+Range Size \cite{lindenfors2007parasite, nunn2003comparative, turmelle2009correlates, huang2015parasite, kamiya2014determines}.
+
+
+
+\tmpsection{Assumptions}
+
+
+
+
+
+\tmpsection{Further correlations between factors}
+
+%For instance, various relationships between group size and home range size exist (Macdonald 1983). Kruuk and Macdonald (1985) predict that home range behaviour in group living species should conform to one of two strategies. They should either expand their range to encompass sufficient additional resources to support more group members (expansionism) or increase group size only up to the size that can be sustained on the resources within the smallest economically defendable range needed to support the minimum social unit (contractionism). http://onlinelibrary.wiley.com/enhanced/doi/10.1111/j.1600-0587.2009.05745.x
+% Badger Group size versus territory size http://onlinelibrary.wiley.com/doi/10.1034/j.1600-0706.2001.950208.x/abstract
+
+
+\tmpsection{conclusions}
+
+
+
+
+
+
+
 
 
 
