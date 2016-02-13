@@ -220,6 +220,8 @@ Therefore there is great need to mechanistic models that try to disentangle the 
   # How often should the population be sampled. Only sampled populations are saved.
   sample <- 1000
 
+  source('chapter4functions.R')
+
 %%end.rcode
 
 
@@ -254,84 +256,6 @@ Therefore there is great need to mechanistic models that try to disentangle the 
 
   tran <- rep(c(0.1, 0.2, 0.3), times = 5 * each)
 
-# Define our simulation function.
-fullSim <- function(x){
-
-  # Set seed (this is set within each parallel simulation to prevent reusing random numbers).
-  simSeed <- paste0(seed, x)
-  set.seed(simSeed)
-
-  # Make the population.
-  p <- makePop(space = side[x], 
-               transmission = tran[x], 
-               meanColonySize = colonySize[x], 
-               nColonies = 20, 
-               model = 'SIR', 
-               events = nEvent, 
-               nPathogens = 2, 
-               recovery = 0.5,  
-               sample = sample, 
-               dispersal = 0.01, 
-               birth = 0.05, 
-               death = 0.05,
-               crossImmunity = 0.1, 
-               infectDeath = 0,
-               maxDistance = 100)
-
-  p$I[1, , 1] <- colonySize[x] - 20
-
-  # Seed endemic pathogen.
-  p$I[3, , 1] <- 20
-  
-  # Recalculate rates of each event after seeding.
-  p <- transRates(p, 1)
-
-  # Burn in simulation
-  p <- runSim(p, end = invadeT)
-
-  # Seed invading pathogen.
-  p$I[2, 1, (invadeT + 1) %% sample] <- 5
-  
-  # Recalculate rates of each event after seeding.
-  p <- transRates(p, (invadeT + 1) %% sample)
-
-  # Continue simulation
-  p <- runSim(p, start = invadeT + 1, end = 'end')
-
-  # Was the invasion succesful?
-  invasion <- findDisDistr(p, 2)[1] > 0
-
-  # Save summary stats
-  d <- data.frame(transmission = NA)
-
-  d$transmission <- p$parameters['transmission']
-  d$dispersal <- p$parameters['dispersal']
-  d$nExtantDis <- sum(findDisDistr(p, 2) > 0)
-  d$nPathogens <- p$parameters['nPathogens']
-  d$meanK <- sum(p$adjacency != 0 )/p$parameters['nColonies']
-  d$maxDistance <- p$parameters['maxDistance']
-  d$nEvents <- p$parameters['events']
-  d$colonySize <- p$parameters['meanColonySize']
-  d$colonyNumber <- p$parameters['nColonies']
-  d$pop <- p$parameters['meanColonySize'] * p$parameters['nColonies']
-  d$area <- p$parameters['space']^2
-  d$dens <- d$pop / d$area
-
-
-  message(paste0("finished ", x, ". Invasion: ", invasion ))
-  message(paste('trans:', d$transmission, 'nColonies:', d$colonyNumber, 
-    'colonySize:', d$colonySize, 'dens:', d$dens, 'pop:', d$pop))
-  
-  if(saveData){ 
-    file <- paste0('data/Chapter4/DensSim_', formatC(x, width = 4, flag = '0'), '.RData')
-    save(p, file = file)
-  }
-
-  rm(p)
-
-  return(d)
-
-}
 %%end.rcode
 
 %%begin.rcode runDensSim, eval = F, cache = TRUE
@@ -390,84 +314,6 @@ write.csv(z, file = 'data/Chapter4/DensSims.csv')
 
   tran <- rep(c(0.1, 0.2, 0.3), times = 5 * each)
 
-# Define our simulation function.
-fullSim <- function(x){
-
-  # Set seed (this is set within each parallel simulation to prevent reusing random numbers).
-  simSeed <- paste0(seed, x)
-  set.seed(simSeed)
-
-  # Make the population.
-  p <- makePop(space = side[x], 
-               transmission = tran[x], 
-               meanColonySize = colonySize, 
-               nColonies = colonyNumber[x], 
-               model = 'SIR', 
-               events = nEvent, 
-               nPathogens = 2, 
-               recovery = 0.5,  
-               sample = sample, 
-               dispersal = 0.01, 
-               birth = 0.05, 
-               death = 0.05,
-               crossImmunity = 0.1, 
-               infectDeath = 0,
-               maxDistance = 100)
-
-  p$I[1, , 1] <- colonySize - 20
-
-  # Seed endemic pathogen.
-  p$I[3, , 1] <- 20
-  
-  # Recalculate rates of each event after seeding.
-  p <- transRates(p, 1)
-
-  # Burn in simulation
-  p <- runSim(p, end = invadeT)
-
-  # Seed invading pathogen.
-  p$I[2, 1, (invadeT + 1) %% sample] <- 5
-  
-  # Recalculate rates of each event after seeding.
-  p <- transRates(p, (invadeT + 1) %% sample)
-
-  # Continue simulation
-  p <- runSim(p, start = invadeT + 1, end = 'end')
-
-  # Was the invasion succesful?
-  invasion <- findDisDistr(p, 2)[1] > 0
-
-  # Save summary stats
-  d <- data.frame(transmission = NA)
-
-  d$transmission <- p$parameters['transmission']
-  d$dispersal <- p$parameters['dispersal']
-  d$nExtantDis <- sum(findDisDistr(p, 2) > 0)
-  d$nPathogens <- p$parameters['nPathogens']
-  d$meanK <- sum(p$adjacency != 0 )/p$parameters['nColonies']
-  d$maxDistance <- p$parameters['maxDistance']
-  d$nEvents <- p$parameters['events']
-  d$colonySize <- p$parameters['meanColonySize']
-  d$colonyNumber <- p$parameters['nColonies']
-  d$pop <- p$parameters['meanColonySize'] * p$parameters['nColonies']
-  d$area <- p$parameters['space']^2
-  d$dens <- d$pop / d$area
-
-
-  message(paste0("finished ", x, ". Invasion: ", invasion ))
-  message(paste('trans:', d$transmission, 'nColonies:', d$colonyNumber, 
-    'colonySize:', d$colonySize, 'dens:', d$dens, 'pop:', d$pop))
-
-  if(saveData){ 
-    file <- paste0('data/Chapter4/DensSim_', formatC(x, width = 4, flag = '0'), '.RData')
-    save(p, file = file)
-  }
-
-  rm(p)
-
-  return(d)
-
-}
 %%end.rcode
 
 %%begin.rcode runDens2Sim, eval = runAllSims, cache = TRUE
@@ -525,85 +371,6 @@ write.csv(z, file = 'data/Chapter4/Dens2Sims.csv')
 
   tran <- rep(c(0.1, 0.2, 0.3), times = 5 * each)
 
-# Define our simulation function.
-fullSim <- function(x){
-
-  # Set seed (this is set within each parallel simulation to prevent reusing random numbers).
-  simSeed <- paste0(seed, x)
-  set.seed(simSeed)
-
-  # Make the population.
-  p <- makePop(space = side[x], 
-               transmission = tran[x], 
-               meanColonySize = colonySize, 
-               nColonies = 20, 
-               model = 'SIR', 
-               events = nEvent, 
-               nPathogens = 2, 
-               recovery = 0.5,  
-               sample = sample, 
-               dispersal = 0.01, 
-               birth = 0.05, 
-               death = 0.05,
-               crossImmunity = 0.1, 
-               infectDeath = 0,
-               maxDistance = 100)
-
-  p$I[1, , 1] <- colonySize - 20
-
-  # Seed endemic pathogen.
-  p$I[3, , 1] <- 20
-  
-  # Recalculate rates of each event after seeding.
-  p <- transRates(p, 1)
-
-  # Burn in simulation
-  p <- runSim(p, end = invadeT)
-
-  # Seed invading pathogen.
-  p$I[2, 1, (invadeT + 1) %% sample] <- 5
-  
-  # Recalculate rates of each event after seeding.
-  p <- transRates(p, (invadeT + 1) %% sample)
-
-  # Continue simulation
-  p <- runSim(p, start = invadeT + 1, end = 'end')
-
-  # Was the invasion succesful?
-  invasion <- findDisDistr(p, 2)[1] > 0
-
-  # Save summary stats
-  d <- data.frame(transmission = NA)
-
-
-  d$transmission <- p$parameters['transmission']
-  d$dispersal <- p$parameters['dispersal']
-  d$nExtantDis <- sum(findDisDistr(p, 2) > 0)
-  d$nPathogens <- p$parameters['nPathogens']
-  d$meanK <- sum(p$adjacency != 0 )/p$parameters['nColonies']
-  d$maxDistance <- p$parameters['maxDistance']
-  d$nEvents <- p$parameters['events']
-  d$colonySize <- p$parameters['meanColonySize']
-  d$colonyNumber <- p$parameters['nColonies']
-  d$pop <- p$parameters['meanColonySize'] * p$parameters['nColonies']
-  d$area <- p$parameters['space']^2
-  d$dens <- d$pop / d$area
-
-
-  message(paste0("finished ", x, ". Invasion: ", invasion ))
-  message(paste('trans:', d$transmission, 'nColonies:', d$colonyNumber, 
-    'colonySize:', d$colonySize, 'dens:', d$dens, 'pop:', d$pop))
-  
-  if(saveData){ 
-    file <- paste0('data/Chapter4/PopSim_', formatC(x, width = 4, flag = '0'), '.RData')
-    save(p, file = file)
-  }
-
-  rm(p)
-
-  return(d)
-
-}
 %%end.rcode
 
 %%begin.rcode runPopSim, eval = runAllSims, cache = TRUE
@@ -947,47 +714,47 @@ popModel <- pop %>%
 
 
 
-#ggplot(dens1Means, aes(x = factor(transmission), y = mean, fill = factor(colonySize))) +
-#  geom_bar(stat = 'identity', position=position_dodge()) +
-#  geom_errorbar(aes(ymin = lower, ymax = upper),
-#                width=.2,                   
-#                position = position_dodge(.9)) +
-#  xlab('Transmission') + 
-#  ylab('Prop. Invasions') +
-#  ylim(0, 1) +
-#  scale_fill_poke(name="Colony Size", 
-#                 #labels=c('0.001', '0.01', '0.1'), 
-#                 pokemon = 'Swampert',
-#                 spread = 5)
+ggplot(dens1Means, aes(x = factor(transmission), y = mean, fill = factor(colonySize))) +
+  geom_bar(stat = 'identity', position=position_dodge()) +
+  geom_errorbar(aes(ymin = lower, ymax = upper),
+                width=.2,                   
+                position = position_dodge(.9)) +
+  xlab('Transmission') + 
+  ylab('Prop. Invasions') +
+  ylim(0, 1) +
+  scale_fill_poke(name="Colony Size", 
+                 #labels=c('0.001', '0.01', '0.1'), 
+                 pokemon = 'Swampert',
+                 spread = 5)
 
 
 
-#ggplot(dens2Means, aes(x = factor(transmission), y = mean, fill = factor(colonyNumber))) +
-#  geom_bar(stat = 'identity', position=position_dodge()) +
-#  geom_errorbar(aes(ymin = lower, ymax = upper),
-#                width=.2,                   
-#                position = position_dodge(.9)) +
-#  ylim(0, 1) +
-#  xlab('Transmission') + 
-#  ylab('Prop. Invasions') +
-#  scale_fill_poke(name="Colony Number", 
-#                 #labels=c('0.001', '0.01', '0.1'), 
-#                 pokemon = 'Swampert',
-#                 spread = 5)
+ggplot(dens2Means, aes(x = factor(transmission), y = mean, fill = factor(colonyNumber))) +
+  geom_bar(stat = 'identity', position=position_dodge()) +
+  geom_errorbar(aes(ymin = lower, ymax = upper),
+                width=.2,                   
+                position = position_dodge(.9)) +
+  ylim(0, 1) +
+  xlab('Transmission') + 
+  ylab('Prop. Invasions') +
+  scale_fill_poke(name="Colony Number", 
+                 #labels=c('0.001', '0.01', '0.1'), 
+                 pokemon = 'Swampert',
+                 spread = 5)
 
 
-#ggplot(popMeans, aes(x = factor(transmission), y = mean, fill = factor(area))) +
-#  geom_bar(stat = 'identity', position=position_dodge()) +
-#  geom_errorbar(aes(ymin = lower, ymax = upper),
-#                width=.2,                   
-#                position = position_dodge(.9)) +
-#  xlab('Transmission') + 
-#  ylab('Prop. Invasions') +
-#  ylim(0, 1) +
-#  scale_fill_poke(name="Area", 
-#                 #labels=c('0.001', '0.01', '0.1'), 
-#                 pokemon = 'Swampert',
-#                 spread = 5) 
+ggplot(popMeans, aes(x = factor(transmission), y = mean, fill = factor(area))) +
+  geom_bar(stat = 'identity', position=position_dodge()) +
+  geom_errorbar(aes(ymin = lower, ymax = upper),
+                width=.2,                   
+                position = position_dodge(.9)) +
+  xlab('Transmission') + 
+  ylab('Prop. Invasions') +
+  ylim(0, 1) +
+  scale_fill_poke(name="Area", 
+                 #labels=c('0.001', '0.01', '0.1'), 
+                 pokemon = 'Swampert',
+                 spread = 5) 
 
 %%end.rcode
 
@@ -1052,7 +819,7 @@ valueChangeMeansCapt <- '
 Comparison of the effect of colony size, colony number and area on probability of invasion.
 Default values are: colony number = 20, colony size = 400 and density = 0.8 animals per unit area.
 The $x$-axis shows the relative change in each of these values ($\\times 0.25, 0.5, 1, 2$ and $4$).
-For colony size and number, area is altered  so that density remains constant.
+For colony size and number, area is altered so that density remains constant.
 For density, population size is constant at 8,000 and area is altered.
 Relationships are shown seperately for each transmission value.
 Each point is the mean of \rinline{each} simulations and bars are 95\\% confidence intervals.
@@ -1314,24 +1081,19 @@ However, again, this affect is very weak compared to the strong changes in local
 
 
 
-\tmpsection{Relate back to global change}
+\subsection{Global change}
 
 It is clear that many species are suffering strong population changes due to climate change \cite{thomas2004extinction}.
-However these changes might affect range size \cite{thomas2004extinction}, population abundance \cite{craigie2010large}, population connectivity \cite{} or group size \cite{lehmann2010apes, zunino2007habitat, manor2003impact, atwood2006influence}.
-My results suggest that pathogen communities will response differently depending on the change although it should be noted that the mechanism here---invasion of a new pathogen    is possibly more relevant in the longer term.
+However these changes might affect range size \cite{thomas2004extinction}, population abundance \cite{craigie2010large}, population connectivity \cite{} or group size \cite{lehmann2010apes, zunino2007habitat, manor2003impact, atwood2006influence} to different extents.
+My results suggest that pathogen communities will response differently depending on the change although it should be noted that the mechanism here---invasion of a new pathogen---is possibly more relevant in the longer term.
+In short, species suffering reductions in groups size \cite{lehmann2010apes, zunino2007habitat, manor2003impact, atwood2006influence} are predicted to experience decreases in pathogen richness in the long term.
+Species that are experience increases in group size \cite{lehmann2010apes} would be expected gain new pathogen species more quickly.
+In contrast, species suffering range contractions \cite{thomas2004extinction} and decreases in abundance \cite{craigie2010large} are expected to experience smaller changes in pathogen richness.
 
 
-Group size changes with global change (decrease \cite{lehmann2010apes, zunino2007habitat, manor2003impact, atwood2006influence} and increase \cite{lehmann2010apes})
+\subsection{Comparative studies}
 
-
-Range size changes with global change \cite{thomas2004extinction} as does abundance \cite{craigie2010large}.
-
-
-
-
-\tmpsection{Contrast to the literature}
-
-%group size \cite{vitone2004body, gay2014parasite, ezenwa2006host, rifkin2012animals, nunn2003comparative}
+Many comparative studies measure some aspect 
 
 While some studies have found a relationship between social group size and pathogen richness \cite{vitone2004body}, others have found negative relationships \cite{gay2014parasite}.
 Overall the empirical evidence is weak \cite{ezenwa2006host, rifkin2012animals}
@@ -1342,7 +1104,7 @@ Range Size \cite{lindenfors2007parasite, nunn2003comparative, turmelle2009correl
 
 
 
-\tmpsection{Assumptions}
+\subsection{Assumptions}
 
 
 
@@ -1354,7 +1116,7 @@ Range Size \cite{lindenfors2007parasite, nunn2003comparative, turmelle2009correl
 % Badger Group size versus territory size http://onlinelibrary.wiley.com/doi/10.1034/j.1600-0706.2001.950208.x/abstract
 
 
-\tmpsection{conclusions}
+\subsection{Conclusions}
 
 
 
