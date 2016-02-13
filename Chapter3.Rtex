@@ -1238,6 +1238,8 @@ Despite commonly being associated with pathogen richness \cite{arneberg2002host,
 I used both the number of subspecies a bat species has and estimates of gene flow (analysed separately) as measures of population structure.
 All analyses were run in R \cite{R}
 
+\subsection{Pathogen richness}
+
 To measure pathogen richness I used data from \cite{luis2013comparison}. 
 These simply include known infections of a bat species with a pathogen species. 
 Only species with at least one pathogen were included in the analysis.
@@ -1569,7 +1571,7 @@ p %<+% nSpecies[, 1:6] +
 
 %%end.rcode
 
-
+\subsection{Population stucture data}
 
 I used two measures of population structure. 
 Gene flow and the number of subspecies.
@@ -1869,6 +1871,8 @@ ggplot(fstFinal, aes(x = Nm, y = virusSpecies, colour = Marker)) +
 
 %%end.rcode
 
+\subsection{Other independant variables}
+
 To control for study bias I collected the number of Pubmed and Google Scholar citations for each bat species name including synonyms from ITIS \cite{itis} via the taxize package \cite{chamberlain2013taxize}.
 The counts were scraped using the rvest package \cite{rvest}.
 I log transformed these variables as they were strongly right skewed.
@@ -1901,7 +1905,7 @@ plot_grid(ITPlot, fstIT, labels = c("A", "B"), align = 'h', label_size = 10)
 %%end.rcode
 
 
-
+\subsection{Phylogenetic nonindependance}
 
 To control for phylogenetic nonindependance I used the best-supported phylogeny from \textcite{fritz2009geographical} (shown in Figure~\ref{fig:treePlot}) which is the supertree from \cite{bininda2007delayed} with names updated to match the Wilson \& Reeder taxonomy \cite{wilson2005mammal}.
 Phylogenetic manipulation was performed using the ape package \cite{ape}.
@@ -2162,7 +2166,7 @@ I have found that a positive affect of population structure (a positive effect o
 Study effort is also clearly supported confirming the expectation that additional study of a bat species yields more known viruses infecting that species and highlighting again that this bias cannot be ignored in studies using known pathogen richness as a proxy for total pathogen richness.
 
 
-\tmpsection{Weaknesses and limitations}
+\subsection{Study limitations}
 
 Although I have used measures of study effort to try to control for biases in the viral richness data, this bias could still make the results here unreliable---this is especially true as study effort is by far the strongest predictor of viral richness in both datasets.
 It is hoped that as untargeted sequencing of viral genetic material (e.g. \textcite{anthony2013strategy}) becomes cheaper and more common this bias can be reduced.
@@ -2182,7 +2186,6 @@ The sensitivity of this analysis reiterates the need to use large datasets where
 The results here suggest that there is a positive relationship between population structure and pathogen richness in bats.
 This is in agreement with \cite{maganga2014bat, turmelle2009correlates} but in disagreement with \cite{gay2014parasite}.
 Furthermore it contradicts the assumption that factors that promote high $R_0$ will automatically promote high pathogen richness \cite{nunn2003comparative, morand2000wormy}.
-
 This relationship implies that direct or indirect competitive mechanisms are acting such that population structure is needed in order to allow escape from competition.
 %Another potential mechanism by which structure might be promoting increased richness is by slowing the spread of highly virulent viruses such as rabies and preventing them from having short, intense epidemics followed by extinction \cite{}.
 %This mechanism has interesting parallel to metapopulation theory in ecology in which a metapopulation structure can allow persistence of species that would otherwise go extinct.
@@ -2199,7 +2202,7 @@ I the main mechanism is one that reduces pathogen extinction rates, a newly frag
 If however population structure actively promotes the evolution of new pathogen strains or allows the persistence of more virulent strains this could have important public health implications.
 Therefore further study on the exact mechanisms by which population structure affects pathogen richness is needed. 
 
-\tmpsection{Conclusions}
+\subsection{Conclusions}
 
 In conclusion, this study adds to the evidence that population structure may promote pathogen richness.
 It does not support the view that factors that increase $R_0$ will increase pathogen richness.
