@@ -518,118 +518,6 @@ mtext(side = 3,  line = -0.3, text = 'D', cex = 1.1, family = 'Lato', at = -22)
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\section{Methods}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%
-
-
-
-
-\subsection{Metapopulation model}
-
-\tmpsection{Overview}
-
-
-I used two-pathogen, metapopulation SIR model to compare the roles of demograhic parameters on pathogen species richness.
-Specifically I let two identical pathogens (and endemic pathogen and an invading pathogen) compete.
-I used presistence or not of the second pathogen as my response variable.
-I test whether population abundance is more important than population density.
-I then test whether colony size or the number of colonies is the more important component of population abundance.
-The multpathogen SIR model is identical to that in Chapter \ref{ch:sims1} and is implemented in R \cite{R}.
-
-
-
-In each simulation the population is seeded with 20 individuals infected with pathogen 1 in each colony. 
-Pathogen 1 is then allowed to spread and reach equilibrium. 
-After \rinline{invadeT} events, 5 individuals infected with pathogen 2 are added to one colony. 
-After another \rinline{nEvent - invadeT} events the invasion of pathogen 2 is considered successful if any individuals with pathogen 2 still remain.
-
-\subsection{Dependant variables}
-
-Three dependant variables were varied: colony size, number of colonies and area.
-From these parameters, population abundance and population density can be calculated.
-The default values of these parameters was a population size of 8000 individuals split into 20 colonies of 400.
-The default area of the simulations was 
-
-Three sets of simulations were run.
-First, colony size was varied using values \rinline{dep1[-5]} and \rinline{dep1[5]}.
-The number of colonies was kept constant and so population abundance varied with colony size.
-Area was scaled to keep population density constant. 
-Secondly, number of colonies (and therefore population abundance) was varied and again area was varied to keep density constant.
-\rinline{dep2[-5]} and \rinline{dep2[5]} colonies were used.
-Finally, colony size and number of colonies were kept constant (therefore keeping population abundance constant) and area was varied alone to alter population density. 
-The values of area used were \rinline{dep3[-5]} and \rinline{dep3[5]} which gave density values of \rinline{depDens[-5]} and \rinline{depDens[5]}.
-
-The affects of area occur through changing the metapopulation network.
-The metapopulation structure was created for each simulation by randomly placing colonies in space (Figure~\ref{fig:colonyNetworkPlots}).
-The spatial scale of the simulations vary between \rinline{min(area)} and \rinline{max(area)} km$^2$ (space is given in kilometers even though they are oin fact arbitrary units for simplicity).
-This corresponds to square areas with sides of \rinline{sqrt(min(area))} to \rinline{sqrt(max(area))} km).
-Dispersal can only occur between two colonies if they are within 100 kilometers of each other i.e. they are connected nodes in the metapopulation network.
-The number of connections each colony has is called its degree, $k$.
-How well connected the metapopulation network is overall is measured by the mean degree, $\bar{k}$.
-This does not guarentee that the population is fully connected but as the endemic pathogen is seeded in all colonies, the invading pathogen cannot be seeded into a fully susceptible colony.
-This was considered more realistic than repeatedly resampling the population until a fully connected population occured.
-The threshold of 100 kilometers was arbitrary but I aimed to maximise the range  of $\bar{k}$ (Figre~\ref{fig:plotK}) while not having many simulations with networks that were not fully connected.
-Given this setup, simulations with low densities had relatively unconnected metapopulation networks while high density populations had fully connected networks.
-
-
-
-\subsection{Other Parameters}
-%TODO switch all b's to d or something else, so that b can be used for regression coeficients. In all eqns in +ch2 as well.
-
-The fixed parameters used are chosen to roughly reflect realistic wild bat populations. 
-The death rate $\Lambda$ is set as 0.05 per year giving a generation time of 20 years.
-The birth rate is set to be equal to $\mu$ so that the population size is stable.
-The recovery rate $\gamma$ is set to 1 giving a average infection duration of 1 years. 
-This is therefore a long lasting infection but not a chronic infection. 
-It is very difficult to directly estimate infection durations in wild populations but it seems that these infections might sometimes be long lasting \cite{peel2012henipavirus, plowright2015ecological}.
-However, other studies have found much shorter infectious periods \cite{amengual2007temporal}.
-These shorter lived in infections are studied further here as preliminary simulations found that they could not persist in the relatively small populations being modelled here.
-
-Cross immunity is set to 0.1 so that an individual infected with one pathogen is 90\% less likely to be infected with another.
-This is a rather arbitrary value.
-However, the rationale of the model is that the invading species might be a newly speciated strain of the endemic species.
-Furthermore, the model assumes complete cross immunity after recovery from infection.
-Therefore cross immunity to coinfection is likely to be very strong as well.
-
-Three values of the transmission rate $\beta$ are used, 0.1, 0.2 and 0.3.
-All simulations are run under all three transmission rates as this is a fundamental parameter that changes the broad dynamics of the pathogens.
-
-
-\subsection{Statistical comparisons}
-
-I tested two hypotheses.
-Firstly I tested the hypothesis that an increase in population abundance creates a stronger increase in invasion probability (of the second pathogen) than an equal increase in population density.
-Secondly I tested the hypothesis that ana increase in colony size creates a stronger increase in invasion probability an an equal increase in number of colonies.
-To statistically test these hypotheses I combined the results from different simulations and fitted multiple logistic regressions, centering and scaling the dependant variables.
-Specifically, I fitted the model 
-\begin{align}
-\text{invasion} = b_1 d + b_2 n + b_3 m + c + \epsilon
-\end{align}
-where $d, n$ and $m$ are density, colony size and number of colonies respecitvely and $c$ is a fitted intercept, $\epsilon$ is a binomially distributed error term and $b_i$ are the regression coefficients.
-To test the first hypothesis I compared the size (and 95\% confidence intervals) of $b_1$ to $b_2$ and $b_3$.
-To test the second hypothesis I compared $b_2$ to $b_3$.
-
-
-
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\section{Results}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
 %%begin.rcode calcMeans
 # Constant density, altered colony size
 
@@ -838,7 +726,7 @@ Default values are: colony number = 20, colony size = 400 and density = 0.8 anim
 The $x$-axis shows the relative change in each of these values ($\\times 0.25, 0.5, 1, 2$ and $4$).
 For colony size and number, area is altered so that density remains constant.
 For density, population size is constant at 8,000 and area is altered.
-Each point is the mean of \rinline{each} simulations and bars are 95\\% confidence intervals.
+Each point is the mean of 100 simulations and bars are 95\\% confidence intervals.
 Curves are bivariate logistic regression fits for each independant variable.
 Relationships are shown seperately for each transmission value.
 '
@@ -932,14 +820,6 @@ ggplot(d, aes(x = ValueChange, y = mean, colour = vary)) +
 %%begin.rcode statTests 
 
 
-#jointModel  <- rbind(
-#                 dens1 %>% mutate(vary = 'colonySize'), 
-#                 dens2 %>% mutate(vary = 'colonyNumber')
-#               ) %>%
-#               mutate(invasion = as.numeric(nExtantDis == 2)) %>%
-#               group_by(transmission) %>%
-#               do(fit = glm(invasion ~ colonySize + colonyNumber, data = ., family = 'binomial')) %>%
-
 combDensModel <- rbind(dens1, dens2) %>% 
                    mutate(invasion = nExtantDis == 2 ) %>%
                    group_by(transmission) %>% 
@@ -951,7 +831,7 @@ combModel <- rbind(dens1, dens2, pop) %>%
                mutate(invasion = nExtantDis == 2 ) %>%
                group_by(transmission) %>% 
                mutate(colonySize = scale(colonySize), colonyNumber = scale(colonyNumber), area = scale(area)) %>% 
-               do(glm(invasion ~  colonyNumber + area + colonySize, data = ., family = binomial) %>% tidy)
+               do(glm(invasion ~  colonySize + colonyNumber + area, data = ., family = binomial) %>% tidy)
 
 combModel <- rbind(dens1, dens2, pop) %>% 
                mutate(invasion = nExtantDis == 2 ) %>%
@@ -970,6 +850,7 @@ transMeansCapt <- '
 Comparison of the effect of population size on probability of invasion when population size is altered by changing colony size or colony number.
 Relationship is shown seperately for each transmission value.
 It can be seen that changes in colony size give a much greater increase in invasion probability than changes in colony number.
+Note that this is the same data as Figure~\\ref{fig:plotValueChangeMeans} but on a different scale.
 '
 
 transMeansTitle <- 'Comparison of the probability of invasion when population size is altered by changing colony size or colony number.'
@@ -1002,18 +883,190 @@ ggplot(d2, aes(x = pop, y = mean, colour = vary)) +
 
 %%end.rcode
 
+%%begin.rcode descriptive
+
+meanDefault <- rbind(dens1, dens2, pop) %>%
+                 filter(colonyNumber == 20, colonySize == 400, dens == 0.8, nExtantDis != 0) %>%
+                 group_by(transmission) %>%
+                 summarise(mean = mean(nExtantDis == 2))
+
+transTest <- rbind(dens1, dens2, pop) %>%
+                 filter(colonyNumber == 20, colonySize == 400, dens == 0.8, nExtantDis != 0) %>%
+               group_by(transmission) %>%
+               summarise(x = sum(nExtantDis == 2), n = n()) %>% 
+               with(., prop.test(x = x, n = n)) %>%
+               tidy
+
+
+
+
+nAllExtinct <- rbind(dens1, dens2, pop) %>%
+                 filter(nExtantDis == 0) %>%
+                 nrow
+
+
+whichTransAllExtinct <- rbind(dens1, dens2, pop) %>%
+                          filter(nExtantDis == 0) %>%
+                          group_by(transmission) %>%
+                          summarise(n = n())
+
+transExtinctTest <- chisq.test(whichTransAllExtinct$n) %>% tidy
+
+
+smallAllExtinct <- rbind(dens1, dens2, pop) %>%
+                          filter(nExtantDis == 0, colonySize == 100) %>%
+                          summarise(n = n())
+
+fewAllExtinct <- rbind(dens1, dens2, pop) %>%
+                          filter(nExtantDis == 0, colonyNumber == 5) %>%
+                          summarise(n = n())
+
+
+%%end.rcode
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section{Methods}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%
+
+
+
+
+\subsection{Metapopulation model}
+
+\tmpsection{Overview}
+
+
+I used two-pathogen, metapopulation SIR model to compare the roles of demograhic parameters on pathogen species richness.
+Specifically I let two identical pathogens (and endemic pathogen and an invading pathogen) compete.
+I used presistence or not of the second pathogen as my response variable.
+I test whether population abundance is more important than population density.
+I then test whether colony size or the number of colonies is the more important component of population abundance.
+The multpathogen SIR model is identical to that in Chapter \ref{ch:sims1} and is implemented in R \cite{R}.
+
+
+
+In each simulation the population is seeded with 20 individuals infected with pathogen 1 in each colony. 
+Pathogen 1 is then allowed to spread and reach equilibrium. 
+After \rinline{invadeT} events, 5 individuals infected with pathogen 2 are added to one colony. 
+After another \rinline{nEvent - invadeT} events the invasion of pathogen 2 is considered successful if any individuals with pathogen 2 still remain.
+
+\subsection{Dependant variables}
+
+Three dependant variables were varied: colony size, number of colonies and area.
+From these parameters, population abundance and population density can be calculated.
+The default values of these parameters was a population size of 8000 individuals split into 20 colonies of 400.
+The default area of the simulations was 
+
+Three sets of simulations were run.
+First, colony size was varied using values \rinline{dep1[-5]} and \rinline{dep1[5]}.
+The number of colonies was kept constant and so population abundance varied with colony size.
+Area was scaled to keep population density constant. 
+Secondly, number of colonies (and therefore population abundance) was varied and again area was varied to keep density constant.
+\rinline{dep2[-5]} and \rinline{dep2[5]} colonies were used.
+Finally, colony size and number of colonies were kept constant (therefore keeping population abundance constant) and area was varied alone to alter population density. 
+The values of area used were \rinline{dep3[-5]} and \rinline{dep3[5]} which gave density values of \rinline{depDens[-5]} and \rinline{depDens[5]}.
+
+The affects of area occur through changing the metapopulation network.
+The metapopulation structure was created for each simulation by randomly placing colonies in space (Figure~\ref{fig:colonyNetworkPlots}).
+The spatial scale of the simulations vary between \rinline{min(area)} and \rinline{max(area)} km$^2$ (space is given in kilometers even though they are oin fact arbitrary units for simplicity).
+This corresponds to square areas with sides of \rinline{sqrt(min(area))} to \rinline{sqrt(max(area))} km).
+Dispersal can only occur between two colonies if they are within 100 kilometers of each other i.e. they are connected nodes in the metapopulation network.
+The number of connections each colony has is called its degree, $k$.
+How well connected the metapopulation network is overall is measured by the mean degree, $\bar{k}$.
+This does not guarentee that the population is fully connected but as the endemic pathogen is seeded in all colonies, the invading pathogen cannot be seeded into a fully susceptible colony.
+This was considered more realistic than repeatedly resampling the population until a fully connected population occured.
+The threshold of 100 kilometers was arbitrary but I aimed to maximise the range  of $\bar{k}$ (Figre~\ref{fig:plotK}) while not having many simulations with networks that were not fully connected.
+Given this setup, simulations with low densities had relatively unconnected metapopulation networks while high density populations had fully connected networks.
+
+
+
+\subsection{Other Parameters}
+%TODO switch all b's to d or something else, so that b can be used for regression coeficients. In all eqns in +ch2 as well.
+
+The fixed parameters used are chosen to roughly reflect realistic wild bat populations. 
+The death rate $\Lambda$ is set as 0.05 per year giving a generation time of 20 years.
+The birth rate is set to be equal to $\mu$ so that the population size is stable.
+The recovery rate $\gamma$ is set to 1 giving a average infection duration of 1 years. 
+This is therefore a long lasting infection but not a chronic infection. 
+It is very difficult to directly estimate infection durations in wild populations but it seems that these infections might sometimes be long lasting \cite{peel2012henipavirus, plowright2015ecological}.
+However, other studies have found much shorter infectious periods \cite{amengual2007temporal}.
+These shorter lived in infections are studied further here as preliminary simulations found that they could not persist in the relatively small populations being modelled here.
+
+Cross immunity is set to 0.1 so that an individual infected with one pathogen is 90\% less likely to be infected with another.
+This is a rather arbitrary value.
+However, the rationale of the model is that the invading species might be a newly speciated strain of the endemic species.
+Furthermore, the model assumes complete cross immunity after recovery from infection.
+Therefore cross immunity to coinfection is likely to be very strong as well.
+
+Three values of the transmission rate $\beta$ are used, 0.1, 0.2 and 0.3.
+All simulations are run under all three transmission rates as this is a fundamental parameter that changes the broad dynamics of the pathogens.
+
+
+\subsection{Statistical comparisons}
+
+I tested two hypotheses.
+Firstly I tested the hypothesis that an increase in population abundance creates a stronger increase in invasion probability (of the second pathogen) than an equal increase in population density.
+Secondly I tested the hypothesis that ana increase in colony size creates a stronger increase in invasion probability an an equal increase in number of colonies.
+To statistically test these hypotheses I combined the results from different simulations and fitted multiple logistic regressions, centering and scaling the dependant variables.
+Specifically, I fitted the model 
+\begin{align}
+  \text{invasion} = b_1 d + b_2 n + b_3 m + c + \epsilon
+\end{align}
+where $d, n$ and $m$ are density, colony size and number of colonies respectively and $c$ is a fitted intercept, $\epsilon$ is a binomially distributed error term and $b_i$ are the regression coefficients.
+To test the first hypothesis I compared the size (and 95\% confidence intervals) of $b_1$ to $b_2$ and $b_3$.
+To test the second hypothesis I compared $b_2$ to $b_3$.
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section{Results}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%     Results text    %%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+At the default parameter settings, the probability of invasion and establishment of the second pathogen, $P(I)$,  was rare ($\beta = 0.1,\: P(I) = \rinline{meanDefault$mean[1]};\: \beta = 0.2,\: P(I) = \rinline{meanDefault$mean[2]};\: \beta = 0.3,\: P(I) = \rinline{meanDefault$mean[3]}$).
+Although there is no clear pattern, these proportions are significantly different ($\chi^2$ test: $\chi^2 = \rinline{transTest$statistic},\: \text{df} = \rinline{transTest$parameter},\: p = \rinline{transTest$p.value}$).
+
+In \rinline{nAllExtinct} simulations, both of the pathogens went extinct.
+This did not depend on transmission rate ($\chi^2$ test: $\chi^2 = \rinline{transExtinctTest$statistic},\: \text{df} = \rinline{transExtinctTest$parameter},\: p = \rinline{transExtinctTest$p.value}$).
+However they were all either in simulations with the smallest colony size (colony size = 100, \rinline{smallAllExtinct} simulations) or with the fewest colonies (5 colonies, \rinline{fewAllExtinct} simulations).
+These simulations were ignored in further analyses.
+
+
+
 \subsection{Population density or abundance}
 
 To test whether population density or abundance has a stronger affect on invasion probability I compared the regression coefficients of the multiple regressions fitted to simulation results (Figure~\ref{fig:plotValueChangeMeans}).
-
+Increasing abundance, either by increasing colony size or number of colonies, increases the probability of invasion (Table~\ref{t:regrCoefs}).
+The relationship between colony size and invasion is strong and significant at all transmission rates, while the relationship between colony number and invasion is weaker and more marginally significant.
+In contrast, varying population density does not alter invasion probability.
+Therefore the simulations support the hypothesis that population abundance affects invasion more strongly than population density.
 
 
 \subsection{Colony size or number of groups}
+
+To test whether colony size or the number of colonies is the more important component of population abundance, I compared the regression coefficients of the multiple regressions fitted to simulation results (Figure~\ref{fig:plotTransMeans}).
+Increasing colony size or the number of colonies increases the probability of invasion but this affect is much stronger for colony size (Table~\ref{t:regrCoefs}).
+Therefore the simulations support the hypothesis that colony size is the more important component of population size, though colony number does still increase the probability of invasion.
+
+
 
 
 
