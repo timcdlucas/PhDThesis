@@ -1021,6 +1021,7 @@ combModel <- rbind(dens1, dens2, pop) %>%
 
 
 
+
 \subsection{Colony size or number of groups}
 
 
