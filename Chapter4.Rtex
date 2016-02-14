@@ -609,9 +609,9 @@ Secondly I tested the hypothesis that ana increase in colony size creates a stro
 To statistically test these hypotheses I combined the results from different simulations and fitted multiple logistic regressions, centering and scaling the dependant variables.
 Specifically, I fitted the model 
 \begin{align}
-\text{invasion} = b_1\cdot \text{density} + b_2\cdot  \text{colony size} + b_3\cdot  \text{number of colonies} + c + \epsilon
+\text{invasion} = b_1 d + b_2 n + b_3 m + c + \epsilon
 \end{align}
- where $c$ is a fitted intercept, $\epsilon$ is a binomially distributed error term and $b_i$ are the regression coefficients.
+where $d, n$ and $m$ are density, colony size and number of colonies respecitvely and $c$ is a fitted intercept, $\epsilon$ is a binomially distributed error term and $b_i$ are the regression coefficients.
 To test the first hypothesis I compared the size (and 95\% confidence intervals) of $b_1$ to $b_2$ and $b_3$.
 To test the second hypothesis I compared $b_2$ to $b_3$.
 
@@ -828,39 +828,6 @@ densPreds <- rbind(dens1Model, dens2Model) %>%
 %%end.rcode
 
 
-%%begin.rcode transMeansCapt
-
-transMeansCapt <- '
-Comparison of the effect of population size on probability of invasion when population size is altered by changing colony size or colony number.
-Relationship is shown seperately for each transmission value.
-It can be seen that changes in colony size give a much greater increase in invasion probability than changes in colony number.
-'
-
-transMeansTitle <- 'Comparison of the probability of invasion when population size is altered by changing colony size or colony number.'
-
-%%end.rcode
-
-%%begin.rcode plotTransMeans, fig.cap = transMeansCapt, fig.scap = transMeansTitle, out.width = '0.9\\textwidth', fig.show = extraFigs
-
-
-rbind(dens1Means, dens2Means) %>%
-ggplot(., aes(x = pop, y = mean, colour = vary)) +
-  geom_line(data = densPreds, aes(x = pop, y = pred, colour = vary)) +
-  facet_grid(transmission ~ .) +
-  geom_point() +
-  geom_errorbar(aes(ymin = lower, ymax = upper),
-              width=.2) +
-  ylab('Prop. Invasions') +
-  xlab('Population size') +
-  ylim(0, 1) +
-  scale_colour_poke(name="Variable varied", 
-               labels=c('Colony Size', 'Colony Number'), 
-               pokemon = 'Swampert',
-               spread = 2) +
-  scale_y_continuous(breaks = c(0, 0.5, 1), labels = c('0.0', '0.5', '0.1')) 
-
-%%end.rcode
-
 
 
 %%begin.rcode valueChangeMeansCapt
@@ -871,8 +838,9 @@ Default values are: colony number = 20, colony size = 400 and density = 0.8 anim
 The $x$-axis shows the relative change in each of these values ($\\times 0.25, 0.5, 1, 2$ and $4$).
 For colony size and number, area is altered so that density remains constant.
 For density, population size is constant at 8,000 and area is altered.
-Relationships are shown seperately for each transmission value.
 Each point is the mean of \rinline{each} simulations and bars are 95\\% confidence intervals.
+Curves are bivariate logistic regression fits for each independant variable.
+Relationships are shown seperately for each transmission value.
 '
 
 valueChangeMeansTitle <- 'Comparison of the probability of invasion when population size is altered by changing colony size or colony number.'
@@ -935,22 +903,6 @@ percChangePreds <- percChangeModels %>%
                    ) %>%
                    do.call(rbind, .)
 
-#ggplot(d, aes(x = ValueChange, y = mean, colour = vary)) +
-#  geom_line(data = percChangePreds, aes(x = ValueChange, y = pred, colour = vary)) +
-#  geom_point() +
-#  geom_errorbar(aes(ymin = lower, ymax = upper),
-#              width=.01) +
-#  ylab('Prop. Invasions') +
-#  xlab('Amount Varied') +
-#  ylim(0, 1) +
-#  scale_colour_poke(name="Variable varied", 
-#               labels=c( 'Colony Number', 'Colony Size', 'Density'), 
-#               pokemon = 'Swampert',
-#               spread = 3) +
-#  scale_y_continuous(breaks = c(0, 0.5, 1), labels = c('0.0', '0.5', '0.1')) +
-#  scale_x_continuous(breaks = c(0.25, 0.5, 1, 2, 4), labels = c(0.25, 0.5, 1, 2, 4), trans = 'log10') +
-#  facet_grid(transmission ~ ., labeller = label_bquote(beta == .(transmission))) 
-
 
 d$transmission <- factor(d$transmission, labels = c('beta == 0.1', '0.2', '0.3'))
 percChangePreds$transmission <- factor(percChangePreds$transmission, labels = c('beta == 0.1', '0.2', '0.3'))
@@ -999,7 +951,7 @@ combModel <- rbind(dens1, dens2, pop) %>%
                mutate(invasion = nExtantDis == 2 ) %>%
                group_by(transmission) %>% 
                mutate(colonySize = scale(colonySize), colonyNumber = scale(colonyNumber), area = scale(area)) %>% 
-               do(glm(invasion ~ colonySize + colonyNumber + area, data = ., family = binomial) %>% tidy)
+               do(glm(invasion ~  colonyNumber + area + colonySize, data = ., family = binomial) %>% tidy)
 
 combModel <- rbind(dens1, dens2, pop) %>% 
                mutate(invasion = nExtantDis == 2 ) %>%
@@ -1012,13 +964,52 @@ combModel <- rbind(dens1, dens2, pop) %>%
 
 %%end.rcode
 
+%%begin.rcode transMeansCapt
+
+transMeansCapt <- '
+Comparison of the effect of population size on probability of invasion when population size is altered by changing colony size or colony number.
+Relationship is shown seperately for each transmission value.
+It can be seen that changes in colony size give a much greater increase in invasion probability than changes in colony number.
+'
+
+transMeansTitle <- 'Comparison of the probability of invasion when population size is altered by changing colony size or colony number.'
+
+%%end.rcode
+
+%%begin.rcode plotTransMeans, fig.cap = transMeansCapt, fig.scap = transMeansTitle, out.width = '0.9\\textwidth', fig.show = TRUE
+
+d2 <- rbind(dens1Means, dens2Means)
+d2$transmission <- factor(d2$transmission, labels = c('beta == 0.1', '0.2', '0.3'))
+densPreds$transmission <- factor(densPreds$transmission, labels = c('beta == 0.1', '0.2', '0.3'))
+
+
+
+
+ggplot(d2, aes(x = pop, y = mean, colour = vary)) +
+  geom_line(data = densPreds, aes(x = pop, y = pred, colour = vary)) +
+  geom_point() +
+  geom_errorbar(aes(ymin = lower, ymax = upper),
+              width=.2) +
+  ylab('Prop. Invasions') +
+  xlab('Population size') +
+  ylim(0, 1) +
+  scale_colour_manual(name="Variable varied", 
+               labels=c('Colony Size', 'Colony Number'), 
+               values = pokepal('Swampert', spread = 3)[2:1]) +
+  scale_y_continuous(breaks = c(0, 0.5, 1), labels = c('0.0', '0.5', '0.1')) +
+  scale_x_continuous(breaks = c(1e4, 2e4, 3e4), label = c(expression(1 %*% 10^4), expression(2 %*% 10^4), expression(3 %*% 10^4))) +
+  facet_grid(transmission ~ ., labeller = label_parsed) 
+
+%%end.rcode
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Results text        %%%%%
+%%%     Results text    %%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Population density or abundance}
 
+To test whether population density or abundance has a stronger affect on invasion probability I compared the regression coefficients of the multiple regressions fitted to simulation results (Figure~\ref{fig:plotValueChangeMeans}).
 
 
 
