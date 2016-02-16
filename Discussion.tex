@@ -1,70 +1,133 @@
 
-\tmpsection{What I did}
+\section{Overview}
 
-\begin{itemize}
-\item In this thesis I aimed to test the importance of population structure and density on pathogen diversity
-\item With a particular focus on bats
-\item Combining simulations and empirical studies.
-\item Identify that population structure does affect pathogen richness in wild bats.
-\item But found that invasision of new pathogens is probably not the mechanism.  
-\item Clarified the relationships between population size and density, range size, colony size and population structure.
-\item And found that colony size is more important than density per se. 
-\item Finally, created a method to more easily estimate bat population densities.
-\end{itemize}
+In this thesis I have aimed to examine the importance of population size and structure on the accumulation of pathogen richness.
+I used bats as a case study throughout due to their interesting and varied social structure \cite{kerth2008causes} and their association with a number of important, recent zoonoses \cite{leroy2005fruit, field2001natural, halpin2011pteropid, li2005bats, field2001natural}.
+I have studied the role of these population factors using both simulation studies and empirical comparative approaches in order to both examine the specific, epidemiological mechanisms involved in a controlled and interpretable \emph{in silico} environment, while be able to also link these results back to real-world data.
+I have found the most robust evidence so far that population structure does relate to higher pathogen richness in bats.
+However, my simulation study testing whether newly evolved pathogens would invade more easily in a stuctured population did not recover the same relationship implying that this mechanism is not important in wild populations.
+Subsequently, I examined a number of intrinsically linked factors---population abundance, density and range size as well as colony size and the number of colonies---and found that contrary to beliefs commonly held in the literature, only colony size strongly promotes the invasion of newly evolved pathogens.
+Finally, I derived and validated a method for estimating bat abundances from acoustic data; as bat abundances are very difficult to estimate, this method fills a great need in bat ecology and zoonotic sirveillance.
+
+%\begin{itemize}
+%\item In this thesis I aimed to test the importance of population structure and density on pathogen diversity
+%\item With a particular focus on bats
+%\item Combining simulations and empirical studies.
+%\item Identify that population structure does affect pathogen richness in wild bats.
+%\item But found that invasision of new pathogens is probably not the mechanism.  
+%\item Clarified the relationships between population size and density, range size, colony size and population structure.
+%\item And found that colony size is more important than density per se. 
+%\item Finally, created a method to more easily estimate bat population densities.
+%\end{itemize}
 
 
 
 \tmpsection{How I did it (Chapters overview)}
 
-\begin{enumerate}
-
-\item
-\begin{itemize}
-\item I tested the hypothesis that population structure predicts viral richness in wild bats.
-\item I used two measurements of population structure.
-\begin{enumerate}
-  \item A novel measure, number of subspecies. Largest dataset to date.
-  \item Gene flow, dealing with issues of marker type and spatial scale
-\end{enumerate}
-\item I used multivariate regression, appraised with information theory techniques.
-\item I controlled for phylogeny.
-\item I found that in both analyses, increased population structure predicts increased pathogen richness and is in best model.
-\end{itemize}
-
-\item
-\begin{itemize}
-\item I modelled a multi-pathogen, metapopulation based on bat populations.
-\item Testing the specific mechanism that population structure increases richness by enabling invasion of newly evolved pathogens.
-\item I found that spatial structure, either by dispersal rate or topology, did not allow invasion.
-\end{itemize}
-
-\item
-\begin{itemize}
-\item I clarified confusion on the relationships between group size, group number, density, population size and range size.
-\item Using same model as Chapter 3 I tested whether it is in fact density or population size that matters.
-\item I tested whether the importact factor in increased density is group size or group number.
-\item I found that it is in fact abundance and group size that matter much more than other factors.
-\end{itemize}
 
 
-\item
-\begin{itemize}
-\item I aimed to collect data on bat density as lit. says this is important.
-\item Discovered I needed a model.
-\item Started with specific model for iBats, ended up writing general model.
-\item I formulated a model that estimates density from acoustic sensors or camera traps.
-\item I tested it using simulations.
-\item I found it to be precise and unbiased.
-\end{itemize}
-
-\end{enumerate}
+In Chapter~\ref{ch:empirical} I tested the hypothesis that bat species with more structured populations harbour more virus species.
+I test this hypothesis with two measurement of population structure: the number of subspecies (a novel measure and the largest dataset yet used to test this hypothesis) and gene flow.
+Using both meausres I found that, after controlling for phylogeny and study bias, a positive relationship between population structure and pathogen richness was very likely in the best model.
+This relationship was of similar strength, and at least as likely to be in the best model, as other measures (body mass and range size) which have been thought to promote pathogen richness in bats and other mammals \cite{kamiya2014determines, arneberg2002host, gay2014parasite, nunn2003comparative, turmelle2009correlates}.
 
 
+%\begin{itemize}
+%\item I tested the hypothesis that population structure predicts viral richness in wild bats.
+%\item I used two measurements of population structure.
+%\begin{enumerate}
+%  \item A novel measure, number of subspecies. Largest dataset to date.
+%  \item Gene flow, dealing with issues of marker type and spatial scale
+%\end{enumerate}
+%\item I used multivariate regression, appraised with information theory techniques.
+%\item I controlled for phylogeny.
+%\item I found that in both analyses, increased population structure predicts increased pathogen richness and is in best model.
+%\end{itemize}
 
+
+While the results from Chapter~\ref{ch:empirical} suggest that there is a relationship between population structure and pathogen richness, comparative studies like these cannot identify by which specific mechanisms the higher pathogen richness is being maintained.
+To examine this I developed a model of two recently diverged---and therefore identical---pathogen lineages competing in a metapopulation based on large bat colonies with limited movement between colonies (Chapter~\ref{ch:sims1}). 
+I tested whether population structure (specifically network topology and dispersal rate) allowed a second pathogen to invade and persist in the presence of strong competition from the first, endemic pathogen.
+However, I found no relationship between probability of invasion and population structure, instead it appeared that if transmission rate was high enough for the invading pathogen to survive the initial, highly stochastic part of it's spread, it would then survive and spread throughout the metapopulation irregardless of how structured it was.
+This imples that local dynamics, defined in part by colony size, are controlling disease invasion and that a different mechanism must be causing the relationship seen in Chapter~\ref{ch:empirical}.
+
+
+%\begin{itemize}
+%\item I modelled a multi-pathogen, metapopulation based on bat populations.
+%\item Testing the specific mechanism that population structure increases richness by enabling invasion of newly evolved pathogens.
+%\item I found that spatial structure, either by dispersal rate or topology, did not allow invasion.
+%\end{itemize}
+
+Group (or colony) size is one of many demographic parameters measured in comparative studies of pathogen richness.
+Other commonly measured parameters include population density and range size \cite{kamiya2014determines, nunn2003comparative, morand1998density, lindenfors2007parasite, gay2014parasite, ezenwa2006host} yet the intrinsic relationships between these variables are rarely acknowledged or discussed.
+Therefore in Chapter~\ref{ch:sims2} I used the same model as Chapter~\ref{ch:sims1} to test whether population density or population abundance more strongly promotes pathogen richness and whether a pathogen invades more easily into a population comprising many small colonies or few big colonies.
+I found that population abundance has a much stronger affect than density and that the component of abundance that has the strongest affect is colony size.
+
+
+%\begin{itemize}
+%\item I clarified confusion on the relationships between group size, group number, density, population size and range size.
+%\item Using same model as Chapter 3 I tested whether it is in fact density or population size that matters.
+%\item I tested whether the importact factor in increased density is group size or group number.
+%\item I found that it is in fact abundance and group size that matter much more than other factors.
+%\end{itemize}
+
+Theory \cite{may1979population, anderson1979population}, previous literature \cite{kamiya2014determines, nunn2003comparative, morand1998density} and Chapters \ref{ch:sims1} and \ref{ch:sims2} suggested that population sizes (either local group size or global population size) strongly influences the dynamics of disease and pathogen richness.
+However, there are very few estimates of population abundance for bats and colony counts are time consuming and costly.
+I therefore aimed to obtain estimates of abundance from acoustic data such as iBats \cite{jones2011indicator}.
+I developed a general method for estimating abundance and density from acoustic detectors (Chapter~\ref{ch:grem}).
+I used spatial simulations of animal movement to validate the method and found it to be precise and unbiased.
+
+%\begin{itemize}
+%\item I aimed to collect data on bat density as lit. says this is important.
+%\item Discovered I needed a model.
+%\item Started with specific model for iBats, ended up writing general model.
+%\item I formulated a model that estimates density from acoustic sensors or camera traps.
+%\item I tested it using simulations.
+%\item I found it to be precise and unbiased.
+%\end{itemize}
+
+
+
+
+
+\section{Applications and implications for research}
+
+I have found evidence, both empirical and theoretical, that demographic parameters can influence pathogen richness.
+However it seems likely that this affect alone is not strong enough to be a useful predictor of viral richness with respect to surveillance for zoonotic diseases.
+While there is potential for population structure and colony size to be useful variables when combined with other variables in a predictive framework, the biases in all pathogen richness datasets makes these approaches difficult.
+However, as more unbiased data is collected \cite{anthony2013strategy, anthony2015non} or using much larger pathogen data sets \cite{wardeh2015database} predictive models may become a more viable tool.
+Furthermore, the method provided in Chapter~\ref{ch:grem} makes the collection of population abundance data more feasible over broad taxonomic, spatial or temporal scales, further increasing the potential of predictive models.
+Field tests should test its ability to estimate density and abundance and to ensure it is not strongly biased by species specific factors; only if it is unbiased can it be effectively used in predictive models and other applications.
+
+While predictive models are difficult to build due to a lack of data and strong biases in pathogen richness data, the mechanistic understanding obtained by the theoretical chapters here can suggest how pathogen richness may respond to global change.
+Firstly, when global change acts to reduce group size \cite{lehmann2010apes, zunino2007habitat, manor2003impact, atwood2006influence} pathogen richness is expected to decrease while in species where group size is increasing \cite{lehmann2010apes} pathogen richness is expected to increase.
+In contrast, species suffering range contractions \cite{thomas2004extinction} and decreases in abundance \cite{craigie2010large} are expected to experience smaller changes in pathogen richness despite these being the more commonly studied factors.
+This suggests that further research should study in more detail the affects of climate change on social group size.
+
+Furthermore, I have shown that while population factors such as density, abundance and range size are directly linked, they have very different affects on pathogen richness.
+Therefore future studies should be careful to acknowledge these relationships and where data makes it possible, compare multiple demographic measurements to further test which factors are in fact causally affecting pathogen richness.
+
+
+
+
+%\begin{itemize}
+%\item \sout{Global change and pop structure.}
+%\item \sout{Structure is not a strong enough predictor to use for zoonotic surveillance. Perhaps colony size is.}
+%\item \sout{Studies should more carefully consider density vs structure vs group size.}
+%\item Population structure should be studied in other groups other than bats.
+%\item \sout{Can more easily estimate bat density.}
+%\end{itemize}
 
 
 
 \tmpsection{What agreed/disagreed with the literature.}
+
+There is a common assumption that factors that increase $R_0$ should increase pathogen diversity \cite{nunn2003comparative, morand2000wormy}.
+However, my results imply a more nuanced relationship. 
+I found that populations with large groups sizes, and therefore many localised contacts (\emph{i.e.} high $R_0$), promote the invasion of new pathogen species, but that at the global level there is little or no affect of population structure and that in wild bat populations, population structure promotes global pathogen species richness.
+This implies that there are two distinct phases or scales to pathogen competition.
+When a new pathogen first enters a population, the local scale is important, and many contacts (\emph{i.e.} a highly connected population) allows the pathogen to spread and avoid stochastic extinction.
+%TODO
 
 \begin{itemize}
 \item Don't find high $R_0$ leads to high richness in contrast to eco assumption.
@@ -73,18 +136,6 @@
 \item Importance of colony size agrees with nunn primate papers.
 \end{itemize}
 
-
-
-\tmpsection{What are the implications for research?}
-
-
-\begin{itemize}
-\item Global change and pop structure.
-\item Structure is not a strong enough predictor to use for zoonotic surveillance. Perhaps colony size is.
-\item Studies should more carefully consider density vs structure vs group size.
-\item Population structure should be studied in other groups other than bats.
-\item Can more easily estimate bat density.
-\end{itemize}
 
 
 
@@ -96,10 +147,11 @@
 \begin{itemize}
 \item Collect data for colony size and test importance against structure.
 \item Limitations of poor data, escpecially for gene flow.
+\item \sout{bias of viral data. Perhaps fixed by non-biased sampling or larger datasets.}
 \item Examine other mechanisms for richness
 \item Examine multi host species more carefully
-\item Field test gREM
-\item Use gREM to collect density estimates 
+\item \sout{Field test gREM}
+\item \sout{Use gREM to collect density estimates }
 \end{itemize}
 
 
