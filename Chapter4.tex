@@ -201,6 +201,96 @@ As area increases, the number of connections each subpopulation has decreases as
 
 
 
+
+
+
+
+
+
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[t]
+
+{\centering \includegraphics[width=0.8\textwidth]{figure/plotK-1} 
+
+}
+
+\caption[Change in average network degree with increasing area]{
+Change in average metapopulation network degree ($\bar{k}$) with increasing area. 
+Bars show the median, boxes show the interquartile range, vertical lines show and range and grey dots indicate outlier values.
+Notches indicate the 95\% confidence interval of the mean.
+All simulations had 20 colonies, meaning 19 is the maximum value of $\bar{k}$.
+}\label{fig:plotK}
+\end{figure}
+
+
+\end{knitrout}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[t]
+
+{\centering \includegraphics[width=\textwidth]{figure/plotValueChangeMeans-1} 
+
+}
+
+\caption[Comparison of the probability of invasion when population size is altered by changing colony size or colony number.]{
+Comparison of the effect of colony size, colony number and area on probability of invasion.
+Default values are: colony number = 20, colony size = 400 and density = 0.8 animals per unit area.
+The $x$-axis shows the relative change in each of these values ($\times 0.25, 0.5, 1, 2$ and $4$).
+For colony size and number, area is altered so that density remains constant.
+For density, population size is constant at 8,000 and area is altered.
+Each point is the mean of 100 simulations and bars are 95\% confidence intervals.
+Curves are bivariate logistic regression fits for each independant variable.
+Relationships are shown seperately for each transmission value.
+}\label{fig:plotValueChangeMeans}
+\end{figure}
+
+
+\end{knitrout}
+
+
+
+
+
+
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[t]
+
+{\centering \includegraphics[width=\textwidth]{figure/plotTransMeans-1} 
+
+}
+
+\caption[Comparison of the probability of invasion when population size is altered by changing colony size or colony number.]{
+Comparison of the effect of population size on probability of invasion when population size is altered by changing colony size or colony number.
+Relationship is shown seperately for each transmission value.
+It can be seen that changes in colony size give a much greater increase in invasion probability than changes in colony number.
+Note that this is the same data as Figure~\ref{fig:plotValueChangeMeans} but on a different scale.
+}\label{fig:plotTransMeans}
+\end{figure}
+
+
+\end{knitrout}
+
+
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -292,13 +382,11 @@ Secondly I tested the hypothesis that ana increase in colony size creates a stro
 To statistically test these hypotheses I combined the results from different simulations and fitted multiple logistic regressions, centering and scaling the dependant variables.
 Specifically, I fitted the model 
 \begin{align}
-\text{invasion} = b_1\cdot \text{density} + b_2\cdot  \text{colony size} + b_3\cdot  \text{number of colonies} + c + \epsilon
+  \text{invasion} = b_1 d + b_2 n + b_3 m + c + \epsilon
 \end{align}
- where $c$ is a fitted intercept, $\epsilon$ is a binomially distributed error term and $b_i$ are the regression coefficients.
+where $d, n$ and $m$ are density, colony size and number of colonies respectively and $c$ is a fitted intercept, $\epsilon$ is a binomially distributed error term and $b_i$ are the regression coefficients.
 To test the first hypothesis I compared the size (and 95\% confidence intervals) of $b_1$ to $b_2$ and $b_3$.
 To test the second hypothesis I compared $b_2$ to $b_3$.
-
-
 
 
 
@@ -314,85 +402,36 @@ To test the second hypothesis I compared $b_2$ to $b_3$.
 
 
 
-
-
-
-
-
-
-\begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[t]
-
-{\centering \includegraphics[width=0.8\textwidth]{figure/plotK-1} 
-
-}
-
-\caption[Change in average network degree with increasing area]{
-Change in average metapopulation network degree ($\bar{k}$) with increasing area. 
-Bars show the median, boxes show the interquartile range, vertical lines show and range and grey dots indicate outlier values.
-Notches indicate the 95\% confidence interval of the mean.
-All simulations had 20 colonies, meaning 19 is the maximum value of $\bar{k}$.
-}\label{fig:plotK}
-\end{figure}
-
-
-\end{knitrout}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[t]
-
-{\centering \includegraphics[width=\textwidth]{figure/plotValueChangeMeans-1} 
-
-}
-
-\caption[Comparison of the probability of invasion when population size is altered by changing colony size or colony number.]{
-Comparison of the effect of colony size, colony number and area on probability of invasion.
-Default values are: colony number = 20, colony size = 400 and density = 0.8 animals per unit area.
-The $x$-axis shows the relative change in each of these values ($\times 0.25, 0.5, 1, 2$ and $4$).
-For colony size and number, area is altered so that density remains constant.
-For density, population size is constant at 8,000 and area is altered.
-Relationships are shown seperately for each transmission value.
-Each point is the mean of inline{each} simulations and bars are 95\% confidence intervals.
-}\label{fig:plotValueChangeMeans}
-\end{figure}
-
-
-\end{knitrout}
-
-
-
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Results text        %%%%%
+%%%     Results text    %%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+At the default parameter settings, the probability of invasion and establishment of the second pathogen, $P(I)$,  was rare ($\beta = 0.1,\: P(I) = 0.02;\: \beta = 0.2,\: P(I) = \ensuremath{3.33\times 10^{-3}};\: \beta = 0.3,\: P(I) = 0.06$).
+Although there is no clear pattern, these proportions are significantly different ($\chi^2$ test: $\chi^2 = 17.21,\: \text{df} = 2,\: p = \ensuremath{1.83\times 10^{-4}}$).
+
+In 37 simulations, both of the pathogens went extinct.
+This did not depend on transmission rate ($\chi^2$ test: $\chi^2 = 1.51,\: \text{df} = 2,\: p = 0.47$).
+However they were all either in simulations with the smallest colony size (colony size = 100, 29 simulations) or with the fewest colonies (5 colonies, 8 simulations).
+These simulations were ignored in further analyses.
+
+
 
 \subsection{Population density or abundance}
 
-
+To test whether population density or abundance has a stronger affect on invasion probability I compared the regression coefficients of the multiple regressions fitted to simulation results (Figure~\ref{fig:plotValueChangeMeans}).
+Increasing abundance, either by increasing colony size or number of colonies, increases the probability of invasion (Table~\ref{t:regrCoefs}).
+The relationship between colony size and invasion is strong and significant at all transmission rates, while the relationship between colony number and invasion is weaker and more marginally significant.
+In contrast, varying population density does not alter invasion probability.
+Therefore the simulations support the hypothesis that population abundance affects invasion more strongly than population density.
 
 
 \subsection{Colony size or number of groups}
+
+To test whether colony size or the number of colonies is the more important component of population abundance, I compared the regression coefficients of the multiple regressions fitted to simulation results (Figure~\ref{fig:plotTransMeans}).
+Increasing colony size or the number of colonies increases the probability of invasion but this affect is much stronger for colony size (Table~\ref{t:regrCoefs}).
+Therefore the simulations support the hypothesis that colony size is the more important component of population size, though colony number does still increase the probability of invasion.
+
+
 
 
 

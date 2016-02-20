@@ -857,7 +857,7 @@ transMeansTitle <- 'Comparison of the probability of invasion when population si
 
 %%end.rcode
 
-%%begin.rcode plotTransMeans, fig.cap = transMeansCapt, fig.scap = transMeansTitle, out.width = '0.9\\textwidth', fig.show = TRUE
+%%begin.rcode plotTransMeans, fig.cap = transMeansCapt, fig.scap = transMeansTitle, out.width = '\\textwidth', fig.show = TRUE
 
 d2 <- rbind(dens1Means, dens2Means)
 d2$transmission <- factor(d2$transmission, labels = c('beta == 0.1', '0.2', '0.3'))
@@ -943,18 +943,18 @@ fewAllExtinct <- rbind(dens1, dens2, pop) %>%
 \tmpsection{Overview}
 
 
-I used two-pathogen, metapopulation SIR model to compare the roles of demograhic parameters on pathogen species richness.
-Specifically I let two identical pathogens (and endemic pathogen and an invading pathogen) compete.
+I used a two-pathogen, metapopulation SIR model to compare the roles of demograhic parameters on pathogen species richness.
+Specifically I let two identical pathogens---an endemic pathogen and an invading pathogen---compete.
 I used presistence or not of the second pathogen as my response variable.
-I test whether population abundance is more important than population density.
-I then test whether colony size or the number of colonies is the more important component of population abundance.
+I tested whether population abundance is more important than population density.
+I then tested whether colony size or the number of colonies is the more important component of population abundance.
 The multpathogen SIR model is identical to that in Chapter \ref{ch:sims1} and is implemented in R \cite{R}.
 
 
 
 In each simulation the population is seeded with 20 individuals infected with pathogen 1 in each colony. 
 Pathogen 1 is then allowed to spread and reach equilibrium. 
-After \rinline{invadeT} events, 5 individuals infected with pathogen 2 are added to one colony. 
+After \rinline{invadeT} events, 5 individuals infected with pathogen 2 are added to one randomly selected colony. 
 After another \rinline{nEvent - invadeT} events the invasion of pathogen 2 is considered successful if any individuals with pathogen 2 still remain.
 
 \subsection{Dependant variables}
@@ -962,7 +962,7 @@ After another \rinline{nEvent - invadeT} events the invasion of pathogen 2 is co
 Three dependant variables were varied: colony size, number of colonies and area.
 From these parameters, population abundance and population density can be calculated.
 The default values of these parameters was a population size of 8000 individuals split into 20 colonies of 400.
-The default area of the simulations was 
+The default area of the simulations was \rinline{dep3[3]}.
 
 Three sets of simulations were run.
 First, colony size was varied using values \rinline{dep1[-5]} and \rinline{dep1[5]}.
@@ -977,7 +977,7 @@ The affects of area occur through changing the metapopulation network.
 The metapopulation structure was created for each simulation by randomly placing colonies in space (Figure~\ref{fig:colonyNetworkPlots}).
 The spatial scale of the simulations vary between \rinline{min(area)} and \rinline{max(area)} km$^2$ (space is given in kilometers even though they are oin fact arbitrary units for simplicity).
 This corresponds to square areas with sides of \rinline{sqrt(min(area))} to \rinline{sqrt(max(area))} km).
-Dispersal can only occur between two colonies if they are within 100 kilometers of each other i.e. they are connected nodes in the metapopulation network.
+Dispersal can only occur between two colonies if they are within 100 kilometers of each other \emph{i.e.} they are connected nodes in the metapopulation network.
 The number of connections each colony has is called its degree, $k$.
 How well connected the metapopulation network is overall is measured by the mean degree, $\bar{k}$.
 This does not guarentee that the population is fully connected but as the endemic pathogen is seeded in all colonies, the invading pathogen cannot be seeded into a fully susceptible colony.
@@ -1042,7 +1042,7 @@ To test the second hypothesis I compared $b_2$ to $b_3$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 At the default parameter settings, the probability of invasion and establishment of the second pathogen, $P(I)$,  was rare ($\beta = 0.1,\: P(I) = \rinline{meanDefault$mean[1]};\: \beta = 0.2,\: P(I) = \rinline{meanDefault$mean[2]};\: \beta = 0.3,\: P(I) = \rinline{meanDefault$mean[3]}$).
-Although there is no clear pattern, these proportions are significantly different ($\chi^2$ test: $\chi^2 = \rinline{transTest$statistic},\: \text{df} = \rinline{transTest$parameter},\: p = \rinline{transTest$p.value}$).
+Although there is no clear, directional relationship, these proportions are significantly different ($\chi^2$ test: $\chi^2 = \rinline{transTest$statistic},\: \text{df} = \rinline{transTest$parameter},\: p = \rinline{transTest$p.value}$).
 
 In \rinline{nAllExtinct} simulations, both of the pathogens went extinct.
 This did not depend on transmission rate ($\chi^2$ test: $\chi^2 = \rinline{transExtinctTest$statistic},\: \text{df} = \rinline{transExtinctTest$parameter},\: p = \rinline{transExtinctTest$p.value}$).
@@ -1062,8 +1062,8 @@ Therefore the simulations support the hypothesis that population abundance affec
 
 \subsection{Colony size or number of groups}
 
-To test whether colony size or the number of colonies is the more important component of population abundance, I compared the regression coefficients of the multiple regressions fitted to simulation results (Figure~\ref{fig:plotTransMeans}).
-Increasing colony size or the number of colonies increases the probability of invasion but this affect is much stronger for colony size (Table~\ref{t:regrCoefs}).
+To test whether colony size or the number of colonies is the more important component of population abundance, I compared the regression coefficients, $b_2$ and $b_3$, of the multiple regressions fitted to simulation results (Figure~\ref{fig:plotTransMeans}).
+Increasing colony size or the number of colonies increases the probability of invasion but this affect is much stronger and more statistically significant, for colony size (Table~\ref{t:regrCoefs}).
 Therefore the simulations support the hypothesis that colony size is the more important component of population size, though colony number does still increase the probability of invasion.
 
 
@@ -1140,7 +1140,7 @@ It is clear that many species are suffering strong population changes due to cli
 However these changes might affect range size \cite{thomas2004extinction}, population abundance \cite{craigie2010large}, population connectivity \cite{} or group size \cite{lehmann2010apes, zunino2007habitat, manor2003impact, atwood2006influence} to different extents.
 My results suggest that pathogen communities will response differently depending on the change although it should be noted that the mechanism here---invasion of a new pathogen---is possibly more relevant in the longer term.
 In short, species suffering reductions in groups size \cite{lehmann2010apes, zunino2007habitat, manor2003impact, atwood2006influence} are predicted to experience decreases in pathogen richness in the long term.
-Species that are experience increases in group size \cite{lehmann2010apes} would be expected gain new pathogen species more quickly.
+Species that are experiencing increases in group size \cite{lehmann2010apes} would be expected gain new pathogen species more quickly.
 In contrast, species suffering range contractions \cite{thomas2004extinction} and decreases in abundance \cite{craigie2010large} are expected to experience smaller changes in pathogen richness.
 
 
@@ -1183,13 +1183,24 @@ Ultimately, the modelling choices could increase or decrease the affects of area
 
 \tmpsection{Further correlations between factors}
 
+I have used the simple relationships between demographic factors (density = abundance / area for exmaples) to illustrate that these are tightly linked.
+In order to isolate the affects of these factors I have assumed these simple relationships hold; to examine density without altering abundance I have fixed abundance and manipulated area.
+However in reality these are likely to covary both and between species and within species across time.
+Therefore, these quantities are certainly linked, they cannot be assumed to have simple linear relationships and should not be used as proxies of each other without further examination.
+For exampleiIt is expected that group size increases with range size \cite{}.
+Similarly it is unlikely that a species whose range size decreases will not experience a decrease in total abundance as well; the range contraction is likely to occur over generations rather than a simple squeezing of the existing individuals into a smaller area.
+
+
 %For instance, various relationships between group size and home range size exist (Macdonald 1983). Kruuk and Macdonald (1985) predict that home range behaviour in group living species should conform to one of two strategies. They should either expand their range to encompass sufficient additional resources to support more group members (expansionism) or increase group size only up to the size that can be sustained on the resources within the smallest economically defendable range needed to support the minimum social unit (contractionism). http://onlinelibrary.wiley.com/enhanced/doi/10.1111/j.1600-0587.2009.05745.x
 % Badger Group size versus territory size http://onlinelibrary.wiley.com/doi/10.1034/j.1600-0706.2001.950208.x/abstract
 
 
 \subsection{Conclusions}
 
-
+Overall I have shown that while a number of demographic factors are intrinsically linked, they have different affects on the rate at which new pathogens will invade.
+I found that abundance, not density, has the stronger impact on the ability of a pathogen to invade.
+Furthermore, species with large groups are likely to harbour more pathogens than species with many, smaller groups.
+Due to the correlations between these factors, they are particularly hard to study within a comparative framework; this highlights the utility of mechanistic models.
 
 
 
