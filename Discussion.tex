@@ -148,6 +148,8 @@ This can be understood by considering that at very long time scale, any populati
 
 \subsection{Furtherwork}
 
+\subsubsection{Other mechanisms controlling pathogen richness}
+
 Colony size has been found to be have a negative relationship \cite{gay2014parasite} and no relationship \cite{turmelle2009correlates} with parasite richness in previous comparative studies using relatively small datasets.
 However, in Chapter \ref{ch:sims2} I found that colony size is particularly important for promoting pathogen richness.
 I did not include colony size in my comparative analysis (Chapter \ref{ch:empirical}) for three reasons: the focus of the chapter was broader scale population structure, the lack of evidence of a positive relationship \cite{gay2014parasite, turmelle2009correlates} and the lack of data.
@@ -172,26 +174,66 @@ This affect will be exacerbated in the case where an epidemic cycle is synchrono
 Structured populations with asynchronous epidemic cycles may experience local pathogen extinction but rarely global extinction; this pattern of local extinction and recolonisation has been well studied in the ecological literature \cite{grenfell1995seasonality, levin1974dispersion, hanski1998metapopulation}, but less so in the epidemiological literature. %read http://link.springer.com/article/10.1007/s10980-008-9245-4
 
 
-\begin{itemize}
-\item \sout{Collect data for colony size and test importance against structure.}
-\item Limitations of poor data, escpecially for gen flow.
-\item \sout{bias of viral data. Perhaps fixed by non-biased sampling or larger datasets.}
-\item Examine other mechanisms for richness
-\item Examine multi host species more carefully
-\item \sout{Field test gREM}
-\item \sout{Use gREM to collect density estimates }
-\end{itemize}
+\subsubsection{Bat social structure}
+
+Finally it is important to note that I have ignored much of the social complexity found in bats.
+In Chapters \ref{ch:sims1} and \ref{ch:sims2} I have modelled bat populations as a metapopulation where the only social structure is the grouping of individuals into subpopulations.
+There is dispersal between these subpopulations but otherwise they are static.
+This does not account for a number of behaviours.
+Similarly, information on these other social behaviours was not included in the regression in Chapter \ref{ch:empirical}.
+Firstly, I have not modelled the creation of new colonies, or the disbanding of colonies \cite{metheny2008genetic}.
+Especially in the face of habitat destruction, it is likely that the number of colonies a species has will be decreasing.
+Furthermore, in some species, colonies are likely to be more fluid, with groups joining and splitting \cite{kerth2012causes}.
+Secondly, there are a number of behaviours common in bats, particularly in temperate regions, that has been excluded from these models.
+For example, many species have different types of colonies: maternity colonies, mating colonies and hibernation colonies \cite{kerth2008causes}.
+The extent to which the individuals move together when switching between these colony types is largely unknown \cite{} but if there is a large degree of mixing during the transition between colony types, then there will be considerably less population structure overall.
+Similarly, swarming behaviour---the coming together of many bats from different colonies---is likely to decrease epidemiological population structure \cite{kerth2012causes}.
+Furthermore, many bat species, both temperate and tropical, are migratory \cite{fleming2003ecology, krauel2013recent, popa2009bats}.
+Again, it is largely unknown whether colonies travel together during migration and therefore colony structure is similar before and after migration \cite{}.
+There is also little data on whether parameters such as dispersal rate are constant before and after migration, though it is likely that most dispersal between colonies is juvenile dispersal and so dispersal rate is likely to be much higher in one location than the other.
+Even if colonies remain fairly constant during migration, the spatial relationships may be different; colonies that were far apart in one area could subsequently be near neighbours after migration.
+Migratory status has been included in previous comparative analyses and not been found to be a strong predictor of pathogen richness \cite{}. 
+
+Another potentially important factor that has been ignored here is roost sharing by different bat species \cite{}.
+If the species are very similar in most epidemiological factors, this could potentially be sensibly modelled by ignoring species identity and treating the whole population as one.
+However, more likely is that there will be less close contact between individuals of different species within a colony and different dispersal patterns between colonies.
+Therefore, more complex models such as overlay network models might be needed in order to effectively model these populations.
+Roost sharing and the amount of sympatry has been included in empirical studies of bat pathogen richness \cite{} %todo, was it found to be important.
+
+Finally, birth and deaths have been modelled here as occuring randomly through time but many bat species have very tightly controlled birth pulses \cite{}.
+Species can have one or more birth pulse per year with almost all births occuring during a week or so \cite{}.
+This has important epidemiological consequences; there will be a pulse of susceptible individuals each year with very few new susceptibles during the rest of the year.
+Models of these population dynamics have found that birth pulses can TODO.
+
+Overall, there is much complexity that could be added to epidemiological models of bats.
+However, there is little data for many species which makes parameterisation difficult.
+Furthermore, as these factors differ between species, trying to make general models that apply across the order is difficult.
+Further work should include specific, detailed models of well studied species and further examination of how important these various factors might be.
+
+
+%\begin{itemize}
+%\item \sout{Collect data for colony size and test importance against structure.}
+%\item Limitations of poor data, escpecially for gen flow.
+%\item \sout{bias of viral data. Perhaps fixed by non-biased sampling or larger datasets.}
+%\item \sou{Examine other mechanisms for richness}
+%\item \sout{Examine multi host species more carefully}
+%\item \sout{Field test gREM}
+%\item \sout{Use gREM to collect density estimates }
+%\end{itemize}
 
 
 \tmpsection{Conclusions}
 
-\begin{itemize}
-\item Population structure does influence pathogen richness but the mechanisms are still unclear.
-\item Local dynamics (local density) are most important for pathogen invasions not broad scale structure.
-\item Data on density should be collected using the gREM.
-\end{itemize}
+%\begin{itemize}
+%\item Population structure does influence pathogen richness but the mechanisms are still unclear.
+%\item Local dynamics (local density) are most important for pathogen invasions not broad scale structure.
+%\item Data on density should be collected using the gREM.
+%\end{itemize}
 
-
+Overall my studies suggest that population size and structure do have consequences for pathogen richness. 
+However, the exact mechanisms by which these affects occur are not clear.
+I have found that colony size is particularly important in the case of closely related, strongly competing pathogens.
+I have also provided a tool to facilitate the estimation of population sizes in echolocating bats; data which is currently sparse despite it's importance to epidemiology and bat ecology more generally.
 
 
 
