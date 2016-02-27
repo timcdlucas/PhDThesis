@@ -2166,7 +2166,7 @@ Study effort is also clearly supported confirming the expectation that additiona
 \subsection{Study limitations}
 
 Although I have used measures of study effort to try to control for biases in the viral richness data, this bias could still make the results here unreliable---this is especially true as study effort is by far the strongest predictor of viral richness in both datasets.
-It is hoped that as untargeted sequencing of viral genetic material (e.g. \textcite{anthony2013strategy}) becomes cheaper and more common this bias can be reduced.
+It is hoped that as untargeted sequencing of viral genetic material (\emph{e.g.}, \textcite{anthony2013strategy}) becomes cheaper and more common this bias can be reduced.
 The strength of the relationship between study effort and known viral richness also highlights the number of virus species and bat-virus host-pathogen relationships yet to be discovered.
 
 I have used two measures of pathogen richness and the number of subspecies dataset is larger than those used in previous studies.
