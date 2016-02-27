@@ -157,7 +157,7 @@ There is disagreement on whether population density (individuals per unit area) 
 With the increase of novel zoonotic pathogens \cite{jones2008global} attention has turned to comparatively assessing the factors that are associated with high or low pathogen richness in wild animal species \cite{poulin2000diversity}.
 Here again there is little clarity on the relationship between a number of species measurements.
 Population density is commonly studied \cite{morand1998density, kamiya2014determines, lindenfors2007parasite, nunn2003comparative, arneberg2002host} as is range size \cite{lindenfors2007parasite, nunn2003comparative, turmelle2009correlates, huang2015parasite, kamiya2014determines}.
-However it is rarely if ever acknowledge that these two values are intrinsically linked by $d = N/a$ where $d$ is density, $N$ is the population size and $a$ is area (See Table~\ref{t:params} for all parameters used).
+However it is rarely if ever acknowledge that these two values are intrinsically linked by $d = N/a$ (where $d$ is density, $N$ is the population size and $a$ is area. See Table~\ref{t:params} for all parameters used) or that the relationship $N \propto a$ is well supported \cite{blackburn2006variations, borregaard2010causality}.
 In contrast, abundance has never been directly studied as a predictor of pathogen richness.
 This is a glaring omission as abundance more closely aligns with the ``island-biogeography'' class of mechanisms posited to explain pathogen richness \cite{}.
 Furthermore, abundance is considered the more relevant measure in terms of pathogen dynamics, especially when area cannot be assumed to be constant \cite{begon2002clarification} as is commonly the case in wild populations, especially in the face of global warming and habitat degradation.
@@ -1137,7 +1137,7 @@ However, again, this affect is very weak compared to the strong changes in local
 \subsection{Global change}
 
 It is clear that many species are suffering strong population changes due to climate change \cite{thomas2004extinction}.
-However these changes might affect range size \cite{thomas2004extinction}, population abundance \cite{craigie2010large}, population connectivity \cite{} or group size \cite{lehmann2010apes, zunino2007habitat, manor2003impact, atwood2006influence} to different extents.
+However these changes might affect range size \cite{thomas2004extinction}, population abundance \cite{craigie2010large}, population connectivity \cite{wasserman2013population, rivera2015habitat, fonturbel2014forest} or group size \cite{lehmann2010apes, zunino2007habitat, manor2003impact, atwood2006influence} to different extents.
 My results suggest that pathogen communities will response differently depending on the change although it should be noted that the mechanism here---invasion of a new pathogen---is possibly more relevant in the longer term.
 In short, species suffering reductions in groups size \cite{lehmann2010apes, zunino2007habitat, manor2003impact, atwood2006influence} are predicted to experience decreases in pathogen richness in the long term.
 Species that are experiencing increases in group size \cite{lehmann2010apes} would be expected gain new pathogen species more quickly.
@@ -1183,11 +1183,11 @@ Ultimately, the modelling choices could increase or decrease the affects of area
 
 \tmpsection{Further correlations between factors}
 
-I have used the simple relationships between demographic factors (density = abundance / area for exmaples) to illustrate that these are tightly linked.
+I have used the simple relationships between demographic factors (density = abundance / area for examples) to illustrate that these are tightly linked.
 In order to isolate the affects of these factors I have assumed these simple relationships hold; to examine density without altering abundance I have fixed abundance and manipulated area.
 However in reality these are likely to covary both and between species and within species across time.
 Therefore, these quantities are certainly linked, they cannot be assumed to have simple linear relationships and should not be used as proxies of each other without further examination.
-For exampleiIt is expected that group size increases with range size \cite{}.
+For example it is expected that group size increases with range size \cite{}.
 Similarly it is unlikely that a species whose range size decreases will not experience a decrease in total abundance as well; the range contraction is likely to occur over generations rather than a simple squeezing of the existing individuals into a smaller area.
 
 
