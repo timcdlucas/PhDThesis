@@ -75,30 +75,29 @@ library(showtext)
 
 \section{Abstract}
 
-
 \tmpsection{One or two sentences providing a basic introduction to the field}
 % comprehensible to a scientist in any discipline.
-\lettr{A}n increasingly large fraction of emerging diseases come from animals \cite{jones2008global, taylor2001risk} and these diseases have a huge impact on human health.
+\lettr{A}n increasingly large fraction of emerging diseases come from wild animals and these diseases have a huge impact on human health.
 The chance that a new disease will come from any particularly wild host species increases with the diversity of pathogens in that species.
 However, the factors that control pathogen diversity in wild populations are still unknown.
 
 
 
 \tmpsection{Two to three sentences of more detailed background}
-Population density is known to increase pathogen richness while theory suggests that population structure may also play a role.
-However, these factors, along with population abundance, are intrinsically linked; reducing density reduces contacts between individuals.
-In group living species, this is particularly true, with group size and the number of groups and distribution size contributing to total animal density. 
-As these factors are completely interdependant, it is very difficult to study them empirically e.g. in a comparative frame work.
+Population density is thought to increase pathogen richness while theory suggests that population structure and population size may also play a role.
+However, these factors are intrinsically linked; reducing density reduces contacts between individuals and directly reduces population size.
+In group living species group size and the number of groups both contribute to total animal abudance. 
+As these factors are completely interdependant, it is very difficult to study them empirically \emph{e.g.}, in a comparative frame work.
 
 \tmpsection{One sentence clearly stating the general problem (the gap)}
 % being addressed by this particular study.
 
-It is unknown whether it is specifically density that controls pathogen diversity or whether density merely correlates with population structure, group size or population size (abundance).
+It is unknown whether it is specifically density that controls pathogen diversity or whether density merely correlates with other causal factors such as population structure, group size or population size.
 
 
 \tmpsection{One sentence summarising the main result}
 %  (with the words “here we show” or their equivalent).
-Here I use metapopulation SIR models to test whether it is density \emph{per se} that increases the ability of a new pathogen to invade as apposed to colony size, population abundance or population structure.
+Here I use metapopulation SIR models to test whether it is density \emph{per se} that increases the ability of a new pathogen to invade as apposed to colony size, population size or population structure.
 
 
 
@@ -150,37 +149,36 @@ Global change is strongly peturbing wild animal populations, but without clear m
 Variables that describe populations, such as population density and structure, are well established as having a central role in pathogen dynamics \cite{colizza2007invasion, barthelemy2010fluctuation, colizza2007invasion,  wu2013threshold, may1979population, anderson1979population}.
 More recently, the role of the population has been examined with respect to pathogen richness and the coexistence of competing pathogens \cite{qiu2013vector, allen2004sis, nunes2006localized}.
 Yet even in theoretical studies there is confusion as to how exactly we should measure populations.
-There is disagreement on whether population density (individuals per unit area) should be preferred over population abundance (number of individuals) \cite{begon2002clarification} and how exactly area should be incorporated \cite{begon2002clarification}. 
+There is disagreement on whether population density (individuals per unit area) should be preferred over population size (number of individuals) \cite{begon2002clarification} and how exactly area should be incorporated \cite{begon2002clarification}. 
 
 
-\tmpsection{Density/abundance in comparative research}
+\tmpsection{Density/size in comparative research}
 With the increase of novel zoonotic pathogens \cite{jones2008global} attention has turned to comparatively assessing the factors that are associated with high or low pathogen richness in wild animal species \cite{poulin2000diversity}.
 Here again there is little clarity on the relationship between a number of species measurements.
 Population density is commonly studied \cite{morand1998density, kamiya2014determines, lindenfors2007parasite, nunn2003comparative, arneberg2002host} as is range size \cite{lindenfors2007parasite, nunn2003comparative, turmelle2009correlates, huang2015parasite, kamiya2014determines}.
 However it is rarely if ever acknowledge that these two values are intrinsically linked by $d = N/a$ (where $d$ is density, $N$ is the population size and $a$ is area. See Table~\ref{t:params} for all parameters used) or that the relationship $N \propto a$ is well supported \cite{blackburn2006variations, borregaard2010causality}.
-In contrast, abundance has never been directly studied as a predictor of pathogen richness.
-This is a glaring omission as abundance more closely aligns with the ``island-biogeography'' class of mechanisms posited to explain pathogen richness \cite{}.
-Furthermore, abundance is considered the more relevant measure in terms of pathogen dynamics, especially when area cannot be assumed to be constant \cite{begon2002clarification} as is commonly the case in wild populations, especially in the face of global warming and habitat degradation.
+In contrast, population size has never been directly studied as a predictor of pathogen richness---although confusingly, population range size is sometimes used as a measure of size \emph{e.g.}, \cite{vogeli2011island}.
+This is a glaring omission.
+Furthermore, population size is considered the more relevant measure in terms of pathogen dynamics, especially when area cannot be assumed to be constant \cite{begon2002clarification} as is commonly the case in wild populations, especially in the face of global warming and habitat degradation.
 
-\tmpsection{Populatiion structure in comparative research}
+\tmpsection{Population structure in comparative research}
 It is clear that individuals of an animal species are not randomly distributed in space: social groups are common \cite{kerth2008causes} and geographic boundaries reduce contacts between isolated populations.
 In social species, measures such as global population density are largely meaningless with respect to the number of infectious contacts individuals may have.
 Rather, contacts are based on group size and rates of movements between groups.
 Two aspects of non-random transmission have been studied in particular: group size \cite{vitone2004body, gay2014parasite, ezenwa2006host, rifkin2012animals, nunn2003comparative} and global measures of population structure including genetic measures and measures derived from distribution shapes (\textcite{gay2014parasite, maganga2014bat, turmelle2009correlates} and see Chapter \ref{ch:empirical}).
-Again however, the relationships between these terms and more the more global terms mentioned above are rarely examined.
-Population abundance can be decomposed into two components, the number of groups and the average size of a group with $N = nm$ where $n$ is group size and $m$ is the number of groups.
-The amount of movement between is largely dependant on the distance between groups.
-This depends on the number of groups per area $m/a$ or $N/na$ and the average distance between groups, if groups are randomly distributed in space scales as $something$.
+Again however, the relationships between these terms and the more global terms mentioned above are rarely examined.
+Population size can be decomposed into two components, the number of groups and the average size of a group with $N = nm$ where $n$ is group size and $m$ is the number of groups.
+The amount of movement between groups is at least partially dependant on the distance between groups \cite{jenkins2010meta, le2012patterns, schooley2009enhancing}.
+The distance between neighbouring groups decreases with the number of groups per area $m/a$ or $N/na$.
 
 \tmpsection{But reaction to climate change, and predictions depend on which factor is actually important}
 
-
 Importantly, these factors, although interrelated, will respond differently to global change and the response will be species dependant.
-Some species may suffer large range contractions, and therefore large falls in absolute abundance, while their density remains fairly constant.
+Some species may suffer large range contractions, and therefore large falls in population size, while their density remains fairly constant.
 Other species might be expected to retain their distribution but have a depressed population density across their range.
 Similarly with population structure, species particularly affected by habitat fragmentation can expect increased reduced movement of individuals between groups, while other species may be most affected by a reduction in group size.
 Furthermore, different mechanisms of maintenance and creation of pathogen richness will respond to changes in these factors differently as well.
-If pathogen richness ultimately depends on the ``island size'' of the host population, then falls in population abundance will reduce pathogen richness the most.
+If pathogen richness ultimately depends on the ``island size'' of the host population, then falls in population size will reduce pathogen richness the most.
 If local group size affects the ability of new pathogens to invade (Chapter \ref{ch:sims1}) then changes in group size are likely to be most important.
 Finally, if increased population structure allows pathogens to coexist (\parencite{qiu2013vector, allen2004sis, nunes2006localized} and Chapter \ref{ch:empirical}) increase habitat fragmentation could be expected to increase pathogen richness.
 
@@ -194,7 +192,7 @@ Furthermore, mechanistic models are expected to be more predictive into the futu
 \tmpsection{The gap}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Therefore there is great need to mechanistic models that try to disentangle the interplay between these many factors: density, abundance, range size, population structure, group size and the number of groups.
+Therefore there is great need to mechanistic models that try to disentangle the interplay between these many factors: density, population size, range size, population structure, group size and the number of groups.
 
 \tmpsection{What I did and found}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -946,8 +944,8 @@ fewAllExtinct <- rbind(dens1, dens2, pop) %>%
 I used a two-pathogen, metapopulation SIR model to compare the roles of demograhic parameters on pathogen species richness.
 Specifically I let two identical pathogens---an endemic pathogen and an invading pathogen---compete.
 I used presistence or not of the second pathogen as my response variable.
-I tested whether population abundance is more important than population density.
-I then tested whether colony size or the number of colonies is the more important component of population abundance.
+I tested whether population size is more important than population density.
+I then tested whether colony size or the number of colonies is the more important component of population size.
 The multpathogen SIR model is identical to that in Chapter \ref{ch:sims1} and is implemented in R \cite{R}.
 
 
@@ -960,17 +958,17 @@ After another \rinline{nEvent - invadeT} events the invasion of pathogen 2 is co
 \subsection{Dependant variables}
 
 Three dependant variables were varied: colony size, number of colonies and area.
-From these parameters, population abundance and population density can be calculated.
+From these parameters, population size and population density can be calculated.
 The default values of these parameters was a population size of 8000 individuals split into 20 colonies of 400.
 The default area of the simulations was \rinline{dep3[3]}.
 
 Three sets of simulations were run.
 First, colony size was varied using values \rinline{dep1[-5]} and \rinline{dep1[5]}.
-The number of colonies was kept constant and so population abundance varied with colony size.
+The number of colonies was kept constant and so population size varied with colony size.
 Area was scaled to keep population density constant. 
-Secondly, number of colonies (and therefore population abundance) was varied and again area was varied to keep density constant.
+Secondly, number of colonies (and therefore population size) was varied and again area was varied to keep density constant.
 \rinline{dep2[-5]} and \rinline{dep2[5]} colonies were used.
-Finally, colony size and number of colonies were kept constant (therefore keeping population abundance constant) and area was varied alone to alter population density. 
+Finally, colony size and number of colonies were kept constant (therefore keeping population size constant) and area was varied alone to alter population density. 
 The values of area used were \rinline{dep3[-5]} and \rinline{dep3[5]} which gave density values of \rinline{depDens[-5]} and \rinline{depDens[5]}.
 
 The affects of area occur through changing the metapopulation network.
@@ -1012,7 +1010,7 @@ All simulations are run under all three transmission rates as this is a fundamen
 \subsection{Statistical comparisons}
 
 I tested two hypotheses.
-Firstly I tested the hypothesis that an increase in population abundance creates a stronger increase in invasion probability (of the second pathogen) than an equal increase in population density.
+Firstly I tested the hypothesis that an increase in population size creates a stronger increase in invasion probability (of the second pathogen) than an equal increase in population density.
 Secondly I tested the hypothesis that ana increase in colony size creates a stronger increase in invasion probability an an equal increase in number of colonies.
 To statistically test these hypotheses I combined the results from different simulations and fitted multiple logistic regressions, centering and scaling the dependant variables.
 Specifically, I fitted the model 
@@ -1051,18 +1049,18 @@ These simulations were ignored in further analyses.
 
 
 
-\subsection{Population density or abundance}
+\subsection{Population density or size}
 
-To test whether population density or abundance has a stronger affect on invasion probability I compared the regression coefficients of the multiple regressions fitted to simulation results (Figure~\ref{fig:plotValueChangeMeans}).
-Increasing abundance, either by increasing colony size or number of colonies, increases the probability of invasion (Table~\ref{t:regrCoefs}).
+To test whether population density or size has a stronger affect on invasion probability I compared the regression coefficients of the multiple regressions fitted to simulation results (Figure~\ref{fig:plotValueChangeMeans}).
+Increasing population size, either by increasing colony size or number of colonies, increases the probability of invasion (Table~\ref{t:regrCoefs}).
 The relationship between colony size and invasion is strong and significant at all transmission rates, while the relationship between colony number and invasion is weaker and more marginally significant.
 In contrast, varying population density does not alter invasion probability.
-Therefore the simulations support the hypothesis that population abundance affects invasion more strongly than population density.
+Therefore the simulations support the hypothesis that population size affects invasion more strongly than population density.
 
 
 \subsection{Colony size or number of groups}
 
-To test whether colony size or the number of colonies is the more important component of population abundance, I compared the regression coefficients, $b_2$ and $b_3$, of the multiple regressions fitted to simulation results (Figure~\ref{fig:plotTransMeans}).
+To test whether colony size or the number of colonies is the more important component of population size, I compared the regression coefficients, $b_2$ and $b_3$, of the multiple regressions fitted to simulation results (Figure~\ref{fig:plotTransMeans}).
 Increasing colony size or the number of colonies increases the probability of invasion but this affect is much stronger and more statistically significant, for colony size (Table~\ref{t:regrCoefs}).
 Therefore the simulations support the hypothesis that colony size is the more important component of population size, though colony number does still increase the probability of invasion.
 
@@ -1113,8 +1111,8 @@ $\beta$ & \emph{Variable} & \emph{Estimate} ($b$) & (95\% \emph{CI}) & $p$\\
 
 \tmpsection{Restate results}
 
-Overall, my results suggest that population abundance promotes pathogen richness significantly more than population density in the context of metapopulations or group living.
-Furthermore, the component of population abundance that is important is group size.
+Overall, my results suggest that population size promotes pathogen richness significantly more than population density in the context of metapopulations or group living.
+Furthermore, the component of population size that is important is group size.
 
 These results lead to a number of other conclusions.
 All else being equal, increasing range size (with density remaining constant) will not increase pathogen richness significantly unless the increased range size promotes larger groups.
@@ -1128,7 +1126,7 @@ As long as there are enough susceptible individuals that the new species persist
 As dispersal is a very slow process compared to infection, the global pool of susceptibles is not important. 
 This is why increasing the number of number of colonies does not increase pathogen invasion as quickly as the size of a colony does.
 Similarly, the density---at the global scale---of the species has little affect.
-In these simulations, increasing density without increasing abundance implies a reduction in range size, which simply increases the number of colonies which are connected to the colony experiencing the invading pathogen.
+In these simulations, increasing density without increasing population size implies a reduction in range size, which simply increases the number of colonies which are connected to the colony experiencing the invading pathogen.
 This increases the pool of susceptibles that are within one dispersal of the invading pathogen.
 However, again, this affect is very weak compared to the strong changes in local disease dynamics caused by increasing colony size.
 
@@ -1137,20 +1135,20 @@ However, again, this affect is very weak compared to the strong changes in local
 \subsection{Global change}
 
 It is clear that many species are suffering strong population changes due to climate change \cite{thomas2004extinction}.
-However these changes might affect range size \cite{thomas2004extinction}, population abundance \cite{craigie2010large}, population connectivity \cite{wasserman2013population, rivera2015habitat, fonturbel2014forest} or group size \cite{lehmann2010apes, zunino2007habitat, manor2003impact, atwood2006influence} to different extents.
+However these changes might affect range size \cite{thomas2004extinction}, population size \cite{craigie2010large}, population connectivity \cite{wasserman2013population, rivera2015habitat, fonturbel2014forest} or group size \cite{lehmann2010apes, zunino2007habitat, manor2003impact, atwood2006influence} to different extents.
 My results suggest that pathogen communities will response differently depending on the change although it should be noted that the mechanism here---invasion of a new pathogen---is possibly more relevant in the longer term.
 In short, species suffering reductions in groups size \cite{lehmann2010apes, zunino2007habitat, manor2003impact, atwood2006influence} are predicted to experience decreases in pathogen richness in the long term.
 Species that are experiencing increases in group size \cite{lehmann2010apes} would be expected gain new pathogen species more quickly.
-In contrast, species suffering range contractions \cite{thomas2004extinction} and decreases in abundance \cite{craigie2010large} are expected to experience smaller changes in pathogen richness.
+In contrast, species suffering range contractions \cite{thomas2004extinction} and decreases in population size \cite{craigie2010large} are expected to experience smaller changes in pathogen richness.
 
 
 \subsection{Comparative studies}
 
 Many comparative studies measure some aspect of a species population size or structure, yet it is rarely discussed how these relate.
 Instead most studies use the data that is available, without considering how it may depend on other factors.
-Population density is often measured \cite{morand1998density, lindenfors2007parasite, nunn2003comparative, arneberg2002host} yet density is directly associated with abundance.
-This study suggests that it is in fact abundance that is important, expecially in the context of social species.
-Therefore, the density measures in these comparative studies are more likely to be proxies for abundance than the true causal factor.
+Population density is often measured \cite{morand1998density, lindenfors2007parasite, nunn2003comparative, arneberg2002host} yet density is directly associated with population size.
+This study suggests that it is in fact population size that is important, expecially in the context of social species.
+Therefore, the density measures in these comparative studies are more likely to be proxies for population size than the true causal factor.
 Similarly, this study suggests that host range size does not promote pathogen richness by the mechanism studied here yet a number of studies have found a relationship \cite{kamiya2014determines, nunn2003comparative}.
 This suggests that either the relationship found in comparative studies is in fact due to a correlation with another factor, or that other mechanisms than rate of invasion of new pathogens are important.
 Range size has been suggested to affect pathogen richness by a number of mechanisms such as increasing the diversity of sympatric species and these other mechanisms should be specifically tested.
@@ -1183,22 +1181,21 @@ Ultimately, the modelling choices could increase or decrease the affects of area
 
 \tmpsection{Further correlations between factors}
 
-I have used the simple relationships between demographic factors (density = abundance / area for examples) to illustrate that these are tightly linked.
-In order to isolate the affects of these factors I have assumed these simple relationships hold; to examine density without altering abundance I have fixed abundance and manipulated area.
-However in reality these are likely to covary both and between species and within species across time.
-Therefore, these quantities are certainly linked, they cannot be assumed to have simple linear relationships and should not be used as proxies of each other without further examination.
-For example it is expected that group size increases with range size \cite{}.
-Similarly it is unlikely that a species whose range size decreases will not experience a decrease in total abundance as well; the range contraction is likely to occur over generations rather than a simple squeezing of the existing individuals into a smaller area.
+I have used the simple relationships between demographic factors---density = population size / area for example---to illustrate that these are tightly linked.
+In order to isolate the affects of these factors I have assumed these simple relationships hold; to examine density without altering population size I have fixed population size and manipulated area.
+However in reality these are likely to covary both within species across time and between species.
+Therefore, while these quantities are certainly linked, they cannot be assumed to have simple linear relationships and should not be used as proxies of each other without further examination.
+For example it is expected that group size increases with range size \cite{}. %TODO
+Furthermore, rates and distances of dispersal---which affect the influence of space---may be related to local density \cite{marjamaki2013local}
+Similarly it is unlikely that a species whose range size decreases will not experience a decrease in total population size as well; the range contraction is likely to occur over generations rather than a simple squeezing of the existing individuals into a smaller area.
 
 
-%For instance, various relationships between group size and home range size exist (Macdonald 1983). Kruuk and Macdonald (1985) predict that home range behaviour in group living species should conform to one of two strategies. They should either expand their range to encompass sufficient additional resources to support more group members (expansionism) or increase group size only up to the size that can be sustained on the resources within the smallest economically defendable range needed to support the minimum social unit (contractionism). http://onlinelibrary.wiley.com/enhanced/doi/10.1111/j.1600-0587.2009.05745.x
-% Badger Group size versus territory size http://onlinelibrary.wiley.com/doi/10.1034/j.1600-0706.2001.950208.x/abstract
 
 
 \subsection{Conclusions}
 
 Overall I have shown that while a number of demographic factors are intrinsically linked, they have different affects on the rate at which new pathogens will invade.
-I found that abundance, not density, has the stronger impact on the ability of a pathogen to invade.
+I found that population size, not density, has the stronger impact on the ability of a pathogen to invade.
 Furthermore, species with large groups are likely to harbour more pathogens than species with many, smaller groups.
 Due to the correlations between these factors, they are particularly hard to study within a comparative framework; this highlights the utility of mechanistic models.
 
