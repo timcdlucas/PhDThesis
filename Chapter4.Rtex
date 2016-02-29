@@ -78,40 +78,42 @@ library(showtext)
 \tmpsection{One or two sentences providing a basic introduction to the field}
 % comprehensible to a scientist in any discipline.
 \lettr{A}n increasingly large fraction of emerging diseases come from wild animals and these diseases have a huge impact on human health.
-The chance that a new disease will come from any particularly wild host species increases with the diversity of pathogens in that species.
-However, the factors that control pathogen diversity in wild populations are still unknown.
+The chance that a new disease will come from any particularly host species increases with the diversity of pathogens in that species.
+However, the factors that control pathogen diversity in wild populations are still poorly understood.
 
 
 
 \tmpsection{Two to three sentences of more detailed background}
 Population density is thought to increase pathogen richness while theory suggests that population structure and population size may also play a role.
 However, these factors are intrinsically linked; reducing density reduces contacts between individuals and directly reduces population size.
-In group living species group size and the number of groups both contribute to total animal abudance. 
+In group living species group size and the total number of groups both contribute to total population size. 
 As these factors are completely interdependant, it is very difficult to study them empirically \emph{e.g.}, in a comparative frame work.
 
 \tmpsection{One sentence clearly stating the general problem (the gap)}
 % being addressed by this particular study.
 
-It is unknown whether it is specifically density that controls pathogen diversity or whether density merely correlates with other causal factors such as population structure, group size or population size.
-
-
 \tmpsection{One sentence summarising the main result}
 %  (with the words “here we show” or their equivalent).
-Here I use metapopulation SIR models to test whether it is density \emph{per se} that increases the ability of a new pathogen to invade as apposed to colony size, population size or population structure.
 
-
+It is unknown whether it is specifically density that controls pathogen diversity or whether density merely correlates with other causal factors such as population structure, group size or population size.
+Here I use metapopulation SIR models to test whether it is density \emph{per se} that increases the ability of a newly evolved pathogen to invade and persist in a population as apposed to colony size, population size or population structure.
 
 \tmpsection{Two or three sentences explaining what the main result reveals in direct comparison to what was thought to be the case previously}
 % or how the main result adds to previous knowledge
 
-
-
 \tmpsection{One or two sentences to put the results into a more general context.}
+
+
+
+I found that that increased group size increases the chance that a new pathogen will invade into a population to the largest extent.
+Both group size and the number of groups (\emph{i.e.} components of population size) promote pathogen richness more than population density.
+This implies that population density is merely a correlate of group size or population size.
 
 \tmpsection{Two or three sentences to provide a broader perspective, }
 % readily comprehensible to a scientist in any discipline.
 
-
+This study helps clarify both the inter-relationships between and relative importance of a number of population level factors affecting pathogen richness. 
+It also highlights the necessity for studying the mechanisms underlying pathogen community construction as comparative approaches do not have the specificity to do so.
 
 
 
