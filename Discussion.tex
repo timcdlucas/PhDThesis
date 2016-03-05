@@ -163,15 +163,14 @@ However, there are a number of other mechanisms that could equally strongly affe
 Closely related to the mechanism studied here is the case of pathogens invading from other host species.
 These pathogens are likely to have different epidemiological parameters (transmission rate, virulence, recovery rate) to the endemic pathogen.
 Furthermore, the competition between pathogens is expected to be less strong.
-This case has been studied in well-mixed populations TODO.
 
 Alternatively, host population traits could affect the rate of pathogen extinction.
 Once a number of pathogens are established in a population, there is still likely to be occasional extinctions, especially in the presence of interpathogen competition.
 A number of population factors could affect this rate.
 It is expected that large populations will experience slower rates of pathogen loss as stochastic extinction will be more rare.
 Furthermore, populations with strongly varying disease prevalences are likely to have higher rates of pathogen extinction.
-This includes populations where epidemic cycles are common; subsequent to a large epidemic, and after a time lag, the number of susceptible individuals in the populations will be low due to immunity, host death or low birth rates induced by infection \cite{}.
-This effect will be exacerbated in the case where an epidemic cycle is synchronous across the whole population.
+This includes populations where epidemic cycles are common \cite{altizer2006sesonality}; subsequent to a large epidemic, and after a time lag, the number of susceptible individuals in the populations will be low due to immunity, host death or low birth rates induced by infection \cite{scott1987population, hethcote1994thousand}.
+This effect will be exacerbated in the case where an epidemic cycle is synchronous across the whole population \cite{duke2011strong}.
 Structured populations with asynchronous epidemic cycles may experience local pathogen extinction but rarely global extinction; this pattern of local extinction and recolonisation has been well studied in the ecological literature \cite{grenfell1995seasonality, levin1974dispersion, hanski1998metapopulation}, but less so in the epidemiological literature. %read http://link.springer.com/article/10.1007/s10980-008-9245-4
 
 
@@ -183,28 +182,32 @@ There is dispersal between these subpopulations but otherwise they are static.
 Similarly, information on these other social behaviours was not included in the regression in Chapter \ref{ch:empirical}.
 Firstly, I have not modelled the creation of new colonies, or the disbanding of colonies \cite{metheny2008genetic}.
 Especially in the face of habitat destruction, it is likely that the number of colonies a species has will be decreasing.
-Furthermore, in some species, colonies are likely to be more fluid, with groups joining and splitting \cite{kerth2012causes}.
+Furthermore, in some species, colonies are likely to be more fluid, with groups joining and splitting \cite{kerth2012causes, august2014sympatric}.
 Secondly, there are a number of behaviours common in bats, particularly in temperate regions, that has been excluded from these models.
-For example, many species have different types of colonies: maternity colonies, mating colonies and hibernation colonies \cite{kerth2008causes}.
-The extent to which the individuals move together when switching between these colony types is largely unknown \cite{} but if there is a large degree of mixing during the transition between colony types, then there will be considerably less population structure overall.
+For example, many species have different types of colonies---maternity colonies, mating colonies and hibernation colonies \cite{kerth2008causes}.
+Epidemiological dynamics are likely to be altered by the physiological differences in bats while in these different colony types \cite{george2011host, langwig2015host, blehert2012fungal} but also due to their role in population structure.
+The extent to which the individuals move together when switching between these colony types is largely unknown \cite{kurta2002philopatry} but if there is a large degree of mixing during the transition between colony types, then there will be considerably less population structure overall.
 Similarly, swarming behaviour---the coming together of many bats from different colonies---is likely to decrease epidemiological population structure \cite{kerth2012causes}.
-Furthermore, many bat species, both temperate and tropical, are migratory \cite{fleming2003ecology, krauel2013recent, popa2009bats}.
-Again, it is largely unknown whether colonies travel together during migration and therefore colony structure is similar before and after migration \cite{}.
+
+
+Furthermore, many bat species, both temperate and tropical, are migratory \cite{fleming2003ecology, krauel2013recent, popa2009bats, hutterer2005bat}.
+Again, it is largely unknown whether colonies travel together during migration and therefore colony structure is similar before and after migration \cite{carter2013cooperation} though \textcite{kurta2002philopatry} find that individuals do not migrate together.
 There is also little data on whether parameters such as dispersal rate are constant before and after migration, though it is likely that most dispersal between colonies is juvenile dispersal and so dispersal rate is likely to be much higher in one location than the other.
 Even if colonies remain fairly constant during migration, the spatial relationships may be different; colonies that were far apart in one area could subsequently be near neighbours after migration.
-Migratory status has been included in previous comparative analyses and not been found to be a strong predictor of pathogen richness \cite{}. 
+Migratory status has been included in previous comparative analyses and not been found to be a strong predictor of pathogen richness \cite{turmelle2009correlates, maganga2014bat}. 
 
-Another potentially important factor that has been ignored here is roost sharing by different bat species \cite{}.
+Another potentially important factor that has been ignored here is roost sharing by different bat species \cite{maganga2014bat, lopez2014seroprevalence, serra2002european, pons2014insights}.
 If the species are very similar in most epidemiological factors, this could potentially be sensibly modelled by ignoring species identity and treating the whole population as one.
 However, it is more likely that there will be fewer close contact events between individuals of different species even if they roost share.
 It is also likely that species will have different dispersal patterns between colonies.
 Therefore, more complex models such as overlay network models might be needed in order to effectively model these populations.
-Roost sharing and the amount of sympatry has been included in empirical studies of bat pathogen richness \cite{} %todo, was it found to be important.
+Roost sharing and the amount of sympatry has been included in empirical studies of bat pathogen richness \cite{maganga2014bat} but was not found to correlate with pathogen richness.
 
-Finally, birth and deaths have been modelled here as occuring randomly through time but many bat species have very tightly controlled birth pulses \cite{}.
-Species can have one or more birth pulse per year with almost all births occuring during a week or so \cite{}.
-This has important epidemiological consequences; there will be a pulse of susceptible individuals each year with very few new susceptibles during the rest of the year.
-Models of these population dynamics have found that birth pulses can TODO.
+Finally, birth and deaths have been modelled here as occuring randomly through time but many bat species have very tightly controlled birth pulses \cite{dietrich2015leptospira, george2011host, porter2001birth, greiner2011predictable}.
+This has important epidemiological consequences; there will be a pulse of susceptible individuals each year with very few new susceptibles during the rest of the year \cite{dietrich2015leptospira}.
+Models of these population dynamics have found that birth pulses can drive pathogen extinction \cite{peel2014effect}.
+\textcite{hayman2015biannual} found that certain Filoviruses were less likely to persist in bat species with an annual birth pulse than a biannual birth pulse.
+In other mammals, birth pulses have also been shown to reduce synchrony of dynamics \cite{duke2011strong}.
 
 Overall, there is much complexity that could be added to epidemiological models of bats.
 However, there is little data for many species which makes parameterisation difficult.
