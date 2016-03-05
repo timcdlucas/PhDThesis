@@ -1197,8 +1197,7 @@ I have used the simple relationships between demographic factors---density = pop
 In order to isolate the affects of these factors I have assumed these simple relationships hold; to examine density without altering population size I have fixed population size and manipulated area.
 However in reality these are likely to covary both within species across time and between species.
 Therefore, while these quantities are certainly linked, they cannot be assumed to have simple linear relationships and should not be used as proxies of each other without further examination.
-For example it is expected that group size increases with range size \cite{}. %TODO
-Furthermore, rates and distances of dispersal---which affect the influence of space---may be related to local density \cite{marjamaki2013local}
+For example, rates and distances of dispersal---which affect the influence of space---may be related to local density \cite{marjamaki2013local}.
 Similarly it is unlikely that a species whose range size decreases will not experience a decrease in total population size as well; the range contraction is likely to occur over generations rather than a simple squeezing of the existing individuals into a smaller area.
 
 

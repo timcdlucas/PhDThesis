@@ -177,17 +177,16 @@ Studies on single pathogens have also shown that space can allow persistence whe
 
 \tmpsection{Choice of measure of population structure}
 
-A number of measurments of population structure have been used in the literature and each has it's own shortcomings.
+A number of measurments of population structure have been used in the literature and each has its own shortcomings.
 In particular, the better, more direct measurements tend to be very work intensive which consequently means data is available for few species.
 
 \tmpsection{Direct dispersal measurements}
 
 The ideal metric of population structure is direct measurement of dispersal rates and distance.
 These are incredibly difficult to obtain, especially over large scales.
-Due to white nose syndrom, some very large mark-recapture studies have been conducted, but recapture rates are low \cite{}.
-Further, these large studies have been in species that live in a few large colonies, so recapture rates should be higher than in less social species.
+Some very large mark-recapture studies have been conducted, but recapture rates are low \cite{norquay2013long}.
 In practise, direct measurements are not practical for comparative analysis due to the lack of data and inconsistency in data collection methods.
-
+%todo
 
 \tmpsection{Genetic measures}
 
