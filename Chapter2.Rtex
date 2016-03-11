@@ -374,7 +374,7 @@ Note this rate is independent of the degree of subpopulation $n$.
 
 I examine this model using stochastic, continuous time simulations (using the Gillespie algorithm) implemented in R \cite{R}.
 At each step in the simulation we calculate the rate that each possible event might occur.
-One event is then randomly chosen, weighted by it's rate
+One event is then randomly chosen, weighted by its rate
 \begin{align}
   p(\text{event } i) = \frac{r_i}{\sum_i r_i}
 \end{align}
