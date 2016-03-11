@@ -168,7 +168,7 @@ We need explicit mechanistic models in order to tease apart these factors.
 Furthermore, a solid mechanistic understanding of these processes will allow us to predict how wild populations will respond to increased human pressure and global change.
 As habitats fragment we expect wild populations to become smaller and less well connected.
 Understanding how these population changes interact reqiures a mechanistic understanding of disease dynamics.
-Different specific mechanisms predict responses to climate change at different rates---the extinction of parasites could occur relatively rapidly, whereas processes whereby invasive pathogens can persist more easily are likely to change pathogen community competition relatively slowly.
+Different specific mechanisms predict responses to climate change at different rates --- the extinction of parasites could occur relatively rapidly, whereas processes whereby invasive pathogens can persist more easily are likely to change pathogen community competition relatively slowly.
 
 \tmpsection{Population structure could be important}
 
@@ -1039,7 +1039,7 @@ This implies it should not be used as a proxy for the probability that a species
 However, my simulations do highlight the importance of competition for the spread of a new pathogen.
 All parameters used correspond to pathogens with $R_0>1$.
 However, the competition with the endemic pathogen means that for some transmission rates the chance of epidemic spread and persistence is close to zero.
-This has implications for human epidemics as well---if there is strong competiton between a newly evolved strain and an endemic strain, we are unlikely to see the new strain spread, irregardless of population structure.
+This has implications for human epidemics as well --- if there is strong competiton between a newly evolved strain and an endemic strain, we are unlikely to see the new strain spread, irregardless of population structure.
 
 
 
