@@ -147,7 +147,7 @@ However, the relationship has implications for global change, implying that incr
 Zoonotic pathogens make up the majority of newly emerging diseases and have profound consequences for public health, economics and international development \cite{jones2008global, smith2014global, ebolaWorldbank}.
 A better understanding of the factors that control which wild host species are potential reservoires of zoonotic diseases would allow us to effectively optimize zoonotic disease surveillance and anticipate how the risks of disease spillover might change with global change.
 The chance that a host species will be the source of an outbreak depends on a number of factors including its proximity and interactions with humans and the prevalence and diversity of pathogens it carries \cite{wolfe2000deforestation}.
-Our understanding of the factors that control the diversity of pathogens in a wild species is still poor.
+However, our understanding of the factors that control the diversity of pathogens in a wild species is still poor.
 
 
 \tmpsection{Specific Intro}
@@ -157,24 +157,24 @@ Our understanding of the factors that control the diversity of pathogens in a wi
 \tmpsection{Theoretical background}
 
 %Think this ref is right but need to check.
-Single pathogen models show that increasing population structure simply slows disease spread and makes establishment less likely \cite{colizza2007invasion, vespignani2008reaction}.
-In the ecological literature this is often taken as predicting that increased population structure will decrease pathogen richness \cite{nunn2003comparative, morand2000wormy, poulin2014parasite, poulin2000diversity, altizer2003social}.
-However, models of competition between multiple pathogens show that in unstructured populations a competitive exclusion process occurs but that splitting the population into two patches allows coexistence \cite{qiu2013vector,allen2004sis, nunes2006localized}.
-
+Models of single pathogens have shown that population structure can allow persistence of a pathogen where a well-mixed population would experience a single, large epidemic followed by pathogen extinction \cite{blackwood2013resolving, pons2014insights, plowright2011urban}.
+Single pathogen models also show that increasing population structure slows disease spread and makes establishment of a new pathogen less likely \cite{colizza2007invasion, vespignani2008reaction}.
+In the ecological literature this is often taken as a prediction that increased population structure will decrease pathogen richness \cite{nunn2003comparative, morand2000wormy, poulin2014parasite, poulin2000diversity, altizer2003social} but this interpretation ignores interpathogen competition.
+Models of competition between multiple pathogens show that in unstructured populations a competitive exclusion process occurs but that adding population structure allows coexistence \cite{qiu2013vector, allen2004sis, nunes2006localized}.
 
 \tmpsection{Previous Studies}
 
 Three studies have used comparative data to test for an association between population structure and viral richness.
-A study on 15 African bats found a positive relationship between distribution fragmentation and viral richness \cite{maganga2014bat} while a study on 20 South-East Asian bats found the opposite relationship \cite{gay2014parasite}. 
-A global study on 33 bats found a positive relationship between $F_{ST}$---a measure of genetic structure---and viral richness \cite{turmelle2009correlates}. 
-However, this study included measures using mtDNA which only measures female dispersal which may have biased the results many bat species show female philopatry \cite{kerth2002extreme, hulva2010mechanisms}.
+A study on 15 African bat species found a positive relationship between distribution fragmentation and viral richness \cite{maganga2014bat} while a study on 20 South-East Asian bat species found the opposite relationship \cite{gay2014parasite}. 
+A global study on 33 bat species found a positive relationship between $F_{ST}$---a measure of genetic structure---and viral richness \cite{turmelle2009correlates}. 
+However, this study included measures using mtDNA which only measures female dispersal which may have biased the results as many bat species show female philopatry \cite{kerth2002extreme, hulva2010mechanisms}.
 Furthermore, this study used measures of $F_{ST}$ irrespective of the study scale with studies covering from tens \cite{mccracken1981social} to thousands \cite{petit1999male} of kilometers.
 As isolation by distance has been shown in a number of bat species \cite{burland1999population, hulva2010mechanisms, o2015genetic, vonhof2015range} this could bias results further.
 Finally, when a global $F_{ST}$ value is not given they used the mean of all pairwise $F_{ST}$ between sites.
 This is not correct as from global $F_{ST}$ we expect migration rates of $M = (1-F_{ST})/8F_{ST}$ while from $F_{ST}$ between pairs of populations we expect migration rates of $M = (1-F_{ST})/16F_{ST}$ where $M$ is the absolute number of diploid inviduals dispersing per generation \cite{slatkin1995measure}.
 To use studies that only present pairwise $F_{ST}$ values the raw data would have to be gathered and global $F_{ST}$ calculated from those.
 As it is in fact the movement of individuals that is epidemiologically relavent, using these studies is probably not correct without attempting to correct for these difference.
-Studies on single pathogens have also shown that space can allow persistence where a well mixed population ould experience a single, large epidemic followed by pathogen extinction \cite{blackwood2013resolving, pons2014insights, plowright2011urban}.
+
 
 
 \tmpsection{Choice of measure of population structure}
