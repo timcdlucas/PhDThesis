@@ -163,10 +163,15 @@ In the ecological literature this is often taken as a prediction that increased 
 Models of competition between multiple pathogens show that in unstructured populations a competitive exclusion process occurs but that adding population structure allows coexistence \cite{qiu2013vector, allen2004sis, nunes2006localized}.
 
 \tmpsection{Previous Studies}
-
+\sloppy
 Three studies have used comparative data to test for an association between population structure and viral richness.
-A study on 15 African bat species found a positive relationship between distribution fragmentation and viral richness \cite{maganga2014bat} while a study on 20 South-East Asian bat species found the opposite relationship \cite{gay2014parasite}. 
-A global study on 33 bat species found a positive relationship between $F_{ST}$---a measure of genetic structure---and viral richness \cite{turmelle2009correlates}. 
+A study on 15 African bat species found a positive relationship between the extent of distribution fragmentation and viral richness \cite{maganga2014bat}.
+Conversely, a study on 20 South-East Asian bat species found the opposite relationship \cite{gay2014parasite}. 
+These studies used the ratio between the perimeter and area of the species' geographic range as their measure of population structure.
+Range maps are very course for many species.
+Furthermore there is a potential bias with island living species being given sea based edges where continental species might be assumed to live across their entire range, without considering the different terrestrial habitats in these areas.
+
+A global study on 33 bat species found a positive relationship between $F_{ST}$ --- a measure of genetic structure --- and viral richness \cite{turmelle2009correlates}. 
 However, this study included measures using mtDNA which only measures female dispersal which may have biased the results as many bat species show female philopatry \cite{kerth2002extreme, hulva2010mechanisms}.
 Furthermore, this study used measures of $F_{ST}$ irrespective of the study scale with studies covering from tens \cite{mccracken1981social} to thousands \cite{petit1999male} of kilometers.
 As isolation by distance has been shown in a number of bat species \cite{burland1999population, hulva2010mechanisms, o2015genetic, vonhof2015range} this could bias results further.
@@ -174,59 +179,55 @@ Finally, when a global $F_{ST}$ value is not given they used the mean of all pai
 This is not correct as from global $F_{ST}$ we expect migration rates of $M = (1-F_{ST})/8F_{ST}$ while from $F_{ST}$ between pairs of populations we expect migration rates of $M = (1-F_{ST})/16F_{ST}$ where $M$ is the absolute number of diploid inviduals dispersing per generation \cite{slatkin1995measure}.
 To use studies that only present pairwise $F_{ST}$ values the raw data would have to be gathered and global $F_{ST}$ calculated from those.
 As it is in fact the movement of individuals that is epidemiologically relavent, using these studies is probably not correct without attempting to correct for these difference.
+\fussy
 
 
-
-\tmpsection{Choice of measure of population structure}
-
-A number of measurments of population structure have been used in the literature and each has its own shortcomings.
-In particular, the better, more direct measurements tend to be very work intensive which consequently means data is available for few species.
-
-\tmpsection{Direct dispersal measurements}
-
-The ideal metric of population structure is direct measurement of dispersal rates and distance.
-These are incredibly difficult to obtain, especially over large scales.
-Some very large mark-recapture studies have been conducted, but recapture rates are low \cite{norquay2013long}.
-In practise, direct measurements are not practical for comparative analysis due to the lack of data and inconsistency in data collection methods.
-%todo
-
-\tmpsection{Genetic measures}
-
-As direct measurement of dispersal are difficult, genetic data is often used.
-Measurement such as $F_{ST}$ are used to calculate migration.
-There are strong model assumptions under the conversion from $F_{ST}$ to migration.
-However, the main issue with this measure is the effort required for each study and the subsequent low number of measurements.
-Further, there are differences in the scales of the studies and the genetic regions being sequenced.
-This differences should not be ignored.
-
-\tmpsection{Number of Subspecies}
-
-For a population to evolve distinct phenotypic or genetic traits, such that they can be classed as a subspecies, there must be limited migration between populations.
-The number of subspecies a species has therefore reflects the level of population structure in that species.
-The value of this measurement is available for every bat species.
-However, it is likely biased, with well studied species being likely to have more recognised subspecies.
-Further, this is a very course measure and it is important to consider whether it is measuring migration at a timescale and rate that is epidemiologically relevant.
-
-For both measures from $F_{ST}$ and the number of subspecies it is useful to consider the rates of animal movement that are being measured.
-Rates of migration estimated from $F_{ST}$ tend to be between 1 and 100 individuals per generation dispersing across all subpopulations.
-
-
-\tmpsection{Measures from range}
-
-The final measurement that has been used is derived from the shape of the species' range, typically from IUCN \cite{iucn} maps.
-The ratio between the perimeter of the range and the area (or similar values) are calculated.
-Range maps are very course for many species.
-Furthermore there is a potential bias with island living species being given sea based edges where continental species might be assumed to live everywhere in between locations where it is known to live, without considering the different terrestrial habitats in these areas.
+%\tmpsection{Choice of measure of population structure}
+%
+%A number of measurements of population structure have been used in the literature and each has its own shortcomings.
+%In particular, the better, more direct measurements tend to be very work intensive which consequently means data is available for few species.
+%
+%\tmpsection{Direct dispersal measurements}
+%
+%The ideal metric of population structure is direct measurement of dispersal rates and distance.
+%These are incredibly difficult to obtain, especially over large scales.
+%Some very large mark-recapture studies have been conducted, but recapture rates are low \cite{norquay2013long}.
+%In practise, direct measurements are not practical for comparative analysis due to the lack of data and inconsistency in data collection methods.
+%%todo
+%
+%\tmpsection{Genetic measures}
+%
+%As direct measurement of dispersal is difficult, genetic data is often used.
+%Measurement such as $F_{ST}$ are used to calculate migration.
+%There are strong model assumptions under the conversion from $F_{ST}$ to migration.
+%Furthermore, estimates are affected by the spatial spatial scale of the studies and the genetic regions being sequenced.
+%These differences should not be ignored.
+%However, the main issue with this measure is the effort required for each study and the subsequent lack of data.
+%
+%\tmpsection{Number of Subspecies}
+%
+%For a population to evolve distinct phenotypic or genetic traits, such that they can be classed as a subspecies, there must be limited migration between populations.
+%The number of subspecies a species has therefore reflects the level of population structure in that species.
+%The value of this measurement is available for every bat species.
+%However, it is likely biased, with well studied species being likely to have more recognised subspecies.
+%Further, this is a very course measure and it is important to consider whether it is measuring migration at a timescale and rate that is epidemiologically relevant.
+%
+%For both measures from $F_{ST}$ and the number of subspecies it is useful to consider the rates of animal movement that are being measured.
+%Rates of migration estimated from $F_{ST}$ tend to be between 1 and 100 individuals per generation dispersing across all subpopulations.
+%
+%
+%\tmpsection{Measures from range}
+%
+%The final measurement that has been used is derived from the shape of the species' range, typically from IUCN maps \cite{iucn}.
+%
+%
 
 \tmpsection{The gap}
-
-There is a lack of studies using multiple measures of population structure and larger datasets to robustly estimate the importance of population structure.
-
-
 \tmpsection{What I did/found}
 
-Here I have used two measures of population structure---the number of subspecies and gene flow---to robustly test for an association between population structure and pathogen richness in bats.
-Furthermore, I used a much larger dataset for one of these analyses, further promoting robustness of results.
+There is a lack of studies using multiple measures of population structure and larger datasets to robustly estimate the importance of population structure.
+Here I have used two measures of population structure --- the number of subspecies and gene flow --- to robustly test for an association between population structure and pathogen richness in bats.
+Furthermore, I have used a dataset that is much larger that previous studies for one of these analyses, further promoting robustness of results.
 I found that both measures of population structure are positively associated with viral richness and are likely to be in the best models for describing viral richness.
 Further, I found that the role of phylogeny is very weak in the models and in the distribution of viral richness amongst taxa.
 
@@ -1235,7 +1236,7 @@ To test for an association between pathogen richness I have performed multiple r
 As species cannot be considered independant due to shared evolutionary history, phylogeny was controlled for in all regressions.
 A number of other factors that have previously been found to be important were included as additional independant variables: body mass \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat, han2015infectious}, range size \cite{kamiya2014determines, turmelle2009correlates, maganga2014bat} and study effort \cite{turmelle2009correlates, gay2014parasite, maganga2014bat}.
 This was to attempt to avoid spurious positive results occuring simply due to correlation between pathogen richness and a different, causal factor.
-Despite commonly being associated with pathogen richness \cite{arneberg2002host, kamiya2014determines, nunn2003comparative}, population density is not included in the analysis as there is very little data for bat densities---however Chapter~\ref{ch:sims2} examines the relationship between density and population structure and Chapter~\ref{ch:grem} presents a method that allows the estimation of density from acoustic surveys.
+Despite commonly being associated with pathogen richness \cite{arneberg2002host, kamiya2014determines, nunn2003comparative}, population density is not included in the analysis as there is very little data for bat densities --- however Chapter~\ref{ch:sims2} examines the relationship between density and population structure and Chapter~\ref{ch:grem} presents a method that allows the estimation of density from acoustic surveys.
 I used both the number of subspecies a bat species has and estimates of gene flow (analysed separately) as measures of population structure.
 All analyses were run in R \cite{R}
 
@@ -2166,7 +2167,7 @@ Study effort is also clearly supported confirming the expectation that additiona
 
 \subsection{Study limitations}
 
-Although I have used measures of study effort to try to control for biases in the viral richness data, this bias could still make the results here unreliable---this is especially true as study effort is by far the strongest predictor of viral richness in both datasets.
+Although I have used measures of study effort to try to control for biases in the viral richness data, this bias could still make the results here unreliable --- this is especially true as study effort is by far the strongest predictor of viral richness in both datasets.
 It is hoped that as untargeted sequencing of viral genetic material (e.g., \textcite{anthony2013strategy}) becomes cheaper and more common this bias can be reduced.
 The strength of the relationship between study effort and known viral richness also highlights the number of virus species and bat-virus host-pathogen relationships yet to be discovered.
 
@@ -2191,7 +2192,7 @@ This relationship implies that direct or indirect competitive mechanisms are act
 The relationship between population structure and pathogen richness suggests that population structure has a least some potential as being predictive of high pathogen richness and therefore of a species likelihood of being a reservoir of a potentially zoonotic pathogen. 
 However given that it is difficult to measure population structure and given that the relationship appears to be weak at best, this trait on its own is unlikely to be useful in predicting zoonotic risk.
 However, as a number of other factors are also associated with pathogen richness (body mass and to a lesser extent range size here but also other traits elsewhere), using a combination traits in a predictive (i.e. machine learning) framework has potential to be used in prioritising zoonotic disease surveillance.
-The main hurdle in this approach is finding a way to validate models---due to the study effort bias in current data, predictive models will also be biased.
+The main hurdle in this approach is finding a way to validate models --- due to the study effort bias in current data, predictive models will also be biased.
 
 The relationship between pathogen richness and population structure also has implications for habitat fragmentation and range shifts due to global change.
 In short habitat fragmentation and range shifts that reduce movement between populations would be predicted to increase pathogen richness.
