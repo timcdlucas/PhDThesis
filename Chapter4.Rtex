@@ -85,9 +85,9 @@ However, the factors that control pathogen diversity in wild populations are sti
 
 \tmpsection{Two to three sentences of more detailed background}
 Population density is thought to increase pathogen richness while theory suggests that population structure and population size may also play a role.
-However, these factors are intrinsically linked; reducing density reduces contacts between individuals and directly reduces population size.
+However, these factors are intrinsically linked---reducing density reduces contacts between individuals and directly reduces population size.
 In group living species group size and the total number of groups both contribute to total population size. 
-As these factors are all completely interdependent, it is very difficult to study them empirically \emph{e.g.}, in a comparative frame work.
+As these factors are all completely interdependent, it is very difficult to study them empirically e.g., in a comparative frame work.
 
 \tmpsection{One sentence clearly stating the general problem (the gap)}
 % being addressed by this particular study.
@@ -106,7 +106,7 @@ Here I use metapopulation SIR models to test whether it is density \emph{per se}
 
 
 I found that increased group size increases the chance that a new pathogen will invade into a population to the largest extent.
-Both group size and the number of groups (\emph{i.e.} components of population size) promote pathogen richness more than population density.
+Both group size and the number of groups (i.e. components of population size) promote pathogen richness more than population density.
 This implies that population density is merely a correlate of group size or population size.
 As these factors are not equally important it is expected that the pathogen communities of different host species will respond to climate change in different ways.
 Species which experience changes in group size are expected to have larger changes in pathogen richness than other species.
@@ -137,7 +137,7 @@ It also highlights the necessity for studying the mechanisms underlying pathogen
 
 Zoonotic diseases are an increasingly important source of human infectious diseases \cite{jones2008global, woolhouse2006host, taylor2001risk}.
 The diversity of pathogens in wild animal populations is huge and largely unknown \cite{poulin2014parasite}.
-Furthermore, the factors that allow large numbers of pathogen species to coexist in a host (\emph{e.g.}, \textcite{anthony2013strategy}) are still unclear.
+Furthermore, the factors that allow large numbers of pathogen species to coexist in a host (e.g., \textcite{anthony2013strategy}) are still unclear.
 It is clear that population level factors such as population density, range size and population structure have an important role in controlling pathogen community dynamics \cite{anderson1979population, may1979population, colizza2007invasion, may2001infection}.
 Global change is strongly perturbing wild animal populations \cite{thomas2004extinction, craigie2010large}, but without clear mechanistic models of how these populations maintain pathogen species richness, we can not predict how pathogen communities, and the risks of zoonotic outbreaks, will change in the coming decades.
 
@@ -162,7 +162,7 @@ With the increase of novel zoonotic pathogens \cite{jones2008global} attention h
 Here again there is little clarity on the relationship between a number of species measurements.
 Population density is commonly studied \cite{morand1998density, kamiya2014determines, lindenfors2007parasite, nunn2003comparative, arneberg2002host} as is range size \cite{lindenfors2007parasite, nunn2003comparative, turmelle2009correlates, huang2015parasite, kamiya2014determines}.
 However it is rarely if ever acknowledge that these two values are intrinsically linked by $d = N/a$ (where $d$ is density, $N$ is the population size and $a$ is area. See Table~\ref{t:params} for all parameters used) or that the relationship $N \propto a$ has broad empirical support \cite{blackburn2006variations, borregaard2010causality}.
-In contrast, population size has never been directly studied as a predictor of pathogen richness---although confusingly, population range size is sometimes used as a measure of size \emph{e.g.}, \cite{vogeli2011island}.
+In contrast, population size has never been directly studied as a predictor of pathogen richness---although confusingly, population range size is sometimes used as a measure of size e.g., \cite{vogeli2011island}.
 %This is a glaring omission.
 Furthermore, population size is considered the more relevant measure in terms of pathogen dynamics, especially when area cannot be assumed to be constant \cite{begon2002clarification} as is commonly the case in wild populations, especially in the face of global warming and habitat degradation.
 
@@ -986,7 +986,7 @@ The affects of area occur through changing the metapopulation network.
 The metapopulation structure was created for each simulation by randomly placing colonies in space (Figure~\ref{fig:colonyNetworkPlots}).
 The spatial scale of the simulations vary between \rinline{min(area)} and \rinline{max(area)} km$^2$.
 This corresponds to square areas with sides of \rinline{sqrt(min(area))} to \rinline{sqrt(max(area))}km.
-Dispersal can only occur between two colonies if they are within 100 kilometres of each other \emph{i.e.} they are connected nodes in the metapopulation network.
+Dispersal can only occur between two colonies if they are within 100 kilometres of each other i.e. they are connected nodes in the metapopulation network.
 The number of connections each colony has is called its degree, $k$.
 How well connected the metapopulation network is overall is measured by the mean degree, $\bar{k}$.
 This does not guarantee that the population is fully connected but as the endemic pathogen is seeded in all colonies, the invading pathogen cannot be seeded into a fully susceptible colony.

@@ -99,7 +99,7 @@ But once understood, these factors could provide a way to prioritise surveillanc
 
 % Theory led.
 
-The pattern of contacts between individuals (\emph{i.e.} population structure) has long been known to strongly affect epidemic processes.
+The pattern of contacts between individuals (i.e. population structure) has long been known to strongly affect epidemic processes.
 Theory suggests that population structure can promote pathogen richness while the ecological literature generally assumes it will decrease richness.
 
 
@@ -1585,7 +1585,7 @@ This is an arbitrary value that was a comprimise between retaining a reasonable 
 I converted all $F_{ST}$ value to migration using $M = (1-F_{ST})/8F_{ST}$.
 This removes the $(0, 1)$ bounds of $F_{ST}$ and is more easily interpretable though the results are unaffected. 
 These two measures of population structure were analysed separately as the number of subspecies has \rinline{nrow(nSpecies)} data points while there is only $F_{ST}$ data for 22 bat species.
-For the subspecies analysis all bat species in \textcite{luis2013comparison} were used (\emph{i.e.} all species with at least one known virus species).
+For the subspecies analysis all bat species in \textcite{luis2013comparison} were used (i.e. all species with at least one known virus species).
 However, for the gene flow analysis, all bat species with suitable $F_{ST}$ estimates were used.
 As this included some species not present in \textcite{luis2013comparison} this includes some bat species with zero known virus species. 
 
@@ -2167,7 +2167,7 @@ Study effort is also clearly supported confirming the expectation that additiona
 \subsection{Study limitations}
 
 Although I have used measures of study effort to try to control for biases in the viral richness data, this bias could still make the results here unreliable---this is especially true as study effort is by far the strongest predictor of viral richness in both datasets.
-It is hoped that as untargeted sequencing of viral genetic material (\emph{e.g.}, \textcite{anthony2013strategy}) becomes cheaper and more common this bias can be reduced.
+It is hoped that as untargeted sequencing of viral genetic material (e.g., \textcite{anthony2013strategy}) becomes cheaper and more common this bias can be reduced.
 The strength of the relationship between study effort and known viral richness also highlights the number of virus species and bat-virus host-pathogen relationships yet to be discovered.
 
 I have used two measures of pathogen richness and the number of subspecies dataset is larger than those used in previous studies.
@@ -2190,7 +2190,7 @@ This relationship implies that direct or indirect competitive mechanisms are act
 
 The relationship between population structure and pathogen richness suggests that population structure has a least some potential as being predictive of high pathogen richness and therefore of a species likelihood of being a reservoir of a potentially zoonotic pathogen. 
 However given that it is difficult to measure population structure and given that the relationship appears to be weak at best, this trait on its own is unlikely to be useful in predicting zoonotic risk.
-However, as a number of other factors are also associated with pathogen richness (body mass and to a lesser extent range size here but also other traits elsewhere), using a combination traits in a predictive (\emph{i.e.} machine learning) framework has potential to be used in prioritising zoonotic disease surveillance.
+However, as a number of other factors are also associated with pathogen richness (body mass and to a lesser extent range size here but also other traits elsewhere), using a combination traits in a predictive (i.e. machine learning) framework has potential to be used in prioritising zoonotic disease surveillance.
 The main hurdle in this approach is finding a way to validate models---due to the study effort bias in current data, predictive models will also be biased.
 
 The relationship between pathogen richness and population structure also has implications for habitat fragmentation and range shifts due to global change.
