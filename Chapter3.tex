@@ -283,7 +283,7 @@ The models shown are those with (pink) and without (red) an interaction between 
 
 
 
-To test for an association between pathogen richness I have performed multiple regression using a model selection framework to establish whether or not two measures of pathogen richness are likely to be in a `best model' and therefore important.
+To test for an association between pathogen richness and population structure I have performed multiple regression using a model selection framework to establish whether or not two measures of pathogen richness are likely to be in a `best model' and therefore important.
 As species cannot be considered independant due to shared evolutionary history, phylogeny was controlled for in all regressions.
 A number of other factors that have previously been found to be important were included as additional independant variables: body mass \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat, han2015infectious}, range size \cite{kamiya2014determines, turmelle2009correlates, maganga2014bat} and study effort \cite{turmelle2009correlates, gay2014parasite, maganga2014bat}.
 This was to attempt to avoid spurious positive results occuring simply due to correlation between pathogen richness and a different, causal factor.
@@ -674,12 +674,12 @@ However, study effort had some phylogenetic autocorrelation ($\lambda$ = 0.15, $
 
 Only the model with study effort, gene flow and mass was well supported with the second model having an $\Delta\text{AICc}$ of 34 (Table \ref{t:models}).
 While less strongly supported than the number of subspecies, gene flow was likely in the best model ($Pr = $ 0.89) compared to the benchmark random variable which has $Pr = $ 0.18 (Figure~\ref{fig:fstITPlots}B and Table~\ref{t:variables}).
-On average (mean weighted by Akaiki weights) there was a negative relationship between gene flow and viral richness ($\beta = $ \ensuremath{-0.67}, variance = \ensuremath{5.48\times 10^{-3}}) despite the apparent positive relationship (see Figure~\ref{fig:fstRawData}) weakly suggested by the bivariate model (pgls: $\beta$ = 0.63, $t$ = 1.16, df = 13, $p$ = 0.27).
+On average (mean weighted by Akaiki weights) there was a negative relationship between gene flow and viral richness ($\beta = $ \ensuremath{-0.67}, variance = \ensuremath{5.48\times 10^{-3}}) despite the apparent positive relationship (see Figure~\ref{fig:fstRawData}) weakly suggested by the single-predictor model (pgls: $\beta$ = 0.63, $t$ = 1.16, df = 13, $p$ = 0.27).
 This supports the hypothesis that population structure promotes viral richness.
 Possibly due to the smaller sample size, or a weaker relationship, this coefficient was much more varied than the number of subspecies coeficient with 22\% of models estimating a positive relationship.
 
 As in the number of subspecies analysis, study effort was very likely in the best model ($Pr = $ 0.99) as was body mass ($Pr = $ 0.98).
-However, body mass has a negative average coefficient ($\beta = $ \ensuremath{-0.35}, variance = 0.04) which is in contrast to number of subspecies analysis, many studies in the literature \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat} and the bivariate model (pgls: $\beta$ = 0.6, $t$ = 0.38, df = 13, $p$ = 0.71).
+However, body mass has a negative average coefficient ($\beta = $ \ensuremath{-0.35}, variance = 0.04) which is in contrast to number of subspecies analysis, many studies in the literature \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat} and the single-predictor model (pgls: $\beta$ = 0.6, $t$ = 0.38, df = 13, $p$ = 0.71).
 In contrast to the number of subspecies analysis, range size was almost certainly not in the best model with $Pr = $ 0.06 being much less than the random variable.
 This variable being less supported than the random variable was probably because range size is closely correlated with study effort (pgls: $\beta$ = 0.6, $t$ = 4.45, df = 13, $p$ = \ensuremath{6.58\times 10^{-4}}).
 Of the three independant variables in the best model, study effort had the largest effect ($\beta = $ 2.49, variance = 0.08).
@@ -719,7 +719,7 @@ However it is clear that the gene flow dataset is small (n = 24).
 This leads to some unexpected results.
 While the model averaging approach has given a negative model averaged coefficient for gene flow, the univariate model of gene flow against viral richness gave a positive coefficient.
 Furthermore body mass has a negative average coefficient.
-This is in contrast to number of subspecies analysis, many studies in the literature \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat} and the bivariate model.
+This is in contrast to number of subspecies analysis, many studies in the literature \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat} and the single-predictor model.
 It is not easy to interpret these contradictions but it is clear that the results from the gene flow analysis alone should not be considered strong evidence for a relationship between pathogen richness and population structure.
 The sensitivity of this analysis reiterates the need to use large datasets where possible and use mutliple measures of population structure to promote robust conclusions.
 

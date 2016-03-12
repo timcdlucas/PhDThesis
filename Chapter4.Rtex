@@ -736,7 +736,7 @@ The $x$-axis shows the relative change in each of these values ($\\times 0.25, 0
 For colony size and number, area is altered so that density remains constant.
 For density, population size is constant at 8,000 and area is altered.
 Each point is the mean of 100 simulations and bars are 95\\% confidence intervals.
-Curves are bivariate logistic regression fits for each independant variable.
+Curves are simple logistic regression fits for each independant variable.
 Relationships are shown seperately for each transmission value.
 '
 
