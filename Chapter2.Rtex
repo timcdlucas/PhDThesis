@@ -82,7 +82,7 @@ However, the factors that control pathogen diversity in wild populations are sti
 Host species traits such as population density, longevity, body size and population structure have been shown to correlate with pathogen diversity.
 Typically it is assumed that well-connected, unstructured populations promote the invasion of new pathogens and therefore increase pathogen diversity. % Where or how to define well-connected?
 However, this assumption is largely untested; in particular our mechanistic understanding of how population structure affects pathogen diversity, in the presence of inter-pathogen competition, is poor.
-Greater understanding is needed to clarify exactly by which mechanisms population structure affects pathogen diversity. 
+Greater understanding is needed to clarify by which exact mechanisms population structure affects pathogen diversity. 
 %Mechanistic models are also likely to be more robust to transferring understanding between taxa and predicting changes. % !!! Not great.
 
 
@@ -93,16 +93,17 @@ Greater understanding is needed to clarify exactly by which mechanisms populatio
 % being addressed by this particular study.
 It is unknown whether population structure allows invading pathogens to escape from competition by stochastically creating areas of low pathogen prevalence.
 I hypothesised that low dispersal rates and a low number of connections in a metapopulation network will allow invading pathogens to establish more readily, thus increasing pathogen diversity. 
-I tested these hypothesese using population networks parameterised to mimic wild bat populations as bats have highly varied social structures and have recently been implicated in a number of high profile diseases such as Ebola, SARS, Hendra and Nipah.
+I tested these hypotheses using population networks parameterised to mimic wild bat populations as bats have highly varied social structures and have recently been implicated in a number of high profile diseases such as Ebola, SARS, Hendra and Nipah.
 
 \tmpsection{One sentence summarising the main result}
 %  (with the words “here we show” or their equivalent).
-I find that neither population connectedness nor dispersal rate affect the probability that a new pathogen will invade into a population.
+I found that neither population connectedness nor dispersal rate affect the probability that a new pathogen will invade into a population.
 %\paragraph{Two or three sentences explaining what the main result reveals in direct comparison to what was thought to be the case previously}
 % or how the main result adds to previous knowledge
 The assumption that factors causing high $R_0$ allow new pathogens to invade and therefore increase pathogen diversity is not supported.
-Instead we find that changes in population structure do not affect the probability of invasion of a new pathogen.
- 
+Instead I found that changes in population structure do not affect the probability of invasion of a new pathogen.
+This is in contrast to much theoretical literature which predicts that increased population structure may promote coexistence of pathogens.
+It is also in contrast to the common assumption that more connected populations increase $R_0$ and therefore increase pathogen richness.
 
 \tmpsection{One or two sentences to put the results into a more general context.}
 This result implies that population structure does not control pathogen diversity.
@@ -153,22 +154,22 @@ However, the factors that control the diversity of pathogens in a wild animal po
 
 A number of host traits have been shown to correlate with pathogen richness including body size \cite{kamiya2014determines, arneberg2002host}, population density \cite{nunn2003comparative, arneberg2002host} and range size \cite{bordes2011impact, kamiya2014determines}.
 There are few studies that study population structure in a comparative framework.
-Maganga \emph{et al.} found that distribution fragmentation predicts viral richness \cite{maganga2014bat}, but \cite{gay2014parasite} finds the opposite relationship. 
-While the data set in \cite{gay2014parasite} is larger, the analysis in \cite{maganga2014bat} is much more focused on fragmentation.
+\textcite{maganga2014bat} found that distribution fragmentation predicts high viral richness, but \textcite{gay2014parasite} finds the opposite relationship. 
+While the data set in \textcite{gay2014parasite} is larger, the analysis in \cite{maganga2014bat} is more focused on fragmentation specifically.
 Genetic correlates of population structure have also been used.
-Turmelle \emph{et al.} \cite{turmelle2009correlates}, in a small analysis, find that high $F_{st}$ (i.e. a structured population) correlates with high richness.
+\textcite{turmelle2009correlates}, in a small analysis, find that high $F_{st}$ (i.e. a structured population) correlates with high richness.
 However, they do not account for the widely different spatial scales found in population structure studies, nor do they deal with the differences between $F_{ST}$, $\phi_{ST}$ and other measures appropriately. 
 
-Empirical, correlative studies are often contradictory due to small sample sizes, noisy data and because empirical relationships often do not extrapolate well to other taxa (though see \cite{kamiya2014determines} for a meta-analysis).
+Empirical, correlative studies are often contradictory due to small sample sizes, noisy data and because empirical relationships often do not extrapolate well to other taxa (though see \textcite{kamiya2014determines} for a meta-analysis).
 The correlation between many traits (e.g., \textcite{nunn2015infectious}) also makes it hard to clearly distinguish which factors are important.
-Furthermore, knowing which factors correlate with pathogen richness does not tell us how they control richness. 
+Furthermore, knowing \emph{which} factors correlate with pathogen richness does not tell us \emph{how} they control richness. 
 Mechanisms by which a trait could increase pathogen diversity include promoting the evolution of new strains within a species \cite{buckee2004effects}, reduction of the rate of pathogen extinction \cite{rand1995invasion} and an increased probability of pathogen invasion from other host species \cite{nunes2006localized}.
 These separate mechanisms have not been examined and it is difficult to see how they could be approached through comparative methods.
 We need explicit mechanistic models in order to tease apart these factors.
 Furthermore, a solid mechanistic understanding of these processes will allow us to predict how wild populations will respond to increased human pressure and global change.
 As habitats fragment we expect wild populations to become smaller and less well connected.
 Understanding how these population changes interact reqiures a mechanistic understanding of disease dynamics.
-Different specific mechanisms predict responses to climate change at different rates --- the extinction of parasites could occur relatively rapidly, whereas processes whereby invasive pathogens can persist more easily are likely to change pathogen community competition relatively slowly.
+Different specific mechanisms predict responses to climate change at different rates --- the extinction of parasites could occur relatively rapidly, whereas processes that increase the rate of pathogen acquisition are likely to change pathogen community relatively slowly.
 
 \tmpsection{Population structure could be important}
 
@@ -179,15 +180,11 @@ Different specific mechanisms predict responses to climate change at different r
 % Analytical models
 % +netCoex
 
-Studies of the role of population structure on pathogen diversity have been in very simple systems.
-These have been so simple that empirical data cannot easily be applied to them to predict pathogen diversity of real wild animal populations.
-There is a need for models that can be carefully and fully explored, while still capturing the complexities of the real world.
-
 In analytical models of well mixed populations competitive exclusion has been predicted \cite{ackleh2003competitive, bremermann1989competitive, martcheva2013competitive, qiu2013vector, allen2004sis}.
 When competitive exclusion occurs, population structure has sometimes been shown to allow coexistence \cite{qiu2013vector, allen2004sis, nunes2006localized, garmer2016multistrain}.
 Competing epidemics, or two pathogens spreading at the same time in a population, is a well studied area \cite{poletto2013host, poletto2015characterising, karrer2011competing}. 
 This area is related to the study of pathogen richness in that they indicate that dynamics of multiple pathogens in a population do depend on population structure.
-However, the results for short term epidemic competition do not directly transfer to the study of long term disease persistence which is the relative time scale when looking at zoonotic potential of a host species.
+However, the results for short term epidemic competition do not directly transfer to the study of long term disease persistence.
 
 
 One commonly taken assumption in the ecological literature is that factors that promote high disease spread automatically promotes high diversity \cite{nunn2003comparative, morand2000wormy, poulin2014parasite, poulin2000diversity, altizer2003social}; this is contrary to the predictions from analytical models \cite{qiu2013vector, allen2004sis, nunes2006localized}. 
@@ -200,7 +197,7 @@ Only if competitive mechanisms are weak will high $R_0$  enable the invasion of 
 How structured a population is can be defined in many ways on many scales.
 Social group size is often examined as an indicator of population in large because the data are readily available.
 However, group size is only one aspect of population structure.
-Dispersal between is also a vital component of population structure.
+Dispersal between colonies is also an integral component of population structure.
 Furthermore, many species exhibit fission-fusion social structures or other less clearly defined groupings.
 
 The most relevant scale to study is that of an epidemiological population.
@@ -210,17 +207,17 @@ It is therefore closely related to a population as defined by population genetic
 The epidemiological contacts within the population can be examined at the individual level (as in contact network epidemiology) or larger scales.
 I consider the metapopulation network the most appropriate.
 Ignoring the metapopulation assumes a fully mixed population which is unlikely.
-Trying to study the contact network relies detailed individual level detail which is not available.
+Trying to study the contact network relies on detailed individual level detail which is not available.
 Metapopulation models consider a network of small subpopulations. 
 Within subpopulations, epidemiological contacts are fully mixed and relatively fast.
 Between subpopulations, epidemiological contacts are dependant on an underlying network structure and relatively slow.
 The network underlying the metapopulation is made up of nodes representing the subpopulations, and edges which represent movement between subpopulations.
 Animals, and therefore infection, can only move between two subpopulations if they are connected by an edge.
 
-There are two factors that affect how structured a population is, given this model framework.
+There are two factors that affect how structured a population is given this model framework.
 Firstly, dispersal is the rate at which individuals move between subpopulations.
-Secondly, the metapopulation network structure controls population structure.
-The simplest measure of how structured the network is the average number of edges each node has.
+Secondly, the metapopulation network structure controls the spatial extent of dispersal.
+The simplest way to measure the structure of the network is to calculate the average number of edges each node has.
 In the extremes, all subpopulations could be either connected to all other subpopulations or only connected to one or two other subpopulations.
 However, other measures that take into account second-order structure in the network are also often used.
 
@@ -236,14 +233,14 @@ However, other measures that take into account second-order structure in the net
 
 Currently the literature contains very abstract, simplified models \cite{qiu2013vector, allen2004sis, nunes2006localized, garmer2016multistrain}.
 These cannot be easily applied to real data.
-They also do not easily quantitative predict pathogen pathogen; typically they predict either no pathogen coexistence \cite{bremermann1989competitive, martcheva2013competitive} or infinite pathogen diversity \cite{may1994superinfection}.
+They also do not easily give quantitative predictions of pathogen richness; typically they predict either no pathogen coexistence \cite{bremermann1989competitive, martcheva2013competitive} or infinite pathogen diversity \cite{may1994superinfection}.
 We need models that can give quantative predictions of pathogen richness in wild populations.
 While predicting an absolute value of pathogen richness is likely to be impossible, we should aim for models that attempt to rank species from highest to lowest pathogen richness.
 This requires a middle ground of model complexity.
 
 
 To this end I have run metapopulation, multipathogen, epidemiological simulations based broadly on real-world bat populations.
-Although still simplified, the model is complex enough that if good measurements of bat populations could be found, simulations of the real world bat population could be run.
+Although still simplified, the model is complex enough that if good measurements of bat populations could be obtained, simulations of real world bat populations could be run.
 Specifically I used these models to test the affects of population structure on the ability of a new pathogen to invade a population.
 I tested two aspects of structure, dispersal rate and connectedness of the metapopulation network.
 
@@ -251,7 +248,7 @@ I tested two aspects of structure, dispersal rate and connectedness of the metap
 \tmpsection{Why bats}
 I have used bats as a case study as they have an unusually large variety of social structures.
 Colony sizes range from 10 to 1 million \cite{jones2009pantheria}.
-Many bats also have interesting seasonal behaviour such as migration \cite{richter2008first, fleming2003ecology}, hibernation, birth puleses and swarming behaviours.
+Many bats also have interesting seasonal behaviour such as migration \cite{richter2008first, fleming2003ecology}, hibernation, birth pulses and swarming behaviours.
 A number of traits have been suggested as predisposing bats towards being reservoirs of zoonotic diseases: high sympatry \cite{luis2013comparison}, flight \cite{wang2011mass}, longevity \cite{wang2011mass} as well as population structure \cite{maganga2014bat, turmelle2009correlates, gay2014parasite}.
 Furthermore, bats have, over the last decade, become a focus for disease research  \cite{calisher2006bats, hughes2007emerging}.
 Recently they have been implicated in a number of high profile diseases such as Ebola, SARS, Hendra and Nipah  \cite{calisher2006bats, li2005bats}.
