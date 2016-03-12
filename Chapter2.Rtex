@@ -1018,7 +1018,7 @@ plot_grid(dispPlot, topoPlot, labels = c('A', 'B'), align = 'h', label_size = 10
 
 \tmpsection{Restate the gap and the main result}
 
-Empirical studies on the role of population structure on pathogen richness are equivocal and cannot examine the specific mechanisms by which pathogen communities are created and maintained.
+Empirical studies on the role of population structure on pathogen richness have contradictory results \cite{maganga2014bat, turmelle2009correlates, gay2014parasite} and cannot examine the specific mechanisms by which pathogen communities are created and maintained.
 I have used mechanistic, metapopulation models to test whether increased population structure can promote pathogen richness by facilitating invasion of new pathogens.
 I find that population structure does not affect the ability of a new pathogen to invade and persist in a population.
 Instead I find that only transmission rate affects the chance of pathogen invasion.
@@ -1034,10 +1034,10 @@ Once the pathogen has infected a large number of individuals in the local metapo
 
 These results imply that if population structure does in fact affect pathogen richness \cite{maganga2014bat, turmelle2009correlates, gay2014parasite} it must occur by a mechanism other than the one studied here.
 Therefore it is not the spread and persistance of a newly evolved pathogen that is facilitated by population structure.
-Other mechanisms that should be examined include reduced competitive exclusion of already established pathogens or increased invasion of less closely and less strongly competiting pathogens, perhaps mediated by ecological competition of pathogens (i.e. reducuction of the susceptible pool by disease induced mortality).
+Other mechanisms that should be examined include reduced competitive exclusion of already established pathogens or increased invasion of less closely and less strongly competing pathogens, perhaps mediated by ecological competition of pathogens (i.e. reducuction of the susceptible pool by disease induced mortality).
 Furthermore, single pathogen dynamics could have an important role such as population structure causing a much slower, asynchronous epidemic preventing acquired herd immunity \cite{plowright2011urban}.
 
-Given that we find no affect of population structure on the ability of a new pathogen to invade, this host trait is not useful for predicting the probability that a wild species has many pathogens.
+Given that I found no affect of population structure on the ability of a new pathogen to invade, this host trait is not useful for predicting the probability that a wild species has many pathogens.
 This implies it should not be used as a proxy for the probability that a species carries a zoonotic pathogen.
 
 However, my simulations do highlight the importance of competition for the spread of a new pathogen.
@@ -1054,7 +1054,7 @@ This has implications for human epidemics as well --- if there is strong competi
 
 I have assumed that once recovered, individuals are immune to both pathogens. 
 Furthermore, when a coinfected individual recovers from one pathogen, it immediately recovers from the other as well.
-This is probably a fairly reasonable assumption given that I am modelling a newly evolved strain.
+This is probably a reasonable assumption given that I am modelling a newly evolved strain.
 However, further work could relax this assumption using a model similar to \cite{poletto2015characterising} which contains additional classes for `infected with pathogen one, immune to pathogen two' and `infected with pathogen two, immune to pathogen one'.
 The model here was formulated such that the study of systems with greater than two pathogens is still computationally feasible while a model such as used in \cite{poletto2015characterising} contains $3^\rho$ classes for a system with $\rho$ pathogen species.
 This quickly becomes computationally restrictive.
