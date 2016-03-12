@@ -288,37 +288,37 @@ This is true whether population structure is altered by changing the dispersal r
 \centering
 \caption[All symbols used in Chapters \ref{ch:sims1} and \ref{ch:sims2}.]{All symbols used in Chapters \ref{ch:sims1} and \ref{ch:sims2} along with their units and default values.}
 
-\begin{tabular}{@{}lp{5cm}p{3.9cm}r@{}}
+\begin{tabular}{@{}lp{6cm}p{2.9cm}r@{}}
 \toprule
 Symbol & Explanation & Units & Value\\
 \midrule
 $S$ & Number of susceptible individuals &&\\
-$I_q$ & N. individuals infectious with diseases $q$ &&\\
-$I^+_p$ & Sum of classes infected with pathogen $p$ &\\
+$I_q$ & N. individuals infectious with diseases $q \in {1, 2, 12}$ &&\\
+%$I^+_p$ & Sum of classes infected with pathogen $p$ &\\
 $R$ & Number of recovered/immune individuals &&\\
 $N$ & Total Population && 30,000\\
 $m$ & Number of colonies&& 10\\
 $n$ & Colony starting size && 3,000\\
 $a$ & Area & km$^2$& 10,000\\
-$\beta$ & Transmission rate & Per year per individual& 2, 5, 10\\
-$\gamma$ & Recovery rate & Per year per individual. & 1\\
-$\lambda$ & Dispersal & Per day per individual& 0.001--0.1\\
-$\Lambda$ & Birth rate & Per year per individual& 0.05\\
-$\mu$ & Death rate & Per year per individual & 0.05\\
+$\beta$ & Transmission rate & year$^{-1}.$individual$^{-1}$ & 2, 5, 10\\
+$\gamma$ & Recovery rate & year$^{-1}.$individual$^{-1}$ & 1\\
+$\lambda$ & Dispersal & year$^{-1}.$individual$^{-1}$ & 0.001--0.1\\
+$\Lambda$ & Birth rate & year$^{-1}.$individual$^{-1}$ & 0.05\\
+$\mu$ & Death rate & year$^{-1}.$individual$^{-1}$ & 0.05\\
 %$d_I$ & Infectious death rate & Additional deaths per day per individual&\\
 $\rho$ & No. pathogens && 2\\
 $p$ &  Pathogen index i.e. $p\in\{1,2\}$ for pathogens 1 and 2 & &\\
 $q$ & Disease class i.e., $q\in\{1,2,12\}$&\\
 %$\mathcal{V}$ & Neighbourhood of a node &&\\
-$t, t^\prime$ & Time and time plus waiting time i.e., $t+\delta$ & Days&\\
+$t, t^\prime$ & Time and time plus waiting time i.e., $t+\delta$ & years &\\
 $k_i$ & Degree of node $i$ &&\\
-$\delta$ & Waiting time until next event & Days&\\
+$\delta$ & Waiting time until next event & years &\\
 $\alpha$ & Cross immunity & Proportion& 0.1\\
 $n, m$ & Colony index &&\\
 %$\bm{A}_{mn}$ & Adjacency matrix. & Distance &\\
 %$\mu$ & Maximum distance for edge to exist & km& 40, 100\\
 $\sigma$ & Invading pathogen seed size & & 10\\
-$r_i$ & The rate that event $i$ occurs. & Days$^{-1}$&\\
+$r_i$ & The rate that event $i$ occurs & year$^{-1}$&\\
 \bottomrule
 \end{tabular}
 
@@ -335,7 +335,7 @@ $r_i$ & The rate that event $i$ occurs. & Days$^{-1}$&\\
 
 \paragraph{Two pathogen SIR model}
 
-I examine a multipathogen SIR model with vital dynamics. 
+I examined a multipathogen SIR model with vital dynamics. 
 This is a compartment model with individuals being classed as susceptible, infected or recovered with immunity (Figure~\ref{f:sir}).
 Susceptible individuals are counted in class $S$.
 There are three infected classes, $I_1$, $I_2$ and $I_{12}$, being individuals infected with pathogen 1, pathogen 2 or both respectively.
@@ -369,7 +369,7 @@ Note this rate is independent of the degree of subpopulation $n$.
 
 \paragraph{Stochastic simulations}
 
-I examine this model using stochastic, continuous time simulations (using the Gillespie algorithm) implemented in R \cite{R}.
+I examined this model using stochastic, continuous time simulations (using the Gillespie algorithm) implemented in R \cite{R}.
 At each step in the simulation we calculate the rate that each possible event might occur.
 One event is then randomly chosen, weighted by its rate
 \begin{align}
@@ -399,29 +399,31 @@ That is, recovery from one pathogen causes immediate recovery from the other pat
 
 
 We can now write down the rates of all events. 
-I defined $I^+_p$ to be the sum of all classes that are infectious with pathogen $p$, for example $I^+_1 = I_1 + I_{12}$. 
+%I defined $I^+_p$ to be the sum of all classes that are infectious with pathogen $p$, for example $I^+_1 = I_1 + I_{12}$. 
 Assuming asexual reproduction, that all classes reproduce at the same rate and that individuals are born into the susceptible class we get
 \begin{align}
   P\left( S_{nt^\prime} = S_{nt} +1\right) &= \Lambda\left( S_{nt}+\sum_q I_{qnt} + R_{nt}\right) 
 \end{align}
 where $P\left( S_{nt^\prime} = S_{nt} +1\right)$ is the probability that the number of susceptibles in subpopulation $n$ will increase by 1 (a single birth) in the time interval $t$ to $t^\prime$ and $\sum_q I_{qnt}$ is the sum of all infection classes $q \in {1, 2, 12}$.
-The rates of death, given a death rate $d$ are given by
+The rates of death, given a death rate $\mu$ are given by
 \begin{align}
   P\left( S_{nt^\prime} = S_{nt}-1 \right) &= \mu S_{nt}, \\
   P\left( I_{qnt^\prime} = I_{qnt}-1 \right) &= \mu I_{qnt},\\
   P\left( R_{nt^\prime} = R_{nt}-1 \right) &= \mu R_{nt}.
 \end{align}
+
 I modelled transmission as density-dependant.
 This assumption was more suitable than frequency-dependant transmission as I am modelling a disease transmitted by saliva or urine in highly dense populations confined to caves, building or potentially a small number of tree roosts.
 I was notably not modelling an STD as these diseases are not expected to be commonly zoonotic.
 Infection of a susceptible with either pathogen 1 or 2, $S \rightarrow I_p$ where $p\in \{1,2\}$, is therefore given by
 \begin{align}
-  P\left( I_{pnt^\prime} = I_{pnt}+1, S_{nt^\prime} = S_{nt}-1 \right) &= \beta S_{nt}I^+_{pnt},
+  P\left( I_{1nt^\prime} = I_{1nt}+1, S_{nt^\prime} = S_{nt}-1 \right) &= \beta S_{nt}\left(I_{1nt} + I_{12nt}\right),\\
+  P\left( I_{2nt^\prime} = I_{2nt}+1, S_{nt^\prime} = S_{nt}-1 \right) &= \beta S_{nt}\left(I_{2nt} + I_{12nt}\right),
 \end{align}
 while coinfection, given a crossimmunity factor $\alpha$, is given by
 \begin{align}
-  P\left( I_{12,nt^\prime} = I_{12,nt}+1,\: I_{1nt^\prime} = I_{1nt}-1\right) = &\alpha\beta I_{1nt}I^+_{2nt},\\
-  P\left( I_{12,nt^\prime} = I_{12,nt}+1,\: I_{2nt^\prime} = I_{2nt}-1\right) = &\alpha\beta I_{2nt}I^+_{1nt}.
+  P\left( I_{12,nt^\prime} = I_{12,nt}+1,\: I_{1nt^\prime} = I_{1nt}-1\right) = &\alpha\beta I_{1nt}\left(I_{2nt} + I_{12nt}\right),\\
+  P\left( I_{12,nt^\prime} = I_{12,nt}+1,\: I_{2nt^\prime} = I_{2nt}-1\right) = &\alpha\beta I_{2nt}\left(I_{1nt} + I_{12nt}\right).
 \end{align}
 The probability of migration from colony $m$ (with degree $k_m$) to colony $n$, given a dispersal rate $\lambda$ is given by
 \begin{align}

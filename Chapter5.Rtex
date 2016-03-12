@@ -59,7 +59,7 @@ While the model is accurate for all capture efforts tested, the precision of the
 We found no effect of different animal movement models on the accuracy and precision of the gREM.  
 
 We conclude that the gREM provides an effective method to estimate absolute animal densities from remote sensor count data over a range of sensor and animal signal widths.
-The gREM is applicable for count data obtained in both marine and terrestrial environments, visually or acoustically (\emph{e.g.}, big cats, sharks, birds, echolocating bats and cetaceans).
+The gREM is applicable for count data obtained in both marine and terrestrial environments, visually or acoustically (e.g., big cats, sharks, birds, echolocating bats and cetaceans).
 As sensors such as camera traps and acoustic detectors become more ubiquitous, the gREM will be increasingly useful for monitoring unmarked animal populations across broad spatial, temporal and taxonomic scales. 
 
 \section{Introduction}
@@ -74,14 +74,14 @@ Existing methods for estimating animal density often require additional informat
 For example, capture-mark-recapture methods \cite{karanth1995estimating, borchers2014continuous} require recognition of individuals, and distance methods \cite{harris2013applying} require estimates of how far away individuals are from the sensor \cite{barlow2005estimates, marques2011estimating}.
 When individuals cannot be told apart, an extension of occupancy modelling can be used to estimate absolute abundance \cite{royle2003estimating}.
 However, as the model is originally formulated to estimate occupancy,  count information is simplified to presence--absence data.
-Assumptions about the distribution of individuals (\emph{e.g.}, a poisson distribution) must also be made \cite{royle2003estimating} which may be a poor assumption for nonrandomly distributed species.
+Assumptions about the distribution of individuals (e.g., a poisson distribution) must also be made \cite{royle2003estimating} which may be a poor assumption for nonrandomly distributed species.
 Furthermore repeat, independent surveys must be performed and the definition of a site can be difficult, especially for wide-ranging species \cite{mackenzie2005designing}.
 
 %More recently, the development of the random encounter model (REM), a modification of an ideal gas model \cite{yapp1956theory, Hutchinson_Waser_2007}, has enabled animal densities to be estimated from unmarked individuals of a known speed, and with known sensor detection parameters     \cite{rowcliffe2008estimating}.
 The REM method has been successfully applied to estimate animal densities from camera trap surveys \cite{zero2013monitoring}.
-However, extending the REM method to other types of sensors (\emph{e.g.}, acoustic detectors) is more problematic, because the original derivation assumes a relatively narrow sensor width (up to $\pi/2$ radians) and that the animal is equally detectable irrespective of its heading \cite{rowcliffe2008estimating}. 
+However, extending the REM method to other types of sensors (e.g., acoustic detectors) is more problematic, because the original derivation assumes a relatively narrow sensor width (up to $\pi/2$ radians) and that the animal is equally detectable irrespective of its heading \cite{rowcliffe2008estimating}. 
 
-Whilst these restrictions are not problematic for most camera trap makes (\emph{e.g.}, Reconyx, Cuddeback), the REM cannot be used to estimate densities from camera traps with a wider sensor width (\emph{e.g.}, canopy monitoring with fish eye lenses, \cite{brusa2014increasing}).
+Whilst these restrictions are not problematic for most camera trap makes (e.g., Reconyx, Cuddeback), the REM cannot be used to estimate densities from camera traps with a wider sensor width (e.g., canopy monitoring with fish eye lenses, \cite{brusa2014increasing}).
 Additionally, the REM method is not useful in estimating densities from acoustic survey data as acoustic detector angles are often wider than $\pi/2$ radians.  Acoustic detectors are designed for a range of diverse tasks and environments \cite{kessel2014review}, which naturally leads to a wide range of sensor detection widths and detection distances.
 In addition to this, calls emitted by many animals are directional \cite{blumstein2011acoustic}, breaking the assumption of the REM method. 
 
@@ -142,7 +142,7 @@ Note that as $z$ is the number of encounters, not individuals, the possibility o
 
 
 \paragraph{gREM derivations for different detection and signal widths}
-Different combinations of $\theta$ and $\alpha$ would be expected to occur (\emph{e.g.}, sensors have different detection widths and animals have different signal widths).
+Different combinations of $\theta$ and $\alpha$ would be expected to occur (e.g., sensors have different detection widths and animals have different signal widths).
 For different combinations $\theta$ and $\alpha$, the area covered per unit time is no longer given by $2rv$.
 Instead of the size of the sensor detection zone having a diameter of $2r$, the size changes with the approach angle between the sensor and the animal.
 The width of the area within which an animal can be detected is called the profile, $p$.
@@ -640,7 +640,7 @@ Indeed any of the models which have animals that are equally detectable in all d
 However, when the animal has a directional call the extension becomes less simple.
 The approach would be to calculate again the mean profile width.
 However, for each angle of approach, one would have to average the profile width for an animal facing in any direction (i.e., not necessarily moving towards the sensor) weighted by the relative velocity of that direction.
-There are a number of situations where a moving detector and animal could occur, \emph{e.g.}, an acoustic detector towed from a boat when studying porpoises \cite{kimura2014acoustic} or surveying echolocating bats from a moving car \cite{jones2011indicator}. 
+There are a number of situations where a moving detector and animal could occur, e.g., an acoustic detector towed from a boat when studying porpoises \cite{kimura2014acoustic} or surveying echolocating bats from a moving car \cite{jones2011indicator}. 
 
 Interesting but unstudied problems impacting the gREM are firstly, edge effects caused by sensor trigger delays (the delay between sensing an animal and attempting to record the encounter) \cite{rovero2013camera}, and secondly, sensors which repeatedly turn on an off during sampling \cite{jones2011indicator}.
 The second problem is particularly relevant to acoustic detectors which record ultrasound by time expansion.

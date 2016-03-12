@@ -98,7 +98,7 @@
 \RequirePackage{setspace}
 \OnehalfSpacing
 
-\setlength{\parindent}{1em} % paragraph indent
+\setlength{\parindent}{2em} % paragraph indent
 \setlength{\parskip}{0pt plus 0.1em} % stop parskip
 \setlength{\mathindent}{\parindent} % set indent to paragraph indent
 
