@@ -262,7 +262,7 @@ Recently they have been implicated in a number of high profile diseases such as 
 I have studied the invasion of new pathogens as a mechanisms for increasing pathogen richness.
 I have studied two metrics for population structure, dispersal rate and metapopulation network topology, to test for effects of population structure on pathogen richness.
 In particular I have focussed on studying the invasion of a newly evolved pathogen that is therefore identical in epidemiological parameters to the endemic pathogen.
-Furthermore, this close evolutionary relationship means that cross immunity is strong.
+Furthermore, this close evolutionary relationship means that cross-immunity is strong.
 
 \tmpsection{What I found}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -313,7 +313,7 @@ $q$ & Disease class i.e., $q\in\{1,2,12\}$&\\
 $t, t^\prime$ & Time and time plus waiting time i.e., $t+\delta$ & years &\\
 $k_i$ & Degree of node $i$ &&\\
 $\delta$ & Waiting time until next event & years &\\
-$\alpha$ & Cross immunity & Proportion& 0.1\\
+$\alpha$ & Cross-immunity & Proportion& 0.1\\
 $n, m$ & Colony index &&\\
 %$\bm{A}_{mn}$ & Adjacency matrix. & Distance &\\
 %$\mu$ & Maximum distance for edge to exist & km& 40, 100\\
@@ -338,15 +338,15 @@ $r_i$ & The rate that event $i$ occurs & year$^{-1}$&\\
 I examined a multipathogen SIR model with vital dynamics. 
 This is a compartment model with individuals being classed as susceptible, infected or recovered with immunity (Figure~\ref{f:sir}).
 Susceptible individuals are counted in class $S$.
-There are three infected classes, $I_1$, $I_2$ and $I_{12}$, being individuals infected with pathogen 1, pathogen 2 or both respectively.
+There are three infected classes, $I_1$, $I_2$ and $I_{12}$, being individuals infected with pathogen 1, pathogen 2 or both respectively (see Table~\ref{t:params} for a list of symbols and values used).
 Recovered individuals, $R$, are immune to both pathogens, even if they have only been infected with one.
 Furthermore, recovery from one pathogen moves an individual straight into the recovered class, even if the individual is infected with both pathogen.
 This modelling choice allows the model to be easily expanded to include more than two pathogens.
-The assumption of immediate recovery from all other diseases is likely to be quite accurate for very closely related pathogens as is being studied here as once an acquired immune response is activated, all infections are likely to be cleared quickly.
+The assumption of immediate recovery from all other diseases is likely to be quite accurate for very closely related pathogens as is being studied here as once an acquired immune response is activated, all infections are likely to be cleared quickly. %todo cite
 
 The coinfection rate (the rate at which an infected individual is infected with a second pathogen) is adjusted compared to the infection rate by a factor $\alpha$ (here I used $\alpha = 0.1$ which means coinfection happens at a tenth the rate of first infections).
 In the application of long term existence of pathogens it is vital to include vital dynamics (births and deaths) as the SIR without vital dynamics has no endemic state.
-Birth and death rates are assumed to be equal, $\mu = \Lambda$ (see Table~\ref{t:params} for a list of symbols and values used).
+Birth and death rates are assumed to be equal, $\mu = \Lambda$.
 The time scale of the simulations are set by setting $\mu$ = 0.05 per year, yielding an average host generation time of 20 years.
 Infection is assumed to cause no extra mortality as for a number of viruses, bats show no clinical signs of infection \cite{halpin2011pteropid, deThoisy2016bioecological}.
 
@@ -361,7 +361,7 @@ Dispersal between subpopulations occurs at a rate $\lambda$.
 Individuals can only disperse to subpopulations connected to theirs in the network.
 The rate of dispersal is not affected by the number of edges a subpopulation has (the degree of the subpopulation).
 So the dispersal rate from a subpopulation $m$ with degree $k_m$ to subpopulation $n$ is $\frac{\lambda}{k_m}$.
-Note this rate is independent of the degree of subpopulation $n$.
+Note this rate is independent of the degree and size of subpopulation $n$.
 
 
 
@@ -373,16 +373,15 @@ I examined this model using stochastic, continuous time simulations (using the G
 At each step in the simulation we calculate the rate that each possible event might occur.
 One event is then randomly chosen, weighted by its rate
 \begin{align}
-  p(\text{event } i) = \frac{r_i}{\sum_i r_i}
+  p(\text{event } i) = \frac{r_i}{\sum_{j\neq i} r_j}
 \end{align}
 where $r_i$ is the rate that event $i$ occurs.
 Finally, the length of the time step, $\delta$, is drawn from an exponential distribution 
 \begin{align}
   \delta \sim \operatorname{Exp}\left(\sum_i r_i  \right).
 \end{align}
+We define the number of events we wish to simulate.
 This means that the total length of each simulation is stochastic. 
-We define the number of events we wish to simulate instead.
-
 
 \begin{figure}[t]
 \centering
@@ -412,7 +411,7 @@ The rates of death, given a death rate $\mu$ are given by
   P\left( R_{nt^\prime} = R_{nt}-1 \right) &= \mu R_{nt}.
 \end{align}
 
-I modelled transmission as density-dependant.
+I modelled transmission as being density-dependant.
 This assumption was more suitable than frequency-dependant transmission as I am modelling a disease transmitted by saliva or urine in highly dense populations confined to caves, building or potentially a small number of tree roosts.
 I was notably not modelling an STD as these diseases are not expected to be commonly zoonotic.
 Infection of a susceptible with either pathogen 1 or 2, $S \rightarrow I_p$ where $p\in \{1,2\}$, is therefore given by
@@ -420,16 +419,16 @@ Infection of a susceptible with either pathogen 1 or 2, $S \rightarrow I_p$ wher
   P\left( I_{1nt^\prime} = I_{1nt}+1, S_{nt^\prime} = S_{nt}-1 \right) &= \beta S_{nt}\left(I_{1nt} + I_{12nt}\right),\\
   P\left( I_{2nt^\prime} = I_{2nt}+1, S_{nt^\prime} = S_{nt}-1 \right) &= \beta S_{nt}\left(I_{2nt} + I_{12nt}\right),
 \end{align}
-while coinfection, given a crossimmunity factor $\alpha$, is given by
+while coinfection, given a cross-immunity factor $\alpha$, is given by
 \begin{align}
   P\left( I_{12,nt^\prime} = I_{12,nt}+1,\: I_{1nt^\prime} = I_{1nt}-1\right) = &\alpha\beta I_{1nt}\left(I_{2nt} + I_{12nt}\right),\\
   P\left( I_{12,nt^\prime} = I_{12,nt}+1,\: I_{2nt^\prime} = I_{2nt}-1\right) = &\alpha\beta I_{2nt}\left(I_{1nt} + I_{12nt}\right).
 \end{align}
 The probability of migration from colony $m$ (with degree $k_m$) to colony $n$, given a dispersal rate $\lambda$ is given by
 \begin{align}
-  P\left(S_{nt^\prime}=S_{nt}+1,\: S_{mt^\prime} = S_{mt}-1\right) &= \frac{\lambda S_{mt}}{k_m-1},\\
-  P\left(I_{qnt^\prime}=I_{qnt}+1,\: I_{qmt^\prime} = I_{qmt}-1\right) &= \frac{\lambda I_{qmt}}{k_m-1},\\
-  P\left(R_{nt^\prime}=S_{nt}+1,\: R_{mt^\prime} = R_{mt}-1\right) &= \frac{\lambda R_{mt}}{k_m-1}.
+  P\left(S_{nt^\prime}=S_{nt}+1,\: S_{mt^\prime} = S_{mt}-1\right) &= \frac{\lambda S_{mt}}{k_m},\\
+  P\left(I_{qnt^\prime}=I_{qnt}+1,\: I_{qmt^\prime} = I_{qmt}-1\right) &= \frac{\lambda I_{qmt}}{k_m},\\
+  P\left(R_{nt^\prime}=S_{nt}+1,\: R_{mt^\prime} = R_{mt}-1\right) &= \frac{\lambda R_{mt}}{k_m}.
 \end{align}
 Finally, recovery from any infectious class occurs at a rate $\gamma$
 \begin{align}
@@ -670,8 +669,9 @@ write.csv(z, file = 'data/Chapter2/TopoSims.csv')
 
 %%end.rcode
 
+\subsection{Experimental setup}
 
-
+The metapopulation contains 10 subpopulations.
 In each simulation the population was seeded with 10 sets of 200 infected individuals of pathogen 1.
 These groups were seeded into randomly selected colonies with replacement.
 For each 200 infected individuals added, 200 susceptible individuals were removed to keep starting colony sizes constant. 
@@ -688,10 +688,10 @@ Again visual inspection of preliminary simulations was used to determine that af
 The values used for the independant variables are chosen to highlight the affects of these variables. 
 Dispersal values are $\lambda = 0.1, 0.01$ and $ 0.001$ dispersals per individual per year. 
 $\lambda = 0.1$ relates to individuals moving between colonies on average twice per lifetime. 
-Therefore exclusively juvenile dispersal would have dispersal rates similar to this. 
+Therefore exclusively juvenile dispersal would have dispersal rates similar to this. %todo cite
 Otherwise it relates to dispersal being a rare event with animals often staying in a colony for many years.
 $\lambda = 0.01$ relates to 20\% of individuals dispersing once in their lifetime.
-This value is therefore close to male-biased dispersal, with female philopatry. 
+This value is therefore close to male-biased dispersal, with female philopatry. %todo cite
 Finally, $\lambda = 0.001$ relates to 2\% of individuals dispersing in their lifetime.
 This therefore relates to a population that does not habitually disperse.
 
@@ -709,20 +709,20 @@ This value is artificially small compared to wildlife populations.
 \subsection{Parameter selection}
 
 
-The fixed parameters used are chosen to roughly reflect realistic wild bat populations. 
+The fixed parameters were chosen to roughly reflect realistic wild bat populations. 
 The death rate $\mu$ was set as 0.05 per year giving a generation time of 20 years.
 The birth rate $\Lambda$ was set to be equal to $\mu$ so that the population size was stable.
 The recovery rate $\gamma$ was set to 1 giving a average infection duration of 1 years. 
 This is therefore a long lasting infection but not a chronic infection. 
 It is very difficult to directly estimate infection durations in wild populations but it seems that these infections might sometimes be long lasting \cite{peel2012henipavirus, plowright2015ecological}.
 However, other studies have found much shorter infectious periods \cite{amengual2007temporal}.
-These shorter lived in infections are studied further here as preliminary simulations found that they could not persist in the relatively small populations being modelled here.
+These shorter lived in infections are not studied further here. %todo consider readding this. " as preliminary simulations found that they could not persist in the relatively small populations being modelled here."
 
-Cross immunity was set to 0.1 so that an individual infected with one pathogen is 90\% less likely to be infected with another.
+Cross-immunity was set to 0.1 so that an individual infected with one pathogen is 90\% less likely to be infected with another.
 This is a rather arbitrary value.
 However, the rationale of the model was that the invading species might be a newly speciated strain of the endemic species.
-Furthermore, the model assumes complete cross immunity after recovery from infection.
-Therefore cross immunity to coinfection is likely to be very strong as well.
+Furthermore, the model assumes complete cross-immunity after recovery from infection.
+Therefore cross-immunity to coinfection is likely to be very strong as well.
 
 The population size of each subpopulation was set to 3,000. 
 This is appropriate for many bat species \cite{jones2009pantheria}, especially the large, frugivorous \emph{Pteropodidae} that have been particularly associated with recent zoonotic diseases.
@@ -912,19 +912,24 @@ TopoTransTest2 <- prop.test(propsTopo$invasions[c(2, 4, 6, 8)], propsTopo$n[c(2,
 %%end.rcode
 
 
+The rates of invasion range from zero out of 100 simulations up to 100 out of 100 (Figure \ref{f:invasionPropPlots}).
+Increased transmission clearly increases the rate of invasion even though the endemic pathogen has the same transmission rate as the invading pathogen.
+ 
 
 
-
-\subsection{Invasion}
+\subsection{Population structure}
 
 
 \paragraph{Dispersal}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-The proportion of invasions was not different across dispersal rates across \rinline{sprintf('%i', nDispSims)} simulations run (Figure \ref{f:invasionPropPlots}A).
-This was true at all transmission levels ($\chi^2$ test. $\beta = 0.1$: $\chi^2 = \rinline{DispTest1$statistic}$, $\text{df} = \rinline{DispTest1$parameter}$, $p = \rinline{p(DispTest1$p.value)}$. $\beta = 0.2$: $\chi^2 = \rinline{DispTest2$statistic}$, $\text{df} = \rinline{DispTest2$parameter}$, $p = \rinline{p(DispTest2$p.value)}$. $\beta = 0.3$: $\chi^2 = \rinline{DispTest3$statistic}$, $\text{df} = \rinline{DispTest3$parameter}$, $p = \rinline{p(DispTest3$p.value)}$, $\beta = 0.4$: $\chi^2 = \rinline{DispTest4$statistic}$, $\text{df} = \rinline{DispTest4$parameter}$, $p = \rinline{p(DispTest4$p.value)}$).
-
+The proportion of invasions was not different across dispersal rates for three of four $\beta$ values ($\chi^2$ test. $\beta = 0.1$: $\chi^2 = \rinline{DispTest1$statistic}$, $\text{df} = \rinline{DispTest1$parameter}$, $p = \rinline{p(DispTest1$p.value)}$.  $\beta = 0.3$: $\chi^2 = \rinline{DispTest3$statistic}$, $\text{df} = \rinline{DispTest3$parameter}$, $p = \rinline{p(DispTest3$p.value)}$, $\beta = 0.4$: $\chi^2 = \rinline{DispTest4$statistic}$, $\text{df} = \rinline{DispTest4$parameter}$, $p = \rinline{p(DispTest4$p.value)}$).
+For $\beta = 0.2$ the rates of invasion were significantly different ($\beta = 0.2$: $\chi^2 = \rinline{DispTest2$statistic}$, $\text{df} = \rinline{DispTest2$parameter}$, $p = \rinline{p(DispTest2$p.value)}$).
+The middle dispersal rate ($\lambda = 0.01$) has the lowest invasion rate (\rinline{propsDisp$props[5]}) with the top and bottom dispersal rates have higher invasion rates ($\lambda = 0.001$: invasion rate $=$ \rinline{propsDisp$props[4]}. $\lambda = 0.1$: invasion rate $=$ \rinline{propsDisp$props[6]}).
+Given the 13 hypotheses tested in this study, if a Bonferroni correction is applied this difference wouild be insignificant at the 95\% confidence level (\rinline{p(DispTest2$p.value)} $> 0.05 / 12 = 6.8 \times 10^{-4}$).
+Due to this U-shape relationship and small differences in proportions of invasions I think this is probably not a real effect.
+POverall, there is no support for the hypothesis that population structure increases the rate at which pathogens invade into the population.
 
 \paragraph{Network structure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -937,7 +942,7 @@ This was true at all transmission levels ($\chi^2$ test. $\beta = 0.1$: $\chi^2 
 \subsection{Transmission}
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Inline with theory, increasing the transmission rate increased the probability of invasion (Figure~\ref{f:invasionPropPlots}).
+In line with theory, increasing the transmission rate increased the probability of invasion (Figure~\ref{f:invasionPropPlots}).
 This is true for all three dispersal values ($\chi^2$ test. $\lambda = 0.001$: $\chi^2 = \rinline{DispTransTest1$statistic}$, $\text{df} = \rinline{DispTransTest1$parameter}$, $p < 10^{-5}$. $\lambda = 0.01$: $\chi^2 = \rinline{DispTransTest2$statistic}$, $\text{df} = \rinline{DispTransTest2$parameter}$, $p < 10^{-5}$. $\lambda = 0.1$: $\chi^2 = \rinline{DispTransTest3$statistic}$, $\text{df} = \rinline{DispTransTest3$parameter}$, $p < 10^{-5}$) and both network structures ($\chi^2$ test. Fully connected: $\chi^2 = \rinline{TopoTransTest2$statistic}$, $\text{df} = \rinline{TopoTransTest2$parameter}$, $p < 10^{-5}$. Minimally connected: $\chi^2 =  \rinline{TopoTransTest2$statistic}$, $\text{df} = \rinline{TopoTransTest2$parameter}$, $p < 10^{-5}$).
 
 
@@ -949,10 +954,10 @@ This is true for all three dispersal values ($\chi^2$ test. $\lambda = 0.001$: $
 # Just defining my caption label here to avoid the long string in chunk options below.
 
 invasionPropCaption <- sprintf("The probability of successful invasion. 
-  For three different transmission rates, the probability of invasion does not change between different a) dispersal rates or b) network topologies (with network topologies A and B refering to the    fully and minimally connected topologies in Figure~\\ref{f:net}). 
+  For three different transmission rates, the probability of invasion does not change between different A) dispersal rates or B) network topologies (with network topologies A and B refering to the    fully and minimally connected topologies in Figure~\\ref{f:net}). 
   Error bars are 95\\%% confidence intervals. 
   %i simulations were run for each treatment.
-  Other parameters are kept constant at: $N = 10,\\, \\, b = d = 0.05,\\, \\gamma = 0.1,\\, \\alpha = 0.1$. 
+  Other parameters were kept constant at: $N = 10,\\, \\, \mu = \Lambda = 0.05,\\, \\gamma = 0.1,\\, \\alpha = 0.1$. 
   When dispersal is varied, the population structure is fully connected. When population structure is varied, $\\lambda = 0.01$.",
   as.integer(each))
 

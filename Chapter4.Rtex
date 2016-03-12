@@ -1008,11 +1008,11 @@ It is very difficult to directly estimate infection durations in wild population
 However, other studies have found much shorter infectious periods \cite{amengual2007temporal}.
 These shorter lived not infections are studied further here.
 
-Cross immunity is set to 0.1 so that an individual infected with one pathogen is 90\% less likely to be infected with another.
+Cross-immunity is set to 0.1 so that an individual infected with one pathogen is 90\% less likely to be infected with another.
 This is a rather arbitrary value.
 However, the rationale of the model is that the invading species might be a newly speciated strain of the endemic species.
-Furthermore, the model assumes complete cross immunity after recovery from infection.
-Therefore cross immunity to coinfection is likely to be very strong as well.
+Furthermore, the model assumes complete cross-immunity after recovery from infection.
+Therefore cross-immunity to coinfection is likely to be very strong as well.
 
 Three values of the transmission rate $\beta$ are used, 0.1, 0.2 and 0.3.
 All simulations are run under all three transmission rates as this is a fundamental parameter that changes the broad dynamics of the pathogens.
