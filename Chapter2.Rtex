@@ -98,7 +98,7 @@ I tested these hypothesese using population networks parameterised to mimic wild
 \tmpsection{One sentence summarising the main result}
 %  (with the words “here we show” or their equivalent).
 I find that neither population connectedness nor dispersal rate affect the probability that a new pathogen will invade into a population.
-%\subsubsection{Two or three sentences explaining what the main result reveals in direct comparison to what was thought to be the case previously}
+%\paragraph{Two or three sentences explaining what the main result reveals in direct comparison to what was thought to be the case previously}
 % or how the main result adds to previous knowledge
 The assumption that factors causing high $R_0$ allow new pathogens to invade and therefore increase pathogen diversity is not supported.
 Instead we find that changes in population structure do not affect the probability of invasion of a new pathogen.
@@ -336,7 +336,7 @@ $r_i$ & The rate that event $i$ occurs. & Days$^{-1}$&\\
 
 
 
-\subsubsection{Two pathogen SIR model}
+\paragraph{Two pathogen SIR model}
 
 I examine a multipathogen SIR model with vital dynamics. 
 This is a compartment model with individuals being classed as susceptible, infected or recovered with immunity (Figure~\ref{f:sir}).
@@ -354,7 +354,7 @@ The time scale of the simulations are set by setting $\mu$ = 0.05 per year, yiel
 Infection is assumed to cause no extra mortality as for a number of viruses, bats show no clinical signs of infection \cite{halpin2011pteropid, deThoisy2016bioecological}.
 
 
-\subsubsection{Metapopulation}
+\paragraph{Metapopulation}
 
 
 The population is divided into a number of subpopulations.
@@ -370,7 +370,7 @@ Note this rate is independent of the degree of subpopulation $n$.
 
 
 
-\subsubsection{Stochastic simulations}
+\paragraph{Stochastic simulations}
 
 I examine this model using stochastic, continuous time simulations (using the Gillespie algorithm) implemented in R \cite{R}.
 At each step in the simulation we calculate the rate that each possible event might occur.
@@ -919,7 +919,7 @@ TopoTransTest2 <- prop.test(propsTopo$invasions[c(2, 4, 6, 8)], propsTopo$n[c(2,
 \subsection{Invasion}
 
 
-\subsubsection{Dispersal}
+\paragraph{Dispersal}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -927,7 +927,7 @@ The proportion of invasions was not different across dispersal rates across \rin
 This was true at all transmission levels ($\chi^2$ test. $\beta = 0.1$: $\chi^2 = \rinline{DispTest1$statistic}$, $\text{df} = \rinline{DispTest1$parameter}$, $p = \rinline{p(DispTest1$p.value)}$. $\beta = 0.2$: $\chi^2 = \rinline{DispTest2$statistic}$, $\text{df} = \rinline{DispTest2$parameter}$, $p = \rinline{p(DispTest2$p.value)}$. $\beta = 0.3$: $\chi^2 = \rinline{DispTest3$statistic}$, $\text{df} = \rinline{DispTest3$parameter}$, $p = \rinline{p(DispTest3$p.value)}$, $\beta = 0.4$: $\chi^2 = \rinline{DispTest4$statistic}$, $\text{df} = \rinline{DispTest4$parameter}$, $p = \rinline{p(DispTest4$p.value)}$).
 
 
-\subsubsection{Network structure}
+\paragraph{Network structure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 I ran \rinline{nTopoSims} simulations over \rinline{length(unique(propsTopo$transmission))} transmission values ($\beta = $ \rinline{unique(propsTopo$transmission)}).
@@ -1046,7 +1046,7 @@ This has implications for human epidemics as well --- if there is strong competi
 
 \subsection{Model assumptions}
 
-\subsubsection{Complete cross-immunity}
+\paragraph{Complete cross-immunity}
 
 I have assumed that once recovered, individuals are immune to both pathogens. 
 Furthermore, when a coinfected individual recovers from one pathogen, it immediately recovers from the other as well.
@@ -1055,14 +1055,14 @@ However, further work could relax this assumption using a model similar to \cite
 The model here was formulated such that the study of systems with greater than two pathogens is still computationally feasible while a model such as used in \cite{poletto2015characterising} contains $3^\rho$ classes for a system with $\rho$ pathogen species.
 This quickly becomes computationally restrictive.
 
-\subsubsection{Identical strains}
+\paragraph{Identical strains}
 
 Many papers on pathogen richness have focussed on the evolution of pathogen traits and have considered a trade off between transmission rate and virulence \cite{nowak1994superinfection, nowak1994superinfection} or infectious period \cite{poletto2013host}.
 However, here I am interested in host traits.
 Therefore we have assumed that pathogen strains are identical.
 It is clear however that there are a number of factors that affect pathogen richness and our focus on host population structure does not imply that pathogen traits are not important.
 
-\subsubsection{Complex social structure and behaviour}
+\paragraph{Complex social structure and behaviour}
 
 With the models here I have aimed to tread a middle ground between the overly simple models employed in analytical studies \cite{allen2004sis} and the full complexity and variety of true bat social systems \cite{kerth2008causes}.
 Omissions include seasonal migration,  maternity roosts, hibernation roosts and swarming sites \cite{kerth2008causes, fleming2003ecology, richter2008first, cryan2014continental}. 
