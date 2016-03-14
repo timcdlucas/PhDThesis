@@ -346,12 +346,12 @@ In this case, this would be counted as one virus species.
 \begin{knitrout}\footnotesize
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[t]
 
-{\centering \includegraphics[width=1.2\textwidth]{figure/treePlot-1} 
+{\centering \includegraphics[width=1\textwidth,trim = 0cm 0cm 0cm 0cm]{figure/treePlot-1} 
 
 }
 
 \caption[Pruned phylogeny with dot size showing number of pathogens and colour showing family.]{
-Phylogeny from \cite{bininda2007delayed} pruned to include all species used in either the number of subspecies of gene flow analysis.
+Phylogeny from \cite{bininda2007delayed} pruned to include all species used in either the number of subspecies or gene flow analysis.
 Dot size shows the number of known viruses for that species and colour shows family.
 }\label{fig:treePlot}
 \end{figure}
@@ -590,7 +590,7 @@ Figure~\ref{fig:fstRawData} shows the raw data for the relationship between path
 \caption[Model selection results for number of subspecies analysis]{
 Model selection results for number of subspecies and gene flow analysis. 
 $\bar{\text{AICc}}$ is the mean AICc score across 50 resamplings of the null random variable. 
-$\Delta$AICc is the model's $\bar{\text{AICc}}$ score $\text{min}(\bar{\text{AICc}})$ the lowest score. 
+$\Delta$AICc is the model's $\bar{\text{AICc}}$ score minus $\text{min}(\bar{\text{AICc}})$. 
 $w$ is the Akaike weight and can be interpreted as the probability that the model is the best model (of those in the plausible set).
 $\sum w$ is the cumulative sum of the Akaike weights.
 log(Scholar)*NSubspecies implies the interaction term between study effort and number of subspecies as well as both of the individual linear terms.
@@ -675,13 +675,13 @@ This supports the hypothesis that population structure promotes viral richness.
 Possibly due to the smaller sample size, or a weaker relationship, this coefficient was much more varied than the number of subspecies coeficient with 22\% of models estimating a positive relationship.
 
 As in the number of subspecies analysis, study effort was very likely in the best model ($Pr = $ 0.99) as was body mass ($Pr = $ 0.98).
-However, body mass has a negative average coefficient ($b = $ \ensuremath{-0.35}, variance = 0.04) which is in contrast to number of subspecies analysis, many studies in the literature \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat} and the single-predictor model (pgls: $b$ = 0.6, $t$ = 0.38, df = 13, $p$ = 0.71).
+However, body mass has a negative average coefficient ($b = $ \ensuremath{-0.35}, variance = 0.04) which is in contrast to the number of subspecies analysis, many studies in the literature \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat} and the single-predictor model (pgls: $b$ = 0.6, $t$ = 0.38, df = 13, $p$ = 0.71).
 In contrast to the number of subspecies analysis, range size was almost certainly not in the best model with $Pr = $ 0.06 being much less than the random variable.
 This variable being less supported than the random variable was probably because range size is closely correlated with study effort (pgls: $b$ = 0.6, $t$ = 4.45, df = 13, $p$ = \ensuremath{6.58\times 10^{-4}}).
 Of the three independant variables in the best model, study effort had the largest effect ($b = $ 2.49, variance = 0.08).
 The effect size of gene flow ($b = $ \ensuremath{-0.67}, variance = \ensuremath{5.48\times 10^{-3}}) was approximately twice the size of that of body mass ($b = $ \ensuremath{-0.35}, variance = 0.04)
 
-Across all models the mean value of $\lambda$ is \ensuremath{-1.64} and a large number of individual models (58\%)  had negatively phylogenetically distributed residuals implying the residuals from the model are strongly negatively phylogenetic.
+Across all models the mean value of $\lambda$ is \ensuremath{-1.64} and a large number of individual models (58\%)  had negatively phylogenetically distributed residuals implying the residuals from the model are spread more uniformally on the phylogeny than expected by change.
 Due to the small sample size this was probably due to a small number of data points with large residuals being distant on the tree.
 
 
@@ -700,8 +700,8 @@ Due to the small sample size this was probably due to a small number of data poi
 
 I have tested the hypothesis that population structure promotes pathogen richness in bats.
 By analysing data on two measures of population structure, and using larger datasets than previous studies, it is hoped that any conclusions may be more robust than the conflicting results in the literature \cite{gay2014parasite, turmelle2009correlates, maganga2014bat}.
-I have found that a positive affect of population structure (a positive effect of the number of subspecies and a negative effect of gene flow) are likely to be in the best models for explaining viral richness.
-Study effort is also clearly supported confirming the expectation that additional study of a bat species yields more known viruses infecting that species and highlighting again that this bias cannot be ignored in studies using known pathogen richness as a proxy for total pathogen richness.
+I have found that a positive effect of population structure (a positive effect of the number of subspecies and a negative effect of gene flow) are likely to be in the best models for explaining viral richness.
+Study effort is also clearly supported confirming the expectation that additional study of a bat species yields more known viruses infecting that species and highlighting again that this bias cannot be ignored in studies using known pathogen richness as a proxy for total pathogen richness \cite{}.
 
 
 \subsection{Study limitations}
@@ -712,12 +712,12 @@ The strength of the relationship between study effort and known viral richness a
 
 I have used two measures of pathogen richness and the number of subspecies dataset is larger than those used in previous studies.
 However it is clear that the gene flow dataset is small (n = 24).
-This leads to some unexpected results.
+This may explain some unexpected results.
 While the model averaging approach has given a negative model averaged coefficient for gene flow, the univariate model of gene flow against viral richness gave a positive coefficient.
 Furthermore body mass has a negative average coefficient.
-This is in contrast to number of subspecies analysis, many studies in the literature \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat} and the single-predictor model.
+This is in contrast to the number of subspecies analysis, many studies in the literature \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat} and the single-predictor model.
 It is not easy to interpret these contradictions but it is clear that the results from the gene flow analysis alone should not be considered strong evidence for a relationship between pathogen richness and population structure.
-The sensitivity of this analysis reiterates the need to use large datasets where possible and use mutliple measures of population structure to promote robust conclusions.
+These contradiction also reiterates the need to use large datasets where possible and use mutliple measures of population structure to promote robust conclusions.
 
 \tmpsection{Broader context of results}
 
@@ -725,19 +725,21 @@ The results here suggest that there is a positive relationship between populatio
 This is in agreement with \cite{maganga2014bat, turmelle2009correlates} but in disagreement with \cite{gay2014parasite}.
 Furthermore it contradicts the assumption that factors that promote high $R_0$ will automatically promote high pathogen richness \cite{nunn2003comparative, morand2000wormy}.
 This relationship implies that direct or indirect competitive mechanisms are acting such that population structure is needed in order to allow escape from competition.
-%Another potential mechanism by which structure might be promoting increased richness is by slowing the spread of highly virulent viruses such as rabies and preventing them from having short, intense epidemics followed by extinction \cite{}.
+%Another potential mechanism by which structure might be promoting increased richness is by slowing the spread of highly virulent viruses such as rabies and preventing them from having short, intense epidemics followed by extinction.
 %This mechanism has interesting parallel to metapopulation theory in ecology in which a metapopulation structure can allow persistence of species that would otherwise go extinct.
 
-The relationship between population structure and pathogen richness suggests that population structure has a least some potential as being predictive of high pathogen richness and therefore of a species likelihood of being a reservoir of a potentially zoonotic pathogen. 
+The relationship between population structure and pathogen richness suggests that population structure has at least some potential as being predictive of high pathogen richness and therefore of a species' likelihood of being a reservoir of a potentially zoonotic pathogen. 
 However given that it is difficult to measure population structure and given that the relationship appears to be weak at best, this trait on its own is unlikely to be useful in predicting zoonotic risk.
-However, as a number of other factors are also associated with pathogen richness (body mass and to a lesser extent range size here but also other traits elsewhere), using a combination traits in a predictive (i.e. machine learning) framework has potential to be used in prioritising zoonotic disease surveillance.
+However, as a number of other factors are also associated with pathogen richness (body mass and to a lesser extent range size as shown here but also other traits studied elsewhere), using a combination traits in a predictive (i.e. machine learning) framework has potential to be used in prioritising zoonotic disease surveillance.
 The main hurdle in this approach is finding a way to validate models --- due to the study effort bias in current data, predictive models will also be biased.
+As unbiased pathogen surveys (e.g. \textcite{anthony2013strategy}) become more common this may become possible.
+Alternatively, predictive models could be trained on all available --- and therefore biased --- data and validated by predicting smaller, unbiased datasets such as the data collected in \textcite{maganga2014bat}
 
 The relationship between pathogen richness and population structure also has implications for habitat fragmentation and range shifts due to global change.
-In short habitat fragmentation and range shifts that reduce movement between populations would be predicted to increase pathogen richness.
-However, depending on the mechanisms by which population structure increase pathogen richness this may not be a cause for concern.
-I the main mechanism is one that reduces pathogen extinction rates, a newly fragmented population is unlikely to increase its pathogen richness over any appreciable timescale.
-If however population structure actively promotes the evolution of new pathogen strains or allows the persistence of more virulent strains this could have important public health implications.
+In short habitat, fragmentation and range shifts that reduce movement between populations would be predicted to increase pathogen richness.
+However, depending on the mechanisms by which population structure increases pathogen richness this may not be a cause for concern.
+If the main mechanism is one that reduces pathogen extinction rates, a newly fragmented population is unlikely to increase its pathogen richness over any appreciable timescale.
+If however population structure actively promotes the evolution of new pathogen strains or allows the persistence of more virulent strains \cite{blackwood2013resolving, pons2014insights, plowright2011urban} this could have important public health implications.
 Therefore further study on the exact mechanisms by which population structure affects pathogen richness is needed. 
 
 \subsection{Conclusions}
@@ -745,7 +747,7 @@ Therefore further study on the exact mechanisms by which population structure af
 In conclusion, this study adds to the evidence that population structure may promote pathogen richness.
 It does not support the view that factors that increase $R_0$ will increase pathogen richness.
 Using larger datasets and multiple measurements makes the weight of the evidence here stronger than in previous studies.
-However, caution must still be taken in interpreting these results as the data is biased and sparse and the analyses show that small changes in model and data choice can give opposite results.
+However, caution must still be taken in interpreting these results as the data is biased and sparse in one of the analyses.
 
 
 
