@@ -42,8 +42,8 @@ Here I use metapopulation SIR models to test whether it is density \emph{per se}
 
 
 I found that increased group size increases the chance that a new pathogen will invade into a population to the largest extent.
-Both group size and the number of groups (i.e. components of population size) promote pathogen richness more than population density.
-This implies that population density is merely a correlate of group size or population size.
+Both group size and the number of groups (i.e. the components of population size) promote pathogen richness more than population density.
+This implies that, in comparative studies, population density is merely a correlate of group size or population size.
 As these factors are not equally important it is expected that the pathogen communities of different host species will respond to climate change in different ways.
 Species which experience changes in group size are expected to have larger changes in pathogen richness than other species.
 
@@ -74,7 +74,7 @@ It also highlights the necessity for studying the mechanisms underlying pathogen
 Zoonotic diseases are an increasingly important source of human infectious diseases \cite{jones2008global, woolhouse2006host, taylor2001risk}.
 The diversity of pathogens in wild animal populations is huge and largely unknown \cite{poulin2014parasite}.
 Furthermore, the factors that allow large numbers of pathogen species to coexist in a host (e.g., \textcite{anthony2013strategy}) are still unclear.
-It is clear that population level factors such as population density, range size and population structure have an important role in controlling pathogen community dynamics \cite{anderson1979population, may1979population, colizza2007invasion, may2001infection}.
+It is well known that population level factors such as population density, range size and population structure have an important role in controlling pathogen community dynamics \cite{anderson1979population, may1979population, colizza2007invasion, may2001infection}.
 Global change is strongly perturbing wild animal populations \cite{thomas2004extinction, craigie2010large}, but without clear mechanistic models of how these populations maintain pathogen species richness, we can not predict how pathogen communities, and the risks of zoonotic outbreaks, will change in the coming decades.
 
 
@@ -97,7 +97,7 @@ There is disagreement on whether population density (individuals per unit area) 
 With the increase of novel zoonotic pathogens \cite{jones2008global} attention has turned to comparatively assessing the factors that are associated with high or low pathogen richness in wild animal species \cite{poulin2000diversity}.
 Here again there is little clarity on the relationship between a number of species measurements.
 Population density is commonly studied \cite{morand1998density, kamiya2014determines, lindenfors2007parasite, nunn2003comparative, arneberg2002host} as is range size \cite{lindenfors2007parasite, nunn2003comparative, turmelle2009correlates, huang2015parasite, kamiya2014determines}.
-However it is rarely if ever acknowledge that these two values are intrinsically linked by $d = N/a$ (where $d$ is density, $N$ is the population size and $a$ is area. See Table~\ref{t:params} for all parameters used) or that the relationship $N \propto a$ has broad empirical support \cite{blackburn2006variations, borregaard2010causality}.
+However it is rarely if ever acknowledge that these two values are intrinsically linked by $d = N/a$ where $d$ is density, $N$ is the population size and $a$ is area (See Table~\ref{t:params} for all parameters used) or that the relationship $N \propto a$ has broad empirical support \cite{blackburn2006variations, borregaard2010causality}.
 In contrast, population size has never been directly studied as a predictor of pathogen richness --- although confusingly, population range size is sometimes used as a measure of size e.g., \cite{vogeli2011island}.
 %This is a glaring omission.
 Furthermore, population size is considered the more relevant measure in terms of pathogen dynamics, especially when area cannot be assumed to be constant \cite{begon2002clarification} as is commonly the case in wild populations, especially in the face of global warming and habitat degradation.
@@ -120,8 +120,8 @@ Other species might retain their distribution but have a depressed population de
 Similarly with population structure, species particularly affected by habitat fragmentation can expect increased reduced movement of individuals between groups, while other species may be most affected by a reduction in group size.
 Furthermore, different mechanisms of maintenance and creation of pathogen richness will respond to changes in these factors differently as well.
 If pathogen richness ultimately depends on the ``island size'' of the host population, then falls in population size will reduce pathogen richness the most.
-If local group size affects the ability of new pathogens to invade (Chapter \ref{ch:sims1}) then changes in group size are likely to be more important.
-Finally, if increased population structure allows pathogens to coexist (\parencite{qiu2013vector, allen2004sis, nunes2006localized} and Chapter \ref{ch:empirical}) increase habitat fragmentation could be expected to increase pathogen richness.
+If local group size affects the ability of new pathogens to invade (\textcite{nunn2003comparative}, Chapter \ref{ch:sims1}) then changes in group size are likely to be more important.
+Finally, if increased population structure allows pathogens to coexist (\textcite{qiu2013vector, allen2004sis, nunes2006localized} and Chapter \ref{ch:empirical}) increased habitat fragmentation could be expected to increase pathogen richness.
 
 As these population factors --- population size and density, range size and group size --- are likely to be intercorrelated, correlative comparative studies will struggle to distinguish between them.
 Furthermore, even if some factors are statistically supported or rejected, the specific mechanisms by which they promote pathogen richness will remain unknown, and these may suggest different responses to global change.
@@ -226,7 +226,7 @@ As area increases, the number of connections each subpopulation has decreases as
 
 \caption[Change in average network degree with increasing area]{
 Change in average metapopulation network degree ($\bar{k}$) with increasing area. 
-Bars show the median, boxes show the interquartile range, vertical lines show and range and grey dots indicate outlier values.
+Bars show the median, boxes show the interquartile range, vertical lines show the range and grey dots indicate outlier values.
 Notches indicate the 95\% confidence interval of the mean.
 All simulations had 20 colonies, meaning 19 is the maximum value of $\bar{k}$.
 }\label{fig:plotK}
@@ -259,12 +259,12 @@ All simulations had 20 colonies, meaning 19 is the maximum value of $\bar{k}$.
 
 \caption[Comparison of the probability of invasion when population size is altered by changing colony size or colony number.]{
 Comparison of the effect of colony size, colony number and area on probability of invasion.
-Default values are: colony number = 20, colony size = 400 and density = 0.8 animals per unit area.
+Default values are: colony number = 20, colony size = 400 and density = 0.8 animals$\cdot\text{km}^{-2}$.
 The $x$-axis shows the relative change in each of these values ($\times 0.25, 0.5, 1, 2$ and $4$).
 For colony size and number, area is altered so that density remains constant.
 For density, population size is constant at 8,000 and area is altered.
 Each point is the mean of 100 simulations and bars are 95\% confidence intervals.
-Curves are bivariate logistic regression fits for each independant variable.
+Curves are simple logistic regression fits for each independant variable.
 Relationships are shown seperately for each transmission value.
 }\label{fig:plotValueChangeMeans}
 \end{figure}
@@ -318,8 +318,7 @@ Note that this is the same data as Figure~\ref{fig:plotValueChangeMeans} but wit
 
 
 I used a two-pathogen, metapopulation SIR model to compare the roles of demographic parameters on pathogen species richness.
-Specifically I let two identical pathogens --- an endemic pathogen and an invading pathogen --- compete.
-I used persistence or not of the second pathogen as my response variable.
+Specifically I let two identical pathogens --- an endemic pathogen and an invading pathogen --- compete and used persistence or not of the second pathogen as my response variable.
 I tested whether population size is more important than population density.
 I then tested whether colony size or the number of colonies is the more important component of population size.
 The multipathogen SIR model is identical to that in Chapter \ref{ch:sims1} and is implemented in R \cite{R}.
@@ -331,30 +330,30 @@ Pathogen 1 is then allowed to spread and reach equilibrium.
 After \ensuremath{7\times 10^{5}} events, 5 individuals infected with pathogen 2 are added to one randomly selected colony. 
 After another \ensuremath{3\times 10^{5}} events the invasion of pathogen 2 is considered successful if any individuals with pathogen 2 still remain.
 
-\subsection{Dependant variables}
+\subsection{Independant variables}
 
-Three dependant variables were varied: colony size, number of colonies and area.
+Three independant variables were varied: colony size, number of colonies and area.
 From these parameters, population size and population density can be calculated.
-The default values of these parameters was a population size of 8000 individuals split into 20 colonies of 400.
+The default values of these parameters was a population size of 8000 individuals split into 20 colonies of 400 individuals.
 The default area of the simulations was \ensuremath{10^{4}}km$^2$ (space is given in square kilometres for simplicity even though they are in fact arbitrary units).
 
 Three sets of simulations were run.
-First, colony size was varied using values 100, 200, 400, 800 and \ensuremath{1.6\times 10^{3}}.
-The number of colonies was kept constant and so population size varied with colony size.
+First, colony size was varied using values 100, 200, 400, 800 and 1600.
+The number of colonies was kept constant and so population size varied directly proportionally with colony size.
 Area was scaled to keep population density constant. 
 Secondly, number of colonies (and therefore population size) was varied and again area was varied to keep density constant.
 5, 10, 20, 40 and 80 colonies were used.
 Finally, colony size and number of colonies were kept constant (therefore keeping population size constant) and area was varied alone to alter population density. 
-The values of area used were \ensuremath{4\times 10^{4}}, \ensuremath{2\times 10^{4}}, \ensuremath{10^{4}}, \ensuremath{5\times 10^{3}} and \ensuremath{2.5\times 10^{3}}km$^2$ which gave density values of 0.2, 0.4, 0.8, 1.6 and 3.2animals$\cdot\text{km}^{-2}$.
+The values of area used were \ensuremath{4\times 10^{4}}, \ensuremath{2\times 10^{4}}, \ensuremath{10^{4}}, \ensuremath{5\times 10^{3}} and \ensuremath{2.5\times 10^{3}}km$^2$ which gave density values of 0.2, 0.4, 0.8, 1.6 and 3.2 animals$\cdot\text{km}^{-2}$.
 
 The affects of area occur through changing the metapopulation network.
 The metapopulation structure was created for each simulation by randomly placing colonies in space (Figure~\ref{fig:colonyNetworkPlots}).
 The spatial scale of the simulations vary between \ensuremath{2.5\times 10^{3}} and \ensuremath{4\times 10^{4}} km$^2$.
 This corresponds to square areas with sides of 50 to 200km.
-Dispersal can only occur between two colonies if they are within 100 kilometres of each other i.e. they are connected nodes in the metapopulation network.
+Dispersal can only occur between two colonies if they are within 100 kilometres of each other i.e. they are then counted as connected nodes in the metapopulation network.
 The number of connections each colony has is called its degree, $k$.
 How well connected the metapopulation network is overall is measured by the mean degree, $\bar{k}$.
-This does not guarantee that the population is fully connected but as the endemic pathogen is seeded in all colonies, the invading pathogen cannot be seeded into a fully susceptible colony.
+This random placement does not guarantee that the population is connected (i.e. made up of a single connected component) but as the endemic pathogen is seeded in all colonies, the invading pathogen cannot be seeded into a fully susceptible colony.
 This was considered more realistic than repeatedly resampling the population until a fully connected population occurred.
 The threshold of 100 kilometres was arbitrary but I aimed to maximise the range  of $\bar{k}$ (Figure~\ref{fig:plotK}) while not having many simulations with networks that were not fully connected.
 Given this setup, simulations with low densities had relatively unconnected metapopulation networks while high density populations had fully connected networks.
@@ -369,32 +368,30 @@ The death rate $\Lambda$ is set as 0.05 per year giving a generation time of 20 
 The birth rate is set to be equal to $\mu$ so that the population size is stable.
 The recovery rate $\gamma$ is set to 1 giving a average infection duration of 1 years. 
 This is therefore a long lasting infection but not a chronic infection. 
-It is very difficult to directly estimate infection durations in wild populations but it seems that these infections might sometimes be long lasting \cite{peel2012henipavirus, plowright2015ecological}.
-However, other studies have found much shorter infectious periods \cite{amengual2007temporal}.
-These shorter lived not infections are studied further here.
+It is difficult to estimate the duration of infections in wild bats but it seems that these infections may often be long lasting \cite{peel2012henipavirus, plowright2015ecological}.
+However, much shorter infectious periods have also been identified \cite{amengual2007temporal}.
+These shorter lived infections are not studied further here.
 
-Cross immunity is set to 0.1 so that an individual infected with one pathogen is 90\% less likely to be infected with another.
-This is a rather arbitrary value.
-However, the rationale of the model is that the invading species might be a newly speciated strain of the endemic species.
-Furthermore, the model assumes complete cross immunity after recovery from infection.
-Therefore cross immunity to coinfection is likely to be very strong as well.
-
-Three values of the transmission rate $\beta$ are used, 0.1, 0.2 and 0.3.
-All simulations are run under all three transmission rates as this is a fundamental parameter that changes the broad dynamics of the pathogens.
+Cross-immunity is set to 0.1 so that coinfection is 90\% less likely than an initial infection.
+This is an arbitrary value that is based on the fact that the rationale of the model is that the invading species is a newly speciated strain of the endemic species.
+Furthermore, the model assumes complete cross-immunity after recovery from infection.
+Therefore cross-immunity to coinfection is also likely to be strong.
+Three values, 0.1, 0.2 and 0.3, of the transmission rate $\beta$ are used.
+All simulations are run under all three transmission rates.
 
 
 \subsection{Statistical comparisons}
 
 I tested two hypotheses.
 Firstly I tested the hypothesis that an increase in population size creates a stronger increase in invasion probability (of the second pathogen) than an equal increase in population density.
-Secondly, I tested the hypothesis that an increase in colony size creates a stronger increase in invasion probability than an equal increase in number of colonies.
-To statistically test these hypotheses I combined the results from different simulations and fitted multiple logistic regressions, centering and scaling the dependant variables.
+Secondly, I tested the hypothesis that an increase in colony size creates a stronger increase in invasion probability than a proportionally equal increase in number of colonies.
+To statistically test these hypotheses I combined the results from different simulations and fitted multiple logistic regressions, centering and scaling the independant variables.
 Specifically, I fitted the model 
 \begin{align}
-  \text{invasion} = b_1 d + b_2 n + b_3 m + c + \epsilon
+  \text{Invasion} = b_1 d + b_2 n + b_3 m + c + \epsilon
 \end{align}
 where $d, n$ and $m$ are density, colony size and number of colonies respectively and $b_i$ are the regression coefficients. 
-$c$ is a fitted intercept, $\epsilon$ is a binomially distributed error term.
+$c$ is a fitted intercept and $\epsilon$ is a binomially distributed error term.
 To test the first hypothesis I compared the size (and 95\% confidence intervals) of $b_1$ to $b_2$ and $b_3$.
 To test the second hypothesis I compared $b_2$ to $b_3$.
 
@@ -422,14 +419,14 @@ Although there is no clear, directional relationship, these proportions are sign
 In 37 simulations, both of the pathogens went extinct.
 This did not depend on transmission rate ($\chi^2$ test: $\chi^2 = 1.51,\: \text{df} = 2,\: p = 0.47$).
 However they were all either in simulations with the smallest colony size (colony size = 100, 29 simulations) or with the fewest colonies (5 colonies, 8 simulations).
-These simulations were ignored in further analyses.
+Results from these simulations were removed before further analyses.
 
 
 
 \subsection{Population density or size}
 
 To test whether population density or size has a stronger affect on invasion probability I compared the regression coefficients of the multiple regressions fitted to simulation results (Figure~\ref{fig:plotValueChangeMeans}).
-Increasing population size, either by increasing colony size or number of colonies, increases the probability of invasion (Table~\ref{t:regrCoefs}).
+Increasing population size, either by increasing colony size or number of colonies, increased the probability of invasion (Table~\ref{t:regrCoefs}).
 The relationship between colony size and invasion is strong and significant at all transmission rates, while the relationship between colony number and invasion is weaker and more marginally significant.
 In contrast, varying population density does not alter invasion probability.
 Therefore the simulations support the hypothesis that population size affects invasion more strongly than population density.
@@ -439,8 +436,7 @@ Therefore the simulations support the hypothesis that population size affects in
 
 To test whether colony size or the number of colonies is the more important component of population size, I compared the regression coefficients, $b_2$ and $b_3$, of the multiple regressions fitted to simulation results (Figure~\ref{fig:plotTransMeans}).
 Increasing colony size or the number of colonies increases the probability of invasion but this affect is much stronger and more statistically significant, for colony size (Table~\ref{t:regrCoefs}).
-Therefore the simulations support the hypothesis that colony size is the more important component of population size, though colony number does still increase the probability of invasion.
-
+Therefore the simulations support the hypothesis that colony size is the more important component of population size.
 
 
 
@@ -448,10 +444,10 @@ Therefore the simulations support the hypothesis that colony size is the more im
 \begin{table}
 
 \caption[Regression results]{
-Regression results comparing affects of colony size, colony number and area.
+Regression results comparing effects of colony size, colony number and density.
 Coefficients are from multiple logistic regressions with invasion as the dependant variable and all independant variables being scaled and centred.
 Colony size and colony number were varied while keeping density equal while density was varied by changing area while keeping population size equal.
-$p$ is for test against the null hypothesis that  $b = 0$.
+$p$ is for the test against the null hypothesis that  $b = 0$.
 }
 \label{t:regrCoefs}
 \centering
@@ -465,7 +461,7 @@ $\beta$ & \emph{Variable} & \emph{Estimate} ($b$) & (95\% \emph{CI}) & $p$\\
       &    Density       & 0.01 & (\ensuremath{-0.66}, 0.52) & 0.97 \\[1em]
 0.2   &    Intercept     & \ensuremath{-2.84} & (\ensuremath{-3.12}, \ensuremath{-2.58}) & $< 10^{-5}$ \\
       &    Colony Size   & 2.11 & (1.71, 2.6) & $< 10^{-5}$ \\
-      &    Colony Number & 0.51 & (0.16, 0.95) & \ensuremath{9\times 10^{-3}} \\
+      &    Colony Number & 0.51 & (0.16, 0.95) & 0.009 \\
       &    Density       & \ensuremath{-0.31} & (\ensuremath{-0.96}, 0.19) & 0.29 \\[1em]
 0.3   &    Intercept     & \ensuremath{-2.11} & (\ensuremath{-2.34}, \ensuremath{-1.9}) & $< 10^{-5}$ \\
       &    Colony Size   & 2.74 & (2.35, 3.16) & $< 10^{-5}$ \\
@@ -498,10 +494,10 @@ Furthermore, social species that live in large groups are likely to harbour more
 
 \tmpsection{Why are these results like that? What do they mean?}
 
-For related, strongly competing strains, the factor that allows new pathogens to invade is the number of susceptible individuals in the local group.
+For related, strongly competing strains, the factor that most strongly allows new pathogens to invade is the number of susceptible individuals in the local group.
 As long as there are enough susceptible individuals that the new pathogen species persists through the stochastic, early stages of the epidemic, the new pathogen will persist.
 As dispersal is a very slow process compared to infection, the global pool of susceptibles is not important. 
-This is why increasing the number of number of colonies does not increase pathogen invasion as quickly as the size of a colony does.
+This is why increasing the number of colonies does not increase pathogen invasion as quickly as the size of a colony does.
 Similarly, the density --- at the global scale --- of the species has little affect.
 In these simulations, increasing density without increasing population size implies a reduction in range size, which simply increases the number of colonies which are connected to the colony experiencing the invading pathogen.
 This increases the pool of susceptibles that are within one dispersal of the invading pathogen.
@@ -513,7 +509,7 @@ However, again, this affect is very weak compared to the strong changes in local
 
 It is clear that many species are suffering strong population changes due to climate change \cite{thomas2004extinction}.
 However these changes might affect range size \cite{thomas2004extinction}, population size \cite{craigie2010large}, population connectivity \cite{wasserman2013population, rivera2015habitat, fonturbel2014forest} or group size \cite{lehmann2010apes, zunino2007habitat, manor2003impact, atwood2006influence} to different extents.
-My results suggest that pathogen communities will response differently depending on the change although it should be noted that the mechanism here --- invasion of a new pathogen --- is possibly more relevant over longer, multi-generation time scales than decadely time scales.
+My results suggest that pathogen communities will respond differently depending on which factors are affected, although it should be noted that the mechanism here --- invasion of a new pathogen --- is possibly more relevant over longer, multi-generation time scales than decadely time scales.
 In short, species suffering reductions in groups size \cite{lehmann2010apes, zunino2007habitat, manor2003impact, atwood2006influence} are predicted to experience decreases in pathogen richness in the long term.
 Species that are experiencing increases in group size \cite{lehmann2010apes} would be expected gain new pathogen species more quickly.
 In contrast, species suffering range contractions \cite{thomas2004extinction} and decreases in population size \cite{craigie2010large} are expected to experience smaller changes in pathogen richness.
@@ -522,33 +518,33 @@ In contrast, species suffering range contractions \cite{thomas2004extinction} an
 \subsection{Comparative studies}
 
 Many comparative studies measure some aspect of a species population size or structure, yet it is rarely discussed how these relate.
-Instead most studies use the data that are available, without considering how it may depend on other factors.
+Instead most studies use the data that are available, without considering \emph{a priori} how it may depend on other factors (though statistical correlations between independant variables is usually considered and dealt with using PCA or by removing colinear variables).
 Population density is often measured \cite{morand1998density, lindenfors2007parasite, nunn2003comparative, arneberg2002host} yet density is directly associated with population size.
 This study suggests that it is in fact population size that is important (in the context of social species as studied here).
 Therefore, the density measures in these comparative studies are more likely to be proxies for population size than the true causal factor.
-Similarly, this study suggests that host range size does not promote pathogen richness by the mechanism studied here yet a number of studies have found a relationship \cite{kamiya2014determines, nunn2003comparative}.
+Similarly, this study suggests that host range size does not promote pathogen richness by the mechanism studied here, yet a number of studies have found evidence of this relationship \cite{kamiya2014determines, nunn2003comparative}.
 This suggests that either the relationship found in comparative studies is in fact due to a correlation with another factor, or that mechanisms other than rate of invasion of new pathogens are important.
 Range size has been suggested to affect pathogen richness by a number of mechanisms such as increasing the diversity of sympatric species and these other mechanisms should be specifically tested.
 
 The studies that have tested specifically the affect of group size have in fact found both positive \cite{vitone2004body} and negative associations \cite{gay2014parasite} or no relationship \cite{ezenwa2006host}.
-Metaanalyses suggest that the relationship between social group size and pathogen richness is weak \cite{rifkin2012animals}.
+Meta-analyses suggest that the relationship between social group size and pathogen richness is weak \cite{rifkin2012animals}.
 This suggests that the mechanism studied here --- invasion of recently evolved pathogens --- is not the major cause of pathogen richness in wild populations.
 
 
 
 \subsection{Assumptions and limitation}
 
-Being based on the same model as Chapter~\ref{ch:sims2}, the work presented here relies on many of the same assumptions.
-Furthermore, as a comparison is being made between the affects of area and population size, the exact specifications of how the metapopulation is affected by area is important.
+Being based on the same model as used earlier, the work presented here relies on many of the same assumptions (see Section~\ref{s:sims1Disc}).
+Furthermore, as a comparison is being made between the effects of area and population size, the exact specifications of how the metapopulation is affected by area is important.
 I have conducted this study at one rate of dispersal, 0.01 dispersals per individual per year.
-In practice this related to only a 20 percent of individuals dispersing at all.
-This low rate of dispersal is expected to exaggerate the affect of area; at high rates of dispersal the population is essentially well-mixed, despite the metapopulion.
+In practice this relates to only 20\% of individuals dispersing in their lifetime.
+This low rate of dispersal is expected to exaggerate the affect of area; at high rates of dispersal the population is essentially well-mixed, despite the metapopulation.
 
 Also, I have assumed that dispersal only occurs between colonies a certain distance apart.
 Based on \emph{a priori} considerations such as the time and energy required to disperse long distances this is a reasonable assumption.
 The exact threshold was chosen to attempt to maximise the range of $\bar{k}$ studied (Figure~\ref{fig:plotK}).
 However, a similar assumption could be made in other ways.
-Instead of a threshold distance, individuals could be expected to disperse in a random direction and stop at the first colony they encounter; this could create some long distance links in the network and increase network connectivity, potentially reducing the affects of area.
+Instead of a threshold distance, individuals could be expected to disperse in a random direction and stop at the first colony they encounter; this could create some long distance links in the network and increase network connectivity, potentially reducing the effects of area.
 Alternatively, the metapopulation could have been modelled as a weighted network with dispersal occuring at a higher rate to nearby colonies.
 Depending on the parameterisation of this distance-dispersal relationship this could serve to increase the affect of area --- by exaggerating dispersal to very nearby colonies --- or decrease the affect of area by allowing rare, but significant, global dispersal creating a small-world network structure.
 Ultimately, the modelling choices could increase or decrease the affects of area relative to colony size and the number of colonies but I have aimed to make the effect of area as strong as possible.
@@ -559,8 +555,8 @@ Ultimately, the modelling choices could increase or decrease the affects of area
 \tmpsection{Further correlations between factors}
 
 I have used the simple relationships between demographic factors --- density = population size / area for example --- to illustrate that these are tightly linked.
-In order to isolate the affects of these factors I have assumed these simple relationships hold; to examine density without altering population size I have fixed population size and manipulated area.
-However in reality these are likely to covary both within species across time and between species.
+In order to isolate the effects of these factors I have assumed these simple relationships hold; to examine density without altering population size I have fixed population size and manipulated area.
+However, in reality, these are likely to covary both within species across time and also between species.
 Therefore, while these quantities are certainly linked, they cannot be assumed to have simple linear relationships and should not be used as proxies of each other without further examination.
 For example, rates and distances of dispersal --- which affect the influence of space --- may be related to local density \cite{marjamaki2013local}.
 Similarly it is unlikely that a species whose range size decreases will not experience a decrease in total population size as well; the range contraction is likely to occur over generations rather than a simple squeezing of the existing individuals into a smaller area.
@@ -570,7 +566,7 @@ Similarly it is unlikely that a species whose range size decreases will not expe
 
 \subsection{Conclusions}
 
-Overall I have shown that while a number of demographic factors are intrinsically linked, they have different affects on the rate at which new pathogens will invade.
+Overall I have shown that while a number of demographic factors are intrinsically linked, they have different effects on the rate at which new pathogens will invade.
 I found that population size, not density, has the stronger impact on the ability of a pathogen to invade.
 Furthermore, species with large groups are likely to harbour more pathogens than species with many, smaller groups.
 Due to the correlations between these factors, they are particularly hard to study within a comparative framework; this highlights the utility of mechanistic models.

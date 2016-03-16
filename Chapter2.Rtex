@@ -716,7 +716,7 @@ The recovery rate $\gamma$ was set to 1 giving a average infection duration of 1
 This is therefore a long lasting infection but not a chronic infection. 
 It is very difficult to directly estimate infection durations in wild populations but it seems that these infections might sometimes be long lasting \cite{peel2012henipavirus, plowright2015ecological}.
 However, other studies have found much shorter infectious periods \cite{amengual2007temporal}.
-These shorter lived in infections are not studied further here. %todo consider readding this. " as preliminary simulations found that they could not persist in the relatively small populations being modelled here."
+These shorter lived infections are not studied further here. %todo consider readding this. " as preliminary simulations found that they could not persist in the relatively small populations being modelled here."
 
 Cross-immunity was set to 0.1 so that an individual infected with one pathogen is 90\% less likely to be infected with another.
 This is a rather arbitrary value.
@@ -954,10 +954,10 @@ This is true for all three dispersal values ($\chi^2$ test. $\lambda = 0.001$: $
 # Just defining my caption label here to avoid the long string in chunk options below.
 
 invasionPropCaption <- sprintf("The probability of successful invasion. 
-  For three different transmission rates, the probability of invasion does not change between different A) dispersal rates or B) network topologies (with network topologies A and B refering to the    fully and minimally connected topologies in Figure~\\ref{f:net}). 
+  For three different transmission rates, the probability of invasion does not change between different A) dispersal rates or B) network topologies (with network topologies A and B refering to the fully and minimally connected topologies in Figure~\\ref{f:net}). 
   Error bars are 95\\%% confidence intervals. 
   %i simulations were run for each treatment.
-  Other parameters were kept constant at: $N = 10,\\, \\, \mu = \Lambda = 0.05,\\, \\gamma = 0.1,\\, \\alpha = 0.1$. 
+  Other parameters were kept constant at: $N = 10,\\, \\, \\mu = \\Lambda = 0.05,\\, \\gamma = 0.1,\\, \\alpha = 0.1$. 
   When dispersal is varied, the population structure is fully connected. When population structure is varied, $\\lambda = 0.01$.",
   as.integer(each))
 
@@ -1012,7 +1012,7 @@ plot_grid(dispPlot, topoPlot, labels = c('A', 'B'), align = 'h', label_size = 10
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\section{Discussion}
+\section{Discussion}\label{s:sims1Disc}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

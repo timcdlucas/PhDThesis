@@ -74,7 +74,7 @@ Existing methods for estimating animal density often require additional informat
 For example, capture-mark-recapture methods \cite{karanth1995estimating, borchers2014continuous} require recognition of individuals, and distance methods \cite{harris2013applying} require estimates of how far away individuals are from the sensor \cite{barlow2005estimates, marques2011estimating}.
 When individuals cannot be told apart, an extension of occupancy modelling can be used to estimate absolute abundance \cite{royle2003estimating}.
 However, as the model is originally formulated to estimate occupancy,  count information is simplified to presence--absence data.
-Assumptions about the distribution of individuals (e.g., a poisson distribution) must also be made \cite{royle2003estimating} which may be a poor assumption for nonrandomly distributed species.
+Assumptions about the distribution of individuals (e.g., a Poisson distribution) must also be made \cite{royle2003estimating} which may be a poor assumption for nonrandomly distributed species.
 Furthermore repeat, independent surveys must be performed and the definition of a site can be difficult, especially for wide-ranging species \cite{mackenzie2005designing}.
 
 %More recently, the development of the random encounter model (REM), a modification of an ideal gas model \cite{yapp1956theory, Hutchinson_Waser_2007}, has enabled animal densities to be estimated from unmarked individuals of a known speed, and with known sensor detection parameters     \cite{rowcliffe2008estimating}.
@@ -502,7 +502,7 @@ CapturesTitle <- 'Simulation model results of the accuracy and precision of four
 
 %%end.rcode
 
-%%begin.rcode Captures, fig.cap = CapturesCapt, fig.scap = CapturesTitle, out.widht = '0.9\\textwidth'
+%%begin.rcode Captures, fig.cap = CapturesCapt, fig.scap = CapturesTitle, out.width = '0.9\\textwidth'
 
 captures <- read.csv('data/Chapter5/captures_tidy.csv')
 captures$count <- factor(captures$count)
