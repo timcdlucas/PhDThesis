@@ -139,8 +139,9 @@
 
 % headers
 \nouppercaseheads
-\createmark{chapter}{left}{nonumber}{}{}
-\createmark{section}{right}{nonumber}{}{}
+%\createmark{section}{left}{nonumber}{}{}
+%\createmark{chapter}{right}{nonumber}{}{}
+\createmark{chapter}{both}{nonumber}{}{}
 
 \newlength{\pagenumpadd}
 \setlength{\pagenumpadd}{11pt}
