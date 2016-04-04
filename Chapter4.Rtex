@@ -173,12 +173,12 @@ Rather, contacts are based on group size and rates of movements between groups.
 Two aspects of non-random transmission have been studied in particular: group size \cite{vitone2004body, gay2014parasite, ezenwa2006host, rifkin2012animals, nunn2003comparative} and global measures of population structure including genetic measures and measures derived from geographic distribution shapes (\textcite{gay2014parasite}, \textcite{maganga2014bat}, \textcite{turmelle2009correlates} and see Chapter \ref{ch:empirical}).
 Again however, the relationships between these terms and range size, population size and density are rarely examined.
 Population size can be decomposed into two components, the number of groups and the average size of a group with $N = nm$ where $n$ is group size and $m$ is the number of groups.
-The amount of movement between groups is at least partially dependant on the distance between them \cite{jenkins2010meta, le2012patterns, schooley2009enhancing}.
+The amount of movement between groups is at least partially dependent on the distance between them \cite{jenkins2010meta, le2012patterns, schooley2009enhancing}.
 The distance between neighbouring groups decreases with the number of groups per area $m/a$ or $N/na$.
 
 \tmpsection{But reaction to climate change, and predictions depend on which factor is actually important}
 
-Importantly, these factors, although interrelated, will respond differently to global change and the response will be species dependant.
+Importantly, these factors, although interrelated, will respond differently to global change and the response will be species dependent.
 Some species may suffer large range contractions, and therefore large falls in population size, while their density remains fairly constant.
 Other species might retain their distribution but have a depressed population density.
 Similarly with population structure, species particularly affected by habitat fragmentation can expect increased reduced movement of individuals between groups, while other species may be most affected by a reduction in group size.
@@ -269,7 +269,7 @@ Secondly I tested whether the invasion of a new pathogen is more strongly promot
 
 %%begin.rcode runDensSim, eval = F, cache = TRUE
 
-# Create and set seed (seed object is used to set seed in each seperate simulation.'
+# Create and set seed (seed object is used to set seed in each separate simulation.'
 seed <- 1
 set.seed(seed)
 
@@ -327,7 +327,7 @@ write.csv(z, file = 'data/Chapter4/DensSims.csv')
 
 %%begin.rcode runDens2Sim, eval = runAllSims, cache = TRUE
 
-# Create and set seed (seed object is used to set seed in each seperate simulation.'
+# Create and set seed (seed object is used to set seed in each separate simulation.'
 seed <- 2
 set.seed(seed)
 
@@ -384,7 +384,7 @@ write.csv(z, file = 'data/Chapter4/Dens2Sims.csv')
 
 %%begin.rcode runPopSim, eval = runAllSims, cache = TRUE
 
-# Create and set seed (seed object is used to set seed in each seperate simulation.'
+# Create and set seed (seed object is used to set seed in each separate simulation.'
 seed <- 3
 set.seed(seed)
 
@@ -710,7 +710,7 @@ ggplot(dens1, aes(x = factor(area), y = meanK, colour = 'a', fill = 'a')) +
 
 %%begin.rcode predictModels
 
-# Predict seperate glms for plotting
+# Predict separate glms for plotting
 
 popPred <- seq(min(dens2$pop), max(dens2$pop), length.out = 200)
 
@@ -736,8 +736,8 @@ The $x$-axis shows the relative change in each of these values ($\\times 0.25, 0
 For colony size and number, area is altered so that density remains constant.
 For density, population size is constant at 8,000 and area is altered.
 Each point is the mean of 100 simulations and bars are 95\\% confidence intervals.
-Curves are simple logistic regression fits for each independant variable.
-Relationships are shown seperately for each transmission value.
+Curves are simple logistic regression fits for each independent variable.
+Relationships are shown separately for each transmission value.
 '
 
 valueChangeMeansTitle <- 'Comparison of the probability of invasion when population size is altered by changing colony size or colony number.'
@@ -857,7 +857,7 @@ combModel <- rbind(dens1, dens2, pop) %>%
 
 transMeansCapt <- '
 Comparison of the effect of population size on probability of invasion when population size is altered by changing colony size or colony number.
-Relationship is shown seperately for each transmission value.
+Relationship is shown separately for each transmission value.
 It can be seen that changes in colony size give a much greater increase in invasion probability than changes in colony number.
 Note that this is the same data as Figure~\\ref{fig:plotValueChangeMeans} but with the $x$-axis scaled by population size, not parameter change.
 '
@@ -965,9 +965,9 @@ Pathogen 1 is then allowed to spread and reach equilibrium.
 After \rinline{invadeT} events, 5 individuals infected with pathogen 2 are added to one randomly selected colony. 
 After another \rinline{nEvent - invadeT} events the invasion of pathogen 2 is considered successful if any individuals with pathogen 2 still remain.
 
-\subsection{Independant variables}
+\subsection{Independent variables}
 
-Three independant variables were varied: colony size, number of colonies and area.
+Three independent variables were varied: colony size, number of colonies and area.
 From these parameters, population size and population density can be calculated.
 The default values of these parameters was a population size of 8000 individuals split into 20 colonies of 400 individuals.
 The default area of the simulations was \rinline{dep3[3]}km$^2$ (space is given in square kilometres for simplicity even though they are in fact arbitrary units).
@@ -1020,7 +1020,7 @@ All simulations are run under all three transmission rates.
 I tested two hypotheses.
 Firstly I tested the hypothesis that an increase in population size creates a stronger increase in invasion probability (of the second pathogen) than an equal increase in population density.
 Secondly, I tested the hypothesis that an increase in colony size creates a stronger increase in invasion probability than a proportionally equal increase in number of colonies.
-To statistically test these hypotheses I combined the results from different simulations and fitted multiple logistic regressions, centering and scaling the independant variables.
+To statistically test these hypotheses I combined the results from different simulations and fitted multiple logistic regressions, centering and scaling the independent variables.
 Specifically, I fitted the model 
 \begin{align}
   \text{Invasion} = b_1 d + b_2 n + b_3 m + c + \epsilon
@@ -1080,7 +1080,7 @@ Therefore the simulations support the hypothesis that colony size is the more im
 
 \caption[Regression results]{
 Regression results comparing effects of colony size, colony number and density.
-Coefficients are from multiple logistic regressions with invasion as the dependant variable and all independant variables being scaled and centred.
+Coefficients are from multiple logistic regressions with invasion as the dependent variable and all independent variables being scaled and centred.
 Colony size and colony number were varied while keeping density equal while density was varied by changing area while keeping population size equal.
 $p$ is for the test against the null hypothesis that  $b = 0$.
 }
@@ -1144,7 +1144,7 @@ However, again, this affect is very weak compared to the strong changes in local
 
 It is clear that many species are suffering strong population changes due to climate change \cite{thomas2004extinction}.
 However these changes might affect range size \cite{thomas2004extinction}, population size \cite{craigie2010large}, population connectivity \cite{wasserman2013population, rivera2015habitat, fonturbel2014forest} or group size \cite{lehmann2010apes, zunino2007habitat, manor2003impact, atwood2006influence} to different extents.
-My results suggest that pathogen communities will respond differently depending on which factors are affected, although it should be noted that the mechanism here --- invasion of a new pathogen --- is possibly more relevant over longer, multi-generation time scales than decadely time scales.
+My results suggest that pathogen communities will respond differently depending on which factors are affected, although it should be noted that the mechanism here --- invasion of a new pathogen --- is possibly more relevant over longer, multi-generation time scales than decade-long time scales.
 In short, species suffering reductions in groups size \cite{lehmann2010apes, zunino2007habitat, manor2003impact, atwood2006influence} are predicted to experience decreases in pathogen richness in the long term.
 Species that are experiencing increases in group size \cite{lehmann2010apes} would be expected gain new pathogen species more quickly.
 In contrast, species suffering range contractions \cite{thomas2004extinction} and decreases in population size \cite{craigie2010large} are expected to experience smaller changes in pathogen richness.
@@ -1153,7 +1153,7 @@ In contrast, species suffering range contractions \cite{thomas2004extinction} an
 \subsection{Comparative studies}
 
 Many comparative studies measure some aspect of a species population size or structure, yet it is rarely discussed how these relate.
-Instead most studies use the data that are available, without considering \emph{a priori} how it may depend on other factors (though statistical correlations between independant variables is usually considered and dealt with using PCA or by removing colinear variables).
+Instead most studies use the data that are available, without considering \emph{a priori} how it may depend on other factors (though statistical correlations between independent variables is usually considered and dealt with using PCA or by removing collinear variables).
 Population density is often measured \cite{morand1998density, lindenfors2007parasite, nunn2003comparative, arneberg2002host} yet density is directly associated with population size.
 This study suggests that it is in fact population size that is important (in the context of social species as studied here).
 Therefore, the density measures in these comparative studies are more likely to be proxies for population size than the true causal factor.
@@ -1180,7 +1180,7 @@ Based on \emph{a priori} considerations such as the time and energy required to 
 The exact threshold was chosen to attempt to maximise the range of $\bar{k}$ studied (Figure~\ref{fig:plotK}).
 However, a similar assumption could be made in other ways.
 Instead of a threshold distance, individuals could be expected to disperse in a random direction and stop at the first colony they encounter; this could create some long distance links in the network and increase network connectivity, potentially reducing the effects of area.
-Alternatively, the metapopulation could have been modelled as a weighted network with dispersal occuring at a higher rate to nearby colonies.
+Alternatively, the metapopulation could have been modelled as a weighted network with dispersal occurring at a higher rate to nearby colonies.
 Depending on the parameterisation of this distance-dispersal relationship this could serve to increase the affect of area --- by exaggerating dispersal to very nearby colonies --- or decrease the affect of area by allowing rare, but significant, global dispersal creating a small-world network structure.
 Ultimately, the modelling choices could increase or decrease the affects of area relative to colony size and the number of colonies but I have aimed to make the effect of area as strong as possible.
 
