@@ -145,7 +145,7 @@ However, the relationship has implications for global change, implying that incr
 \tmpsection{General Intro}
 
 Zoonotic pathogens make up the majority of newly emerging diseases and have profound consequences for public health, economics and international development \cite{jones2008global, smith2014global, ebolaWorldbank}.
-A better understanding of the factors that control which wild host species are potential reservoirs of zoonotic diseases would allow us to effectively optimize zoonotic disease surveillance and anticipate how the risks of disease spillover might change with global change.
+A better understanding of the factors that control which wild host species are potential reservoirs of zoonotic diseases would allow us to effectively optimise zoonotic disease surveillance and anticipate how the risks of disease spillover might change with global change.
 The chance that a host species will be the source of an outbreak depends on a number of factors including its proximity and interactions with humans and the prevalence and diversity of pathogens it carries \cite{wolfe2000deforestation}.
 However, our understanding of the factors that control the diversity of pathogens in a wild species is still poor.
 
@@ -159,7 +159,7 @@ However, our understanding of the factors that control the diversity of pathogen
 %Think this ref is right but need to check.
 Models of single pathogens have shown that population structure can allow persistence of a pathogen where a well-mixed population would experience a single, large epidemic followed by pathogen extinction \cite{blackwood2013resolving, pons2014insights, plowright2011urban}.
 Single pathogen models also show that increasing population structure slows disease spread and makes establishment of a new pathogen less likely \cite{colizza2007invasion, vespignani2008reaction}.
-In the ecological literature this is often taken as a prediction that increased population structure will decrease pathogen richness \cite{nunn2003comparative, morand2000wormy, poulin2014parasite, poulin2000diversity, altizer2003social} but this interpretation ignores interpathogen competition.
+In the ecological literature this is often taken as a prediction that increased population structure will decrease pathogen richness \cite{nunn2003comparative, morand2000wormy, poulin2014parasite, poulin2000diversity, altizer2003social} but this interpretation ignores inter-pathogen competition.
 Models of competition between multiple pathogens show that in unstructured populations a competitive exclusion process occurs but that adding population structure allows coexistence \cite{qiu2013vector, allen2004sis, nunes2006localized}.
 
 \tmpsection{Previous Studies}
@@ -173,12 +173,12 @@ Furthermore there is a potential bias with island living species being given sea
 
 A global study on 33 bat species found a positive relationship between $F_{ST}$ --- a measure of genetic structure --- and viral richness \cite{turmelle2009correlates}. 
 However, this study included measures using mtDNA which only measures female dispersal which may have biased the results as many bat species show female philopatry \cite{kerth2002extreme, hulva2010mechanisms}.
-Furthermore, this study used measures of $F_{ST}$ irrespective of the study scale with studies covering from tens \cite{mccracken1981social} to thousands \cite{petit1999male} of kilometers.
+Furthermore, this study used measures of $F_{ST}$ irrespective of the study scale with studies covering from tens \cite{mccracken1981social} to thousands \cite{petit1999male} of kilometres.
 As isolation by distance has been shown in a number of bat species \cite{burland1999population, hulva2010mechanisms, o2015genetic, vonhof2015range} this could bias results further.
 Finally, when a global $F_{ST}$ value is not given they used the mean of all pairwise $F_{ST}$ between sites.
-This is not correct as from global $F_{ST}$ we expect migration rates of $M = (1-F_{ST})/8F_{ST}$ while from $F_{ST}$ between pairs of populations we expect migration rates of $M = (1-F_{ST})/16F_{ST}$ where $M$ is the absolute number of diploid inviduals dispersing per generation \cite{slatkin1995measure}.
+This is not correct as from global $F_{ST}$ we expect migration rates of $M = (1-F_{ST})/8F_{ST}$ while from $F_{ST}$ between pairs of populations we expect migration rates of $M = (1-F_{ST})/16F_{ST}$ where $M$ is the absolute number of diploid individuals dispersing per generation \cite{slatkin1995measure}.
 To use studies that only present pairwise $F_{ST}$ values the raw data would have to be gathered and global $F_{ST}$ calculated from those.
-As it is in fact the movement of individuals that is epidemiologically relavent, using these studies is probably not correct without attempting to correct for these difference.
+As it is in fact the movement of individuals that is epidemiologically relevant, using these studies is probably not correct without attempting to correct for these difference.
 \fussy
 
 
@@ -225,9 +225,9 @@ As it is in fact the movement of individuals that is epidemiologically relavent,
 \tmpsection{The gap}
 \tmpsection{What I did/found}
 
-There is a lack of studies using multiple measures of population structure and larger datasets to robustly estimate the importance of population structure.
+There is a lack of studies using multiple measures of population structure and larger data sets to robustly estimate the importance of population structure.
 Here I have used two measures of population structure --- the number of subspecies and gene flow --- to robustly test for an association between population structure and pathogen richness in bats.
-Furthermore, I have used a dataset that is much larger that previous studies for one of these analyses, further promoting robustness of results.
+Furthermore, I have used a data set that is much larger that previous studies for one of these analyses, further promoting robustness of results.
 I found that both measures of population structure are positively associated with viral richness and are likely to be in the best models for describing viral richness.
 Further, I found that the role of phylogeny is very weak in the models and in the distribution of viral richness amongst taxa.
 
@@ -892,8 +892,8 @@ subspeciesInter <- pgls(
 		
 boxplotCapt <- 'Number of virus species against number of subspecies. 		
 The top panel shows the histogram of the data with most species having few subspecies.		
-Data within the same number of subspecies are plotted as boxplots with the dark bar showing the median, the box showing the interquartile range, vertical lines showing the range and outliers shown as seperate points.		
-Regression lines are from phylogenetic multiple regressions with all other independant variables set at their median value.		
+Data within the same number of subspecies are plotted as boxplots with the dark bar showing the median, the box showing the interquartile range, vertical lines showing the range and outliers shown as separate points.		
+Regression lines are from phylogenetic multiple regressions with all other independent variables set at their median value.		
 The models shown are those with (pink) and without (red) an interaction between study effort and number of subspecies.		
 '
 %%end.rcode		
@@ -1230,9 +1230,9 @@ ggdraw() +
 
 
 To test for an association between pathogen richness and population structure I have performed multiple regression using a model selection framework to establish whether or not two measures of pathogen richness are likely to be in a `best model' and therefore important.
-As species cannot be considered independant due to shared evolutionary history, phylogeny was controlled for in all regressions.
-A number of other factors that have previously been found to be important were included as additional independant variables: body mass \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat, han2015infectious}, range size \cite{kamiya2014determines, turmelle2009correlates, maganga2014bat} and study effort \cite{turmelle2009correlates, gay2014parasite, maganga2014bat}.
-This was to attempt to avoid spurious positive results occuring simply due to correlation between pathogen richness and a different, causal factor.
+As species cannot be considered independent due to shared evolutionary history, phylogeny was controlled for in all regressions.
+A number of other factors that have previously been found to be important were included as additional independent variables: body mass \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat, han2015infectious}, range size \cite{kamiya2014determines, turmelle2009correlates, maganga2014bat} and study effort \cite{turmelle2009correlates, gay2014parasite, maganga2014bat}.
+This was to attempt to avoid spurious positive results occur  ring simply due to correlation between pathogen richness and a different, causal factor.
 Despite commonly being associated with pathogen richness \cite{arneberg2002host, kamiya2014determines, nunn2003comparative}, population density is not included in the analysis as there is very little data for bat densities --- however Chapter~\ref{ch:sims2} examines the relationship between density and population structure and Chapter~\ref{ch:grem} presents a method that allows the estimation of density from acoustic surveys.
 I used both the number of subspecies a bat species has and estimates of gene flow (analysed separately) as measures of population structure.
 All analyses were run in R \cite{R}
@@ -1580,7 +1580,7 @@ p %<+% combdf +
 
 %%end.rcode
 
-\subsection{Population stucture data}
+\subsection{Population structure data}
 
 I used two measures of population structure: gene flow and the number of subspecies.
 The number of subspecies was counted using the Wilson and Reeder taxonomy \cite{wilson2005mammal}.
@@ -1588,7 +1588,7 @@ Gene flow was calculated from estimates of $F_{ST}$ collated from the literature
 The studies were from a wide range of spatial scales, from local ($\sim\SI{10}{\kilo\metre}$) to continental.
 As $F_{ST}$ often increases with spatial scale \cite{burland1999population, hulva2010mechanisms, o2015genetic, vonhof2015range} I controlled for this by only using data from studies where a large proportion of the species range was studied.
 I used the ratio of the furthest distance between $F_{ST}$ samples (measured with \url{http://www.distancefromto.net/} if not stated) to the width of the IUCN species range \cite{iucn} and only used studies if this ratio was greater than \rinline{rangeUseable}.
-This is an arbitrary value that was a comprimise between retaining a reasonable number of data points and controlling for the bias in spatial scale.
+This is an arbitrary value that was a compromise between retaining a reasonable number of data points and controlling for the bias in spatial scale.
 I converted all $F_{ST}$ value to migration using $M = (1-F_{ST})/8F_{ST}$.
 This removes the $(0, 1)$ bounds of $F_{ST}$ and is more easily interpretable (though the final results are unaffected). 
 These two measures of population structure were analysed separately as the number of subspecies has \rinline{nrow(nSpecies)} data points while there is only $F_{ST}$ data for 22 bat species.
@@ -1876,14 +1876,14 @@ ggplot(fstFinal, aes(x = Nm, y = virusSpecies, colour = Marker)) +
 
 %%end.rcode
 
-\subsection{Other independant variables}
+\subsection{Other independent variables}
 
-To control for study bias I collected the number of Pubmed and Google Scholar citations for each bat species name including synonyms from ITIS \cite{itis} via the taxize package \cite{chamberlain2013taxize}.
+To control for study bias I collected the number of PubMed and Google Scholar citations for each bat species name including synonyms from ITIS \cite{itis} via the taxize package \cite{chamberlain2013taxize}.
 The counts were scraped using the rvest package \cite{rvest}.
 I log transformed these variables as they were strongly right skewed.
-The log number of citations on Pubmed and Google scholar were highly correlated (pgls: $t$ = \rinline{studyEffortCor$coefficients['log(pubmedRefs + 1)', 't value']}, df = \rinline{studyEffortCor$df[2]}, $p < 10^{-5}$).
+The log number of citations on PubMed and Google scholar were highly correlated (pgls: $t$ = \rinline{studyEffortCor$coefficients['log(pubmedRefs + 1)', 't value']}, df = \rinline{studyEffortCor$df[2]}, $p < 10^{-5}$).
 As this correlation is strong, only results for analyses using only Google Scholar citations are presented.
-%See the appendix for analyses run using Pubmed citations.
+%See the appendix for analyses run using PubMed citations.
 
 Measures of body mass were taken from Pantheria \cite{jones2009pantheria} and primary literature \cite{canals2005relative, arita1993rarity, lopez2014echolocation, orr2013does, lim2001bat, aldridge1987turning, ma2003dietary, owen2003home, henderson2008movements, heaney2012nyctalus, oleksy2015high, zhang2009recent}. 
 \emph{Pipistrellus pygmaeus} was assigned the same mass as \emph{P. pipistrellus} as they are indistinguishable by mass.
@@ -1892,7 +1892,7 @@ Distribution size was estimated by downloading range maps for all species from I
 
 
 
-%%begin.rcode fstITPlots, fig.cap = "Akaika variable weights for both analyses. The probability that each variable will be in the best model if the data were recollected is shown for each of the bootstrap analyses. The purple ``Random'' box is a uniform random variable used as a null. Population structure (Number of subspecies and Gene flow), shown in red, is likely to be in the best model in both analyses.", fig.height = 2.5, fig.scap = 'Akaika variable weights for $F_{ST}$ analysis.', out.width = '\\textwidth', out.extra = 'trim = 0 1cm 0 0'
+%%begin.rcode fstITPlots, fig.cap = "Akaike variable weights for both analyses. The probability that each variable will be in the best model if the data were recollected is shown for each of the bootstrap analyses. The purple ``Random'' box is a uniform random variable used as a null. Population structure (Number of subspecies and Gene flow), shown in red, is likely to be in the best model in both analyses.", fig.height = 2.5, fig.scap = 'Akaike variable weights for $F_{ST}$ analysis.', out.width = '\\textwidth', out.extra = 'trim = 0 1cm 0 0'
 
 
 fstIT <- ggplot(fstSepVarWeights, aes(x = variable, y = estimate, colour = col, fill = col)) +
@@ -1911,9 +1911,9 @@ plot_grid(ITPlot, fstIT, labels = c("A", "B"), align = 'h', label_size = 10)
 %%end.rcode
 
 
-\subsection{Phylogenetic nonindependance}
+\subsection{Phylogenetic nonindependence}
 
-To control for phylogenetic nonindependance I used the best-supported phylogeny from \textcite{fritz2009geographical} (shown in Figure~\ref{fig:treePlot}) which is the supertree from \cite{bininda2007delayed} with names updated to match the Wilson \& Reeder taxonomy \cite{wilson2005mammal}.
+To control for phylogenetic nonindependence I used the best-supported phylogeny from \textcite{fritz2009geographical} (shown in Figure~\ref{fig:treePlot}) which is the supertree from \cite{bininda2007delayed} with names updated to match the Wilson \& Reeder taxonomy \cite{wilson2005mammal}.
 Phylogenetic manipulation was performed using the ape package \cite{ape}.
 The importance of the phylogeny on each variable separately (the $\lambda$ parameter of the variable regressed against an intercept) was estimated and tested against the null of $\lambda = 0$ with log-likelihood ratio tests using caper \cite{caper}.
 I also performed the analysis using the tree from \cite{jones2005bats} as this has some broad changes with families in different places.
@@ -1930,29 +1930,29 @@ However the phylogeny did not affect the analysis.
 
 \subsection{Statistical analysis}
 
-Statistical analysis for both dependant variables was conducted using an information theoretical/model averaging approach \cite{burnham2002model}, specifically following \textcite{whittingham2005habitat, whittingham2006we}.
+Statistical analysis for both dependent variables was conducted using an information theoretical/model averaging approach \cite{burnham2002model}, specifically following \textcite{whittingham2005habitat, whittingham2006we}.
 I chose a credible set of models including all combinations of independent variables and a model with just an intercept.
-In the analysis using the number of subspecies dependant variable I also included an interaction term between study effort and number of subspecies.
+In the analysis using the number of subspecies dependent variable I also included an interaction term between study effort and number of subspecies.
 This interaction was included as I believed \emph{a priori} that this interaction may be present as subspecies in well studied species are more likely to be identified.
 The interaction was only included in models with both study effort and number of subspecies as individual terms.
 
 I fitted phylogenetic regressions of all models using nlme \cite{nlme}.
-The independant variables were centered and scaled to allow direct comparison of the coefficients \cite{schielzeth2010simple}.
-In each case I simultaneously fitted the $\lambda$ parameter as this avoids mispecifying the model \cite{revell2010phylogenetic}.
+The independent variables were centered and scaled to allow direct comparison of the coefficients \cite{schielzeth2010simple}.
+In each case I simultaneously fitted the $\lambda$ parameter as this avoids misspecifying the model \cite{revell2010phylogenetic}.
 $\kappa$ and $\delta$ parameters were constrained to one as they are more concerned with when along a branch evolution occurs and because fitting multiple parameters makes interpretation difficult. 
 
 To establish the importance of variables I calculated the probability, $Pr$, that each variable would be in the best model if the data were recollected.
 For each variable the mean of its coefficient, $b$, in all models that contained that variable was also calculated to determine the direction and strength of the variables.
 In the subspecies analysis, this mean of $b$ was calculated for: a) all models b) only models with a interaction term and c) only models without an interaction.
-As the interaction term greatly affects the estimated value of $b$, considering these value seperately aids interpretation.
-Following \cite{whittingham2005habitat} I included a uniformally random variable as a null variable as even unimportant variables can have Akaiki weights notably greater than zero.
+As the interaction term greatly affects the estimated value of $b$, considering these value separately aids interpretation.
+Following \cite{whittingham2005habitat} I included a uniformly random variable as a null variable as even unimportant variables can have Akaike weights notably greater than zero.
 The whole analysis was run \rinline{nBoots} times, resampling the random variable each time.
 I calculated AICc for each model.
 I calculated the average AICc, $\bar{\text{AICc}}$, by averaging AICc scores within models.
 $\Delta\text{AICc}$ was calculated as $\text{min}(\bar{\text{AICc}}) - \bar{\text{AICc}}$, not the mean of the individual $\Delta\text{AICc}$ scores, to guarantee that the best model has $\Delta\text{AICc} = 0$.
-From these $\Delta\text{AICc}$ values I calculated Akaiki weights, $w$.
+From these $\Delta\text{AICc}$ values I calculated Akaike weights, $w$.
 This value can be interpreted as the probability that a model would be the best model if the data were recollected.
-For each variable, the sum of the Akaiki weights of models containing that variable are summed to give $Pr$.
+For each variable, the sum of the Akaike weights of models containing that variable are summed to give $Pr$.
 This value can be interpreted as the probability that the given variable is in the best model.
 
 
@@ -1990,9 +1990,9 @@ These top seven models had a combined weight of \rinline{sprintf("%.2f", round(m
 However these top seven models all contained study effort, number of subspecies and the interaction between these two variables.
 log(Mass) and log(Range Size) and the random variable are all in three of the top seven models.
 
-Summing the Akaiki weights of all models that contain a given variable gives a probability, $Pr$, that the variable would be in the best model (Figure~\ref{fig:fstITPlots}A) if the data were recollected \cite{whittingham2006we}.
+Summing the Akaike weights of all models that contain a given variable gives a probability, $Pr$, that the variable would be in the best model (Figure~\ref{fig:fstITPlots}A) if the data were recollected \cite{whittingham2006we}.
 The number of subspecies is very likely in the best model ($Pr > $ \rinline{substring(as.character( varWeights['NumberOfSubspecies']), 1, 4)}) as is the interaction between number of species and study effort ($Pr = $ \rinline{varWeights['scholarRefs.NumberOfSubspecies']}) compared to the benchmark random variable which has $Pr = $ \rinline{varWeights['rand']} (see Figure~\ref{fig:fstITPlots}A and Table~\ref{t:variables}).
-When models with the interaction term are removed, on average (mean weighted by Akaiki weights) there is a positive relationship between the number of subspecies and viral richness ($b = $ \rinline{nSpeciesCoefMean}, variance = \rinline{nSpeciesCoefVar}).
+When models with the interaction term are removed, on average (mean weighted by Akaike weights) there is a positive relationship between the number of subspecies and viral richness ($b = $ \rinline{nSpeciesCoefMean}, variance = \rinline{nSpeciesCoefVar}).
 Models with an interaction between number of subspecies and study effort have a positive interaction term ($b = $ \rinline{nSpeciesInterMean}, variance = \rinline{nSpeciesInterVar}) and linear term ($b = $ \rinline{nSpeciesCoefMeanI}, variance = \rinline{nSpeciesCoefVarI}).
 This supports the hypothesis that population structure promotes pathogen richness.
 The strong support for a positive interaction term implies that population structure has a stronger relationship with known pathogen richness in the presence of study effort.
@@ -2009,8 +2009,8 @@ Body mass and range size are also probably in the best model ($b = $ \rinline{va
 \centering
 \caption[Estimated variable weights and coefficients]{
 Estimated variable weights (probability that a variable is in the best model) and their estimated coefficients for both number of subspecies and gene flow analyses.
-The coefficients for the number of subspecies variable are also seperated for models with and without the interaction term because this term strongly changes the coefficient and because the coefficient can only be usefully interpreted when estimated without the interaction. 
-However, there are no weights for these seperated terms as they are not directly compared in the model selection framework.
+The coefficients for the number of subspecies variable are also separated for models with and without the interaction term because this term strongly changes the coefficient and because the coefficient can only be usefully interpreted when estimated without the interaction. 
+However, there are no weights for these separated terms as they are not directly compared in the model selection framework.
 }
 %\rowcolors{2}{gray!25}{white}
 \begin{tabular}{@{}>{\small}l rrrr@{}}
@@ -2136,18 +2136,18 @@ However, study effort had some phylogenetic autocorrelation ($\lambda$ = \rinlin
 
 Only the model with study effort, gene flow and mass was well supported with the second model having an $\Delta\text{AICc}$ of \rinline{round(fstModelWeights[2, 3])} (Table \ref{t:models}).
 While less strongly supported than the number of subspecies, gene flow was likely in the best model ($Pr = $ \rinline{fstVarWeights['Nm']}) compared to the benchmark random variable which has $Pr = $ \rinline{fstVarWeights['rand']} (Figure~\ref{fig:fstITPlots}B and Table~\ref{t:variables}).
-On average (mean weighted by Akaiki weights) there was a negative relationship between gene flow and viral richness ($b = $ \rinline{fstCoefMeans['beta.Nm']}, variance = \rinline{fstCoefVars['beta.Nm']}) despite the apparent positive relationship (see Figure~\ref{fig:fstRawData}) weakly suggested by the single-predictor model (pgls: $b$ = \rinline{nmFstUni$coefficients['log(Nm)', 'Estimate']}, $t$ = \rinline{nmFstUni$coefficients['log(Nm)', 't value']}, df = \rinline{nmFstUni$df[2]}, $p$ = \rinline{nmFstUni$coefficients['log(Nm)', 'Pr(>|t|)']}).
+On average (mean weighted by Akaike weights) there was a negative relationship between gene flow and viral richness ($b = $ \rinline{fstCoefMeans['beta.Nm']}, variance = \rinline{fstCoefVars['beta.Nm']}) despite the apparent positive relationship (see Figure~\ref{fig:fstRawData}) weakly suggested by the single-predictor model (pgls: $b$ = \rinline{nmFstUni$coefficients['log(Nm)', 'Estimate']}, $t$ = \rinline{nmFstUni$coefficients['log(Nm)', 't value']}, df = \rinline{nmFstUni$df[2]}, $p$ = \rinline{nmFstUni$coefficients['log(Nm)', 'Pr(>|t|)']}).
 This supports the hypothesis that population structure promotes viral richness.
-Possibly due to the smaller sample size, or a weaker relationship, this coefficient was much more varied than the number of subspecies coeficient with \rinline{round(pcCoefLzero)}\% of models estimating a positive relationship.
+Possibly due to the smaller sample size, or a weaker relationship, this coefficient was much more varied than the number of subspecies coefficient with \rinline{round(pcCoefLzero)}\% of models estimating a positive relationship.
 
 As in the number of subspecies analysis, study effort was very likely in the best model ($Pr = $ \rinline{fstVarWeights['scholarRefs']}) as was body mass ($Pr = $ \rinline{fstVarWeights['mass']}).
 However, body mass has a negative average coefficient ($b = $ \rinline{fstCoefMeans['beta.mass']}, variance = \rinline{fstCoefVars['beta.mass']}) which is in contrast to the number of subspecies analysis, many studies in the literature \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat} and the single-predictor model (pgls: $b$ = \rinline{massFstUni$coefficients['log(mass)', 'Estimate']}, $t$ = \rinline{massFstUni$coefficients['log(mass)', 't value']}, df = \rinline{massFstUni$df[2]}, $p$ = \rinline{massFstUni$coefficients['log(mass)', 'Pr(>|t|)']}).
 In contrast to the number of subspecies analysis, range size was almost certainly not in the best model with $Pr = $ \rinline{fstVarWeights['distrSize']} being much less than the random variable.
 This variable being less supported than the random variable was probably because range size is closely correlated with study effort (pgls: $b$ = \rinline{fstDistrStudyEffort$coefficients['log(distrSize)', 'Estimate']}, $t$ = \rinline{fstDistrStudyEffort$coefficients['log(distrSize)', 't value']}, df = \rinline{fstDistrStudyEffort$df[2]}, $p$ = \rinline{fstDistrStudyEffort$coefficients['log(distrSize)', 'Pr(>|t|)']}).
-Of the three independant variables in the best model, study effort had the largest effect ($b = $ \rinline{fstCoefMeans['beta.scholarRefs']}, variance = \rinline{fstCoefVars['beta.scholarRefs']}).
+Of the three independent variables in the best model, study effort had the largest effect ($b = $ \rinline{fstCoefMeans['beta.scholarRefs']}, variance = \rinline{fstCoefVars['beta.scholarRefs']}).
 The effect size of gene flow ($b = $ \rinline{fstCoefMeans['beta.Nm']}, variance = \rinline{fstCoefVars['beta.Nm']}) was approximately twice the size of that of body mass ($b = $ \rinline{fstCoefMeans['beta.mass']}, variance = \rinline{fstCoefVars['beta.mass']})
 
-Across all models the mean value of $\lambda$ is \rinline{mean(na.omit(fstAllResults$lambda))} and a large number of individual models (\rinline{round(mean(na.omit(fstAllResults$lambda < 0))*100)}\%)  had negatively phylogenetically distributed residuals implying the residuals from the model are spread more uniformally on the phylogeny than expected by change.
+Across all models the mean value of $\lambda$ is \rinline{mean(na.omit(fstAllResults$lambda))} and a large number of individual models (\rinline{round(mean(na.omit(fstAllResults$lambda < 0))*100)}\%)  had negatively phylogenetically distributed residuals implying the residuals from the model are spread more uniformly on the phylogeny than expected by change.
 Due to the small sample size this was probably due to a small number of data points with large residuals being distant on the tree.
 
 
@@ -2183,7 +2183,7 @@ While the model averaging approach has given a negative model averaged coefficie
 Furthermore body mass has a negative average coefficient.
 This is in contrast to the number of subspecies analysis, many studies in the literature \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat} and the single-predictor model.
 It is not easy to interpret these contradictions but it is clear that the results from the gene flow analysis alone should not be considered strong evidence for a relationship between pathogen richness and population structure.
-These contradiction also reiterates the need to use large datasets where possible and use mutliple measures of population structure to promote robust conclusions.
+These contradiction also reiterates the need to use large datasets where possible and use multiple measures of population structure to promote robust conclusions.
 
 \tmpsection{Broader context of results}
 
