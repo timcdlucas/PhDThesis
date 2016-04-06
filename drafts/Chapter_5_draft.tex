@@ -1,0 +1,88 @@
+
+\documentclass[a4paper,10pt,reqno]{amsart}
+\usepackage{etex}
+
+\usepackage[T1]{fontenc}
+
+\usepackage[bitstream-charter]{mathdesign}
+\usepackage{tgheros}  %  the advanced helvet as it was nice.
+
+
+
+% Redefine cite so that we get references in footnotes.
+\usepackage[
+backend=biber,
+citestyle=authoryear,
+bibstyle=authoryear,
+sorting=none,
+firstinits=true,
+maxcitenames=2
+]{biblatex} %style=mla for footnotes.
+%\renewcommand{\cite}[1]{\footcite{#1}}
+%\renewcommand{\cite}[1]{\supercite{#1}}
+
+
+\addbibresource{../epilit.bib}
+% This has to go below fontenc for some reason
+\input{../KnitrSettings}
+
+\usepackage{graphicx}
+
+\graphicspath{{../}}
+
+\newcommand{\lettr}[1]{#1}
+
+
+\usepackage{caption}
+\usepackage{verbatim, geometry, fancyhdr,  graphicx, xcomment, microtype, array}
+%\usepackage{amsmath}
+
+
+\usepackage{pictex}
+
+\usepackage{booktabs}
+
+%\usepackage{bm} % for \bm bold math command for matrices.
+
+\usepackage[pdftex,hidelinks]{hyperref}
+
+
+
+% This declares the unit "animals". Also redefined days to be whole word *(not sure if thats what is needed.
+\usepackage{siunitx}
+\DeclareSIUnit{\animals}{animals}
+\DeclareSIUnit{\day}{day}
+
+
+
+
+
+
+\setcounter{tocdepth}{4} % make TOC go to subsubsection
+
+
+
+\begin{document}
+
+
+\title{The role of population structure in pathogen diversity in wild bat populations}
+\author{Tim Lucas. \today}
+\date{}
+
+\maketitle
+\tableofcontents
+
+\input{../Chapter5.tex}
+
+
+
+
+\section{Appendix}
+
+\input{../lucas_et_al_supplementarymaterial_2015-01-20.tex}
+
+\small
+\printbibliography 
+
+
+\end{document}

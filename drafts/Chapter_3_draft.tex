@@ -1,0 +1,93 @@
+\documentclass[a4paper,10pt,reqno]{amsart}
+
+
+
+
+\usepackage[T1]{fontenc}
+
+\usepackage{mathdesign}
+\usepackage{lato}
+
+
+
+
+\usepackage{mathpazo} % Use the Palatino font
+
+
+
+\usepackage{siunitx}
+
+
+% Redefine cite so that we get references in footnotes.
+\usepackage[
+backend=biber,
+citestyle=authoryear,
+bibstyle=authoryear-comp,
+sorting=none,
+firstinits=true,
+maxcitenames=2
+]{biblatex} %style=mla for footnotes.
+%\renewcommand{\cite}[1]{\footcite{#1}}
+\renewcommand{\cite}[1]{\parencite{#1}}
+
+\newcommand{\lettr}[1]{#1}
+
+\newcommand{\tmpsection}[1]{\subsubsection{#1}}
+%\newcommand{\tmpsection}[1]{}
+
+\addbibresource{../epilit.bib}
+% This has to go below fontenc for some reason
+\input{../KnitrSettings}
+
+\usepackage{graphicx}
+
+\graphicspath{{../}}
+
+
+
+\usepackage[font=footnotesize, labelfont=bf]{caption}
+\usepackage{verbatim, fancyhdr,  graphicx, xcomment, microtype, array}
+%\usepackage{amsmath}
+
+%Make floats appear quickly maybe.
+\renewcommand{\topfraction}{0.6}
+
+\makeatletter
+\@fpsep\textheight
+\makeatother
+
+
+\usepackage[pdftex,hidelinks]{hyperref}
+
+% for coloured tables
+\usepackage[table]{xcolor}    % loads also »colortbl«  
+
+
+\usepackage{booktabs}
+
+
+
+
+\begin{document}
+
+\title{The role of population structure in pathogen diversity in wild bat populations}
+\author{Tim Lucas. \today}
+\date{}
+
+
+\maketitle
+
+
+
+
+\input{../Chapter3.tex}
+
+
+
+
+
+\small
+\printbibliography 
+
+
+\end{document}

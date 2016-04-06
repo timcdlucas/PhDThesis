@@ -27,16 +27,17 @@ Text only chapters are written directly in a .tex file.
 
 While [tim-lucas-thesis.pdf](tim-lucas-thesis.pdf) is the full thesis pdf, most chapters are also compiled seperately. These files are 
 
-- [intro_draft.pdf](intro_draft.pdf)
-- [Chapter_2_draft.pdf](Chapter_2_draft.pdf)
-- [Chapter_3_draft.pdf](Chapter_3_draft.pdf)
-- [Chapter_4_draft.pdf](Chapter_4_draft.pdf)
-- [Chapter_5_draft.pdf](Chapter_5_draft.pdf)
-- [discussion_draft.pdf](discussion_draft.pdf)
+- [drafts/intro_draft.pdf](intro_draft.pdf)
+- [drafts/Chapter_2_draft.pdf](drafts/Chapter_2_draft.pdf)
+- [drafts/Chapter_3_draft.pdf](drafts/Chapter_3_draft.pdf)
+- [drafts/Chapter_4_draft.pdf](drafts/Chapter_4_draft.pdf)
+- [drafts/Chapter_5_draft.pdf](drafts/Chapter_5_draft.pdf)
+- [drafts/discussion_draft.pdf](drafts/discussion_draft.pdf)
 
 ### Other files
 
 [Chapter5DataReformat.R](Chapter5DataReformat.R) takes data from simulations for Chapter 5 and reformats them ready for plotting.
+[chapter3functions.R](chapter3functions.R) and [chapter4functions.R](chapter4functions.R) contain additional files used in these chapters and are pulled out to keep the `.Rtex` files more tidy.
 
 [lucas_et_al_supplementarymaterial_2015-01-20.tex](lucas_et_al_supplementarymaterial_2015-01-20.tex), [REM-methods.tex](REM-methods.tex) and files in [latexFiles/](latexFiles/) make up additional methods for Chapter 5 and are included as an appendix.
 
@@ -46,16 +47,25 @@ Each folder should contain a README describing the data files in more detail.
 Figures created directly from Chapter analyses by knitr are in [figure/](figure/).
 Figures created by older analyses and manually with inkscape are in [imgs/](imgs/)
 
-[misc/](misc/) contains additional files such as my [misc/theme_tcdl.R](ggplot2 themes) and [misc/KnitrOptions.R](global knitr options).
+[misc/](misc/) contains additional files such as my [ggplot2 themes](misc/theme_tcdl.R) and [global knitr options](misc/KnitrOptions.R).
 
 Reproducibility
 ----------------
 
 The thesis is largely reproducible. 
 Chapters 2 and 4 require my R package [MetapopEpi](https://github.com/timcdlucas/MetapopEpi) which is only available on github.
-The simulations in chapter 5 are not reproducible. 
+The simulations in Chapter 5 are not reproducible. 
 They were written by a coauthor and I haven't gotten round to getting the code and working out how to run it.
 Sorry.
+
+
+Reuseability
+------------
+Most of the simulations are run using my R package [MetapopEpi](https://github.com/timcdlucas/MetapopEpi). 
+While this isn't particularly well written for reusability, feel free to have a go.
+
+If you want to use knitr in your thesis there is a barebones thesis [here](https://github.com/timcdlucas/knitr-thesis). 
+This repo also explains some of the issues and benefits with using knitr in this way.
 
 
 Pretty Thesis
