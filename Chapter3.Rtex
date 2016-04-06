@@ -92,44 +92,29 @@ library(parallel)
 % comprehensible to a scientist in any discipline.
 \lettr{I}t is still unclear what factors determine the number of pathogens a wild species carries.
 But once understood, these factors could provide a way to prioritise surveillance of wild populations for zoonotic diseases and make predictions as to how pathogen richness will respond to global change.
-
-
 \tmpsection{Two to three sentences of more detailed background}
 % comprehensible to scientists in related disciplines.
-
 % Theory led.
-
 The pattern of contacts between individuals (i.e. population structure) has long been known to strongly affect epidemic processes.
 Theory suggests that population structure can promote pathogen richness while the ecological literature generally assumes it will decrease richness.
-
-
 \tmpsection{One sentence clearly stating the general problem (the gap)}
 % being addressed by this particular study.
-
 Previous studies in wild bat populations have had contradictory results and different measures of population structure have different shortcomings.
 There is therefore a need for more robust comparative studies testing for a relationship between pathogen richness and population structure.
-
 \tmpsection{One sentence summarising the main result}
 %  (with the words “here we show” or their equivalent).
-
 Here I used comparative data to test whether population structure influences pathogen richness.
 I use bats as a case study as they have been associated with a number of important, recent zoonotic outbreaks.
 Unlike previous studies I used two measures of population structure: a novel measure, number of subspecies, and a more careful application of genetic measures which have been used previously.
-I find that both of these measures are positively associated with pathogen richness and are probably in the best model.
-
-
+I find that both of these measures are positively associated with pathogen richness.
 \tmpsection{Two or three sentences explaining what the main result reveals in direct comparison to what was thoughts to be the case previously}
 % or how the main result adds to previous knowledge
-
-My results add more robust support to the hypothesis that pathogen structure promotes pathogen richness in bats and lends clarity to the contradictory results previously published.
+My results add more robust support to the hypothesis that population structure promotes pathogen richness in bats and lends clarity to the contradictory results previously published.
 The results support predictions from theory.
 They contradict the assumption commonly made in the ecological literature that factors that increase $R_0$ should increase pathogen richness.
 This implies that competitive processes amongst pathogens are stronger than previously thought.
-
-
 \tmpsection{One or two sentences to put the results into a more general context.}
-
-Although my analysis implies that population structure does promote pathogen richness in bats, the weakness of the relationship and the difficulty in obtaining some measurements means this is probably not a usefully predictive factor on its own for optimising zoonotic surveillance.
+Although my analysis implies that population structure does promote pathogen richness in bats, the weakness of the relationship and the difficulty in obtaining some measurements means this is probably not a useful, predictive factor on its own for optimising zoonotic surveillance.
 However, the relationship has implications for global change, implying that increased habitat fragmentation might promote greater viral richness in bats.
 
 
@@ -163,7 +148,7 @@ In the ecological literature this is often taken as a prediction that increased 
 Models of competition between multiple pathogens show that in unstructured populations a competitive exclusion process occurs but that adding population structure allows coexistence \cite{qiu2013vector, allen2004sis, nunes2006localized}.
 
 \tmpsection{Previous Studies}
-\sloppy
+
 Three studies have used comparative data to test for an association between population structure and viral richness.
 A study on 15 African bat species found a positive relationship between the extent of distribution fragmentation and viral richness \cite{maganga2014bat}.
 Conversely, a study on 20 South-East Asian bat species found the opposite relationship \cite{gay2014parasite}. 
@@ -173,13 +158,16 @@ Furthermore there is a potential bias with island living species being given sea
 
 A global study on 33 bat species found a positive relationship between $F_{ST}$ --- a measure of genetic structure --- and viral richness \cite{turmelle2009correlates}. 
 However, this study included measures using mtDNA which only measures female dispersal which may have biased the results as many bat species show female philopatry \cite{kerth2002extreme, hulva2010mechanisms}.
-Furthermore, this study used measures of $F_{ST}$ irrespective of the study scale with studies covering from tens \cite{mccracken1981social} to thousands \cite{petit1999male} of kilometres.
+Furthermore, this study used measures of $F_{ST}$ irrespective of the study scale including studies covering from tens \cite{mccracken1981social} to thousands \cite{petit1999male} of kilometres.
 As isolation by distance has been shown in a number of bat species \cite{burland1999population, hulva2010mechanisms, o2015genetic, vonhof2015range} this could bias results further.
-Finally, when a global $F_{ST}$ value is not given they used the mean of all pairwise $F_{ST}$ between sites.
-This is not correct as from global $F_{ST}$ we expect migration rates of $M = (1-F_{ST})/8F_{ST}$ while from $F_{ST}$ between pairs of populations we expect migration rates of $M = (1-F_{ST})/16F_{ST}$ where $M$ is the absolute number of diploid individuals dispersing per generation \cite{slatkin1995measure}.
-To use studies that only present pairwise $F_{ST}$ values the raw data would have to be gathered and global $F_{ST}$ calculated from those.
-As it is in fact the movement of individuals that is epidemiologically relevant, using these studies is probably not correct without attempting to correct for these difference.
-\fussy
+Finally, when a global $F_{ST}$ value is not given they used the mean of all pairwise $F_{ST}$ values between sites.
+This is not correct as pairwise and global $F_{ST}$ values have different relationships with effective migration rates. 
+
+%Global $F_{ST}$ should be calculated as
+%global $F_{ST}$ values we expect migration rates of $M = (1-F_{ST})/4F_{ST}$ while from $F_{ST}$ values between pairs of populations we expect migration rates of $M = (1-F_{ST})/8F_{ST}$ where $M$ is the effective number of diploid individuals dispersing per generation \cite{slatkin1995measure}.
+%To use studies that only present pairwise $F_{ST}$ values the raw data would have to be gathered and global $F_{ST}$ calculated from those.
+%As it is in fact the movement of individuals that is epidemiologically relevant, using these studies is probably not accurate without attempting to correct for these differences.
+
 
 
 %\tmpsection{Choice of measure of population structure}
@@ -226,10 +214,10 @@ As it is in fact the movement of individuals that is epidemiologically relevant,
 \tmpsection{What I did/found}
 
 There is a lack of studies using multiple measures of population structure and larger data sets to robustly estimate the importance of population structure.
-Here I have used two measures of population structure --- the number of subspecies and gene flow --- to robustly test for an association between population structure and pathogen richness in bats.
+Here I have used two measures of population structure --- the number of subspecies and effective gene flow --- to robustly test for an association between population structure and pathogen richness in bats.
 Furthermore, I have used a data set that is much larger that previous studies for one of these analyses, further promoting robustness of results.
-I found that both measures of population structure are positively associated with viral richness and are likely to be in the best models for describing viral richness.
-Further, I found that the role of phylogeny is very weak in the models and in the distribution of viral richness amongst taxa.
+I found that both measures of population structure are positively associated with viral richness and are included as explanatory variables in the best models for describing viral richness.
+Furthermore, I found that the role of phylogeny is very weak in the models and in the distribution of viral richness amongst taxa.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
