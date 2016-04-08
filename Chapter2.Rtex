@@ -72,29 +72,21 @@ library(cowplot)
 \lettr{A}n increasingly large fraction of emerging diseases come from wild animals and these diseases have a huge impact on human health, healthcare systems and economic development.
 The chance that a new zoonosis will come from any particular wild host species increases with the diversity of pathogens in that species \cite{wolfe2000deforestation}.
 However, the factors that control pathogen diversity in wild populations are still unclear.
-
-
-
 \tmpsection{Two to three sentences of more detailed background}
 % comprehensible to scientists in related disciplines.
-
 % Add mechanistic vs empirical
 Host species traits such as population density, longevity, body size and population structure have been shown to correlate with pathogen diversity.
 Typically it is assumed that well-connected, unstructured populations promote the invasion of new pathogens and therefore increase pathogen diversity. % Where or how to define well-connected?
 However, this assumption is largely untested; in particular our mechanistic understanding of how population structure affects pathogen diversity, in the presence of inter-pathogen competition, is poor.
 Greater understanding is needed to clarify by which exact mechanisms population structure affects pathogen diversity. 
 %Mechanistic models are also likely to be more robust to transferring understanding between taxa and predicting changes. % !!! Not great.
-
-
 %However, if competition is strong endemic pathogens will dominate and prevent new diseases from invading and spreading.
 %In a structured population, stochastic effects could create areas of low prevalence of the endemic disease, allowing new diseases to invade.
-
 \tmpsection{One sentence clearly stating the general problem (the gap)}
 % being addressed by this particular study.
 It is unknown whether population structure allows invading pathogens to escape from competition by stochastically creating areas of low pathogen prevalence.
 I hypothesised that low dispersal rates and a low number of connections in a metapopulation network will allow invading pathogens to establish more readily, thus increasing pathogen diversity. 
 I tested these hypotheses using population networks parameterised to mimic wild bat populations as bats have highly varied social structures and have recently been implicated in a number of high profile diseases such as Ebola, SARS, Hendra and Nipah.
-
 \tmpsection{One sentence summarising the main result}
 %  (with the words “here we show” or their equivalent).
 I found that neither population connectedness nor dispersal rate affect the probability that a new pathogen will invade into a population.
@@ -104,7 +96,6 @@ The assumption that factors causing high $R_0$ allow new pathogens to invade and
 Instead I found that changes in population structure do not affect the probability of invasion of a new pathogen.
 This is in contrast to much theoretical literature which predicts that increased population structure may promote coexistence of pathogens.
 It is also in contrast to the common assumption that more connected populations increase $R_0$ and therefore increase pathogen richness.
-
 \tmpsection{One or two sentences to put the results into a more general context.}
 This result implies that population structure does not control pathogen diversity.
 Instead it seems that local dynamics, that affect the short term branching process at the very start of the epidemic control the chance of pathogen invasion.
@@ -157,8 +148,8 @@ There are few studies that study population structure in a comparative framework
 \textcite{maganga2014bat} found that distribution fragmentation predicts high viral richness, but \textcite{gay2014parasite} finds the opposite relationship. 
 While the data set in \textcite{gay2014parasite} is larger, the analysis in \cite{maganga2014bat} is more focused on fragmentation specifically.
 Genetic correlates of population structure have also been used.
-\textcite{turmelle2009correlates}, in a small analysis, find that high $F_{st}$ (i.e. a structured population) correlates with high richness.
-However, they do not account for the widely different spatial scales found in population structure studies, nor do they deal with the differences between $F_{ST}$, $\phi_{ST}$ and other measures appropriately. 
+\textcite{turmelle2009correlates}, in a small analysis, foundnd that high $F_{st}$ (i.e. a structured population) correlates with high richness.
+However, they did not account for the widely different spatial scales found in population structure studies, nor did they deal with the differences between $F_{ST}$, $\phi_{ST}$ and other measures appropriately. 
 
 Empirical, correlative studies are often contradictory due to small sample sizes, noisy data and because empirical relationships often do not extrapolate well to other taxa (though see \textcite{kamiya2014determines} for a meta-analysis).
 The correlation between many traits (e.g., \textcite{nunn2015infectious}) also makes it hard to clearly distinguish which factors are important.
