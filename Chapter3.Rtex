@@ -88,32 +88,43 @@ library(parallel)
 \section{Abstract}
 
 
-\tmpsection{One or two sentences providing a basic introduction to the field}
+%\tmpsection{One or two sentences providing a basic introduction to the field}
 % comprehensible to a scientist in any discipline.
-\lettr{I}t is still unclear what factors determine the number of pathogens a wild species carries.
-But once understood, these factors could provide a way to prioritise surveillance of wild populations for zoonotic diseases and make predictions as to how pathogen richness will respond to global change.
-\tmpsection{Two to three sentences of more detailed background}
+\lettr{Z}oonotic diseases make up a majority of human infectious diseases and are a major drain on healthcare resources and economies.
+Species that host many pathogen species are more likely to be the source of a novel zoonotic disease.
+Unfortunately, the factors that influence pathogen richness in animal species are still poorly understood.
+%
+%
+%\tmpsection{Two to three sentences of more detailed background}
 % comprehensible to scientists in related disciplines.
 % Theory led.
-The pattern of contacts between individuals (i.e. population structure) has long been known to strongly affect epidemic processes.
-Theory suggests that population structure can promote pathogen richness while the ecological literature generally assumes it will decrease richness.
-\tmpsection{One sentence clearly stating the general problem (the gap)}
+The pattern of contacts between individuals (i.e. population structure) can be influenced by habitat fragmentation, sociality and dispersal behaviour.
+Epidemiological theory suggests that population structure can promote pathogen richness by reducing competition.
+Conversely, it is often assumed that as population structure slows the spread of a new pathogen less structured populations should have greater pathogen richness.
+%
+%
+%\tmpsection{One sentence clearly stating the general problem (the gap)}
 % being addressed by this particular study.
-Previous studies in wild bat populations have had contradictory results and different measures of population structure have different shortcomings.
-There is therefore a need for more robust comparative studies testing for a relationship between pathogen richness and population structure.
-\tmpsection{One sentence summarising the main result}
+Previous studies have had contradictory results and different measures of population structure have been used complicating the interpretation.
+%
+%
+%\tmpsection{One sentence summarising the main result}
 %  (with the words “here we show” or their equivalent).
-Here I used comparative data to test whether population structure influences pathogen richness.
+Here I use comparative data across \rinline{nrow(combdf)} bat species using phylogenetic linear models, controlling for body mass, range size and study effort, to test whether population structure correlates with pathogen richness.
 I use bats as a case study as they have been associated with a number of important, recent zoonotic outbreaks.
 Unlike previous studies I used two measures of population structure: a novel measure, number of subspecies, and a more careful application of genetic measures which have been used previously.
-I find that both of these measures are positively associated with pathogen richness.
-\tmpsection{Two or three sentences explaining what the main result reveals in direct comparison to what was thoughts to be the case previously}
+Both of these measures are positively associated with pathogen richness.
+%
+%
+%\tmpsection{Two or three sentences explaining what the main result reveals in direct comparison to what was thoughts to be the case previously}
 % or how the main result adds to previous knowledge
 My results add more robust support to the hypothesis that population structure promotes pathogen richness in bats and lends clarity to the contradictory results previously published.
 The results support predictions from theory.
 They contradict the assumption commonly made in the ecological literature that factors that increase $R_0$ should increase pathogen richness.
 This implies that competitive processes amongst pathogens are stronger than previously thought.
-\tmpsection{One or two sentences to put the results into a more general context.}
+%
+%
+%\tmpsection{One or two sentences to put the results into a more general context.}
 Although my analysis implies that population structure does promote pathogen richness in bats, the weakness of the relationship and the difficulty in obtaining some measurements means this is probably not a useful, predictive factor on its own for optimising zoonotic surveillance.
 However, the relationship has implications for global change, implying that increased habitat fragmentation might promote greater viral richness in bats.
 
