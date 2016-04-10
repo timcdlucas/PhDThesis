@@ -91,16 +91,16 @@ library(parallel)
 %\tmpsection{One or two sentences providing a basic introduction to the field}
 % comprehensible to a scientist in any discipline.
 \lettr{Z}oonotic diseases make up a majority of human infectious diseases and are a major drain on healthcare resources and economies.
-Species that host many pathogen species are more likely to be the source of a novel zoonotic disease.
-Unfortunately, the factors that influence pathogen richness in animal species are still poorly understood.
+Species that host many pathogen species are more likely to be the source of a novel zoonotic disease than species with few pathogens.
+However, the factors that influence pathogen richness in animal species are poorly understood.
 %
 %
 %\tmpsection{Two to three sentences of more detailed background}
 % comprehensible to scientists in related disciplines.
 % Theory led.
 The pattern of contacts between individuals (i.e. population structure) can be influenced by habitat fragmentation, sociality and dispersal behaviour.
-Epidemiological theory suggests that population structure can promote pathogen richness by reducing competition.
-Conversely, it is often assumed that as population structure slows the spread of a new pathogen less structured populations should have greater pathogen richness.
+Epidemiological theory suggests that population structure can promote pathogen richness by reducing competition between pathogen species.
+Conversely, it is often assumed that as population structure slows the spread of a new pathogen, less structured populations should have greater pathogen richness.
 %
 %
 %\tmpsection{One sentence clearly stating the general problem (the gap)}
@@ -112,15 +112,15 @@ Previous studies have had contradictory results and different measures of popula
 %  (with the words “here we show” or their equivalent).
 Here I use comparative data across \rinline{nrow(combdf)} bat species using phylogenetic linear models, controlling for body mass, range size and study effort, to test whether population structure correlates with pathogen richness.
 I use bats as a case study as they have been associated with a number of important, recent zoonotic outbreaks.
-Unlike previous studies I used two measures of population structure: a novel measure, number of subspecies, and a more careful application of genetic measures which have been used previously.
-Both of these measures are positively associated with pathogen richness.
+Unlike previous studies I used two measures of population structure: the number of subspecies, and a more careful application of genetic measures than have been used previously.
+Both measures are positively associated with pathogen richness.
 %
 %
 %\tmpsection{Two or three sentences explaining what the main result reveals in direct comparison to what was thoughts to be the case previously}
 % or how the main result adds to previous knowledge
-My results add more robust support to the hypothesis that population structure promotes pathogen richness in bats and lends clarity to the contradictory results previously published.
-The results support predictions from theory.
-They contradict the assumption commonly made in the ecological literature that factors that increase $R_0$ should increase pathogen richness.
+My results add more robust support to the hypothesis that population structure promotes pathogen richness in bats.
+The results support the prediction that population structure reduces competition between pathogens and so allow greater pathogen richness and
+contradict the prediction that factors that increase $R_0$ should increase pathogen richness.
 This implies that competitive processes amongst pathogens are stronger than previously thought.
 %
 %
@@ -141,9 +141,9 @@ However, the relationship has implications for global change, implying that incr
 \tmpsection{General Intro}
 
 Zoonotic pathogens make up the majority of newly emerging diseases and have profound consequences for public health, economics and international development \cite{jones2008global, smith2014global, ebolaWorldbank}.
-A better understanding of the factors that control which wild host species are potential reservoirs of zoonotic diseases would allow us to effectively optimise zoonotic disease surveillance and anticipate how the risks of disease spillover might change with global change.
-The chance that a host species will be the source of an outbreak depends on a number of factors including its proximity and interactions with humans and the prevalence and diversity of pathogens it carries \cite{wolfe2000deforestation}.
-However, our understanding of the factors that control the diversity of pathogens in a wild species is still poor.
+Better predictive models of which wild host species are potential reservoirs of zoonotic diseases would allow us to effectively optimise zoonotic disease surveillance and anticipate how the risks of disease spillover might change with global change.
+The chance that a host species will be the source of an outbreak depends on a number of factors including its proximity and interactions with humans and the prevalence and the diversity of pathogens it carries \cite{wolfe2000deforestation}.
+However, our understanding of the factors that control the number of pathogen species in a host species is still poor.
 
 
 \tmpsection{Specific Intro}
@@ -153,10 +153,13 @@ However, our understanding of the factors that control the diversity of pathogen
 \tmpsection{Theoretical background}
 
 %Think this ref is right but need to check.
-Models of single pathogens have shown that population structure can allow persistence of a pathogen where a well-mixed population would experience a single, large epidemic followed by pathogen extinction \cite{blackwood2013resolving, pons2014insights, plowright2011urban}.
-Single pathogen models also show that increasing population structure slows disease spread and makes establishment of a new pathogen less likely \cite{colizza2007invasion, vespignani2008reaction}.
-In the ecological literature this is often taken as a prediction that increased population structure will decrease pathogen richness \cite{nunn2003comparative, morand2000wormy, poulin2014parasite, poulin2000diversity, altizer2003social} but this interpretation ignores inter-pathogen competition.
-Models of competition between multiple pathogens show that in unstructured populations a competitive exclusion process occurs but that adding population structure allows coexistence \cite{qiu2013vector, allen2004sis, nunes2006localized}.
+One factor that may affect pathogen richness is population structure.
+Population structure can be defined as the extent to which interactions between individuals in a population are non-random.
+Epidemiological models of single pathogens have shown that increased population structure can allow persistence of a pathogen where a well-mixed population would experience a single, large epidemic followed by pathogen extinction \cite{blackwood2013resolving, pons2014insights, plowright2011urban}.
+Single pathogen models also show that decreasing population structure increases the speed of disease spread (increased $R_0$) and makes establishment of a new pathogen more likely \cite{colizza2007invasion, vespignani2008reaction}.
+In comparative studies of pathogen richness in wild animals, this relationship with $R_0$ is often taken as a prediction that decreased population structure will increase pathogen richness relative to other host species \cite{nunn2003comparative, morand2000wormy, poulin2014parasite, poulin2000diversity, altizer2003social}. 
+However, this interpretation ignores inter-pathogen competition.
+Simple epidemiological models of competition between multiple pathogens show that in unstructured populations a competitive exclusion process occurs but that adding population structure allows coexistence \cite{qiu2013vector, allen2004sis, nunes2006localized}.
 
 \tmpsection{Previous Studies}
 
