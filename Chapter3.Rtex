@@ -15,7 +15,7 @@ runFstScrape <- FALSE
 # Run slow bootstrapping?
 subBoots <- FALSE
 fstBoots <- FALSE
-batclocksBoots <- FALSE
+batclocksBoots <- TRUE
 
 # Run slow fst data wrangling as some is slow.
 fstComb <- FALSE
@@ -110,7 +110,7 @@ Previous studies have had contradictory results and different measures of popula
 %
 %\tmpsection{One sentence summarising the main result}
 %  (with the words “here we show” or their equivalent).
-Here I use comparative data across \rinline{nrow(combdf)} bat species using phylogenetic linear models, controlling for body mass, range size and study effort, to test whether population structure correlates with pathogen richness.
+Here I use comparative data across 203 bat species using phylogenetic linear models, controlling for body mass, range size and study effort, to test whether population structure correlates with pathogen richness.
 I use bats as a case study as they have been associated with a number of important, recent zoonotic outbreaks.
 Unlike previous studies I used two measures of population structure: the number of subspecies, and a more careful application of genetic measures than have been used previously.
 Both measures are positively associated with pathogen richness.
@@ -161,21 +161,34 @@ However, our understanding of the factors that control the number of pathogen sp
 
 \tmpsection{Specific Intro}
 
-#2. Need to understand why some species have more pathogens than others. Life history variables of the host have been used to explain why some species have more than others, such as blah blah. However, pop structure (explain what this means) is of particular interest because of blah blah.
-
-#3. Epidemiological theoretical models predict relationship with pop structure and translated into across species patterns as increased structure less pathogen diversity but problem is of inter-pathogen competition
-
+#2. Need to understand why some species have more pathogens than others. Life history variables of the host have been used to explain why some species have more than others, such as blah blah. 
 \tmpsection{Theoretical background}
 
 
+A number of individual and population level traits that might control pathogen richness have been studied.
+Individual traits that have been studied include body mass and longevity.
+Large bodied animals have been shown to have high pathogen richness with large bodies providing more resource for pathogens \cite{kamiya2014determines, arneberg2002host, poulin1995phylogeny}.
+Long lived species are expected to have high pathogen richness as the number of pathogens a host encounters in its lifetime will be higher \cite{nunn2003comparative, ezenwa2006host}. 
+Population level traits have also been studied.
+Animal density \cite{kamiya2014determines, nunn2003comparative, arneberg2002host} and sociality \cite{bordes2007rodent, vitone2004body, altizer2003social, ezenwa2006host} are both predicted to increase pathogen richness by increasing the rate of spread, $R_0$, of a new pathogen.
+Finally, widely distributed species have high pathogen richness, potentially because they experience a wider range of environments or because they are sympatric with host species \cite{kamiya2014determines, nunn2003comparative}).
 
-One factor that may affect pathogen richness is population structure.
+# However, pop structure (explain what this means) is of particular interest because of blah blah.
+
+#3. Epidemiological theoretical models predict relationship with pop structure and translated into across species patterns as increased structure less pathogen diversity but problem is of inter-pathogen competition
+
+
+A further population level factor that may affect pathogen richness is population structure.
 Population structure can be defined as the extent to which interactions between individuals in a population are non-random.
-Epidemiological models of single pathogens have shown that increased population structure can allow persistence of a pathogen where a well-mixed population would experience a single, large epidemic followed by pathogen extinction \cite{blackwood2013resolving, pons2014insights, plowright2011urban}.
-Single pathogen models also show that decreasing population structure increases the speed of disease spread (increased $R_0$) and makes establishment of a new pathogen more likely \cite{colizza2007invasion, vespignani2008reaction}.
+The role of population structure on human epidemics has been studied in depth and it has been shown that decreased population structure increases the speed of disease spread and makes establishment of a new pathogen more likely \cite{colizza2007invasion, vespignani2008reaction}.
 In comparative studies of pathogen richness in wild animals, this relationship with $R_0$ is often taken as a prediction that decreased population structure will increase pathogen richness relative to other host species \cite{nunn2003comparative, morand2000wormy, poulin2014parasite, poulin2000diversity, altizer2003social}. 
-However, this interpretation ignores inter-pathogen competition.
+However, epidemiological models of highly virulent pathogens have shown that increased population structure can allow persistence of a pathogen where a well-mixed population would experience a single, large epidemic followed by pathogen extinction \cite{blackwood2013resolving, plowright2011urban}.
+Furthermore, the assumption that high $R_0$ leads to high pathogen richness ignores inter-pathogen competition.
 Simple epidemiological models of competition between multiple pathogens show that in unstructured populations a competitive exclusion process occurs but that adding population structure allows coexistence \cite{qiu2013vector, allen2004sis, nunes2006localized}.
+
+
+
+
 
 \tmpsection{Previous Studies}
 
@@ -2263,6 +2276,18 @@ t2 <- read.nexus('data/Chapter3/BatST2BL.nex')
 # Make names match previous names
 t2$tip.label <- gsub('_', ' ', t2$tip.label)
 
+#missing <- nSpecies$binomial[!nSpecies$binomial %in% pruneTree2$tip.label ]
+
+## Copy binomial column. binomial will be changed to fit t2.
+#nSpecies$oldBinomial <- nSpecies$binomial
+
+## Replace with agrep where possible
+#closeMatch <- sapply(missing, function(i) t2$tip.label[agrep(i, t2$tip.label, max.distance = 0.11)])
+
+#closeMatch <- closeMatch[sapply(closeMatch, function(i) length(i) > 0)]
+
+
+
 
 unneededTips2 <- t2$tip.label[!(t2$tip.label %in% nSpecies$binomial)]
 
@@ -2296,7 +2321,7 @@ t2$tip.label[t2$tip.label == 'Miniopterus pusillus'] <- 'Miniopterus natalensis'
 t2$tip.label[t2$tip.label == 'Miniopterus schreibersi'] <- 'Miniopterus schreibersii'
 t2$tip.label[t2$tip.label == 'Rousettus celebensis'] <- 'Rousettus leschenaultii'
 t2$tip.label[t2$tip.label == 'Myotis oxyotus'] <- 'Myotis macropus'
-
+t2$tip.label[t2$tip.label == 'Myotis leibii'] <- 'Myotis ciliolabrum'
 
 #Re prune tree
 # Which tips are not needed
