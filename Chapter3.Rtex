@@ -140,19 +140,19 @@ However, the relationship has implications for global change, implying that incr
 
 #the introduction is not bad and starts very well but i think you need a bit more from studies of other mammals (not bats) to put the study into context as well as explaining why particularly you focus on pop structure, some justification of why bats, and less detail about the specific Fst measures (move to methods) and more stuff on your actual methods and approach you use in this study.
 
-#Structure could be:
-#1. Zoonotic disease is bad (as you have written it already)
-#2. Need to understand why some species have more pathogens than others. Life history variables of the host have been used to explain why some species have more than others, such as blah blah. However, pop structure (explain what this means) is of particular interest because of blah blah.
-#3. Epidemiological theoretical models predict relationship with pop structure and translated into across species patterns as increased structure less pathogen diversity but problem is of inter-pathogen competition
-#4. lack of large across species studies of these relationships - those that have been done have conflicting patterns (examples across different taxa).
-#5. Bats are very interesting in this regard because of blah
-#6. Bat studies of pathogen richness and population structure are particularly interesting in this area but also are conflicting (examples), due in part to low sample sizes and problems with comparing results using different definitions of population structure and not controlling for effects of phylogeny.
-#7. Here I use a phylogenetic comparative approach to understand the relationship between pop structure and pathogen richness across the largest study of bats to date. I use a phylogenetic GLM controlling for the other life history characteristics known to impact pathogen richness to quantify the relationship between viral richness (as a proxy for pathogen richness_ and two measures of population structure. 
-#8. I found ...
+%#Structure could be:
+%#1. Zoonotic disease is bad (as you have written it already)
+%#2. Need to understand why some species have more pathogens than others. Life history variables of the host have been used to explain why some %species have more than others, such as blah blah. However, pop structure (explain what this means) is of particular interest because of blah blah.
+%#3. Epidemiological theoretical models predict relationship with pop structure and translated into across species patterns as increased structure less pathogen diversity but problem is of inter-pathogen competition
+%#4. lack of large across species studies of these relationships - those that have been done have conflicting patterns (examples across different taxa).
+%#5. Bats are very interesting in this regard because of blah
+%#6. Bat studies of pathogen richness and population structure are particularly interesting in this area but also are conflicting (examples), due in part to low sample sizes and problems with comparing results using different definitions of population structure and not controlling for effects of phylogeny.
+%#7. Here I use a phylogenetic comparative approach to understand the relationship between pop structure and pathogen richness across the largest study of bats to date. I use a phylogenetic GLM controlling for the other life history characteristics known to impact pathogen richness to quantify the relationship between viral richness (as a proxy for pathogen richness_ and two measures of population structure. 
+%#8. I found ...
 
 \tmpsection{General Intro}
 
-#1. Zoonotic disease is bad (as you have written it already)
+%#1. Zoonotic disease is bad (as you have written it already)
 Zoonotic pathogens make up the majority of newly emerging diseases and have profound consequences for public health, economics and international development \cite{jones2008global, smith2014global, ebolaWorldbank}.
 Better predictive models of which wild host species are potential reservoirs of zoonotic diseases would allow us to effectively optimise zoonotic disease surveillance and anticipate how the risks of disease spillover might change with global change.
 The chance that a host species will be the source of an outbreak depends on a number of factors including its proximity and interactions with humans and the prevalence and the diversity of pathogens it carries \cite{wolfe2000deforestation}.
@@ -161,9 +161,9 @@ However, our understanding of the factors that control the number of pathogen sp
 
 \tmpsection{Specific Intro}
 
-#2. Need to understand why some species have more pathogens than others. Life history variables of the host have been used to explain why some species have more than others, such as blah blah. However, pop structure (explain what this means) is of particular interest because of blah blah.
+%#2. Need to understand why some species have more pathogens than others. Life history variables of the host have been used to explain why some species have more than others, such as blah blah. However, pop structure (explain what this means) is of particular interest because of blah blah.
 
-#3. Epidemiological theoretical models predict relationship with pop structure and translated into across species patterns as increased structure less pathogen diversity but problem is of inter-pathogen competition
+%#3. Epidemiological theoretical models predict relationship with pop structure and translated into across species patterns as increased structure less pathogen diversity but problem is of inter-pathogen competition
 
 \tmpsection{Theoretical background}
 
@@ -179,11 +179,11 @@ Simple epidemiological models of competition between multiple pathogens show tha
 
 \tmpsection{Previous Studies}
 
-#4. lack of large across species studies of these relationships - those that have been done have conflicting patterns (examples across different taxa).
+%#4. lack of large across species studies of these relationships - those that have been done have conflicting patterns (examples across different taxa).
 
-#5. Bats are very interesting in this regard because of blah
+%#5. Bats are very interesting in this regard because of blah
 
-#6. Bat studies of pathogen richness and population structure are particularly interesting in this area but also are conflicting (examples), due in part to low sample sizes and problems with comparing results using different definitions of population structure and not controlling for effects of phylogeny.
+%#6. Bat studies of pathogen richness and population structure are particularly interesting in this area but also are conflicting (examples), due in part to low sample sizes and problems with comparing results using different definitions of population structure and not controlling for effects of phylogeny.
 
 Three studies have used comparative data to test for an association between population structure and viral richness.
 A study on 15 African bat species found a positive relationship between the extent of distribution fragmentation and viral richness \cite{maganga2014bat}.
@@ -249,8 +249,8 @@ This is not correct as pairwise and global $F_{ST}$ values have different relati
 \tmpsection{The gap}
 \tmpsection{What I did/found}
 
-#7. Here I use a phylogenetic comparative approach to understand the relationship between pop structure and pathogen richness across the largest study of bats to date. I use a phylogenetic GLM controlling for the other life history characteristics known to impact pathogen richness to quantify the relationship between viral richness (as a proxy for pathogen richness_ and two measures of population structure. 
-#8. I found ...
+%#7. Here I use a phylogenetic comparative approach to understand the relationship between pop structure and pathogen richness across the largest study of bats to date. I use a phylogenetic GLM controlling for the other life history characteristics known to impact pathogen richness to quantify the relationship between viral richness (as a proxy for pathogen richness_ and two measures of population structure. 
+%#8. I found ...
 
 There is a lack of studies using multiple measures of population structure and larger data sets to robustly estimate the importance of population structure.
 Here I have used two measures of population structure --- the number of subspecies and effective gene flow --- to robustly test for an association between population structure and pathogen richness in bats.
