@@ -1245,13 +1245,13 @@ nSpeciesBox <- ggplot(nSpecies, aes(SubspeciesFactor, virusSpecies, colour = 'a'
   xlab('Number of Subspecies') +
   ylab('Viral Richness') +
   geom_line(data = lines, aes(x = NumberOfSubspecies, y = virusSpecies, group = 1),
-    colour = pokepal('nidorina')[10], lwd = 0.7) +
+    colour = pokepal('nidorina')[10], lwd = 0.7)
 #  geom_line(data = linesInter, aes(x = NumberOfSubspecies, y = virusSpecies, group = 1),
 #    colour = pokepal('nidorina')[13], lwd = 0.7) +
 #  annotate('text', x = c(11.8, 12.2), y = c(5.4, 2.5), 
 #    label = c('No interaction', 'Interaction'),
 #    colour = pokepal('nidorina')[c(10,13)], size = c(3, 3),
-    family = 'Lato Light')
+#    family = 'Lato Light')
 
 nSpeciesHist <- ggplot(nSpecies, aes(x = SubspeciesFactor)) +
   scale_x_discrete(limits = levels(nSpecies$SubspeciesFactor), drop = FALSE, labels = rep('', max(nSpecies$NumberOfSubspecies))) +
@@ -2076,7 +2076,7 @@ In the number of subspecies analysis there are many models with low $\Delta$AICc
 In the gene flow analysis, only the top model is supported.
 }
 
-\begin{tabular}{@{}>{\footnotesize}p{8cm}rrrr@{}}
+\begin{tabular}{@{}>{\footnotesize}lrrrr@{}}
 
 \toprule
 \normalsize{Model} & $\bar{\text{AICc}}$ & $\Delta$AICc & $w$ & $\sum w$\\
