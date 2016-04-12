@@ -86,11 +86,11 @@ However, our understanding of the factors that control the number of pathogen sp
 
 A number of individual and population level traits that might control pathogen richness have been studied.
 Individual traits that have been studied include body mass and longevity.
-Large bodied animals have been shown to have high pathogen richness with large bodies providing more resource for pathogens \cite{kamiya2014determines, arneberg2002host, poulin1995phylogeny}.
+Large bodied animals have been shown to have high pathogen richness with large bodies providing more resource for pathogens \cite{kamiya2014determines, arneberg2002host, poulin1995phylogeny, bordes2008bat}.
 Long lived species are expected to have high pathogen richness as the number of pathogens a host encounters in its lifetime will be higher \cite{nunn2003comparative, ezenwa2006host}. 
 Population level traits have also been studied.
 Animal density \cite{kamiya2014determines, nunn2003comparative, arneberg2002host} and sociality \cite{bordes2007rodent, vitone2004body, altizer2003social, ezenwa2006host} are both predicted to increase pathogen richness by increasing the rate of spread, $R_0$, of a new pathogen.
-Finally, widely distributed species have high pathogen richness, potentially because they experience a wider range of environments or because they are sympatric with host species \cite{kamiya2014determines, nunn2003comparative}).
+Finally, widely distributed species have high pathogen richness, potentially because they experience a wider range of environments or because they are sympatric with more species \cite{kamiya2014determines, nunn2003comparative, luis2013comparison}.
 
 %# However, pop structure (explain what this means) is of particular interest because of blah blah.
 
@@ -106,16 +106,24 @@ Furthermore, the assumption that high $R_0$ leads to high pathogen richness igno
 Simple epidemiological models of competition between multiple pathogens show that in unstructured populations a competitive exclusion process occurs but that adding population structure allows coexistence \cite{qiu2013vector, allen2004sis, nunes2006localized}.
 
 
-
-
-
 \tmpsection{Previous Studies}
 
 %#4. lack of large across species studies of these relationships - those that have been done have conflicting patterns (examples across different taxa).
 
+There is a lack of large, comparative studies of the role of population structure on pathogen richness.
+Sociality, which is one constituent part of population structure, has been well studied.
+However, in primates only a weak positive association between sociality and pathogen richess was found \cite{vitone2004body}.
+Furthermore, a negative association was found in rodents \cite{bordes2007rodent} and even and odd-toed hoofed mammals \cite{ezenwa2006host}.
+
+
+
 %#5. Bats are very interesting in this regard because of blah
 
 %#6. Bat studies of pathogen richness and population structure are particularly interesting in this area but also are conflicting (examples), due in part to low sample sizes and problems with comparing results using different definitions of population structure and not controlling for effects of phylogeny.
+
+
+
+
 
 Three studies have used comparative data to test for an association between population structure and viral richness.
 A study on 15 African bat species found a positive relationship between the extent of distribution fragmentation and viral richness \cite{maganga2014bat}.
@@ -123,6 +131,8 @@ Conversely, a study on 20 South-East Asian bat species found the opposite relati
 These studies used the ratio between the perimeter and area of the species' geographic range as their measure of population structure.
 Range maps are very course for many species.
 Furthermore there is a potential bias with island living species being given sea based edges where continental species might be assumed to live across their entire range, without considering the different terrestrial habitats in these areas.
+
+Also colony size. \cite{bordes2008bat}
 
 A global study on 33 bat species found a positive relationship between $F_{ST}$ --- a measure of genetic structure --- and viral richness \cite{turmelle2009correlates}. 
 However, this study included measures using mtDNA which only measures female dispersal which may have biased the results as many bat species show female philopatry \cite{kerth2002extreme, hulva2010mechanisms}.
@@ -184,9 +194,11 @@ This is not correct as pairwise and global $F_{ST}$ values have different relati
 %#7. Here I use a phylogenetic comparative approach to understand the relationship between pop structure and pathogen richness across the largest study of bats to date. I use a phylogenetic GLM controlling for the other life history characteristics known to impact pathogen richness to quantify the relationship between viral richness (as a proxy for pathogen richness_ and two measures of population structure. 
 %#8. I found ...
 
-There is a lack of studies using multiple measures of population structure and larger data sets to robustly estimate the importance of population structure.
-Here I have used two measures of population structure --- the number of subspecies and effective gene flow --- to robustly test for an association between population structure and pathogen richness in bats.
-Furthermore, I have used a data set that is much larger that previous studies for one of these analyses, further promoting robustness of results.
+Here I use a phylogenetic comparative approach to test for a relationship between population structure and pathogen richness in the largest study of bats to date. 
+I have used phylogenetic linear models with two measures of population structure --- the number of subspecies and effective gene flow --- and viral richness to robustly test for an association between population structure and pathogen richness.
+I used phylogenetic linear models
+
+
 I found that both measures of population structure are positively associated with viral richness and are included as explanatory variables in the best models for describing viral richness.
 Furthermore, I found that the role of phylogeny is very weak in the models and in the distribution of viral richness amongst taxa.
 
@@ -325,7 +337,7 @@ For plotting the models are predicted for the range of $x$-values with all other
 
 To test for an association between pathogen richness and population structure I have performed multiple regression using a model selection framework to establish whether or not two measures of population structure are likely to be included as explanatory variables in a `best model' and therefore important.
 As species cannot be considered independent due to shared evolutionary history, phylogeny was controlled for in all regressions.
-A number of other factors that have previously been found to be important were included as additional explanatory variables: body mass \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat, han2015infectious}, range size \cite{kamiya2014determines, turmelle2009correlates, maganga2014bat} and study effort \cite{turmelle2009correlates, gay2014parasite, maganga2014bat}.
+A number of other factors that have previously been found to be important were included as additional explanatory variables: body mass \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat, han2015infectious, bordes2008bat}, range size \cite{kamiya2014determines, turmelle2009correlates, maganga2014bat} and study effort \cite{turmelle2009correlates, gay2014parasite, maganga2014bat}.
 This was to attempt to avoid spurious positive results occur  ring simply due to correlation between pathogen richness and a different, causal factor.
 Despite commonly being associated with pathogen richness \cite{arneberg2002host, kamiya2014determines, nunn2003comparative}, population density is not included in the analysis as there is very little data for bat densities --- however Chapter~\ref{ch:sims2} examines the relationship between density and population structure and Chapter~\ref{ch:grem} presents a method that allows the estimation of density from acoustic surveys.
 I used both the number of subspecies a bat species has and estimates of gene flow (analysed separately) as measures of population structure.
@@ -456,6 +468,8 @@ This was to make the greatest use of the $F_{ST}$ data available and because the
 
 
 \end{knitrout}
+
+
 
 \subsection{Other explanatory variables}
 
