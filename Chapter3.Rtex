@@ -15,7 +15,7 @@ runFstScrape <- FALSE
 # Run slow bootstrapping?
 subBoots <- FALSE
 fstBoots <- FALSE
-batclocksBoots <- TRUE
+batclocksBoots <- FALSE
 
 # Run slow fst data wrangling as some is slow.
 fstComb <- FALSE
