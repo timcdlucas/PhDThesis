@@ -132,14 +132,16 @@ These studies used the ratio between the perimeter and area of the species' geog
 Range maps are very course for many species.
 Furthermore there is a potential bias with island living species being given sea based edges where continental species might be assumed to live across their entire range, without considering the different terrestrial habitats in these areas.
 
-Also colony size. \cite{bordes2008bat}
-
 A global study on 33 bat species found a positive relationship between $F_{ST}$ --- a measure of genetic structure --- and viral richness \cite{turmelle2009correlates}. 
 However, this study included measures using mtDNA which only measures female dispersal which may have biased the results as many bat species show female philopatry \cite{kerth2002extreme, hulva2010mechanisms}.
 Furthermore, this study used measures of $F_{ST}$ irrespective of the study scale including studies covering from tens \cite{mccracken1981social} to thousands \cite{petit1999male} of kilometres.
 As isolation by distance has been shown in a number of bat species \cite{burland1999population, hulva2010mechanisms, o2015genetic, vonhof2015range} this could bias results further.
 Finally, when a global $F_{ST}$ value is not given they used the mean of all pairwise $F_{ST}$ values between sites.
 This is not correct as pairwise and global $F_{ST}$ values have different relationships with effective migration rates. 
+
+Finally, one further study tested for an association between group size and parasite richness in bats \cite{bordes2008bat}.
+They found no relationship between group size (coded into four classes) and bat fly species richness.
+
 
 %Global $F_{ST}$ should be calculated as
 %global $F_{ST}$ values we expect migration rates of $M = (1-F_{ST})/4F_{ST}$ while from $F_{ST}$ values between pairs of populations we expect migration rates of $M = (1-F_{ST})/8F_{ST}$ where $M$ is the effective number of diploid individuals dispersing per generation \cite{slatkin1995measure}.
@@ -337,7 +339,7 @@ For plotting the models are predicted for the range of $x$-values with all other
 
 To test for an association between pathogen richness and population structure I have performed multiple regression using a model selection framework to establish whether or not two measures of population structure are likely to be included as explanatory variables in a `best model' and therefore important.
 As species cannot be considered independent due to shared evolutionary history, phylogeny was controlled for in all regressions.
-A number of other factors that have previously been found to be important were included as additional explanatory variables: body mass \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat, han2015infectious, bordes2008bat}, range size \cite{kamiya2014determines, turmelle2009correlates, maganga2014bat} and study effort \cite{turmelle2009correlates, gay2014parasite, maganga2014bat}.
+-A number of other factors that have previously been found to be important were included as additional explanatory variables: body mass \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat, han2015infectious, bordes2008bat}, range size \cite{kamiya2014determines, turmelle2009correlates, maganga2014bat} and study effort \cite{turmelle2009correlates, gay2014parasite, maganga2014bat}.		
 This was to attempt to avoid spurious positive results occur  ring simply due to correlation between pathogen richness and a different, causal factor.
 Despite commonly being associated with pathogen richness \cite{arneberg2002host, kamiya2014determines, nunn2003comparative}, population density is not included in the analysis as there is very little data for bat densities --- however Chapter~\ref{ch:sims2} examines the relationship between density and population structure and Chapter~\ref{ch:grem} presents a method that allows the estimation of density from acoustic surveys.
 I used both the number of subspecies a bat species has and estimates of gene flow (analysed separately) as measures of population structure.
@@ -414,15 +416,16 @@ Dot size shows the number of known viruses for that species and colour shows fam
 
 \subsection{Population structure data}
 
-I used two measures of population structure: gene flow and the number of subspecies.
+I used two measures of population structure: the effective level of gene flow and the number of subspecies.
 The number of subspecies was counted using the Wilson and Reeder taxonomy \cite{wilson2005mammal}.
-Gene flow was calculated from estimates of $F_{ST}$ collated from the literature.
+The effective level of gene flow was calculated from estimates of $F_{ST}$ collated from the literature.
 The studies were from a wide range of spatial scales, from local ($\sim\SI{10}{\kilo\metre}$) to continental.
 As $F_{ST}$ often increases with spatial scale \cite{burland1999population, hulva2010mechanisms, o2015genetic, vonhof2015range} I controlled for this by only using data from studies where a large proportion of the species range was studied.
-I used the ratio of the furthest distance between $F_{ST}$ samples (measured with \url{http://www.distancefromto.net/} if not stated) to the width of the IUCN species range \cite{iucn} and only used studies if this ratio was greater than 0.2.
+I used the ratio of the furthest distance between $F_{ST}$ samples (taken from the paper or measured with \url{http://www.distancefromto.net/} if not stated in the paper) to the length of the IUCN species range \cite{iucn} and only used studies if this ratio was greater than 0.2.
 This is an arbitrary value that was a compromise between retaining a reasonable number of data points and controlling for the bias in spatial scale.
-I converted all $F_{ST}$ value to migration using $M = (1-F_{ST})/8F_{ST}$.
-This removes the $(0, 1)$ bounds of $F_{ST}$ and is more easily interpretable (though the final results are unaffected). 
+I only used global $F_{ST}$ estimates as the mean of pairwise $F_{ST}$ values is not necessarily equal to the global $F_{ST}$ value.
+I converted all $F_{ST}$ values to effective migration rates using $M = (1-F_{ST})/4F_{ST}$.
+This transforms the data from being bound by $(0, 1)$ to being in the range $\lbrack 0, \infty)$ and is more easily interpretable (though the final results are unaffected). 
 These two measures of population structure were analysed separately as the number of subspecies has 196 data points while there is only $F_{ST}$ data for 22 bat species.
 For the subspecies analysis all bat species in \textcite{luis2013comparison} were used (i.e. all species with at least one known virus species).
 This is to avoid using the very large number of bat species that have simply never been sampled for viruses.
@@ -470,20 +473,23 @@ This was to make the greatest use of the $F_{ST}$ data available and because the
 \end{knitrout}
 
 
+ 		
 
 \subsection{Other explanatory variables}
 
 To control for study bias I collected the number of PubMed and Google Scholar citations for each bat species name including synonyms from ITIS \cite{itis} via the taxize package \cite{chamberlain2013taxize}.
 The counts were scraped using the rvest package \cite{rvest}.
 I log transformed these variables as they were strongly right skewed.
+I tested for correlation between these two proxies for study effort using phylogenetic least squares regression (pgls) and likelihood ratio tests using the caper package \cite{caper}.
+I used the best-supported phylogeny from \textcite{fritz2009geographical}.
 The log number of citations on PubMed and Google scholar were highly correlated (pgls: $t$ = 19.32, df = 194, $p < 10^{-5}$).
-As this correlation is strong, only results for analyses using only Google Scholar citations are presented.
+As this correlation is strong I used Google Scholar reference counts only in subsequent analyses.
 %See the appendix for analyses run using PubMed citations.
 
 Measures of body mass were taken from Pantheria \cite{jones2009pantheria} and primary literature \cite{canals2005relative, arita1993rarity, lopez2014echolocation, orr2013does, lim2001bat, aldridge1987turning, ma2003dietary, owen2003home, henderson2008movements, heaney2012nyctalus, oleksy2015high, zhang2009recent}. 
 \emph{Pipistrellus pygmaeus} was assigned the same mass as \emph{P. pipistrellus} as they are indistinguishable by mass.
 Body mass measurements were log transformed as they were strongly right skewed.
-Distribution size was estimated by downloading range maps for all species from IUCN \cite{iucn} and were also logged due to right skew.
+Distribution size was estimated by downloading range maps for all species from IUCN \cite{iucn} and were also log transformed due to right skew.
 
 
 
@@ -494,7 +500,7 @@ Distribution size was estimated by downloading range maps for all species from I
 
 }
 
-\caption[Akaike variable weights for $F_{ST}$ analysis.]{Akaike variable weights for both analyses. The probability that each variable will be in the best model if the data were recollected is shown for each of the bootstrap analyses. The purple ``Random'' box is a uniform random variable used as a null. Population structure (Number of subspecies and Gene flow), shown in red, is likely to be in the best model in both analyses.}\label{fig:fstITPlots}
+\caption[Akaike variable weights for $F_{ST}$ analysis.]{Akaike variable weights for both analyses. The probability that each variable is in the best model (amongst the models test) is shown, with the boxplots showing the variation amongst the models over inline{nBoots} resamplings of the uniformly random ``null'' variable. The three bars of the boxplot show the median values and upper and lower quartiles of the data, vertical lines show the range and points display outliers. The purple ``Random'' box is the uniformly random variable. Population structure (Number of subspecies and effective gene flow), shown in red, is likely to be in the best model in both analyses.}\label{fig:fstITPlots}
 \end{figure}
 
 

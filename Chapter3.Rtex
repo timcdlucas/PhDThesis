@@ -1646,7 +1646,7 @@ I used the ratio of the furthest distance between $F_{ST}$ samples (taken from t
 This is an arbitrary value that was a compromise between retaining a reasonable number of data points and controlling for the bias in spatial scale.
 I only used global $F_{ST}$ estimates as the mean of pairwise $F_{ST}$ values is not necessarily equal to the global $F_{ST}$ value.
 I converted all $F_{ST}$ values to effective migration rates using $M = (1-F_{ST})/4F_{ST}$.
-This transforms the data from being bound by $(0, 1)$ to being in the range $\[0, \infin)$ and is more easily interpretable (though the final results are unaffected). 
+This transforms the data from being bound by $(0, 1)$ to being in the range $\lbrack 0, \infty)$ and is more easily interpretable (though the final results are unaffected). 
 These two measures of population structure were analysed separately as the number of subspecies has \rinline{nrow(nSpecies)} data points while there is only $F_{ST}$ data for 22 bat species.
 For the subspecies analysis all bat species in \textcite{luis2013comparison} were used (i.e. all species with at least one known virus species).
 This is to avoid using the very large number of bat species that have simply never been sampled for viruses.
@@ -1967,7 +1967,7 @@ Distribution size was estimated by downloading range maps for all species from I
 
 
 
-%%begin.rcode fstITPlots, fig.cap = "Akaike variable weights for both analyses. The probability that each variable is in the best model (amongst the models test) is shown, with the boxplots showing the variation amongst the models over \\rinline{nBoots} resamplings of the uniformly random ``null'' variable. The three bars of the boxplot show the median values and upper and lower quartiles of the data, vertical lines show the range and points display outliers. The purple ``Random'' box is the uniformly random variable. Population structure (Number of subspecies and effective gene flow), shown in red, is likely to be in the best model in both analyses.", fig.height = 2.5, fig.scap = 'Akaike variable weights for $F_{ST}$ analysis.', out.width = '\\textwidth', out.extra = 'trim = 0 1cm 0 0'
+%%begin.rcode fstITPlots, fig.cap = "Akaike variable weights for both analyses. The probability that each variable is in the best model (amongst the models test) is shown, with the boxplots showing the variation amongst the models over \rinline{nBoots} resamplings of the uniformly random ``null'' variable. The three bars of the boxplot show the median values and upper and lower quartiles of the data, vertical lines show the range and points display outliers. The purple ``Random'' box is the uniformly random variable. Population structure (Number of subspecies and effective gene flow), shown in red, is likely to be in the best model in both analyses.", fig.height = 2.5, fig.scap = 'Akaike variable weights for $F_{ST}$ analysis.', out.width = '\\textwidth', out.extra = 'trim = 0 1cm 0 0'
 
 
 fstIT <- ggplot(fstSepVarWeights, aes(x = variable, y = estimate, colour = col, fill = col)) +
