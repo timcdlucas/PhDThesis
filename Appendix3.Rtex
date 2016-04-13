@@ -1,4 +1,8 @@
 
+
+
+
+
 %%begin.rcode settings, echo = FALSE, cache = FALSE, message = FALSE, results = 'hide', eval = TRUE
 
 
@@ -12,7 +16,8 @@
 extraFigs <- 'hide'
 
 #knitr options
-opts_chunk$set(cache.path = '.AppCh3Cache/')
+#  Set figure prefix as A so that no figures will be overwritten.
+opts_chunk$set(cache.path = '.AppCh3Cache/', fig.path = 'figures/A-')
 source('misc/KnitrOptions.R')
 
 # ggplot2 theme.
@@ -167,7 +172,7 @@ rm(t2)
 %%begin.rcode treeCapt
 
 treeCapt <- '
-Phylogeny from \\cite{jones2005bats} (version 2) pruned to include all species used in the number of subspecies analysis.
+Phylogeny from \\textcite{jones2005bats} (version 2) pruned to include all species used in the number of subspecies analysis.
 Dot size shows the number of known viruses for that species and colour shows family.
 Analyses run with this phylogeny gave qualitatively similar results to analyses using the phylogeny from \\cite{bininda2007delayed}.
 '
@@ -176,8 +181,8 @@ treeTitle <- 'Pruned alternative phylogeny with dot size showing number of patho
 
 %%end.rcode
 
-%%begin.rcode treePlot2, show.figs = 'hide', out.width = '\\textwidth', fig.cap = 'Pruned phylogeny \\cite{jones2005bats} with dot size showing number of pathogens and colour showing family.'
 
+%%begin.rcode treePlot2, out.width = '1\\textwidth', out.extra = 'trim = 0cm 0cm 0cm 0cm', fig.height = 5, fig.height = 5.5, fig.cap = treeCapt, fig.scap = treeTitle
 
 
 # Plot tree 
