@@ -1,0 +1,205 @@
+
+%%begin.rcode settings, echo = FALSE, cache = FALSE, message = FALSE, results = 'hide', eval = TRUE
+
+
+##################################
+### Run web scraping?          ###
+##################################
+
+# There are figures created in the data analysis which are not in the final chapter document.
+#   If TRUE, they will be included in the output.
+#   Use 'hide' to remove them.
+extraFigs <- 'hide'
+
+#knitr options
+opts_chunk$set(cache.path = '.AppCh3Cache/')
+source('misc/KnitrOptions.R')
+
+# ggplot2 theme.
+source('misc/theme_tcdl.R')
+theme_set(theme_grey() + theme_tcdl)
+
+
+# Choose the number of cores to use
+nCores <- 4
+
+%%end.rcode
+
+
+%%begin.rcode libs, cache = FALSE, result = FALSE
+
+# Data handling
+library(dplyr)
+library(broom)
+library(readxl)
+library(sqldf)
+library(reshape2)
+
+# phylogenetic regression
+library(ape)
+library(caper)
+library(phytools)
+library(nlme)
+library(qpcR)
+library(car)
+
+# weighted means + var
+library(Hmisc)
+
+# Plotting
+library(ggplot2)
+library(ggtree)
+library(palettetown)
+library(ggthemes)
+library(GGally)
+library(cowplot)
+
+
+# Web scraping.
+library(rvest)
+
+# For synonym list
+library(taxize)
+
+# Spatial analysis
+library(maptools)
+library(geosphere)
+
+# Parllel computation
+library(parallel)
+
+%%end.rcode
+
+
+
+
+%%-------------------------------------------------------------------------------%%
+%% Read and plot bat clocks rocks tree.
+%%-------------------------------------------------------------------------------%%
+
+
+%%begin.rcode readrawdata
+
+
+
+fstFinal <- read.csv('data/Chapter3/fstFinal.csv', row.names = 1)
+
+nSpecies <- read.csv('data/Chapter3/nSpecies.csv', row.names = 1)
+
+%%end.rcode
+
+
+
+%%begin.rcode treeRead2
+
+# Read in trees
+t2 <- read.nexus('data/Chapter3/BatST2BL.nex')
+
+# Make names match previous names
+t2$tip.label <- gsub('_', ' ', t2$tip.label)
+
+#missing <- nSpecies$binomial[!nSpecies$binomial %in% pruneTree2$tip.label ]
+
+## Copy binomial column. binomial will be changed to fit t2.
+#nSpecies$oldBinomial <- nSpecies$binomial
+
+## Replace with agrep where possible
+#closeMatch <- sapply(missing, function(i) t2$tip.label[agrep(i, t2$tip.label, max.distance = 0.11)])
+
+#closeMatch <- closeMatch[sapply(closeMatch, function(i) length(i) > 0)]
+
+
+
+
+unneededTips2 <- t2$tip.label[!(t2$tip.label %in% nSpecies$binomial)]
+
+# Prune tree down to only needed tips.
+pruneTree2 <- drop.tip(t2, unneededTips2)
+
+
+nSpecies2 <- sapply(pruneTree2$tip.label, function(x) which(nSpecies$binomial == x)) %>%
+               nSpecies[., ]
+
+
+################
+## Fst tree   ##
+################
+
+
+# Which tips are not needed
+fstUnneededTips2 <- t2$tip.label[!(t2$tip.label %in% fstFinal$binomial)]
+
+# Prune tree down to only needed tips.
+fstTree2 <- drop.tip(t2, fstUnneededTips2)
+
+# Which tips in Fst analysis are not in bats clocks tree.
+fstFinal$binomial[!(fstFinal$binomial %in% fstTree2$tip.label)]
+
+
+# Hacky cruddy way of placing the missing tips into the tree. Should end up with genus level polytomies in trimmed tree.
+# Just replacing some of the uneeded tips with the ones I need.
+
+t2$tip.label[t2$tip.label == 'Miniopterus pusillus'] <- 'Miniopterus natalensis'
+t2$tip.label[t2$tip.label == 'Miniopterus schreibersi'] <- 'Miniopterus schreibersii'
+t2$tip.label[t2$tip.label == 'Rousettus celebensis'] <- 'Rousettus leschenaultii'
+t2$tip.label[t2$tip.label == 'Myotis oxyotus'] <- 'Myotis macropus'
+t2$tip.label[t2$tip.label == 'Myotis leibii'] <- 'Myotis ciliolabrum'
+
+#Re prune tree
+# Which tips are not needed
+fstUnneededTips2 <- t2$tip.label[!(t2$tip.label %in% fstFinal$binomial)]
+
+# Prune tree down to only needed tips.
+fstTree2 <- drop.tip(t2, fstUnneededTips2)
+
+# Check we now have all the tips.
+fstFinal$binomial[!(fstFinal$binomial %in% fstTree2$tip.label)]
+
+rm(t2)
+
+
+
+
+%%end.rcode
+
+
+
+%%begin.rcode treeCapt
+
+treeCapt <- '
+Phylogeny from \\cite{jones2005bats} (version 2) pruned to include all species used in the number of subspecies analysis.
+Dot size shows the number of known viruses for that species and colour shows family.
+Analyses run with this phylogeny gave qualitatively similar results to analyses using the phylogeny from \\cite{bininda2007delayed}.
+'
+
+treeTitle <- 'Pruned alternative phylogeny with dot size showing number of pathogens and colour showing family.'
+
+%%end.rcode
+
+%%begin.rcode treePlot2, show.figs = 'hide', out.width = '\\textwidth', fig.cap = 'Pruned phylogeny \\cite{jones2005bats} with dot size showing number of pathogens and colour showing family.'
+
+
+
+# Plot tree 
+# Plot tree 
+p <- ggtree(pruneTree2, layout = 'fan') 
+
+p %<+% nSpecies +
+  geom_point2(aes(size = virusSpecies, colour = Family, subset = isTip)) +
+  scale_size(range = c(0.1, 3)) +
+  scale_colour_manual(values = c(pokepal('oddish')[c(1,3,5,7,9,10)],    pokepal('Carvanha')[c(1,2,4, 13, 12, 9)])) +
+  theme_tcdl +
+  theme(plot.margin = unit(c(-2, -0, +3, -0), "lines")) +
+  theme(legend.position = c(0.5, -0.04)) +
+  labs(size = 'Virus Richness') +
+  theme(legend.key.size = unit(0.8, "lines"),
+        legend.text = element_text(size = 10),
+        legend.margin = unit(c(0.05), "cm"),
+        legend.title = element_text(size = 12),
+        legend.direction = "horizontal") +
+  guides(colour = guide_legend(ncol=3))
+
+
+
+%%end.rcode
+
