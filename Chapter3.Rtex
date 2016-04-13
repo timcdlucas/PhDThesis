@@ -1259,13 +1259,13 @@ nSpeciesBox <- ggplot(nSpecies, aes(SubspeciesFactor, virusSpecies, colour = 'a'
   xlab('Number of Subspecies') +
   ylab('Viral Richness') +
   geom_line(data = lines, aes(x = NumberOfSubspecies, y = virusSpecies, group = 1),
-    colour = pokepal('nidorina')[10], lwd = 0.7) +
+    colour = pokepal('nidorina')[10], lwd = 0.7)
 #  geom_line(data = linesInter, aes(x = NumberOfSubspecies, y = virusSpecies, group = 1),
 #    colour = pokepal('nidorina')[13], lwd = 0.7) +
 #  annotate('text', x = c(11.8, 12.2), y = c(5.4, 2.5), 
 #    label = c('No interaction', 'Interaction'),
 #    colour = pokepal('nidorina')[c(10,13)], size = c(3, 3),
-    family = 'Lato Light')
+#    family = 'Lato Light')
 
 nSpeciesHist <- ggplot(nSpecies, aes(x = SubspeciesFactor)) +
   scale_x_discrete(limits = levels(nSpecies$SubspeciesFactor), drop = FALSE, labels = rep('', max(nSpecies$NumberOfSubspecies))) +
@@ -1285,7 +1285,7 @@ ggdraw() +
 
 To test for an association between pathogen richness and population structure I have performed multiple regression using a model selection framework to establish whether or not two measures of population structure are likely to be included as explanatory variables in a `best model' and therefore important.
 As species cannot be considered independent due to shared evolutionary history, phylogeny was controlled for in all regressions.
-A number of other factors that have previously been found to be important were included as additional explanatory variables: body mass \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat, han2015infectious}, range size \cite{kamiya2014determines, turmelle2009correlates, maganga2014bat} and study effort \cite{turmelle2009correlates, gay2014parasite, maganga2014bat}.
+-A number of other factors that have previously been found to be important were included as additional explanatory variables: body mass \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat, han2015infectious, bordes2008bat}, range size \cite{kamiya2014determines, turmelle2009correlates, maganga2014bat} and study effort \cite{turmelle2009correlates, gay2014parasite, maganga2014bat}.		
 This was to attempt to avoid spurious positive results occur  ring simply due to correlation between pathogen richness and a different, causal factor.
 Despite commonly being associated with pathogen richness \cite{arneberg2002host, kamiya2014determines, nunn2003comparative}, population density is not included in the analysis as there is very little data for bat densities --- however Chapter~\ref{ch:sims2} examines the relationship between density and population structure and Chapter~\ref{ch:grem} presents a method that allows the estimation of density from acoustic surveys.
 I used both the number of subspecies a bat species has and estimates of gene flow (analysed separately) as measures of population structure.
@@ -1933,6 +1933,22 @@ ggplot(fstFinal, aes(x = Nm, y = virusSpecies, colour = Marker)) +
 
 %%end.rcode
 
+%%begin.rcode fstInteractive, eval = FALSE		
+ 		
+ pp < ggplot(fstFinal, aes(x = Nm, y = virusSpecies, colour = Marker, text = binomial)) +		
+   geom_point(size = 2) +		
+   scale_colour_poke(pokemon = 'oddish', spread = 3) +		
+   scale_x_log10() +		
+   geom_abline(intercept = nmFstUni$coef[1, 1], slope = nmFstUni$coef[2, 1], lwd = 0.7, colour = pokepal('nidorina')[10]) +		
+   xlab('Gene Flow (per gen.)') +		
+   ylab('Viral Richness') 		
+ 		
+ ply < ggplotly(pp, tooltip = c('text', 'colour', 'y'))		
+ htmlwidgets::saveWidget(as.widget(ply), "imgs/fstinter.html")		
+ 		
+ %%end.rcode		
+ 		
+
 \subsection{Other explanatory variables}
 
 To control for study bias I collected the number of PubMed and Google Scholar citations for each bat species name including synonyms from ITIS \cite{itis} via the taxize package \cite{chamberlain2013taxize}.
@@ -2005,7 +2021,7 @@ For each variable the mean of its coefficient, $b$, in all models that contained
 In the subspecies analysis, this mean of $b$ was calculated for: a) all models b) only models with a interaction term and c) only models without an interaction.
 As the interaction term greatly affects the estimated value of $b$, considering these value separately aids interpretation.
 Following \cite{whittingham2005habitat} I included a uniformly random variable as a null variable as even unimportant variables can have Akaike weights notably greater than zero.
-The whole analysis was rUN \rinline{nBoots} times, resampling the random variable each time.
+The whole analysis was run \rinline{nBoots} times, resampling the random variable each time.
 I calculated AICc for each model.
 I calculated the average AICc, $\bar{\text{AICc}}$, by averaging AICc scores within models.
 $\Delta\text{AICc}$ was calculated as $\text{min}(\bar{\text{AICc}}) - \bar{\text{AICc}}$, not the mean of the individual $\Delta\text{AICc}$ scores, to guarantee that the best model has $\Delta\text{AICc} = 0$.
@@ -2093,7 +2109,7 @@ In the number of subspecies analysis there are many models with low $\Delta$AICc
 In the gene flow analysis, only the top model is supported.
 }
 
-\begin{tabular}{@{}>{\footnotesize}p{8cm}rrrr@{}}
+\begin{tabular}{@{}>{\footnotesize}lrrrr@{}}
 
 \toprule
 \normalsize{Model} & $\bar{\text{AICc}}$ & $\Delta$AICc & $w$ & $\sum w$\\
