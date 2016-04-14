@@ -419,7 +419,7 @@ colnames(fstModelWeights) <- c("Model", "$\\bar{\\text{AICc}}$", "$\\Delta$AICc"
 
 
 
-\begin{landscape}
+
 %%begin.rcode printnspeciestable, results = 'asis'
 
 modelSelectCapt <- "
@@ -444,6 +444,7 @@ print(xtable(modelWeights,
       size = "tiny", #Change size; useful for bigger tables
       include.rownames = FALSE, #Don't print rownames
       include.colnames = TRUE,
+
       sanitize.colnames.function = function(x){x},
       caption.placement = "top", 
       hline.after = c(-1, 0, nrow(modelWeights)), 
@@ -455,7 +456,7 @@ print(xtable(modelWeights,
 
 %%end.rcode
 
-\end{landscape}
+
 
 %%begin.rcode printfsttable, results = 'asis'
 
