@@ -36,17 +36,25 @@ While [tim-lucas-thesis.pdf](tim-lucas-thesis.pdf) is the full thesis pdf, most 
 
 ### Other files
 
+#### Additional analysis scripts
 [Chapter5DataReformat.R](Chapter5DataReformat.R) takes data from simulations for Chapter 5 and reformats them ready for plotting.
 [chapter3functions.R](chapter3functions.R) and [chapter4functions.R](chapter4functions.R) contain additional files used in these chapters and are pulled out to keep the `.Rtex` files more tidy.
 
+#### Appendices
+
+[Appendix3.Rtex](Appendix3.Rtex) contains code and text for appendices for Chapter 2.
+
 [lucas_et_al_supplementarymaterial_2015-01-20.tex](lucas_et_al_supplementarymaterial_2015-01-20.tex), [REM-methods.tex](REM-methods.tex) and files in [latexFiles/](latexFiles/) make up additional methods for Chapter 5 and are included as an appendix.
 
+#### Data
 [data/](data/) contains all raw and processed data for each chapter in seperate folders.
 Each folder should contain a README describing the data files in more detail.
 
+#### Figures
 Figures created directly from Chapter analyses by knitr are in [figure/](figure/).
 Figures created by older analyses and manually with inkscape are in [imgs/](imgs/)
 
+#### Misc
 [misc/](misc/) contains additional files such as my [ggplot2 themes](misc/theme_tcdl.R) and [global knitr options](misc/KnitrOptions.R).
 
 Reproducibility

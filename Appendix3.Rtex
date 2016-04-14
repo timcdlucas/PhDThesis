@@ -83,6 +83,75 @@ library(parallel)
 
 
 
+%%begin.rcode readRawData
+
+
+
+fstFinal <- read.csv('data/Chapter3/fstFinal.csv', row.names = 1)
+
+nSpecies <- read.csv('data/Chapter3/nSpecies.csv', row.names = 1)
+
+%%end.rcode
+
+
+%%begin.rcode rawDataTidy
+
+
+
+# Join the data frames
+joindf <- nSpecies %>%
+            full_join(fstFinal)
+            
+# Hack a  variable to sort so that it's FST only, both, subspecies only.
+joindf$whichAnalyses <- as.numeric(is.na(joindf$NumberOfSubspecies))
+joindf$whichAnalyses[!is.na(joindf$NumberOfSubspecies) & !is.na(joindf$Nm)] <- 2
+joindf$whichAnalyses[joindf$whichAnalyses == 0] <- 3
+
+# Make references cite
+joindf$References <- as.character(joindf$References)
+joindf$References[!is.na(joindf$References)] <- paste0('\\cite{', joindf$References[!is.na(joindf$References)], '}')
+
+# Sort and select wanted column
+joindf <- joindf %>%
+            arrange(whichAnalyses, Family, binomial) %>%
+            dplyr::select(Family, binomial, virusSpecies, NumberOfSubspecies, Nm, mass, 
+                   distrSize, scholarRefs, pubmedRefs, rangeWidth, Dmax..km., References)
+
+
+names(joindf) <- c('Family', 'Binomial', 'Virus Sp.', 'Subspecies', 'Gene Flow', 'Mass', 
+                   'Range Size', 'Scholar', 'PubMed', 'Range Width', 'Dmax', 'Reference')
+
+
+
+
+%%end.rcode
+
+
+\begin{landscape}
+%%begin.rcode rawDataTable, results = 'asis'
+
+rawDataCapt <- 'Raw species for both number of subspecies analyses'
+
+print(xtable(joindf, 
+             digits = 2, 
+             caption = rawDataCapt, 
+             label = "A-rawData",
+             align = c('l', '@{}l', 'l', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r@{}')), 
+      size = "tiny", #Change size; useful for bigger tables
+      include.rownames = FALSE, #Don't print rownames
+      include.colnames = TRUE,
+      tabular.environment = 'longtable',
+      sanitize.colnames.function = function(x){x},
+      sanitize.text.function = function(x){x},
+      caption.placement = "top", 
+      hline.after = c(-1, 0, nrow(joindf)), 
+      booktabs = TRUE,
+      floating = FALSE
+    )
+
+
+%%end.rcode
+\end{landscape}
 
 %%-------------------------------------------------------------------------------%%
 %% Read full model selection results for both analyses and make tables.
@@ -152,6 +221,7 @@ modelSelectCapt <- "
   log(Scholar)*NSubspecies implies the interaction term between study effort and number of subspecies.
   "
 
+# floating.environment = 'sidewaystable') ? possible to do upright caption.
 print(xtable(modelWeights, 
              digits = 2, 
              caption = modelSelectCapt, 
@@ -211,18 +281,6 @@ print(xtable(fstModelWeights,
 %%-------------------------------------------------------------------------------%%
 %% Read and plot bat clocks rocks tree.
 %%-------------------------------------------------------------------------------%%
-
-
-%%begin.rcode readrawdata
-
-
-
-fstFinal <- read.csv('data/Chapter3/fstFinal.csv', row.names = 1)
-
-nSpecies <- read.csv('data/Chapter3/nSpecies.csv', row.names = 1)
-
-%%end.rcode
-
 
 
 %%begin.rcode treeRead2
