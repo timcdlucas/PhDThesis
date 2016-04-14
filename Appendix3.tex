@@ -9,6 +9,13 @@
 
 
 
+%%-------------------------------------------------------------------------------%%
+%% Give full data tables for both analyses.
+%%-------------------------------------------------------------------------------%%
+
+
+
+
 
 %%-------------------------------------------------------------------------------%%
 %% Read full model selection results for both analyses and make tables.
@@ -27,19 +34,20 @@
 
 \begin{landscape}
 % latex table generated in R 3.2.4 by xtable 1.8-2 package
-% Wed Apr 13 23:45:19 2016
+% Thu Apr 14 13:04:31 2016
 \begin{table}[ht]
 \centering
 \caption{
-  Model selection results for number of effective gene flow analysis. 
+  Model selection results for number of subspecies analysis. 
   $\bar{\text{AICc}}$ is the mean AICc score across inline{nBoots} resamplings of the null random variable. 
   $\Delta$AICc is the model's $\bar{\text{AICc}}$ score minus $\text{min}(\bar{\text{AICc}})$. 
   $w$ is the Akaike weight and can be interpreted as the probability that the model is the best model (of those in the plausible set).
   $\sum w$ is the cumulative sum of the Akaike weights.
+  log(Scholar)*NSubspecies implies the interaction term between study effort and number of subspecies.
   } 
 \label{A-modelWeights}
 \begingroup\tiny
-\begin{tabular}{lrrrr}
+\begin{tabular}{@{}lrrrr@{}}
   \toprule
 Model & $\bar{\text{AICc}}$ & $\Delta$AICc & $w$ & $\sum w$ \\ 
   \midrule
@@ -91,20 +99,19 @@ log(Scholar)*NSubspecies + log(Scholar) + NSubspecies + log(Mass) + log(RangeSiz
 \end{landscape}
 
 % latex table generated in R 3.2.4 by xtable 1.8-2 package
-% Wed Apr 13 23:47:27 2016
+% Thu Apr 14 13:04:31 2016
 \begin{table}[ht]
 \centering
 \caption{
-  Model selection results for number of subspecies analysis. 
+  Model selection results for number of effective gene flow analysis. 
   $\bar{\text{AICc}}$ is the mean AICc score across inline{nBoots} resamplings of the null random variable. 
   $\Delta$AICc is the model's $\bar{\text{AICc}}$ score minus $\text{min}(\bar{\text{AICc}})$. 
   $w$ is the Akaike weight and can be interpreted as the probability that the model is the best model (of those in the plausible set).
   $\sum w$ is the cumulative sum of the Akaike weights.
-  log(Scholar)*NSubspecies implies the interaction term between study effort and number of subspecies.
   } 
 \label{A-fstModelWeights}
 \begingroup\scriptsize
-\begin{tabular}{lrrrr}
+\begin{tabular}{@{}lrrrr@{}}
   \toprule
 Model & $\bar{\text{AICc}}$ & $\Delta$AICc & $w$ & $\sum w$ \\ 
   \midrule

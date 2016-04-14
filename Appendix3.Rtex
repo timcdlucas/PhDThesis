@@ -76,6 +76,13 @@ library(parallel)
 %%end.rcode
 
 
+%%-------------------------------------------------------------------------------%%
+%% Give full data tables for both analyses.
+%%-------------------------------------------------------------------------------%%
+
+
+
+
 
 %%-------------------------------------------------------------------------------%%
 %% Read full model selection results for both analyses and make tables.
@@ -145,7 +152,11 @@ modelSelectCapt <- "
   log(Scholar)*NSubspecies implies the interaction term between study effort and number of subspecies.
   "
 
-print(xtable(modelWeights, digits = 2, caption = fstSelectCapt, label = "A-modelWeights"), 
+print(xtable(modelWeights, 
+             digits = 2, 
+             caption = modelSelectCapt, 
+             label = "A-modelWeights",
+             align = c('l', '@{}l', 'r', 'r', 'r', 'r@{}')), 
       size = "tiny", #Change size; useful for bigger tables
       include.rownames = FALSE, #Don't print rownames
       include.colnames = TRUE,
@@ -174,7 +185,11 @@ fstSelectCapt <- "
 
 
 
-print(xtable(fstModelWeights, digits = 2, caption = modelSelectCapt, label = "A-fstModelWeights"), 
+print(xtable(fstModelWeights, 
+             digits = 2, 
+             caption = fstSelectCapt, 
+             label = "A-fstModelWeights",
+             align = c('l', '@{}l', 'r', 'r', 'r', 'r@{}')),  
       size = "scriptsize", #Change size; useful for bigger tables
       include.rownames = FALSE, #Don't print rownames
       include.colnames = TRUE,
