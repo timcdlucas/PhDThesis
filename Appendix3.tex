@@ -25,14 +25,33 @@
 \begin{landscape}
 
 % latex table generated in R 3.2.4 by xtable 1.8-2 package
-% Thu Apr 14 16:07:10 2016
+% Thu Apr 14 23:33:29 2016
 \begingroup\tiny
-\begin{longtable}{@{}llrrrrrrrrrr@{}}
-\caption{Raw species for both number of subspecies analyses} \\ 
+\begin{longtable}{@{}llrrrrrrrrrl@{}}
+\caption[
+Raw data for both analyses.
+]{
+Raw data for both analyses.
+Range Length is the distance between furthest apart points in the species range.
+Dmax is the distance between furthest apart $F_{ST}$ sampling locations.
+The references are for the $F_{ST}$ data only.
+} \\ 
   \toprule
-Family & Binomial & Virus Sp. & Subspecies & Gene Flow & Mass & Range Size & Scholar & PubMed & Range Width & Dmax & Reference \\ 
+Family & Binomial & Virus Sp. & Subsp. & Gene Flow & Mass & Range Size & Scholar & PubMed & Range Length & Dmax & Reference \\ 
   &  &  &  &  & (g) & ($\times 10^{9}$km$^2$) &  &  & (km) & (km) &  \\ 
-   \midrule\endhead 
+   \midrule
+\endfirsthead 
+\caption[]{
+Raw data for both analyses.
+Range Length is the distance between furthest apart points in the species range.
+Dmax is the distance between furthest apart $F_{ST}$ sampling locations.
+The references are for the $F_{ST}$ data only.
+}\\
+\toprule
+Family & Binomial & Virus Sp. & Subsp. & Gene Flow & Mass & Range Size & Scholar & PubMed & Range Length & Dmax & Reference \\
+   &  &  &  &  & (g) & ($\times 10^{9}$km$^2$) &  &  & (km) & (km) &  \\
+ \midrule 
+\endhead 
 Megadermatidae & \emph{Macroderma gigas} & 0 &  & 0.25 & 124.37 & 1078.95 & 769 & 13 & 3609.23 & 3148 & \cite{wilmer1999genetic} \\ 
   Miniopteridae & \emph{Miniopterus natalensis} & 0 &  & 0.08 & 10.43 & 3784.83 & 180 & 5 & 6657.28 & 1706 & \cite{miller2003strong} \\ 
   Miniopteridae & \emph{Miniopterus schreibersii} & 12 &  & 1.86 & 11.46 & 3707.97 & 3090 & 64 & 7050.77 & 2649 & \cite{witsenburg2015haemosporidian} \\ 
@@ -244,6 +263,64 @@ Megadermatidae & \emph{Macroderma gigas} & 0 &  & 0.25 & 124.37 & 1078.95 & 769 
 
 \end{landscape}
 
+
+
+
+
+
+
+
+
+
+
+%%-------------------------------------------------------------------------------%%
+%% Some plots of the data
+%%-------------------------------------------------------------------------------%%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[t]
+
+{\centering \includegraphics[width=\textwidth]{figures/A-scholarvspubmedPlot-1} 
+
+}
+
+\caption[
+  Logged number of references on Scholar and PubMed, with a fitted phylogenetic linear model]{
+  Logged number of references on Scholar and PubMed, with a fitted phylogenetic linear model. 
+  Colours indicate family. 
+  (pgls: $t$ = 19.32, df = 194, $p < 10^{-5}$.)}\label{fig:scholarvspubmedPlot}
+\end{figure}
+
+
+\end{knitrout}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 %%-------------------------------------------------------------------------------%%
 %% Read full model selection results for both analyses and make tables.
 %%-------------------------------------------------------------------------------%%
@@ -261,10 +338,12 @@ Megadermatidae & \emph{Macroderma gigas} & 0 &  & 0.25 & 124.37 & 1078.95 & 769 
 
 \begin{landscape}
 % latex table generated in R 3.2.4 by xtable 1.8-2 package
-% Thu Apr 14 14:15:00 2016
+% Thu Apr 14 23:33:20 2016
 \begin{table}[ht]
 \centering
-\caption{
+\caption[
+  Full model selection results for number of subspecies analysis. 
+]{
   Model selection results for number of subspecies analysis. 
   $\bar{\text{AICc}}$ is the mean AICc score across inline{nBoots} resamplings of the null random variable. 
   $\Delta$AICc is the model's $\bar{\text{AICc}}$ score minus $\text{min}(\bar{\text{AICc}})$. 
@@ -326,10 +405,12 @@ log(Scholar)*NSubspecies + log(Scholar) + NSubspecies + log(Mass) + log(RangeSiz
 \end{landscape}
 
 % latex table generated in R 3.2.4 by xtable 1.8-2 package
-% Thu Apr 14 13:04:31 2016
+% Thu Apr 14 23:33:29 2016
 \begin{table}[ht]
 \centering
-\caption{
+\caption[
+  Full model selection results for number of effective gene flow analysis. 
+]{
   Model selection results for number of effective gene flow analysis. 
   $\bar{\text{AICc}}$ is the mean AICc score across inline{nBoots} resamplings of the null random variable. 
   $\Delta$AICc is the model's $\bar{\text{AICc}}$ score minus $\text{min}(\bar{\text{AICc}})$. 
