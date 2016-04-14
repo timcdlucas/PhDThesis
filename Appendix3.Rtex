@@ -127,8 +127,8 @@ joindf <- joindf %>%
 joindf <- joindf %>%  
             rbind(c('', '', '', '', '', '(g)', '($\\times 10^{9}$km$^2$)', '', '', '(km)', '(km)', ''), .)
 
-names(joindf) <- c('Family', 'Binomial', 'Virus Sp.', 'Subspecies', 'Gene Flow', 'Mass', 
-                   'Range Size', 'Scholar', 'PubMed', 'Range Width', 'Dmax', 'Reference')
+names(joindf) <- c('Family', 'Binomial', 'Virus Sp.', 'Subsp.', 'Gene Flow', 'Mass', 
+                   'Range Size', 'Scholar', 'PubMed', 'Range Length', 'Dmax', 'Reference')
 
 
 
@@ -140,6 +140,9 @@ names(joindf) <- c('Family', 'Binomial', 'Virus Sp.', 'Subspecies', 'Gene Flow',
 %%begin.rcode rawDataTable, results = 'asis', cache = FALSE
 rawDataCapt <- '
 Raw data for both analyses.
+Range Length is the distance between furthest apart points in the species range.
+Dmax is the distance between furthest apart $F_{ST}$ sampling locations.
+The references are for the $F_{ST}$ data only.
 '
 
 addtorow          <- list()
@@ -154,7 +157,7 @@ print(xtable(joindf,
              digits = 2, 
              caption = rawDataCapt, 
              label = "A-rawData",
-             align = c('l', '@{}l', 'l', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r@{}')), 
+             align = c('l', '@{}l', 'l', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'l@{}')), 
       size = "tiny", #Change size; useful for bigger tables
       include.rownames = FALSE, #Don't print rownames
       include.colnames = TRUE,
