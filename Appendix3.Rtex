@@ -96,8 +96,6 @@ nSpecies <- read.csv('data/Chapter3/nSpecies.csv', row.names = 1)
 
 %%begin.rcode rawDataTidy
 
-
-
 # Join the data frames
 joindf <- nSpecies %>%
             full_join(fstFinal)
@@ -112,15 +110,25 @@ joindf$References <- as.character(joindf$References)
 joindf$References[!is.na(joindf$References)] <- paste0('\\cite{', joindf$References[!is.na(joindf$References)], '}')
 
 # Sort and select wanted column
+#   Have to do loads of converting to characters and sprintf because of units row below.
 joindf <- joindf %>%
+            mutate(binomial = paste0('\\emph{', binomial, '}')) %>%
+            mutate(distrSize = sprintf('%.2f', distrSize / 1e9)) %>%
+            mutate(Nm = sprintf('%.2f', Nm)) %>%
+            mutate(Nm = replace(Nm, Nm == 'NA', '')) %>%
+            mutate(rangeWidth = sprintf('%.2f', rangeWidth)) %>%
+            mutate(rangeWidth = replace(rangeWidth, rangeWidth == 'NA', '')) %>%
             arrange(whichAnalyses, Family, binomial) %>%
             dplyr::select(Family, binomial, virusSpecies, NumberOfSubspecies, Nm, mass, 
                    distrSize, scholarRefs, pubmedRefs, rangeWidth, Dmax..km., References)
 
+# All a horrible hack now. 
+#   Add end head to end...
+joindf <- joindf %>%  
+            rbind(c('', '', '', '', '', '(g)', '($\\times 10^{9}$km$^2$)', '', '', '(km)', '(km)', ''), .)
 
 names(joindf) <- c('Family', 'Binomial', 'Virus Sp.', 'Subspecies', 'Gene Flow', 'Mass', 
                    'Range Size', 'Scholar', 'PubMed', 'Range Width', 'Dmax', 'Reference')
-
 
 
 
@@ -128,9 +136,19 @@ names(joindf) <- c('Family', 'Binomial', 'Virus Sp.', 'Subspecies', 'Gene Flow',
 
 
 \begin{landscape}
-%%begin.rcode rawDataTable, results = 'asis'
 
-rawDataCapt <- 'Raw species for both number of subspecies analyses'
+%%begin.rcode rawDataTable, results = 'asis', cache = FALSE
+rawDataCapt <- '
+Raw data for both analyses.
+'
+
+addtorow          <- list()
+addtorow$pos      <- list()
+addtorow$pos[[1]] <- c(1)
+addtorow$command  <- c(paste("\\midrule",
+                             "\\endhead \n", sep=""))
+
+
 
 print(xtable(joindf, 
              digits = 2, 
@@ -144,8 +162,9 @@ print(xtable(joindf,
       sanitize.colnames.function = function(x){x},
       sanitize.text.function = function(x){x},
       caption.placement = "top", 
-      hline.after = c(-1, 0, nrow(joindf)), 
+      hline.after = c(-1, nrow(joindf)), 
       booktabs = TRUE,
+      add.to.row = addtorow,
       floating = FALSE
     )
 
