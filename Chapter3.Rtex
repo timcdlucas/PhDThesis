@@ -1167,74 +1167,6 @@ sspUni <- summary(pgls(virusSpecies ~ NumberOfSubspecies, data = compSubspecies,
 
 
 
-%%begin.rcode boxplot, fig.cap = boxplotCapt		
-
-
-# Make a boxplot of subspecies vs virus
-# Add model lines for pgls models.
-
-# Make predictions of model w/out interactions using median values of other variables.
-
-predData <- data.frame(scholarRefs = quantile(nSpecies$scholarRefs, 0.5),
-                       mass = quantile(nSpecies$mass, 0.5),
-                       NumberOfSubspecies =
-                         seq(min(nSpecies$NumberOfSubspecies), max(nSpecies$NumberOfSubspecies), 
-                         length.out = 200)
-                       )
-
-
-lines <- data.frame(NumberOfSubspecies = predData$NumberOfSubspecies, 
-               virusSpecies = predict(subspeciesJointUnlog, newdata = predData))
-
-## Make predictions of model w/ interactions using median values of other variables.
-
-predDataInter <- data.frame(scholarRefs = quantile(nSpecies$scholarRefs, 0.5),
-                       mass = quantile(nSpecies$mass, 0.5),
-                       NumberOfSubspecies =
-                         seq(min(nSpecies$NumberOfSubspecies), max(nSpecies$NumberOfSubspecies), 
-                         length.out = 200)
-                       )
-
-
-linesInter <- data.frame(NumberOfSubspecies = predData$NumberOfSubspecies, 
-               virusSpecies = predict(subspeciesInter, newdata = predDataInter))
-
-# Make plot
-
-nSpeciesBox <- ggplot(nSpecies, aes(SubspeciesFactor, virusSpecies, colour = 'a', fill = 'a')) + 
-  geom_boxplot(outlier.size = 1, size = 0.3, outlier.colour = grey(0.3), 
-    notch = FALSE) +
-  scale_colour_manual(values = pokepal('nidorina')[4]) +
-  scale_fill_manual(values = pokepal('nidorina')[2]) +
-  stat_summary(geom = "crossbar", width = 0.7, fatten = 2, 
-    fun.data = function(x){ return(c(y = median(x), ymin = median(x), ymax = median(x))) }) +
-  theme(legend.position = 'none') + 
-  scale_x_discrete(limits = levels(nSpecies$SubspeciesFactor), drop = FALSE) +
-  xlab('Number of Subspecies') +
-  ylab('Viral Richness') +
-  geom_line(data = lines, aes(x = NumberOfSubspecies, y = virusSpecies, group = 1),
-    colour = pokepal('nidorina')[10], lwd = 0.7)
-#  geom_line(data = linesInter, aes(x = NumberOfSubspecies, y = virusSpecies, group = 1),
-#    colour = pokepal('nidorina')[13], lwd = 0.7) +
-#  annotate('text', x = c(11.8, 12.2), y = c(5.4, 2.5), 
-#    label = c('No interaction', 'Interaction'),
-#    colour = pokepal('nidorina')[c(10,13)], size = c(3, 3),
-#    family = 'Lato Light')
-
-nSpeciesHist <- ggplot(nSpecies, aes(x = SubspeciesFactor)) +
-  scale_x_discrete(limits = levels(nSpecies$SubspeciesFactor), drop = FALSE, labels = rep('', max(nSpecies$NumberOfSubspecies))) +
-  scale_y_continuous(breaks = c(20, 60)) +
-  geom_bar(stat = 'count') +
-  xlab('') +
-  ylab('Count') +
-  theme(plot.margin  =  unit(c(0.3, 0.1, -1.6, 1.3), "lines"))
-
-ggdraw() +
-  draw_plot(nSpeciesHist, 0, 0.75, 1, 0.25) +
-  draw_plot(nSpeciesBox, 0, 0, 1, 0.75)
-
-%%end.rcode
-
 
 
 To test for an association between pathogen richness and population structure I have performed multiple regression using a model selection framework to establish whether or not two measures of population structure are likely to be included as explanatory variables in a `best model' and therefore important.
@@ -1873,20 +1805,6 @@ fstMassStudyEffort <- summary(pgls(log(scholarRefs) ~ log(mass), data = compFst,
 %%end.rcode
 
 
-%%begin.rcode fstRawData, fig.height = 2.3, fig.cap = 'Gene flow per generation (on a log scale) against viral richness. The genetic marker used is shown with colour. The red line shows the univariate phylogenetic model.'
-
-# Plot raw fstdata
-
-ggplot(fstFinal, aes(x = Nm, y = virusSpecies, colour = Marker)) +
-  geom_point(size = 2) +
-  scale_colour_poke(pokemon = 'oddish', spread = 3) +
-  scale_x_log10() +
-  geom_abline(intercept = nmFstUni$coef[1, 1], slope = nmFstUni$coef[2, 1], lwd = 0.7, colour = pokepal('nidorina')[10]) +
-  xlab('Gene Flow (per gen.)') +
-  ylab('Viral Richness') 
-
-%%end.rcode
-
 %%begin.rcode fstInteractive, eval = FALSE		
  		
  pp < ggplot(fstFinal, aes(x = Nm, y = virusSpecies, colour = Marker, text = binomial)) +		
@@ -1993,8 +1911,80 @@ This value can be interpreted as the probability that the given variable is in t
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+%%begin.rcode boxplot, fig.cap = boxplotCapt		
+
+
+# Make a boxplot of subspecies vs virus
+# Add model lines for pgls models.
+
+# Make predictions of model w/out interactions using median values of other variables.
+
+predData <- data.frame(scholarRefs = quantile(nSpecies$scholarRefs, 0.5),
+                       mass = quantile(nSpecies$mass, 0.5),
+                       NumberOfSubspecies =
+                         seq(min(nSpecies$NumberOfSubspecies), max(nSpecies$NumberOfSubspecies), 
+                         length.out = 200)
+                       )
+
+
+lines <- data.frame(NumberOfSubspecies = predData$NumberOfSubspecies, 
+               virusSpecies = predict(subspeciesJointUnlog, newdata = predData))
+
+## Make predictions of model w/ interactions using median values of other variables.
+
+predDataInter <- data.frame(scholarRefs = quantile(nSpecies$scholarRefs, 0.5),
+                       mass = quantile(nSpecies$mass, 0.5),
+                       NumberOfSubspecies =
+                         seq(min(nSpecies$NumberOfSubspecies), max(nSpecies$NumberOfSubspecies), 
+                         length.out = 200)
+                       )
+
+
+linesInter <- data.frame(NumberOfSubspecies = predData$NumberOfSubspecies, 
+               virusSpecies = predict(subspeciesInter, newdata = predDataInter))
+
+# Make plot
+
+nSpeciesBox <- ggplot(nSpecies, aes(SubspeciesFactor, virusSpecies, colour = 'a', fill = 'a')) + 
+  geom_boxplot(outlier.size = 1, size = 0.3, outlier.colour = grey(0.3), 
+    notch = FALSE) +
+  scale_colour_manual(values = pokepal('nidorina')[4]) +
+  scale_fill_manual(values = pokepal('nidorina')[2]) +
+  stat_summary(geom = "crossbar", width = 0.7, fatten = 2, 
+    fun.data = function(x){ return(c(y = median(x), ymin = median(x), ymax = median(x))) }) +
+  theme(legend.position = 'none') + 
+  scale_x_discrete(limits = levels(nSpecies$SubspeciesFactor), drop = FALSE) +
+  xlab('Number of Subspecies') +
+  ylab('Viral Richness') +
+  geom_line(data = lines, aes(x = NumberOfSubspecies, y = virusSpecies, group = 1),
+    colour = pokepal('nidorina')[10], lwd = 0.7)
+#  geom_line(data = linesInter, aes(x = NumberOfSubspecies, y = virusSpecies, group = 1),
+#    colour = pokepal('nidorina')[13], lwd = 0.7) +
+#  annotate('text', x = c(11.8, 12.2), y = c(5.4, 2.5), 
+#    label = c('No interaction', 'Interaction'),
+#    colour = pokepal('nidorina')[c(10,13)], size = c(3, 3),
+#    family = 'Lato Light')
+
+nSpeciesHist <- ggplot(nSpecies, aes(x = SubspeciesFactor)) +
+  scale_x_discrete(limits = levels(nSpecies$SubspeciesFactor), drop = FALSE, labels = rep('', max(nSpecies$NumberOfSubspecies))) +
+  scale_y_continuous(breaks = c(20, 60)) +
+  geom_bar(stat = 'count') +
+  xlab('') +
+  ylab('Count') +
+  theme(plot.margin  =  unit(c(0.3, 0.1, -1.6, 1.3), "lines"))
+
+ggdraw() +
+  draw_plot(nSpeciesHist, 0, 0.75, 1, 0.25) +
+  draw_plot(nSpeciesBox, 0, 0, 1, 0.75)
+
+%%end.rcode
+
+
+
 \subsection{Number of Subspecies}
 \tmpsection{More descriptive}
+
 
 After data cleaning there was data for \rinline{nrow(nSpecies)} bat species in \rinline{length(unique(nSpecies$Family))} families.
 There appears to be a positive relationship between the number of subspecies and viral richness (Figure~\ref{fig:boxplot}) though few species have more than four subspecies. 
@@ -2044,6 +2034,22 @@ Due to the low number of studies and the restrictive requirements imposed on stu
 The number of described virus species for a bat host ranged up to \rinline{max(fstFinal$virusSpecies)} viruses in \emph{\rinline{fstFinal$binomial[which.max(fstFinal$virusSpecies)]}}.
 Figure~\ref{fig:fstRawData} shows the raw data for the relationship between pathogen richness and log gene flow.
 %Figure~\ref{fig:fstTreePlot} shows the phylogeny used and the number of viruses for each species.
+
+
+
+%%begin.rcode fstRawData, fig.height = 2.3, fig.cap = 'Gene flow per generation (on a log scale) against viral richness. The genetic marker used is shown with colour. The red line shows the univariate phylogenetic model.'
+
+# Plot raw fstdata
+
+ggplot(fstFinal, aes(x = Nm, y = virusSpecies, colour = Marker)) +
+  geom_point(size = 2) +
+  scale_colour_poke(pokemon = 'oddish', spread = 3) +
+  scale_x_log10() +
+  geom_abline(intercept = nmFstUni$coef[1, 1], slope = nmFstUni$coef[2, 1], lwd = 0.7, colour = pokepal('nidorina')[10]) +
+  xlab('Gene Flow (per gen.)') +
+  ylab('Viral Richness') 
+
+%%end.rcode
 
 
 
