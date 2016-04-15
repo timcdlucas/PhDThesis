@@ -224,52 +224,6 @@ Finally, one further study tested for an association between group size and para
 They found no relationship between group size (coded into four classes) and bat fly species richness.
 
 
-%Global $F_{ST}$ should be calculated as
-%global $F_{ST}$ values we expect migration rates of $M = (1-F_{ST})/4F_{ST}$ while from $F_{ST}$ values between pairs of populations we expect migration rates of $M = (1-F_{ST})/8F_{ST}$ where $M$ is the effective number of diploid individuals dispersing per generation \cite{slatkin1995measure}.
-%To use studies that only present pairwise $F_{ST}$ values the raw data would have to be gathered and global $F_{ST}$ calculated from those.
-%As it is in fact the movement of individuals that is epidemiologically relevant, using these studies is probably not accurate without attempting to correct for these differences.
-
-
-
-%\tmpsection{Choice of measure of population structure}
-%
-%A number of measurements of population structure have been used in the literature and each has its own shortcomings.
-%In particular, the better, more direct measurements tend to be very work intensive which consequently means data is available for few species.
-%
-%\tmpsection{Direct dispersal measurements}
-%
-%The ideal metric of population structure is direct measurement of dispersal rates and distance.
-%These are incredibly difficult to obtain, especially over large scales.
-%Some very large mark-recapture studies have been conducted, but recapture rates are low \cite{norquay2013long}.
-%In practise, direct measurements are not practical for comparative analysis due to the lack of data and inconsistency in data collection methods.
-%%todo
-%
-%\tmpsection{Genetic measures}
-%
-%As direct measurement of dispersal is difficult, genetic data is often used.
-%Measurement such as $F_{ST}$ are used to calculate migration.
-%There are strong model assumptions under the conversion from $F_{ST}$ to migration.
-%Furthermore, estimates are affected by the spatial spatial scale of the studies and the genetic regions being sequenced.
-%These differences should not be ignored.
-%However, the main issue with this measure is the effort required for each study and the subsequent lack of data.
-%
-%\tmpsection{Number of Subspecies}
-%
-%For a population to evolve distinct phenotypic or genetic traits, such that they can be classed as a subspecies, there must be limited migration between populations.
-%The number of subspecies a species has therefore reflects the level of population structure in that species.
-%The value of this measurement is available for every bat species.
-%However, it is likely biased, with well studied species being likely to have more recognised subspecies.
-%Further, this is a very course measure and it is important to consider whether it is measuring migration at a timescale and rate that is epidemiologically relevant.
-%
-%For both measures from $F_{ST}$ and the number of subspecies it is useful to consider the rates of animal movement that are being measured.
-%Rates of migration estimated from $F_{ST}$ tend to be between 1 and 100 individuals per generation dispersing across all subpopulations.
-%
-%
-%\tmpsection{Measures from range}
-%
-%The final measurement that has been used is derived from the shape of the species' range, typically from IUCN maps \cite{iucn}.
-%
-%
 
 \tmpsection{The gap}
 \tmpsection{What I did/found}
