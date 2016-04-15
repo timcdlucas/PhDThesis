@@ -1992,8 +1992,8 @@ plot_grid(ITPlot, fstIT, labels = c("A", "B"), align = 'h', label_size = 10)
 To control for phylogenetic nonindependence I used the best-supported phylogeny from \textcite{fritz2009geographical} (shown in Figure~\ref{fig:treePlot}) which is the supertree from \cite{bininda2007delayed} with names updated to match the Wilson \& Reeder taxonomy \cite{wilson2005mammal}.
 Phylogenetic manipulation was performed using the ape package \cite{ape}.
 The importance of the phylogeny on each variable separately (the $\lambda$ parameter of the variable regressed against an intercept) was estimated and tested against the null of $\lambda = 0$ with log-likelihood ratio tests using caper \cite{caper}.
-I also performed the analysis using the tree from \cite{jones2005bats} as this has some broad changes with families in different places.
-However the phylogeny did not affect the analysis (Figure~\ref{fig:treePlot2}).
+I also performed the analysis using the tree from \cite{jones2005bats} as this has some broad changes with families in different places (Figure~\ref{fig:treePlot2}).
+However the phylogeny did not affect the analysis.
 
 %$F_{ST}$ studies are conducted at a range of spatial scales, but $F_{ST}$ often increases with distance studied \cite{burland1999population, hulva2010mechanisms, o2015genetic, vonhof2015range}.
 %To minimise the effects of this I only used data from studies that cover \rinline{rangeUseable * 100}\% of the diameter of the species range.
