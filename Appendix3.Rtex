@@ -5,11 +5,6 @@
 
 %%begin.rcode settings, echo = FALSE, cache = FALSE, message = FALSE, results = 'hide', eval = TRUE
 
-
-##################################
-### Run web scraping?          ###
-##################################
-
 # There are figures created in the data analysis which are not in the final chapter document.
 #   If TRUE, they will be included in the output.
 #   Use 'hide' to remove them.

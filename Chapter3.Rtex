@@ -1956,7 +1956,7 @@ The counts were scraped using the rvest package \cite{rvest}.
 I log transformed these variables as they were strongly right skewed.
 I tested for correlation between these two proxies for study effort using phylogenetic least squares regression (pgls) and likelihood ratio tests using the caper package \cite{caper}.
 I used the best-supported phylogeny from \textcite{fritz2009geographical}.
-The log number of citations on PubMed and Google scholar were highly correlated (pgls: $t$ = \rinline{studyEffortCor$coefficients['log(pubmedRefs + 1)', 't value']}, df = \rinline{studyEffortCor$df[2]}, $p < 10^{-5}$).
+The log number of citations on PubMed and Google scholar were highly correlated (pgls: $t$ = \rinline{studyEffortCor$coefficients['log(pubmedRefs + 1)', 't value']}, df = \rinline{studyEffortCor$df[2]}, $p < 10^{-5}$ and see Figure~\ref{fig:scholarvspubmedPlot}).
 As this correlation is strong I used Google Scholar reference counts only in subsequent analyses.
 %See the appendix for analyses run using PubMed citations.
 
@@ -1964,6 +1964,7 @@ Measures of body mass were taken from Pantheria \cite{jones2009pantheria} and pr
 \emph{Pipistrellus pygmaeus} was assigned the same mass as \emph{P. pipistrellus} as they are indistinguishable by mass.
 Body mass measurements were log transformed as they were strongly right skewed.
 Distribution size was estimated by downloading range maps for all species from IUCN \cite{iucn} and were also log transformed due to right skew.
+The raw data tables are included in Table \ref{A-rawData}.
 
 
 
@@ -2060,7 +2061,7 @@ A small number of models (\rinline{mean(na.omit(allResults$lambda < 0))*100}\%) 
 
 \tmpsection{Model results}
 
-The top seven models all had $\Delta\text{AICc} < 4$ meaning there was no clear best model (Table~\ref{t:models}).
+The top seven models all had $\Delta\text{AICc} < 4$ meaning there was no clear best model (Table~\ref{t:models} and Table \ref{A-modelWeights}).
 These top seven models had a combined weight of \rinline{sprintf("%.2f", round(modelWeights[7, 5], 2))} meaning that there was a \rinline{sprintf("%.0f", round(100 * modelWeights[7, 5]))}\% chance that one of these models would be the best model if the data was recollected.
 However these top seven models all contained study effort, number of subspecies and the interaction between these two variables.
 log(Mass) and log(Range Size) and the random variable are all in three of the top seven models.
@@ -2215,7 +2216,7 @@ However, study effort had some phylogenetic autocorrelation ($\lambda$ = \rinlin
 
 \tmpsection{Model results}
 
-Only the model with study effort, gene flow and mass was well supported with the second model having an $\Delta\text{AICc}$ of \rinline{round(fstModelWeights[2, 3])} (Table \ref{t:models}).
+Only the model with study effort, gene flow and mass was well supported with the second model having an $\Delta\text{AICc}$ of \rinline{round(fstModelWeights[2, 3])} (Table \ref{t:models} and Table \ref{A-modelWeights}).
 While less strongly supported than the number of subspecies, gene flow was likely in the best model ($Pr = $ \rinline{fstVarWeights['Nm']}) compared to the benchmark random variable which has $Pr = $ \rinline{fstVarWeights['rand']} (Figure~\ref{fig:fstITPlots}B and Table~\ref{t:variables}).
 On average (mean weighted by Akaike weights) there was a negative relationship between gene flow and viral richness ($b = $ \rinline{fstCoefMeans['beta.Nm']}, variance = \rinline{fstCoefVars['beta.Nm']}) despite the apparent positive relationship (see Figure~\ref{fig:fstRawData}) weakly suggested by the single-predictor model (pgls: $b$ = \rinline{nmFstUni$coefficients['log(Nm)', 'Estimate']}, $t$ = \rinline{nmFstUni$coefficients['log(Nm)', 't value']}, df = \rinline{nmFstUni$df[2]}, $p$ = \rinline{nmFstUni$coefficients['log(Nm)', 'Pr(>|t|)']}).
 This supports the hypothesis that population structure promotes viral richness.
