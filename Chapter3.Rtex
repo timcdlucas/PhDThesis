@@ -220,8 +220,9 @@ As isolation by distance has been shown in a number of bat species \cite{burland
 Finally, when a global $F_{ST}$ value is not given they used the mean of all pairwise $F_{ST}$ values between sites.
 This is not correct as pairwise and global $F_{ST}$ values have different relationships with effective migration rates. 
 
-Finally, one further study tested for an association between group size and parasite richness in bats \cite{bordes2008bat}.
+Finally, one further study tested for an association between group size and parasite richness amongst 138 bat species \cite{bordes2008bat}.
 They found no relationship between group size (coded into four classes) and bat fly species richness.
+While group size is an important component of population structure it does not capture fully how connected the population is globally (but see Chaper~\ref{ch:sims2}). 
 
 
 
@@ -231,13 +232,12 @@ They found no relationship between group size (coded into four classes) and bat 
 %#7. Here I use a phylogenetic comparative approach to understand the relationship between pop structure and pathogen richness across the largest study of bats to date. I use a phylogenetic GLM controlling for the other life history characteristics known to impact pathogen richness to quantify the relationship between viral richness (as a proxy for pathogen richness_ and two measures of population structure. 
 %#8. I found ...
 
-Here I use a phylogenetic comparative approach to test for a relationship between population structure and pathogen richness in the largest study of bats to date. 
-I have used phylogenetic linear models with two measures of population structure --- the number of subspecies and effective gene flow --- and viral richness to robustly test for an association between population structure and pathogen richness.
-I used phylogenetic linear models
+Here I used a phylogenetic comparative approach to test for a relationship between population structure and pathogen richness in the largest study of bats to date. 
+I used a phylogenetic linear models, controlling for the other life history characteristics known to impact pathogen richness, to quantify the relationship between viral richness (as a proxy for pathogen richness) and two measures of population structure. 
+I used two measures of population structure --- the number of subspecies and effective gene flow --- as meausures of population structure to increase the robustness of the analysis.
 
-
-I found that both measures of population structure are positively associated with viral richness and are included as explanatory variables in the best models for describing viral richness.
-Furthermore, I found that the role of phylogeny is very weak in the models and in the distribution of viral richness amongst taxa.
+I found that increases in both measures of population structure are positively associated with viral richness and are included as explanatory variables in the best models for describing viral richness.
+Furthermore, I found that the role of phylogeny is very weak both in the models and in the distribution of viral richness amongst taxa.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
