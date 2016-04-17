@@ -1478,49 +1478,6 @@ p %<+% fstFinal[, c('binomial', 'virusSpecies')] +
 %%end.rcode
 
 
-%%begin.rcode treeCapt
-
-treeCapt <- '
-Phylogeny from \\cite{bininda2007delayed} pruned to include all species used in either the number of subspecies or gene flow analysis.
-Dot size shows the number of known viruses for that species and colour shows family.
-'
-
-treeTitle <- 'Pruned phylogeny with dot size showing number of pathogens and colour showing family.'
-
-%%end.rcode
-
-%%begin.rcode treePlot, out.width = '1\\textwidth', out.extra = 'trim = 0cm 0cm 0cm 0cm', fig.height = 5, fig.height = 5.5, fig.cap = treeCapt, fig.scap = treeTitle
-
-combUneeded <- tr1$tip.label[!(tr1$tip.label %in% c(as.character(fstFinal$binomial), nSpecies$binomial))]
-
-# Prune tree down to only needed tips.
-combTree <- drop.tip(tr1, combUneeded)
-
-combdf <- nSpecies %>%
-            dplyr::select(binomial, virusSpecies, Family) %>%
-            rbind(fstFinal %>% dplyr::select(binomial, virusSpecies, Family)) %>%
-            distinct(binomial)
-
-# Plot tree 
-p <- ggtree(combTree, layout = 'fan') 
-
-p %<+% combdf +
-  geom_point2(aes(size = virusSpecies, colour = Family, subset = isTip)) +
-  scale_size(range = c(0.1, 3)) +
-  scale_colour_manual(values = c(pokepal('oddish')[c(1,3,5,7,9,10)],    pokepal('Carvanha')[c(1,2,4, 13, 12, 9)])) +
-  theme_tcdl +
-  theme(plot.margin = unit(c(-2, -0, +3, -0), "lines")) +
-  theme(legend.position = c(0.5, -0.04)) +
-  labs(size = 'Virus Richness') +
-  theme(legend.key.size = unit(0.8, "lines"),
-        legend.text = element_text(size = 10),
-        legend.margin = unit(c(0.05), "cm"),
-        legend.title = element_text(size = 12),
-        legend.direction = "horizontal") +
-  guides(colour = guide_legend(ncol=3))
-
-%%end.rcode
-
 \subsection{Population structure data}
 
 I used two measures of population structure: the effective level of gene flow and the number of subspecies.
@@ -1834,6 +1791,51 @@ The importance of the phylogeny on each variable separately (the $\lambda$ param
 I also performed the analysis using the tree from \cite{jones2005bats} as this has some broad changes with families in different places (Figure~\ref{fig:treePlot2}).
 However the phylogeny did not affect the analysis.
 
+
+%%begin.rcode treeCapt
+
+treeCapt <- '
+Phylogeny from \\cite{bininda2007delayed} pruned to include all species used in either the number of subspecies or gene flow analysis.
+Dot size shows the number of known viruses for that species and colour shows family.
+'
+
+treeTitle <- 'Pruned phylogeny with dot size showing number of pathogens and colour showing family.'
+
+%%end.rcode
+
+%%begin.rcode treePlot, out.width = '1\\textwidth', out.extra = 'trim = 0cm 0cm 0cm 0cm', fig.height = 5, fig.height = 5.5, fig.cap = treeCapt, fig.scap = treeTitle
+
+combUneeded <- tr1$tip.label[!(tr1$tip.label %in% c(as.character(fstFinal$binomial), nSpecies$binomial))]
+
+# Prune tree down to only needed tips.
+combTree <- drop.tip(tr1, combUneeded)
+
+combdf <- nSpecies %>%
+            dplyr::select(binomial, virusSpecies, Family) %>%
+            rbind(fstFinal %>% dplyr::select(binomial, virusSpecies, Family)) %>%
+            distinct(binomial)
+
+# Plot tree 
+p <- ggtree(combTree, layout = 'fan') 
+
+p %<+% combdf +
+  geom_point2(aes(size = virusSpecies, colour = Family, subset = isTip)) +
+  scale_size(range = c(0.1, 3)) +
+  scale_colour_manual(values = c(pokepal('oddish')[c(1,3,5,7,9,10)],    pokepal('Carvanha')[c(1,2,4, 13, 12, 9)])) +
+  theme_tcdl +
+  theme(plot.margin = unit(c(-2, -0, +3, -0), "lines")) +
+  theme(legend.position = c(0.5, -0.04)) +
+  labs(size = 'Virus Richness') +
+  theme(legend.key.size = unit(0.8, "lines"),
+        legend.text = element_text(size = 10),
+        legend.margin = unit(c(0.05), "cm"),
+        legend.title = element_text(size = 12),
+        legend.direction = "horizontal") +
+  guides(colour = guide_legend(ncol=3))
+
+%%end.rcode
+
+
 %$F_{ST}$ studies are conducted at a range of spatial scales, but $F_{ST}$ often increases with distance studied \cite{burland1999population, hulva2010mechanisms, o2015genetic, vonhof2015range}.
 %To minimise the effects of this I only used data from studies that cover \rinline{rangeUseable * 100}\% of the diameter of the species range.
 %This is a largely arbitrary value that could be considered to reflect a ``global'' estimate of $F_{ST}$ while keeping a reasonable number of datapoints available.
@@ -1877,6 +1879,22 @@ This value can be interpreted as the probability that the given variable is in t
 \section{Results}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+\subsection{Number of Subspecies}
+\tmpsection{More descriptive}
+
+
+After data cleaning there was data for \rinline{nrow(nSpecies)} bat species in \rinline{length(unique(nSpecies$Family))} families.
+There appears to be a positive relationship between the number of subspecies and viral richness (Figure~\ref{fig:boxplot}) though few species have more than four subspecies. 
+The number of described virus species for a bat host ranged up to \rinline{max(nSpecies$virusSpecies)} viruses in \emph{\rinline{nSpecies$binomial[which.max(nSpecies$virusSpecies)]}}.
+Figure~\ref{fig:treePlot} shows the phylogeny used and the number of viruses for each species.
+The mean number of viruses across families is fairly constant with a lower range of \rinline{min(familyMeans$mean)} for \rinline{familyMeans$Family[which.min(familyMeans$mean)]}.
+The highest mean is \rinline{familyMeans$Family[which.max(familyMeans$mean)]} with \rinline{max(familyMeans$mean)} virus species per bat species, but this is based on a sample size of \rinline{familyMeans$n[which.max(familyMeans$mean)]}.
+The \rinline{familyMeans$Family[order(familyMeans$mean, decreasing = TRUE)[2]]} have the second highest mean  of \rinline{familyMeans$mean[order(familyMeans$mean, decreasing = TRUE)[2]]} (n = \rinline{familyMeans$n[order(familyMeans$mean, decreasing = TRUE)[2]]}).
+
 
 
 %%begin.rcode boxplot, fig.cap = boxplotCapt		
@@ -1948,19 +1966,6 @@ ggdraw() +
 %%end.rcode
 
 
-
-\subsection{Number of Subspecies}
-\tmpsection{More descriptive}
-
-
-After data cleaning there was data for \rinline{nrow(nSpecies)} bat species in \rinline{length(unique(nSpecies$Family))} families.
-There appears to be a positive relationship between the number of subspecies and viral richness (Figure~\ref{fig:boxplot}) though few species have more than four subspecies. 
-The number of described virus species for a bat host ranged up to \rinline{max(nSpecies$virusSpecies)} viruses in \emph{\rinline{nSpecies$binomial[which.max(nSpecies$virusSpecies)]}}.
-Figure~\ref{fig:treePlot} shows the phylogeny used and the number of viruses for each species.
-The mean number of viruses across families is fairly constant with a lower range of \rinline{min(familyMeans$mean)} for \rinline{familyMeans$Family[which.min(familyMeans$mean)]}.
-The highest mean is \rinline{familyMeans$Family[which.max(familyMeans$mean)]} with \rinline{max(familyMeans$mean)} virus species per bat species, but this is based on a sample size of \rinline{familyMeans$n[which.max(familyMeans$mean)]}.
-The \rinline{familyMeans$Family[order(familyMeans$mean, decreasing = TRUE)[2]]} have the second highest mean  of \rinline{familyMeans$mean[order(familyMeans$mean, decreasing = TRUE)[2]]} (n = \rinline{familyMeans$n[order(familyMeans$mean, decreasing = TRUE)[2]]}).
-
 The small change in mean pathogen richness across families and the lack of clear pattern in Figure~\ref{fig:treePlot} implies that viral richness is not strongly phylogenetic. 
 This is corroborated by the small estimated size of $\lambda$ ($\lambda$ = \rinline{virusLambda$param['lambda']}, $p$ = \rinline{virusLambda$param.CI$lambda$bounds.p[1]}).
 This fact implies that other factors must control pathogen richness.
@@ -1970,12 +1975,30 @@ Of the explanatory variables, the number of subspecies has no phylogenetic autoc
 Across all models the mean value of $\lambda$ is \rinline{mean(na.omit(allResults$lambda))} implying the residuals from the model are weakly phylogenetic.
 A small number of models (\rinline{mean(na.omit(allResults$lambda < 0))*100}\%)  had negatively phylogenetically distributed residuals.
 
+
+
+
 \tmpsection{Model results}
+
 
 The top seven models all had $\Delta\text{AICc} < 4$ meaning there was no clear best model (Table~\ref{t:models} and Table \ref{A-modelWeights}).
 These top seven models had a combined weight of \rinline{sprintf("%.2f", round(modelWeights[7, 5], 2))} meaning that there was a \rinline{sprintf("%.0f", round(100 * modelWeights[7, 5]))}\% chance that one of these models would be the best model if the data was recollected.
 However these top seven models all contained study effort, number of subspecies and the interaction between these two variables.
 log(Mass) and log(Range Size) and the random variable are all in three of the top seven models.
+
+%%begin.rcode fstRawData, fig.height = 2.3, fig.cap = 'Gene flow per generation (on a log scale) against viral richness. The genetic marker used is shown with colour. The red line shows the univariate phylogenetic model.'
+
+# Plot raw fstdata
+
+ggplot(fstFinal, aes(x = Nm, y = virusSpecies, colour = Marker)) +
+  geom_point(size = 2) +
+  scale_colour_poke(pokemon = 'oddish', spread = 3) +
+  scale_x_log10() +
+  geom_abline(intercept = nmFstUni$coef[1, 1], slope = nmFstUni$coef[2, 1], lwd = 0.7, colour = pokepal('nidorina')[10]) +
+  xlab('Gene Flow (per gen.)') +
+  ylab('Viral Richness') 
+
+%%end.rcode
 
 Summing the Akaike weights of all models that contain a given variable gives a probability, $Pr$, that the variable would be in the best model (Figure~\ref{fig:fstITPlots}A) if the data were recollected \cite{whittingham2006we}.
 The number of subspecies is very likely in the best model ($Pr > $ \rinline{substring(as.character( varWeights['NumberOfSubspecies']), 1, 4)}) as is the interaction between number of species and study effort ($Pr = $ \rinline{varWeights['scholarRefs.NumberOfSubspecies']}) compared to the benchmark random variable which has $Pr = $ \rinline{varWeights['rand']} (see Figure~\ref{fig:fstITPlots}A and Table~\ref{t:variables}).
@@ -1992,8 +2015,6 @@ Body mass and range size are also probably in the best model ($b = $ \rinline{va
 
 
 
-
-
 \subsection{Gene Flow}
 
 \tmpsection{More Descriptive}
@@ -2003,20 +2024,10 @@ Figure~\ref{fig:fstRawData} shows the raw data for the relationship between path
 %Figure~\ref{fig:fstTreePlot} shows the phylogeny used and the number of viruses for each species.
 
 
-
-%%begin.rcode fstRawData, fig.height = 2.3, fig.cap = 'Gene flow per generation (on a log scale) against viral richness. The genetic marker used is shown with colour. The red line shows the univariate phylogenetic model.'
-
-# Plot raw fstdata
-
-ggplot(fstFinal, aes(x = Nm, y = virusSpecies, colour = Marker)) +
-  geom_point(size = 2) +
-  scale_colour_poke(pokemon = 'oddish', spread = 3) +
-  scale_x_log10() +
-  geom_abline(intercept = nmFstUni$coef[1, 1], slope = nmFstUni$coef[2, 1], lwd = 0.7, colour = pokepal('nidorina')[10]) +
-  xlab('Gene Flow (per gen.)') +
-  ylab('Viral Richness') 
-
-%%end.rcode
+As with the number of subspecies data set, there was no phylogenetic signal in the number of virus species ($\lambda$ = \rinline{virusFstLambda$param['lambda']}, $p > 0.999$).
+Gene flow also had no phylogenetic autocorrelation ($\lambda$ = \rinline{nmFstLambda$param['lambda']},  $p > 0.999$).
+Due to the low sample size, significance tests are unlikely to have much power.
+However, study effort had some phylogenetic autocorrelation ($\lambda$ = \rinline{scholarFstLambda$param['lambda']}, $p$ = \rinline{scholarFstLambda$param.CI$lambda$bounds.p[1]}) while distribution size and mass seemed to show phylogenetic signal (Distribution size: $\lambda$ = \rinline{distrFstLambda$param['lambda']}, $p$ = \rinline{distrFstLambda$param.CI$lambda$bounds.p[1]}, Mass: $\lambda$ = \rinline{massFstLambda$param['lambda']}, $p$ = \rinline{massFstLambda$param.CI$lambda$bounds.p[1]}).
 
 
 %%begin.rcode fstITPlots, fig.cap = "Akaike variable weights for both analyses. The probability that each variable is in the best model (amongst the models test) is shown, with the boxplots showing the variation amongst the models over \rinline{nBoots} resamplings of the uniformly random ``null'' variable. The three bars of the boxplot show the median values and upper and lower quartiles of the data, vertical lines show the range and points display outliers. The purple ``Random'' box is the uniformly random variable. Population structure (Number of subspecies and effective gene flow), shown in red, is likely to be in the best model in both analyses.", fig.height = 2.5, fig.scap = 'Akaike variable weights for $F_{ST}$ analysis.', out.width = '\\textwidth', out.extra = 'trim = 0 1cm 0 0'
@@ -2037,7 +2048,17 @@ plot_grid(ITPlot, fstIT, labels = c("A", "B"), align = 'h', label_size = 10)
 
 %%end.rcode
 
+\tmpsection{Model results}
 
+
+Only the model with study effort, gene flow and mass was well supported with the second model having an $\Delta\text{AICc}$ of \rinline{round(fstModelWeights[2, 3])} (Table \ref{t:models} and Table \ref{A-modelWeights}).
+While less strongly supported than the number of subspecies, gene flow was likely in the best model ($Pr = $ \rinline{fstVarWeights['Nm']}) compared to the benchmark random variable which has $Pr = $ \rinline{fstVarWeights['rand']} (Figure~\ref{fig:fstITPlots}B and Table~\ref{t:variables}).
+On average (mean weighted by Akaike weights) there was a negative relationship between gene flow and viral richness ($b = $ \rinline{fstCoefMeans['beta.Nm']}, variance = \rinline{fstCoefVars['beta.Nm']}) despite the apparent positive relationship (see Figure~\ref{fig:fstRawData}) weakly suggested by the single-predictor model (pgls: $b$ = \rinline{nmFstUni$coefficients['log(Nm)', 'Estimate']}, $t$ = \rinline{nmFstUni$coefficients['log(Nm)', 't value']}, df = \rinline{nmFstUni$df[2]}, $p$ = \rinline{nmFstUni$coefficients['log(Nm)', 'Pr(>|t|)']}).
+This supports the hypothesis that population structure promotes viral richness.
+Possibly due to the smaller sample size, or a weaker relationship, this coefficient was much more varied than the number of subspecies coefficient with \rinline{round(pcCoefLzero)}\% of models estimating a positive relationship.
+
+
+\afterpage{ % use after page to make sure this whole table is at the end of a page.
 \begin{landscape}
 \begin{table}[t]
 \centering
@@ -2054,6 +2075,8 @@ log(Scholar)*NSubspecies implies the interaction term between study effort and n
 In the number of subspecies analysis there are many models with low $\Delta$AICc scores suggesting there there is no single `best model'.
 In the gene flow analysis, only the top model is supported.
 }
+
+
 
 \begin{tabular}{@{}>{\footnotesize}lrrrr@{}}
 
@@ -2117,6 +2140,26 @@ log(Mass) &
 \label{t:models}
 \end{table}
 \end{landscape}
+}
+
+
+
+
+As in the number of subspecies analysis, study effort was very likely in the best model ($Pr = $ \rinline{fstVarWeights['scholarRefs']}) as was body mass ($Pr = $ \rinline{fstVarWeights['mass']}).
+However, body mass has a negative average coefficient ($b = $ \rinline{fstCoefMeans['beta.mass']}, variance = \rinline{fstCoefVars['beta.mass']}) which is in contrast to the number of subspecies analysis, many studies in the literature \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat} and the single-predictor model (pgls: $b$ = \rinline{massFstUni$coefficients['log(mass)', 'Estimate']}, $t$ = \rinline{massFstUni$coefficients['log(mass)', 't value']}, df = \rinline{massFstUni$df[2]}, $p$ = \rinline{massFstUni$coefficients['log(mass)', 'Pr(>|t|)']}).
+In contrast to the number of subspecies analysis, range size was almost certainly not in the best model with $Pr = $ \rinline{fstVarWeights['distrSize']} being much less than the random variable.
+This variable being less supported than the random variable was probably because range size is closely correlated with study effort (pgls: $b$ = \rinline{fstDistrStudyEffort$coefficients['log(distrSize)', 'Estimate']}, $t$ = \rinline{fstDistrStudyEffort$coefficients['log(distrSize)', 't value']}, df = \rinline{fstDistrStudyEffort$df[2]}, $p$ = \rinline{fstDistrStudyEffort$coefficients['log(distrSize)', 'Pr(>|t|)']}).
+Of the three explanatory variables in the best model, study effort had the largest effect ($b = $ \rinline{fstCoefMeans['beta.scholarRefs']}, variance = \rinline{fstCoefVars['beta.scholarRefs']}).
+The effect size of gene flow ($b = $ \rinline{fstCoefMeans['beta.Nm']}, variance = \rinline{fstCoefVars['beta.Nm']}) was approximately twice the size of that of body mass ($b = $ \rinline{fstCoefMeans['beta.mass']}, variance = \rinline{fstCoefVars['beta.mass']})
+
+Across all models the mean value of $\lambda$ is \rinline{mean(na.omit(fstAllResults$lambda))} and a large number of individual models (\rinline{round(mean(na.omit(fstAllResults$lambda < 0))*100)}\%)  had negatively phylogenetically distributed residuals implying the residuals from the model are spread more uniformly on the phylogeny than expected by change.
+Due to the small sample size this was probably due to a small number of data points with large residuals being distant on the tree.
+
+
+
+
+
+
 
 
 \begin{table}[t]
@@ -2153,38 +2196,10 @@ Random &  \rinline{sprintf('%.2f', varWeights['rand'])} &  \rinline{varCoefMeans
 \end{table}
 
 
-As with the number of subspecies data set, there was no phylogenetic signal in the number of virus species ($\lambda$ = \rinline{virusFstLambda$param['lambda']}, $p > 0.999$).
-Gene flow also had no phylogenetic autocorrelation ($\lambda$ = \rinline{nmFstLambda$param['lambda']},  $p > 0.999$).
-Due to the low sample size, significance tests are unlikely to have much power.
-However, study effort had some phylogenetic autocorrelation ($\lambda$ = \rinline{scholarFstLambda$param['lambda']}, $p$ = \rinline{scholarFstLambda$param.CI$lambda$bounds.p[1]}) while distribution size and mass seemed to show phylogenetic signal (Distribution size: $\lambda$ = \rinline{distrFstLambda$param['lambda']}, $p$ = \rinline{distrFstLambda$param.CI$lambda$bounds.p[1]}, Mass: $\lambda$ = \rinline{massFstLambda$param['lambda']}, $p$ = \rinline{massFstLambda$param.CI$lambda$bounds.p[1]}).
-
-
-\tmpsection{Model results}
-
-Only the model with study effort, gene flow and mass was well supported with the second model having an $\Delta\text{AICc}$ of \rinline{round(fstModelWeights[2, 3])} (Table \ref{t:models} and Table \ref{A-modelWeights}).
-While less strongly supported than the number of subspecies, gene flow was likely in the best model ($Pr = $ \rinline{fstVarWeights['Nm']}) compared to the benchmark random variable which has $Pr = $ \rinline{fstVarWeights['rand']} (Figure~\ref{fig:fstITPlots}B and Table~\ref{t:variables}).
-On average (mean weighted by Akaike weights) there was a negative relationship between gene flow and viral richness ($b = $ \rinline{fstCoefMeans['beta.Nm']}, variance = \rinline{fstCoefVars['beta.Nm']}) despite the apparent positive relationship (see Figure~\ref{fig:fstRawData}) weakly suggested by the single-predictor model (pgls: $b$ = \rinline{nmFstUni$coefficients['log(Nm)', 'Estimate']}, $t$ = \rinline{nmFstUni$coefficients['log(Nm)', 't value']}, df = \rinline{nmFstUni$df[2]}, $p$ = \rinline{nmFstUni$coefficients['log(Nm)', 'Pr(>|t|)']}).
-This supports the hypothesis that population structure promotes viral richness.
-Possibly due to the smaller sample size, or a weaker relationship, this coefficient was much more varied than the number of subspecies coefficient with \rinline{round(pcCoefLzero)}\% of models estimating a positive relationship.
-
-As in the number of subspecies analysis, study effort was very likely in the best model ($Pr = $ \rinline{fstVarWeights['scholarRefs']}) as was body mass ($Pr = $ \rinline{fstVarWeights['mass']}).
-However, body mass has a negative average coefficient ($b = $ \rinline{fstCoefMeans['beta.mass']}, variance = \rinline{fstCoefVars['beta.mass']}) which is in contrast to the number of subspecies analysis, many studies in the literature \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat} and the single-predictor model (pgls: $b$ = \rinline{massFstUni$coefficients['log(mass)', 'Estimate']}, $t$ = \rinline{massFstUni$coefficients['log(mass)', 't value']}, df = \rinline{massFstUni$df[2]}, $p$ = \rinline{massFstUni$coefficients['log(mass)', 'Pr(>|t|)']}).
-In contrast to the number of subspecies analysis, range size was almost certainly not in the best model with $Pr = $ \rinline{fstVarWeights['distrSize']} being much less than the random variable.
-This variable being less supported than the random variable was probably because range size is closely correlated with study effort (pgls: $b$ = \rinline{fstDistrStudyEffort$coefficients['log(distrSize)', 'Estimate']}, $t$ = \rinline{fstDistrStudyEffort$coefficients['log(distrSize)', 't value']}, df = \rinline{fstDistrStudyEffort$df[2]}, $p$ = \rinline{fstDistrStudyEffort$coefficients['log(distrSize)', 'Pr(>|t|)']}).
-Of the three explanatory variables in the best model, study effort had the largest effect ($b = $ \rinline{fstCoefMeans['beta.scholarRefs']}, variance = \rinline{fstCoefVars['beta.scholarRefs']}).
-The effect size of gene flow ($b = $ \rinline{fstCoefMeans['beta.Nm']}, variance = \rinline{fstCoefVars['beta.Nm']}) was approximately twice the size of that of body mass ($b = $ \rinline{fstCoefMeans['beta.mass']}, variance = \rinline{fstCoefVars['beta.mass']})
-
-Across all models the mean value of $\lambda$ is \rinline{mean(na.omit(fstAllResults$lambda))} and a large number of individual models (\rinline{round(mean(na.omit(fstAllResults$lambda < 0))*100)}\%)  had negatively phylogenetically distributed residuals implying the residuals from the model are spread more uniformly on the phylogeny than expected by change.
-Due to the small sample size this was probably due to a small number of data points with large residuals being distant on the tree.
-
-
-
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%\clearpage
 \section{Discussion}  
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
