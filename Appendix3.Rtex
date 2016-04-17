@@ -481,7 +481,6 @@ print(xtable(fstModelWeights,
       booktabs = TRUE
     )
 
-
 %%end.rcode
 
 
@@ -643,7 +642,7 @@ Interactive plots
 \begin{figure}[t]
 \centering
   \includegraphics[width=1\textwidth]{figure/fstITPlots2-1.pdf}
-  \caption[Akaike variable weights with alternative phylogeny]{
+  \caption[Akaike variable weights for analysis using alternative phylogeny]{
 Akaike variable weights for both analyses using the phylogeny from \cite{jones2005bats}. 
 The probability that each variable is in the best model (amongst the models test) is shown, with the boxplots showing the variation amongst the models over 50 resamplings of the uniformly random ``null'' variable. 
 The three bars of the boxplot show the median values and upper and lower quartiles of the data, vertical lines show the range and points display outliers. 
@@ -754,7 +753,6 @@ fstCoefMeans2 <- apply(fstAllResults2[, grep('beta', names(fstAllResults2))], 2,
 
 %%begin.rcode analyseModelSelect2, fig.show = extraFigs
 
-
 modelWeightsFull2 <- allResults2 %>%
                   group_by(predictors) %>%
                   summarise(AICc = mean(AIC)) %>%
@@ -775,8 +773,6 @@ colnames(modelWeightsFull2) <- c("Model", "$\\bar{\\text{AICc}}$", "$\\Delta$AIC
 
 
 %%begin.rcode fstAnalyseModelSelect2, fig.show = extraFigs
-
-
 
 fstModelWeightsFull2 <- fstAllResults2 %>%
                   group_by(predictors) %>%
@@ -801,6 +797,7 @@ colnames(fstModelWeightsFull2) <- c("Model", "$\\bar{\\text{AICc}}$", "$\\Delta$
 
 %%begin.rcode printmodelweights2, results = 'asis'
 
+
 modelSelectCapt <- "
   Model selection results for number of subspecies analysis using phylogeny from \\cite{jones2005bats}. 
   $\\bar{\\text{AICc}}$ is the mean AICc score across \rinline{nBoots} resamplings of the null random variable. 
@@ -811,7 +808,7 @@ modelSelectCapt <- "
   "
 
 modelSelectTitle <- "
-  Full model selection results for number of subspecies analysis. 
+  Full model selection results for number of subspecies analysis using alternative phylogeny. 
 "
 
 # floating.environment = 'sidewaystable') ? possible to do upright caption.
@@ -838,6 +835,7 @@ print(xtable(modelWeightsFull2,
 
 
 %%begin.rcode printfsttable2, results = 'asis'
+
 
 fstSelectCapt <- "
   Model selection results for effective gene flow analysis using phylogeny from \\cite{jones2005bats}. 
