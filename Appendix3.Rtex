@@ -12,7 +12,7 @@ extraFigs <- 'hide'
 
 #knitr options
 #  Set figure prefix as A so that no figures will be overwritten.
-opts_chunk$set(cache.path = '.AppCh3Cache/', fig.path = 'figures/A-')
+opts_chunk$set(cache.path = '.AppCh3Cache/', fig.path = 'figure/A-')
 source('misc/KnitrOptions.R')
 
 # ggplot2 theme.
@@ -630,9 +630,20 @@ Interactive plots
    xlab('Gene Flow (per gen.)') +		
    ylab('Viral Richness') 		
  		
- ply < ggplotly(pp, tooltip = c('text', 'colour', 'y'))		
+ ply <- ggplotly(pp, tooltip = c('text', 'colour', 'y'))		
  htmlwidgets::saveWidget(as.widget(ply), "imgs/fstinter.html")		
  		
  %%end.rcode		
  		
 
+
+
+
+
+%%begin.rcode ggtreeInteractive, eval = FALSE
+
+ #ply <- ggplotly(p)		
+ # ply <- ggplotly(pp, tooltip = c('text', 'colour', 'y'))		
+ #htmlwidgets::saveWidget(as.widget(ply), "imgs/fstinter.html")		
+
+%%end.rcode
