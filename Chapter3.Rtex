@@ -1798,8 +1798,8 @@ The raw data tables are included in Table \ref{A-rawData}.
 To control for phylogenetic nonindependence I used the best-supported phylogeny from \textcite{fritz2009geographical} (shown in Figure~\ref{fig:treePlot}) which is the supertree from \cite{bininda2007delayed} with names updated to match the Wilson \& Reeder taxonomy \cite{wilson2005mammal}.
 Phylogenetic manipulation was performed using the ape package \cite{ape}.
 The importance of the phylogeny on each variable separately (the $\lambda$ parameter of the variable regressed against an intercept) was estimated and tested against the null of $\lambda = 0$ with log-likelihood ratio tests using caper \cite{caper}.
-I also performed the analysis using the tree from \cite{jones2005bats} as this has some broad changes with families in different places (Figure~\ref{fig:treePlot2}).
-However the phylogeny did not affect the analysis.
+I also performed the analysis using the phylogeny from \cite{jones2005bats} as this has some broad changes with families in different places (Figure~\ref{fig:treePlot2}).
+
 
 
 %%begin.rcode treeCapt
@@ -2024,6 +2024,10 @@ As seen in Figure~\ref{fig:fstITPlots}A, study effort is very likely in the best
 Body mass and range size are also probably in the best model ($b = $ \rinline{varCoefMeans['beta.mass']}, $Pr = $ \rinline{varWeights['mass']} and $b = $ \rinline{varCoefMeans['beta.distrSize']}, $Pr = $ \rinline{varWeights['distrSize']}) with positive relationships of slightly lower strength than the number of subspecies in models without an interaction term ($b = $ \rinline{nSpeciesCoefMean}, variance = \rinline{nSpeciesCoefVar}).	
 
 
+When using the phylogeny from \cite{jones2005bats} the results are broadly similar (Figure~\ref{f:A-itplots} and Tables~\ref{A-modelWeights2} and \ref{t:variables2}).
+Study effort and number of subspecies have strong support while range size has intermediate support.
+However, mass and the interaction between number of subspecies and subspecies are less likely to be in the best model than the random variable.
+
 
 \subsection{Gene Flow}
 
@@ -2166,7 +2170,9 @@ Across all models the mean value of $\lambda$ is \rinline{mean(na.omit(fstAllRes
 Due to the small sample size this was probably due to a small number of data points with large residuals being distant on the tree.
 
 
-
+When using the phylogeny from \cite{jones2005bats} the analysis becomes very unstable (Figure~\ref{f:A-itplots}).
+The support for each variable changes dramatically with each resampling of the random variable.
+On average however, only the model containing mass and range size is supported (Tables~\ref{A-fstModelWeights} and \ref{t:variables2}).
 
 
 
@@ -2204,6 +2210,7 @@ Random &  \rinline{sprintf('%.2f', varWeights['rand'])} &  \rinline{varCoefMeans
 
 \label{t:variables}
 \end{table}
+
 
 
 
@@ -2381,80 +2388,8 @@ rm(t2)
 %%begin.rcode runBatClocks, eval = batclocksBoots
 
 
-modelSelect2 <- function(allForm, data, phy, boot, allModelMat, varList){
-  
-  set.seed(paste0('1993', boot))
-  bootData <- cbind(data, rand = runif(nrow(data)))
-  rownames(bootData) <- bootData$binomial
-  #compBootData <- comparative.data(data = bootData, phy = phy, names.col = 'binomial')
 
-  results <- apply(allModelMat, 1, function(x) sapply(c(varList, "log(scholarRefs):NumberOfSubspecies"), function(y) y %in% x)) %>%
-               t %>%
-               data.frame %>%
-               cbind(AIC = NA, boot = boot, lambda = NA, coef = NA)
-
-
-
-  for(m in 1:length(allForm)){
-    if(exists('model')){
-      rm(model)
-    }
-    try({
-      model <- gls(allForm[[m]], correlation = corPagel(value = 0.4, phy = phy), data = bootData, method = 'ML')  
-      results$attempt[m] <- 1
-    }) 
-    if(!exists('model')){
-      try({
-        model <- gls(allForm[[m]], correlation = corPagel(value = 0.3, phy = phy), data = bootData, method = 'ML')  
-        results$attempt[m] <- 2
-      }) 
-    }
-    if(!exists('model')){
-      try({
-        model <- gls(allForm[[m]], correlation = corPagel(value = 0.2, phy = phy), data = bootData, method = 'ML')  
-        results$attempt[m] <- 3
-      }) 
-    }
-    if(!exists('model')){
-      try({
-        model <- gls(allForm[[m]], correlation = corPagel(value = 0.1, phy = phy), data = bootData, method = 'ML')  
-        results$attempt[m] <- 4
-      }) 
-    }
-    if(!exists('model')){
-      try({
-        model <- lm(allForm[[m]], data = bootData) 
-        results$attempt[m] <- 5
-        message('Running lm')
-      }) 
-    }
-    #model <- lm(allForm[[m]], data = bootData)
-    #model <- pgls(allForm[[m]], data = compBootData, lambda = 'ML')
-
-
-    results$AIC[m] <- AICc(model)
-    results$predictors[m] <- allForm[[m]] %>% as.character %>% .[3]
-  
-    if(results$NumberOfSubspecies[m]){
-      results$coef[m] <- model$coef['NumberOfSubspecies']
-    }
-
-    if(inherits(model, 'gls')){
-        results$lambda[m] <- model$modelStruct$corStruct[1]
-    }
-    message(paste('Boot:', boot, ', m:', m, '\n'))
-  }
-
-  results$dAIC <- results$AIC - min(results$AIC)
-  results$weight <- exp(- 0.5 * results$dAIC) / sum(exp(- 0.5 * results$dAIC))
-
-
-  return(results)
-
-}
-
-
-fitModelsBootStrap2 <- mclapply(1:nBoots, function(b) modelSelect2(allFormulae, nSpecies2, pruneTree2, b, allModelMat, varList), mc.cores = nCores)
+fitModelsBootStrap2 <- mclapply(1:nBoots, function(b) modelSelect(allFormulae, nSpecies2, pruneTree2, b, allModelMat, varList), mc.cores = nCores)
 
 allResults2 <- do.call(rbind, fitModelsBootStrap2)
 

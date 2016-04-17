@@ -649,7 +649,7 @@ The probability that each variable is in the best model (amongst the models test
 The three bars of the boxplot show the median values and upper and lower quartiles of the data, vertical lines show the range and points display outliers. 
 The purple ``Random'' box is the uniformly random variable.
 }
-\label{f:sir}
+\label{f:A-itplots}
 \end{figure}
 
 
@@ -768,7 +768,7 @@ modelWeightsFull2 <- allResults2 %>%
                   mutate(predictors = gsub('1', 'Intercept only', predictors)) %>%
                   mutate(predictors = gsub('NumberOfSubspecies', 'NSubspecies', predictors))
 
-colnames(modelWeights2) <- c("Model", "$\\bar{\\text{AICc}}$", "$\\Delta$AICc", "$w$", "$\\sum w$") 
+colnames(modelWeightsFull2) <- c("Model", "$\\bar{\\text{AICc}}$", "$\\Delta$AICc", "$w$", "$\\sum w$") 
 
 %%end.rcode
 
@@ -791,7 +791,7 @@ fstModelWeightsFull2 <- fstAllResults2 %>%
                   mutate(predictors = gsub('1', 'Intercept only', predictors)) %>%
                   mutate(predictors = gsub('Nm', 'Gene Flow', predictors))
 
-colnames(fstModelWeights2) <- c("Model", "$\\bar{\\text{AICc}}$", "$\\Delta$AICc", "$w$", "$\\sum w$") 
+colnames(fstModelWeightsFull2) <- c("Model", "$\\bar{\\text{AICc}}$", "$\\Delta$AICc", "$w$", "$\\sum w$") 
 
 
 %%end.rcode
