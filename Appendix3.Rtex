@@ -415,7 +415,7 @@ colnames(fstModelWeights) <- c("Model", "$\\bar{\\text{AICc}}$", "$\\Delta$AICc"
 
 
 
-%%begin.rcode printnspeciestable, results = 'asis'
+%%begin.rcode printmodelweights, results = 'asis'
 
 modelSelectCapt <- "
   Model selection results for number of subspecies analysis. 
@@ -456,7 +456,7 @@ print(xtable(modelWeights,
 %%begin.rcode printfsttable, results = 'asis'
 
 fstSelectCapt <- "
-  Model selection results for number of effective gene flow analysis. 
+  Model selection results for effective gene flow analysis. 
   $\\bar{\\text{AICc}}$ is the mean AICc score across \rinline{nBoots} resamplings of the null random variable. 
   $\\Delta$AICc is the model's $\\bar{\\text{AICc}}$ score minus $\\text{min}(\\bar{\\text{AICc}})$. 
   $w$ is the Akaike weight and can be interpreted as the probability that the model is the best model (of those in the plausible set).
@@ -464,7 +464,7 @@ fstSelectCapt <- "
   "
 
 fstSelectTitle <- "
-  Full model selection results for number of effective gene flow analysis. 
+  Full model selection results for effective gene flow analysis. 
 "
 
 print(xtable(fstModelWeights, 
@@ -640,10 +640,212 @@ Interactive plots
 
 
 
-%%begin.rcode ggtreeInteractive, eval = FALSE
+\begin{figure}[t]
+\centering
+  \includegraphics[width=1\textwidth]{figure/fstITPlots2-1.pdf}
+  \caption[Akaike variable weights with alternative phylogeny]{
+Akaike variable weights for both analyses using the phylogeny from \cite{jones2005bats}. 
+The probability that each variable is in the best model (amongst the models test) is shown, with the boxplots showing the variation amongst the models over 50 resamplings of the uniformly random ``null'' variable. 
+The three bars of the boxplot show the median values and upper and lower quartiles of the data, vertical lines show the range and points display outliers. 
+The purple ``Random'' box is the uniformly random variable.
+}
+\label{f:sir}
+\end{figure}
 
- #ply <- ggplotly(p)		
- # ply <- ggplotly(pp, tooltip = c('text', 'colour', 'y'))		
- #htmlwidgets::saveWidget(as.widget(ply), "imgs/fstinter.html")		
+
+
+
+%%begin.rcode batClocksAnalyse
+
+
+allResults2 <- read.csv('data/Chapter3/modelSelectSubspeciesBatClocks.csv', row.names = 1)
+
+varWeights2 <- sapply(names(allResults2)[1:6], function(x) sum(allResults2$weight[allResults2[, x]])/nBoots)
+
+
+sepVarWeights2 <- lapply(1:nBoots, function(b) 
+                      sapply(names(allResults2)[1:6], 
+                        function(x) 
+                          sum(allResults2[allResults2$boot == b, 'weight'][allResults2[allResults2$boot == b, x]])
+                      )
+                     )      
+
+sepVarWeights2 <- do.call(rbind, sepVarWeights2) %>%
+                      data.frame(., boot = 1:nBoots) %>%
+                      reshape2::melt(., value.name = 'estimate', id.vars = 'boot')
+
+sepVarWeights2$col <- 'Other Variables'
+sepVarWeights2$col[grep('NumberOf', sepVarWeights2$variable)] <- 'Population Structure'
+sepVarWeights2$col[sepVarWeights2$variable == 'rand'] <- 'Null'
+
+
+
+modelWeights2 <- allResults2 %>%
+                  group_by(predictors) %>%
+                  summarise(AICc = mean(AIC)) %>%
+                  mutate(dAIC = AICc - min(AICc), modelWeight = exp(- 0.5 * dAIC) / sum(exp(- 0.5 * dAIC))) %>%
+                  arrange(desc(modelWeight)) %>%
+                  mutate(cumulativeWeight = cumsum(modelWeight)) %>%
+                  mutate(string = levels(predictors)[predictors])
+
+
+#### FST
+
+
+fstAllResults2 <- read.csv('data/Chapter3/fstModelSelectSubspeciesBatClocks.csv', row.names = 1)
+
+fstSepVarWeights2 <- lapply(1:nBoots, function(b) 
+                      sapply(names(fstAllResults2)[1:5], 
+                        function(x) 
+                          sum(fstAllResults2[fstAllResults2$boot == b, 'weight'][fstAllResults2[fstAllResults2$boot == b, x]])
+                      )
+                     )      
+
+fstSepVarWeights2 <- do.call(rbind, fstSepVarWeights2) %>%
+                      data.frame(., boot = 1:nBoots) %>%
+                      reshape2::melt(., value.name = 'estimate', id.vars = 'boot')
+
+fstSepVarWeights2$col <- 'Other Variables'
+fstSepVarWeights2$col[fstSepVarWeights2$variable == 'Nm'] <- 'Population Structure'
+fstSepVarWeights2$col[fstSepVarWeights2$variable == 'rand'] <- 'Null'
+
+
+fstVarWeights2 <- sapply(names(fstAllResults2)[1:5], function(x) sum(fstAllResults2$weight[fstAllResults2[, x]])/nBoots)
+
+
+fstModelWeights2 <- fstAllResults2 %>%
+                  group_by(predictors) %>%
+                  summarise(AICc = mean(AIC)) %>%
+                  mutate(dAIC = AICc - min(AICc), modelWeight = exp(- 0.5 * dAIC) / sum(exp(- 0.5 * dAIC))) %>%
+                  arrange(desc(modelWeight)) %>%
+                  mutate(cumulativeWeight = cumsum(modelWeight)) 
+
 
 %%end.rcode
+
+
+
+
+
+%%begin.rcode analyseModelSelect2, fig.show = extraFigs
+
+
+modelWeights2 <- allResults2 %>%
+                  group_by(predictors) %>%
+                  summarise(AICc = mean(AIC)) %>%
+                  mutate(dAIC = AICc - min(AICc), modelWeight = exp(- 0.5 * dAIC) / sum(exp(- 0.5 * dAIC))) %>%
+                  arrange(desc(modelWeight)) %>%
+                  mutate(cumulativeWeight = cumsum(modelWeight)) %>%
+                  mutate(predictors = gsub(':', '*', predictors)) %>%
+                  mutate(predictors = gsub('scholarRefs', 'log(Scholar)', predictors)) %>%
+                  mutate(predictors = gsub('mass', 'log(Mass)', predictors)) %>%
+                  mutate(predictors = gsub('distrSize', 'log(RangeSize)', predictors)) %>%
+                  mutate(predictors = gsub('1', 'Intercept only', predictors)) %>%
+                  mutate(predictors = gsub('NumberOfSubspecies', 'NSubspecies', predictors))
+
+colnames(modelWeights2) <- c("Model", "$\\bar{\\text{AICc}}$", "$\\Delta$AICc", "$w$", "$\\sum w$") 
+
+%%end.rcode
+
+
+
+%%begin.rcode fstAnalyseModelSelect2, fig.show = extraFigs
+
+
+
+fstModelWeights2 <- fstAllResults2 %>%
+                  group_by(predictors) %>%
+                  summarise(AICc = mean(AIC)) %>%
+                  mutate(dAIC = AICc - min(AICc), modelWeight = exp(- 0.5 * dAIC) / sum(exp(- 0.5 * dAIC))) %>%
+                  arrange(desc(modelWeight)) %>%
+                  mutate(cumulativeWeight = cumsum(modelWeight)) %>%
+                  mutate(predictors = gsub(':', '*', predictors)) %>%
+                  mutate(predictors = gsub('scholarRefs', 'log(Scholar)', predictors)) %>%
+                  mutate(predictors = gsub('mass', 'log(Mass)', predictors)) %>%
+                  mutate(predictors = gsub('distrSize', 'log(RangeSize)', predictors)) %>%
+                  mutate(predictors = gsub('1', 'Intercept only', predictors)) %>%
+                  mutate(predictors = gsub('Nm', 'Gene Flow', predictors))
+
+colnames(fstModelWeights2) <- c("Model", "$\\bar{\\text{AICc}}$", "$\\Delta$AICc", "$w$", "$\\sum w$") 
+
+
+%%end.rcode
+
+
+
+
+%%begin.rcode printmodelweights2, results = 'asis'
+
+modelSelectCapt <- "
+  Model selection results for number of subspecies analysis using phylogeny from \\cite{jones2005bats}. 
+  $\\bar{\\text{AICc}}$ is the mean AICc score across \rinline{nBoots} resamplings of the null random variable. 
+  $\\Delta$AICc is the model's $\\bar{\\text{AICc}}$ score minus $\\text{min}(\\bar{\\text{AICc}})$. 
+  $w$ is the Akaike weight and can be interpreted as the probability that the model is the best model (of those in the plausible set).
+  $\\sum w$ is the cumulative sum of the Akaike weights.
+  log(Scholar)*NSubspecies implies the interaction term between study effort and number of subspecies.
+  "
+
+modelSelectTitle <- "
+  Full model selection results for number of subspecies analysis. 
+"
+
+# floating.environment = 'sidewaystable') ? possible to do upright caption.
+print(xtable(modelWeights2, 
+             digits = 2, 
+             caption = c(modelSelectCapt, modelSelectTitle), 
+             label = "A-modelWeights2",
+             align = c('l', '@{}l', 'r', 'r', 'r', 'r@{}')), 
+      size = "tiny", #Change size; useful for bigger tables
+      include.rownames = FALSE, #Don't print rownames
+      include.colnames = TRUE,
+
+      sanitize.colnames.function = function(x){x},
+      caption.placement = "top", 
+      hline.after = c(-1, 0, nrow(modelWeights2)), 
+      booktabs = TRUE
+    )
+
+
+
+
+%%end.rcode
+
+
+
+%%begin.rcode printfsttable2, results = 'asis'
+
+fstSelectCapt <- "
+  Model selection results for effective gene flow analysis using phylogeny from \\cite{jones2005bats}. 
+  $\\bar{\\text{AICc}}$ is the mean AICc score across \rinline{nBoots} resamplings of the null random variable. 
+  $\\Delta$AICc is the model's $\\bar{\\text{AICc}}$ score minus $\\text{min}(\\bar{\\text{AICc}})$. 
+  $w$ is the Akaike weight and can be interpreted as the probability that the model is the best model (of those in the plausible set).
+  $\\sum w$ is the cumulative sum of the Akaike weights.
+  "
+
+fstSelectTitle <- "
+  Full model selection results for effective gene flow analysis. 
+"
+
+print(xtable(fstModelWeights2, 
+             digits = 2, 
+             caption = c(fstSelectCapt, fstSelectTitle),
+             label = "A-fstModelWeights2",
+             align = c('l', '@{}l', 'r', 'r', 'r', 'r@{}')),  
+      size = "scriptsize", #Change size; useful for bigger tables
+      include.rownames = FALSE, #Don't print rownames
+      include.colnames = TRUE,
+      sanitize.colnames.function = function(x){x},
+      caption.placement = "top", 
+      hline.after = c(-1, 0, nrow(fstModelWeights2)), 
+      booktabs = TRUE
+    )
+
+
+%%end.rcode
+
+
+
+
+
+
+

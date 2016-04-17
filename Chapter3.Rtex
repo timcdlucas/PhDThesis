@@ -13,8 +13,8 @@ runFstScrape <- FALSE
 
 
 # Run slow bootstrapping?
-subBoots <- TRUE
-fstBoots <- TRUE
+subBoots <- FALSE
+fstBoots <- FALSE
 batclocksBoots <- FALSE
 
 # Run slow fst data wrangling as some is slow.
@@ -2030,7 +2030,7 @@ Due to the low sample size, significance tests are unlikely to have much power.
 However, study effort had some phylogenetic autocorrelation ($\lambda$ = \rinline{scholarFstLambda$param['lambda']}, $p$ = \rinline{scholarFstLambda$param.CI$lambda$bounds.p[1]}) while distribution size and mass seemed to show phylogenetic signal (Distribution size: $\lambda$ = \rinline{distrFstLambda$param['lambda']}, $p$ = \rinline{distrFstLambda$param.CI$lambda$bounds.p[1]}, Mass: $\lambda$ = \rinline{massFstLambda$param['lambda']}, $p$ = \rinline{massFstLambda$param.CI$lambda$bounds.p[1]}).
 
 
-%%begin.rcode fstITPlots, fig.cap = "Akaike variable weights for both analyses. The probability that each variable is in the best model (amongst the models test) is shown, with the boxplots showing the variation amongst the models over \rinline{nBoots} resamplings of the uniformly random ``null'' variable. The three bars of the boxplot show the median values and upper and lower quartiles of the data, vertical lines show the range and points display outliers. The purple ``Random'' box is the uniformly random variable. Population structure (Number of subspecies and effective gene flow), shown in red, is likely to be in the best model in both analyses.", fig.height = 2.5, fig.scap = 'Akaike variable weights for $F_{ST}$ analysis.', out.width = '\\textwidth', out.extra = 'trim = 0 1cm 0 0'
+%%begin.rcode fstITPlots, fig.cap = "Akaike variable weights for both analyses. The probability that each variable is in the best model (amongst the models test) is shown, with the boxplots showing the variation amongst the models over 50 resamplings of the uniformly random ``null'' variable. The three bars of the boxplot show the median values and upper and lower quartiles of the data, vertical lines show the range and points display outliers. The purple ``Random'' box is the uniformly random variable. Population structure (Number of subspecies and effective gene flow), shown in red, is likely to be in the best model in both analyses.", fig.height = 2.5, fig.scap = 'Akaike variable weights', out.width = '\\textwidth', out.extra = 'trim = 0 1cm 0 0'
 
 
 fstIT <- ggplot(fstSepVarWeights, aes(x = variable, y = estimate, colour = col, fill = col)) +
@@ -2529,7 +2529,44 @@ fstModelWeights2 <- fstAllResults2 %>%
                   mutate(cumulativeWeight = cumsum(modelWeight)) 
 
 
+%%end.rcode
 
+
+%% ------------------------------------------- %%
+%% plot bat clocks rocks
+%% ------------------------------------------- %%
+
+
+%%begin.rcode ITPlots2
+
+ITPlot2 <- ggplot(sepVarWeights2, aes(x = variable, y = estimate, colour = col, fill = col)) +
+  geom_boxplot(outlier.colour = grey(0.3), notch = FALSE, width = 0.99, outlier.size = 1, lwd = 0.4) +
+  scale_colour_manual(values = pokepal('nidorino')[c(2, 5, 11)]) +
+  scale_fill_manual(values = pokepal('nidorino')[c(3, 6, 10)]) +
+  theme(legend.position = 'none', axis.text.x = element_text(size = 10, angle = 40, hjust = 1, colour = 'black', family = 'lato light'),
+    axis.text.y = element_text(size = 8)) +
+  scale_x_discrete(labels = c('Scholar', 'NSubspecies', 'Mass', 'Range size', 'Random', 'NSubspecies*Effort')) +
+  ylab('P(in best model)') +
+  xlab('')
+
+
+%%end.rcode
+
+
+%%begin.rcode fstITPlots2, fig.show = extraFigs, fig.cap = "Akaike variable weights for both analyses using the phylogeny from \\cite{jones2005bats}. The probability that each variable is in the best model (amongst the models test) is shown, with the boxplots showing the variation amongst the models over 50 resamplings of the uniformly random ``null'' variable. The three bars of the boxplot show the median values and upper and lower quartiles of the data, vertical lines show the range and points display outliers. The purple ``Random'' box is the uniformly random variable.", fig.height = 2.5, fig.scap = 'Akaike variable weights', out.width = '\\textwidth', out.extra = 'trim = 0 1cm 0 0'
+
+
+fstIT2 <- ggplot(fstSepVarWeights2, aes(x = variable, y = estimate, colour = col, fill = col)) +
+  geom_boxplot(outlier.colour = grey(0.3), notch = FALSE, width = 0.7, outlier.size = 1, lwd = 0.4) +
+  scale_colour_manual(values = pokepal('nidorino')[c(2, 5, 11)]) +
+  scale_fill_manual(values = pokepal('nidorino')[c(3, 6, 10)]) +
+  theme(legend.position = 'none', axis.text.x = element_text(size = 10, angle = 40, hjust = 1, colour = 'black', family = 'lato light'),
+    axis.text.y = element_text(size = 8)) +
+  scale_x_discrete(labels = c('Scholar', 'Gene flow', 'Mass', 'Range size', 'Random'))+
+  ylab('P(in best model)') +
+  xlab('')
+
+plot_grid(ITPlot2, fstIT2, labels = c("A", "B"), align = 'h', label_size = 10)
 
 
 %%end.rcode

@@ -25,7 +25,7 @@
 \begin{landscape}
 
 % latex table generated in R 3.2.4 by xtable 1.8-2 package
-% Sun Apr 17 12:14:27 2016
+% Sun Apr 17 14:29:09 2016
 \begingroup\tiny
 \begin{longtable}{@{}llrrrrrrrrrl@{}}
 \caption[
@@ -338,7 +338,7 @@ Megadermatidae & \emph{Macroderma gigas} & 0 &  & 0.25 & 124.37 & 1078.95 & 769 
 
 
 % latex table generated in R 3.2.4 by xtable 1.8-2 package
-% Sun Apr 17 12:14:42 2016
+% Sun Apr 17 14:25:54 2016
 \begin{table}[ht]
 \centering
 \caption[
@@ -405,13 +405,13 @@ log(Scholar)*NSubspecies + log(Scholar) + NSubspecies + log(Mass) + log(RangeSiz
 
 
 % latex table generated in R 3.2.4 by xtable 1.8-2 package
-% Sun Apr 17 12:14:42 2016
+% Sun Apr 17 14:25:54 2016
 \begin{table}[ht]
 \centering
 \caption[
-  Full model selection results for number of effective gene flow analysis. 
+  Full model selection results for effective gene flow analysis. 
 ]{
-  Model selection results for number of effective gene flow analysis. 
+  Model selection results for effective gene flow analysis. 
   $\bar{\text{AICc}}$ is the mean AICc score across inline{nBoots} resamplings of the null random variable. 
   $\Delta$AICc is the model's $\bar{\text{AICc}}$ score minus $\text{min}(\bar{\text{AICc}})$. 
   $w$ is the Akaike weight and can be interpreted as the probability that the model is the best model (of those in the plausible set).
@@ -512,6 +512,165 @@ Interactive plots
 
 
  		
+
+
+
+
+
+\begin{figure}[t]
+\centering
+  \includegraphics[width=1\textwidth]{figure/fstITPlots2-1.pdf}
+  \caption[Akaike variable weights with alternative phylogeny]{
+Akaike variable weights for both analyses using the phylogeny from \cite{jones2005bats}. 
+The probability that each variable is in the best model (amongst the models test) is shown, with the boxplots showing the variation amongst the models over 50 resamplings of the uniformly random ``null'' variable. 
+The three bars of the boxplot show the median values and upper and lower quartiles of the data, vertical lines show the range and points display outliers. 
+The purple ``Random'' box is the uniformly random variable.
+}
+\label{f:sir}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% latex table generated in R 3.2.4 by xtable 1.8-2 package
+% Sun Apr 17 14:29:09 2016
+\begin{table}[ht]
+\centering
+\caption[
+  Full model selection results for number of subspecies analysis. 
+]{
+  Model selection results for number of subspecies analysis using phylogeny from \cite{jones2005bats}. 
+  $\bar{\text{AICc}}$ is the mean AICc score across inline{nBoots} resamplings of the null random variable. 
+  $\Delta$AICc is the model's $\bar{\text{AICc}}$ score minus $\text{min}(\bar{\text{AICc}})$. 
+  $w$ is the Akaike weight and can be interpreted as the probability that the model is the best model (of those in the plausible set).
+  $\sum w$ is the cumulative sum of the Akaike weights.
+  log(Scholar)*NSubspecies implies the interaction term between study effort and number of subspecies.
+  } 
+\label{A-modelWeights2}
+\begingroup\tiny
+\begin{tabular}{@{}lrrrr@{}}
+  \toprule
+Model & $\bar{\text{AICc}}$ & $\Delta$AICc & $w$ & $\sum w$ \\ 
+  \midrule
+log(Scholar) + NSubspecies + log(RangeSize) & 740.76 & 0.00 & 0.18 & 0.18 \\ 
+  log(Scholar) + NSubspecies & 741.21 & 0.45 & 0.14 & 0.32 \\ 
+  log(Scholar) + NSubspecies + log(RangeSize) + rand & 741.84 & 1.08 & 0.11 & 0.43 \\ 
+  log(Scholar) + NSubspecies + rand & 742.27 & 1.51 & 0.08 & 0.51 \\ 
+  log(Scholar)*NSubspecies + log(Scholar) + NSubspecies + log(RangeSize) & 742.82 & 2.06 & 0.06 & 0.58 \\ 
+  log(Scholar) + NSubspecies + log(Mass) + log(RangeSize) & 742.87 & 2.12 & 0.06 & 0.64 \\ 
+  log(Scholar)*NSubspecies + log(Scholar) + NSubspecies & 743.21 & 2.45 & 0.05 & 0.69 \\ 
+  log(Scholar) + NSubspecies + log(Mass) & 743.29 & 2.54 & 0.05 & 0.75 \\ 
+  log(Scholar)*NSubspecies + log(Scholar) + NSubspecies + log(RangeSize) + rand & 743.93 & 3.17 & 0.04 & 0.78 \\ 
+  log(Scholar) + NSubspecies + log(Mass) + log(RangeSize) + rand & 743.97 & 3.22 & 0.04 & 0.82 \\ 
+  log(Scholar)*NSubspecies + log(Scholar) + NSubspecies + rand & 744.30 & 3.54 & 0.03 & 0.85 \\ 
+  log(Scholar) + NSubspecies + log(Mass) + rand & 744.38 & 3.62 & 0.03 & 0.88 \\ 
+  log(Scholar)*NSubspecies + log(Scholar) + NSubspecies + log(Mass) + log(RangeSize) & 744.96 & 4.21 & 0.02 & 0.90 \\ 
+  log(Scholar) + log(RangeSize) & 745.23 & 4.47 & 0.02 & 0.92 \\ 
+  log(Scholar)*NSubspecies + log(Scholar) + NSubspecies + log(Mass) & 745.32 & 4.56 & 0.02 & 0.94 \\ 
+  log(Scholar) & 746.04 & 5.28 & 0.01 & 0.95 \\ 
+  log(Scholar) + log(RangeSize) + rand & 746.26 & 5.50 & 0.01 & 0.96 \\ 
+  log(Scholar)*NSubspecies + log(Scholar) + NSubspecies + log(Mass) + rand & 746.43 & 5.67 & 0.01 & 0.97 \\ 
+  log(Scholar) + rand & 747.05 & 6.29 & 0.01 & 0.98 \\ 
+  log(Scholar) + log(Mass) + log(RangeSize) & 747.33 & 6.57 & 0.01 & 0.99 \\ 
+  log(Scholar) + log(Mass) & 748.06 & 7.31 & 0.00 & 0.99 \\ 
+  log(Scholar) + log(Mass) + log(RangeSize) + rand & 748.38 & 7.62 & 0.00 & 1.00 \\ 
+  log(Scholar) + log(Mass) + rand & 749.09 & 8.34 & 0.00 & 1.00 \\ 
+  NSubspecies + log(RangeSize) & 780.92 & 40.16 & 0.00 & 1.00 \\ 
+  NSubspecies + log(RangeSize) + rand & 782.12 & 41.37 & 0.00 & 1.00 \\ 
+  NSubspecies + log(Mass) + log(RangeSize) & 782.43 & 41.68 & 0.00 & 1.00 \\ 
+  NSubspecies + log(Mass) + log(RangeSize) + rand & 783.65 & 42.90 & 0.00 & 1.00 \\ 
+  NSubspecies & 792.53 & 51.78 & 0.00 & 1.00 \\ 
+  log(RangeSize) & 792.61 & 51.85 & 0.00 & 1.00 \\ 
+  log(RangeSize) + rand & 793.72 & 52.96 & 0.00 & 1.00 \\ 
+  NSubspecies + rand & 793.76 & 53.00 & 0.00 & 1.00 \\ 
+  log(Mass) + log(RangeSize) & 794.00 & 53.25 & 0.00 & 1.00 \\ 
+  NSubspecies + log(Mass) & 794.59 & 53.83 & 0.00 & 1.00 \\ 
+  log(Mass) + log(RangeSize) + rand & 795.12 & 54.37 & 0.00 & 1.00 \\ 
+  NSubspecies + log(Mass) + rand & 795.83 & 55.08 & 0.00 & 1.00 \\ 
+  Intercept only & 806.58 & 65.82 & 0.00 & 1.00 \\ 
+  rand & 807.68 & 66.93 & 0.00 & 1.00 \\ 
+  log(Mass) & 808.62 & 67.86 & 0.00 & 1.00 \\ 
+  log(Mass) + rand & 809.74 & 68.98 & 0.00 & 1.00 \\ 
+   \bottomrule
+\end{tabular}
+\endgroup
+\end{table}
+
+
+
+
+% latex table generated in R 3.2.4 by xtable 1.8-2 package
+% Sun Apr 17 14:29:09 2016
+\begin{table}[ht]
+\centering
+\caption[
+  Full model selection results for effective gene flow analysis. 
+]{
+  Model selection results for effective gene flow analysis using phylogeny from \cite{jones2005bats}. 
+  $\bar{\text{AICc}}$ is the mean AICc score across inline{nBoots} resamplings of the null random variable. 
+  $\Delta$AICc is the model's $\bar{\text{AICc}}$ score minus $\text{min}(\bar{\text{AICc}})$. 
+  $w$ is the Akaike weight and can be interpreted as the probability that the model is the best model (of those in the plausible set).
+  $\sum w$ is the cumulative sum of the Akaike weights.
+  } 
+\label{A-fstModelWeights2}
+\begingroup\scriptsize
+\begin{tabular}{@{}lrrrr@{}}
+  \toprule
+Model & $\bar{\text{AICc}}$ & $\Delta$AICc & $w$ & $\sum w$ \\ 
+  \midrule
+log(Mass) + log(RangeSize) & 106.05 & 0.00 & 1.00 & 1.00 \\ 
+  log(Scholar) + log(Mass) + rand & 119.34 & 13.30 & 0.00 & 1.00 \\ 
+  Gene Flow + log(Mass) & 120.15 & 14.11 & 0.00 & 1.00 \\ 
+  log(Mass) + rand & 122.83 & 16.78 & 0.00 & 1.00 \\ 
+  log(Mass) & 123.09 & 17.04 & 0.00 & 1.00 \\ 
+  log(Scholar) + log(Mass) & 124.22 & 18.18 & 0.00 & 1.00 \\ 
+  Gene Flow + log(Mass) + log(RangeSize) + rand & 124.52 & 18.48 & 0.00 & 1.00 \\ 
+  log(Mass) + log(RangeSize) + rand & 124.68 & 18.64 & 0.00 & 1.00 \\ 
+  rand & 125.42 & 19.37 & 0.00 & 1.00 \\ 
+  log(Scholar) + log(Mass) + log(RangeSize) + rand & 125.69 & 19.64 & 0.00 & 1.00 \\ 
+  log(Scholar) + rand & 126.04 & 19.99 & 0.00 & 1.00 \\ 
+  Gene Flow + log(Mass) + rand & 126.52 & 20.48 & 0.00 & 1.00 \\ 
+  log(Scholar) & 126.56 & 20.52 & 0.00 & 1.00 \\ 
+  log(Scholar) + Gene Flow + log(Mass) + rand & 126.90 & 20.86 & 0.00 & 1.00 \\ 
+  log(Scholar) + log(RangeSize) + rand & 127.83 & 21.78 & 0.00 & 1.00 \\ 
+  log(Scholar) + log(RangeSize) & 127.96 & 21.91 & 0.00 & 1.00 \\ 
+  log(Scholar) + log(Mass) + log(RangeSize) & 128.01 & 21.96 & 0.00 & 1.00 \\ 
+  Gene Flow + log(RangeSize) + rand & 128.07 & 22.02 & 0.00 & 1.00 \\ 
+  Gene Flow + rand & 128.37 & 22.33 & 0.00 & 1.00 \\ 
+  log(RangeSize) + rand & 129.02 & 22.98 & 0.00 & 1.00 \\ 
+  log(Scholar) + Gene Flow & 129.09 & 23.04 & 0.00 & 1.00 \\ 
+  log(Scholar) + Gene Flow + log(Mass) & 129.18 & 23.13 & 0.00 & 1.00 \\ 
+  log(Scholar) + Gene Flow + rand & 130.46 & 24.42 & 0.00 & 1.00 \\ 
+  log(Scholar) + Gene Flow + log(Mass) + log(RangeSize) & 130.80 & 24.76 & 0.00 & 1.00 \\ 
+  log(Scholar) + Gene Flow + log(RangeSize) & 130.81 & 24.76 & 0.00 & 1.00 \\ 
+  log(Scholar) + Gene Flow + log(RangeSize) + rand & 130.89 & 24.84 & 0.00 & 1.00 \\ 
+  log(RangeSize) & 131.22 & 25.17 & 0.00 & 1.00 \\ 
+  Gene Flow + log(Mass) + log(RangeSize) & 131.85 & 25.80 & 0.00 & 1.00 \\ 
+  log(Scholar) + Gene Flow + log(Mass) + log(RangeSize) + rand & 132.97 & 26.93 & 0.00 & 1.00 \\ 
+  Gene Flow + log(RangeSize) & 133.17 & 27.12 & 0.00 & 1.00 \\ 
+  Gene Flow & 135.91 & 29.86 & 0.00 & 1.00 \\ 
+  Intercept only & 136.23 & 30.18 & 0.00 & 1.00 \\ 
+   \bottomrule
+\end{tabular}
+\endgroup
+\end{table}
+
+
 
 
 
