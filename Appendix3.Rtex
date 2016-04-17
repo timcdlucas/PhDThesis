@@ -689,6 +689,25 @@ modelWeights2 <- allResults2 %>%
                   mutate(string = levels(predictors)[predictors])
 
 
+
+varWeights2 <- sapply(names(allResults2)[1:6], 
+  function(x) sum(modelWeights2$modelWeight[grep(x, as.character(modelWeights2$predictors))]))
+
+
+coefMeans2 <- apply(allResults2[, grep('beta', names(allResults2))], 2, function(x) wtd.mean(x, allResults2$weight, na.rm = TRUE))
+
+
+
+varCoefMeans2 <- apply(allResults[, grep('beta', names(allResults2))], 2, function(x) wtd.mean(x, allResults2$weight, na.rm = TRUE))
+varCoefVars2  <- apply(allResults[, grep('beta', names(allResults2))], 2, function(x) wtd.var(x, allResults2$weight, na.rm = TRUE))
+
+nSpeciesCoefMean2 <- wtd.mean(allResults2$beta.NumberOfSubspecies[!allResults2$scholarRefs.NumberOfSubspecies], 
+                             allResults2$weight[!allResults2$scholarRefs.NumberOfSubspecies], na.rm = TRUE)
+nSpeciesCoefMeanI2 <- wtd.mean(allResults2$beta.NumberOfSubspecies[allResults2$scholarRefs.NumberOfSubspecies], 
+                             allResults2$weight[allResults2$scholarRefs.NumberOfSubspecies], na.rm = TRUE)
+nSpeciesInterMean2 <- wtd.mean(allResults2$`beta.scholarRefs.NumberOfSubspecies`, allResults2$weight, na.rm = TRUE)
+
+
 #### FST
 
 
@@ -710,7 +729,7 @@ fstSepVarWeights2$col[fstSepVarWeights2$variable == 'Nm'] <- 'Population Structu
 fstSepVarWeights2$col[fstSepVarWeights2$variable == 'rand'] <- 'Null'
 
 
-fstVarWeights2 <- sapply(names(fstAllResults2)[1:5], function(x) sum(fstAllResults2$weight[fstAllResults2[, x]])/nBoots)
+#fstVarWeights2 <- sapply(names(fstAllResults2)[1:5], function(x) sum(fstAllResults2$weight[fstAllResults2[, x]])/nBoots)
 
 
 fstModelWeights2 <- fstAllResults2 %>%
@@ -719,6 +738,12 @@ fstModelWeights2 <- fstAllResults2 %>%
                   mutate(dAIC = AICc - min(AICc), modelWeight = exp(- 0.5 * dAIC) / sum(exp(- 0.5 * dAIC))) %>%
                   arrange(desc(modelWeight)) %>%
                   mutate(cumulativeWeight = cumsum(modelWeight)) 
+
+fstVarWeights2 <- sapply(names(fstAllResults2)[1:5], 
+  function(x) sum(fstModelWeights2$modelWeight[grep(x, as.character(fstModelWeights2$predictors))]))
+
+
+fstCoefMeans2 <- apply(fstAllResults2[, grep('beta', names(fstAllResults2))], 2, function(x) wtd.mean(x, fstAllResults2$weight, na.rm = TRUE))
 
 
 %%end.rcode
@@ -730,7 +755,7 @@ fstModelWeights2 <- fstAllResults2 %>%
 %%begin.rcode analyseModelSelect2, fig.show = extraFigs
 
 
-modelWeights2 <- allResults2 %>%
+modelWeightsFull2 <- allResults2 %>%
                   group_by(predictors) %>%
                   summarise(AICc = mean(AIC)) %>%
                   mutate(dAIC = AICc - min(AICc), modelWeight = exp(- 0.5 * dAIC) / sum(exp(- 0.5 * dAIC))) %>%
@@ -753,7 +778,7 @@ colnames(modelWeights2) <- c("Model", "$\\bar{\\text{AICc}}$", "$\\Delta$AICc", 
 
 
 
-fstModelWeights2 <- fstAllResults2 %>%
+fstModelWeightsFull2 <- fstAllResults2 %>%
                   group_by(predictors) %>%
                   summarise(AICc = mean(AIC)) %>%
                   mutate(dAIC = AICc - min(AICc), modelWeight = exp(- 0.5 * dAIC) / sum(exp(- 0.5 * dAIC))) %>%
@@ -790,7 +815,7 @@ modelSelectTitle <- "
 "
 
 # floating.environment = 'sidewaystable') ? possible to do upright caption.
-print(xtable(modelWeights2, 
+print(xtable(modelWeightsFull2, 
              digits = 2, 
              caption = c(modelSelectCapt, modelSelectTitle), 
              label = "A-modelWeights2",
@@ -801,7 +826,7 @@ print(xtable(modelWeights2,
 
       sanitize.colnames.function = function(x){x},
       caption.placement = "top", 
-      hline.after = c(-1, 0, nrow(modelWeights2)), 
+      hline.after = c(-1, 0, nrow(modelWeightsFull2)), 
       booktabs = TRUE
     )
 
@@ -823,10 +848,10 @@ fstSelectCapt <- "
   "
 
 fstSelectTitle <- "
-  Full model selection results for effective gene flow analysis. 
+  Full model selection results for effective gene flow analysis with alternative phylogeny. 
 "
 
-print(xtable(fstModelWeights2, 
+print(xtable(fstModelWeightsFull2, 
              digits = 2, 
              caption = c(fstSelectCapt, fstSelectTitle),
              label = "A-fstModelWeights2",
@@ -836,7 +861,7 @@ print(xtable(fstModelWeights2,
       include.colnames = TRUE,
       sanitize.colnames.function = function(x){x},
       caption.placement = "top", 
-      hline.after = c(-1, 0, nrow(fstModelWeights2)), 
+      hline.after = c(-1, 0, nrow(fstModelWeightsFull2)), 
       booktabs = TRUE
     )
 
@@ -846,6 +871,42 @@ print(xtable(fstModelWeights2,
 
 
 
+
+
+
+
+\begin{table}[t]
+\centering
+\caption[Estimated variable weights and coefficients using alternative phylogeny]{
+Estimated variable weights (probability that a variable is in the best model) and their estimated coefficients for both number of subspecies and gene flow analyses using phylogeny from \cite{jones2005bats}. .
+The coefficients for the number of subspecies variable are also separated for models with and without the interaction term because this term strongly changes the coefficient and because the coefficient can only be usefully interpreted when estimated without the interaction. 
+However, there are no weights for these separated terms as they are not directly compared in the model selection framework.
+}
+%\rowcolors{2}{gray!25}{white}
+\begin{tabular}{@{}>{\small}l rrrr@{}}
+\toprule
+& \multicolumn{2}{c}{\textit{Number of Subspecies}} & \multicolumn{2}{c}{\textit{Gene flow}}\\\cmidrule(rl){2-3}\cmidrule(rl){4-5}
+\normalsize{Variable} & $Pr$ & Coefficient & $Pr$ & Coefficient\\
+\midrule
+Number of subspecies &&&&\\
+\hspace{3mm}Total & \rinline{sprintf('%.2f', varWeights2['NumberOfSubspecies'])} & \rinline{varCoefMeans2['beta.NumberOfSubspecies']} &&\\
+\hspace{3mm}Models without interaction term &&  \rinline{nSpeciesCoefMean2} &&\\
+\hspace{3mm}Models with interaction term &&  \rinline{nSpeciesCoefMeanI2} &&\\
+Number of subspecies*log(Scholar) &  \rinline{varWeights2['scholarRefs.NumberOfSubspecies']} &  \rinline{sprintf('%.2f', varCoefMeans2['beta.scholarRefs.NumberOfSubspecies'])} && \\[2.5mm]  
+Gene flow & & &  \rinline{fstVarWeights2['Nm']} &  \rinline{fstCoefMeans2['beta.Nm']}\\[2.5mm]  
+log(Scholar) &  \rinline{sprintf('%.2f', varWeights2['scholarRefs'])} &  \rinline{varCoefMeans2['beta.scholarRefs']} & 
+   \rinline{fstVarWeights2['scholarRefs']} &  \rinline{fstCoefMeans2['beta.scholarRefs']}\\
+log(Mass) &  \rinline{sprintf('%.2f', varWeights2['mass'])} &  \rinline{varCoefMeans2['beta.mass']} & 
+   \rinline{fstVarWeights2['mass']} &  \rinline{fstCoefMeans2['beta.mass']}\\
+log(Range size) &  \rinline{sprintf('%.2f', varWeights2['distrSize'])} &  \rinline{varCoefMeans2['beta.distrSize']}& 
+   \rinline{fstVarWeights2['distrSize']} &  \rinline{fstCoefMeans2['beta.distrSize']}\\
+Random &  \rinline{sprintf('%.2f', varWeights2['rand'])} &  \rinline{varCoefMeans2['beta.rand']}& 
+   \rinline{fstVarWeights2['rand']} &  \rinline{fstCoefMeans2['beta.rand']}\\
+\bottomrule
+\end{tabular}
+
+\label{t:variables2}
+\end{table}
 
 
 
