@@ -222,7 +222,7 @@ This is not correct as pairwise and global $F_{ST}$ values have different relati
 
 Finally, one further study tested for an association between group size and parasite richness amongst 138 bat species \cite{bordes2008bat}.
 They found no relationship between group size (coded into four classes) and bat fly species richness.
-While group size is an important component of population structure it does not capture fully how connected the population is globally (but see Chaper~\ref{ch:sims2}). 
+While group size is an important component of population structure it does not capture fully how connected the population is globally. 
 
 
 
@@ -247,6 +247,7 @@ Furthermore, I found that the role of phylogeny is very weak both in the models 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%begin.rcode parameters
+
 # Define some parameters.
 #   This is useful at the top so that it can go in text.
 
@@ -1179,7 +1180,7 @@ To test for an association between pathogen richness and population structure I 
 As species cannot be considered independent due to shared evolutionary history, phylogeny was controlled for in all regressions.
 -A number of other factors that have previously been found to be important were included as additional explanatory variables: body mass \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat, han2015infectious, bordes2008bat}, range size \cite{kamiya2014determines, turmelle2009correlates, maganga2014bat} and study effort \cite{turmelle2009correlates, gay2014parasite, maganga2014bat}.		
 This was to attempt to avoid spurious positive results occur  ring simply due to correlation between pathogen richness and a different, causal factor.
-Despite commonly being associated with pathogen richness \cite{arneberg2002host, kamiya2014determines, nunn2003comparative}, population density is not included in the analysis as there is very little data for bat densities --- however Chapter~\ref{ch:sims2} examines the relationship between density and population structure and Chapter~\ref{ch:grem} presents a method that allows the estimation of density from acoustic surveys.
+Despite commonly being associated with pathogen richness \cite{arneberg2002host, kamiya2014determines, nunn2003comparative}, population density is not included in the analysis as there is very little data for bat densities.
 I used both the number of subspecies a bat species has and estimates of gene flow (analysed separately) as measures of population structure.
 All analyses were run in R \cite{R}
 
@@ -1809,7 +1810,7 @@ Phylogeny from \\cite{bininda2007delayed} pruned to include all species used in 
 Dot size shows the number of known viruses for that species and colour shows family.
 '
 
-treeTitle <- 'Pruned phylogeny with dot size showing number of pathogens and colour showing family.'
+treeTitle <- 'Pruned phylogeny with dot size showing number of pathogens and colour showing family. The red scale bar shows 25 tim units' % TODO.
 
 %%end.rcode
 
@@ -1835,6 +1836,7 @@ p %<+% combdf +
   theme_tcdl +
   theme(plot.margin = unit(c(-2, -0, +3, -0), "lines")) +
   theme(legend.position = c(0.5, -0.04)) +
+  geom_treescale(x = 0, y = 152, width = 25, color = 'red', offset = 9) +
   labs(size = 'Virus Richness') +
   theme(legend.key.size = unit(0.8, "lines"),
         legend.text = element_text(size = 10),
