@@ -1924,19 +1924,21 @@ The \rinline{familyMeans$Family[order(familyMeans$mean, decreasing = TRUE)[2]]} 
 		
 # Caption for the main boxplot of subspecies vs virus		
 		
-boxplotCapt <- '
-The relationship between number of subspecies and viral richness.
+boxplotCapt <- paste(
+'The relationship between number of subspecies and viral richness for',
+nrow(nSpecies),
+'bat species.
 A) Histogram of the number of subspecies data with most species having few subspecies.		
 B) Number of virus species against number of subspecies. 
-Data for the same number of subspecies are plotted as boxplots with the dark bar showing the median, the box showing the interquartile range, vertical lines showing the range and outliers shown as separate points.
+Median bat species viral richness is plotted (dark bar) for species having different numbers of subspecies, where interquartile range is represented by a box, vertical lines representing range, and outliers shown as filled circles.
 When only one species has a certain number of subspecies, only the median (dark bar) is plotted.
-The regression line is of a phylogenetic multiple regression including all the explanatory variables but no interaction term.
-The plotted line shows the slope from the multiple regression with the intercept being calculated by setting other explanatory variables to their median values.
+The red line represents a phylogenetic multiple regression including all the explanatory variables but no interaction term.
+The line shows the slope from the multiple regression with the intercept being calculated by setting other explanatory variables to their median values.
 '
+)
 %%end.rcode		
 		
 %%begin.rcode boxplot, fig.cap = boxplotCapt		
-
 
 # Make a boxplot of subspecies vs virus
 # Add model lines for pgls models.
@@ -1962,6 +1964,7 @@ predDataInter <- data.frame(scholarRefs = quantile(nSpecies$scholarRefs, 0.5),
                          seq(min(nSpecies$NumberOfSubspecies), max(nSpecies$NumberOfSubspecies), 
                          length.out = 200)
                        )
+
 
 
 linesInter <- data.frame(NumberOfSubspecies = predData$NumberOfSubspecies, 
