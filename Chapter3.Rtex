@@ -1805,12 +1805,19 @@ I also performed the analysis using the phylogeny from \cite{jones2005bats} as t
 
 %%begin.rcode treeCapt
 
-treeCapt <- '
-Phylogeny from \\cite{bininda2007delayed} pruned to include all species used in either the number of subspecies or gene flow analysis.
+treeCapt <- paste('
+The phylogenetic distribution of viral richness.
+The phylogeny is from \\cite{bininda2007delayed} pruned to include all species used in either the number of subspecies or gene flow analysis.
 Dot size shows the number of known viruses for that species and colour shows family.
-'
+The red scale bar shows 25 million years. %todo
+There is no clear association between phylogeny and virus richness (pgls: $\\lambda = $', 
+round(virusLambda$param['lambda'], 2),
+', $p$ = ',
+round(virusLambda$param.CI$lambda$bounds.p[1], 2),
+').')
 
-treeTitle <- 'Pruned phylogeny with dot size showing number of pathogens and colour showing family. The red scale bar shows 25 tim units' % TODO.
+
+treeTitle <- 'Pruned phylogeny with dot size showing number of pathogens and colour showing family.'
 
 %%end.rcode
 
@@ -1836,7 +1843,7 @@ p %<+% combdf +
   theme_tcdl +
   theme(plot.margin = unit(c(-2, -0, +3, -0), "lines")) +
   theme(legend.position = c(0.5, -0.04)) +
-  geom_treescale(x = 0, y = 152, width = 25, color = 'red', offset = 9) +
+  geom_treescale(x = 0, y = 152, width = 25, color = pokepal(17)[3], offset = 9) +
   labs(size = 'Virus Richness') +
   theme(legend.key.size = unit(0.8, "lines"),
         legend.text = element_text(size = 10),
@@ -1859,9 +1866,9 @@ p %<+% combdf +
 
 \subsection{Statistical analysis}
 
-Statistical analysis for both dependent variables was conducted using an information theoretical approach \cite{burnham2002model}, specifically following \textcite{whittingham2005habitat, whittingham2006we}.
+Statistical analysis for both response variables --- number of subspecies and effective level of gene flow --- was conducted using an information theoretical approach \cite{burnham2002model}, specifically following \textcite{whittingham2005habitat, whittingham2006we}.
 I chose a credible set of models including all combinations of explanatory variables and a model with just an intercept.
-In the analysis using the number of subspecies dependent variable I also modelled the interaction study effort and number of subspecies by including their product.
+In the analysis using the number of subspecies response variable I also modelled the interaction study effort and number of subspecies by including their product.
 This interaction was included as I believed \emph{a priori} that this interaction may be present as subspecies in well studied species are more likely to be identified.
 The interaction was only included in models with both study effort and number of subspecies as individual terms.
 
@@ -1870,17 +1877,18 @@ The explanatory variables were centered and scaled to allow direct comparison of
 In each case I simultaneously fitted the $\lambda$ parameter as this avoids misspecifying the model \cite{revell2010phylogenetic}.
 $\kappa$ and $\delta$ parameters were constrained to one as they are more concerned with when along a branch evolution occurs and because fitting multiple parameters makes interpretation difficult. 
 
-To establish the importance of variables I calculated the probability, $Pr$, that each variable would be in the best model if the data were recollected.
-For each variable the mean of its coefficient, $b$, in all models that contained that variable was also calculated to determine the direction and strength of the variables.
-In the subspecies analysis, this mean of $b$ was calculated for: a) all models b) only models with a interaction term and c) only models without an interaction.
-As the interaction term greatly affects the estimated value of $b$, considering these value separately aids interpretation.
-Following \cite{whittingham2005habitat} I included a uniformly random variable as a null variable as even unimportant variables can have Akaike weights notably greater than zero.
+To establish the importance of variables I calculated the probability, $Pr$, that each variable would be in the best model amongst those examined (under the assumption that all models are \emph{a priori} equally likely).
+This value can more generally, and with fewer assumptions, be considered as simply the relative weight of evidence for each variable being in the best model amongst those examined.
+For each variable the mean of its coefficient, $b$, in all models that contained that variable was also calculated to determine the direction and strength of the effect of each variables.
+In the subspecies analysis, this mean of $b$ was calculated for: \emph{i}) all models, \emph{ii}) only models with an interaction term and \emph{iii}) only models without an interaction term.
+As the interaction term greatly affects the estimated value of $b$, considering these values separately aids interpretation.
+Following \cite{whittingham2005habitat} I included a uniformly distributed random variable as a null variable as even unimportant variables can have Akaike weights notably greater than zero.
 The whole analysis was run \rinline{nBoots} times, resampling the random variable each time.
 I calculated AICc for each model.
 I calculated the average AICc, $\bar{\text{AICc}}$, by averaging AICc scores within models.
 $\Delta\text{AICc}$ was calculated as $\text{min}(\bar{\text{AICc}}) - \bar{\text{AICc}}$, not the mean of the individual $\Delta\text{AICc}$ scores, to guarantee that the best model has $\Delta\text{AICc} = 0$.
 From these $\Delta\text{AICc}$ values I calculated Akaike weights, $w$.
-This value can be interpreted as the probability that a model would be the best model if the data were recollected.
+This value can be interpreted as the probability that a model is the best model, given the data, amongst those examined.
 For each variable, the sum of the Akaike weights of models containing that variable are summed to give $Pr$.
 This value can be interpreted as the probability that the given variable is in the best model.
 
@@ -1900,10 +1908,10 @@ This value can be interpreted as the probability that the given variable is in t
 
 
 After data cleaning there was data for \rinline{nrow(nSpecies)} bat species in \rinline{length(unique(nSpecies$Family))} families.
-There appears to be a positive relationship between the number of subspecies and viral richness (Figure~\ref{fig:boxplot}) though few species have more than four subspecies. 
+There appears to be a positive relationship between the number of subspecies and viral richness (Figure~\ref{fig:boxplot}) though few species have more than five subspecies. 
 The number of described virus species for a bat host ranged up to \rinline{max(nSpecies$virusSpecies)} viruses in \emph{\rinline{nSpecies$binomial[which.max(nSpecies$virusSpecies)]}}.
 Figure~\ref{fig:treePlot} shows the phylogeny used and the number of viruses for each species.
-The mean number of viruses across families is fairly constant with a lower range of \rinline{min(familyMeans$mean)} for \rinline{familyMeans$Family[which.min(familyMeans$mean)]}.
+The mean number of viruses across families is fairly constant with \rinline{familyMeans$Family[which.min(familyMeans$mean)]} having the smallest mean (\rinline{min(familyMeans$mean)}).
 The highest mean is \rinline{familyMeans$Family[which.max(familyMeans$mean)]} with \rinline{max(familyMeans$mean)} virus species per bat species, but this is based on a sample size of \rinline{familyMeans$n[which.max(familyMeans$mean)]}.
 The \rinline{familyMeans$Family[order(familyMeans$mean, decreasing = TRUE)[2]]} have the second highest mean  of \rinline{familyMeans$mean[order(familyMeans$mean, decreasing = TRUE)[2]]} (n = \rinline{familyMeans$n[order(familyMeans$mean, decreasing = TRUE)[2]]}).
 
