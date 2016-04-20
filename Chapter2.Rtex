@@ -1001,8 +1001,14 @@ topoPlot <- ggplot(propsTopoCI, aes(x = factor(transmission), y = mean, fill = t
                  spread = 2) +
   theme(legend.position = "bottom")
 
-plot_grid(dispPlot, topoPlot, labels = c('A', 'B'), align = 'h', label_size = 10)
+#plot_grid(dispPlot, topoPlot, labels = c('A', 'B'), align = 'h', label_size = 10)
 
+
+ggdraw() +
+  draw_plot_label("A", size = 14, fontface = 'plain') + 
+  draw_plot(dispPlot, 0, 0, 0.5, 1) +
+  draw_plot_label("B", size = 14, x = 0.5, y = 1, fontface = 'plain') + 
+  draw_plot(topoPlot, 0.5, 0, 0.5, 1)
 %%end.rcode
 
 
