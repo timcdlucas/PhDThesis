@@ -1187,7 +1187,7 @@ sspUni <- summary(pgls(virusSpecies ~ NumberOfSubspecies, data = compSubspecies,
 To measure pathogen richness I used data from \cite{luis2013comparison}. 
 These simply include known infections of a bat species with a virus species. 
 I am using viral richness as a proxy for pathogen richness generally but the analysis could instead be considered as representative of viral richness only.
-Rows with host species that were not identified to species level were removed.
+Rows with host species that were not identified to species level according to \textcite{wilson2005mammal} were removed.
 Many viruses were not identified to species level or their specified species names were not in the ICTV virus taxonomy \cite{ICTV}.
 I counted a virus if it was the only virus, for that host species, in the lowest taxonomic level identified (present in the ICTV taxonomy).
 That is, if a host is recorded as harbouring an unknown Paramyxoviridae virus, then it must carry at least one Paramyxoviridae virus.
@@ -1485,7 +1485,7 @@ p %<+% fstFinal[, c('binomial', 'virusSpecies')] +
 
 \subsubsection{Population structure data}
 
-I used two measures of population structure: the effective level of gene flow and the number of subspecies.
+I used two measures of population structure: the number of subspecies and the effective level of gene flow.
 The number of subspecies was counted using the Wilson and Reeder taxonomy \cite{wilson2005mammal}.
 The effective level of gene flow was calculated from estimates of $F_{ST}$ collated from the literature.
 The studies were from a wide range of spatial scales, from local ($\sim\SI{10}{\kilo\metre}$) to continental.
@@ -1811,7 +1811,7 @@ treeCapt <- paste('
 The phylogenetic distribution of viral richness.
 The phylogeny is from \\cite{bininda2007delayed} pruned to include all species used in either the number of subspecies or gene flow analysis.
 Dot size shows the number of known viruses for that species and colour shows family.
-The red scale bar shows 25 million years. %todo
+The red scale bar shows 25 million years. 
 There is no clear association between phylogeny and virus richness (pgls: $\\lambda = $', 
 round(virusLambda$param['lambda'], 2),
 ', $p$ = ',
@@ -1847,6 +1847,7 @@ p %<+% combdf +
   theme(legend.position = c(0.5, -0.04)) +
   geom_treescale(x = 0, y = 152, width = 25, color = pokepal(17)[3], offset = 9) +
   labs(size = 'Virus Richness') +
+#  guides(size = guide_legend(override.aes = list(shape = 1))) +
   theme(legend.key.size = unit(0.8, "lines"),
         legend.text = element_text(size = 10),
         legend.margin = unit(c(0.05), "cm"),
@@ -1936,9 +1937,16 @@ The red line represents a phylogenetic multiple regression including all the exp
 The line shows the slope from the multiple regression with the intercept being calculated by setting other explanatory variables to their median values.
 '
 )
+
+boxplotTitle <- paste(
+'The relationship between number of subspecies and viral richness for',
+nrow(nSpecies),
+'bat species.'
+)
+
 %%end.rcode		
 		
-%%begin.rcode boxplot, fig.cap = boxplotCapt		
+%%begin.rcode boxplot, fig.cap = boxplotCapt, fig.scap = boxplotTitle	
 
 # Make a boxplot of subspecies vs virus
 # Add model lines for pgls models.
@@ -2029,7 +2037,32 @@ These top seven models had a combined weight of \rinline{sprintf("%.2f", round(m
 However these top seven models all contained study effort, number of subspecies and the interaction between these two variables.
 log(Mass) and log(Range Size) and the random variable are all in three of the top seven models.
 
-%%begin.rcode fstRawData, fig.height = 2.3, fig.cap = 'Gene flow per generation (on a log scale) against viral richness. The genetic marker used is shown with colour. The red line shows the univariate phylogenetic model.'
+
+
+%%begin.rcode fstRawCapt
+
+fstRawDataCapt <- 
+paste(
+'Relationship between viral richness and log effective gene flow per generation for',
+nrow(fstFinal),
+'bat species.
+Green points are studies that estimate effective gene flow using allozymes and blue points are studies using microstatellites.
+')
+
+
+
+fstRawDataTitle <- 
+paste(
+'Relationship between viral richness and log effective gene flow per generation for',
+nrow(fstFinal),
+'bat species.
+')
+
+%%end.rcode
+
+
+
+%%begin.rcode fstRawData, fig.height = 2.3, fig.cap = fstRawDataCapt, fig.scap = fstRawDataTitle
 
 # Plot raw fst data
 
@@ -2265,7 +2298,7 @@ Random &  \rinline{sprintf('%.2f', varWeights['rand'])} &  \rinline{varCoefMeans
 I have tested the hypothesis that population structure promotes pathogen richness in bats.
 By analysing data on two measures of population structure, and using larger data sets than previous studies, it is hoped that any conclusions may be more robust than the conflicting results in the literature \cite{gay2014parasite, turmelle2009correlates, maganga2014bat}.
 I have found that a positive effect of population structure (a positive effect of the number of subspecies and a negative effect of gene flow) are likely to be in the best models for explaining viral richness.
-Study effort is also clearly supported confirming the expectation that additional study of a bat species yields more known viruses infecting that species and highlighting again that this bias cannot be ignored in studies using known pathogen richness as a proxy for total pathogen richness \cite{}.
+Study effort is also clearly supported confirming the expectation that additional study of a bat species yields more known viruses infecting that species and highlighting again that this bias cannot be ignored in studies using known pathogen richness as a proxy for total pathogen richness \cite{}. %todo
 
 
 \subsection{Study limitations}
