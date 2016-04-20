@@ -570,11 +570,19 @@ rm(t2)
 
 %%begin.rcode treeCapt
 
-treeCapt <- '
-Phylogeny from \\textcite{jones2005bats} (version 2) pruned to include all species used in the number of subspecies analysis.
+
+treeCapt <- paste('
+The distribution of viral richness on the alternate phylogeny.
+The phylogeny is from \\textcite{jones2005bats} (version 2) pruned to include all species used in either the number of subspecies or gene flow analysis.
 Dot size shows the number of known viruses for that species and colour shows family.
-Analyses run with this phylogeny gave qualitatively similar results to analyses using the phylogeny from \\cite{bininda2007delayed}.
-'
+The red scale bar shows 25 million years. %todo
+There is no clear association between phylogeny and virus richness (pgls: $\\lambda = $', 
+round(virusLambda$param['lambda'], 2),
+', $p$ = ',
+round(virusLambda$param.CI$lambda$bounds.p[1], 2),
+').')
+
+
 
 treeTitle <- 'Pruned alternative phylogeny with dot size showing number of pathogens and colour showing family.'
 
@@ -593,14 +601,14 @@ p %<+% nSpecies +
   theme_tcdl +
   theme(plot.margin = unit(c(-2, -0, +3, -0), "lines")) +
   theme(legend.position = c(0.5, -0.04)) +
+  geom_treescale(x = 0, y = 152, width = 25, color = pokepal(17)[3], offset = 9) +
   labs(size = 'Virus Richness') +
   theme(legend.key.size = unit(0.8, "lines"),
         legend.text = element_text(size = 10),
         legend.margin = unit(c(0.05), "cm"),
         legend.title = element_text(size = 12),
         legend.direction = "horizontal") +
-  guides(colour = guide_legend(ncol=3))
-
+  guides(colour = guide_legend(ncol=3))   
 
 
 %%end.rcode

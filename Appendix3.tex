@@ -24,8 +24,8 @@
 
 \begin{landscape}
 
-% latex table generated in R 3.2.4 by xtable 1.8-2 package
-% Sun Apr 17 16:56:08 2016
+% latex table generated in R 3.2.5 by xtable 1.8-2 package
+% Wed Apr 20 09:10:29 2016
 \begingroup\tiny
 \begin{longtable}{@{}llrrrrrrrrrl@{}}
 \caption[
@@ -337,8 +337,8 @@ Megadermatidae & \emph{Macroderma gigas} & 0 &  & 0.25 & 124.37 & 1078.95 & 769 
 
 
 
-% latex table generated in R 3.2.4 by xtable 1.8-2 package
-% Sun Apr 17 16:56:20 2016
+% latex table generated in R 3.2.5 by xtable 1.8-2 package
+% Wed Apr 20 09:09:25 2016
 \begin{table}[ht]
 \centering
 \caption[
@@ -404,8 +404,8 @@ log(Scholar)*NSubspecies + log(Scholar) + NSubspecies + log(Mass) + log(RangeSiz
 
 
 
-% latex table generated in R 3.2.4 by xtable 1.8-2 package
-% Sun Apr 17 16:56:20 2016
+% latex table generated in R 3.2.5 by xtable 1.8-2 package
+% Wed Apr 20 09:09:25 2016
 \begin{table}[ht]
 \centering
 \caption[
@@ -487,10 +487,11 @@ log(Scholar) + Gene Flow + log(Mass) & 70.57 & 0.00 & 1.00 & 1.00 \\
 }
 
 \caption[Pruned alternative phylogeny with dot size showing number of pathogens and colour showing family.]{
-Phylogeny from \textcite{jones2005bats} (version 2) pruned to include all species used in the number of subspecies analysis.
+The distribution of viral richness on the alternate phylogeny.
+The phylogeny is from \textcite{jones2005bats} (version 2) pruned to include all species used in either the number of subspecies or gene flow analysis.
 Dot size shows the number of known viruses for that species and colour shows family.
-Analyses run with this phylogeny gave qualitatively similar results to analyses using the phylogeny from \cite{bininda2007delayed}.
-}\label{fig:treePlot2}
+The red scale bar shows 25 million years. %todo
+There is no clear association between phylogeny and virus richness (pgls: $\lambda = $ 0.04 , $p$ =  0.21 ).}\label{fig:treePlot2}
 \end{figure}
 
 
@@ -520,13 +521,13 @@ Interactive plots
 \begin{figure}[t]
 \centering
   \includegraphics[width=1\textwidth]{figure/fstITPlots2-1.pdf}
-  \caption[Akaike variable weights with alternative phylogeny]{
+  \caption[Akaike variable weights for analysis using alternative phylogeny]{
 Akaike variable weights for both analyses using the phylogeny from \cite{jones2005bats}. 
 The probability that each variable is in the best model (amongst the models test) is shown, with the boxplots showing the variation amongst the models over 50 resamplings of the uniformly random ``null'' variable. 
 The three bars of the boxplot show the median values and upper and lower quartiles of the data, vertical lines show the range and points display outliers. 
 The purple ``Random'' box is the uniformly random variable.
 }
-\label{f:sir}
+\label{f:A-itplots}
 \end{figure}
 
 
@@ -547,12 +548,12 @@ The purple ``Random'' box is the uniformly random variable.
 
 
 
-% latex table generated in R 3.2.4 by xtable 1.8-2 package
-% Sun Apr 17 16:56:22 2016
+% latex table generated in R 3.2.5 by xtable 1.8-2 package
+% Wed Apr 20 09:09:26 2016
 \begin{table}[ht]
 \centering
 \caption[
-  Full model selection results for number of subspecies analysis. 
+  Full model selection results for number of subspecies analysis using alternative phylogeny. 
 ]{
   Model selection results for number of subspecies analysis using phylogeny from \cite{jones2005bats}. 
   $\bar{\text{AICc}}$ is the mean AICc score across inline{nBoots} resamplings of the null random variable. 
@@ -565,7 +566,7 @@ The purple ``Random'' box is the uniformly random variable.
 \begingroup\tiny
 \begin{tabular}{@{}lrrrr@{}}
   \toprule
-predictors & AICc & dAIC & modelWeight & cumulativeWeight \\ 
+Model & $\bar{\text{AICc}}$ & $\Delta$AICc & $w$ & $\sum w$ \\ 
   \midrule
 log(Scholar)*NSubspecies + log(Scholar) + NSubspecies + log(Mass) + log(RangeSize) & 756.44 & 0.00 & 0.21 & 0.21 \\ 
   log(Scholar)*NSubspecies + log(Scholar) + NSubspecies + log(Mass) & 756.90 & 0.46 & 0.17 & 0.38 \\ 
@@ -614,8 +615,8 @@ log(Scholar)*NSubspecies + log(Scholar) + NSubspecies + log(Mass) + log(RangeSiz
 
 
 
-% latex table generated in R 3.2.4 by xtable 1.8-2 package
-% Sun Apr 17 16:56:22 2016
+% latex table generated in R 3.2.5 by xtable 1.8-2 package
+% Wed Apr 20 09:09:26 2016
 \begin{table}[ht]
 \centering
 \caption[
@@ -631,7 +632,7 @@ log(Scholar)*NSubspecies + log(Scholar) + NSubspecies + log(Mass) + log(RangeSiz
 \begingroup\scriptsize
 \begin{tabular}{@{}lrrrr@{}}
   \toprule
-predictors & AICc & dAIC & modelWeight & cumulativeWeight \\ 
+Model & $\bar{\text{AICc}}$ & $\Delta$AICc & $w$ & $\sum w$ \\ 
   \midrule
 log(Mass) + log(RangeSize) & 106.05 & 0.00 & 1.00 & 1.00 \\ 
   log(Scholar) + log(Mass) + rand & 119.34 & 13.30 & 0.00 & 1.00 \\ 
