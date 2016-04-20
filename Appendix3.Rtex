@@ -237,7 +237,7 @@ citeCor <- pgls(log(scholarRefs, base = 10) ~ log(pubmedRefs + 1, base = 10), da
 
 citeCor2 <- summary(pgls(log(scholarRefs) ~ log(pubmedRefs + 1), data = compSubspecies, lambda = 'ML'))
 
-
+virusLambda <- summary(pgls(virusSpecies ~ 1, data = compSubspecies, lambda = 'ML'))
 
 %%end.rcode
 

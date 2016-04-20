@@ -1173,18 +1173,28 @@ sspUni <- summary(pgls(virusSpecies ~ NumberOfSubspecies, data = compSubspecies,
 
 
 
+%have a look at Henry's ant paper for the structure of a very similar methods section (paper is a similar lay out too - phyogenetic analysis of an evolutionary/ecological question so you could look at it overall for structure.
+%
+%Basically you dont start out the methods section with a discussion of what and why you are going to do - that is the introduction. The methods section should be the text of how you did the thing you set up in the introduction. I usually use a few pithy subheaders to get straight to the point
+%1. Data collection
+%2. Phylogenetic reconstruction
+%3. Data Analysis
+%
+%You can have fancier names if you want but those are the basics. Why dont you have another go at the methods with this structure in mind?
 
 
 
-To test for an association between pathogen richness and population structure I have performed multiple regression using a model selection framework to establish whether or not two measures of population structure are likely to be included as explanatory variables in a `best model' and therefore important.
-As species cannot be considered independent due to shared evolutionary history, phylogeny was controlled for in all regressions.
+%To test for an association between pathogen richness and population structure I have performed multiple regression using a model selection framework to establish whether or not two measures of population structure are likely to be included as explanatory variables in a `best model' and therefore important.
+%As species cannot be considered independent due to shared evolutionary history, phylogeny was controlled for in all regressions.
 -A number of other factors that have previously been found to be important were included as additional explanatory variables: body mass \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat, han2015infectious, bordes2008bat}, range size \cite{kamiya2014determines, turmelle2009correlates, maganga2014bat} and study effort \cite{turmelle2009correlates, gay2014parasite, maganga2014bat}.		
-This was to attempt to avoid spurious positive results occur  ring simply due to correlation between pathogen richness and a different, causal factor.
-Despite commonly being associated with pathogen richness \cite{arneberg2002host, kamiya2014determines, nunn2003comparative}, population density is not included in the analysis as there is very little data for bat densities.
-I used both the number of subspecies a bat species has and estimates of gene flow (analysed separately) as measures of population structure.
-All analyses were run in R \cite{R}
+%This was to attempt to avoid spurious positive results occur  ring simply due to correlation between pathogen richness and a different, causal factor.
+%Despite commonly being associated with pathogen richness \cite{arneberg2002host, kamiya2014determines, nunn2003comparative}, population density is not included in the analysis as there is very little data for bat densities.
+%I used both the number of subspecies a bat species has and estimates of gene flow (analysed separately) as measures of population structure.
+%All analyses were run in R \cite{R}
 
-\subsection{Pathogen richness}
+\subsection{Data Collection}
+
+\subsubsection{Pathogen richness}
 
 To measure pathogen richness I used data from \cite{luis2013comparison}. 
 These simply include known infections of a bat species with a virus species. 
@@ -1485,7 +1495,7 @@ p %<+% fstFinal[, c('binomial', 'virusSpecies')] +
 %%end.rcode
 
 
-\subsection{Population structure data}
+\subsubsection{Population structure data}
 
 I used two measures of population structure: the effective level of gene flow and the number of subspecies.
 The number of subspecies was counted using the Wilson and Reeder taxonomy \cite{wilson2005mammal}.
@@ -1774,7 +1784,7 @@ fstMassStudyEffort <- summary(pgls(log(scholarRefs) ~ log(mass), data = compFst,
 
 
 
-\subsection{Other explanatory variables}
+\subsubsection{Other explanatory variables}
 
 To control for study bias I collected the number of PubMed and Google Scholar citations for each bat species name including synonyms from ITIS \cite{itis} via the taxize package \cite{chamberlain2013taxize}.
 The counts were scraped using the rvest package \cite{rvest}.
