@@ -1005,9 +1005,9 @@ topoPlot <- ggplot(propsTopoCI, aes(x = factor(transmission), y = mean, fill = t
 
 
 ggdraw() +
-  draw_plot_label("A", size = 14, fontface = 'plain') + 
+  draw_plot_label("A", size = 10, fontface = 'plain') + 
   draw_plot(dispPlot, 0, 0, 0.5, 1) +
-  draw_plot_label("B", size = 14, x = 0.5, y = 1, fontface = 'plain') + 
+  draw_plot_label("B", size = 10, x = 0.5, y = 1, fontface = 'plain') + 
   draw_plot(topoPlot, 0.5, 0, 0.5, 1)
 %%end.rcode
 
