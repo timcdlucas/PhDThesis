@@ -1848,6 +1848,28 @@ p %<+% combdf +
         legend.direction = "horizontal") +
   guides(colour = guide_legend(ncol=3))
 
+
+# Attempt at concentric circle time bar.
+#scale <- data.frame(x = c(0, 0), y = c(0, 0), l = c(1200, 2400))
+
+#p %<+% combdf +
+#  geom_point2(aes(size = virusSpecies, colour = Family, subset = isTip)) +
+#  scale_size(range = c(0.1, 100), breaks = c(1, 5, 10)) +
+#  scale_colour_manual(values = c(pokepal('oddish')[c(1,3,5,7,9,10)],    pokepal('Carvanha')[c(1,2,4, 13, 12, 9)])) +
+#  theme_tcdl +
+#  theme(plot.margin = unit(c(-2, -0, +3, -0), "lines")) +
+#  theme(legend.position = c(0.5, -0.04)) +
+#  geom_point(data = scale, aes(x = x, y = y, size = l), alpha = 0.2) +
+#  geom_treescale(x = 0, y = 152, width = 25, color = pokepal(17)[3], offset = 9) +
+#  labs(size = 'Virus Richness') +
+##  guides(size = guide_legend(override.aes = list(shape = 1)), alpha = 0.9) +
+#  theme(legend.key.size = unit(0.8, "lines"),
+#        legend.text = element_text(size = 10),
+#        legend.margin = unit(c(0.05), "cm"),
+#        legend.title = element_text(size = 12),
+#        legend.direction = "horizontal") +
+#  guides(colour = guide_legend(ncol=3))
+
 %%end.rcode
 
 
