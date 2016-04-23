@@ -1800,14 +1800,14 @@ The raw data tables are included in Table \ref{A-rawData}.
 
 %%begin.rcode treeCapt
 
-treeCapt <- paste('
+treeCapt <- paste0('
 The phylogenetic distribution of viral richness.
 The phylogeny is from \\cite{bininda2007delayed} pruned to include all species used in either the number of subspecies or gene flow analysis.
 Dot size shows the number of known viruses for that species and colour shows family.
 The red scale bar shows 25 million years. 
-There is no clear association between phylogeny and virus richness (pgls: $\\lambda = $', 
+There is no clear association between phylogeny and virus richness (pgls: $\\lambda =$ ', 
 round(virusLambda$param['lambda'], 2),
-', $p$ = ',
+', $p =$ ',
 round(virusLambda$param.CI$lambda$bounds.p[1], 2),
 ').')
 
@@ -1901,7 +1901,7 @@ The interaction was only included in models with both study effort and number of
 
 To control for phylogenetic non-independence I used the best-supported phylogeny from \textcite{fritz2009geographical} (shown in Figure~\ref{fig:treePlot}) which is the supertree from \textcite{bininda2007delayed} with names updated to match the taxonomy by \textcite{wilson2005mammal}.
 Phylogenetic manipulation was performed using the ape package \cite{ape}.
-I also performed the analysis using the phylogeny from \cite{jones2005bats} as this has some broad changes with families in different places (Figure~\ref{fig:treePlot2}). %todo what changes?
+I also performed the analysis using the phylogeny from \cite{jones2005bats} as this has some broad topological differences including the Rhinolophoidea being sister to the Pteropodidae rather than being related to the other insectivorous bats (Figure~\ref{fig:treePlot2}). 
 
 The importance of the phylogeny on each variable separately was examined by estimating the $\lambda$ parameter when regressing the variable against an intercept using the pgls function in caper \cite{caper}.
 The parameter $\lambda$ usually takes values between zero and one and pgls constrains $\lambda$ within these bounds. 
@@ -2352,7 +2352,7 @@ On average however, only the model containing mass and range size is supported (
 I have tested the hypothesis that population structure promotes pathogen richness in bats.
 By analysing data on two measures of population structure, and using larger data sets than previous studies, it is hoped that any conclusions may be more robust than the conflicting results in the literature \cite{gay2014parasite, turmelle2009correlates, maganga2014bat}.
 I have found that a positive effect of population structure (a positive effect of the number of subspecies and a negative effect of gene flow) are likely to be in the best models for explaining viral richness.
-Study effort is also clearly supported confirming the expectation that additional study of a bat species yields more known viruses infecting that species and highlighting again that this bias cannot be ignored in studies using known pathogen richness as a proxy for total pathogen richness \cite{}. %todo
+Study effort is also clearly supported confirming the expectation that additional study of a bat species yields more known viruses infecting that species and highlighting again that this bias cannot be ignored in studies using known pathogen richness as a proxy for total pathogen richness \cite{nunn2003comparative, gregory1990parasites}.
 
 
 \subsection{Study limitations}
