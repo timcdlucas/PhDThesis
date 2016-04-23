@@ -1870,6 +1870,14 @@ p %<+% combdf +
 #        legend.direction = "horizontal") +
 #  guides(colour = guide_legend(ncol=3))
 
+# Or using bars
+
+#scale2 <- data.frame(x = c(1, 1), y = c(10, 200), w = c(1, 1))
+
+#p %<+% combdf +
+#  geom_point2(aes(size = virusSpecies, colour = Family, subset = isTip)) +
+#  geom_bar(data = scale2, aes(x = x, y = y, size = w), alpha = 0.3, stat = 'identity', position = 'identity')
+
 %%end.rcode
 
 
@@ -2175,7 +2183,7 @@ ggdraw() +
 
 
 Only the model with study effort, gene flow and mass was well supported with the second model having an $\Delta\text{AICc}$ of \rinline{round(fstModelWeights[2, 3])} (Table \ref{t:models} and Table \ref{A-modelWeights}).
-While less strongly supported than the number of subspecies, gene flow was likely in the best model ($Pr = $ \rinline{fstVarWeights['Nm']}) compared to the benchmark random variable which has $Pr = $ \rinline{fstVarWeights['rand']} (Figure~\ref{fig:fstITPlots}B and Table~\ref{t:variables}).
+The effective level of gene flow was also likely in the best model ($Pr = $ \rinline{fstVarWeights['Nm']}, see Figure~\ref{fig:fstITPlots}B and Table~\ref{t:variables}).
 On average (mean weighted by Akaike weights) there was a negative relationship between gene flow and viral richness ($b = $ \rinline{fstCoefMeans['beta.Nm']}, variance = \rinline{fstCoefVars['beta.Nm']}) despite the apparent positive relationship (see Figure~\ref{fig:fstRawData}) weakly suggested by the single-predictor model (pgls: $b$ = \rinline{nmFstUni$coefficients['log(Nm)', 'Estimate']}, $t$ = \rinline{nmFstUni$coefficients['log(Nm)', 't value']}, df = \rinline{nmFstUni$df[2]}, $p$ = \rinline{nmFstUni$coefficients['log(Nm)', 'Pr(>|t|)']}).
 This supports the hypothesis that population structure promotes viral richness.
 Possibly due to the smaller sample size, or a weaker relationship, this coefficient was much more varied than the number of subspecies coefficient with \rinline{round(pcCoefLzero)}\% of models estimating a positive relationship.
