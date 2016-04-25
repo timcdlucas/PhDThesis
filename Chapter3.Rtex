@@ -1789,7 +1789,10 @@ Measures of body mass were taken from Pantheria \cite{jones2009pantheria} and pr
 \emph{Pipistrellus pygmaeus} was assigned the same mass as \emph{P. pipistrellus} as they are indistinguishable by mass.
 Body mass measurements were log transformed as they were strongly right skewed.
 Distribution size was estimated by downloading range maps for all species from IUCN \cite{iucn} and were also log transformed due to right skew.
-The raw data tables are included in Table \ref{A-rawData}.
+
+After data cleaning there was data for \rinline{nrow(nSpecies)} bat species in \rinline{length(unique(nSpecies$Family))} families for the subspecies analysis.
+Due to the low number of studies and the restrictive requirements imposed on study design, there was only data for \rinline{nrow(fstFinal)} bat species in \rinline{length(unique(fstFinal$Family))} families for the effective gene flow analysis.
+The raw data are included in Table \ref{A-rawData}.
 
 
 
@@ -1899,9 +1902,12 @@ In the analysis using the number of subspecies response variable I also modelled
 This interaction was included as I believed \emph{a priori} that this interaction may be present as subspecies in well studied species are more likely to be identified.
 The interaction was only included in models with both study effort and number of subspecies as individual terms.
 
+
 To control for phylogenetic non-independence I used the best-supported phylogeny from \textcite{fritz2009geographical} (shown in Figure~\ref{fig:treePlot}) which is the supertree from \textcite{bininda2007delayed} with names updated to match the taxonomy by \textcite{wilson2005mammal}.
 Phylogenetic manipulation was performed using the ape package \cite{ape}.
 I also performed the analysis using the phylogeny from \cite{jones2005bats} as this has some broad topological differences including the Rhinolophoidea being sister to the Pteropodidae rather than being related to the other insectivorous bats (Figure~\ref{fig:treePlot2}). 
+
+
 
 The importance of the phylogeny on each variable separately was examined by estimating the $\lambda$ parameter when regressing the variable against an intercept using the pgls function in caper \cite{caper}.
 The parameter $\lambda$ usually takes values between zero and one and pgls constrains $\lambda$ within these bounds. 
@@ -1940,21 +1946,8 @@ This value can be interpreted as the probability that the given variable is in t
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
-
-\subsection{Number of Subspecies}
-\tmpsection{More descriptive}
-
-
-After data cleaning there was data for \rinline{nrow(nSpecies)} bat species in \rinline{length(unique(nSpecies$Family))} families.
-There appears to be a positive relationship between the number of subspecies and viral richness (Figure~\ref{fig:boxplot}) though few species have more than five subspecies. 
-The number of described virus species for a bat host ranged up to \rinline{max(nSpecies$virusSpecies)} viruses in \emph{\rinline{nSpecies$binomial[which.max(nSpecies$virusSpecies)]}}.
-Figure~\ref{fig:treePlot} shows the phylogeny used and the number of viruses for each species.
-The mean number of viruses across families is fairly constant with \rinline{familyMeans$Family[which.min(familyMeans$mean)]} having the smallest mean, (\rinline{min(familyMeans$mean)}).
-The highest mean is \rinline{familyMeans$Family[which.max(familyMeans$mean)]} with \rinline{max(familyMeans$mean)} virus species per bat species, but this is based on a sample size of \rinline{familyMeans$n[which.max(familyMeans$mean)]}.
-The \rinline{familyMeans$Family[order(familyMeans$mean, decreasing = TRUE)[2]]} have the second highest mean  of \rinline{familyMeans$mean[order(familyMeans$mean, decreasing = TRUE)[2]]} (n = \rinline{familyMeans$n[order(familyMeans$mean, decreasing = TRUE)[2]]}).
-
-
+%i think this results section could be better structured - phylogenetic stuff at one place at the beginning, for example. 
+%It also needs to emphasise the main result - headline stories and to only report your work - not add in discussion - that is for the discussion sections. Think of it as a really dry section that presents your results without context. you add in the context with the introduction, methods and discussion
 
 
 %%begin.rcode boxplotCapt	
@@ -2064,11 +2057,11 @@ Across all models the mean value of $\lambda$ is \rinline{mean(na.omit(allResult
 A small number of models (\rinline{mean(na.omit(allResults$lambda < 0))*100}\%)  had negatively phylogenetically distributed residuals.
 
 
+\subsection{Number of Subspecies}
+\tmpsection{More descriptive}
 
 
-\tmpsection{Model results}
-
-
+There appears to be a positive relationship between the number of subspecies and viral richness (Figure~\ref{fig:boxplot}) though few species have more than five subspecies. 
 Out of \rinline{nrow(modelWeights)} fitted models, the top seven models all had $\Delta\text{AICc} < 4$ meaning there was no clear best model (Table~\ref{t:models} and Table \ref{A-modelWeights}).
 These top seven models had a combined weight of \rinline{sprintf("%.2f", round(modelWeights[7, 5], 2))} meaning that there is a \rinline{sprintf("%.0f", round(100 * modelWeights[7, 5]))}\% chance that one of these models is the best model amongst those examined.
 However these top seven models all contained study effort, number of subspecies and the interaction between these two variables.
@@ -2136,19 +2129,12 @@ However, mass and the interaction between number of subspecies and subspecies ar
 \subsection{Gene Flow}
 
 \tmpsection{More Descriptive}
-Due to the low number of studies and the restrictive requirements imposed on study design, there was only data for \rinline{nrow(fstFinal)} bat species in \rinline{length(unique(fstFinal$Family))} families.
-The number of described virus species for a bat host ranged up to \rinline{max(fstFinal$virusSpecies)} viruses in \emph{\rinline{fstFinal$binomial[which.max(fstFinal$virusSpecies)]}}.
+
 Figure~\ref{fig:fstRawData} shows the raw data for the relationship between pathogen richness and the logarithm of the effective level of gene flow.
 %Figure~\ref{fig:fstTreePlot} shows the phylogeny used and the number of viruses for each species.
 
 
-As with the number of subspecies data set, there was no phylogenetic signal in the number of virus species ($\lambda$ = \rinline{virusFstLambda$param['lambda']}, $p > 0.999$).
-Gene flow also had no phylogenetic autocorrelation ($\lambda$ = \rinline{nmFstLambda$param['lambda']},  $p > 0.999$).
-Due to the low sample size, significance tests are unlikely to have much power.
-There is little evidence of phylogenetic autocorrelation in study effort ($\lambda$ = \rinline{scholarFstLambda$param['lambda']}, $p$ = \rinline{scholarFstLambda$param.CI$lambda$bounds.p[1]}).
-However, there is some weak evidence of phylogenetic signal in range size as the estimated size of $\lambda$ is large while $p$ is also large, potentially due to a lack of statistical power ($\lambda$ = \rinline{distrFstLambda$param['lambda']}, $p$ = \rinline{distrFstLambda$param.CI$lambda$bounds.p[1]}).
-Body mass showed significant phylogenetic autocorrelation ($\lambda$ = \rinline{massFstLambda$param['lambda']}, $p$ = \rinline{massFstLambda$param.CI$lambda$bounds.p[1]}).
-
+The number of described virus species for a bat host ranged up to \rinline{max(fstFinal$virusSpecies)} viruses in \emph{\rinline{fstFinal$binomial[which.max(fstFinal$virusSpecies)]}}.
 
 %%begin.rcode ITCombPlotCapt
 
@@ -2340,6 +2326,26 @@ Due to the small sample size this was probably due to a small number of data poi
 When using the phylogeny from \cite{jones2005bats} the analysis became very unstable (Figure~\ref{f:A-itplots}).
 The support for each variable changed dramatically with each resampling of the random variable.
 On average however, only the model containing mass and range size is supported (Tables~\ref{A-fstModelWeights} and \ref{t:variables2}).
+
+
+
+\subsection{Phylogenetic Analysis}
+
+\subsubsection{Number of subspecies dataset}
+The number of described virus species for a bat host ranged up to \rinline{max(nSpecies$virusSpecies)} viruses in \emph{\rinline{nSpecies$binomial[which.max(nSpecies$virusSpecies)]}}.
+Figure~\ref{fig:treePlot} shows the phylogeny used and the number of viruses for each species.
+The mean number of viruses across families is fairly constant with \rinline{familyMeans$Family[which.min(familyMeans$mean)]} having the smallest mean, (\rinline{min(familyMeans$mean)}).
+The highest mean is \rinline{familyMeans$Family[which.max(familyMeans$mean)]} with \rinline{max(familyMeans$mean)} virus species per bat species, but this is based on a sample size of \rinline{familyMeans$n[which.max(familyMeans$mean)]}.
+The \rinline{familyMeans$Family[order(familyMeans$mean, decreasing = TRUE)[2]]} have the second highest mean  of \rinline{familyMeans$mean[order(familyMeans$mean, decreasing = TRUE)[2]]} (n = \rinline{familyMeans$n[order(familyMeans$mean, decreasing = TRUE)[2]]}).
+
+\subsubsection{Effective gene flow dataset}
+As with the number of subspecies data set, there was no phylogenetic signal in the number of virus species ($\lambda$ = \rinline{virusFstLambda$param['lambda']}, $p > 0.999$).
+Gene flow also had no phylogenetic autocorrelation ($\lambda$ = \rinline{nmFstLambda$param['lambda']},  $p > 0.999$).
+Due to the low sample size, significance tests are unlikely to have much power.
+There is little evidence of phylogenetic autocorrelation in study effort ($\lambda$ = \rinline{scholarFstLambda$param['lambda']}, $p$ = \rinline{scholarFstLambda$param.CI$lambda$bounds.p[1]}).
+However, there is some weak evidence of phylogenetic signal in range size as the estimated size of $\lambda$ is large while $p$ is also large, potentially due to a lack of statistical power ($\lambda$ = \rinline{distrFstLambda$param['lambda']}, $p$ = \rinline{distrFstLambda$param.CI$lambda$bounds.p[1]}).
+Body mass showed significant phylogenetic autocorrelation ($\lambda$ = \rinline{massFstLambda$param['lambda']}, $p$ = \rinline{massFstLambda$param.CI$lambda$bounds.p[1]}).
+
 
 
 
