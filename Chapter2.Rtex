@@ -1003,9 +1003,9 @@ topoPlot <- ggplot(propsTopoCI, aes(x = factor(transmission), y = mean, fill = t
 #plot_grid(dispPlot, topoPlot, labels = c('A', 'B'), align = 'h', label_size = 10)
 
 ggdraw() +
-  draw_plot_label("A", size = 10, fontface = 'plain') + 
+  draw_label("A)", 0.02, 0.96, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
   draw_plot(dispPlot, 0, 0, 0.5, 1) +
-  draw_plot_label("B", size = 10, x = 0.5, y = 1, fontface = 'plain') + 
+  draw_label("B)", 0.53, 0.96, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
   draw_plot(topoPlot, 0.5, 0, 0.5, 1)
 %%end.rcode
 
