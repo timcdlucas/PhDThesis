@@ -2127,7 +2127,7 @@ One interpretation of this is that population structure alone does not predict h
 
 
 As seen in Figure~\ref{fig:fstITPlots}A, study effort is very likely in the best model ($b = $ \rinline{varCoefMeans['beta.scholarRefs']}, $Pr > $ \rinline{substring(as.character(varWeights['scholarRefs']), 1, 4)}).
-Body mass and range size are also probably in the best model ($b = $ \rinline{varCoefMeans['beta.mass']}, $Pr = $ \rinline{varWeights['mass']} and $b = $ \rinline{varCoefMeans['beta.distrSize']}, $Pr = $ \rinline{varWeights['distrSize']}) with positive relationships of slightly lower strength than the number of subspecies in models without an interaction term ($b = $ \rinline{nSpeciesCoefMean}, variance = \rinline{nSpeciesCoefVar}).	
+Body mass and range size are also probably in the best model ($b = $ \rinline{varCoefMeans['beta.mass']}, $Pr = $ \rinline{varWeights['mass']} and $b = $ \rinline{varCoefMeans['beta.distrSize']}, $Pr = $ \rinline{varWeights['distrSize']} respectively) with positive relationships of slightly lower strength than the number of subspecies in models without an interaction term ($b = $ \rinline{nSpeciesCoefMean}, variance = \rinline{nSpeciesCoefVar}).	
 
 
 When using the phylogeny from \cite{jones2005bats} the results are broadly similar (Figure~\ref{f:A-itplots} and Tables~\ref{A-modelWeights2} and \ref{t:variables2}).
@@ -2203,7 +2203,7 @@ ggdraw() +
 %\rowcolors{2}{gray!25}{white}
 \caption[Model selection results]{
 Model selection results for number of subspecies and effective level of gene flow analysis. 
-Only the top nine and three  models are shown respectively.
+Models are ranked according to AIC and only the bes nine and three  models are shown respectively.
 Models were fitted to all combinations of variables (in total \rinline{nrow(modelWeights)} number of subspecies models and \rinline{nrow(fstModelWeights)} effective gene flow models).
 $\bar{\text{AICc}}$ is the mean AICc score across \rinline{nBoots} resamplings of the null random variable. 
 $\Delta$AICc is the model's $\bar{\text{AICc}}$ score minus $\text{min}(\bar{\text{AICc}})$. 
