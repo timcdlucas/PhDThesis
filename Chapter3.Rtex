@@ -156,7 +156,7 @@ However, the relationship has implications for global change, implying that incr
 %#1. Zoonotic disease is bad (as you have written it already)
 Zoonotic pathogens make up the majority of newly emerging diseases and have profound consequences for public health, economics and international development \cite{jones2008global, smith2014global, ebolaWorldbank}.
 Better predictive models of which wild host species are potential reservoirs of zoonotic diseases would allow us to effectively optimise zoonotic disease surveillance and anticipate how the risks of disease spillover might change with global change.
-The chance that a host species will be the source of an outbreak depends on a number of factors including its proximity and interactions with humans and the prevalence and the diversity of pathogens it carries \cite{wolfe2000deforestation}.
+The chance that a host species will be the source of an outbreak depends on a number of factors including its proximity and interactions with humans and the prevalence and the number of pathogen species it carries \cite{wolfe2000deforestation}.
 However, our understanding of the factors that control the number of pathogen species in a host species is still poor.
 
 
@@ -181,11 +181,11 @@ Finally, widely distributed species have high pathogen richness, potentially bec
 
 A further population level factor that may affect pathogen richness is population structure.
 Population structure can be defined as the extent to which interactions between individuals in a population are non-random.
-The role of population structure on human epidemics has been studied in depth and it has been shown that decreased population structure increases the speed of disease spread and makes establishment of a new pathogen more likely \cite{colizza2007invasion, vespignani2008reaction}.
+The role of population structure on human epidemics has been studied in depth and it has been shown that decreased population structure increases the speed of pathogen spread and makes establishment of a new pathogen more likely \cite{colizza2007invasion, vespignani2008reaction}.
 In comparative studies of pathogen richness in wild animals, this relationship with $R_0$ is often taken as a prediction that decreased population structure will increase pathogen richness relative to other host species \cite{nunn2003comparative, morand2000wormy, poulin2014parasite, poulin2000diversity, altizer2003social}. 
 However, epidemiological models of highly virulent pathogens have shown that increased population structure can allow persistence of a pathogen where a well-mixed population would experience a single, large epidemic followed by pathogen extinction \cite{blackwood2013resolving, plowright2011urban}.
 Furthermore, the assumption that high $R_0$ leads to high pathogen richness ignores inter-pathogen competition.
-Simple epidemiological models of competition between multiple pathogens show that in unstructured populations a competitive exclusion process occurs but that adding population structure allows coexistence \cite{qiu2013vector, allen2004sis, nunes2006localized}.
+Simple epidemiological models of competition between multiple pathogens show that in completely unstructured populations a competitive exclusion process occurs but that adding population structure makes coexistence possible \cite{qiu2013vector, allen2004sis, nunes2006localized}.
 
 
 \tmpsection{Previous Studies}
@@ -204,10 +204,7 @@ Furthermore, a negative association was found in rodents \cite{bordes2007rodent}
 %#6. Bat studies of pathogen richness and population structure are particularly interesting in this area but also are conflicting (examples), due in part to low sample sizes and problems with comparing results using different definitions of population structure and not controlling for effects of phylogeny.
 
 
-
-
-
-Three studies have used comparative data to test for an association between population structure and viral richness.
+Three studies have used comparative data to test for an association between population structure and viral richness specifically in bats.
 A study on 15 African bat species found a positive relationship between the extent of distribution fragmentation and viral richness \cite{maganga2014bat}.
 Conversely, a study on 20 South-East Asian bat species found the opposite relationship \cite{gay2014parasite}. 
 These studies used the ratio between the perimeter and area of the species' geographic range as their measure of population structure.
@@ -234,8 +231,8 @@ While group size is an important component of population structure it does not c
 %#8. I found ...
 
 Here I used a phylogenetic comparative approach to test for a relationship between population structure and pathogen richness in the largest study of bats to date. 
-I used a phylogenetic linear models, controlling for the other life history characteristics known to impact pathogen richness, to quantify the relationship between viral richness (as a proxy for pathogen richness) and two measures of population structure. 
-I used two measures of population structure --- the number of subspecies and effective gene flow --- as meausures of population structure to increase the robustness of the analysis.
+I used a phylogenetic linear models, controlling for the other life history characteristics known to impact pathogen richness, to quantify the relationship between viral richness (as a proxy for pathogen richness) and two measures of population structure: the number of subspecies and effective gene flow. 
+I used two measures of population structure to increase the robustness of the analysis; this is particularly important as previous studies have had contradictory results \cite{maganga2014bat, gay2014parasite, turmelle2009correlates}.
 
 I found that increases in both measures of population structure are positively associated with viral richness and are included as explanatory variables in the best models for describing viral richness.
 Furthermore, I found that the role of phylogeny is very weak both in the models and in the distribution of viral richness amongst taxa.
@@ -2049,11 +2046,10 @@ nSpeciesHist <- ggplot(nSpecies, aes(x = SubspeciesFactor)) +
 
 # Combine and print plots.
 ggdraw() +
-  draw_plot_label("A", size = 10, fontface = 'plain') + 
+  draw_label("A)", 0.02, 0.96, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
   draw_plot(nSpeciesHist, 0, 0.75, 1, 0.25) +
-  draw_plot_label("B", size = 10, x = 0, y = 0.72, fontface = 'plain') + 
+  draw_label("B)", 0.02, 0.71, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
   draw_plot(nSpeciesBox, 0, 0, 1, 0.75)
-
 
 %%end.rcode
 
@@ -2169,7 +2165,7 @@ ITPlotTitle <- "The relative weight of evidence that each explanatory variable i
 %%end.rcode
 
 
-%%begin.rcode fstITPlots, fig.cap = ITPlotCapts, fig.height = 2.5, fig.scap = 'Akaike variable weights', out.width = '\\textwidth', out.extra = 'trim = 0 1cm 0 0', cache = FALSE
+%%begin.rcode fstITPlots, fig.cap = ITPlotCapts, fig.height = 2.5, fig.scap = 'Akaike variable weights', out.width = '\\textwidth', cache = FALSE
 
 # Draw the fst model selection plot
 fstIT <- ggplot(fstSepVarWeights, aes(x = variable, y = estimate, colour = col, fill = col)) +
@@ -2189,10 +2185,11 @@ fstIT <- ggplot(fstSepVarWeights, aes(x = variable, y = estimate, colour = col, 
 
 # Combine and print the plots.
 ggdraw() +
-  draw_plot_label("A", size = 10, fontface = 'plain') + 
+  draw_label("A)", 0.02, 0.96, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
   draw_plot(ITPlot, 0, 0, 0.5, 1) +
-  draw_plot_label("B", size = 10, x = 0.5, y = 1, fontface = 'plain') + 
-  draw_plot(fstIT, 0.5, 0.145, 0.5, 0.855)
+  draw_label("B)", 0.52, 0.96, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
+  draw_plot(fstIT, 0.5, 0.145, 0.5, 0.855) +
+  draw_label('Explanatory variable', 0.5, 0.1, fontfamily = 'lato light', size = 12)
 
 %%end.rcode
 
@@ -2650,11 +2647,11 @@ fstIT2 <- ggplot(fstSepVarWeights2, aes(x = variable, y = estimate, colour = col
   xlab('')
 
 ggdraw() +
-  draw_plot_label("A", size = 10, fontface = 'plain') + 
+  draw_label("A)", 0.02, 0.96, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
   draw_plot(ITPlot, 0, 0, 0.5, 1) +
-  draw_plot_label("B", size = 10, x = 0.5, y = 1, fontface = 'plain') + 
-  draw_plot(fstIT, 0.5, 0.145, 0.5, 0.855)
-
+  draw_label("B)", 0.52, 0.96, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
+  draw_plot(fstIT, 0.5, 0.145, 0.5, 0.855) +
+  draw_label('Explanatory variable', 0.5, 0.1, fontfamily = 'lato light', size = 12)
 
 %%end.rcode
 
