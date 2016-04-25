@@ -460,7 +460,7 @@ ggplot(allMods, aes(x = model, y = percentageerror, colour = expression, fill = 
   theme(legend.position = 'none') + 
   xlab('gREM Submodel') +
   ylab('Percent Error') +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, size = 9))
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, size = 9), panel.grid.major.x = element_blank())
 
 
 
@@ -523,7 +523,7 @@ ggplot(captures, aes(x = count, y = percentageerror,
   theme(legend.position = 'none') + 
   scale_x_discrete("Captures", labels = xlabels) + 
   ylab('Percent Error') +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, size = 8))
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, size = 8), panel.grid.major.x = element_blank())
 
 
 %%end.rcode
@@ -583,7 +583,10 @@ waitPlot <- ggplot(wait, aes(x = wait, y = percentageerror, colour = expression,
   scale_fill_manual(values = combPalette[c(7, 3, 1)]) +
   stat_summary(geom = "crossbar", width=0.45, fatten=0, color="white", 
     fun.data = function(x){ return(c(y=median(x), ymin=median(x), ymax=median(x))) }) +
-  theme(legend.position = 'none', axis.title.x = element_text(vjust = 1), plot.margin  =  unit(c(0.3, 0.1, 1, 1.3), "lines")) +
+  theme(legend.position = 'none', 
+        axis.title.x = element_text(vjust = 1), 
+        plot.margin  =  unit(c(0.3, 0.1, 1, 1.3), "lines"),
+        panel.grid.major.x = element_blank()) +
   ylab('Percentage Error') +
   xlab('Prop. Time Stationary')
 
@@ -606,7 +609,7 @@ tortPlot <- ggplot(tort, aes(x = maxAngle, y = percentageerror, colour = express
   scale_fill_manual(values = combPalette[c(7, 3, 1)]) +
   stat_summary(geom = "crossbar", width=0.45, fatten=0, color="white", 
     fun.data = function(x){ return(c(y=median(x), ymin=median(x), ymax=median(x))) }) +
-  theme(legend.position = 'none') +
+  theme(legend.position = 'none', panel.grid.major.x = element_blank()) +
   ylab('Percent Error') +
   xlab('Max Angle') +
   scale_x_discrete(breaks=c("0", "pi/3", "2pi/3", "pi"),

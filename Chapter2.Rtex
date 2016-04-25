@@ -970,7 +970,6 @@ invasionPropShort <- "The probability of invasion across different dispersal rat
 
 propsDispCI <- data.frame(propsDisp[, 1:2], binom.confint(propsDisp$invasions, propsDisp$n, conf.level = 0.95, methods = "exact"))
 
-
 dispPlot <- ggplot(propsDispCI, aes(x = factor(transmission), y = mean, fill = factor(dispersal))) +
   geom_bar(stat = 'identity', position=position_dodge()) +
   geom_errorbar(aes(ymin = lower, ymax = upper),
@@ -982,7 +981,7 @@ dispPlot <- ggplot(propsDispCI, aes(x = factor(transmission), y = mean, fill = f
                  labels=c('0.001', '0.01', '0.1'), 
                  pokemon = 'Swampert',
                  spread = 3) +
-  theme(legend.position = "bottom")
+  theme(legend.position = "bottom", panel.grid.major.x = element_blank())
 
 propsTopoCI <- data.frame(propsTopo[, 1:2], binom.confint(propsTopo$invasions, nTopo$n, conf.level = 0.95, methods = "exact"))
 
@@ -999,10 +998,9 @@ topoPlot <- ggplot(propsTopoCI, aes(x = factor(transmission), y = mean, fill = t
                  labels=c("A", "B"),
                  pokemon = 'Swampert',
                  spread = 2) +
-  theme(legend.position = "bottom")
+  theme(legend.position = "bottom", panel.grid.major.x = element_blank())
 
 #plot_grid(dispPlot, topoPlot, labels = c('A', 'B'), align = 'h', label_size = 10)
-
 
 ggdraw() +
   draw_plot_label("A", size = 10, fontface = 'plain') + 

@@ -1078,8 +1078,8 @@ ITPlot <- ggplot(sepVarWeights, aes(x = variable, y = estimate, colour = col, fi
   geom_boxplot(outlier.colour = grey(0.3), notch = FALSE, width = 0.99, outlier.size = 1, lwd = 0.4) +
   scale_colour_manual(values = pokepal('nidorino')[c(2, 5, 11)]) +
   scale_fill_manual(values = pokepal('nidorino')[c(3, 6, 10)]) +
-  ylim(0, 1) +
   theme(legend.position = 'none', axis.text.x = element_text(size = 10, angle = 40, hjust = 1, colour = 'black', family = 'lato light'),
+    panel.grid.major.x = element_blank(),
     axis.text.y = element_text(size = 8)) +
   scale_x_discrete(labels = c('Scholar', 'NSubspecies', 'Mass', 'Range size', 'Random', 'NSubspecies*Effort')) +
   ylab('P(in best model)') +
@@ -2026,7 +2026,7 @@ nSpeciesBox <- ggplot(nSpecies, aes(SubspeciesFactor, virusSpecies, colour = 'a'
   scale_fill_manual(values = pokepal('nidorina')[2]) +
   stat_summary(geom = "crossbar", width = 0.7, fatten = 2, 
     fun.data = function(x){ return(c(y = median(x), ymin = median(x), ymax = median(x))) }) +
-  theme(legend.position = 'none') + 
+  theme(legend.position = 'none', panel.grid.major.x = element_blank()) + 
   scale_x_discrete(limits = levels(nSpecies$SubspeciesFactor), drop = FALSE) +
   xlab('Number of Subspecies') +
   ylab('Viral Richness') +
@@ -2045,7 +2045,7 @@ nSpeciesHist <- ggplot(nSpecies, aes(x = SubspeciesFactor)) +
   geom_bar(stat = 'count') +
   xlab('') +
   ylab('Count') +
-  theme(plot.margin  =  unit(c(0.3, 0.1, -1.6, 1.3), "lines"))
+  theme(plot.margin  =  unit(c(0.3, 0.1, -1.6, 1.3), "lines"), panel.grid.major.x = element_blank())
 
 # Combine and print plots.
 ggdraw() +
@@ -2053,6 +2053,7 @@ ggdraw() +
   draw_plot(nSpeciesHist, 0, 0.75, 1, 0.25) +
   draw_plot_label("B", size = 10, x = 0, y = 0.72, fontface = 'plain') + 
   draw_plot(nSpeciesBox, 0, 0, 1, 0.75)
+
 
 %%end.rcode
 
@@ -2114,6 +2115,7 @@ ggplot(fstFinal, aes(x = Nm, y = virusSpecies, colour = Marker)) +
   xlab('Gene Flow (per gen.)') +
   ylab('Viral Richness') 
 
+
 %%end.rcode
 
 Summing the Akaike weights of all models that contain a given variable gives a probability, $Pr$, that the variable would be in the best model (Figure~\ref{fig:fstITPlots}A) amongst those in the plausible set \cite{whittingham2006we}.
@@ -2167,7 +2169,7 @@ ITPlotTitle <- "The relative weight of evidence that each explanatory variable i
 %%end.rcode
 
 
-%%begin.rcode fstITPlots, fig.cap = ITPlotCapts, fig.height = 2.5, fig.scap = 'Akaike variable weights', out.width = '\\textwidth', out.extra = 'trim = 0 1cm 0 0'
+%%begin.rcode fstITPlots, fig.cap = ITPlotCapts, fig.height = 2.5, fig.scap = 'Akaike variable weights', out.width = '\\textwidth', out.extra = 'trim = 0 1cm 0 0', cache = FALSE
 
 # Draw the fst model selection plot
 fstIT <- ggplot(fstSepVarWeights, aes(x = variable, y = estimate, colour = col, fill = col)) +
@@ -2176,15 +2178,16 @@ fstIT <- ggplot(fstSepVarWeights, aes(x = variable, y = estimate, colour = col, 
   scale_fill_manual(values = pokepal('nidorino')[c(3, 6, 10)]) +
   ylim(0, 1) +
   theme(legend.position = 'none', axis.text.x = element_text(size = 10, angle = 40, hjust = 1, colour = 'black', family = 'lato light'),
+    panel.grid.major.x = element_blank(),
     axis.text.y = element_text(size = 8)) +
   scale_x_discrete(labels = c('Scholar', 'Gene flow', 'Mass', 'Range size', 'Random'))+
   ylab('P(in best model)') +
   xlab('')
 
+
 #plot_grid(ITPlot, fstIT, labels = c("A", "B"), align = 'h', label_size = 10)
 
 # Combine and print the plots.
-
 ggdraw() +
   draw_plot_label("A", size = 10, fontface = 'plain') + 
   draw_plot(ITPlot, 0, 0, 0.5, 1) +
@@ -2618,8 +2621,10 @@ ITPlot2 <- ggplot(sepVarWeights2, aes(x = variable, y = estimate, colour = col, 
   scale_colour_manual(values = pokepal('nidorino')[c(2, 5, 11)]) +
   scale_fill_manual(values = pokepal('nidorino')[c(3, 6, 10)]) +
   ylim(0, 1) +
-  theme(legend.position = 'none', axis.text.x = element_text(size = 10, angle = 40, hjust = 1, colour = 'black', family = 'lato light'),
-    axis.text.y = element_text(size = 8)) +
+  theme(legend.position = 'none', 
+        axis.text.x = element_text(size = 10, angle = 40, hjust = 1, colour = 'black', family = 'lato light'),
+        panel.grid.major.x = element_blank(),
+        axis.text.y = element_text(size = 8)) +
   scale_x_discrete(labels = c('Scholar', 'NSubspecies', 'Mass', 'Range size', 'Random', 'NSubspecies*Effort')) +
   ylab('P(in best model)') +
   xlab('')
@@ -2636,8 +2641,10 @@ fstIT2 <- ggplot(fstSepVarWeights2, aes(x = variable, y = estimate, colour = col
   scale_colour_manual(values = pokepal('nidorino')[c(2, 5, 11)]) +
   scale_fill_manual(values = pokepal('nidorino')[c(3, 6, 10)]) +
   ylim(0, 1) +
-  theme(legend.position = 'none', axis.text.x = element_text(size = 10, angle = 40, hjust = 1, colour = 'black', family = 'lato light'),
-    axis.text.y = element_text(size = 8)) +
+  theme(legend.position = 'none', 
+        axis.text.x = element_text(size = 10, angle = 40, hjust = 1, colour = 'black', family = 'lato light'),
+        panel.grid.major.x = element_blank(),
+        axis.text.y = element_text(size = 8)) +
   scale_x_discrete(labels = c('Scholar', 'Gene flow', 'Mass', 'Range size', 'Random'))+
   ylab('P(in best model)') +
   xlab('')
