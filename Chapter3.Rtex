@@ -1958,10 +1958,8 @@ boxplotCapt <- paste(
 'The relationship between number of subspecies and viral richness for',
 nrow(nSpecies),
 'bat species.
-A) Histogram of the number of subspecies data with most species having few subspecies.		
-B) Number of virus species against number of subspecies. 
-Median viral richness is plotted (dark bar) for species having each number of subspecies, the interquartile range is represented by a box, vertical lines represent range, and outliers are shown as filled circles.
-When only one species has a certain number of subspecies, only the median (dark bar) is plotted.
+As both variables take discrete values, the area of the circle shows the number of bat species at each value.
+48 bat species have one subspecies and one known virus species.
 The red line represents a phylogenetic multiple regression including all the explanatory variables but no interaction term.
 The line shows the slope from the multiple regression with the intercept being calculated by setting other explanatory variables to their median values.
 '
@@ -2009,41 +2007,56 @@ linesInter <- data.frame(NumberOfSubspecies = predData$NumberOfSubspecies,
 
 # Make plot
 
-nSpeciesBox <- ggplot(nSpecies, aes(SubspeciesFactor, virusSpecies, colour = 'a', fill = 'a')) + 
-  geom_boxplot(outlier.size = 1, size = 0.3, outlier.colour = grey(0.3), 
-    notch = FALSE) +
-  scale_colour_manual(values = pokepal('nidorina')[4]) +
-  scale_fill_manual(values = pokepal('nidorina')[2]) +
-  stat_summary(geom = "crossbar", width = 0.7, fatten = 2, 
-    fun.data = function(x){ return(c(y = median(x), ymin = median(x), ymax = median(x))) }) +
-  theme(legend.position = 'none', panel.grid.major.x = element_blank()) + 
-  scale_x_discrete(limits = levels(nSpecies$SubspeciesFactor), drop = FALSE) +
+#nSpeciesBox <- ggplot(nSpecies, aes(SubspeciesFactor, virusSpecies, colour = 'a', fill = 'a')) + 
+#  geom_boxplot(outlier.size = 1, size = 0.3, outlier.colour = grey(0.3), 
+#    notch = FALSE) +
+#  scale_colour_manual(values = pokepal('nidorina')[4]) +
+#  scale_fill_manual(values = pokepal('nidorina')[2]) +
+#  stat_summary(geom = "crossbar", width = 0.7, fatten = 2, 
+#    fun.data = function(x){ return(c(y = median(x), ymin = median(x), ymax = median(x))) }) +
+#  theme(legend.position = 'none', panel.grid.major.x = element_blank()) + 
+#  scale_x_discrete(limits = levels(nSpecies$SubspeciesFactor), drop = FALSE) +
+#  xlab('Number of Subspecies') +
+#  ylab('Viral Richness') +
+#  geom_line(data = lines, aes(x = NumberOfSubspecies, y = virusSpecies, group = 1),
+#    colour = pokepal('nidorina')[10], lwd = 0.7)
+##  geom_line(data = linesInter, aes(x = NumberOfSubspecies, y = virusSpecies, group = 1),
+##    colour = pokepal('nidorina')[13], lwd = 0.7) +
+##  annotate('text', x = c(11.8, 12.2), y = c(5.4, 2.5), 
+##    label = c('No interaction', 'Interaction'),
+##    colour = pokepal('nidorina')[c(10,13)], size = c(3, 3),
+##    family = 'Lato Light')
+
+#nSpeciesHist <- ggplot(nSpecies, aes(x = SubspeciesFactor)) +
+#  scale_x_discrete(limits = levels(nSpecies$SubspeciesFactor), drop = FALSE, labels = rep('', max(nSpecies$NumberOfSubspecies))) +
+#  scale_y_continuous(breaks = c(20, 60)) +
+#  geom_bar(stat = 'count') +
+#  xlab('') +
+#  ylab('Count') +
+#  theme(plot.margin  =  unit(c(0.3, 0.1, -1.6, 1.3), "lines"), panel.grid.major.x = element_blank())
+
+
+## Combine and print plots.
+#ggdraw() +
+#  draw_label("A)", 0.02, 0.96, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
+#  draw_plot(nSpeciesHist, 0, 0.75, 1, 0.25) +
+#  draw_label("B)", 0.02, 0.71, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
+#  draw_plot(nSpeciesBox, 0, 0, 1, 0.75)
+
+
+
+nSpeciesCounts <- nSpecies %>%
+                    group_by(NumberOfSubspecies, virusSpecies) %>%
+                    dplyr::summarize(n = n())
+
+ggplot(nSpeciesCounts, aes(NumberOfSubspecies, virusSpecies, size = n)) + 
+  geom_point() +
+  scale_size(range = c(0.5, 4.3), breaks = c(1, 20, 40)) +
   xlab('Number of Subspecies') +
   ylab('Viral Richness') +
   geom_line(data = lines, aes(x = NumberOfSubspecies, y = virusSpecies, group = 1),
     colour = pokepal('nidorina')[10], lwd = 0.7)
-#  geom_line(data = linesInter, aes(x = NumberOfSubspecies, y = virusSpecies, group = 1),
-#    colour = pokepal('nidorina')[13], lwd = 0.7) +
-#  annotate('text', x = c(11.8, 12.2), y = c(5.4, 2.5), 
-#    label = c('No interaction', 'Interaction'),
-#    colour = pokepal('nidorina')[c(10,13)], size = c(3, 3),
-#    family = 'Lato Light')
 
-nSpeciesHist <- ggplot(nSpecies, aes(x = SubspeciesFactor)) +
-  scale_x_discrete(limits = levels(nSpecies$SubspeciesFactor), drop = FALSE, labels = rep('', max(nSpecies$NumberOfSubspecies))) +
-  scale_y_continuous(breaks = c(20, 60)) +
-  geom_bar(stat = 'count') +
-  xlab('') +
-  ylab('Count') +
-  theme(plot.margin  =  unit(c(0.3, 0.1, -1.6, 1.3), "lines"), panel.grid.major.x = element_blank())
-
-
-# Combine and print plots.
-ggdraw() +
-  draw_label("A)", 0.02, 0.96, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
-  draw_plot(nSpeciesHist, 0, 0.75, 1, 0.25) +
-  draw_label("B)", 0.02, 0.71, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
-  draw_plot(nSpeciesBox, 0, 0, 1, 0.75)
 
 
 %%end.rcode
@@ -2116,7 +2129,7 @@ Body mass and range size are also probably in the best model ($b = $ \rinline{va
 
 When using the phylogeny from \cite{jones2005bats} the results are broadly similar (Figure~\ref{f:A-itplots} and Tables~\ref{A-modelWeights2} and \ref{t:variables2}).
 Study effort, the number of subspecies and the interaction between the number of subspecies and study effort have strong support while range size and mass have intermediate support.
-However, mass, range size and the interaction between number of subspecies and study effort are have slightly weaker support than in the analysis using the phylogeny from \textcit{bininda2007delayed}.
+However, mass, range size and the interaction between number of subspecies and study effort are have slightly weaker support than in the analysis using the phylogeny from \textcite{bininda2007delayed}.
 
 %%begin.rcode ITCombPlotCapt
 
