@@ -2045,8 +2045,7 @@ Summing the Akaike weights of all models that contain a given variable gives a p
 The number of subspecies is very likely in the best model ($Pr > $ \rinline{substring(as.character( varWeights['NumberOfSubspecies']), 1, 4)}) as is the interaction term between the number of subspecies and study effort ($Pr = $ \rinline{varWeights['scholarRefs.NumberOfSubspecies']}) compared to the benchmark random variable which has $Pr = $ \rinline{varWeights['rand']} (see Figure~\ref{fig:fstITPlots}A and Table~\ref{t:variables}).
 When models with the interaction term are removed there is, on average (mean weighted by Akaike weights), a positive relationship between the number of subspecies and viral richness ($b = $ \rinline{nSpeciesCoefMean}, variance = \rinline{nSpeciesCoefVar}).
 Models with an interaction term between the number of subspecies and study effort have a positive interaction term ($b = $ \rinline{nSpeciesInterMean}, variance = \rinline{nSpeciesInterVar}) and linear term ($b = $ \rinline{nSpeciesCoefMeanI}, variance = \rinline{nSpeciesCoefVarI}).
-This supports the hypothesis that population structure promotes pathogen richness.
-The strong support for a positive interaction term implies that population structure has a stronger relationship with known pathogen richness in the presence of study effort.
+
 
 
 
@@ -2162,8 +2161,15 @@ The number of described virus species for a bat host ranged up to \rinline{max(f
 Only the model with study effort, gene flow and mass was well supported with the second model having an $\Delta\text{AICc}$ of \rinline{round(fstModelWeights[2, 3])} (Table \ref{t:models} and Table \ref{A-modelWeights}).
 The effective level of gene flow was also likely in the best model ($Pr > 0.999$, see Figure~\ref{fig:fstITPlots}B and Table~\ref{t:variables}).
 On average (mean weighted by Akaike weights) there was a negative relationship between gene flow and viral richness ($b = $ \rinline{fstCoefMeans['beta.Nm']}, variance = \rinline{fstCoefVars['beta.Nm']}) despite the insignificant positive relationship (see Figure~\ref{fig:fstRawData}) estimated by the single-predictor model (pgls: $b$ = \rinline{nmFstUni$coefficients['log(Nm)', 'Estimate']}, $t$ = \rinline{nmFstUni$coefficients['log(Nm)', 't value']}, df = \rinline{nmFstUni$df[2]}, $p$ = \rinline{nmFstUni$coefficients['log(Nm)', 'Pr(>|t|)']}).
-This supports the hypothesis that population structure promotes viral richness.
 Possibly due to the smaller sample size, or a weaker relationship, this coefficient was much more varied than the number of subspecies coefficient with \rinline{round(pcCoefLzero)}\% of models estimating a positive relationship.
+
+Study effort was very likely in the best model ($Pr = $ \rinline{fstVarWeights['scholarRefs']}) as was body mass ($Pr = $ \rinline{fstVarWeights['mass']}).
+However, body mass has a negative average coefficient ($b = $ \rinline{fstCoefMeans['beta.mass']}, variance = \rinline{fstCoefVars['beta.mass']}). % which is in contrast to the number of subspecies analysis, many studies in the literature \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat} and the single-predictor model (pgls: $b$ = \rinline{massFstUni$coefficients['log(mass)', 'Estimate']}, $t$ = \rinline{massFstUni$coefficients['log(mass)', 't value']}, df = \rinline{massFstUni$df[2]}, $p$ = \rinline{massFstUni$coefficients['log(mass)', 'Pr(>|t|)']}).
+In contrast to the number of subspecies analysis, range size was almost certainly not in the best model with $Pr = $ \rinline{fstVarWeights['distrSize']}.
+%This variable being less supported than the random variable may be because range size is closely correlated with study effort (pgls: $b$ = \rinline{fstDistrStudyEffort$coefficients['log(distrSize)', 'Estimate']}, $t$ = \rinline{fstDistrStudyEffort$coefficients['log(distrSize)', 't value']}, df = \rinline{fstDistrStudyEffort$df[2]}, $p$ = \rinline{fstDistrStudyEffort$coefficients['log(distrSize)', 'Pr(>|t|)']}).
+Of the three explanatory variables in the best model, study effort had the largest effect ($b = $ \rinline{fstCoefMeans['beta.scholarRefs']}, variance = \rinline{fstCoefVars['beta.scholarRefs']}).
+The effect size of gene flow ($b = $ \rinline{fstCoefMeans['beta.Nm']}, variance = \rinline{fstCoefVars['beta.Nm']}) was approximately twice the size of that of body mass ($b = $ \rinline{fstCoefMeans['beta.mass']}, variance = \rinline{fstCoefVars['beta.mass']})
+
 
 
 \afterpage{ % use after page to make sure this whole table is at the end of a page.
@@ -2173,26 +2179,16 @@ Possibly due to the smaller sample size, or a weaker relationship, this coeffici
 %\rowcolors{2}{gray!25}{white}
 \caption[Model selection results]{
 Model selection results for number of subspecies and effective level of gene flow analysis. 
-Models are ranked according to AIC and only the bes nine and three  models are shown respectively.
+Models are ranked according to AIC and only the best nine and three  models are shown respectively.
 Models were fitted to all combinations of variables (in total \rinline{nrow(modelWeights)} number of subspecies models and \rinline{nrow(fstModelWeights)} effective gene flow models).
 $\bar{\text{AICc}}$ is the mean AICc score across \rinline{nBoots} resamplings of the null random variable. 
 $\Delta$AICc is the model's $\bar{\text{AICc}}$ score minus $\text{min}(\bar{\text{AICc}})$. 
 $w$ is the Akaike weight and can be interpreted as the probability that the model is the best model (of those in the plausible set).
 $\sum w$ is the cumulative sum of the Akaike weights.
-log(Scholar)*NSubspecies implies the interaction term between study effort and number of subspecies.
-In the number of subspecies analysis there are many models with low $\Delta$AICc scores suggesting there there is no single `best model'.
-In the gene flow analysis, only the top model is supported.
+log(Scholar)*NSubspecies indicates the interaction term between study effort and number of subspecies.
+%In the number of subspecies analysis there are many models with low $\Delta$AICc scores suggesting there there is no single `best model'.
+%In the gene flow analysis, only the top model is supported.
 }
-
-
-
-As in the number of subspecies analysis, study effort was very likely in the best model ($Pr = $ \rinline{fstVarWeights['scholarRefs']}) as was body mass ($Pr = $ \rinline{fstVarWeights['mass']}).
-However, body mass has a negative average coefficient ($b = $ \rinline{fstCoefMeans['beta.mass']}, variance = \rinline{fstCoefVars['beta.mass']}). % which is in contrast to the number of subspecies analysis, many studies in the literature \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat} and the single-predictor model (pgls: $b$ = \rinline{massFstUni$coefficients['log(mass)', 'Estimate']}, $t$ = \rinline{massFstUni$coefficients['log(mass)', 't value']}, df = \rinline{massFstUni$df[2]}, $p$ = \rinline{massFstUni$coefficients['log(mass)', 'Pr(>|t|)']}).
-In contrast to the number of subspecies analysis, range size was almost certainly not in the best model with $Pr = $ \rinline{fstVarWeights['distrSize']}.
-%This variable being less supported than the random variable may be because range size is closely correlated with study effort (pgls: $b$ = \rinline{fstDistrStudyEffort$coefficients['log(distrSize)', 'Estimate']}, $t$ = \rinline{fstDistrStudyEffort$coefficients['log(distrSize)', 't value']}, df = \rinline{fstDistrStudyEffort$df[2]}, $p$ = \rinline{fstDistrStudyEffort$coefficients['log(distrSize)', 'Pr(>|t|)']}).
-Of the three explanatory variables in the best model, study effort had the largest effect ($b = $ \rinline{fstCoefMeans['beta.scholarRefs']}, variance = \rinline{fstCoefVars['beta.scholarRefs']}).
-The effect size of gene flow ($b = $ \rinline{fstCoefMeans['beta.Nm']}, variance = \rinline{fstCoefVars['beta.Nm']}) was approximately twice the size of that of body mass ($b = $ \rinline{fstCoefMeans['beta.mass']}, variance = \rinline{fstCoefVars['beta.mass']})
-
 
 
 \begin{tabular}{@{}>{\footnotesize}lrrrr@{}}
@@ -2320,12 +2316,13 @@ Random &  \rinline{sprintf('%.2f', varWeights['rand'])} &  \rinline{varCoefMeans
 
 
 \subsubsection{Effective gene flow}
-As with the number of subspecies data set, there was no phylogenetic signal in the number of virus species ($\lambda$ = \rinline{virusFstLambda$param['lambda']}, $p > 0.999$).
+
+There was no phylogenetic signal in the number of virus species ($\lambda$ = \rinline{virusFstLambda$param['lambda']}, $p > 0.999$).
 Gene flow also had no phylogenetic autocorrelation ($\lambda$ = \rinline{nmFstLambda$param['lambda']},  $p > 0.999$).
 Due to the low sample size, significance tests are unlikely to have much power.
 There is little evidence of phylogenetic autocorrelation in study effort ($\lambda$ = \rinline{scholarFstLambda$param['lambda']}, $p$ = \rinline{scholarFstLambda$param.CI$lambda$bounds.p[1]}).
 However, there is some weak evidence of phylogenetic signal in range size as the estimated size of $\lambda$ is large while $p$ is also large, potentially due to a lack of statistical power ($\lambda$ = \rinline{distrFstLambda$param['lambda']}, $p$ = \rinline{distrFstLambda$param.CI$lambda$bounds.p[1]}).
-Body mass showed significant phylogenetic autocorrelation ($\lambda$ = \rinline{massFstLambda$param['lambda']}, $p$ = \rinline{massFstLambda$param.CI$lambda$bounds.p[1]}).
+Body mass showed significant phylogenetic autocorrelation ($\lambda$ = \rinline{massFstLambda$param['lambda']}, $p$ = \rinline{massFstLambda$param.CI$lambdaA$bounds.p[1]}).
 
 
 
@@ -2349,16 +2346,43 @@ On average however, only the model containing mass and range size is supported (
 \tmpsection{Restate results}
 
 I have tested the hypothesis that population structure promotes pathogen richness in bats.
-By analysing data on two measures of population structure, and using larger data sets than previous studies, it is hoped that any conclusions may be more robust than the conflicting results in the literature \cite{gay2014parasite, turmelle2009correlates, maganga2014bat}.
-I have found that a positive effect of population structure (a positive effect of the number of subspecies and a negative effect of gene flow) are likely to be in the best models for explaining viral richness.
-Study effort is also clearly supported confirming the expectation that additional study of a bat species yields more known viruses infecting that species and highlighting again that this bias cannot be ignored in studies using known pathogen richness as a proxy for total pathogen richness \cite{nunn2003comparative, gregory1990parasites}.
+In both analyses I found that a positive effect of increasing population structure (a positive effect of the number of subspecies and a negative effect of gene flow) is likely to be in the best models for explaining viral richness.
+Positive effects of study effort and body are both also selected as being in the best model.
+By analysing data on two measures of population structure, and using larger data sets than previous studies, it is hoped that any conclusions may be more robust than previous studies \cite{gay2014parasite, turmelle2009correlates, maganga2014bat}.
 
 \tmpsection{Discuss results in more detail}
+
+
+\tmpsection{Pop structure relates to pathogen richness}
+
+% Does with number of subspecies
+% Does with Fst
+% Other studies?
+%
+
+\tmpsection{
+
+
+
+
+% Using bats and viruses as a case study, my study suggests that there is an association between pathogen richness 
+% 
+%
+%Study effort positively predicted pathogen richness confirming the expectation that additional study of a bat species yields more known viruses infecting that species and highlighting again that this bias cannot be ignored in studies using known pathogen richness as a proxy for total pathogen richness \cite{nunn2003comparative, gregory1990parasites}.
+%
+%
+%
+%
+%
+%
+
 
 
 \tmpsection{Broader context of results}
 
 The results here suggest that there is a positive relationship between population structure and pathogen richness in bats.
+This supports the hypothesis that population structure promotes pathogen richness.
+The strong support for a positive interaction term implies that population structure has a stronger relationship with known pathogen richness in the presence of study effort.
 This is in agreement with \cite{maganga2014bat, turmelle2009correlates} but in disagreement with \cite{gay2014parasite}.
 Furthermore it contradicts the assumption that factors that promote high $R_0$ will automatically promote high pathogen richness \cite{nunn2003comparative, morand2000wormy}.
 This relationship implies that direct or indirect competitive mechanisms are acting such that population structure is needed in order to allow escape from competition.
@@ -2403,10 +2427,12 @@ These contradiction also reiterates the need to use large data sets where possib
 
 \subsection{Conclusions}
 
-In conclusion, this study adds to the evidence that population structure may promote pathogen richness.
+
+I have used phylogenetic linear models to identify positive relationships between two measures of population structure (the number of subspecies and effective levels of gene flow) and viral richness in bats.
+This study adds to the evidence that population structure may promote pathogen richness.
 It does not support the view that factors that increase $R_0$ will increase pathogen richness.
 Using larger data sets and multiple measurements makes the weight of the evidence here stronger than in previous studies.
-However, caution must still be taken in interpreting these results as the data is biased and sparse in one of the analyses.
+However, caution must still be taken in interpreting these results as the data is biased and particularly sparse in one of the analyses.
 
 
 
