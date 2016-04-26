@@ -277,7 +277,62 @@ Many viruses were not identified to species level or their specified species nam
 I counted a virus if it was the only virus, for that host species, in the lowest taxonomic level identified (present in the ICTV taxonomy).
 That is, if a host is recorded as harbouring an unknown Paramyxoviridae virus, then it must carry at least one Paramyxoviridae virus.
 If a host carries an unknown Paramyxoviridae virus and a known Paramyxoviridae virus, then it is hard to confirm that the unknown virus is not another record of the known virus.
-In this case, this would be counted as one virus species.
+In this case, the host would be counted as having one virus species.
+
+
+%$F_{ST}$ studies are conducted at a range of spatial scales, but $F_{ST}$ often increases with distance studied \cite{burland1999population, hulva2010mechanisms, o2015genetic, vonhof2015range}.
+%To minimise the effects of this I only used data from studies that cover \rinline{rangeUseable * 100}\% of the diameter of the species range.
+%This is a largely arbitrary value that could be considered to reflect a ``global'' estimate of $F_{ST}$ while keeping a reasonable number of data points available.
+%I calculated the diameter of the species range by finding the furthest apart points in the IUCN species range \cite{iucn} even if the range is split into multiple polygons.
+%The width covered by each study was the distance between the most distant sampling sites.
+%When this was not explicit in the paper, the centre of the lowest level of geographic area was used.
+
+
+
+\subsection{Statistical analysis}
+
+Statistical analysis for both response variables --- number of subspecies and effective level of gene flow --- was conducted using an information theoretical approach \cite{burnham2002model}, specifically following \textcite{whittingham2005habitat, whittingham2006we}.
+All analysis were performed in R \cite{R}.
+I chose a credible set of models including all combinations of explanatory variables and a model with just an intercept.
+In the analysis using the number of subspecies response variable I also modelled the interaction study effort and number of subspecies by including their product.
+This interaction was included as I believed \emph{a priori} that this interaction may be present as subspecies in well studied species are more likely to be identified.
+The interaction was only included in models with both study effort and number of subspecies as individual terms.
+
+
+To control for phylogenetic non-independence I used the best-supported phylogeny from \textcite{fritz2009geographical} (shown in Figure~\ref{fig:treePlot}) which is the supertree from \textcite{bininda2007delayed} with names updated to match the taxonomy by \textcite{wilson2005mammal}.
+Phylogenetic manipulation was performed using the ape package \cite{ape}.
+I also performed the analysis using the phylogeny from \cite{jones2005bats} as this has some broad topological differences including the Rhinolophoidea being sister to the Pteropodidae rather than being related to the other insectivorous bats (Figure~\ref{fig:treePlot2}). 
+
+
+
+The importance of the phylogeny on each variable separately was examined by estimating the $\lambda$ parameter when regressing the variable against an intercept using the pgls function in caper \cite{caper}.
+The parameter $\lambda$ usually takes values between zero and one and pgls constrains $\lambda$ within these bounds. 
+$\lambda = 0$ implies no autocorrelation while a trait evolving by Brownian motion along the tree would have $\lambda = 1$.
+I tested fitted $\lambda$ values against the null hypothesis of $\lambda = 0$ (no correlation between species) with log-likelihood ratio tests using caper \cite{caper}.
+
+I fitted phylogenetic regressions of all models in the credible set using the function gls in the package nlme \cite{nlme}.
+The explanatory variables were centred and scaled to allow direct comparison of the coefficients \cite{schielzeth2010simple}.
+For each regression model I simultaneously fitted the $\lambda$ parameter as this avoids misspecifying the model \cite{revell2010phylogenetic}.
+Unlike the pgls function, gls does not constrain $\lambda$ to be in the range $\lbrack 0, 1\rbrack$.
+$\lambda < 0$ indicates that residuals from the fitted model are distributed on the phylogeny more uniformly than expected by chance.
+$\kappa$ and $\delta$ parameters were constrained to one as they are more concerned with when along a branch evolution occurs than the importance of the phylogeny.
+Further, fitting multiple parameters makes interpretation difficult. 
+
+
+To establish the importance of variables I calculated the probability, $Pr$, that each variable would be in the best model amongst those examined (under the assumption that all models are \emph{a priori} equally likely).
+This value can more generally, and with fewer assumptions, be considered as simply the relative weight of evidence for each variable being in the best model amongst those examined.
+to determine the direction and strength of the effect of each variable the mean of its regression coefficient, $b$, in all models that contained that variable, was also calculated.
+In the subspecies analysis the inclusion of an interaction term between number of subspecies and study effort makes interpretation of this mean coefficient more difficult, particularly because the interaction term greatly affects the estimated value of $b$.
+To aid interpretation, the mean of $b$ was calculated for: \emph{i}) all models, \emph{ii}) only models with the interaction term and \emph{iii}) only models without the interaction term.
+Following \cite{whittingham2005habitat} I included a uniformly distributed random variable as a null variable as even unimportant variables can have Akaike weights notably greater than zero.
+The whole analysis was run \rinline{nBoots} times, resampling the random variable each time.
+I calculated AICc for each model.
+I calculated the average AICc, $\bar{\text{AICc}}$, by averaging AICc scores within models.
+$\Delta\text{AICc}$ was calculated as $\text{min}(\bar{\text{AICc}}) - \bar{\text{AICc}}$, not the mean of the individual $\Delta\text{AICc}$ scores, to guarantee that the best model has $\Delta\text{AICc} = 0$.
+From these $\Delta\text{AICc}$ values I calculated Akaike weights, $w$.
+This value can be interpreted as the probability that a model is the best model, given the data, amongst those examined.
+For each variable, the sum of the Akaike weights of models containing that variable are summed to give $Pr$.
+This value can be interpreted as the probability that the given variable is in the best model.
 
 
 
@@ -1886,61 +1941,6 @@ p %<+% combdf +
 %%end.rcode
 
 
-%$F_{ST}$ studies are conducted at a range of spatial scales, but $F_{ST}$ often increases with distance studied \cite{burland1999population, hulva2010mechanisms, o2015genetic, vonhof2015range}.
-%To minimise the effects of this I only used data from studies that cover \rinline{rangeUseable * 100}\% of the diameter of the species range.
-%This is a largely arbitrary value that could be considered to reflect a ``global'' estimate of $F_{ST}$ while keeping a reasonable number of data points available.
-%I calculated the diameter of the species range by finding the furthest apart points in the IUCN species range \cite{iucn} even if the range is split into multiple polygons.
-%The width covered by each study was the distance between the most distant sampling sites.
-%When this was not explicit in the paper, the centre of the lowest level of geographic area was used.
-
-
-
-\subsection{Statistical analysis}
-
-Statistical analysis for both response variables --- number of subspecies and effective level of gene flow --- was conducted using an information theoretical approach \cite{burnham2002model}, specifically following \textcite{whittingham2005habitat, whittingham2006we}.
-All analysis were performed in R \cite{R}.
-I chose a credible set of models including all combinations of explanatory variables and a model with just an intercept.
-In the analysis using the number of subspecies response variable I also modelled the interaction study effort and number of subspecies by including their product.
-This interaction was included as I believed \emph{a priori} that this interaction may be present as subspecies in well studied species are more likely to be identified.
-The interaction was only included in models with both study effort and number of subspecies as individual terms.
-
-
-To control for phylogenetic non-independence I used the best-supported phylogeny from \textcite{fritz2009geographical} (shown in Figure~\ref{fig:treePlot}) which is the supertree from \textcite{bininda2007delayed} with names updated to match the taxonomy by \textcite{wilson2005mammal}.
-Phylogenetic manipulation was performed using the ape package \cite{ape}.
-I also performed the analysis using the phylogeny from \cite{jones2005bats} as this has some broad topological differences including the Rhinolophoidea being sister to the Pteropodidae rather than being related to the other insectivorous bats (Figure~\ref{fig:treePlot2}). 
-
-
-
-The importance of the phylogeny on each variable separately was examined by estimating the $\lambda$ parameter when regressing the variable against an intercept using the pgls function in caper \cite{caper}.
-The parameter $\lambda$ usually takes values between zero and one and pgls constrains $\lambda$ within these bounds. 
-$\lambda = 0$ implies no autocorrelation while a trait evolving by Brownian motion along the tree would have $\lambda = 1$.
-I tested fitted $\lambda$ values against the null hypothesis of $\lambda = 0$ (no correlation between species) with log-likelihood ratio tests using caper \cite{caper}.
-
-I fitted phylogenetic regressions of all models in the credible set using the function gls in the package nlme \cite{nlme}.
-The explanatory variables were centred and scaled to allow direct comparison of the coefficients \cite{schielzeth2010simple}.
-For each regression model I simultaneously fitted the $\lambda$ parameter as this avoids misspecifying the model \cite{revell2010phylogenetic}.
-Unlike the pgls function, gls does not constrain $\lambda$ to be in the range $\lbrack 0, 1\rbrack$.
-$\lambda < 0$ indicates that residuals from the fitted model are distributed on the phylogeny more uniformly than expected by chance.
-$\kappa$ and $\delta$ parameters were constrained to one as they are more concerned with when along a branch evolution occurs than the importance of the phylogeny.
-Further, fitting multiple parameters makes interpretation difficult. 
-
-
-To establish the importance of variables I calculated the probability, $Pr$, that each variable would be in the best model amongst those examined (under the assumption that all models are \emph{a priori} equally likely).
-This value can more generally, and with fewer assumptions, be considered as simply the relative weight of evidence for each variable being in the best model amongst those examined.
-to determine the direction and strength of the effect of each variable the mean of its regression coefficient, $b$, in all models that contained that variable, was also calculated.
-In the subspecies analysis the inclusion of an interaction term between number of subspecies and study effort makes interpretation of this mean coefficient more difficult, particularly because the interaction term greatly affects the estimated value of $b$.
-To aid interpretation, the mean of $b$ was calculated for: \emph{i}) all models, \emph{ii}) only models with the interaction term and \emph{iii}) only models without the interaction term.
-Following \cite{whittingham2005habitat} I included a uniformly distributed random variable as a null variable as even unimportant variables can have Akaike weights notably greater than zero.
-The whole analysis was run \rinline{nBoots} times, resampling the random variable each time.
-I calculated AICc for each model.
-I calculated the average AICc, $\bar{\text{AICc}}$, by averaging AICc scores within models.
-$\Delta\text{AICc}$ was calculated as $\text{min}(\bar{\text{AICc}}) - \bar{\text{AICc}}$, not the mean of the individual $\Delta\text{AICc}$ scores, to guarantee that the best model has $\Delta\text{AICc} = 0$.
-From these $\Delta\text{AICc}$ values I calculated Akaike weights, $w$.
-This value can be interpreted as the probability that a model is the best model, given the data, amongst those examined.
-For each variable, the sum of the Akaike weights of models containing that variable are summed to give $Pr$.
-This value can be interpreted as the probability that the given variable is in the best model.
-
-
 
 %%begin.rcode boxplotCapt	
 		
@@ -2282,19 +2282,6 @@ Across all multiple regression models the mean value of $\lambda$ was \rinline{m
 A small number of models (\rinline{mean(na.omit(allResults$lambda < 0))*100}\%)  had negatively phylogenetically distributed residuals.
 
 
-
-
-\subsubsection{Effective gene flow}
-As with the number of subspecies data set, there was no phylogenetic signal in the number of virus species ($\lambda$ = \rinline{virusFstLambda$param['lambda']}, $p > 0.999$).
-Gene flow also had no phylogenetic autocorrelation ($\lambda$ = \rinline{nmFstLambda$param['lambda']},  $p > 0.999$).
-Due to the low sample size, significance tests are unlikely to have much power.
-There is little evidence of phylogenetic autocorrelation in study effort ($\lambda$ = \rinline{scholarFstLambda$param['lambda']}, $p$ = \rinline{scholarFstLambda$param.CI$lambda$bounds.p[1]}).
-However, there is some weak evidence of phylogenetic signal in range size as the estimated size of $\lambda$ is large while $p$ is also large, potentially due to a lack of statistical power ($\lambda$ = \rinline{distrFstLambda$param['lambda']}, $p$ = \rinline{distrFstLambda$param.CI$lambda$bounds.p[1]}).
-Body mass showed significant phylogenetic autocorrelation ($\lambda$ = \rinline{massFstLambda$param['lambda']}, $p$ = \rinline{massFstLambda$param.CI$lambda$bounds.p[1]}).
-
-
-
-
 \begin{table}[t!]
 \centering
 \caption[Estimated variable weights and coefficients for number of subspecies and gene flow analyses]{
@@ -2327,6 +2314,19 @@ Random &  \rinline{sprintf('%.2f', varWeights['rand'])} &  \rinline{varCoefMeans
 
 \label{t:variables}
 \end{table}
+
+
+
+
+
+\subsubsection{Effective gene flow}
+As with the number of subspecies data set, there was no phylogenetic signal in the number of virus species ($\lambda$ = \rinline{virusFstLambda$param['lambda']}, $p > 0.999$).
+Gene flow also had no phylogenetic autocorrelation ($\lambda$ = \rinline{nmFstLambda$param['lambda']},  $p > 0.999$).
+Due to the low sample size, significance tests are unlikely to have much power.
+There is little evidence of phylogenetic autocorrelation in study effort ($\lambda$ = \rinline{scholarFstLambda$param['lambda']}, $p$ = \rinline{scholarFstLambda$param.CI$lambda$bounds.p[1]}).
+However, there is some weak evidence of phylogenetic signal in range size as the estimated size of $\lambda$ is large while $p$ is also large, potentially due to a lack of statistical power ($\lambda$ = \rinline{distrFstLambda$param['lambda']}, $p$ = \rinline{distrFstLambda$param.CI$lambda$bounds.p[1]}).
+Body mass showed significant phylogenetic autocorrelation ($\lambda$ = \rinline{massFstLambda$param['lambda']}, $p$ = \rinline{massFstLambda$param.CI$lambda$bounds.p[1]}).
+
 
 
 
