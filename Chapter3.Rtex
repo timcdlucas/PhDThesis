@@ -2348,20 +2348,42 @@ On average however, only the model containing mass and range size is supported (
 I have tested the hypothesis that population structure promotes pathogen richness in bats.
 In both analyses I found that a positive effect of increasing population structure (a positive effect of the number of subspecies and a negative effect of gene flow) is likely to be in the best models for explaining viral richness.
 Positive effects of study effort and body are both also selected as being in the best model.
-By analysing data on two measures of population structure, and using larger data sets than previous studies, it is hoped that any conclusions may be more robust than previous studies \cite{gay2014parasite, turmelle2009correlates, maganga2014bat}.
+
+
+
 
 \tmpsection{Discuss results in more detail}
 
 
 \tmpsection{Pop structure relates to pathogen richness}
 
-% Does with number of subspecies
-% Does with Fst
-% Other studies?
-%
+% It does so here
 
-\tmpsection{
+% It does so in some lit
 
+% The pattern is reversed in other lit
+
+% I hope this study is more robust.
+
+\tmpsection{There is an interaction between study effort and number of subspecies}
+
+% interpretations
+% Biases are known in the lit. gippoliti2007problem % maybe should add to methods?
+
+
+\tmpsection{Other explanatory vars}
+
+% study effort is important. Never forget.
+% body mass behaves wierdly.
+% Range size is very marginal
+
+
+\tmpsection{phylogeny}
+% Phylogeny is not very important
+% phylogeny is weird in Fst study?
+
+
+By analysing data on two measures of population structure, and using larger data sets than previous studies, it is hoped that any conclusions may be more robust than previous studies \cite{gay2014parasite, turmelle2009correlates, maganga2014bat}.
 
 
 
