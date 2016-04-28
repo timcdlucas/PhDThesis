@@ -368,7 +368,7 @@ Note this rate is independent of the degree and size of subpopulation $n$.
 
 \paragraph{Stochastic simulations}
 
-I examined this model using stochastic, continuous time simulations (using the Gillespie algorithm) implemented in R \cite{R}.
+I examined this model using stochastic, continuous time simulations (using the Gillespie algorithm) implemented in \emph{R} \cite{R}.
 At each step in the simulation we calculate the rate that each possible event might occur.
 One event is then randomly chosen, weighted by its rate
 \begin{align}

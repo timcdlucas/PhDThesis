@@ -90,7 +90,7 @@ As these factors are all completely interdependent, it is very difficult to stud
 \tmpsection{One sentence summarising the main result}
 %  (with the words “here we show” or their equivalent).
 It is unknown whether it is specifically density that controls pathogen diversity or whether density merely correlates with other causal factors such as population structure, group size or population size.
-Here I use metapopulation SIR models to test whether it is density \emph{per se} that increases the ability of a newly evolved pathogen to invade and persist in a population as apposed to colony size, population size or population structure.
+Here I use metapopulation SIR models to test whether it is density \emph{per se} that increases the ability of a newly evolved pathogen to invade and persist in a population as opposed to colony size, population size or population structure.
 \tmpsection{Two or three sentences explaining what the main result reveals in direct comparison to what was thought to be the case previously}
 % or how the main result adds to previous knowledge
 \tmpsection{One or two sentences to put the results into a more general context.}
@@ -942,7 +942,7 @@ I used a two-pathogen, metapopulation SIR model to compare the roles of demograp
 Specifically I let two identical pathogens --- an endemic pathogen and an invading pathogen --- compete and used persistence or not of the second pathogen as my response variable.
 I tested whether population size is more important than population density.
 I then tested whether colony size or the number of colonies is the more important component of population size.
-The multipathogen SIR model is identical to that in Chapter \ref{ch:sims1} and is implemented in R \cite{R}.
+The multipathogen SIR model is identical to that in Chapter \ref{ch:sims1} and is implemented in \emph{R} \cite{R}.
 
 
 

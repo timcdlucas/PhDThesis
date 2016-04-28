@@ -314,9 +314,9 @@ These discontinuities can occur for a number of reasons such as a profile switch
 As an example, if $\alpha$ is small, there is an interval between Figure \ref{f:x1AndInt}c and \ref{f:x1AndInt}d where the `blind spot' would prevent animals being detected giving $p=0$.
 This would require an extra integral in our equation, as simply putting our small value of $\alpha$ into \ref{e:SE2int} would not give us this integral of $p=0$.
 
-gREM submodel specifications were done by hand, and the integration was done using SymPy \cite{sympy} in Python (Appendix S3).
+gREM submodel specifications were done by hand, and the integration was done using \emph{SymPy} \cite{sympy} in \emph{Python} (Appendix S3).
 The gREM submodels were checked by confirming that: (1) submodels adjacent in parameter space were equal at the boundary between them; (2) submodels that border $ \alpha = 0$ had $p = 0$ when $ \alpha = 0$; (3) average profile widths $\bar{p}$ were between 0 and $2r$ and; (4) each integral, divided by the range of angles that it was integrated over, was between 0 and $2r$.
-The scripts for these tests are included in Appendix S3 and the R \cite{R} implementation of the gREM is given in Appendix S4.  
+The scripts for these tests are included in Appendix S3 and the \emph{R} \cite{R} implementation of the gREM is given in Appendix S4.  
 
 \subsection{Simulation Model}
 
