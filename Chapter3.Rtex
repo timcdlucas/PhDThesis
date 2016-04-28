@@ -110,23 +110,23 @@ Previous studies have had contradictory results and different measures of popula
 %
 %\tmpsection{One sentence summarising the main result}
 %  (with the words “here we show” or their equivalent).
-Here I use comparative data across 203 bat species using phylogenetic linear models, controlling for body mass, range size and study effort, to test whether population structure correlates with pathogen richness.
-I use bats as a case study as they have been associated with a number of important, recent zoonotic outbreaks.
-Unlike previous studies I used two measures of population structure: the number of subspecies and effective levels of gene flow.
-I also use more careful application of genetic measures than has been used previously.
-Both measures are positively associated with pathogen richness.
+Here I used comparative data across 203 bat species using phylogenetic linear models, controlling for body mass, range size and study effort, to test whether population structure correlates with pathogen richness.
+Bats as a group make a useful case study because they have been associated with a number of important, recent zoonotic outbreaks.
+Unlike previous studies, I used two measures of population structure: the number of subspecies and effective levels of gene flow.
+I also used more careful application of genetic measures than has been used previously.
+I find that both measures are positively associated with pathogen richness.
 %
 %
 %\tmpsection{Two or three sentences explaining what the main result reveals in direct comparison to what was thoughts to be the case previously}
 % or how the main result adds to previous knowledge
 My results add more robust support to the hypothesis that population structure promotes pathogen richness in bats.
-The results support the prediction that population structure reduces competition between pathogens and so allow greater pathogen richness and
+The results also support the prediction that population structure reduces competition between pathogens and so allow greater pathogen richness and
 contradict the prediction that factors that increase $R_0$ should increase pathogen richness.
 This implies that competitive processes amongst pathogens are stronger than previously thought.
 %
 %
 %\tmpsection{One or two sentences to put the results into a more general context.}
-Although my analysis implies that population structure does promote pathogen richness in bats, the weakness of the relationship and the difficulty in obtaining some measurements means this is probably not a useful, predictive factor on its own for optimising zoonotic surveillance.
+Although my analysis implies that population structure does promote pathogen richness in bats, the weakness of the relationship and the difficulty in obtaining some measurements means that this is probably not a useful, predictive factor on its own for optimising zoonotic surveillance.
 However, the relationship has implications for global change, implying that increased habitat fragmentation might promote greater viral richness in bats.
 
 
@@ -155,9 +155,9 @@ However, the relationship has implications for global change, implying that incr
 
 %#1. Zoonotic disease is bad (as you have written it already)
 Zoonotic pathogens make up the majority of newly emerging diseases and have profound consequences for public health, economics and international development \cite{jones2008global, smith2014global, ebolaWorldbank}.
-Better predictive models of which wild host species are potential reservoirs of zoonotic diseases would allow us to effectively optimise zoonotic disease surveillance and anticipate how the risks of disease spillover might change with global change.
-The chance that a host species will be the source of an outbreak depends on a number of factors including its proximity and interactions with humans and the prevalence and the number of pathogen species it carries \cite{wolfe2000deforestation}.
-However, our understanding of the factors that control the number of pathogen species in a host species is still poor.
+Better models for predicting which wild host species are potential reservoirs of zoonotic diseases would allow us to optimise zoonotic disease surveillance and anticipate how the risks of disease spillover might change with global change.
+The chance that a host species will be the source of an outbreak depends on a number of factors, such as its proximity and interactions with humans, and the prevalence and the number of pathogen species it carries \cite{wolfe2000deforestation}.
+However, the factors that control the number of pathogen species in a host species remain poorly understood.
 
 
 \tmpsection{Specific Intro}
@@ -169,7 +169,7 @@ However, our understanding of the factors that control the number of pathogen sp
 A number of individual and population level traits that might control pathogen richness have been studied.
 Individual traits that have been studied include body mass and longevity.
 Large bodied animals have been shown to have high pathogen richness with large bodies providing more resource for pathogens \cite{kamiya2014determines, arneberg2002host, poulin1995phylogeny, bordes2008bat}.
-Long lived species are expected to have high pathogen richness as the number of pathogens a host encounters in its lifetime will be higher \cite{nunn2003comparative, ezenwa2006host}. 
+Long lived species are expected to have high pathogen richness, because the number of pathogens a host encounters in its lifetime will be higher \cite{nunn2003comparative, ezenwa2006host}. 
 Population level traits have also been studied.
 Animal density \cite{kamiya2014determines, nunn2003comparative, arneberg2002host} and sociality \cite{bordes2007rodent, vitone2004body, altizer2003social, ezenwa2006host} are both predicted to increase pathogen richness by increasing the rate of spread, $R_0$, of a new pathogen.
 Finally, widely distributed species have high pathogen richness, potentially because they experience a wider range of environments or because they are sympatric with more species \cite{kamiya2014determines, nunn2003comparative, luis2013comparison}.
@@ -185,7 +185,7 @@ The role of population structure on human epidemics has been studied in depth an
 In comparative studies of pathogen richness in wild animals, this relationship with $R_0$ is often taken as a prediction that decreased population structure will increase pathogen richness relative to other host species \cite{nunn2003comparative, morand2000wormy, poulin2014parasite, poulin2000diversity, altizer2003social}. 
 However, epidemiological models of highly virulent pathogens have shown that increased population structure can allow persistence of a pathogen where a well-mixed population would experience a single, large epidemic followed by pathogen extinction \cite{blackwood2013resolving, plowright2011urban}.
 Furthermore, the assumption that high $R_0$ leads to high pathogen richness ignores inter-pathogen competition.
-Simple epidemiological models of competition between multiple pathogens show that in completely unstructured populations a competitive exclusion process occurs but that adding population structure makes coexistence possible \cite{qiu2013vector, allen2004sis, nunes2006localized}.
+Simple epidemiological models of competition between multiple pathogens show that, in completely unstructured populations, a competitive exclusion process occurs but that adding population structure makes coexistence possible \cite{qiu2013vector, allen2004sis, nunes2006localized}.
 
 
 \tmpsection{Previous Studies}
@@ -194,8 +194,8 @@ Simple epidemiological models of competition between multiple pathogens show tha
 
 There is a lack of large, comparative studies of the role of population structure on pathogen richness.
 Sociality, which is one constituent part of population structure, has been well studied.
-However, in primates only a weak positive association between sociality and pathogen richess was found \cite{vitone2004body}.
-Furthermore, a negative association was found in rodents \cite{bordes2007rodent} and even and odd-toed hoofed mammals \cite{ezenwa2006host}.
+However, in primates only a weak positive association between sociality and pathogen richness was found \cite{vitone2004body}.
+Furthermore, a negative association was found in rodents \cite{bordes2007rodent} and in even and odd-toed hoofed mammals \cite{ezenwa2006host}.
 
 
 
@@ -208,14 +208,16 @@ Three studies have used comparative data to test for an association between popu
 A study on 15 African bat species found a positive relationship between the extent of distribution fragmentation and viral richness \cite{maganga2014bat}.
 Conversely, a study on 20 South-East Asian bat species found the opposite relationship \cite{gay2014parasite}. 
 These studies used the ratio between the perimeter and area of the species' geographic range as their measure of population structure.
-Range maps are very course for many species.
-Furthermore there is a potential bias with island living species being given sea based edges where continental species might be assumed to live across their entire range, without considering the different terrestrial habitats in these areas.
+Range maps are very coarse for many species.
+Furthermore there this measure is potentially biased. 
+Continental species might be assumed to live across their entire range, without considering the different terrestrial habitats within these areas.
+However, the patchy nature of the environment will be clear in island-living species as coastlines are easily identified.
 
 A global study on 33 bat species found a positive relationship between $F_{ST}$ --- a measure of genetic structure --- and viral richness \cite{turmelle2009correlates}. 
 However, this study included measures using mtDNA which only measures female dispersal which may have biased the results as many bat species show female philopatry \cite{kerth2002extreme, hulva2010mechanisms}.
 Furthermore, this study used measures of $F_{ST}$ irrespective of the study scale including studies covering from tens \cite{mccracken1981social} to thousands \cite{petit1999male} of kilometres.
-As isolation by distance has been shown in a number of bat species \cite{burland1999population, hulva2010mechanisms, o2015genetic, vonhof2015range} this could bias results further.
-Finally, when a global $F_{ST}$ value is not given they used the mean of all pairwise $F_{ST}$ values between sites.
+As isolation by distance has been shown in a number of bat species \cite{burland1999population, hulva2010mechanisms, o2015genetic, vonhof2015range}, this could bias results further.
+Finally, when a global $F_{ST}$ value is not given \textcite{turmelle2009correlates} used the mean of all pairwise $F_{ST}$ values between sites.
 This is not correct as pairwise and global $F_{ST}$ values have different relationships with effective migration rates. 
 
 Finally, one further study tested for an association between group size and parasite richness amongst 138 bat species \cite{bordes2008bat}.
@@ -269,14 +271,14 @@ Furthermore, I found that the role of phylogeny is very weak both in the models 
 
 \subsubsection{Pathogen richness}
 
-To measure pathogen richness I used data from \cite{luis2013comparison}. 
-These simply include known infections of a bat species with a virus species. 
-I am using viral richness as a proxy for pathogen richness generally but the analysis could instead be considered as representative of viral richness only.
+To measure pathogen richness I used data from \textcite{luis2013comparison}. 
+This data simply includes known infections of a bat species with a virus species. 
+I have used viral richness as a proxy for pathogen richness generally, but the analysis could also be considered as representative of viral richness only.
 Rows with host species that were not identified to species level according to \textcite{wilson2005mammal} were removed.
 Many viruses were not identified to species level or their specified species names were not in the ICTV virus taxonomy \cite{ICTV}.
-I counted a virus if it was the only virus, for that host species, in the lowest taxonomic level identified (present in the ICTV taxonomy).
-That is, if a host is recorded as harbouring an unknown Paramyxoviridae virus, then it must carry at least one Paramyxoviridae virus.
-If a host carries an unknown Paramyxoviridae virus and a known Paramyxoviridae virus, then it is hard to confirm that the unknown virus is not another record of the known virus.
+Therefore, I counted a virus if it was the only virus, for that host species, in the lowest taxonomic level identified (present in the ICTV taxonomy).
+For example, if a host is recorded as harbouring an unknown Paramyxoviridae virus, then it is logical to assume that the host carries at least one Paramyxoviridae virus.
+If a host carries an unknown Paramyxoviridae virus and a known Paramyxoviridae virus, it is hard to confirm that the unknown virus is not another record of the known virus.
 In this case, the host would be counted as having one virus species.
 
 
@@ -286,6 +288,54 @@ In this case, the host would be counted as having one virus species.
 %I calculated the diameter of the species range by finding the furthest apart points in the IUCN species range \cite{iucn} even if the range is split into multiple polygons.
 %The width covered by each study was the distance between the most distant sampling sites.
 %When this was not explicit in the paper, the centre of the lowest level of geographic area was used.
+
+
+\subsubsection{Population structure data}
+
+I used two measures of population structure: the number of subspecies and the effective level of gene flow.
+The number of subspecies was counted using the Wilson and Reeder taxonomy \cite{wilson2005mammal}.
+The effective level of gene flow was calculated from estimates of $F_{ST}$ collated from the literature.
+The studies were from a wide range of spatial scales, from local ($\sim\SI{10}{\kilo\metre}$) to continental.
+As $F_{ST}$ often increases with spatial scale \cite{burland1999population, hulva2010mechanisms, o2015genetic, vonhof2015range} I controlled for this by only using data from studies where a large proportion of the species range was studied.
+I used the ratio of the furthest distance between $F_{ST}$ samples (taken from the paper or measured with \url{http://www.distancefromto.net/} if not stated in the paper) to the length of the IUCN species range \cite{iucn} and only used studies if this ratio was greater than \rinline{rangeUseable}.
+This is an arbitrary value that was a compromise between retaining a reasonable number of data points and controlling for the bias in spatial scale.
+I only used global $F_{ST}$ estimates as the mean of pairwise $F_{ST}$ values is not necessarily equal to the global $F_{ST}$ value.
+I converted all $F_{ST}$ values to effective migration rates using $M = (1-F_{ST})/4F_{ST}$.
+This transforms the data from being bound by $(0, 1)$ to being in the range $\lbrack 0, \infty)$ and is more easily interpretable (though the final results are unaffected). 
+These two measures of population structure were analysed separately as the number of subspecies has \rinline{nrow(nSpecies)} data points while there is only $F_{ST}$ data for 22 bat species.
+For the subspecies analysis all bat species in \textcite{luis2013comparison} were used (i.e. all species with at least one known virus species).
+This is to avoid using the very large number of bat species that have simply never been sampled for viruses.
+However, for the gene flow analysis, all bat species with suitable $F_{ST}$ estimates were used.
+As this included some species not present in \textcite{luis2013comparison} this includes some bat species with zero known virus species. 
+This was to make the greatest use of the $F_{ST}$ data available and because the number of species with no known virus species was not unduly large (\rinline{sum(fstFinal$virusSpecies == 0)} species).
+
+
+\subsubsection{Other explanatory variables}
+
+
+
+To control for study bias I collected the number of PubMed and Google Scholar citations for each bat species name including synonyms from ITIS \cite{itis} via the taxize package \cite{chamberlain2013taxize}.
+The counts were scraped using the rvest package \cite{rvest}.
+I log transformed these variables as they were strongly right skewed.
+I tested for correlation between these two proxies for study effort using phylogenetic least squares regression (pgls), using the best-supported phylogeny from \textcite{fritz2009geographical}, and likelihood ratio tests using the caper package \cite{caper} (Figures~\ref{fig:treePlot} and \ref{fig:scholarvspubmedPlot}).
+The log number of citations on PubMed and Google scholar were highly correlated (pgls: $t$ = \rinline{studyEffortCor$coefficients['log(pubmedRefs + 1)', 't value']}, df = \rinline{studyEffortCor$df[2]}, $p < 10^{-5}$).
+As this correlation is strong I used Google Scholar reference counts only in subsequent analyses.
+%See the appendix for analyses run using PubMed citations.
+
+A number of other factors that have previously been found to be important were included as additional explanatory variables: body mass \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat, han2015infectious, bordes2008bat}, range size \cite{kamiya2014determines, turmelle2009correlates, maganga2014bat} and study effort \cite{turmelle2009correlates, gay2014parasite, maganga2014bat}.		
+This was to attempt to avoid spurious positive results occur  ring simply due to correlation between pathogen richness and a different, causal factor.
+Despite commonly being associated with pathogen richness \cite{arneberg2002host, kamiya2014determines, nunn2003comparative}, population density is not included in the analysis as there is very little data for bat densities.
+Measures of body mass were taken from Pantheria \cite{jones2009pantheria} and primary literature \cite{canals2005relative, arita1993rarity, lopez2014echolocation, orr2013does, lim2001bat, aldridge1987turning, ma2003dietary, owen2003home, henderson2008movements, heaney2012nyctalus, oleksy2015high, zhang2009recent}. 
+\emph{Pipistrellus pygmaeus} was assigned the same mass as \emph{P. pipistrellus} as they are indistinguishable by mass.
+Body mass measurements were log transformed as they were strongly right skewed.
+Distribution size was estimated by downloading range maps for all species from IUCN \cite{iucn} and were also log transformed due to right skew.
+
+After data cleaning there was data for \rinline{nrow(nSpecies)} bat species in \rinline{length(unique(nSpecies$Family))} families for the subspecies analysis.
+Due to the low number of studies and the restrictive requirements imposed on study design, there was only data for \rinline{nrow(fstFinal)} bat species in \rinline{length(unique(fstFinal$Family))} families for the effective gene flow analysis.
+The raw data are included in Table \ref{A-rawData}.
+
+
+
 
 
 
@@ -1538,24 +1588,6 @@ p %<+% fstFinal[, c('binomial', 'virusSpecies')] +
 %%end.rcode
 
 
-\subsubsection{Population structure data}
-
-I used two measures of population structure: the number of subspecies and the effective level of gene flow.
-The number of subspecies was counted using the Wilson and Reeder taxonomy \cite{wilson2005mammal}.
-The effective level of gene flow was calculated from estimates of $F_{ST}$ collated from the literature.
-The studies were from a wide range of spatial scales, from local ($\sim\SI{10}{\kilo\metre}$) to continental.
-As $F_{ST}$ often increases with spatial scale \cite{burland1999population, hulva2010mechanisms, o2015genetic, vonhof2015range} I controlled for this by only using data from studies where a large proportion of the species range was studied.
-I used the ratio of the furthest distance between $F_{ST}$ samples (taken from the paper or measured with \url{http://www.distancefromto.net/} if not stated in the paper) to the length of the IUCN species range \cite{iucn} and only used studies if this ratio was greater than \rinline{rangeUseable}.
-This is an arbitrary value that was a compromise between retaining a reasonable number of data points and controlling for the bias in spatial scale.
-I only used global $F_{ST}$ estimates as the mean of pairwise $F_{ST}$ values is not necessarily equal to the global $F_{ST}$ value.
-I converted all $F_{ST}$ values to effective migration rates using $M = (1-F_{ST})/4F_{ST}$.
-This transforms the data from being bound by $(0, 1)$ to being in the range $\lbrack 0, \infty)$ and is more easily interpretable (though the final results are unaffected). 
-These two measures of population structure were analysed separately as the number of subspecies has \rinline{nrow(nSpecies)} data points while there is only $F_{ST}$ data for 22 bat species.
-For the subspecies analysis all bat species in \textcite{luis2013comparison} were used (i.e. all species with at least one known virus species).
-This is to avoid using the very large number of bat species that have simply never been sampled for viruses.
-However, for the gene flow analysis, all bat species with suitable $F_{ST}$ estimates were used.
-As this included some species not present in \textcite{luis2013comparison} this includes some bat species with zero known virus species. 
-This was to make the greatest use of the $F_{ST}$ data available and because the number of species with no known virus species was not unduly large (\rinline{sum(fstFinal$virusSpecies == 0)} species).
 
 %%begin.rcode fstITanalysis
 
@@ -1824,33 +1856,6 @@ fstDistrStudyEffort <- summary(pgls(log(scholarRefs) ~ log(distrSize), data = co
 fstMassStudyEffort <- summary(pgls(log(scholarRefs) ~ log(mass), data = compFst, lambda = 'ML'))
 
 %%end.rcode
-
-
-
-\subsubsection{Other explanatory variables}
-
-
-
-To control for study bias I collected the number of PubMed and Google Scholar citations for each bat species name including synonyms from ITIS \cite{itis} via the taxize package \cite{chamberlain2013taxize}.
-The counts were scraped using the rvest package \cite{rvest}.
-I log transformed these variables as they were strongly right skewed.
-I tested for correlation between these two proxies for study effort using phylogenetic least squares regression (pgls), using the best-supported phylogeny from \textcite{fritz2009geographical}, and likelihood ratio tests using the caper package \cite{caper} (Figures~\ref{fig:treePlot} and \ref{fig:scholarvspubmedPlot}).
-The log number of citations on PubMed and Google scholar were highly correlated (pgls: $t$ = \rinline{studyEffortCor$coefficients['log(pubmedRefs + 1)', 't value']}, df = \rinline{studyEffortCor$df[2]}, $p < 10^{-5}$).
-As this correlation is strong I used Google Scholar reference counts only in subsequent analyses.
-%See the appendix for analyses run using PubMed citations.
-
-A number of other factors that have previously been found to be important were included as additional explanatory variables: body mass \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat, han2015infectious, bordes2008bat}, range size \cite{kamiya2014determines, turmelle2009correlates, maganga2014bat} and study effort \cite{turmelle2009correlates, gay2014parasite, maganga2014bat}.		
-This was to attempt to avoid spurious positive results occur  ring simply due to correlation between pathogen richness and a different, causal factor.
-Despite commonly being associated with pathogen richness \cite{arneberg2002host, kamiya2014determines, nunn2003comparative}, population density is not included in the analysis as there is very little data for bat densities.
-Measures of body mass were taken from Pantheria \cite{jones2009pantheria} and primary literature \cite{canals2005relative, arita1993rarity, lopez2014echolocation, orr2013does, lim2001bat, aldridge1987turning, ma2003dietary, owen2003home, henderson2008movements, heaney2012nyctalus, oleksy2015high, zhang2009recent}. 
-\emph{Pipistrellus pygmaeus} was assigned the same mass as \emph{P. pipistrellus} as they are indistinguishable by mass.
-Body mass measurements were log transformed as they were strongly right skewed.
-Distribution size was estimated by downloading range maps for all species from IUCN \cite{iucn} and were also log transformed due to right skew.
-
-After data cleaning there was data for \rinline{nrow(nSpecies)} bat species in \rinline{length(unique(nSpecies$Family))} families for the subspecies analysis.
-Due to the low number of studies and the restrictive requirements imposed on study design, there was only data for \rinline{nrow(fstFinal)} bat species in \rinline{length(unique(fstFinal$Family))} families for the effective gene flow analysis.
-The raw data are included in Table \ref{A-rawData}.
-
 
 
 
