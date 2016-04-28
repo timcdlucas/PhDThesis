@@ -85,6 +85,22 @@ library(parallel)
 
 %%end.rcode
 
+
+
+%%begin.rcode parameters
+
+
+# Define some parameters.
+#   This is useful at the top so that it can go in text.
+
+# How many bootstraps for model selection NULL variable
+nBoots <- 50
+
+# What proportion of a species range should be covered for an Fst study to count as valid.
+rangeUseable <- 0.20
+
+%%end.rcode
+
 \section{Abstract}
 
 
@@ -290,118 +306,7 @@ In this case, the host would be counted as having one virus species.
 %When this was not explicit in the paper, the centre of the lowest level of geographic area was used.
 
 
-\subsubsection{Population structure data}
 
-I used two measures of population structure: the number of subspecies and the effective level of gene flow.
-The number of subspecies was counted using the Wilson and Reeder taxonomy \cite{wilson2005mammal}.
-The effective level of gene flow was calculated from estimates of $F_{ST}$ collated from the literature.
-The studies were from a wide range of spatial scales, from local ($\sim\SI{10}{\kilo\metre}$) to continental.
-As $F_{ST}$ often increases with spatial scale \cite{burland1999population, hulva2010mechanisms, o2015genetic, vonhof2015range} I controlled for this by only using data from studies where a large proportion of the species range was studied.
-I used the ratio of the furthest distance between $F_{ST}$ samples (taken from the paper or measured with \url{http://www.distancefromto.net/} if not stated in the paper) to the length of the IUCN species range \cite{iucn} and only used studies if this ratio was greater than \rinline{rangeUseable}.
-This is an arbitrary value that was a compromise between retaining a reasonable number of data points and controlling for the bias in spatial scale.
-I only used global $F_{ST}$ estimates as the mean of pairwise $F_{ST}$ values is not necessarily equal to the global $F_{ST}$ value.
-I converted all $F_{ST}$ values to effective migration rates using $M = (1-F_{ST})/4F_{ST}$.
-This transforms the data from being bound by $(0, 1)$ to being in the range $\lbrack 0, \infty)$ and is more easily interpretable (though the final results are unaffected). 
-These two measures of population structure were analysed separately as the number of subspecies has \rinline{nrow(nSpecies)} data points while there is only $F_{ST}$ data for 22 bat species.
-For the subspecies analysis all bat species in \textcite{luis2013comparison} were used (i.e. all species with at least one known virus species).
-This is to avoid using the very large number of bat species that have simply never been sampled for viruses.
-However, for the gene flow analysis, all bat species with suitable $F_{ST}$ estimates were used.
-As this included some species not present in \textcite{luis2013comparison} this includes some bat species with zero known virus species. 
-This was to make the greatest use of the $F_{ST}$ data available and because the number of species with no known virus species was not unduly large (\rinline{sum(fstFinal$virusSpecies == 0)} species).
-
-
-\subsubsection{Other explanatory variables}
-
-
-
-To control for study bias I collected the number of PubMed and Google Scholar citations for each bat species name including synonyms from ITIS \cite{itis} via the taxize package \cite{chamberlain2013taxize}.
-The counts were scraped using the rvest package \cite{rvest}.
-I log transformed these variables as they were strongly right skewed.
-I tested for correlation between these two proxies for study effort using phylogenetic least squares regression (pgls), using the best-supported phylogeny from \textcite{fritz2009geographical}, and likelihood ratio tests using the caper package \cite{caper} (Figures~\ref{fig:treePlot} and \ref{fig:scholarvspubmedPlot}).
-The log number of citations on PubMed and Google scholar were highly correlated (pgls: $t$ = \rinline{studyEffortCor$coefficients['log(pubmedRefs + 1)', 't value']}, df = \rinline{studyEffortCor$df[2]}, $p < 10^{-5}$).
-As this correlation is strong I used Google Scholar reference counts only in subsequent analyses.
-%See the appendix for analyses run using PubMed citations.
-
-A number of other factors that have previously been found to be important were included as additional explanatory variables: body mass \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat, han2015infectious, bordes2008bat}, range size \cite{kamiya2014determines, turmelle2009correlates, maganga2014bat} and study effort \cite{turmelle2009correlates, gay2014parasite, maganga2014bat}.		
-This was to attempt to avoid spurious positive results occur  ring simply due to correlation between pathogen richness and a different, causal factor.
-Despite commonly being associated with pathogen richness \cite{arneberg2002host, kamiya2014determines, nunn2003comparative}, population density is not included in the analysis as there is very little data for bat densities.
-Measures of body mass were taken from Pantheria \cite{jones2009pantheria} and primary literature \cite{canals2005relative, arita1993rarity, lopez2014echolocation, orr2013does, lim2001bat, aldridge1987turning, ma2003dietary, owen2003home, henderson2008movements, heaney2012nyctalus, oleksy2015high, zhang2009recent}. 
-\emph{Pipistrellus pygmaeus} was assigned the same mass as \emph{P. pipistrellus} as they are indistinguishable by mass.
-Body mass measurements were log transformed as they were strongly right skewed.
-Distribution size was estimated by downloading range maps for all species from IUCN \cite{iucn} and were also log transformed due to right skew.
-
-After data cleaning there was data for \rinline{nrow(nSpecies)} bat species in \rinline{length(unique(nSpecies$Family))} families for the subspecies analysis.
-Due to the low number of studies and the restrictive requirements imposed on study design, there was only data for \rinline{nrow(fstFinal)} bat species in \rinline{length(unique(fstFinal$Family))} families for the effective gene flow analysis.
-The raw data are included in Table \ref{A-rawData}.
-
-
-
-
-
-
-\subsection{Statistical analysis}
-
-Statistical analysis for both response variables --- number of subspecies and effective level of gene flow --- was conducted using an information theoretical approach \cite{burnham2002model}, specifically following \textcite{whittingham2005habitat, whittingham2006we}.
-All analysis were performed in R \cite{R}.
-I chose a credible set of models including all combinations of explanatory variables and a model with just an intercept.
-In the analysis using the number of subspecies response variable I also modelled the interaction study effort and number of subspecies by including their product.
-This interaction was included as I believed \emph{a priori} that this interaction may be present as subspecies in well studied species are more likely to be identified.
-The interaction was only included in models with both study effort and number of subspecies as individual terms.
-
-
-To control for phylogenetic non-independence I used the best-supported phylogeny from \textcite{fritz2009geographical} (shown in Figure~\ref{fig:treePlot}) which is the supertree from \textcite{bininda2007delayed} with names updated to match the taxonomy by \textcite{wilson2005mammal}.
-Phylogenetic manipulation was performed using the ape package \cite{ape}.
-I also performed the analysis using the phylogeny from \cite{jones2005bats} as this has some broad topological differences including the Rhinolophoidea being sister to the Pteropodidae rather than being related to the other insectivorous bats (Figure~\ref{fig:treePlot2}). 
-
-
-
-The importance of the phylogeny on each variable separately was examined by estimating the $\lambda$ parameter when regressing the variable against an intercept using the pgls function in caper \cite{caper}.
-The parameter $\lambda$ usually takes values between zero and one and pgls constrains $\lambda$ within these bounds. 
-$\lambda = 0$ implies no autocorrelation while a trait evolving by Brownian motion along the tree would have $\lambda = 1$.
-I tested fitted $\lambda$ values against the null hypothesis of $\lambda = 0$ (no correlation between species) with log-likelihood ratio tests using caper \cite{caper}.
-
-I fitted phylogenetic regressions of all models in the credible set using the function gls in the package nlme \cite{nlme}.
-The explanatory variables were centred and scaled to allow direct comparison of the coefficients \cite{schielzeth2010simple}.
-For each regression model I simultaneously fitted the $\lambda$ parameter as this avoids misspecifying the model \cite{revell2010phylogenetic}.
-Unlike the pgls function, gls does not constrain $\lambda$ to be in the range $\lbrack 0, 1\rbrack$.
-$\lambda < 0$ indicates that residuals from the fitted model are distributed on the phylogeny more uniformly than expected by chance.
-$\kappa$ and $\delta$ parameters were constrained to one as they are more concerned with when along a branch evolution occurs than the importance of the phylogeny.
-Further, fitting multiple parameters makes interpretation difficult. 
-
-
-To establish the importance of variables I calculated the probability, $Pr$, that each variable would be in the best model amongst those examined (under the assumption that all models are \emph{a priori} equally likely).
-This value can more generally, and with fewer assumptions, be considered as simply the relative weight of evidence for each variable being in the best model amongst those examined.
-to determine the direction and strength of the effect of each variable the mean of its regression coefficient, $b$, in all models that contained that variable, was also calculated.
-In the subspecies analysis the inclusion of an interaction term between number of subspecies and study effort makes interpretation of this mean coefficient more difficult, particularly because the interaction term greatly affects the estimated value of $b$.
-To aid interpretation, the mean of $b$ was calculated for: \emph{i}) all models, \emph{ii}) only models with the interaction term and \emph{iii}) only models without the interaction term.
-Following \cite{whittingham2005habitat} I included a uniformly distributed random variable as a null variable as even unimportant variables can have Akaike weights notably greater than zero.
-The whole analysis was run \rinline{nBoots} times, resampling the random variable each time.
-I calculated AICc for each model.
-I calculated the average AICc, $\bar{\text{AICc}}$, by averaging AICc scores within models.
-$\Delta\text{AICc}$ was calculated as $\text{min}(\bar{\text{AICc}}) - \bar{\text{AICc}}$, not the mean of the individual $\Delta\text{AICc}$ scores, to guarantee that the best model has $\Delta\text{AICc} = 0$.
-From these $\Delta\text{AICc}$ values I calculated Akaike weights, $w$.
-This value can be interpreted as the probability that a model is the best model, given the data, amongst those examined.
-For each variable, the sum of the Akaike weights of models containing that variable are summed to give $Pr$.
-This value can be interpreted as the probability that the given variable is in the best model.
-
-
-
-
-%%begin.rcode parameters
-
-# Define some parameters.
-#   This is useful at the top so that it can go in text.
-
-# How many bootstraps for model selection NULL variable
-nBoots <- 50
-
-
-# What proportion of a species range should be covered for an Fst study to count as valid.
-rangeUseable <- 0.20
-
-
-
-%%end.rcode
 
 %%begin.rcode luis2013virusRead
 
@@ -1032,6 +937,10 @@ subspeciesInter <- pgls(
 #sqrt(vif(lm(virusSpecies ~ log(scholarRefs) + NumberOfSubspecies +  log(mass) + log(distrSize), data = nSpecies)))
 
 %%end.rcode
+
+
+
+
 
 
 
@@ -1947,6 +1856,108 @@ p %<+% combdf +
 
 
 
+
+
+
+\subsubsection{Population structure data}
+
+I used two measures of population structure: the number of subspecies and the effective level of gene flow.
+The number of subspecies was counted using the Wilson and Reeder taxonomy \cite{wilson2005mammal}.
+The effective level of gene flow was calculated from estimates of $F_{ST}$ collated from the literature.
+The studies were from a wide range of spatial scales, from local ($\sim\SI{10}{\kilo\metre}$) to continental.
+As $F_{ST}$ often increases with spatial scale \cite{burland1999population, hulva2010mechanisms, o2015genetic, vonhof2015range} I controlled for this by only using data from studies where a large proportion of the species range was studied.
+I used the ratio of the furthest distance between $F_{ST}$ samples (taken from the paper or measured with \url{http://www.distancefromto.net/} if not stated in the paper) to the length of the IUCN species range \cite{iucn} and only used studies if this ratio was greater than \rinline{rangeUseable}.
+This is an arbitrary value that was a compromise between retaining a reasonable number of data points and controlling for the bias in spatial scale.
+I only used global $F_{ST}$ estimates as the mean of pairwise $F_{ST}$ values is not necessarily equal to the global $F_{ST}$ value.
+I converted all $F_{ST}$ values to effective migration rates using $M = (1-F_{ST})/4F_{ST}$.
+This transforms the data from being bound by $(0, 1)$ to being in the range $\lbrack 0, \infty)$ and is easier to interpret. 
+These two measures of population structure were analysed separately because the number of subspecies had \rinline{nrow(nSpecies)} data points but there was only $F_{ST}$ data for 22 bat species.
+For the subspecies analysis, all bat species in \textcite{luis2013comparison} were used (i.e. all species with at least one known virus species).
+This was to avoid using the very large number of bat species that have simply never been sampled for viruses.
+However, for the gene flow analysis, all bat species with suitable $F_{ST}$ estimates were used.
+As some bat species had suitable $F_{ST}$ estimates but were not present in \textcite{luis2013comparison}, some bat species with zero known virus species were included. 
+These bat species with no known viruses were included to make the greatest use of the $F_{ST}$ data available and because the number of species with no known virus species was not unduly large (\rinline{sum(fstFinal$virusSpecies == 0)} species).
+
+
+\subsubsection{Other explanatory variables}
+
+
+
+To control for study bias I collected the number of PubMed and Google Scholar citations for each bat species name including synonyms from ITIS \cite{itis} via the \emph{taxize} package \cite{chamberlain2013taxize}.
+The counts were scraped using the \emph{rvest} package \cite{rvest}.
+I log transformed these variables as they were strongly right skewed.
+I tested for correlation between these two proxies for study effort using phylogenetic least squares regression (pgls), using the best-supported phylogeny from \textcite{fritz2009geographical}, and likelihood ratio tests using the \emph{caper} package \cite{caper} (Figures~\ref{fig:treePlot} and \ref{fig:scholarvspubmedPlot}).
+The log number of citations on PubMed and Google scholar were highly correlated (pgls: $t$ = \rinline{studyEffortCor$coefficients['log(pubmedRefs + 1)', 't value']}, df = \rinline{studyEffortCor$df[2]}, $p < 10^{-5}$).
+As the correlation between citation counts is strong, I used Google Scholar reference counts only in subsequent analyses.
+%See the appendix for analyses run using PubMed citations.
+
+A number of other factors that have previously been found to be important were included as additional explanatory variables: body mass \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat, han2015infectious, bordes2008bat}, range size \cite{kamiya2014determines, turmelle2009correlates, maganga2014bat} and study effort \cite{turmelle2009correlates, gay2014parasite, maganga2014bat}.		
+These other factors were included to avoid spurious positive results occurring simply due to correlations between pathogen richness and a different, causal factor.
+Despite commonly being associated with pathogen richness \cite{arneberg2002host, kamiya2014determines, nunn2003comparative}, population density is not included in the analysis as there is very little data for bat densities.
+Measures of body mass were taken from Pantheria \cite{jones2009pantheria} and primary literature \cite{canals2005relative, arita1993rarity, lopez2014echolocation, orr2013does, lim2001bat, aldridge1987turning, ma2003dietary, owen2003home, henderson2008movements, heaney2012nyctalus, oleksy2015high, zhang2009recent}. 
+\emph{Pipistrellus pygmaeus} was assigned the same mass as \emph{P. pipistrellus} as they are indistinguishable by mass.
+Body mass measurements were log transformed as they were strongly right skewed.
+Distribution size was estimated by downloading range maps for all species from IUCN \cite{iucn} and were also log transformed due to right skew.
+
+After data cleaning there was data for \rinline{nrow(nSpecies)} bat species in \rinline{length(unique(nSpecies$Family))} families for the subspecies analysis.
+Due to the limited number of studies and the restrictive requirements imposed on study design, there was only data for \rinline{nrow(fstFinal)} bat species in \rinline{length(unique(fstFinal$Family))} families for the effective gene flow analysis.
+The raw data are included in Table \ref{A-rawData}.
+
+
+
+
+
+
+\subsection{Statistical analysis}
+
+Statistical analysis for both response variables --- number of subspecies and effective level of gene flow --- was conducted using an information theoretical approach \cite{burnham2002model}, specifically following \textcite{whittingham2005habitat, whittingham2006we}.
+All analysis were performed in R \cite{R}.
+I chose a credible set of models including all combinations of explanatory variables and a model with just an intercept.
+In the analysis using the number of subspecies response variable I also modelled the interaction study effort and number of subspecies by including their product.
+This interaction was included as I believed \emph{a priori} that this interaction may be present as subspecies in well studied species are more likely to be identified.
+The interaction was only included in models with both study effort and number of subspecies as individual terms.
+
+
+To control for phylogenetic non-independence I used the best-supported phylogeny from \textcite{fritz2009geographical} (shown in Figure~\ref{fig:treePlot}) which is the supertree from \textcite{bininda2007delayed} with names updated to match the taxonomy by \textcite{wilson2005mammal}.
+Phylogenetic manipulation was performed using the \emph{ape} package \cite{ape}.
+I also performed the analysis using the phylogeny from \textcite{jones2005bats} as this has some broad topological differences including the Rhinolophoidea being sister to the Pteropodidae rather than being related to the other insectivorous bats (Figure~\ref{fig:treePlot2}). 
+
+
+
+The importance of the phylogeny on each variable separately was examined by estimating the $\lambda$ parameter when regressing the variable against an intercept using the \emph{pgls} function in \emph{caper} \cite{caper}.
+The parameter $\lambda$ usually takes values between zero and one and \emph{pgls} constrains $\lambda$ within these bounds. 
+$\lambda = 0$ implies no autocorrelation while a trait evolving by Brownian motion along the tree would have $\lambda = 1$.
+I tested fitted $\lambda$ values against the null hypothesis of $\lambda = 0$ (no correlation between species) with log-likelihood ratio tests using caper \cite{caper}.
+
+I fitted phylogenetic regressions of all models in the credible set using the function \emph{gls} in the package \emph{nlme} \cite{nlme}.
+The explanatory variables were centred and scaled to allow direct comparison of the coefficients \cite{schielzeth2010simple}.
+For each regression model I simultaneously fitted the $\lambda$ parameter as this avoids misspecifying the model \cite{revell2010phylogenetic}.
+Unlike the \emph{pgls} function, \emph{gls} does not constrain $\lambda$ to be in the range $\lbrack 0, 1\rbrack$.
+$\lambda < 0$ indicates that residuals from the fitted model are distributed on the phylogeny more uniformly than expected by chance.
+$\kappa$ and $\delta$ parameters were constrained to one as they are more concerned with when along a branch evolution occurs than the importance of the phylogeny.
+Further, fitting multiple parameters makes interpretation difficult. 
+
+
+To establish the importance of variables I calculated the probability, $Pr$, that each variable would be in the best model amongst those examined (under the assumption that all models are \emph{a priori} equally likely).
+This value can more generally, and with fewer assumptions, be considered as simply the relative weight of evidence for each variable being in the best model amongst those examined.
+to determine the direction and strength of the effect of each variable the mean of its regression coefficient, $b$, in all models that contained that variable, was also calculated.
+In the subspecies analysis the inclusion of an interaction term between number of subspecies and study effort makes interpretation of this mean coefficient more difficult, particularly because the interaction term greatly affects the estimated value of $b$.
+To aid interpretation, the mean of $b$ was calculated for: \emph{i}) all models, \emph{ii}) only models with the interaction term and \emph{iii}) only models without the interaction term.
+Following \cite{whittingham2005habitat} I included a uniformly distributed random variable as a null variable as even unimportant variables can have Akaike weights notably greater than zero.
+The whole analysis was run \rinline{nBoots} times, resampling the random variable each time.
+I calculated AICc for each model.
+I calculated the average AICc, $\bar{\text{AICc}}$, by averaging AICc scores within models.
+$\Delta\text{AICc}$ was calculated as $\text{min}(\bar{\text{AICc}}) - \bar{\text{AICc}}$, not the mean of the individual $\Delta\text{AICc}$ scores, to guarantee that the best model has $\Delta\text{AICc} = 0$.
+From these $\Delta\text{AICc}$ values I calculated Akaike weights, $w$.
+This value can be interpreted as the probability that a model is the best model, given the data, amongst those examined.
+For each variable, the sum of the Akaike weights of models containing that variable are summed to give $Pr$.
+This value can be interpreted as the probability that the given variable is in the best model.
+
+
+
+
+
+
 %%begin.rcode boxplotCapt	
 		
 # Caption for the main boxplot of subspecies vs virus		
@@ -2020,7 +2031,6 @@ ggplot(nSpeciesCounts, aes(NumberOfSubspecies, virusSpecies, size = n)) +
 
 
 %%end.rcode
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2100,7 +2110,7 @@ As seen in Figure~\ref{fig:fstITPlots}A, study effort is very likely in the best
 Body mass and range size are also probably in the best model ($b = $ \rinline{varCoefMeans['beta.mass']}, $Pr = $ \rinline{varWeights['mass']} and $b = $ \rinline{varCoefMeans['beta.distrSize']}, $Pr = $ \rinline{varWeights['distrSize']} respectively) with positive relationships of slightly lower strength than the number of subspecies in models without an interaction term ($b = $ \rinline{nSpeciesCoefMean}, variance = \rinline{nSpeciesCoefVar}).	
 
 
-When using the phylogeny from \cite{jones2005bats} the results are broadly similar (Figure~\ref{f:A-itplots} and Tables~\ref{A-modelWeights2} and \ref{t:variables2}).
+When using the phylogeny from \textcite{jones2005bats} the results are broadly similar (Figure~\ref{f:A-itplots} and Tables~\ref{A-modelWeights2} and \ref{t:variables2}).
 Study effort, the number of subspecies and the interaction between the number of subspecies and study effort have strong support while range size and mass have intermediate support.
 However, mass, range size and the interaction between number of subspecies and study effort are have slightly weaker support than in the analysis using the phylogeny from \textcite{bininda2007delayed}.
 
@@ -2278,8 +2288,8 @@ This is corroborated by the small estimated size of $\lambda$ ($\lambda$ = \rinl
 This fact implies that other factors must control pathogen richness.
 It also implies that pathogens are not directly inherited down the phylogeny, although this is to be expected by the fast evolution of viruses.
 
-Of the explanatory variables, the number of subspecies has no phylogenetic autocorrelation ($\lambda$ = \rinline{sspLambda$param['lambda']}, $p > 0.999$), study effort and distribution size have weak but significant autocorrelation (Study Effort: $\lambda$ = \rinline{scholarLambda$param['lambda']}, $p$ = \rinline{scholarLambda$param.CI$lambda$bounds.p[1]}, Distribution size: $\lambda$ = \rinline{distrLambda$param['lambda']}, $p < 10^{-5}$) and body mass is strongly phylogenetic ($\lambda$ = \rinline{massLambda$param['lambda']}, $p < 10^{-5}$). 
-Across all multiple regression models the mean value of $\lambda$ was \rinline{mean(na.omit(allResults$lambda))} implying the residuals from the model are very weakly phylogenetic.
+Of the explanatory variables, the number of subspecies has no phylogenetic autocorrelation ($\lambda$ = \rinline{sspLambda$param['lambda']}, $p > 0.999$), study effort and distribution size had weak but significant autocorrelation (Study Effort: $\lambda$ = \rinline{scholarLambda$param['lambda']}, $p$ = \rinline{scholarLambda$param.CI$lambda$bounds.p[1]}, Distribution size: $\lambda$ = \rinline{distrLambda$param['lambda']}, $p < 10^{-5}$) and body mass was strongly phylogenetic ($\lambda$ = \rinline{massLambda$param['lambda']}, $p < 10^{-5}$). 
+Across all multiple regression models the mean value of $\lambda$ was \rinline{mean(na.omit(allResults$lambda))} which implied that the residuals from the models were very weakly phylogenetic.
 A small number of models (\rinline{mean(na.omit(allResults$lambda < 0))*100}\%)  had negatively phylogenetically distributed residuals.
 
 
@@ -2324,7 +2334,7 @@ Random &  \rinline{sprintf('%.2f', varWeights['rand'])} &  \rinline{varCoefMeans
 
 There was no phylogenetic signal in the number of virus species ($\lambda$ = \rinline{virusFstLambda$param['lambda']}, $p > 0.999$).
 Gene flow also had no phylogenetic autocorrelation ($\lambda$ = \rinline{nmFstLambda$param['lambda']},  $p > 0.999$).
-Due to the low sample size, significance tests are unlikely to have much power.
+Due to the limited sample size, significance tests are unlikely to have much power.
 There is little evidence of phylogenetic autocorrelation in study effort ($\lambda$ = \rinline{scholarFstLambda$param['lambda']}, $p$ = \rinline{scholarFstLambda$param.CI$lambda$bounds.p[1]}).
 However, there is some weak evidence of phylogenetic signal in range size as the estimated size of $\lambda$ is large while $p$ is also large, potentially due to a lack of statistical power ($\lambda$ = \rinline{distrFstLambda$param['lambda']}, $p$ = \rinline{distrFstLambda$param.CI$lambda$bounds.p[1]}).
 Body mass showed significant phylogenetic autocorrelation ($\lambda$ = \rinline{massFstLambda$param['lambda']}, $p$ = \rinline{massFstLambda$param.CI$lambdaA$bounds.p[1]}).
@@ -2336,7 +2346,7 @@ Across all multiple regression models the mean value of $\lambda$ is \rinline{me
 Due to the small sample size this was probably due to a small number of data points with large residuals being distant on the tree.
 
 
-When using the phylogeny from \cite{jones2005bats} the analysis became very unstable (Figure~\ref{f:A-itplots}).
+When using the phylogeny from \textcite{jones2005bats} the analysis became very unstable (Figure~\ref{f:A-itplots}).
 The support for each variable changed dramatically with each resampling of the random variable.
 On average however, only the model containing mass and range size is supported (Tables~\ref{A-fstModelWeights} and \ref{t:variables2}).
 
@@ -2400,7 +2410,8 @@ The number of subspecies is more commonly used as a variable in comparative anal
 % Range size is very marginal
 
 Of the other explanatory variables considered, study effort and body mass were selected as being in the best model while there was marginal evidence for range size being associated with viral richness.
-Study effort positively predicted pathogen richness confirming the expectation that additional study of a bat species yields more known viruses infecting that species and highlighting again that this bias cannot be ignored in studies using known pathogen richness as a proxy for total pathogen richness \cite{nunn2003comparative, gregory1990parasites}.
+Study effort positively predicted pathogen richness, confirming the expectation that additional study of a bat species yields more known viruses infecting that host species.
+Therefore, this bias cannot be ignored in studies using known pathogen richness as a proxy for total pathogen richness \cite{nunn2003comparative, gregory1990parasites}.
 While body mass is selected as being in the best model in both the number of subspecies analysis and the effective gene flow analyis the estimated coefficients have opposite signs in the two analyses.
 In the number of subspecies analysis, body mass has a positive relationship with pathogen richness which is in agreement with many of studies \cite{kamiya2014determines, arneberg2002host, poulin1995phylogeny, bordes2008bat}.
 However, in the effective gene flow analysis, body mass has a negative estimated coefficient.
@@ -2449,7 +2460,7 @@ While the model averaging approach has given a negative model averaged coefficie
 Furthermore body mass has a negative average coefficient.
 This is in contrast to the number of subspecies analysis, many studies in the literature \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat} and the single-predictor model.
 It is not easy to interpret these contradictions but it is clear that the results from the gene flow analysis alone should not be considered strong evidence for a relationship between pathogen richness and population structure.
-These contradiction also reiterates the need to use large data sets where possible and use multiple measures of population structure to promote robust conclusions.
+These contradictions also reiterate the need to use large data sets where possible and the need to use multiple measures of population structure to promote robust conclusions.
 
 \subsection{Conclusions}
 
@@ -2687,7 +2698,7 @@ ITPlot2 <- ggplot(sepVarWeights2, aes(x = variable, y = estimate, colour = col, 
 %%end.rcode
 
 
-%%begin.rcode fstITPlots2, fig.show = extraFigs, fig.cap = "Akaike variable weights for both analyses using the phylogeny from \\cite{jones2005bats}. The probability that each variable is in the best model (amongst the models test) is shown, with the boxplots showing the variation amongst the models over 50 resamplings of the uniformly random ``null'' variable. The three bars of the boxplot show the median values and upper and lower quartiles of the data, vertical lines show the range and points display outliers. The purple ``Random'' box is the uniformly random variable.", fig.height = 2.5, fig.scap = 'Akaike variable weights', out.width = '\\textwidth', out.extra = 'trim = 0 1cm 0 0'
+%%begin.rcode fstITPlots2, fig.show = extraFigs, fig.cap = "Akaike variable weights for both analyses using the phylogeny from \\textcite{jones2005bats}. The probability that each variable is in the best model (amongst the models test) is shown, with the boxplots showing the variation amongst the models over 50 resamplings of the uniformly random ``null'' variable. The three bars of the boxplot show the median values and upper and lower quartiles of the data, vertical lines show the range and points display outliers. The purple ``Random'' box is the uniformly random variable.", fig.height = 2.5, fig.scap = 'Akaike variable weights', out.width = '\\textwidth', out.extra = 'trim = 0 1cm 0 0'
 
 
 fstIT2 <- ggplot(fstSepVarWeights2, aes(x = variable, y = estimate, colour = col, fill = col)) +
