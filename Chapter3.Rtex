@@ -1770,6 +1770,74 @@ fstMassStudyEffort <- summary(pgls(log(scholarRefs) ~ log(mass), data = compFst,
 
 
 
+
+
+
+\subsubsection{Population structure data}
+
+I used two measures of population structure: the number of subspecies and the effective level of gene flow.
+The number of subspecies was counted using the Wilson and Reeder taxonomy \cite{wilson2005mammal}.
+The effective level of gene flow was calculated from estimates of $F_{ST}$ collated from the literature.
+The studies were from a wide range of spatial scales, from local ($\sim\SI{10}{\kilo\metre}$) to continental.
+As $F_{ST}$ often increases with spatial scale \cite{burland1999population, hulva2010mechanisms, o2015genetic, vonhof2015range} I controlled for this by only using data from studies where a large proportion of the species range was studied.
+I used the ratio of the furthest distance between $F_{ST}$ samples (taken from the paper or measured with \url{http://www.distancefromto.net/} if not stated in the paper) to the length of the IUCN species range \cite{iucn} and only used studies if this ratio was greater than \rinline{rangeUseable}.
+This is an arbitrary value that was a compromise between retaining a reasonable number of data points and controlling for the bias in spatial scale.
+I only used global $F_{ST}$ estimates as the mean of pairwise $F_{ST}$ values is not necessarily equal to the global $F_{ST}$ value.
+I converted all $F_{ST}$ values to effective migration rates using $M = (1-F_{ST})/4F_{ST}$.
+This transforms the data from being bound by $(0, 1)$ to being in the range $\lbrack 0, \infty)$ and is easier to interpret. 
+These two measures of population structure were analysed separately because the number of subspecies had \rinline{nrow(nSpecies)} data points but there was only $F_{ST}$ data for 22 bat species.
+For the subspecies analysis, all bat species in \textcite{luis2013comparison} were used (i.e. all species with at least one known virus species).
+This was to avoid using the very large number of bat species that have simply never been sampled for viruses.
+However, for the gene flow analysis, all bat species with suitable $F_{ST}$ estimates were used.
+As some bat species had suitable $F_{ST}$ estimates but were not present in \textcite{luis2013comparison}, some bat species with zero known virus species were included. 
+These bat species with no known viruses were included to make the greatest use of the $F_{ST}$ data available and because the number of species with no known virus species was not unduly large (\rinline{sum(fstFinal$virusSpecies == 0)} species).
+
+
+\subsubsection{Other explanatory variables}
+
+
+
+To control for study bias I collected the number of PubMed and Google Scholar citations for each bat species name including synonyms from ITIS \cite{itis} via the \emph{taxize} package \cite{chamberlain2013taxize}.
+The counts were scraped using the \emph{rvest} package \cite{rvest}.
+I log transformed these variables as they were strongly right skewed.
+I tested for correlation between these two proxies for study effort using phylogenetic least squares regression (pgls), using the best-supported phylogeny from \textcite{fritz2009geographical}, and likelihood ratio tests using the \emph{caper} package \cite{caper} (Figures~\ref{fig:treePlot} and \ref{fig:scholarvspubmedPlot}).
+The log number of citations on PubMed and Google scholar were highly correlated (pgls: $t$ = \rinline{studyEffortCor$coefficients['log(pubmedRefs + 1)', 't value']}, df = \rinline{studyEffortCor$df[2]}, $p < 10^{-5}$).
+As the correlation between citation counts is strong, I used Google Scholar reference counts only in subsequent analyses.
+%See the appendix for analyses run using PubMed citations.
+
+A number of other factors that have previously been found to be important were included as additional explanatory variables: body mass \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat, han2015infectious, bordes2008bat}, range size \cite{kamiya2014determines, turmelle2009correlates, maganga2014bat} and study effort \cite{turmelle2009correlates, gay2014parasite, maganga2014bat}.		
+These other factors were included to avoid spurious positive results occurring simply due to correlations between pathogen richness and a different, causal factor.
+Despite commonly being associated with pathogen richness \cite{arneberg2002host, kamiya2014determines, nunn2003comparative}, population density is not included in the analysis as there is very little data for bat densities.
+Measures of body mass were taken from Pantheria \cite{jones2009pantheria} and primary literature \cite{canals2005relative, arita1993rarity, lopez2014echolocation, orr2013does, lim2001bat, aldridge1987turning, ma2003dietary, owen2003home, henderson2008movements, heaney2012nyctalus, oleksy2015high, zhang2009recent}. 
+\emph{Pipistrellus pygmaeus} was assigned the same mass as \emph{P. pipistrellus} as they are indistinguishable by mass.
+Body mass measurements were log transformed as they were strongly right skewed.
+Distribution size was estimated by downloading range maps for all species from IUCN \cite{iucn} and were also log transformed due to right skew.
+
+After data cleaning there was data for \rinline{nrow(nSpecies)} bat species in \rinline{length(unique(nSpecies$Family))} families for the subspecies analysis.
+Due to the limited number of studies and the restrictive requirements imposed on study design, there was only data for \rinline{nrow(fstFinal)} bat species in \rinline{length(unique(fstFinal$Family))} families for the effective gene flow analysis.
+The raw data are included in Table \ref{A-rawData}.
+
+
+
+
+
+\subsection{Statistical analysis}
+
+Statistical analysis for both response variables --- number of subspecies and effective level of gene flow --- was conducted using an information theoretical approach \cite{burnham2002model}, specifically following \textcite{whittingham2005habitat, whittingham2006we}.
+All analysis were performed in R \cite{R}.
+I chose a credible set of models including all combinations of explanatory variables and a model with just an intercept.
+In the analysis using the number of subspecies response variable I also modelled the interaction study effort and number of subspecies by including their product.
+This interaction was included as I believed \emph{a priori} that this interaction may be present as subspecies in well studied species are more likely to be identified.
+The interaction was only included in models with both study effort and number of subspecies as individual terms.
+
+
+To control for phylogenetic non-independence I used the best-supported phylogeny from \textcite{fritz2009geographical} (shown in Figure~\ref{fig:treePlot}) which is the supertree from \textcite{bininda2007delayed} with names updated to match the taxonomy by \textcite{wilson2005mammal}.
+Phylogenetic manipulation was performed using the \emph{ape} package \cite{ape}.
+I also performed the analysis using the phylogeny from \textcite{jones2005bats} as this has some broad topological differences including the Rhinolophoidea being sister to the Pteropodidae rather than being related to the other insectivorous bats (Figure~\ref{fig:treePlot2}). 
+
+
+
+
 %%begin.rcode treeCapt
 
 treeCapt <- paste0('
@@ -1853,74 +1921,6 @@ p %<+% combdf +
 #  geom_bar(data = scale2, aes(x = x, y = y, size = w), alpha = 0.3, stat = 'identity', position = 'identity')
 
 %%end.rcode
-
-
-
-
-
-
-\subsubsection{Population structure data}
-
-I used two measures of population structure: the number of subspecies and the effective level of gene flow.
-The number of subspecies was counted using the Wilson and Reeder taxonomy \cite{wilson2005mammal}.
-The effective level of gene flow was calculated from estimates of $F_{ST}$ collated from the literature.
-The studies were from a wide range of spatial scales, from local ($\sim\SI{10}{\kilo\metre}$) to continental.
-As $F_{ST}$ often increases with spatial scale \cite{burland1999population, hulva2010mechanisms, o2015genetic, vonhof2015range} I controlled for this by only using data from studies where a large proportion of the species range was studied.
-I used the ratio of the furthest distance between $F_{ST}$ samples (taken from the paper or measured with \url{http://www.distancefromto.net/} if not stated in the paper) to the length of the IUCN species range \cite{iucn} and only used studies if this ratio was greater than \rinline{rangeUseable}.
-This is an arbitrary value that was a compromise between retaining a reasonable number of data points and controlling for the bias in spatial scale.
-I only used global $F_{ST}$ estimates as the mean of pairwise $F_{ST}$ values is not necessarily equal to the global $F_{ST}$ value.
-I converted all $F_{ST}$ values to effective migration rates using $M = (1-F_{ST})/4F_{ST}$.
-This transforms the data from being bound by $(0, 1)$ to being in the range $\lbrack 0, \infty)$ and is easier to interpret. 
-These two measures of population structure were analysed separately because the number of subspecies had \rinline{nrow(nSpecies)} data points but there was only $F_{ST}$ data for 22 bat species.
-For the subspecies analysis, all bat species in \textcite{luis2013comparison} were used (i.e. all species with at least one known virus species).
-This was to avoid using the very large number of bat species that have simply never been sampled for viruses.
-However, for the gene flow analysis, all bat species with suitable $F_{ST}$ estimates were used.
-As some bat species had suitable $F_{ST}$ estimates but were not present in \textcite{luis2013comparison}, some bat species with zero known virus species were included. 
-These bat species with no known viruses were included to make the greatest use of the $F_{ST}$ data available and because the number of species with no known virus species was not unduly large (\rinline{sum(fstFinal$virusSpecies == 0)} species).
-
-
-\subsubsection{Other explanatory variables}
-
-
-
-To control for study bias I collected the number of PubMed and Google Scholar citations for each bat species name including synonyms from ITIS \cite{itis} via the \emph{taxize} package \cite{chamberlain2013taxize}.
-The counts were scraped using the \emph{rvest} package \cite{rvest}.
-I log transformed these variables as they were strongly right skewed.
-I tested for correlation between these two proxies for study effort using phylogenetic least squares regression (pgls), using the best-supported phylogeny from \textcite{fritz2009geographical}, and likelihood ratio tests using the \emph{caper} package \cite{caper} (Figures~\ref{fig:treePlot} and \ref{fig:scholarvspubmedPlot}).
-The log number of citations on PubMed and Google scholar were highly correlated (pgls: $t$ = \rinline{studyEffortCor$coefficients['log(pubmedRefs + 1)', 't value']}, df = \rinline{studyEffortCor$df[2]}, $p < 10^{-5}$).
-As the correlation between citation counts is strong, I used Google Scholar reference counts only in subsequent analyses.
-%See the appendix for analyses run using PubMed citations.
-
-A number of other factors that have previously been found to be important were included as additional explanatory variables: body mass \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat, han2015infectious, bordes2008bat}, range size \cite{kamiya2014determines, turmelle2009correlates, maganga2014bat} and study effort \cite{turmelle2009correlates, gay2014parasite, maganga2014bat}.		
-These other factors were included to avoid spurious positive results occurring simply due to correlations between pathogen richness and a different, causal factor.
-Despite commonly being associated with pathogen richness \cite{arneberg2002host, kamiya2014determines, nunn2003comparative}, population density is not included in the analysis as there is very little data for bat densities.
-Measures of body mass were taken from Pantheria \cite{jones2009pantheria} and primary literature \cite{canals2005relative, arita1993rarity, lopez2014echolocation, orr2013does, lim2001bat, aldridge1987turning, ma2003dietary, owen2003home, henderson2008movements, heaney2012nyctalus, oleksy2015high, zhang2009recent}. 
-\emph{Pipistrellus pygmaeus} was assigned the same mass as \emph{P. pipistrellus} as they are indistinguishable by mass.
-Body mass measurements were log transformed as they were strongly right skewed.
-Distribution size was estimated by downloading range maps for all species from IUCN \cite{iucn} and were also log transformed due to right skew.
-
-After data cleaning there was data for \rinline{nrow(nSpecies)} bat species in \rinline{length(unique(nSpecies$Family))} families for the subspecies analysis.
-Due to the limited number of studies and the restrictive requirements imposed on study design, there was only data for \rinline{nrow(fstFinal)} bat species in \rinline{length(unique(fstFinal$Family))} families for the effective gene flow analysis.
-The raw data are included in Table \ref{A-rawData}.
-
-
-
-
-
-
-\subsection{Statistical analysis}
-
-Statistical analysis for both response variables --- number of subspecies and effective level of gene flow --- was conducted using an information theoretical approach \cite{burnham2002model}, specifically following \textcite{whittingham2005habitat, whittingham2006we}.
-All analysis were performed in R \cite{R}.
-I chose a credible set of models including all combinations of explanatory variables and a model with just an intercept.
-In the analysis using the number of subspecies response variable I also modelled the interaction study effort and number of subspecies by including their product.
-This interaction was included as I believed \emph{a priori} that this interaction may be present as subspecies in well studied species are more likely to be identified.
-The interaction was only included in models with both study effort and number of subspecies as individual terms.
-
-
-To control for phylogenetic non-independence I used the best-supported phylogeny from \textcite{fritz2009geographical} (shown in Figure~\ref{fig:treePlot}) which is the supertree from \textcite{bininda2007delayed} with names updated to match the taxonomy by \textcite{wilson2005mammal}.
-Phylogenetic manipulation was performed using the \emph{ape} package \cite{ape}.
-I also performed the analysis using the phylogeny from \textcite{jones2005bats} as this has some broad topological differences including the Rhinolophoidea being sister to the Pteropodidae rather than being related to the other insectivorous bats (Figure~\ref{fig:treePlot2}). 
 
 
 
