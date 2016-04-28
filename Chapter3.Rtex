@@ -2353,8 +2353,8 @@ On average however, only the model containing mass and range size is supported (
 % I hope this study is more robust.
 In this study I have used known viral richness in bats as a case study for the more general hypothesis that population structure promotes pathogen richness.
 In both analyses I found that a positive effect of increasing population structure (a positive effect of the number of subspecies and a negative effect of gene flow) is likely to be in the best model for explaining viral richness.
-Only the effective gene flow analysis, when performed using the phylogeny from \textcite{jones2005bats} does not support this hypothesis.
-Therefore my study supports the hypothesis that population structure promotes pathogen richness.
+Only the effective gene flow analysis, when performed using the phylogeny from \textcite{jones2005bats}, does not support this hypothesis.
+Therefore my study supports the broader hypothesis that population structure promotes pathogen richness.
 Furthermore it contradicts the assumption that factors that promote high $R_0$ will automatically promote high pathogen richness \cite{nunn2003comparative, morand2000wormy}.
 This relationship implies that direct or indirect competitive mechanisms are acting such that population structure is needed in order to allow escape from competition.
 
@@ -2364,14 +2364,14 @@ This relationship implies that direct or indirect competitive mechanisms are act
 This analysis is in agreement with two studies that have specifically tested this same hypothesis \cite{turmelle2009correlates, maganga2014bat}.
 These two studies used $F_{ST}$ \cite{turmelle2009correlates} and fragmentation of species distributions \cite{maganga2014bat}.
 Combined with the analysis here using the number of subspecies, three different measures of population structure have been shown to correlate with pathogen richness in bats.
-By analysing data on two measures of population structure, and using larger data sets than previous studies, it is hoped that any conclusions may be more robust than previous studies \cite{gay2014parasite, turmelle2009correlates, maganga2014bat}.
+By analysing data on two measures of population structure, and using larger data sets than previous studies, it is hoped that the results here may be more robust than previous studies \cite{gay2014parasite, turmelle2009correlates, maganga2014bat}.
 
 
 
 % The pattern is reversed in other lit
-In contrast, one study using fragmentation of species distribution \cite{gay2014parasite} the opposite relationship and one study using colony size \cite{bordes2008bat} has found no relationship between increased population structure and pathogen richness.
-However, the study by \text{gay2014parasites} uses relatively few species while the study by \textcite{bordes2008bat} uses group size which is not a direct measurement of population structure.
-The overal weight of evidence suggests that poplulation structure and pathogen richness are associated.
+In contrast, one study using fragmentation of species distribution \cite{gay2014parasite} found the opposite relationship and one study using colony size \cite{bordes2008bat} has found no relationship between increased population structure and pathogen richness.
+However, the study by \textcite{gay2014parasite} uses relatively few species while the study by \textcite{bordes2008bat} uses group size which is not a direct measurement of population structure.
+The overall weight of evidence suggests that poplulation structure and pathogen richness are associated.
 
 
 
@@ -2385,19 +2385,22 @@ There was strong support for a positive interaction between the number of subspe
 The support for this interaction implies that population structure has a stronger relationship with known pathogen richness in the presence of study effort.
 One interpretation of this is that population structure alone does not predict high known viral richness; reasonable study effort is also needed to turn the expected high viral richness into known and recorded viral richness.
 Biases in identification of subspecies has been noted before \cite{gippoliti2007problem}.
-The number of subspecies is more commonly used as a variable in comparative analyses of birds but the fact that it is associated with study effort is often not taken into account (e.g., \textcite{phillimore2007biogeographical, phillimore2007biogeographical}).
+The number of subspecies is more commonly used as a variable in comparative analyses of birds but the fact that it is associated with study effort is often not taken into account; for example, in \textcite{phillimore2007biogeographical} and \textcite{belliure2000dispersal}.
 
 \tmpsection{Other explanatory vars}
-
-Of the other explanatory variables considered, study effort and body mass were selected as being in the best model while there was marginal evidence for range size being associated with viral richness.
-Study effort positively predicted pathogen richness confirming the expectation that additional study of a bat species yields more known viruses infecting that species and highlighting again that this bias cannot be ignored in studies using known pathogen richness as a proxy for total pathogen richness \cite{nunn2003comparative, gregory1990parasites}.
-
-
 
 
 % study effort is important. Never forget.
 % body mass behaves wierdly.
 % Range size is very marginal
+
+Of the other explanatory variables considered, study effort and body mass were selected as being in the best model while there was marginal evidence for range size being associated with viral richness.
+Study effort positively predicted pathogen richness confirming the expectation that additional study of a bat species yields more known viruses infecting that species and highlighting again that this bias cannot be ignored in studies using known pathogen richness as a proxy for total pathogen richness \cite{nunn2003comparative, gregory1990parasites}.
+While body mass is selected as being in the best model in both the number of subspecies analysis and the effective gene flow analyis the estimated coefficients have opposite signs in the two analyses.
+In the number of subspecies analysis, body mass has a positive relationship with pathogen richness which is in agreement with many of studies \cite{kamiya2014determines, arneberg2002host, poulin1995phylogeny, bordes2008bat}.
+However, in the effective gene flow analysis, body mass has a negative estimated coefficient.
+This is in contrast to the number of subspecies analysis, many studies in the literature \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat} and the single-predictor model.
+This result is probably due to correlations with other variables in the analysis and exacerbated by the small sample size in this analysis.
 
 
 \tmpsection{phylogeny}
@@ -2406,30 +2409,12 @@ Study effort positively predicted pathogen richness confirming the expectation t
 
 
 
-
-
-
-% Using bats and viruses as a case study, my study suggests that there is an association between pathogen richness 
-% 
-%
-
-%
-%
-%
-%
-%
-%
-
-
-
-\tmpsection{Broader context of results}
-
-
-
 %Another interpretation is that having few subspecies does not predict low viral richness unless the species has been adequately studied as otherwise the low number of subspecies is probably due to a lack of study rather than an accurate measurement.
 
 %Another potential mechanism by which structure might be promoting increased richness is by slowing the spread of highly virulent viruses such as rabies and preventing them from having short, intense epidemics followed by extinction.
 %This mechanism has interesting parallel to metapopulation theory in ecology in which a metapopulation structure can allow persistence of species that would otherwise go extinct.
+
+\subsection{Broader implications}
 
 The relationship between population structure and pathogen richness suggests that population structure has at least some potential as being predictive of high pathogen richness and therefore of a species' likelihood of being a reservoir of a potentially zoonotic pathogen. 
 However given that it is difficult to measure population structure and given that the relationship appears to be weak at best, this trait on its own is unlikely to be useful in predicting zoonotic risk.
