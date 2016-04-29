@@ -78,8 +78,8 @@ library(showtext)
 \tmpsection{One or two sentences providing a basic introduction to the field}
 % comprehensible to a scientist in any discipline.
 \lettr{A}n increasingly large fraction of emerging diseases come from wild animals and these diseases have a huge impact on human health.
-The chance that a new disease will come from any particularly host species increases with the diversity of pathogens in that species.
-However, the factors that control pathogen diversity in wild populations are still poorly understood.
+The chance that a new disease will come from any particularly host species increases with the number of pathogen species in that host species.
+However, the factors that control pathogen richness in wild populations are still poorly understood.
 \tmpsection{Two to three sentences of more detailed background}
 Population density is thought to increase pathogen richness while theory suggests that population structure and population size may also play a role.
 However, these factors are intrinsically linked --- reducing density reduces contacts between individuals and directly reduces population size.
@@ -89,7 +89,7 @@ As these factors are all completely interdependent, it is very difficult to stud
 % being addressed by this particular study.
 \tmpsection{One sentence summarising the main result}
 %  (with the words “here we show” or their equivalent).
-It is unknown whether it is specifically density that controls pathogen diversity or whether density merely correlates with other causal factors such as population structure, group size or population size.
+It is unknown whether it is specifically density that controls pathogen richness or whether density merely correlates with other causal factors such as population structure, group size or population size.
 Here I use metapopulation SIR models to test whether it is density \emph{per se} that increases the ability of a newly evolved pathogen to invade and persist in a population as opposed to colony size, population size or population structure.
 \tmpsection{Two or three sentences explaining what the main result reveals in direct comparison to what was thought to be the case previously}
 % or how the main result adds to previous knowledge
@@ -122,7 +122,7 @@ It also highlights the necessity for studying the mechanisms underlying pathogen
 % comprehensible to a scientist in any discipline.
 
 Zoonotic diseases are an increasingly important source of human infectious diseases \cite{jones2008global, woolhouse2006host, taylor2001risk}.
-The diversity of pathogens in wild animal populations is huge and largely unknown \cite{poulin2014parasite}.
+The number of pathogen species occurring in wild animal populations is huge and largely unknown \cite{poulin2014parasite}.
 Furthermore, the factors that allow large numbers of pathogen species to coexist in a host (e.g., \textcite{anthony2013strategy}) are still unclear.
 It is well known that population level factors such as population density, range size and population structure have an important role in controlling pathogen community dynamics \cite{anderson1979population, may1979population, colizza2007invasion, may2001infection}.
 Global change is strongly perturbing wild animal populations \cite{thomas2004extinction, craigie2010large}, but without clear mechanistic models of how these populations maintain pathogen species richness, we can not predict how pathogen communities, and the risks of zoonotic outbreaks, will change in the coming decades.
@@ -1145,7 +1145,7 @@ This study suggests that it is in fact population size that is important (in the
 Therefore, the density measures in these comparative studies are more likely to be proxies for population size than the true causal factor.
 Similarly, this study suggests that host range size does not promote pathogen richness by the mechanism studied here, yet a number of studies have found evidence of this relationship \cite{kamiya2014determines, nunn2003comparative}.
 This suggests that either the relationship found in comparative studies is in fact due to a correlation with another factor, or that mechanisms other than rate of invasion of new pathogens are important.
-Range size has been suggested to affect pathogen richness by a number of mechanisms such as increasing the diversity of sympatric species and these other mechanisms should be specifically tested.
+Range size has been suggested to affect pathogen richness by a number of mechanisms such as increasing the number of sympatric species and these other mechanisms should be specifically tested.
 
 The studies that have tested specifically the affect of group size have in fact found both positive \cite{vitone2004body} and negative associations \cite{gay2014parasite} or no relationship \cite{ezenwa2006host}.
 Meta-analyses suggest that the relationship between social group size and pathogen richness is weak \cite{rifkin2012animals}.

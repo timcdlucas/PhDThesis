@@ -69,18 +69,18 @@ library(cowplot)
 
 \tmpsection{One or two sentences providing a basic introduction to the field}
 % comprehensible to a scientist in any discipline.
-\lettr{A}n increasingly large fraction of emerging diseases come from wild animals and these diseases have a huge impact on human health, healthcare systems and economic development.
-The chance that a new zoonosis will come from any particular wild host species increases with the diversity of pathogens in that species.
-However, the factors that control pathogen diversity of wild animal species are still unclear.
+\lettr{A}n increasingly large fraction of human emerging diseases come from animals and these diseases have a huge impact on human health, healthcare systems and economic development.
+The chance that a new zoonosis will come from any particular wild host species increases with the number of pathogen species occurring in that host species.
+However, the factors that control pathogen richness of wild animal species are still unclear.
 %
 %
 \tmpsection{Two to three sentences of more detailed background}
 % comprehensible to scientists in related disciplines.
 % Add mechanistic vs empirical
-Host species traits such as population density, longevity, body size and population structure have been shown to correlate with pathogen diversity.
-Typically it is assumed that well-connected, unstructured populations promote the invasion of new pathogens and therefore increase pathogen diversity. % Where or how to define well-connected?
-However, this assumption is largely untested; in particular our mechanistic understanding of how population structure affects pathogen diversity, in the presence of inter-pathogen competition, is poor.
-Greater understanding is needed to clarify by which exact mechanisms population structure affects pathogen diversity. 
+Comparative, phylogenetic approaches have shown that host species traits such as population density, longevity, body size and population structure correlate with pathogen richness.
+Typically it is assumed that well-connected, unstructured populations promote the invasion of new pathogens and therefore increase pathogen richness. % Where or how to define well-connected?
+However, this assumption is largely untested; in particular our mechanistic understanding of how population structure affects pathogen richness, in the presence of inter-pathogen competition, is poor.
+Greater understanding is needed to clarify by which exact mechanisms population structure affects pathogen richness. 
 %Mechanistic models are also likely to be more robust to transferring understanding between taxa and predicting changes. % !!! Not great.
 %However, if competition is strong endemic pathogens will dominate and prevent new diseases from invading and spreading.
 %In a structured population, stochastic effects could create areas of low prevalence of the endemic disease, allowing new diseases to invade.
@@ -89,7 +89,7 @@ Greater understanding is needed to clarify by which exact mechanisms population 
 \tmpsection{One sentence clearly stating the general problem (the gap)}
 % being addressed by this particular study.
 It is unknown whether population structure allows invading pathogens to escape from competition by stochastically creating areas of low pathogen prevalence.
-I hypothesised that low dispersal rates and a low number of connections in a metapopulation network will allow invading pathogens to establish more readily, thus increasing pathogen diversity. 
+I hypothesised that low dispersal rates and a low number of connections in a metapopulation network will allow invading pathogens to establish more readily, thus increasing pathogen richness. 
 I tested these hypotheses using population networks parameterised to mimic wild bat populations as bats have highly varied social structures and have recently been implicated in a number of high profile diseases such as Ebola, SARS, Hendra and Nipah.
 %
 %
@@ -98,16 +98,16 @@ I tested these hypotheses using population networks parameterised to mimic wild 
 I found that neither population connectedness nor dispersal rate affect the probability that a new pathogen will invade into a population.
 %\paragraph{Two or three sentences explaining what the main result reveals in direct comparison to what was thought to be the case previously}
 % or how the main result adds to previous knowledge
-The assumption that factors causing high $R_0$ allow new pathogens to invade and therefore increase pathogen diversity is not supported.
+The assumption that factors causing high $R_0$ allow new pathogens to invade and therefore increase pathogen richness is not supported.
 Instead I found that changes in population structure do not affect the probability of invasion of a new pathogen.
 This is in contrast to much theoretical literature which predicts that increased population structure may promote coexistence of pathogens.
 It is also in contrast to the common assumption that more connected populations increase $R_0$ and therefore increase pathogen richness.
 %
 %
 \tmpsection{One or two sentences to put the results into a more general context.}
-This result implies that population structure does not control pathogen diversity.
+This result implies that population structure does not control pathogen richness.
 Instead it seems that local dynamics, that affect the short term branching process at the very start of the epidemic control the chance of pathogen invasion.
-This also implies that population structure is not a useful proxy for pathogen diversity with respect to zoonotic disease surveillance (in bats for example).
+This also implies that population structure is not a useful proxy for pathogen richness with respect to zoonotic disease surveillance (in bats for example).
 
 
 %\tmpsection{Two or three sentences to provide a broader perspective, }
@@ -133,12 +133,12 @@ This also implies that population structure is not a useful proxy for pathogen d
 % comprehensible to a scientist in any discipline.
 
 
-\tmpsection{Why is pathogen diversity important?}
+\tmpsection{Why is pathogen richness? important?}
 Over 50\% of emerging infectious diseases have an animal source \cite{jones2008global, smith2014global}.
 Zoonotic pathogens can be highly virulent \cite{luby2009recurrent, lefebvre2014case} and potentially have huge public health impacts \cite{granich2015trends}, economic costs \cite{knobler2004learning} and slow down international development \cite{ebolaWorldbank}.
 Therefore understanding and predicting changes in the process of zoonotic spillover is a global health priority \cite{taylor2001risk}.
 The number of pathogen species hosted by a wild animal species affects the chance that a disease from that species will infect humans.
-However, the factors that control the diversity of pathogens in a wild animal population are still unclear \cite{metcalf2015five}; in particular our mechanistic understanding of how population processes inhibit or promote pathogen richness is poor.
+However, the factors that control the number of pathogen species in a wild animal population are still unclear \cite{metcalf2015five}; in particular our mechanistic understanding of how population processes inhibit or promote pathogen richness is poor.
 
 
 
@@ -148,7 +148,7 @@ However, the factors that control the diversity of pathogens in a wild animal po
 % comprehensible to scientists in related disciplines.
 
 
-\tmpsection{We know some factors that correlate with pathogen diversity}
+\tmpsection{We know some factors that correlate with pathogen richness}
 %population density, longevity, body size and population structure
 
 A number of host traits have been shown to correlate with pathogen richness including body size \cite{kamiya2014determines, arneberg2002host}, population density \cite{nunn2003comparative, arneberg2002host} and range size \cite{bordes2011impact, kamiya2014determines}.
@@ -162,7 +162,7 @@ However, they did not account for the widely different spatial scales found in p
 Empirical, correlative studies are often contradictory due to small sample sizes, noisy data and because empirical relationships often do not extrapolate well to other taxa (though see \textcite{kamiya2014determines} for a meta-analysis).
 The correlation between many traits (e.g., \textcite{nunn2015infectious}) also makes it hard to clearly distinguish which factors are important.
 Furthermore, knowing \emph{which} factors correlate with pathogen richness does not tell us \emph{how} they control richness. 
-Mechanisms by which a trait could increase pathogen diversity include promoting the evolution of new strains within a species \cite{buckee2004effects}, reduction of the rate of pathogen extinction \cite{rand1995invasion} and an increased probability of pathogen invasion from other host species \cite{nunes2006localized}.
+Mechanisms by which a trait could increase pathogen richness include promoting the evolution of new strains within a species \cite{buckee2004effects}, reduction of the rate of pathogen extinction \cite{rand1995invasion} and an increased probability of pathogen invasion from other host species \cite{nunes2006localized}.
 These separate mechanisms have not been examined and it is difficult to see how they could be approached through comparative methods.
 We need explicit mechanistic models in order to tease apart these factors.
 Furthermore, a solid mechanistic understanding of these processes will allow us to predict how wild populations will respond to increased human pressure and global change.
@@ -186,10 +186,10 @@ This area is related to the study of pathogen richness in that they indicate tha
 However, the results for short term epidemic competition do not directly transfer to the study of long term disease persistence.
 
 
-One commonly taken assumption in the ecological literature is that factors that promote high disease spread automatically promotes high diversity \cite{nunn2003comparative, morand2000wormy, poulin2014parasite, poulin2000diversity, altizer2003social}; this is contrary to the predictions from analytical models \cite{qiu2013vector, allen2004sis, nunes2006localized}. 
+One commonly taken assumption in the ecological literature is that factors that promote high disease spread automatically promotes high pathogen richness \cite{nunn2003comparative, morand2000wormy, poulin2014parasite, poulin2000diversity, altizer2003social}; this is contrary to the predictions from analytical models \cite{qiu2013vector, allen2004sis, nunes2006localized}. 
 Furthermore, this assumption ignores competitive mechanisms such as cross-immunity and depletion of susceptible hosts.
 If competitive mechanisms are strong, pathogens in populations structured such that $R_0$ will be high will be able to easily out-compete invading pathogens.
-Only if competitive mechanisms are weak will high $R_0$  enable the invasion of new pathogens and allow higher pathogen diversity.
+Only if competitive mechanisms are weak will high $R_0$  enable the invasion of new pathogens and allow higher pathogen richness.
 
 \tmpsection{Types of population structure}
 
@@ -232,7 +232,7 @@ However, other measures that take into account second-order structure in the net
 
 Currently the literature contains very abstract, simplified models \cite{qiu2013vector, allen2004sis, nunes2006localized, garmer2016multistrain}.
 These cannot be easily applied to real data.
-They also do not easily give quantitative predictions of pathogen richness; typically they predict either no pathogen coexistence \cite{bremermann1989competitive, martcheva2013competitive} or infinite pathogen diversity \cite{may1994superinfection}.
+They also do not easily give quantitative predictions of pathogen richness; typically they predict either no pathogen coexistence \cite{bremermann1989competitive, martcheva2013competitive} or infinite pathogen richness \cite{may1994superinfection}.
 We need models that can give quantitive predictions of pathogen richness in wild populations.
 While predicting an absolute value of pathogen richness is likely to be impossible, we should aim for models that attempt to rank species from highest to lowest pathogen richness.
 This requires a middle ground of model complexity.
