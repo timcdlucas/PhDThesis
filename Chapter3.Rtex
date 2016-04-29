@@ -264,17 +264,6 @@ Furthermore, I found that the role of phylogeny is very weak both in the models 
 
 
 
-%have a look at Henry's ant paper for the structure of a very similar methods section (paper is a similar lay out too - phyogenetic analysis of an evolutionary/ecological question so you could look at it overall for structure.
-%
-%Basically you dont start out the methods section with a discussion of what and why you are going to do - that is the introduction. The methods section should be the text of how you did the thing you set up in the introduction. I usually use a few pithy subheaders to get straight to the point
-%1. Data collection
-%2. Phylogenetic reconstruction
-%3. Data Analysis
-%
-%You can have fancier names if you want but those are the basics. Why dont you have another go at the methods with this structure in mind?
-
-
-
 %To test for an association between pathogen richness and population structure I have performed multiple regression using a model selection framework to establish whether or not two measures of population structure are likely to be included as explanatory variables in a `best model' and therefore important.
 %As species cannot be considered independent due to shared evolutionary history, phylogeny was controlled for in all regressions.
 %A number of other factors that have previously been found to be important were included as additional explanatory variables: body mass \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat, han2015infectious, bordes2008bat}, range size \cite{kamiya2014determines, turmelle2009correlates, maganga2014bat} and study effort \cite{turmelle2009correlates, gay2014parasite, maganga2014bat}.		
@@ -2040,9 +2029,6 @@ ggplot(nSpeciesCounts, aes(NumberOfSubspecies, virusSpecies, size = n)) +
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-%i think this results section could be better structured - phylogenetic stuff at one place at the beginning, for example. 
-%It also needs to emphasise the main result - headline stories and to only report your work - not add in discussion - that is for the discussion sections. Think of it as a really dry section that presents your results without context. you add in the context with the introduction, methods and discussion
-
 
 \subsection{Number of Subspecies}
 \tmpsection{More descriptive}
@@ -2451,16 +2437,23 @@ Therefore further study on the exact mechanisms by which population structure af
 
 Although I have used measures of study effort to try to control for biases in the viral richness data, this bias could still make the results here unreliable --- this is especially true as study effort is by far the strongest predictor of viral richness in both data sets.
 It is hoped that as untargeted sequencing of viral genetic material (e.g., \textcite{anthony2013strategy}) becomes cheaper and more common this bias can be reduced.
-The strength of the relationship between study effort and known viral richness also highlights the number of virus species and bat-virus host-pathogen relationships yet to be discovered.
+The strength of the relationship between study effort and known viral richness also highlights the number of bat-virus host-pathogen relationships yet to be discovered and the number of virus species that are yet to be described.
 
 I have used two measures of population structure and the number of subspecies data set is larger than those used in previous studies.
-However it is clear that the gene flow data set is small (n = \rinline{nrow(fstFinal)}).
+However it is clear that the gene flow data set is small ($n$ = \rinline{nrow(fstFinal)}).
 This may explain some unexpected results.
 While the model averaging approach has given a negative model averaged coefficient for gene flow, the univariate model of gene flow against viral richness gave a positive coefficient.
 Furthermore body mass has a negative average coefficient.
 This is in contrast to the number of subspecies analysis, many studies in the literature \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat} and the single-predictor model.
 It is not easy to interpret these contradictions but it is clear that the results from the gene flow analysis alone should not be considered strong evidence for a relationship between pathogen richness and population structure.
 These contradictions also reiterate the need to use large data sets where possible and the need to use multiple measures of population structure to promote robust conclusions.
+
+Finally, while comparative studies are a useful tool for examining broad trends of pathogen richness across large taxonomic groups, they cannot examine the specific mechanisms that may be underpinning the correlations found.
+Therefore, further work is needed to test which mechanisms are actually causing the relationship between population structure and pathogen richness that I have identified here.
+A number of mechanisms might be involved.
+A reduced rate of pathogen extinction might be caused by a reduction in competition due to the slow dispersal of competing pathogens.
+Alternatively, population structure may promote the invasion of new pathogens, by creating localised areas of low competition or host immunity.
+One method for testing these mechanisms would be through mechanistic epidemiological models.
 
 \subsection{Conclusions}
 
