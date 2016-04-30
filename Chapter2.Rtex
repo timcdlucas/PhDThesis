@@ -77,37 +77,35 @@ However, the factors that control pathogen richness of wild animal species are s
 \tmpsection{Two to three sentences of more detailed background}
 % comprehensible to scientists in related disciplines.
 % Add mechanistic vs empirical
-Comparative, phylogenetic approaches have shown that host species traits such as population density, longevity, body size and population structure correlate with pathogen richness.
-Typically it is assumed that well-connected, unstructured populations promote the invasion of new pathogens and therefore increase pathogen richness. % Where or how to define well-connected?
-However, this assumption is largely untested; in particular our mechanistic understanding of how population structure affects pathogen richness, in the presence of inter-pathogen competition, is poor.
-Greater understanding is needed to clarify by which exact mechanisms population structure affects pathogen richness. 
-%Mechanistic models are also likely to be more robust to transferring understanding between taxa and predicting changes. % !!! Not great.
-%However, if competition is strong endemic pathogens will dominate and prevent new diseases from invading and spreading.
-%In a structured population, stochastic effects could create areas of low prevalence of the endemic disease, allowing new diseases to invade.
-%
+Comparative, phylogenetic studies have shown that host species traits such as population density, longevity and body size correlate with pathogen richness.
+Further comparative studies have shown a correlation between population structure and pathogen richness though the direction of the relationship differs between studies.
+Typically it is assumed that well-connected, unstructured populations (that therefore have a high basic reproductive number, $R_0$) promote the invasion of new pathogens and therefore increase pathogen richness. % Where or how to define well-connected?
+However, this assumption is largely untested.
+In the presence of inter-pathogen competition, the opposite effect might occur; population structure may increase pathogen richness by reducing the effects of competition.
+A more mechanistic understanding of how population structure affects pathogen richness could discriminate between these two broad hypotheses.
+In particular mechanistic models of competing pathogens in structured populations are lacking.
 %
 \tmpsection{One sentence clearly stating the general problem (the gap)}
 % being addressed by this particular study.
-It is unknown whether population structure allows invading pathogens to escape from competition by stochastically creating areas of low pathogen prevalence.
-I hypothesised that low dispersal rates and a low number of connections in a metapopulation network will allow invading pathogens to establish more readily, thus increasing pathogen richness. 
+%It is unknown whether greater population structure allows invading pathogens to escape from competition by stochastically creating areas of low pathogen prevalence.
+I hypothesised that a low number of connections in a metapopulation network and low dispersal rates will allow invading pathogens to establish more readily, thus increasing pathogen richness. 
 I tested these hypotheses using population networks parameterised to mimic wild bat populations as bats have highly varied social structures and have recently been implicated in a number of high profile diseases such as Ebola, SARS, Hendra and Nipah.
 %
 %
 \tmpsection{One sentence summarising the main result}
 %  (with the words “here we show” or their equivalent).
-I found that neither population connectedness nor dispersal rate affect the probability that a new pathogen will invade into a population.
+I simulated the process of a new pathogen invading into a metapopulation already occupied by an identical pathogen.
+I varied the topology of the metapopulation (using fully and minimally connected networks) , dispersal rate and transmission rate.
+I found that neither metapopulation topology nor dispersal rate affected the probability that a new pathogen would invade into a population.
+Increased transmission rate strongly increased invasion probability, as expected. 
 %\paragraph{Two or three sentences explaining what the main result reveals in direct comparison to what was thought to be the case previously}
 % or how the main result adds to previous knowledge
-The assumption that factors causing high $R_0$ allow new pathogens to invade and therefore increase pathogen richness is not supported.
-Instead I found that changes in population structure do not affect the probability of invasion of a new pathogen.
-This is in contrast to much theoretical literature which predicts that increased population structure may promote coexistence of pathogens.
-It is also in contrast to the common assumption that more connected populations increase $R_0$ and therefore increase pathogen richness.
+The assumption that factors causing high $R_0$ allow new pathogens to invade and therefore increase pathogen richness was not supported.
+My results also contradict much theoretical literature which predicts that increased population structure may promote coexistence of pathogens.
 %
 %
 \tmpsection{One or two sentences to put the results into a more general context.}
-This result implies that population structure does not control pathogen richness.
-Instead it seems that local dynamics, that affect the short term branching process at the very start of the epidemic control the chance of pathogen invasion.
-This also implies that population structure is not a useful proxy for pathogen richness with respect to zoonotic disease surveillance (in bats for example).
+
 
 
 %\tmpsection{Two or three sentences to provide a broader perspective, }
@@ -301,7 +299,7 @@ $n$ & Colony starting size && 3,000\\
 $a$ & Area & km$^2$& 10,000\\
 $\beta$ & Transmission rate & year$^{-1}.$individual$^{-1}$ & 2, 5, 10\\
 $\gamma$ & Recovery rate & year$^{-1}.$individual$^{-1}$ & 1\\
-$\lambda$ & Dispersal & year$^{-1}.$individual$^{-1}$ & 0.001--0.1\\
+$\xi$ & Dispersal & year$^{-1}.$individual$^{-1}$ & 0.001--0.1\\
 $\Lambda$ & Birth rate & year$^{-1}.$individual$^{-1}$ & 0.05\\
 $\mu$ & Death rate & year$^{-1}.$individual$^{-1}$ & 0.05\\
 %$d_I$ & Infectious death rate & Additional deaths per day per individual&\\
@@ -356,10 +354,10 @@ Infection is assumed to cause no extra mortality as for a number of viruses, bat
 The population is divided into a number of subpopulations.
 This metapopulation is modelled as a network with subpopulations being nodes and dispersal between subpopulations being indicated by edges (Figure~\ref{f:net}).
 Individuals within a subpopulation interact randomly so that the subpopulation is fully mixed.
-Dispersal between subpopulations occurs at a rate $\lambda$.
+Dispersal between subpopulations occurs at a rate $\xi$.
 Individuals can only disperse to subpopulations connected to theirs in the network.
 The rate of dispersal is not affected by the number of edges a subpopulation has (the degree of the subpopulation).
-So the dispersal rate from a subpopulation $m$ with degree $k_m$ to subpopulation $n$ is $\frac{\lambda}{k_m}$.
+So the dispersal rate from a subpopulation $m$ with degree $k_m$ to subpopulation $n$ is $\frac{\xi}{k_m}$.
 Note this rate is independent of the degree and size of subpopulation $n$.
 
 
@@ -423,11 +421,11 @@ while coinfection, given a cross-immunity factor $\alpha$, is given by
   P\left( I_{12,nt^\prime} = I_{12,nt}+1,\: I_{1nt^\prime} = I_{1nt}-1\right) = &\alpha\beta I_{1nt}\left(I_{2nt} + I_{12nt}\right),\\
   P\left( I_{12,nt^\prime} = I_{12,nt}+1,\: I_{2nt^\prime} = I_{2nt}-1\right) = &\alpha\beta I_{2nt}\left(I_{1nt} + I_{12nt}\right).
 \end{align}
-The probability of migration from colony $m$ (with degree $k_m$) to colony $n$, given a dispersal rate $\lambda$ is given by
+The probability of migration from colony $m$ (with degree $k_m$) to colony $n$, given a dispersal rate $\xi$ is given by
 \begin{align}
-  P\left(S_{nt^\prime}=S_{nt}+1,\: S_{mt^\prime} = S_{mt}-1\right) &= \frac{\lambda S_{mt}}{k_m},\\
-  P\left(I_{qnt^\prime}=I_{qnt}+1,\: I_{qmt^\prime} = I_{qmt}-1\right) &= \frac{\lambda I_{qmt}}{k_m},\\
-  P\left(R_{nt^\prime}=S_{nt}+1,\: R_{mt^\prime} = R_{mt}-1\right) &= \frac{\lambda R_{mt}}{k_m}.
+  P\left(S_{nt^\prime}=S_{nt}+1,\: S_{mt^\prime} = S_{mt}-1\right) &= \frac{\xi S_{mt}}{k_m},\\
+  P\left(I_{qnt^\prime}=I_{qnt}+1,\: I_{qmt^\prime} = I_{qmt}-1\right) &= \frac{\xi I_{qmt}}{k_m},\\
+  P\left(R_{nt^\prime}=S_{nt}+1,\: R_{mt^\prime} = R_{mt}-1\right) &= \frac{\xi R_{mt}}{k_m}.
 \end{align}
 Finally, recovery from any infectious class occurs at a rate $\gamma$
 \begin{align}
@@ -685,13 +683,13 @@ Again visual inspection of preliminary simulations was used to determine that af
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 The values used for the independent variables are chosen to highlight the affects of these variables. 
-Dispersal values are $\lambda = 0.1, 0.01$ and $ 0.001$ dispersals per individual per year. 
-$\lambda = 0.1$ relates to individuals moving between colonies on average twice per lifetime. 
+Dispersal values are $\xi = 0.1, 0.01$ and $ 0.001$ dispersals per individual per year. 
+$\xi = 0.1$ relates to individuals moving between colonies on average twice per lifetime. 
 Therefore exclusively juvenile dispersal would have dispersal rates similar to this. %todo cite
 Otherwise it relates to dispersal being a rare event with animals often staying in a colony for many years.
-$\lambda = 0.01$ relates to 20\% of individuals dispersing once in their lifetime.
+$\xi = 0.01$ relates to 20\% of individuals dispersing once in their lifetime.
 This value is therefore close to male-biased dispersal, with female philopatry. %todo cite
-Finally, $\lambda = 0.001$ relates to 2\% of individuals dispersing in their lifetime.
+Finally, $\xi = 0.001$ relates to 2\% of individuals dispersing in their lifetime.
 This therefore relates to a population that does not habitually disperse.
 
 
@@ -925,7 +923,7 @@ Increased transmission clearly increases the rate of invasion even though the en
 
 The proportion of invasions was not different across dispersal rates for three of four $\beta$ values ($\chi^2$ test. $\beta = 0.1$: $\chi^2 = \rinline{DispTest1$statistic}$, $\text{df} = \rinline{DispTest1$parameter}$, $p = \rinline{p(DispTest1$p.value)}$.  $\beta = 0.3$: $\chi^2 = \rinline{DispTest3$statistic}$, $\text{df} = \rinline{DispTest3$parameter}$, $p = \rinline{p(DispTest3$p.value)}$, $\beta = 0.4$: $\chi^2 = \rinline{DispTest4$statistic}$, $\text{df} = \rinline{DispTest4$parameter}$, $p = \rinline{p(DispTest4$p.value)}$).
 For $\beta = 0.2$ the rates of invasion were significantly different ($\beta = 0.2$: $\chi^2 = \rinline{DispTest2$statistic}$, $\text{df} = \rinline{DispTest2$parameter}$, $p = \rinline{p(DispTest2$p.value)}$).
-The middle dispersal rate ($\lambda = 0.01$) has the lowest invasion rate (\rinline{propsDisp$props[5]}) with the top and bottom dispersal rates have higher invasion rates ($\lambda = 0.001$: invasion rate $=$ \rinline{propsDisp$props[4]}. $\lambda = 0.1$: invasion rate $=$ \rinline{propsDisp$props[6]}).
+The middle dispersal rate ($\xi = 0.01$) has the lowest invasion rate (\rinline{propsDisp$props[5]}) with the top and bottom dispersal rates have higher invasion rates ($\xi = 0.001$: invasion rate $=$ \rinline{propsDisp$props[4]}. $\xi = 0.1$: invasion rate $=$ \rinline{propsDisp$props[6]}).
 Given the 13 hypotheses tested in this study, if a Bonferroni correction is applied this difference would be insignificant at the 95\% confidence level (\rinline{p(DispTest2$p.value)} $> 0.05 / 12 = 6.8 \times 10^{-4}$).
 Due to this U-shape relationship and small differences in proportions of invasions I think this is probably not a real effect.
 Overall, there is no support for the hypothesis that population structure increases the rate at which pathogens invade into the population.
@@ -942,7 +940,7 @@ This was true at all transmission levels ($\chi^2$ test. $\beta = 0.1$: $\chi^2 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 
 In line with theory, increasing the transmission rate increased the probability of invasion (Figure~\ref{f:invasionPropPlots}).
-This is true for all three dispersal values ($\chi^2$ test. $\lambda = 0.001$: $\chi^2 = \rinline{DispTransTest1$statistic}$, $\text{df} = \rinline{DispTransTest1$parameter}$, $p < 10^{-5}$. $\lambda = 0.01$: $\chi^2 = \rinline{DispTransTest2$statistic}$, $\text{df} = \rinline{DispTransTest2$parameter}$, $p < 10^{-5}$. $\lambda = 0.1$: $\chi^2 = \rinline{DispTransTest3$statistic}$, $\text{df} = \rinline{DispTransTest3$parameter}$, $p < 10^{-5}$) and both network structures ($\chi^2$ test. Fully connected: $\chi^2 = \rinline{TopoTransTest2$statistic}$, $\text{df} = \rinline{TopoTransTest2$parameter}$, $p < 10^{-5}$. Minimally connected: $\chi^2 =  \rinline{TopoTransTest2$statistic}$, $\text{df} = \rinline{TopoTransTest2$parameter}$, $p < 10^{-5}$).
+This is true for all three dispersal values ($\chi^2$ test. $\xi = 0.001$: $\chi^2 = \rinline{DispTransTest1$statistic}$, $\text{df} = \rinline{DispTransTest1$parameter}$, $p < 10^{-5}$. $\xi = 0.01$: $\chi^2 = \rinline{DispTransTest2$statistic}$, $\text{df} = \rinline{DispTransTest2$parameter}$, $p < 10^{-5}$. $\xi = 0.1$: $\chi^2 = \rinline{DispTransTest3$statistic}$, $\text{df} = \rinline{DispTransTest3$parameter}$, $p < 10^{-5}$) and both network structures ($\chi^2$ test. Fully connected: $\chi^2 = \rinline{TopoTransTest2$statistic}$, $\text{df} = \rinline{TopoTransTest2$parameter}$, $p < 10^{-5}$. Minimally connected: $\chi^2 =  \rinline{TopoTransTest2$statistic}$, $\text{df} = \rinline{TopoTransTest2$parameter}$, $p < 10^{-5}$).
 
 
 
@@ -957,7 +955,7 @@ invasionPropCaption <- sprintf("The probability of successful invasion.
   Error bars are 95\\%% confidence intervals. 
   %i simulations were run for each treatment.
   Other parameters were kept constant at: $N = 10,\\, \\, \\mu = \\Lambda = 0.05,\\, \\gamma = 0.1,\\, \\alpha = 0.1$. 
-  When dispersal is varied, the population structure is fully connected. When population structure is varied, $\\lambda = 0.01$.",
+  When dispersal is varied, the population structure is fully connected. When population structure is varied, $\\xi = 0.01$.",
   as.integer(each))
 
 invasionPropShort <- "The probability of invasion across different dispersal rates and network topologies."
