@@ -287,7 +287,7 @@
         pdfsubject={PhD Thesis on pathogen richness in bats},
         pdfkeywords={chiroptera, bats, zoonotic disease, pathogen richness, ecology},
         pdfauthor={Tim Lucas},
-        pdftitle={The role of social ecology in Chiropteran pathogen richness and zoonotic potential},
+        pdftitle={The role of population structureand size in determining bat pathogen richness},
     }
 
 \usepackage{url}
