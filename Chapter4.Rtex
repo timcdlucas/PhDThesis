@@ -632,7 +632,7 @@ ggplot(dens1, aes(x = factor(area), y = meanK, colour = 'a', fill = 'a')) +
   scale_fill_manual(values = pokepal('vileplume')[7]) +
   stat_summary(geom = "crossbar", width = 0.2, fatten = 2, 
     fun.data = function(x){ return(c(y = median(x), ymin = median(x), ymax = median(x))) }) +
-  theme(legend.position = 'none') + 
+  theme(legend.position = 'none', panel.grid.major.x = element_blank()) + 
   scale_x_discrete(labels = c('2500', '5000', '10000', '20000', '40000')) +
   xlab(expression(paste('Area ', (km^2)))) +
   ylab(expression(paste('Mean degree, ', italic(bar(k))))) +
