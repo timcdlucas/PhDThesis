@@ -95,7 +95,7 @@ Here I use metapopulation SIR models to test whether it is density \emph{per se}
 % or how the main result adds to previous knowledge
 \tmpsection{One or two sentences to put the results into a more general context.}
 I found that increased group size increases the chance that a new pathogen will invade into a population to the largest extent.
-Both group size and the number of groups (i.e. the components of population size) promote pathogen richness more than population density.
+Both group size and the number of groups (i.e.\ the components of population size) promote pathogen richness more than population density.
 This implies that, in comparative studies, population density is merely a correlate of group size or population size.
 As these factors are not equally important it is expected that the pathogen communities of different host species will respond to climate change in different ways.
 Species which experience changes in group size are expected to have larger changes in pathogen richness than other species.
@@ -971,10 +971,10 @@ The affects of area occur through changing the metapopulation network.
 The metapopulation structure was created for each simulation by randomly placing colonies in space (Figure~\ref{fig:colonyNetworkPlots}).
 The spatial scale of the simulations vary between \rinline{min(area)} and \rinline{max(area)} km$^2$.
 This corresponds to square areas with sides of \rinline{sqrt(min(area))} to \rinline{sqrt(max(area))}km.
-Dispersal can only occur between two colonies if they are within 100 kilometres of each other i.e. they are then counted as connected nodes in the metapopulation network.
+Dispersal can only occur between two colonies if they are within 100 kilometres of each other i.e.\ they are then counted as connected nodes in the metapopulation network.
 The number of connections each colony has is called its degree, $k$.
 How well connected the metapopulation network is overall is measured by the mean degree, $\bar{k}$.
-This random placement does not guarantee that the population is connected (i.e. made up of a single connected component) but as the endemic pathogen is seeded in all colonies, the invading pathogen cannot be seeded into a fully susceptible colony.
+This random placement does not guarantee that the population is connected (i.e.\ made up of a single connected component) but as the endemic pathogen is seeded in all colonies, the invading pathogen cannot be seeded into a fully susceptible colony.
 This was considered more realistic than repeatedly resampling the population until a fully connected population occurred.
 The threshold of 100 kilometres was arbitrary but I aimed to maximise the range  of $\bar{k}$ (Figure~\ref{fig:plotK}) while not having many simulations with networks that were not fully connected.
 Given this setup, simulations with low densities had relatively unconnected metapopulation networks while high density populations had fully connected networks.
@@ -1223,7 +1223,7 @@ Due to the correlations between these factors, they are particularly hard to stu
 %$d$ & Death rate & Deaths per year per individual & 0.05\\
 %$d_I$ & Infectious death rate & Additional deaths per day per individual&\\
 %$\rho$ & No. pathogens && 2\\
-%$p$ &  Pathogen index i.e. $p\in\{1,2\}$ for pathogens 1 and 2 & &\\
+%$p$ &  Pathogen index i.e.\ $p\in\{1,2\}$ for pathogens 1 and 2 & &\\
 %$q$ & Disease class i.e., $q\in\{1,2,12\}$&\\
 %$\mathcal{V}$ & Neighbourhood of a node &&\\
 %$t, t^\prime$ & Time and time plus waiting time i.e., $t+\delta$ & Days&\\
