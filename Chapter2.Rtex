@@ -78,7 +78,7 @@ However, the factors that control pathogen richness of wild animal species are s
 % comprehensible to scientists in related disciplines.
 % Add mechanistic vs empirical
 Comparative, phylogenetic studies have shown that host species traits such as population density, longevity and body size correlate with pathogen richness.
-Further comparative studies have shown a correlation between population structure and pathogen richness though the direction of the relationship differs between studies.
+Further comparative studies have found correlations between population structure and pathogen richness though the direction of the relationships differ.
 Typically it is assumed that well-connected, unstructured populations (that therefore have a high basic reproductive number, $R_0$) promote the invasion of new pathogens and therefore increase pathogen richness. % Where or how to define well-connected?
 However, this assumption is largely untested.
 In the presence of inter-pathogen competition, the opposite effect might occur; population structure may increase pathogen richness by reducing the effects of competition.
@@ -88,7 +88,7 @@ In particular mechanistic models of competing pathogens in structured population
 \tmpsection{One sentence clearly stating the general problem (the gap)}
 % being addressed by this particular study.
 %It is unknown whether greater population structure allows invading pathogens to escape from competition by stochastically creating areas of low pathogen prevalence.
-I hypothesised that a low number of connections in a metapopulation network and low dispersal rates will allow invading pathogens to establish more readily, thus increasing pathogen richness. 
+I hypothesised that a low number of connections in a metapopulation network and low dispersal rates will allow invading pathogens to establish more easily, thus increasing pathogen richness. 
 I tested these hypotheses using population networks parameterised to mimic wild bat populations as bats have highly varied social structures and have recently been implicated in a number of high profile diseases such as Ebola, SARS, Hendra and Nipah.
 %
 %
@@ -100,12 +100,12 @@ I found that neither metapopulation topology nor dispersal rate affected the pro
 Increased transmission rate strongly increased invasion probability, as expected. 
 %\paragraph{Two or three sentences explaining what the main result reveals in direct comparison to what was thought to be the case previously}
 % or how the main result adds to previous knowledge
-The assumption that factors causing high $R_0$ allow new pathogens to invade and therefore increase pathogen richness was not supported.
-My results also contradict much theoretical literature which predicts that increased population structure may promote coexistence of pathogens.
+The assumption that all factors causing high $R_0$ allow new pathogens to invade and therefore increase pathogen richness was not supported.
+My results also contradict many theoretical studies which predict that increased population structure may promote coexistence of pathogens.
+Given the conflict between previous studies (empirical and theoretical) and this study, it is likely that either my model does not capture the elements of population structure that strongly affects pathogen coexistence or that population structure affects pathogen richness via a different mechanism to the one modelled here.
 %
 %
 \tmpsection{One or two sentences to put the results into a more general context.}
-
 
 
 %\tmpsection{Two or three sentences to provide a broader perspective, }
