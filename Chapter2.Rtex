@@ -123,6 +123,17 @@ Given the conflict between previous studies (empirical and theoretical) and this
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+%Possible structure (each number a sep. paragraph):
+%1. zoonotics bad, need to predict spillover, factors controlling pathogen richness unknown
+%2. results from comparative studies (including mammal and bat ones), explaining why population structure is important
+%3. limitations of comparative studies (including highlighting that empirical and mechanistic approaches would give different predictions) that and need a more mechanistic approach 
+%4. description of the possible mechanisms for population structure - explaining why focusing on reduction of competition mechanisms
+%5. results from analytical models so far and limitations of the approach
+%6. what is needed now
+%7. what your focus is (including a  bit about bat focus)
+%8. 'here I show..' what you found briefly to lead into methods
+
+
 
 
 \tmpsection{General Intro}
@@ -130,7 +141,7 @@ Given the conflict between previous studies (empirical and theoretical) and this
 % A basic introduction to the field,
 % comprehensible to a scientist in any discipline.
 
-
+%1. zoonotics bad, need to predict spillover, factors controlling pathogen richness unknown
 \tmpsection{Why is pathogen richness? important?}
 Over 50\% of emerging infectious diseases have an animal source \cite{jones2008global, smith2014global}.
 Zoonotic pathogens can be highly virulent \cite{luby2009recurrent, lefebvre2014case} and potentially have huge public health impacts \cite{granich2015trends}, economic costs \cite{knobler2004learning} and slow down international development \cite{ebolaWorldbank}.
@@ -149,6 +160,7 @@ However, the factors that control the number of pathogen species in a wild anima
 \tmpsection{We know some factors that correlate with pathogen richness}
 %population density, longevity, body size and population structure
 
+%2. results from comparative studies (including mammal and bat ones), explaining why population structure is important
 A number of host traits have been shown to correlate with pathogen richness including body size \cite{kamiya2014determines, arneberg2002host}, population density \cite{nunn2003comparative, arneberg2002host} and range size \cite{bordes2011impact, kamiya2014determines}.
 There are few studies that study population structure in a comparative framework.
 \textcite{maganga2014bat} found that distribution fragmentation predicts high viral richness, but \textcite{gay2014parasite} finds the opposite relationship. 
@@ -157,6 +169,7 @@ Genetic correlates of population structure have also been used.
 \textcite{turmelle2009correlates}, in a small analysis, foundnd that high $F_{st}$ (i.e.\ a structured population) correlates with high richness.
 However, they did not account for the widely different spatial scales found in population structure studies, nor did they deal with the differences between $F_{ST}$, $\phi_{ST}$ and other measures appropriately. 
 
+%3. limitations of comparative studies (including highlighting that empirical and mechanistic approaches would give different predictions) that and need a more mechanistic approach 
 Empirical, correlative studies are often contradictory due to small sample sizes, noisy data and because empirical relationships often do not extrapolate well to other taxa (though see \textcite{kamiya2014determines} for a meta-analysis).
 The correlation between many traits (e.g., \textcite{nunn2015infectious}) also makes it hard to clearly distinguish which factors are important.
 Furthermore, knowing \emph{which} factors correlate with pathogen richness does not tell us \emph{how} they control richness. 
@@ -166,16 +179,15 @@ We need explicit mechanistic models in order to tease apart these factors.
 Furthermore, a solid mechanistic understanding of these processes will allow us to predict how wild populations will respond to increased human pressure and global change.
 As habitats fragment we expect wild populations to become smaller and less well connected.
 Understanding how these population changes interact requires a mechanistic understanding of disease dynamics.
-Different specific mechanisms predict responses to climate change at different rates --- the extinction of parasites could occur relatively rapidly, whereas processes that increase the rate of pathogen acquisition are likely to change pathogen community relatively slowly.
+
 
 \tmpsection{Population structure could be important}
 
-
+%4. description of the possible mechanisms for population structure - explaining why focusing on reduction of competition mechanisms
 
 \tmpsection{Network structure has been studied}
- 
-% Analytical models
-% +netCoex
+%5. results from analytical models so far and limitations of the approach
+
 
 In analytical models of well mixed populations competitive exclusion has been predicted \cite{ackleh2003competitive, bremermann1989competitive, martcheva2013competitive, qiu2013vector, allen2004sis}.
 When competitive exclusion occurs, population structure has sometimes been shown to allow coexistence \cite{qiu2013vector, allen2004sis, nunes2006localized, garmer2016multistrain}.
@@ -221,7 +233,7 @@ However, other measures that take into account second-order structure in the net
 
 
 
-
+%6. what is needed now
 \tmpsection{The gap}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % One sentence clearly stating the general problem
@@ -235,14 +247,11 @@ We need models that can give quantitive predictions of pathogen richness in wild
 While predicting an absolute value of pathogen richness is likely to be impossible, we should aim for models that attempt to rank species from highest to lowest pathogen richness.
 This requires a middle ground of model complexity.
 
-
-To this end I have run metapopulation, multipathogen, epidemiological simulations based broadly on real-world bat populations.
-Although still simplified, the model is complex enough that if good measurements of bat populations could be obtained, simulations of real world bat populations could be run.
-Specifically I used these models to test the affects of population structure on the ability of a new pathogen to invade a population.
-I tested two aspects of structure, dispersal rate and connectedness of the metapopulation network.
+%7. what your focus is (including a  bit about bat focus)
 
 
 \tmpsection{Why bats}
+The metapopulations are parameterised to broadly mimic wild bat populations.
 I have used bats as a case study as they have an unusually large variety of social structures.
 Colony sizes range from 10 to 1 million \cite{jones2009pantheria}.
 Many bats also have interesting seasonal behaviour such as migration \cite{richter2008first, fleming2003ecology}, hibernation, birth pulses and swarming behaviours.
@@ -255,11 +264,13 @@ Recently they have been implicated in a number of high profile diseases such as 
 
 \tmpsection{What I did}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%8. 'here I show..' what you found briefly to lead into methods
 
 I have studied the invasion of new pathogens as a mechanisms for increasing pathogen richness.
-I have studied two metrics for population structure, dispersal rate and metapopulation network topology, to test for effects of population structure on pathogen richness.
+I have used two independant variables that alter population structure, dispersal rate and metapopulation network topology.
+I tested for effects of population structure on pathogen richness.
 In particular I have focused on studying the invasion of a newly evolved pathogen that is therefore identical in epidemiological parameters to the endemic pathogen.
-Furthermore, this close evolutionary relationship means that cross-immunity is strong.
+Furthermore, this close evolutionary relationship means that competition via cross-immunity is strong.
 
 \tmpsection{What I found}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -332,18 +343,18 @@ $r_i$ & The rate that event $i$ occurs & year$^{-1}$&\\
 
 \paragraph{Two pathogen SIR model}
 
-I examined a multipathogen SIR model with vital dynamics. 
-This is a compartment model with individuals being classed as susceptible, infected or recovered with immunity (Figure~\ref{f:sir}).
+I developed a multipathogen, SIR compartment model with individuals being classed as susceptible, infected or recovered with immunity (Figure~\ref{f:sir}).
 Susceptible individuals are counted in class $S$.
 There are three infected classes, $I_1$, $I_2$ and $I_{12}$, being individuals infected with pathogen 1, pathogen 2 or both respectively (see Table~\ref{t:params} for a list of symbols and values used).
 Recovered individuals, $R$, are immune to both pathogens, even if they have only been infected with one.
 Furthermore, recovery from one pathogen moves an individual straight into the recovered class, even if the individual is infected with both pathogen.
 This modelling choice allows the model to be easily expanded to include more than two pathogens.
 The assumption of immediate recovery from all other diseases is likely to be quite accurate for very closely related pathogens as is being studied here as once an acquired immune response is activated, all infections are likely to be cleared quickly. %todo cite
-
 The coinfection rate (the rate at which an infected individual is infected with a second pathogen) is adjusted compared to the infection rate by a factor $\alpha$ (here I used $\alpha = 0.1$ which means coinfection happens at a tenth the rate of first infections).
+
 In the application of long term existence of pathogens it is vital to include vital dynamics (births and deaths) as the SIR without vital dynamics has no endemic state.
 Birth and death rates are assumed to be equal, $\mu = \Lambda$.
+New born individuals enter the susceptible class.
 The time scale of the simulations are set by setting $\mu$ = 0.05 per year, yielding an average host generation time of 20 years.
 Infection is assumed to cause no extra mortality as for a number of viruses, bats show no clinical signs of infection \cite{halpin2011pteropid, deThoisy2016bioecological}.
 
