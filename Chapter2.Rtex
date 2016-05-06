@@ -161,38 +161,31 @@ However, the factors that control the number of pathogen species in a wild anima
 %population density, longevity, body size and population structure
 
 %2. results from comparative studies (including mammal and bat ones), explaining why population structure is important
+%3. limitations of comparative studies (including highlighting that empirical and mechanistic approaches would give different predictions) that and need a more mechanistic approach 
 
 In comparative studies, a number of host traits have been shown to correlate with pathogen richness including body size \cite{kamiya2014determines, arneberg2002host}, population density \cite{nunn2003comparative, arneberg2002host} and range size \cite{bordes2011impact, kamiya2014determines}.
 A further factor that may affect pathogen richness is population structure.
+In comparative studies it is often assumed that factors that promote fast disease spread should promote high pathogen richness; the faster a new pathogen spread through a population, the more likely it is to persist \cite{nunn2003comparative, morand2000wormy, poulin2014parasite, poulin2000diversity, altizer2003social}.
+However, this assumption ignores competitive mechanisms such as cross-immunity and depletion of susceptible hosts.
+If competitive mechanisms are strong, pathogens in populations structured such that $R_0$ will be high will be able to easily out-compete invading pathogens.
+Only if competitive mechanisms are weak will high $R_0$  enable the invasion of new pathogens and allow higher pathogen richness.
 Overall, the evidence indicates that increased population structure correlates with higher pathogen richness (Chapter \ref{ch:empirical}, \cites{vitone2004body, maganga2014bat, turmelle2009correlates}).
 However, there are number of studies that contradict this conclusion \cite{gay2014parasite, bordes2007rodent, ezenwa2006host}.
-
+Comparative studies are often contradictory due to small sample sizes, noisy data and because empirical relationships often do not extrapolate well to other taxa (though see \textcite{kamiya2014determines} for a meta-analysis).
+Multicollinearity between many traits also makes it hard to clearly distinguish which factors are important \cite{nunn2015infectious}.
 
 %3. limitations of comparative studies (including highlighting that empirical and mechanistic approaches would give different predictions) that and need a more mechanistic approach 
 
-Comparative, correlative studies have a number of limitations.
-Comparative studies are often contradictory due to small sample sizes, noisy data and because empirical relationships often do not extrapolate well to other taxa (though see \textcite{kamiya2014determines} for a meta-analysis).
-Multicollinearity between many traits also makes it hard to clearly distinguish which factors are important \cite{nunn2015infectious}.
 Furthermore, knowing \emph{which} factors correlate with pathogen richness does not tell us \emph{how}, or if, they causally control pathogen richness. 
-Finally, this lack of a solid mechanistic understanding of these processes precludes predictions of how wild populations will respond to increased human pressure and global change.
+This lack of a solid mechanistic understanding of these processes precludes predictions of how wild populations will respond to increased human pressure and global change.
 As habitats fragment we expect wild populations to change in a number of ways including becoming smaller and less well connected \cite{andren1994effects, cushman2012separating}.
 As multiple population-level factors are likely to change simultaneously due to global change, the correlative relationships examined in comparative studies are unlikely to effectively predict future changes in pathogen richness.
 Mechanistic models are needed to project how these highly non-linear disease systems will respond to the multiple, simultaneous stressors affecting them.
 
-%4. description of the possible mechanisms for population structure - explaining why focusing on reduction of competition mechanisms
 
-
-Mechanisms by which a trait could increase pathogen richness include promoting the evolution of new strains within a species \cite{buckee2004effects}, reduction of the rate of pathogen extinction \cite{rand1995invasion} and an increased probability of pathogen invasion from other host species \cite{nunes2006localized}.
-These separate mechanisms have not been examined and it is difficult to see how they could be approached through comparative methods.
-We need explicit mechanistic models in order to tease apart these factors.
-
-
-
-\tmpsection{Population structure could be important}
 
 \tmpsection{Network structure has been studied}
 %5. results from analytical models so far and limitations of the approach
-
 
 In analytical models of well mixed populations competitive exclusion has been predicted \cite{ackleh2003competitive, bremermann1989competitive, martcheva2013competitive, qiu2013vector, allen2004sis}.
 When competitive exclusion occurs, population structure has sometimes been shown to allow coexistence \cite{qiu2013vector, allen2004sis, nunes2006localized, garmer2016multistrain}.
@@ -201,12 +194,10 @@ This area is related to the study of pathogen richness in that they indicate tha
 However, the results for short term epidemic competition do not directly transfer to the study of long term disease persistence.
 
 
-One commonly taken assumption in the ecological literature is that factors that promote high disease spread automatically promotes high pathogen richness \cite{nunn2003comparative, morand2000wormy, poulin2014parasite, poulin2000diversity, altizer2003social}; this is contrary to the predictions from analytical models \cite{qiu2013vector, allen2004sis, nunes2006localized}. 
-Furthermore, this assumption ignores competitive mechanisms such as cross-immunity and depletion of susceptible hosts.
-If competitive mechanisms are strong, pathogens in populations structured such that $R_0$ will be high will be able to easily out-compete invading pathogens.
-Only if competitive mechanisms are weak will high $R_0$  enable the invasion of new pathogens and allow higher pathogen richness.
+%4. description of the possible mechanisms for population structure - explaining why focusing on reduction of competition mechanisms
 
-
+Mechanisms by which population structure could increase pathogen richness include promoting the evolution of new strains within a species \cite{buckee2004effects}, reduction of the rate of pathogen extinction \cite{rand1995invasion} and an increased probability of pathogen invasion from other host species \cite{nunes2006localized}.
+These separate mechanisms have not been examined and it is difficult to see how they could be distringuished through comparative methods.
 
 %\tmpsection{Types of population structure}
 %
