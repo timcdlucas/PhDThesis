@@ -199,37 +199,6 @@ However, the results for short term epidemic competition do not directly transfe
 Mechanisms by which population structure could increase pathogen richness include promoting the evolution of new strains within a species \cite{buckee2004effects}, reduction of the rate of pathogen extinction \cite{rand1995invasion} and an increased probability of pathogen invasion from other host species \cite{nunes2006localized}.
 These separate mechanisms have not been examined and it is difficult to see how they could be distringuished through comparative methods.
 
-%\tmpsection{Types of population structure}
-%
-%How structured a population is can be defined in many ways on many scales.
-%Social group size is often examined as an indicator of population in large because the data are readily available.
-%However, group size is only one aspect of population structure.
-%Dispersal between colonies is also an integral component of population structure.
-%Furthermore, many species exhibit fission-fusion social structures or other less clearly defined groupings.
-%
-%The most relevant scale to study is that of an epidemiological population.
-%This is the population within which a pathogen can spread in an epidemiologically relevant time period (years or decades).
-%It is therefore closely related to a population as defined by population genetics, but with movement defined on a shorter time scale.
-%
-%The epidemiological contacts within the population can be examined at the individual level (as in contact network epidemiology) or larger scales.
-%I consider the metapopulation network the most appropriate.
-%Ignoring the metapopulation assumes a fully mixed population which is unlikely.
-%Trying to study the contact network relies on detailed individual level detail which is not available.
-%Metapopulation models consider a network of small subpopulations. 
-%Within subpopulations, epidemiological contacts are fully mixed and relatively fast.
-%Between subpopulations, epidemiological contacts are dependent on an underlying network structure and relatively slow.
-%The network underlying the metapopulation is made up of nodes representing the subpopulations, and edges which represent movement between subpopulations.
-%Animals, and therefore infection, can only move between two subpopulations if they are connected by an edge.
-%
-%There are two factors that affect how structured a population is given this model framework.
-%Firstly, dispersal is the rate at which individuals move between subpopulations.
-%Secondly, the metapopulation network structure controls the spatial extent of dispersal.
-%The simplest way to measure the structure of the network is to calculate the average number of edges each node has.
-%In the extremes, all subpopulations could be either connected to all other subpopulations or only connected to one or two other subpopulations.
-%However, other measures that take into account second-order structure in the network are also often used.
-%
-%
-%
 
 
 %6. what is needed now
