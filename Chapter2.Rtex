@@ -784,10 +784,16 @@ propsDisp
 
 # Then run proportion tests between population structures
 
-DispTest1 <- prop.test(propsDisp$invasions[1:3], propsDisp$n[1:3])
-DispTest2 <- prop.test(propsDisp$invasions[4:6], propsDisp$n[4:6])
-DispTest3 <- prop.test(propsDisp$invasions[7:9], propsDisp$n[7:9])
-DispTest4 <- prop.test(propsDisp$invasions[10:12], propsDisp$n[10:12])
+#DispTest1 <- prop.test(propsDisp$invasions[1:3], propsDisp$n[1:3])
+#DispTest2 <- prop.test(propsDisp$invasions[4:6], propsDisp$n[4:6])
+#DispTest3 <- prop.test(propsDisp$invasions[7:9], propsDisp$n[7:9])
+#DispTest4 <- prop.test(propsDisp$invasions[10:12], propsDisp$n[10:12])
+
+
+DispTest1 <- fisher.test(cbind(propsDisp$invasions[1:3], propsDisp$n[1:3] - propsDisp$invasions[1:3]))
+DispTest2 <- fisher.test(cbind(propsDisp$invasions[4:6], propsDisp$n[4:6] - propsDisp$invasions[4:6]))
+DispTest3 <- fisher.test(cbind(propsDisp$invasions[7:9], propsDisp$n[1:3] - propsDisp$invasions[7:9]))
+DispTest4 <- fisher.test(cbind(propsDisp$invasions[10:12], propsDisp$n[10:12] - propsDisp$invasions[10:12]))
 
 
 %%end.rcode
@@ -796,10 +802,16 @@ DispTest4 <- prop.test(propsDisp$invasions[10:12], propsDisp$n[10:12])
 
 
 %%begin.rcode DispTransPropTests
+##Finally run proportion tests between transmission rates
+#DispTransTest1 <- prop.test(propsDisp$invasions[c(1, 4, 7, 10)], propsDisp$n[c(1, 4, 7, 1)])
+#DispTransTest2 <- prop.test(propsDisp$invasions[c(2, 5, 8, 11)], propsDisp$n[c(2, 5, 8, 11)])
+#DispTransTest3 <- prop.test(propsDisp$invasions[c(3, 6, 9, 12)], propsDisp$n[c(3, 6, 9, 12)])
+
+
 #Finally run proportion tests between transmission rates
-DispTransTest1 <- prop.test(propsDisp$invasions[c(1, 4, 7, 10)], propsDisp$n[c(1, 4, 7, 1)])
-DispTransTest2 <- prop.test(propsDisp$invasions[c(2, 5, 8, 11)], propsDisp$n[c(2, 5, 8, 11)])
-DispTransTest3 <- prop.test(propsDisp$invasions[c(3, 6, 9, 12)], propsDisp$n[c(3, 6, 9, 12)])
+DispTransTest1 <- fisher.test(cbind(propsDisp$invasions[c(1, 4, 7, 10)], propsDisp$n[c(1, 4, 7, 10)] - propsDisp$invasions[c(1, 4, 7, 10)]))
+DispTransTest2 <- fisher.test(cbind(propsDisp$invasions[c(2, 5, 8, 11)], propsDisp$n[c(2, 5, 8, 11)] - propsDisp$invasions[c(2, 5, 8, 11)]))
+DispTransTest3 <- fisher.test(cbind(propsDisp$invasions[c(3, 6, 9, 12)], propsDisp$n[c(3, 6, 9, 12)] - propsDisp$invasions[c(3, 6, 9, 12)]))
 
 
 
@@ -864,10 +876,17 @@ propsTopo
 
 # Then run proportion tests between population structures
 
-TopoTest1 <- prop.test(propsTopo$invasions[1:2], propsTopo$n[1:2])
-TopoTest2 <- prop.test(propsTopo$invasions[3:4], propsTopo$n[3:4])
-TopoTest3 <- prop.test(propsTopo$invasions[5:6], propsTopo$n[5:6])
-TopoTest4 <- prop.test(propsTopo$invasions[7:8], propsTopo$n[7:8])
+#TopoTest1 <- prop.test(propsTopo$invasions[1:2], propsTopo$n[1:2])
+#TopoTest2 <- prop.test(propsTopo$invasions[3:4], propsTopo$n[3:4])
+#TopoTest3 <- prop.test(propsTopo$invasions[5:6], propsTopo$n[5:6])
+#TopoTest4 <- prop.test(propsTopo$invasions[7:8], propsTopo$n[7:8])
+
+
+TopoTest1 <- fisher.test(cbind(propsTopo$invasions[1:2], propsTopo$n[1:2] - propsTopo$invasions[1:2]))
+TopoTest2 <- fisher.test(cbind(propsTopo$invasions[3:4], propsTopo$n[3:4] - propsTopo$invasions[3:4]))
+TopoTest3 <- fisher.test(cbind(propsTopo$invasions[5:6], propsTopo$n[5:6] - propsTopo$invasions[5:6]))
+TopoTest4 <- fisher.test(cbind(propsTopo$invasions[7:8], propsTopo$n[7:8] - propsTopo$invasions[7:8]))
+
 
 
 %%end.rcode
@@ -878,8 +897,12 @@ TopoTest4 <- prop.test(propsTopo$invasions[7:8], propsTopo$n[7:8])
 %%begin.rcode TopoTransPropTests
 #Finally run proportion tests between transmission rates
 
-TopoTransTest1 <- prop.test(propsTopo$invasions[c(1, 3, 5, 7)], propsTopo$n[c(1, 3, 5, 7)])
-TopoTransTest2 <- prop.test(propsTopo$invasions[c(2, 4, 6, 8)], propsTopo$n[c(2, 4, 6, 8)])
+#TopoTransTest1 <- prop.test(propsTopo$invasions[c(1, 3, 5, 7)], propsTopo$n[c(1, 3, 5, 7)])
+#TopoTransTest2 <- prop.test(propsTopo$invasions[c(2, 4, 6, 8)], propsTopo$n[c(2, 4, 6, 8)])
+
+
+TopoTransTest1 <- fisher.test(cbind(propsTopo$invasions[c(1, 3, 5, 7)], propsTopo$n[c(1, 3, 5, 7)] - propsDisp$invasions[c(1, 3, 5, 7)]))
+TopoTransTest2 <- fisher.test(cbind(propsTopo$invasions[c(2, 4, 6, 8)], propsTopo$n[c(2, 4, 6, 8)] - propsDisp$invasions[c(2, 4, 6, 8)]))
 
 
 %%end.rcode
@@ -897,8 +920,8 @@ Increased transmission clearly increases the rate of invasion even though the en
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-The proportion of invasions was not different across dispersal rates for three of four $\beta$ values ($\chi^2$ test. $\beta = 0.1$: $\chi^2 = \rinline{DispTest1$statistic}$, $\text{df} = \rinline{DispTest1$parameter}$, $p = \rinline{p(DispTest1$p.value)}$.  $\beta = 0.3$: $\chi^2 = \rinline{DispTest3$statistic}$, $\text{df} = \rinline{DispTest3$parameter}$, $p = \rinline{p(DispTest3$p.value)}$, $\beta = 0.4$: $\chi^2 = \rinline{DispTest4$statistic}$, $\text{df} = \rinline{DispTest4$parameter}$, $p = \rinline{p(DispTest4$p.value)}$).
-For $\beta = 0.2$ the rates of invasion were significantly different ($\beta = 0.2$: $\chi^2 = \rinline{DispTest2$statistic}$, $\text{df} = \rinline{DispTest2$parameter}$, $p = \rinline{p(DispTest2$p.value)}$).
+The proportion of invasions was not different across dispersal rates for three of four $\beta$ values (Fisher's exact test: $\beta = 0.1$, $p = \rinline{p(DispTest1$p.value)}$.  $\beta = 0.3$, $p = \rinline{p(DispTest3$p.value)}$, $\beta = 0.4$, $p = \rinline{p(DispTest4$p.value)}$).
+For $\beta = 0.2$ the rates of invasion were significantly different (Fisher's exact test: $p = \rinline{p(DispTest2$p.value)}$).
 The middle dispersal rate ($\xi = 0.01$) has the lowest invasion rate (\rinline{propsDisp$props[5]}) with the top and bottom dispersal rates have higher invasion rates ($\xi = 0.001$: invasion rate $=$ \rinline{propsDisp$props[4]}. $\xi = 0.1$: invasion rate $=$ \rinline{propsDisp$props[6]}).
 Given the 13 hypotheses tested in this study, if a Bonferroni correction is applied this difference would be insignificant at the 95\% confidence level (\rinline{p(DispTest2$p.value)} $> 0.05 / 12 = 6.8 \times 10^{-4}$).
 Due to this U-shape relationship and small differences in proportions of invasions I think this is probably not a real effect.
@@ -909,14 +932,14 @@ Overall, there is no support for the hypothesis that population structure increa
 
 I ran \rinline{nTopoSims} simulations over \rinline{length(unique(propsTopo$transmission))} transmission values ($\beta = $ \rinline{unique(propsTopo$transmission)}).
 The proportion of invasions was not different between highly connected and largely unconnected metapopulations (Figure~\ref{f:invasionPropPlots}B). 
-This was true at all transmission levels ($\chi^2$ test. $\beta = 0.1$: $\chi^2 < 10^{-5}$, $\text{df} = \rinline{TopoTest1$parameter}$, $p > 0.9999$. $\beta = 0.2$: $\chi^2 = \rinline{TopoTest2$statistic}$, $\text{df} = \rinline{TopoTest2$parameter}$, $p = \rinline{p(TopoTest2$p.value)}$. $\beta = 0.3$: $\chi^2 = \rinline{TopoTest3$statistic}$, $\text{df} = \rinline{TopoTest3$parameter}$, $p = \rinline{p(TopoTest3$p.value)}$. $\beta = 0.4$: $\chi^2 = \rinline{TopoTest4$statistic}$, $\text{df} = \rinline{TopoTest4$parameter}$, $p = \rinline{p(TopoTest4$p.value)}$).
+This was true at all transmission levels (Fisher's exact test. $\beta = 0.1$: $p = \rinline{p(TopoTest1$p.value)}$. $\beta = 0.2$:  $p = \rinline{p(TopoTest2$p.value)}$. $\beta = 0.3$: $p = \rinline{p(TopoTest3$p.value)}$. $\beta = 0.4$:  $p = \rinline{p(TopoTest4$p.value)}$).
 
  
 \subsection{Transmission}
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 
 In line with theory, increasing the transmission rate increased the probability of invasion (Figure~\ref{f:invasionPropPlots}).
-This is true for all three dispersal values ($\chi^2$ test. $\xi = 0.001$: $\chi^2 = \rinline{DispTransTest1$statistic}$, $\text{df} = \rinline{DispTransTest1$parameter}$, $p < 10^{-5}$. $\xi = 0.01$: $\chi^2 = \rinline{DispTransTest2$statistic}$, $\text{df} = \rinline{DispTransTest2$parameter}$, $p < 10^{-5}$. $\xi = 0.1$: $\chi^2 = \rinline{DispTransTest3$statistic}$, $\text{df} = \rinline{DispTransTest3$parameter}$, $p < 10^{-5}$) and both network structures ($\chi^2$ test. Fully connected: $\chi^2 = \rinline{TopoTransTest2$statistic}$, $\text{df} = \rinline{TopoTransTest2$parameter}$, $p < 10^{-5}$. Minimally connected: $\chi^2 =  \rinline{TopoTransTest2$statistic}$, $\text{df} = \rinline{TopoTransTest2$parameter}$, $p < 10^{-5}$).
+This is true for all three dispersal values (Fisher's exact test. $\xi = 0.001$: $p < 10^{-5}$. $\xi = 0.01$: $p < 10^{-5}$. $\xi = 0.1$: $\chi^2 = \rinline{DispTransTest3$statistic}$, $p < 10^{-5}$) and both network structures (Fisher's exact test. Fully connected: $p < 10^{-5}$. Minimally connected: $p < 10^{-5}$).
 
 
 
