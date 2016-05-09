@@ -1,0 +1,173 @@
+
+
+%%begin.rcode settings, echo = FALSE, cache = FALSE, message = FALSE, results = 'hide', eval = TRUE
+
+
+
+# There are figures created in the data analysis which are not in the final chapter document.
+#   If TRUE, they will be included in the output.
+#   Use 'hide' to remove them.
+extraFigs <- 'hide'
+
+#knitr options
+#  Set figure prefix as A so that no figures will be overwritten.
+opts_chunk$set(cache.path = '.AppCh2Cache/', fig.path = 'figure/A-')
+source('misc/KnitrOptions.R')
+
+# ggplot2 theme.
+source('misc/theme_tcdl.R')
+theme_set(theme_grey() + theme_tcdl)
+
+
+# Choose the number of cores to use
+nCores <- 6
+
+%%end.rcode
+
+
+%%begin.rcode simsSwitch
+
+runSims <- FALSE
+
+%%end.rcode
+
+%%begin.rcode libs
+
+library(MetapopEpi)
+library(cowplot)
+
+
+%%end.rcode
+
+
+
+%%begin.rcode SimLengths2
+
+  # These apply to both topo and disp sims. And probably should apply to extinction sims if I include them.
+  # How long should the simulation last?
+  nEvent <- 8e5
+
+  # When should the invading pathogen be added.
+  invadeT <- 3e5
+
+
+  # 
+  sample <- 1000
+
+%%end.rcode
+
+%%begin.rcode sims, eval = runSims
+
+# Run simulations
+
+  set.seed(2000)
+
+  # Make the population.
+  p1 <- makePop(model = 'SIR', events = nEvent, nColonies = 10, nPathogens = 2,   recovery = 1,  sample = sample, dispersal = 0.1, birth = 0.05, death = 0.05, crossImmunity = 0.1, meanColonySize = 3000, infectDeath = 0, transmission = 0.2, maxDistance = 100, colonySpatialDistr = 'circle')
+
+  # Seed endemic pathogen.
+  for(i in 1:10){
+    p1 <- seedPathogen(p1, 2, n = 200, diffCols = FALSE)
+  }
+
+  # Burn in simulation
+  p1 <- runSim(p1, end = invadeT)
+
+  # Seed invading pathogen.
+  p1$I[2, 1, (invadeT + 1) %% sample] <- 5
+  
+  # Recalculate rates of each event after seeding.
+  p1 <- transRates(p1, (invadeT + 1) %% sample)
+
+  # Continue simulation
+  p1 <- runSim(p1, start = invadeT + 1, end = 'end')
+
+  save(p1, file = 'data/Chapter2/Appen1.RData')
+
+
+
+  set.seed(2021)
+
+  # Make the population.
+  p2 <- makePop(model = 'SIR', events = nEvent, nColonies = 10, nPathogens = 2,   recovery = 1,  sample = sample, dispersal = 0.1, birth = 0.05, death = 0.05, crossImmunity = 0.1, meanColonySize = 3000, infectDeath = 0, transmission = 0.2, maxDistance = 100, colonySpatialDistr = 'circle')
+
+  # Seed endemic pathogen.
+  for(i in 1:10){
+    p2 <- seedPathogen(p2, 2, n = 200, diffCols = FALSE)
+  }
+
+  # Burn in simulation
+  p2 <- runSim(p1, end = invadeT)
+
+  # Seed invading pathogen.
+  p2$I[2, 1, (invadeT + 1) %% sample] <- 5
+  
+  # Recalculate rates of each event after seeding.
+  p2 <- transRates(p2, (invadeT + 1) %% sample)
+
+  # Continue simulation
+  p2 <- runSim(p2, start = invadeT + 1, end = 'end')
+
+  save(p2, file = 'data/Chapter2/Appen2.RData')
+
+
+
+
+
+%%end.rcode 
+
+
+
+
+%%begin.rcode plotsCaps
+
+invadeCapt <- c(
+'awdawdawd',
+'Herbgurnle',
+'awdawdawd',
+'adfgirirsam'
+)
+
+%%end.rcode
+
+
+%%begin.rcode plots, fig.cap = invadeCapt, fig.height = 4, out.width = "\\textwidth" 
+
+  load('data/Chapter2/Appen1.RData')
+
+  invasion1 <- findDisDistr(p1, 2)[1] > 0
+
+  pPop(p1) + theme_tcdl
+  pCol(p1) + theme_tcdl
+  pSIR(p1) + theme_tcdl 
+  pSIR(p1) + theme_tcdl + ylim(0, 2000)
+
+
+
+  
+%%end.rcode
+
+
+
+
+%%begin.rcode plots2, fig.cap = invadeCapt, fig.height = 4, out.width = "\\textwidth" 
+
+  load('data/Chapter2/Appen2.RData')
+
+  invasion2 <- findDisDistr(p2, 2)[1] > 0
+
+  pPop(p1) + theme_tcdl
+  pCol(p1) + theme_tcdl
+  pSIR(p1) + theme_tcdl 
+  pSIR(p1) + theme_tcdl + ylim(0, 2000)
+
+
+
+  
+%%end.rcode
+
+
+
+
+
+
