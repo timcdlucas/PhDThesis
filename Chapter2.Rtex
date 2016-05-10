@@ -328,14 +328,14 @@ We can now write down the rates of all events.
 %I defined $I^+_p$ to be the sum of all classes that are infectious with pathogen $p$, for example $I^+_1 = I_1 + I_{12}$. 
 Assuming asexual reproduction, that all classes reproduce at the same rate and that individuals are born into the susceptible class we get
 \begin{align}
-  P\left( S_{nt^\prime} = S_{nt} +1\right) &= \Lambda\left( S_{nt}+\sum_q I_{qnt} + R_{nt}\right) 
+  S_{n} \rightarrow S_{n} + 1 \text{at a rate of} \Lambda\left( S_{n}+\sum_q I_{qn} + R_{n}\right) 
 \end{align}
-where $P\left( S_{nt^\prime} = S_{nt} +1\right)$ is the probability that the number of susceptibles in subpopulation $n$ will increase by 1 (a single birth) in the time interval $t$ to $t^\prime$ and $\sum_q I_{qnt}$ is the sum of all infection classes $q \in {1, 2, 12}$.
+where $S_{n} \rightarrow S_{n} + 1$ is the event that the number of susceptibles in subpopulation $n$ will increase by 1 (a single birth) and $\sum_q I_{qn}$ is the sum of all infection classes $q \in {1, 2, 12}$.
 The rates of death, given a death rate $\mu$ are given by
 \begin{align}
-  P\left( S_{nt^\prime} = S_{nt}-1 \right) &= \mu S_{nt}, \\
-  P\left( I_{qnt^\prime} = I_{qnt}-1 \right) &= \mu I_{qnt},\\
-  P\left( R_{nt^\prime} = R_{nt}-1 \right) &= \mu R_{nt}.
+  S_{n} \rightarrow S_{n}-1  \text{at a rate of} \mu S_{n}, \\
+  I_{qn}  \rightarrow I_{qn}-1 \text{at a rate of} \mu I_{qn},\\
+  R_{n}  \rightarrow R_{n}-1 \text{at a rate of} \mu R_{n}.
 \end{align}
 
 
@@ -357,7 +357,7 @@ $I_q$ & Number of individuals infected with disease(s) $q \in {1, 2, 12}$ &&\\
 $R$ & Number of individuals in the recovered with immunity class &&\\
 $N$ & Total Population size && 30,000\\
 $m$ & Number of colonies&& 10\\
-$n$ & Colony starting size && 3,000\\
+$n$ & Colony size && 3,000\\
 $a$ & Area & km$^2$& 10,000\\
 $\beta$ & Transmission rate & year$^{-1}.$individual$^{-1}$ & 2, 5, 10\\
 $\gamma$ & Recovery rate & year$^{-1}.$individual$^{-1}$ & 1\\
@@ -370,7 +370,7 @@ $\mu$ & Death rate & year$^{-1}.$individual$^{-1}$ & 0.05\\
 $k_i$ & Degree of node $i$ (number of colonies that individuals from colony $i$ can disperse to). &&\\
 $\delta$ & Waiting time until next event & years &\\
 $\alpha$ & Coinfection adjustment factor.  & Proportion & 0.1\\
-$n, m$ & Colony index &&\\
+$i, j$ & Colony index &&\\
 %$\bm{A}_{mn}$ & Adjacency matrix. & Distance &\\
 %$\mu$ & Maximum distance for edge to exist & km& 40, 100\\
 %$\sigma$ & Invading pathogen seed size & & 10\\
@@ -387,23 +387,23 @@ This assumption was more suitable than frequency-dependent transmission as I am 
 I was notably not modelling an STD as these diseases are not expected to be commonly zoonotic.
 Infection of a susceptible with either pathogen 1 or 2, $S \rightarrow I_p$ where $p\in \{1,2\}$, is therefore given by
 \begin{align}
-  P\left( I_{1nt^\prime} = I_{1nt}+1, S_{nt^\prime} = S_{nt}-1 \right) &= \beta S_{nt}\left(I_{1nt} + I_{12nt}\right),\\
-  P\left( I_{2nt^\prime} = I_{2nt}+1, S_{nt^\prime} = S_{nt}-1 \right) &= \beta S_{nt}\left(I_{2nt} + I_{12nt}\right),
+  I_{1i} \rightarrow I_{1i}+1, S_{i} \rightarrow S_{i}-1 &\text{at a rate of} \beta S_{i}\left(I_{1i} + I_{12i}\right),\\
+  I_{2i} \rightarrow I_{2i}+1, S_{i} \rightarrow S_{i}-1  &\text{at a rate of} \beta S_{n}\left(I_{2i} + I_{12i}\right),
 \end{align}
 while coinfection, given a coinfection adjustment factor $\alpha$, is given by
 \begin{align}
-  P\left( I_{12,nt^\prime} = I_{12,nt}+1,\: I_{1nt^\prime} = I_{1nt}-1\right) = &\alpha\beta I_{1nt}\left(I_{2nt} + I_{12nt}\right),\\
-  P\left( I_{12,nt^\prime} = I_{12,nt}+1,\: I_{2nt^\prime} = I_{2nt}-1\right) = &\alpha\beta I_{2nt}\left(I_{1nt} + I_{12nt}\right).
+  I_{12,i} \rightarrow I_{12,i}+1,\: I_{1i} \rightarrow I_{1i}-1 &\text{at a rate of} &\alpha\beta I_{1i}\left(I_{2i} + I_{12i}\right),\\
+  I_{12,i} \rightarrow I_{12,i}+1,\: I_{2i} \rightarrow I_{2i}-1 &\text{at a rate of} &\alpha\beta I_{2i}\left(I_{1i} + I_{12i}\right).
 \end{align}
 The probability of migration from colony $m$ (with degree $k_m$) to colony $n$, given a dispersal rate $\xi$ is given by
 \begin{align}
-  P\left(S_{nt^\prime}=S_{nt}+1,\: S_{mt^\prime} = S_{mt}-1\right) &= \frac{\xi S_{mt}}{k_m},\\
-  P\left(I_{qnt^\prime}=I_{qnt}+1,\: I_{qmt^\prime} = I_{qmt}-1\right) &= \frac{\xi I_{qmt}}{k_m},\\
-  P\left(R_{nt^\prime}=S_{nt}+1,\: R_{mt^\prime} = R_{mt}-1\right) &= \frac{\xi R_{mt}}{k_m}.
+  S_{n} \rightarrow S_{i}+1,\: S_{j} \rightarrow S_{j}-1 &\text{at a rate of} \frac{\xi S_{j}}{k_j},\\
+  I_{qn} \rightarrow I_{qi}+1,\: I_{qj} \rightarrow I_{qj}-1 &\text{at a rate of} \frac{\xi I_{qj}}{k_j},\\
+  R_{n} \rightarrow S_{i}+1,\: R_{j} \rightarrow R_{j}-1 &\text{at a rate of} \frac{\xi R_{j}}{k_j}.
 \end{align}
 Finally, recovery from any infectious class occurs at a rate $\gamma$
 \begin{align}
-  P\left( I_{qnt^\prime} = I_{qnt}-1,\: R_{nt^\prime} = R_{nt}+1 \right) &= \gamma I_{qnt}.
+  I_{qi} \rightarrow I_{qi}-1,\: R_{i} \rightarrow R_{i}+1  \text{at a rate of} \gamma I_{qi}.
 \end{align}
 
 
