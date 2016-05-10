@@ -60,33 +60,8 @@ library(cowplot)
 
 # Run simulations
 
-  set.seed(2000)
 
-  # Make the population.
-  p1 <- makePop(model = 'SIR', events = nEvent, nColonies = 10, nPathogens = 2,   recovery = 1,  sample = sample, dispersal = 0.1, birth = 0.05, death = 0.05, crossImmunity = 0.1, meanColonySize = 3000, infectDeath = 0, transmission = 0.2, maxDistance = 100, colonySpatialDistr = 'circle')
-
-  # Seed endemic pathogen.
-  for(i in 1:10){
-    p1 <- seedPathogen(p1, 2, n = 200, diffCols = FALSE)
-  }
-
-  # Burn in simulation
-  p1 <- runSim(p1, end = invadeT)
-
-  # Seed invading pathogen.
-  p1$I[2, 1, (invadeT + 1) %% sample] <- 5
-  
-  # Recalculate rates of each event after seeding.
-  p1 <- transRates(p1, (invadeT + 1) %% sample)
-
-  # Continue simulation
-  p1 <- runSim(p1, start = invadeT + 1, end = 'end')
-
-  save(p1, file = 'data/Chapter2/Appen1.RData')
-
-
-
-  set.seed(2021)
+  set.seed(22)
 
   # Make the population.
   p2 <- makePop(model = 'SIR', events = nEvent, nColonies = 10, nPathogens = 2,   recovery = 1,  sample = sample, dispersal = 0.1, birth = 0.05, death = 0.05, crossImmunity = 0.1, meanColonySize = 3000, infectDeath = 0, transmission = 0.2, maxDistance = 100, colonySpatialDistr = 'circle')
@@ -97,7 +72,7 @@ library(cowplot)
   }
 
   # Burn in simulation
-  p2 <- runSim(p1, end = invadeT)
+  p2 <- runSim(p2, end = invadeT)
 
   # Seed invading pathogen.
   p2$I[2, 1, (invadeT + 1) %% sample] <- 5
@@ -108,7 +83,36 @@ library(cowplot)
   # Continue simulation
   p2 <- runSim(p2, start = invadeT + 1, end = 'end')
 
-  save(p2, file = 'data/Chapter2/Appen2.RData')
+  save(p2, file = 'data/Chapter2/Appen22.RData')
+
+
+
+
+
+  set.seed(24)
+
+  # Make the population.
+  p2 <- makePop(model = 'SIR', events = nEvent, nColonies = 10, nPathogens = 2,   recovery = 1,  sample = sample, dispersal = 0.1, birth = 0.05, death = 0.05, crossImmunity = 0.1, meanColonySize = 3000, infectDeath = 0, transmission = 0.2, maxDistance = 100, colonySpatialDistr = 'circle')
+
+  # Seed endemic pathogen.
+  for(i in 1:10){
+    p2 <- seedPathogen(p2, 2, n = 200, diffCols = FALSE)
+  }
+
+  # Burn in simulation
+  p2 <- runSim(p2, end = invadeT)
+
+  # Seed invading pathogen.
+  p2$I[2, 1, (invadeT + 1) %% sample] <- 5
+  
+  # Recalculate rates of each event after seeding.
+  p2 <- transRates(p2, (invadeT + 1) %% sample)
+
+  # Continue simulation
+  p2 <- runSim(p2, start = invadeT + 1, end = 'end')
+
+  save(p2, file = 'data/Chapter2/Appen24.RData')
+
 
 
 
@@ -125,41 +129,56 @@ library(cowplot)
 
 %%begin.rcode invadeCapts
 
-invadeTitle <- c(
+
+#p2 <- makePop(model = 'SIR', events = nEvent, nColonies = 10, nPathogens = 2,   recovery = 1,  sample = sample, dispersal = 0.1, birth = 0.05, death = 0.05, crossImmunity = 0.1, meanColonySize = 3000, infectDeath = 0, transmission = 0.2, maxDistance = 100, colonySpatialDistr = 'circle')
+
+
+invadeTitle <-
 '
-Example of simulated colony size change
-',
+Examples of simulated SIR dynamics with succesfull invasions
 '
-Example of simulated SIR dynamics with succesfull invasion
-',
-'
-Example of disease dynamics of successfully invading pathogen
-')
 
 
 
-invadeCapt <- c(
-paste('
-Population change of all ten colonies over the course of a simulation.
-)',
-'',
-'adfgirirsam'
-)
+invadeCapt <- 
+'
+Two examples (A and B) of a succesful invasion plotted on a logged $y$-axis.
+The lines are coloured such that blue represents susceptibles, brown represents individuals infected with one pathogen (the two seperate brown lines are pathogen 1 and 2), black represents co-infected individuals and yellow represents recovered and immune individuals.
+Pathogen 2 is seeded after $3\times 10^4$ events (approximately 30 years).
+Simulations are run on a fully-connected network.
+Parameter values are: dispersal rate = 0.1, transmission rate = 0.2.
+All other parameters are as stated in Table~\\ref{t:params}.
+'
+
 
 %%end.rcode
 
 
-%%begin.rcode plotsInvade, fig.cap = invadeCapt, fig.scap = invadeTitle, fig.height = 4, out.width = "\\textwidth" 
+%%begin.rcode plotsInvade, fig.cap = invadeCapt, fig.scap = invadeTitle, fig.height = 5, out.width = "\\textwidth" 
 
-  load('data/Chapter2/Appen1.RData')
+load('data/Chapter2/Appen1.RData')
+findDisDistr(p1, 2)[1] > 0
+invade1 <- pSIR(p1) + 
+            theme_tcdl + 
+            scale_y_log10() + 
+            scale_colour_poke(pokemon = 'Loudred', spread = 4) +
+            xlab('Time (years)')
 
-  invasion1 <- findDisDistr(p1, 2)[1] > 0
+load('data/Chapter2/Appen24.RData')
+findDisDistr(p2, 2)[1] > 0
+invade2 <- pSIR(p2) + 
+            theme_tcdl + 
+            scale_y_log10() + 
+            scale_colour_poke(pokemon = 'Loudred', spread = 4) +
+            xlab('Time (years)')
 
-  pPop(p1) + theme_tcdl
-  # pCol(p1) + theme_tcdl
-  pSIR(p1) + theme_tcdl 
-  pSIR(p1) + theme_tcdl + ylim(0, 2000)
 
+# Combine and print the plots.
+ggdraw() +
+  draw_label("A)", 0.02, 0.98, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
+  draw_plot(invade1, 0, 0, 1, 0.5) +
+  draw_label("B)", 0.02, 0.48, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
+  draw_plot(invade2, 0, 0.5, 1, 0.5) 
 
 
   
@@ -177,33 +196,83 @@ Population change of all ten colonies over the course of a simulation.
 
 noInvadeTitle <- c(
 '
-Example of disease dynamics for unsuccessfully invading pathogen
-')
+Examples of simulated SIR dynamics with nusuccesfull invasions
+',
+'
+Examples of colony size dynamics
+'
+)
 
 
 
 noInvadeCapt <- c(
-paste('
-Population change of all ten colonies over the course of a simulation.
-')
+'
+Two examples (A and B) of an unsuccesful invasion plotted on a logged $y$-axis.
+The lines are coloured such that blue represents susceptibles, brown represents individuals infected with one pathogen (the two seperate brown lines are pathogen 1 and 2), black represents co-infected individuals and yellow represents recovered and immune individuals.
+Pathogen 2 is seeded after $3\times 10^4$ events (approximately 30 years).
+It can be seen that after seeding pathogen 2, there is a very short period before extinction as opposed to a long fade out of disease.
+Simulations are run on a fully-connected network.
+Parameter values are: dispersal rate = 0.1, transmission rate = 0.2.
+All other parameters are as stated in Table~\\ref{t:params}.
+',
+'
+Two examples (A and B) of the change in colony sizes throughout a simulation (note the truncated $y$-axis).
+The size of each colony changes as a random walk.
+However, given the length of the simulations, there is little risk of colonies going extinct or becoming very large.
+Birth and death rate are equal and set to 0.05, giving a generation time of 20 years.
+The metapopulation network is fully-connected and the dispersal rate is 0.1 per year.
+The starting colony size is 3,000.
+'
 )
 
 %%end.rcode
 
 
 
-%%begin.rcode plotsNoInvade, fig.cap = noInvadeCapt, fig.scap = noInvadeTitle, fig.height = 4, out.width = "\\textwidth" 
+%%begin.rcode plotsNoInvade, fig.cap = noInvadeCapt, fig.scap = noInvadeTitle, fig.height = 5, out.width = c("\\textwidth", "0.8\\textwidth")
 
-  load('data/Chapter2/Appen2.RData')
+load('data/Chapter2/Appen22.RData')
 
-  invasion2 <- findDisDistr(p2, 2)[1] > 0
+noInvade1 <- pSIR(p2) + 
+               theme_tcdl + 
+               scale_y_log10() + 
+               scale_colour_poke(pokemon = 'Loudred', spread = 4) + 
+               xlab('Time (years)')
+pop1 <- pPop(p2) + theme_tcdl + xlab('Time (years)')
 
-  pSIR(p1) + theme_tcdl 
-  pSIR(p1) + theme_tcdl + ylim(0, 2000)
+
+load('data/Chapter2/Appen25.RData')
 
 
+noInvade2 <- pSIR(p2) + 
+               theme_tcdl + 
+               scale_y_log10() + 
+               scale_colour_poke(pokemon = 'Loudred', spread = 4) +
+               xlab('Time (years)')
+pop2 <- pPop(p2) + theme_tcdl + xlab('Time (years)')
+
+
+# Combine and print the plots.
+ggdraw() +
+  draw_label("A)", 0.02, 0.98, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
+  draw_plot(noInvade1, 0, 0, 1, 0.5) +
+  draw_label("B)", 0.02, 0.48, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
+  draw_plot(noInvade2, 0, 0.5, 1, 0.5) 
 
   
+
+
+# Combine and print the plots.
+ggdraw() +
+  draw_label("A)", 0.02, 0.98, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
+  draw_plot(pop1, 0, 0, 1, 0.5) +
+  draw_label("B)", 0.02, 0.48, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
+  draw_plot(pop2, 0, 0.5, 1, 0.5) 
+
+  
+
+
+
 %%end.rcode
 
 
