@@ -1,8 +1,5 @@
 
 
-
-
-
 %%begin.rcode settings, echo = FALSE, cache = FALSE, message = FALSE, results = 'hide'
 
 ####################################
@@ -95,7 +92,7 @@ I tested these hypotheses using metapopulation networks parameterised to mimic w
 %  (with the words “here we show” or their equivalent).
 I simulated the process of a new pathogen invading into a metapopulation already occupied by an identical pathogen.
 I varied the topology of the metapopulation (using fully and minimally connected networks) , dispersal rate and transmission rate.
-I found that neither metapopulation topology nor dispersal rate affected the probability that a new pathogen would invade into a population.
+I found no significant evidence that either metapopulation topology nor dispersal rate affected the probability that a new pathogen would invade into a population.
 Increased transmission rate strongly increased invasion probability, as expected. 
 %\paragraph{Two or three sentences explaining what the main result reveals in direct comparison to what was thought to be the case previously}
 % or how the main result adds to previous knowledge
@@ -242,7 +239,7 @@ Finally, population structure has already been found to correlate with pathogen 
 % One sentence summarising the main result
 % (with the words “here we show” or their equivalent).
 
-Here I show that, given the assumptions of a metapopulation, population structure does not affect the rate of invasion of new pathogens.
+Here I show that, given the assumptions of a metapopulation, population structure does not significantly affect the rate of invasion of new pathogens.
 This is true whether population structure is altered by changing the dispersal rate or the topology of the metapopulation network.
 
 
@@ -269,15 +266,15 @@ I developed a multipathogen, SIR compartment model with individuals being classe
 Susceptible individuals are counted in class $S$.
 There are three infected classes, $I_1$, $I_2$ and $I_{12}$, being individuals infected with pathogen 1, pathogen 2 or both respectively (see Table~\ref{t:params} for a list of symbols and values used).
 Recovered individuals, $R$, are immune to both pathogens, even if they have only been infected with one.
-Furthermore, recovery from one pathogen moves an individual straight into the recovered class, even if the individual is infected with both pathogen.
+Furthermore, recovery from one pathogen moves an individual straight into the recovered class, even if the individual is infected with both pathogens.
 This modelling choice allows the model to be easily expanded to include more than two pathogens.
 The assumption of immediate recovery from all other diseases is likely to be quite accurate for very closely related pathogens as is being studied here as once an acquired immune response is activated, all infections are likely to be cleared quickly. %todo cite
 The coinfection rate (the rate at which an infected individual is infected with a second pathogen) is adjusted compared to the infection rate by a factor $\alpha$ (here I used $\alpha = 0.1$ which means coinfection happens at a tenth the rate of first infections).
 
-In the application of long term existence of pathogens it is vital to include vital dynamics (births and deaths) as the SIR without vital dynamics has no endemic state.
+In the application of long term existence of pathogens it is necessary to include vital dynamics (births and deaths) as the SIR model without vital dynamics has no endemic state.
 Birth and death rates are assumed to be equal, $\mu = \Lambda$.
 New born individuals enter the susceptible class.
-The time scale of the simulations are set by setting $\mu$ = 0.05 per year, yielding an average host generation time of 20 years.
+The time scale of the simulations are determined by setting $\mu$ = 0.05 per year, yielding an average host generation time of 20 years.
 Infection is assumed to cause no extra mortality as for a number of viruses, bats show no clinical signs of infection \cite{halpin2011pteropid, deThoisy2016bioecological}.
 
 
@@ -299,13 +296,13 @@ Note this rate is independent of the degree and size of subpopulation $n$.
 
 \paragraph{Stochastic simulations}
 
-I examined this model using stochastic, continuous time simulations (using the Gillespie algorithm) implemented in \emph{R} \cite{R}.
-At each step in the simulation we calculate the rate that each possible event might occur.
+I examined this model using stochastic, continuous time simulations implemented in \emph{R} \cite{R}.
+At each step in the simulation we calculate the rate at which each possible event might occur.
 One event is then randomly chosen, weighted by its rate
 \begin{align}
   p(\text{event } i) = \frac{r_i}{\sum_{j\neq i} r_j}
 \end{align}
-where $r_i$ is the rate that event $i$ occurs.
+where $r_i$ is the rate at whch event $i$ occurs.
 Finally, the length of the time step, $\delta$, is drawn from an exponential distribution 
 \begin{align}
   \delta \sim \operatorname{Exp}\left(\sum_i r_i  \right).
@@ -318,8 +315,8 @@ This means that the total length of each simulation is stochastic.
   \includegraphics[width=0.4\textwidth]{imgs/SIRoption1.pdf}
   \caption[Schematic of the SIR model used]{
 Schematic of the SIR model used. 
-Individuals are in one five classes, susceptible (orange, S), infectious with pathogen 1, pathogen 2 or both (blue, $I_1, I_2, I_{12}$) or recovered and immune from further infection (green, R).
-Transitions between classes occurs only as indicated by arrows.
+Individuals are in one of five classes, susceptible (orange, S), infectious with pathogen 1, pathogen 2 or both (blue, $I_1, I_2, I_{12}$) or recovered and immune from further infection (green, R).
+Transitions between classes occur only as indicated by arrows.
 Note that individuals in $I_{12}$ move into R, not back to $I_1$ or $I_2$. 
 That is, recovery from one pathogen causes immediate recovery from the other pathogen.
 }
@@ -344,17 +341,21 @@ The rates of death, given a death rate $\mu$ are given by
 
 \begin{table}[b!]
 \centering
-\caption[All symbols used in Chapters \ref{ch:sims1} and \ref{ch:sims2}.]{A summary of all symbols used in Chapters \ref{ch:sims1} and \ref{ch:sims2} along with their units and default values.}
+\caption[All symbols used in Chapters \ref{ch:sims1} and \ref{ch:sims2}.]{A summary of all symbols used in Chapters \ref{ch:sims1} and \ref{ch:sims2} along with their units and default values.
+The justification for parameter values is given in Section \ref{s:paramSelect}.}
 
 \begin{tabular}{@{}lp{6cm}p{2.9cm}r@{}}
 \toprule
 Symbol & Explanation & Units & Value\\
 \midrule
+$\rho$ & Number of pathogens && 2\\
+$p$ &  Pathogen index i.e.\ $p\in\{1,2\}$ for pathogens 1 and 2 & &\\
+$q$ & Disease class i.e.\ $q\in\{1,2,12\}$&\\
 $S$ & Number of susceptible individuals &&\\
-$I_q$ & N. individuals infectious with diseases $q \in {1, 2, 12}$ &&\\
-%$I^+_p$ & Sum of classes infected with pathogen $p$ &\\
-$R$ & Number of recovered/immune individuals &&\\
-$N$ & Total Population && 30,000\\
+$I_q$ & Number of individuals infected with disease(s) $q \in {1, 2, 12}$ &&\\
+%$I^+_p$ & Total number of individuals infected with pathogen $p$ &\\
+$R$ & Number of individuals in the recovered with immunity class &&\\
+$N$ & Total Population size && 30,000\\
 $m$ & Number of colonies&& 10\\
 $n$ & Colony starting size && 3,000\\
 $a$ & Area & km$^2$& 10,000\\
@@ -364,19 +365,16 @@ $\xi$ & Dispersal & year$^{-1}.$individual$^{-1}$ & 0.001--0.1\\
 $\Lambda$ & Birth rate & year$^{-1}.$individual$^{-1}$ & 0.05\\
 $\mu$ & Death rate & year$^{-1}.$individual$^{-1}$ & 0.05\\
 %$d_I$ & Infectious death rate & Additional deaths per day per individual&\\
-$\rho$ & No. pathogens && 2\\
-$p$ &  Pathogen index i.e.\ $p\in\{1,2\}$ for pathogens 1 and 2 & &\\
-$q$ & Disease class i.e., $q\in\{1,2,12\}$&\\
 %$\mathcal{V}$ & Neighbourhood of a node &&\\
-$t, t^\prime$ & Time and time plus waiting time i.e., $t+\delta$ & years &\\
-$k_i$ & Degree of node $i$ &&\\
+%$t, t^\prime$ & Time, and time plus waiting time i.e. $t+\delta$ & years &\\
+$k_i$ & Degree of node $i$ (number of colonies that individuals from colony $i$ can disperse to). &&\\
 $\delta$ & Waiting time until next event & years &\\
-$\alpha$ & Cross-immunity & Proportion& 0.1\\
+$\alpha$ & Coinfection adjustment factor.  & Proportion & 0.1\\
 $n, m$ & Colony index &&\\
 %$\bm{A}_{mn}$ & Adjacency matrix. & Distance &\\
 %$\mu$ & Maximum distance for edge to exist & km& 40, 100\\
-$\sigma$ & Invading pathogen seed size & & 10\\
-$r_i$ & The rate that event $i$ occurs & year$^{-1}$&\\
+%$\sigma$ & Invading pathogen seed size & & 10\\
+$r_i$ & The rate at which event $i$ occurs & year$^{-1}$&\\
 \bottomrule
 \end{tabular}
 
@@ -392,7 +390,7 @@ Infection of a susceptible with either pathogen 1 or 2, $S \rightarrow I_p$ wher
   P\left( I_{1nt^\prime} = I_{1nt}+1, S_{nt^\prime} = S_{nt}-1 \right) &= \beta S_{nt}\left(I_{1nt} + I_{12nt}\right),\\
   P\left( I_{2nt^\prime} = I_{2nt}+1, S_{nt^\prime} = S_{nt}-1 \right) &= \beta S_{nt}\left(I_{2nt} + I_{12nt}\right),
 \end{align}
-while coinfection, given a cross-immunity factor $\alpha$, is given by
+while coinfection, given a coinfection adjustment factor $\alpha$, is given by
 \begin{align}
   P\left( I_{12,nt^\prime} = I_{12,nt}+1,\: I_{1nt^\prime} = I_{1nt}-1\right) = &\alpha\beta I_{1nt}\left(I_{2nt} + I_{12nt}\right),\\
   P\left( I_{12,nt^\prime} = I_{12,nt}+1,\: I_{2nt^\prime} = I_{2nt}-1\right) = &\alpha\beta I_{2nt}\left(I_{1nt} + I_{12nt}\right).
@@ -680,7 +678,7 @@ This value is artificially small compared to wildlife populations.
 
 
 \subsection{Parameter selection}
-
+\label{s:paramSelect}
 
 The fixed parameters were chosen to roughly reflect realistic wild bat populations. 
 The death rate $\mu$ was set as 0.05 per year giving a generation time of 20 years.

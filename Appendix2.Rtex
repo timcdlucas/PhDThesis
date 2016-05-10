@@ -119,26 +119,44 @@ library(cowplot)
 
 
 
-%%begin.rcode plotsCaps
+% --------------------------------------------------------------------------- %
+% Invading pathogen plots
+% --------------------------------------------------------------------------- %
+
+%%begin.rcode invadeCapts
+
+invadeTitle <- c(
+'
+Example of simulated colony size change
+',
+'
+Example of simulated SIR dynamics with succesfull invasion
+',
+'
+Example of disease dynamics of successfully invading pathogen
+')
+
+
 
 invadeCapt <- c(
-'awdawdawd',
-'Herbgurnle',
-'awdawdawd',
+paste('
+Population change of all ten colonies over the course of a simulation.
+)',
+'',
 'adfgirirsam'
 )
 
 %%end.rcode
 
 
-%%begin.rcode plots, fig.cap = invadeCapt, fig.height = 4, out.width = "\\textwidth" 
+%%begin.rcode plotsInvade, fig.cap = invadeCapt, fig.scap = invadeTitle, fig.height = 4, out.width = "\\textwidth" 
 
   load('data/Chapter2/Appen1.RData')
 
   invasion1 <- findDisDistr(p1, 2)[1] > 0
 
   pPop(p1) + theme_tcdl
-  pCol(p1) + theme_tcdl
+  # pCol(p1) + theme_tcdl
   pSIR(p1) + theme_tcdl 
   pSIR(p1) + theme_tcdl + ylim(0, 2000)
 
@@ -149,15 +167,37 @@ invadeCapt <- c(
 
 
 
+% --------------------------------------------------------------------------- %
+% No invasion plots
+% --------------------------------------------------------------------------- %
 
-%%begin.rcode plots2, fig.cap = invadeCapt, fig.height = 4, out.width = "\\textwidth" 
+
+
+%%begin.rcode noInvadeCapts
+
+noInvadeTitle <- c(
+'
+Example of disease dynamics for unsuccessfully invading pathogen
+')
+
+
+
+noInvadeCapt <- c(
+paste('
+Population change of all ten colonies over the course of a simulation.
+')
+)
+
+%%end.rcode
+
+
+
+%%begin.rcode plotsNoInvade, fig.cap = noInvadeCapt, fig.scap = noInvadeTitle, fig.height = 4, out.width = "\\textwidth" 
 
   load('data/Chapter2/Appen2.RData')
 
   invasion2 <- findDisDistr(p2, 2)[1] > 0
 
-  pPop(p1) + theme_tcdl
-  pCol(p1) + theme_tcdl
   pSIR(p1) + theme_tcdl 
   pSIR(p1) + theme_tcdl + ylim(0, 2000)
 
