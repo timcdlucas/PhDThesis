@@ -709,7 +709,7 @@ fullSim <- function(x){
   p <- runSim(p, end = invadeT)
 
   # Seed invading pathogen.
-  p$I[1, 1, (invadeT + 1) %% sample] <- 5
+  p$I[3, 2, (invadeT + 1) %% sample] <- 5
   
   # Recalculate rates of each event after seeding.
   p <- transRates(p, (invadeT + 1) %% sample)
@@ -749,7 +749,7 @@ fullSim <- function(x){
 }
 %%end.rcode
 
-%%begin.rcode runUnstructuredSim, eval = FALSE, cache = TRUE
+%%begin.rcode runUnstructuredSim, eval = TRUE, cache = TRUE
 
 # Create and set seed (seed object is used to set seed in each seperate simulation.'
 seed <- 13
