@@ -380,7 +380,7 @@ $x, y$ & Colony index &&\\
 %$\bm{A}_{mn}$ & Adjacency matrix. & Distance &\\
 %$\mu$ & Maximum distance for edge to exist & km& 40, 100\\
 %$\sigma$ & Invading pathogen seed size & & 10\\
-$r_i$ & The rate at which event $i$ occurs & year$^{-1}$&\\
+$e_i$ & The rate at which event $i$ occurs & year$^{-1}$&\\
 \bottomrule
 \end{tabular}
 
