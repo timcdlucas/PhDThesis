@@ -209,20 +209,26 @@ All other parameters are as stated in Table~\\ref{t:params}.
 %%begin.rcode plotsInvade, fig.cap = invadeCapt, fig.scap = invadeTitle, fig.height = 5, out.width = "\\textwidth" 
 
 load('data/Chapter2/Appen1.RData')
+load('data/Chapter2/Appen24.RData')
+
+maxt <- max(sum(p1$sampleWaiting), sum(p2$sampleWaiting))
+
 findDisDistr(p1, 2)[1] > 0
 invade1 <- pSIR(p1) + 
             theme_tcdl + 
             scale_y_log10() + 
             scale_colour_poke(pokemon = 'Loudred', spread = 4) +
-            xlab('Time (years)')
+            xlab('Time (years)') +
+            xlim(0, maxt)
 
-load('data/Chapter2/Appen24.RData')
+
 findDisDistr(p2, 2)[1] > 0
 invade2 <- pSIR(p2) + 
             theme_tcdl + 
             scale_y_log10() + 
             scale_colour_poke(pokemon = 'Loudred', spread = 4) +
-            xlab('Time (years)')
+            xlab('Time (years)') +
+            xlim(0, maxt)
 
 
 # Combine and print the plots.
@@ -282,24 +288,30 @@ The starting colony size is 3,000.
 %%begin.rcode plotsNoInvade, fig.cap = noInvadeCapt, fig.scap = noInvadeTitle, fig.height = 5, out.width = c("\\textwidth", "0.8\\textwidth")
 
 load('data/Chapter2/Appen22.RData')
+p1 <- p2
+load('data/Chapter2/Appen25.RData')
 
-noInvade1 <- pSIR(p2) + 
+maxt <- max(sum(p1$sampleWaiting), sum(p2$sampleWaiting))
+
+noInvade1 <- pSIR(p1) + 
                theme_tcdl + 
                scale_y_log10() + 
                scale_colour_poke(pokemon = 'Loudred', spread = 4) + 
-               xlab('Time (years)')
-pop1 <- pPop(p2) + theme_tcdl + xlab('Time (years)')
+               xlab('Time (years)') +
+               xlim(0, maxt)
+pop1 <- pPop(p1) + theme_tcdl + xlab('Time (years)') + xlim(0, maxt)
 
 
-load('data/Chapter2/Appen25.RData')
+
 
 
 noInvade2 <- pSIR(p2) + 
                theme_tcdl + 
                scale_y_log10() + 
                scale_colour_poke(pokemon = 'Loudred', spread = 4) +
-               xlab('Time (years)')
-pop2 <- pPop(p2) + theme_tcdl + xlab('Time (years)')
+               xlab('Time (years)') +
+               xlim(0, maxt)
+pop2 <- pPop(p2) + theme_tcdl + xlab('Time (years)') + xlim(0, maxt)
 
 
 # Combine and print the plots.
