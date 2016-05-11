@@ -299,19 +299,19 @@ Note this rate is independent of the degree and size of subpopulation $y$.
 I examined this model using stochastic, continuous-time simulations implemented in \emph{R} \cite{R}.
 The model can be written as a continuous-time Markov Chain.
 The Markov Chain contains the random variables $((S_x)_{x = 1\ldots m}, (I_{x, q})_{x =1\ldots m, q \in \{1, 2, 12\}}, (R_x)_{x = 1\ldots m})$.
-Here, $(S_x)_{x = 1\ldots m}$ is a length $m$ vector of the number of susceptibles in each colony
+Here, $(S_x)_{x = 1\ldots m}$ is a length $m$ vector of the number of susceptibles in each colony.
 $(I_{x, q})_{x =1\ldots m, q \in \{1, 2, 12\}}$ is a length $m \times 3$ vector describing the number of individuals of each disease class ($q \in \{1, 2, 12\}$) in each colony.
-Finally, $(R_x)_{x = 1\ldots m})$ is a length $m$ vector of the number of individuals in the recovered class.
+Finally, $(R_x)_{x = 1\ldots m}$ is a length $m$ vector of the number of individuals in the recovered class.
 At any time, suppose the system is in state $((s_x), (i_{x,q}), (r_x))$.
 At each step in the simulation we calculate the rate at which each possible event might occur.
 One event is then randomly chosen, weighted by its rate
 \begin{align}
-  p(\text{event } i) = \frac{r_j}{\sum_{j\neq i} r_j},
+  p(\text{event } i) = \frac{e_i}{\sum_j e_j},
 \end{align}
-where $r_j$ is the rate at which event $j$ occurs.
+where $e_i$ is the rate at which event $i$ occurs and $\sum_j e_j$ is the sum of the rates of all possible events.
 Finally, the length of the time step, $\delta$, is drawn from an exponential distribution 
 \begin{align}
-  \delta \sim \operatorname{Exp}\left(\sum_i r_i  \right).
+  \delta \sim \operatorname{Exp}\left(\sum_i e_i  \right).
 \end{align}
 We define the number of events we wish to simulate.
 This means that the total length of each simulation is stochastic. 
@@ -334,14 +334,14 @@ We can now write down the rates of all events.
 %I defined $I^+_p$ to be the sum of all classes that are infectious with pathogen $p$, for example $I^+_1 = I_1 + I_{12}$. 
 Assuming asexual reproduction, that all classes reproduce at the same rate and that individuals are born into the susceptible class we get
 \begin{align}
-  s_x \rightarrow s_x + 1 \text{at a rate of} \Lambda\left( s_{x}+\sum_q i_{qx} + r_{x}\right) 
+  s_x \rightarrow s_x + 1 \;\;\text{at a rate of}\;\; \Lambda\left( s_{x}+\sum_q i_{qx} + r_{x}\right) 
 \end{align}
 where $s_x \rightarrow s_x + 1$ is the event that the number of susceptibles in subpopulation $x$ will increase by 1 (a single birth) and $\sum_q i_{qx}$ is the sum of all infection classes $q \in \{1, 2, 12\}$.
 The rates of death, given a death rate $\mu$ are given by
 \begin{align}
-  s_x \rightarrow s_x-1  \text{at a rate of} \mu s_x, \\
-  i_{qx}  \rightarrow i_{qx}-1 \text{at a rate of} \mu i_{qx},\\
-  r_x  \rightarrow r_x-1 \text{at a rate of} \mu r_x.
+  s_x \rightarrow s_x-1  &\;\;\text{at a rate of}\;\; \mu s_x, \\
+  i_{qx}  \rightarrow i_{qx}-1 &\;\;\text{at a rate of}\;\; \mu i_{qx},\\
+  r_x  \rightarrow r_x-1 &\;\;\text{at a rate of}\;\; \mu r_x.
 \end{align}
 
 
@@ -391,27 +391,27 @@ $r_i$ & The rate at which event $i$ occurs & year$^{-1}$&\\
 I modelled transmission as being density-dependent.
 This assumption was more suitable than frequency-dependent transmission as I am modelling a disease transmitted by saliva or urine in highly dense populations confined to caves, building or potentially a small number of tree roosts.
 I was notably not modelling an STD as these diseases are not expected to be commonly zoonotic.
-Infection of a susceptible with either pathogen 1 or 2, $S \rightarrow I_p$ where $p\in \{1,2\}$, is therefore given by
+Infection of a susceptible with either pathogen 1 or 2 is therefore given by
 \begin{align}
-  i_{1x} \rightarrow i_{1x}+1, s_x \rightarrow s_x-1 &\text{at a rate of} \beta s_x\left(i_{1x} + i_{12x}\right),\\
-  i_{2x} \rightarrow i_{2x}+1, s_x \rightarrow s_x-1  &\text{at a rate of} \beta s_x\left(i_{2x} + i_{12x}\right),
+  i_{1x} \rightarrow i_{1x}+1, s_x \rightarrow s_x-1 &\;\;\text{at a rate of}\;\; \beta s_x\left(i_{1x} + i_{12x}\right),\\
+  i_{2x} \rightarrow i_{2x}+1, s_x \rightarrow s_x-1  &\;\;\text{at a rate of}\;\; \beta s_x\left(i_{2x} + i_{12x}\right),
 \end{align}
 while coinfection, given a coinfection adjustment factor $\alpha$, is given by
 \begin{align}
-  i_{12,x} \rightarrow i_{12,x}+1,\: i_{1x} \rightarrow i_{1x}-1 &\text{at a rate of} &\alpha\beta i_{1x}\left(i_{2x} + i_{12x}\right),\\
-  i_{12,x} \rightarrow i_{12,x}+1,\: I_{2x} \rightarrow i_{2x}-1 &\text{at a rate of} &\alpha\beta i_{2x}\left(i_{1x} + i_{12x}\right).
+  i_{12,x} \rightarrow i_{12,x}+1,\: i_{1x} \rightarrow i_{1x}-1 &\;\;\text{at a rate of}\;\; &\alpha\beta i_{1x}\left(i_{2x} + i_{12x}\right),\\
+  i_{12,x} \rightarrow i_{12,x}+1,\: I_{2x} \rightarrow i_{2x}-1 &\;\;\text{at a rate of}\;\; &\alpha\beta i_{2x}\left(i_{1x} + i_{12x}\right).
 \end{align}
 Note that lower values of $\alpha$ give lower rates of infection.
 $\alpha = 0$ would be the case of no coinfection while $\alpha = 1$ would be the case where coinfection occurs at the same rate as the initial infection.
 The probability of migration from colony $m$ (with degree $k_m$) to colony $n$, given a dispersal rate $\xi$ is given by
 \begin{align}
-  s_x \rightarrow s_x+1,\: s_y \rightarrow s_y-1 &\text{at a rate of} \frac{\xi s_y}{k_y},\\
-  i_{qx} \rightarrow i_{qx}+1,\: i_{qy} \rightarrow i_{qy}-1 &\text{at a rate of} \frac{\xi i_{qy}}{k_y},\\
-  r_x \rightarrow r_x+1,\: r_y \rightarrow r_y-1 &\text{at a rate of} \frac{\xi r_y}{k_y}.
+  s_x \rightarrow s_x+1,\: s_y \rightarrow s_y-1 &\;\;\text{at a rate of}\;\; \frac{\xi s_y}{k_y},\\
+  i_{qx} \rightarrow i_{qx}+1,\: i_{qy} \rightarrow i_{qy}-1 &\;\;\text{at a rate of}\;\; \frac{\xi i_{qy}}{k_y},\\
+  r_x \rightarrow r_x+1,\: r_y \rightarrow r_y-1 &\;\;\text{at a rate of}\;\; \frac{\xi r_y}{k_y}.
 \end{align}
 Finally, recovery from any infectious class occurs at a rate $\gamma$
 \begin{align}
-  i_{qx} \rightarrow i_{qx}-1,\: r_x \rightarrow r_x+1  \text{at a rate of} \gamma i_{qx}.
+  i_{qx} \rightarrow i_{qx}-1,\: r_x \rightarrow r_x+1  \;\;\text{at a rate of}\;\; \gamma i_{qx}.
 \end{align}
 
 
@@ -749,7 +749,7 @@ fullSim <- function(x){
 }
 %%end.rcode
 
-%%begin.rcode runUnstructuredSim, eval = TRUE, cache = TRUE
+%%begin.rcode runUnstructuredSim, eval = FALSE, cache = TRUE
 
 # Create and set seed (seed object is used to set seed in each seperate simulation.'
 seed <- 13
@@ -1135,6 +1135,7 @@ ggdraw() +
   draw_plot(dispPlot, 0, 0, 0.5, 1) +
   draw_label("B)", 0.53, 0.96, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
   draw_plot(topoPlot, 0.5, 0, 0.5, 1)
+
 %%end.rcode
 
 
