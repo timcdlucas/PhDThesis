@@ -287,8 +287,8 @@ Individuals within a subpopulation interact randomly so that the subpopulation i
 Dispersal between subpopulations occurs at a rate $\xi$.
 Individuals can only disperse to subpopulations connected to theirs in the network.
 The rate of dispersal is not affected by the number of edges a subpopulation has (the degree of the subpopulation).
-So the dispersal rate from a subpopulation $m$ with degree $k_m$ to subpopulation $n$ is $\frac{\xi}{k_m}$.
-Note this rate is independent of the degree and size of subpopulation $n$.
+So the dispersal rate from a subpopulation $x$ with degree $k_x$ to subpopulation $y$ is $\frac{\xi}{k_x}$.
+Note this rate is independent of the degree and size of subpopulation $y$.
 
 
 
@@ -296,13 +296,19 @@ Note this rate is independent of the degree and size of subpopulation $n$.
 
 \paragraph{Stochastic simulations}
 
-I examined this model using stochastic, continuous time simulations implemented in \emph{R} \cite{R}.
+I examined this model using stochastic, continuous-time simulations implemented in \emph{R} \cite{R}.
+The model can be written as a continuous-time Markov Chain.
+The Markov Chain contains the random variables $((S_x)_{x = 1\ldots m}, (I_{x, q})_{x =1\ldots m, q \in \{1, 2, 12\}}, (R_x)_{x = 1\ldots m})$.
+Here, $(S_x)_{x = 1\ldots m}$ is a length $m$ vector of the number of susceptibles in each colony
+$(I_{x, q})_{x =1\ldots m, q \in \{1, 2, 12\}}$ is a length $m \times 3$ vector describing the number of individuals of each disease class ($q \in \{1, 2, 12\}$) in each colony.
+Finally, $(R_x)_{x = 1\ldots m})$ is a length $m$ vector of the number of individuals in the recovered class.
+At any time, suppose the system is in state $((s_x), (i_{x,q}), (r_x))$.
 At each step in the simulation we calculate the rate at which each possible event might occur.
 One event is then randomly chosen, weighted by its rate
 \begin{align}
-  p(\text{event } i) = \frac{r_i}{\sum_{j\neq i} r_j}
+  p(\text{event } i) = \frac{r_j}{\sum_{j\neq i} r_j},
 \end{align}
-where $r_i$ is the rate at whch event $i$ occurs.
+where $r_j$ is the rate at which event $j$ occurs.
 Finally, the length of the time step, $\delta$, is drawn from an exponential distribution 
 \begin{align}
   \delta \sim \operatorname{Exp}\left(\sum_i r_i  \right).
@@ -328,14 +334,14 @@ We can now write down the rates of all events.
 %I defined $I^+_p$ to be the sum of all classes that are infectious with pathogen $p$, for example $I^+_1 = I_1 + I_{12}$. 
 Assuming asexual reproduction, that all classes reproduce at the same rate and that individuals are born into the susceptible class we get
 \begin{align}
-  S_{n} \rightarrow S_{n} + 1 \text{at a rate of} \Lambda\left( S_{n}+\sum_q I_{qn} + R_{n}\right) 
+  s_x \rightarrow s_x + 1 \text{at a rate of} \Lambda\left( s_{x}+\sum_q i_{qx} + r_{x}\right) 
 \end{align}
-where $S_{n} \rightarrow S_{n} + 1$ is the event that the number of susceptibles in subpopulation $n$ will increase by 1 (a single birth) and $\sum_q I_{qn}$ is the sum of all infection classes $q \in {1, 2, 12}$.
+where $s_x \rightarrow s_x + 1$ is the event that the number of susceptibles in subpopulation $x$ will increase by 1 (a single birth) and $\sum_q i_{qx}$ is the sum of all infection classes $q \in \{1, 2, 12\}$.
 The rates of death, given a death rate $\mu$ are given by
 \begin{align}
-  S_{n} \rightarrow S_{n}-1  \text{at a rate of} \mu S_{n}, \\
-  I_{qn}  \rightarrow I_{qn}-1 \text{at a rate of} \mu I_{qn},\\
-  R_{n}  \rightarrow R_{n}-1 \text{at a rate of} \mu R_{n}.
+  s_x \rightarrow s_x-1  \text{at a rate of} \mu s_x, \\
+  i_{qx}  \rightarrow i_{qx}-1 \text{at a rate of} \mu i_{qx},\\
+  r_x  \rightarrow r_x-1 \text{at a rate of} \mu r_x.
 \end{align}
 
 
@@ -367,10 +373,10 @@ $\mu$ & Death rate & year$^{-1}.$individual$^{-1}$ & 0.05\\
 %$d_I$ & Infectious death rate & Additional deaths per day per individual&\\
 %$\mathcal{V}$ & Neighbourhood of a node &&\\
 %$t, t^\prime$ & Time, and time plus waiting time i.e. $t+\delta$ & years &\\
-$k_i$ & Degree of node $i$ (number of colonies that individuals from colony $i$ can disperse to). &&\\
+$k_x$ & Degree of node $x$ (number of colonies that individuals from colony $x$ can disperse to). &&\\
 $\delta$ & Waiting time until next event & years &\\
 $\alpha$ & Coinfection adjustment factor.  & Proportion & 0.1\\
-$i, j$ & Colony index &&\\
+$x, y$ & Colony index &&\\
 %$\bm{A}_{mn}$ & Adjacency matrix. & Distance &\\
 %$\mu$ & Maximum distance for edge to exist & km& 40, 100\\
 %$\sigma$ & Invading pathogen seed size & & 10\\
@@ -387,23 +393,25 @@ This assumption was more suitable than frequency-dependent transmission as I am 
 I was notably not modelling an STD as these diseases are not expected to be commonly zoonotic.
 Infection of a susceptible with either pathogen 1 or 2, $S \rightarrow I_p$ where $p\in \{1,2\}$, is therefore given by
 \begin{align}
-  I_{1i} \rightarrow I_{1i}+1, S_{i} \rightarrow S_{i}-1 &\text{at a rate of} \beta S_{i}\left(I_{1i} + I_{12i}\right),\\
-  I_{2i} \rightarrow I_{2i}+1, S_{i} \rightarrow S_{i}-1  &\text{at a rate of} \beta S_{n}\left(I_{2i} + I_{12i}\right),
+  i_{1x} \rightarrow i_{1x}+1, s_x \rightarrow s_x-1 &\text{at a rate of} \beta s_x\left(i_{1x} + i_{12x}\right),\\
+  i_{2x} \rightarrow i_{2x}+1, s_x \rightarrow s_x-1  &\text{at a rate of} \beta s_x\left(i_{2x} + i_{12x}\right),
 \end{align}
 while coinfection, given a coinfection adjustment factor $\alpha$, is given by
 \begin{align}
-  I_{12,i} \rightarrow I_{12,i}+1,\: I_{1i} \rightarrow I_{1i}-1 &\text{at a rate of} &\alpha\beta I_{1i}\left(I_{2i} + I_{12i}\right),\\
-  I_{12,i} \rightarrow I_{12,i}+1,\: I_{2i} \rightarrow I_{2i}-1 &\text{at a rate of} &\alpha\beta I_{2i}\left(I_{1i} + I_{12i}\right).
+  i_{12,x} \rightarrow i_{12,x}+1,\: i_{1x} \rightarrow i_{1x}-1 &\text{at a rate of} &\alpha\beta i_{1x}\left(i_{2x} + i_{12x}\right),\\
+  i_{12,x} \rightarrow i_{12,x}+1,\: I_{2x} \rightarrow i_{2x}-1 &\text{at a rate of} &\alpha\beta i_{2x}\left(i_{1x} + i_{12x}\right).
 \end{align}
+Note that lower values of $\alpha$ give lower rates of infection.
+$\alpha = 0$ would be the case of no coinfection while $\alpha = 1$ would be the case where coinfection occurs at the same rate as the initial infection.
 The probability of migration from colony $m$ (with degree $k_m$) to colony $n$, given a dispersal rate $\xi$ is given by
 \begin{align}
-  S_{n} \rightarrow S_{i}+1,\: S_{j} \rightarrow S_{j}-1 &\text{at a rate of} \frac{\xi S_{j}}{k_j},\\
-  I_{qn} \rightarrow I_{qi}+1,\: I_{qj} \rightarrow I_{qj}-1 &\text{at a rate of} \frac{\xi I_{qj}}{k_j},\\
-  R_{n} \rightarrow S_{i}+1,\: R_{j} \rightarrow R_{j}-1 &\text{at a rate of} \frac{\xi R_{j}}{k_j}.
+  s_x \rightarrow s_x+1,\: s_y \rightarrow s_y-1 &\text{at a rate of} \frac{\xi s_y}{k_y},\\
+  i_{qx} \rightarrow i_{qx}+1,\: i_{qy} \rightarrow i_{qy}-1 &\text{at a rate of} \frac{\xi i_{qy}}{k_y},\\
+  r_x \rightarrow r_x+1,\: r_y \rightarrow r_y-1 &\text{at a rate of} \frac{\xi r_y}{k_y}.
 \end{align}
 Finally, recovery from any infectious class occurs at a rate $\gamma$
 \begin{align}
-  I_{qi} \rightarrow I_{qi}-1,\: R_{i} \rightarrow R_{i}+1  \text{at a rate of} \gamma I_{qi}.
+  i_{qx} \rightarrow i_{qx}-1,\: r_x \rightarrow r_x+1  \text{at a rate of} \gamma i_{qx}.
 \end{align}
 
 
