@@ -12,6 +12,7 @@
 *~
 .httr-oauth
 *Cache*
+drafts/*.pdf
 
 misc/.archChapter2.tex
 misc/bibexport.bib

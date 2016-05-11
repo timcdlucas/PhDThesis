@@ -61,6 +61,31 @@ library(cowplot)
 # Run simulations
 
 
+
+  set.seed(2000)
+
+  # Make the population.
+  p2 <- makePop(model = 'SIR', events = nEvent, nColonies = 10, nPathogens = 2,   recovery = 1,  sample = sample, dispersal = 0.1, birth = 0.05, death = 0.05, crossImmunity = 0.1, meanColonySize = 3000, infectDeath = 0, transmission = 0.2, maxDistance = 100, colonySpatialDistr = 'circle')
+
+  # Seed endemic pathogen.
+  for(i in 1:10){
+    p2 <- seedPathogen(p2, 2, n = 200, diffCols = FALSE)
+  }
+
+  # Burn in simulation
+  p2 <- runSim(p2, end = invadeT)
+
+  # Seed invading pathogen.
+  p2$I[2, 1, (invadeT + 1) %% sample] <- 5
+  
+  # Recalculate rates of each event after seeding.
+  p2 <- transRates(p2, (invadeT + 1) %% sample)
+
+  # Continue simulation
+  p2 <- runSim(p2, start = invadeT + 1, end = 'end')
+
+  save(p2, file = 'data/Chapter2/Appen1.RData')
+
   set.seed(22)
 
   # Make the population.
@@ -113,6 +138,33 @@ library(cowplot)
 
   save(p2, file = 'data/Chapter2/Appen24.RData')
 
+
+
+
+
+  set.seed(25)
+
+  # Make the population.
+  p2 <- makePop(model = 'SIR', events = nEvent, nColonies = 10, nPathogens = 2,   recovery = 1,  sample = sample, dispersal = 0.1, birth = 0.05, death = 0.05, crossImmunity = 0.1, meanColonySize = 3000, infectDeath = 0, transmission = 0.2, maxDistance = 100, colonySpatialDistr = 'circle')
+
+  # Seed endemic pathogen.
+  for(i in 1:10){
+    p2 <- seedPathogen(p2, 2, n = 200, diffCols = FALSE)
+  }
+
+  # Burn in simulation
+  p2 <- runSim(p2, end = invadeT)
+
+  # Seed invading pathogen.
+  p2$I[2, 1, (invadeT + 1) %% sample] <- 5
+  
+  # Recalculate rates of each event after seeding.
+  p2 <- transRates(p2, (invadeT + 1) %% sample)
+
+  # Continue simulation
+  p2 <- runSim(p2, start = invadeT + 1, end = 'end')
+
+  save(p2, file = 'data/Chapter2/Appen25.RData')
 
 
 
@@ -180,8 +232,6 @@ ggdraw() +
   draw_label("B)", 0.02, 0.48, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
   draw_plot(invade2, 0, 0.5, 1, 0.5) 
 
-
-  
 %%end.rcode
 
 
@@ -270,9 +320,6 @@ ggdraw() +
   draw_plot(pop2, 0, 0.5, 1, 0.5) 
 
   
-
-
-
 %%end.rcode
 
 
