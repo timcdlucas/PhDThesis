@@ -297,8 +297,8 @@ Note this rate is independent of the degree and size of subpopulation $y$.
 \paragraph{Stochastic simulations}
 
 I examined this model using stochastic, continuous-time simulations implemented in \emph{R} \cite{R}.
-The model can be written as a continuous-time Markov Chain.
-The Markov Chain contains the random variables $((S_x)_{x = 1\ldots m}, (I_{x, q})_{x =1\ldots m, q \in \{1, 2, 12\}}, (R_x)_{x = 1\ldots m})$.
+The model can be written as a continuous-time Markov chain.
+The Markov chain contains the random variables $((S_x)_{x = 1\ldots m}, (I_{x, q})_{x =1\ldots m, q \in \{1, 2, 12\}}, (R_x)_{x = 1\ldots m})$.
 Here, $(S_x)_{x = 1\ldots m}$ is a length $m$ vector of the number of susceptibles in each colony.
 $(I_{x, q})_{x =1\ldots m, q \in \{1, 2, 12\}}$ is a length $m \times 3$ vector describing the number of individuals of each disease class ($q \in \{1, 2, 12\}$) in each colony.
 Finally, $(R_x)_{x = 1\ldots m}$ is a length $m$ vector of the number of individuals in the recovered class.
@@ -365,7 +365,7 @@ $N$ & Total Population size && 30,000\\
 $m$ & Number of colonies&& 10\\
 $n$ & Colony size && 3,000\\
 $a$ & Area & km$^2$& 10,000\\
-$\beta$ & Transmission rate & year$^{-1}.$individual$^{-1}$ & 2, 5, 10\\
+$\beta$ & Transmission rate & $ & 0.1 -- 0.4\\
 $\gamma$ & Recovery rate & year$^{-1}.$individual$^{-1}$ & 1\\
 $\xi$ & Dispersal & year$^{-1}.$individual$^{-1}$ & 0.001--0.1\\
 $\Lambda$ & Birth rate & year$^{-1}.$individual$^{-1}$ & 0.05\\
@@ -975,22 +975,26 @@ The metapopulation contains 10 subpopulations.
 In each simulation the population was seeded with 10 sets of 200 infected individuals of pathogen 1.
 These groups were seeded into randomly selected colonies with replacement.
 For each 200 infected individuals added, 200 susceptible individuals were removed to keep starting colony sizes constant. 
-Pathogen 1 was then allowed to spread and reach equilibrium. 
+Pathogen 1 was then allowed to spread until the initial large epidemic had ended. 
 After \rinline{invadeT} events, 5 individuals infected with pathogen 2 were added to one randomly selected colony. 
-Visual inspection of preliminary simulations was used to decide on \rinline{invadeT} as being long enough for the epidemic to reach an equilibrium state.
-After another \rinline{nEvent - invadeT} events the invasion of pathogen 2 was considered successful if any individuals are still infected with pathogen 2.
-Again visual inspection of preliminary simulations was used to determine that after \rinline{nEvent - invadeT} events, if an invading pathogen was still present, it was well established. 
+Visual inspection of preliminary simulations was used to decide on \rinline{invadeT} as being long enough for the epidemic to end and the pathogen to be in an endemic state (Figures~\ref{fig:plotsInvade} and \ref{fig:plotsNoInvade1}).
+After another \rinline{nEvent - invadeT} events the invasion of pathogen 2 was considered successful if any individuals were still infected with pathogen 2.
+Therefore, if at least one individual is in class $I_2$ or $I_{12}$ at the end of the simulation, this was considered an invasion.
+Again visual inspection of preliminary simulations was used to determine that after \rinline{nEvent - invadeT} events, if an invading pathogen was still present, it was well established (Figures~\ref{plotsInvade} and \ref{plotsNoInvade1}).
+The model is a Markov chain where extinction of both pathogens species and extinction of the host species are absorbing states.
+However, the expected time to reach this state is much larger than the duration of the simulations.
 
 
 \subsection{Dispersal}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The values used for the independent variables are chosen to highlight the affects of these variables. 
+The values used for the parameters of the model were chosen to highlight the effects of population structure. 
 Dispersal values are $\xi = 0.1, 0.01$ and $ 0.001$ dispersals per individual per year. 
 $\xi = 0.1$ relates to individuals moving between colonies on average twice per lifetime. 
 Therefore exclusively juvenile dispersal would have dispersal rates similar to this. %todo cite
 Otherwise it relates to dispersal being a rare event with animals often staying in a colony for many years.
-$\xi = 0.01$ relates to 20\% of individuals dispersing once in their lifetime.
+The probability that an individual disperses at least once in its lifetime $\frac{\xi}{\xi + \mu}$.
+$\xi = 0.01$ relates to 17\% of individuals dispersing at least once in their lifetime.
 This value is therefore close to male-biased dispersal, with female philopatry. %todo cite
 Finally, $\xi = 0.001$ relates to 2\% of individuals dispersing in their lifetime.
 This therefore relates to a population that does not habitually disperse.
@@ -1001,7 +1005,7 @@ This therefore relates to a population that does not habitually disperse.
 \subsection{Network structure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The network structure was synthetically created to be either fully or minimally connected (See Figure~\ref{f:net}). 
-10 subpopulations was selected as a trade off between computation time and a network complicated enough that structure might have an effect. 
+10 subpopulations was selected as a trade off between computation time and a network complex enough that structure might have an effect. 
 This value is artificially small compared to wildlife populations. 
 
 
@@ -1011,12 +1015,15 @@ This value is artificially small compared to wildlife populations.
 
 The fixed parameters were chosen to roughly reflect realistic wild bat populations. 
 The death rate $\mu$ was set as 0.05 per year giving a generation time of 20 years.
-The birth rate $\Lambda$ was set to be equal to $\mu$ so that the population size was stable.
+The birth rate $\Lambda$ was set to be equal to $\mu$.
+This yields a population that did not systematically increase or decrease.
+However, the size of each colony changes as a random walk.
+Given the length of the simulations, colonies were very unlikely to go extinct (Figure~\ref{fig:plotsNoInvade2})
 The recovery rate $\gamma$ was set to 1 giving a average infection duration of 1 years. 
 This is therefore a long lasting infection but not a chronic infection. 
 It is very difficult to directly estimate infection durations in wild populations but it seems that these infections might sometimes be long lasting \cite{peel2012henipavirus, plowright2015ecological}.
 However, other studies have found much shorter infectious periods \cite{amengual2007temporal}.
-These shorter lived infections are not studied further here. %todo consider readding this. " as preliminary simulations found that they could not persist in the relatively small populations being modelled here."
+These shorter infections are not studied further here. %todo consider readding this. " as preliminary simulations found that they could not persist in the relatively small populations being modelled here."
 
 Cross-immunity was set to 0.1 so that an individual infected with one pathogen is 90\% less likely to be infected with another.
 This is a rather arbitrary value.
@@ -1024,12 +1031,13 @@ However, the rationale of the model was that the invading species might be a new
 Furthermore, the model assumes complete cross-immunity after recovery from infection.
 Therefore cross-immunity to coinfection is likely to be very strong as well.
 
-The population size of each subpopulation was set to 3,000. 
+The starting size of each subpopulation was set to 3,000. 
 This is appropriate for many bat species \cite{jones2009pantheria}, especially the large, frugivorous \emph{Pteropodidae} that have been particularly associated with recent zoonotic diseases.
 
 
-Four values of the transmission rate $\beta$ are used, 0.1, 0.2, 0.3 and 0.4.
-All simulations are run under all four transmission rates as this is such a fundamental parameter.
+Four values of the transmission rate $\beta$ were used, 0.1, 0.2, 0.3 and 0.4.
+These values were chosen to cover the range of behaviours, from very high probabilities of invasion of the second pathogen, to very low probabilities.
+All simulations were run under all four transmission rates as this is such a fundamental parameter.
 %Given the recovery, birth and death rates we can calculate an approximation of $R_0$ that ignores spatial structure.
 %That is, this is $R_0$ for the local, within-subpopulation dynamics.
 %Furthermore, it is $R_0$ for the first pathogen; $R_0$ of the invading pathogen will be lower due to competition.
@@ -1266,7 +1274,7 @@ This was true at all transmission levels (Fisher's exact test. $\beta = 0.1$: $p
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 
 In line with theory, increasing the transmission rate increased the probability of invasion (Figure~\ref{f:invasionPropPlots}).
-This is true for all three dispersal values (Fisher's exact test. $\xi = 0.001$: $p < 10^{-5}$. $\xi = 0.01$: $p < 10^{-5}$. $\xi = 0.1$: $\chi^2 = \rinline{DispTransTest3$statistic}$, $p < 10^{-5}$) and both network structures (Fisher's exact test. Fully connected: $p < 10^{-5}$. Minimally connected: $p < 10^{-5}$).
+This is true for all three dispersal values (Fisher's exact test. $\xi = 0.001$: $p < 10^{-5}$. $\xi = 0.01$: $p < 10^{-5}$. $\xi = 0.1$: $p < 10^{-5}$) and both network structures (Fisher's exact test. Fully connected: $p < 10^{-5}$. Minimally connected: $p < 10^{-5}$).
 
 
 
