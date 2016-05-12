@@ -161,7 +161,7 @@ However, the factors that control the number of pathogen species in a wild anima
 
 In comparative studies, a number of host traits have been shown to correlate with pathogen richness including body size \cite{kamiya2014determines, arneberg2002host}, population density \cite{nunn2003comparative, arneberg2002host} and range size \cite{bordes2011impact, kamiya2014determines}.
 A further factor that may affect pathogen richness is population structure.
-In comparative studies it is often assumed that factors that promote fast disease spread should promote high pathogen richness; the faster a new pathogen spread through a population, the more likely it is to persist \cite{nunn2003comparative, morand2000wormy, poulin2014parasite, poulin2000diversity, altizer2003social}.
+In comparative studies it is often assumed that factors that promote fast disease spread should promote high pathogen richness; the faster a new pathogen spreads through a population, the more likely it is to persist \cite{nunn2003comparative, morand2000wormy, poulin2014parasite, poulin2000diversity, altizer2003social}.
 However, this assumption ignores competitive mechanisms such as cross-immunity and depletion of susceptible hosts.
 If competitive mechanisms are strong, pathogens in populations structured such that $R_0$ will be high will be able to easily out-compete invading pathogens.
 Only if competitive mechanisms are weak will high $R_0$  enable the invasion of new pathogens and allow higher pathogen richness.
@@ -206,8 +206,8 @@ These separate mechanisms have not been examined and it is difficult to see how 
 Currently the literature contains very abstract, simplified models \cite{qiu2013vector, allen2004sis, nunes2006localized, garmer2016multistrain}.
 These cannot be easily applied to real data.
 They also do not easily give quantitative predictions of pathogen richness; typically they predict either no pathogen coexistence \cite{bremermann1989competitive, martcheva2013competitive} or infinite pathogen richness \cite{may1994superinfection}.
-We need models that can give quantitive predictions of pathogen richness in wild populations.
-While predicting an absolute value of pathogen richness is likely to be impossible, we should aim for models that attempt to rank species from highest to lowest pathogen richness.
+Models that can give quantitive predictions of pathogen richness in wild populations are more applicable to real-world issues such as zoonotic disease surveillance.
+While predicting an absolute value of pathogen richness for a wild species is likely to be impossible, models that attempt to rank species from highest to lowest pathogen richness are still useful for prioritising species for surveillance.
 This requires a middle ground of model complexity.
 
 \tmpsection{What I did}
@@ -398,8 +398,8 @@ Infection of a susceptible with either pathogen 1 or 2 is therefore given by
 \end{align}
 while coinfection, given a coinfection adjustment factor $\alpha$, is given by
 \begin{align}
-  i_{12,x} \rightarrow i_{12,x}+1,\: i_{1x} \rightarrow i_{1x}-1 &\;\;\text{at a rate of}\;\; &\alpha\beta i_{1x}\left(i_{2x} + i_{12x}\right),\\
-  i_{12,x} \rightarrow i_{12,x}+1,\: I_{2x} \rightarrow i_{2x}-1 &\;\;\text{at a rate of}\;\; &\alpha\beta i_{2x}\left(i_{1x} + i_{12x}\right).
+  i_{12,x} \rightarrow i_{12,x}+1,\: i_{1x} \rightarrow i_{1x}-1 &\;\;\text{at a rate of}\;\; \alpha\beta i_{1x}\left(i_{2x} + i_{12x}\right),\\
+  i_{12,x} \rightarrow i_{12,x}+1,\: I_{2x} \rightarrow i_{2x}-1 &\;\;\text{at a rate of}\;\; \alpha\beta i_{2x}\left(i_{1x} + i_{12x}\right).
 \end{align}
 Note that lower values of $\alpha$ give lower rates of infection.
 $\alpha = 0$ would be the case of no coinfection while $\alpha = 1$ would be the case where coinfection occurs at the same rate as the initial infection.
@@ -555,6 +555,99 @@ z <- do.call(rbind, z)
 
 # Save summary data.
 write.csv(z, file = 'data/Chapter2/DispSims.csv')
+
+%%end.rcode
+
+
+%%begin.rcode extraMidBeta, eval = TRUE
+
+
+
+
+# Define our simulation function.
+fullSim <- function(x){
+
+  dispVec <- rep(c(0.001, 0.01, 0.1), each = nDispSims/3 +1)
+  disp <- dispVec[x]
+
+  tran <- 0.2
+
+  # Set seed (this is set within each parallel simulation to prevent reusing random numbers).
+  simSeed <- paste0(seed, x)
+  set.seed(simSeed)
+
+  # Make the population.
+  p <- makePop(model = 'SIR', events = nEvent, nColonies = 10, nPathogens = 2,   recovery = 1,  sample = sample, dispersal = disp, birth = 0.05, death = 0.05, crossImmunity = 0.1, meanColonySize = 3000, infectDeath = 0, transmission = tran, maxDistance = 100, colonySpatialDistr = 'circle')
+
+  # Seed endemic pathogen.
+  for(i in 1:10){
+    p <- seedPathogen(p, 2, n = 200, diffCols = FALSE)
+  }
+
+  # Burn in simulation
+  p <- runSim(p, end = invadeT)
+
+  # Seed invading pathogen.
+  p$I[2, 1, (invadeT + 1) %% sample] <- 5
+  
+  # Recalculate rates of each event after seeding.
+  p <- transRates(p, (invadeT + 1) %% sample)
+
+  # Continue simulation
+  p <- runSim(p, start = invadeT + 1, end = 'end')
+
+  # Was the invasion succesful?
+  invasion <- findDisDistr(p, 2)[1] > 0
+
+  # Save summary stats
+  d <- data.frame(transmission = NA)
+
+  d$transmission <- p$parameters['transmission']
+  d$dispersal <- p$parameters['dispersal']
+  d$nExtantDis <- sum(findDisDistr(p, 2) > 0)
+  d$singleInf <- findCoinfDistr(p, 2)[2]
+  d$doubleInf <- findCoinfDistr(p, 2)[3]
+  d$nColonies <- p$parameters['nColonies']
+  d$nPathogens <- p$parameters['nPathogens']
+  d$meanK <- sum(p$adjacency != 0 )/p$parameters['nColonies']
+  d$maxDistance <- p$parameters['maxDistance']
+  d$nEvents <- p$parameters['events']
+
+
+
+  # Time until extinction
+  invadePath <- colSums(p$sample[2,  , (2 + invadeT / sample):(dim(p$sample)[3])]) + 
+                  colSums(p$sample[4,  , (2 + invadeT / sample):(dim(p$sample)[3])])
+
+  d$extinctionTime <- cumsum(p$sampleWaiting)[min(which(invadePath == 0)) + (2 + invadeT / sample)]
+  d$totalTime <- sum(p$sampleWaiting)
+  d$survivalTime <- d$extinctionTime - cumsum(p$sampleWaiting)[(2 + invadeT / sample)]
+
+  d$pathInv <- sum(p$sample[c(1, 4), , dim(p$sample)[3]])
+
+  message(paste0("finished ", x, ". Invasion: ", invasion ))
+ 
+
+  rm(p)
+
+  return(d)
+
+}
+
+
+# Create and set seed (seed object is used to set seed in each seperate simulation.'
+seed <- 787
+set.seed(seed)
+
+
+# Run sims.
+z <- mclapply(1:300, . %>% fullSim, mc.preschedule = FALSE, mc.cores = nCores)
+
+z <- do.call(rbind, z)
+
+# Save summary data.
+write.csv(z, file = 'data/Chapter2/extraMidBeta.csv')
+
 
 %%end.rcode
 
@@ -735,6 +828,7 @@ fullSim <- function(x){
   d$nEvents <- p$parameters['events']
 
 
+
   message(paste0("finished ", x, ". Invasion: ", invasion ))
   
   if(saveData){ 
@@ -749,7 +843,7 @@ fullSim <- function(x){
 }
 %%end.rcode
 
-%%begin.rcode runUnstructuredSim, eval = TRUE, cache = TRUE
+%%begin.rcode runUnstructuredSim, eval = runAllSims, cache = TRUE
 
 # Create and set seed (seed object is used to set seed in each seperate simulation.'
 seed <- 13
@@ -767,6 +861,108 @@ z <- do.call(rbind, z)
 
 # Save summary data.
 write.csv(z, file = 'data/Chapter2/unstructuredSims.csv')
+
+%%end.rcode
+
+
+
+
+
+%%begin.rcode noDispSimsFuncs
+
+  #################################
+  # Topology sim definitions      #
+  #################################
+
+  # How many simulations to run?
+  nNoDispSims <- 4 * each
+
+# Define our simulation function.
+fullSim <- function(x){
+
+
+  # Chose transmission rates.
+  tranVec <- rep(c(0.1, 0.2, 0.3, 0.4), nNoDispSims/4 + 1)
+  tran <- tranVec[x]
+
+
+  # Set seed (this is set within each parallel simulation to prevent reusing random numbers).
+  simSeed <- paste0(seed, x)
+  set.seed(simSeed)
+
+  # Make the population.
+  p <- makePop(model = 'SIR', events = nEvent, nColonies = 2, nPathogens = 2,   recovery = 1,  sample = sample, dispersal = 0.0, birth = 0.05, death = 0.05, crossImmunity = 0.1, meanColonySize = 2800, infectDeath = 0, transmission = tran, maxDistance = 120, colonySpatialDistr = 'circle')
+
+  # Seed endemic pathogen.
+  p$I[2, 2, 1] <- 200
+  p$I[1, 1, 1] <- 0
+  
+  # Recalculate rates of each event after seeding.
+  p <- transRates(p, 1)
+
+  # Burn in simulation
+  p <- runSim(p, end = invadeT)
+
+  # Seed invading pathogen.
+  p$I[3, 2, (invadeT + 1) %% sample] <- 5
+  
+  # Recalculate rates of each event after seeding.
+  p <- transRates(p, (invadeT + 1) %% sample)
+
+  # Continue simulation
+  p <- runSim(p, start = invadeT + 1, end = 'end')
+
+  # Was the invasion succesful?
+  invasion <- findDisDistr(p, 2)[1] > 0
+
+  # Save summary stats
+  d <- data.frame(transmission = NA)
+
+  d$transmission <- p$parameters['transmission']
+  d$dispersal <- p$parameters['dispersal']
+  d$nExtantDis <- sum(findDisDistr(p, 2) > 0)
+  d$singleInf <- findCoinfDistr(p, 2)[2]
+  d$doubleInf <- findCoinfDistr(p, 2)[3]
+  d$nColonies <- p$parameters['nColonies']
+  d$nPathogens <- p$parameters['nPathogens']
+  d$meanK <- sum(p$adjacency != 0 )/p$parameters['nColonies']
+  d$maxDistance <- p$parameters['maxDistance']
+  d$nEvents <- p$parameters['events']
+  d$path2[x] <- sum(p$sample[c(2, 4), , dim(p$sample)[3]])
+
+  # Time until extinction
+  invadePath <- colSums(p$sample[2,  , (2 + invadeT / sample):(dim(p$sample)[3])]) + 
+                  colSums(p$sample[4,  , (2 + invadeT / sample):(dim(p$sample)[3])])
+
+  d$extinctionTime <- cumsum(p$sampleWaiting)[min(which(invadePath == 0)) + (2 + invadeT / sample)]
+  d$totalTime <- sum(p$sampleWaiting)
+  d$survivalTime <- d$extinctionTime - cumsum(p$sampleWaiting)[(2 + invadeT / sample)]
+
+
+
+  message(paste0("finished ", x, ". Invasion: ", invasion ))
+  
+
+  rm(p)
+
+  return(d)
+
+}
+%%end.rcode
+
+%%begin.rcode runNoDispSims, eval = TRUE, cache = TRUE
+
+# Create and set seed (seed object is used to set seed in each seperate simulation.'
+seed <- 19
+set.seed(seed)
+
+# Run sims.
+z <- mclapply(1:nNoDispSims, . %>% fullSim, mc.preschedule = FALSE, mc.cores = nCores)
+
+z <- do.call(rbind, z)
+
+# Save summary data.
+write.csv(z, file = 'data/Chapter2/noDispSims.csv')
 
 %%end.rcode
 
