@@ -559,18 +559,23 @@ write.csv(z, file = 'data/Chapter2/DispSims.csv')
 %%end.rcode
 
 
+
+
+
+
 %%begin.rcode extraMidBeta, eval = runAllSims
 
 
-
+nExtraSims <- 600
 
 # Define our simulation function.
 fullSim <- function(x){
 
-  dispVec <- rep(c(0.001, 0.01, 0.1), each = nDispSims/3 +1)
+  dispVec <- rep(c(0.001, 0.01, 0.1), each = nExtraSims/3 + 1)
   disp <- dispVec[x]
 
-  tran <- 0.2
+  tranVec <- rep(c(0.2, 0.3), nExtraSims/2 + 1)
+  tran <- tranVec[x]
 
   # Set seed (this is set within each parallel simulation to prevent reusing random numbers).
   simSeed <- paste0(seed, x)
@@ -641,7 +646,7 @@ set.seed(seed)
 
 
 # Run sims.
-z <- mclapply(1:300, . %>% fullSim, mc.preschedule = FALSE, mc.cores = nCores)
+z <- mclapply(1:600, . %>% fullSim, mc.preschedule = FALSE, mc.cores = nCores)
 
 z <- do.call(rbind, z)
 
@@ -1140,15 +1145,20 @@ propsDisp
 
 # Then run proportion tests between population structures
 
-DispTest1 <- fisher.test(cbind(propsDisp$invasions[1:3], propsDisp$n[1:3] - propsDisp$invasions[1:3]))
-DispTest2 <- fisher.test(cbind(propsDisp$invasions[4:6], propsDisp$n[4:6] - propsDisp$invasions[4:6]))
-DispTest3 <- fisher.test(cbind(propsDisp$invasions[7:9], propsDisp$n[1:3] - propsDisp$invasions[7:9]))
-DispTest4 <- fisher.test(cbind(propsDisp$invasions[10:12], propsDisp$n[10:12] - propsDisp$invasions[10:12]))
+#DispTest1 <- fisher.test(cbind(propsDisp$invasions[1:3], propsDisp$n[1:3] - propsDisp$invasions[1:3]))
+#DispTest2 <- fisher.test(cbind(propsDisp$invasions[4:6], propsDisp$n[4:6] - propsDisp$invasions[4:6]))
+#DispTest3 <- fisher.test(cbind(propsDisp$invasions[7:9], propsDisp$n[1:3] - propsDisp$invasions[7:9]))
+#DispTest4 <- fisher.test(cbind(propsDisp$invasions[10:12], propsDisp$n[10:12] - propsDisp$invasions[10:12]))
 
-dispPostHoc1 <- fisher.test(cbind(propsDisp$invasions[c(4, 6)], propsDisp$n[c(4, 6)] - propsDisp$invasions[c(4, 6)]))
-dispPostHoc2 <- fisher.test(cbind(propsDisp$invasions[c(5, 6)], propsDisp$n[c(5, 6)] - propsDisp$invasions[c(5, 6)]))
-dispPostHoc3 <- fisher.test(cbind(propsDisp$invasions[c(4, 5)], propsDisp$n[c(4, 5)] - propsDisp$invasions[c(4, 5)]))
+#dispPostHoc1 <- fisher.test(cbind(propsDisp$invasions[c(4, 6)], propsDisp$n[c(4, 6)] - propsDisp$invasions[c(4, 6)]))
+#dispPostHoc2 <- fisher.test(cbind(propsDisp$invasions[c(5, 6)], propsDisp$n[c(5, 6)] - propsDisp$invasions[c(5, 6)]))
+#dispPostHoc3 <- fisher.test(cbind(propsDisp$invasions[c(4, 5)], propsDisp$n[c(4, 5)] - propsDisp$invasions[c(4, 5)]))
 
+
+DispGLM1 <- summary(glm(invasion ~ dispersal, data = dDisp[dDisp$transmission == 0.1, ], family = binomial))
+DispGLM2 <- summary(glm(invasion ~ dispersal, data = dDisp[dDisp$transmission == 0.2, ], family = binomial))
+DispGLM3 <- summary(glm(invasion ~ dispersal, data = dDisp[dDisp$transmission == 0.3, ], family = binomial))
+DispGLM4 <- summary(glm(invasion ~ dispersal, data = dDisp[dDisp$transmission == 0.4, ], family = binomial))
 
 %%end.rcode
 
@@ -1159,10 +1169,14 @@ dispPostHoc3 <- fisher.test(cbind(propsDisp$invasions[c(4, 5)], propsDisp$n[c(4,
 ##Finally run proportion tests between transmission rates
 
 #Finally run proportion tests between transmission rates
-DispTransTest1 <- fisher.test(cbind(propsDisp$invasions[c(1, 4, 7, 10)], propsDisp$n[c(1, 4, 7, 10)] - propsDisp$invasions[c(1, 4, 7, 10)]))
-DispTransTest2 <- fisher.test(cbind(propsDisp$invasions[c(2, 5, 8, 11)], propsDisp$n[c(2, 5, 8, 11)] - propsDisp$invasions[c(2, 5, 8, 11)]))
-DispTransTest3 <- fisher.test(cbind(propsDisp$invasions[c(3, 6, 9, 12)], propsDisp$n[c(3, 6, 9, 12)] - propsDisp$invasions[c(3, 6, 9, 12)]))
+#DispTransTest1 <- fisher.test(cbind(propsDisp$invasions[c(1, 4, 7, 10)], propsDisp$n[c(1, 4, 7, 10)] - propsDisp$invasions[c(1, 4, 7, 10)]))
+#DispTransTest2 <- fisher.test(cbind(propsDisp$invasions[c(2, 5, 8, 11)], propsDisp$n[c(2, 5, 8, 11)] - propsDisp$invasions[c(2, 5, 8, 11)]))
+#DispTransTest3 <- fisher.test(cbind(propsDisp$invasions[c(3, 6, 9, 12)], propsDisp$n[c(3, 6, 9, 12)] - propsDisp$invasions[c(3, 6, 9, 12)]))
 
+
+DispTransGLM1 <- summary(glm(invasion ~ transmission, data = dDisp[dDisp$dispersal == 0.001, ], family = binomial))
+DispTransGLM2 <- summary(glm(invasion ~ transmission, data = dDisp[dDisp$dispersal == 0.01, ], family = binomial))
+DispTransGLM3 <- summary(glm(invasion ~ transmission, data = dDisp[dDisp$dispersal == 0.1, ], family = binomial))
 
 
 %%end.rcode
@@ -1241,9 +1255,12 @@ TopoTest4 <- fisher.test(cbind(propsTopo$invasions[7:8], propsTopo$n[7:8] - prop
 %%begin.rcode TopoTransPropTests
 #Finally run proportion tests between transmission rates
 
-TopoTransTest1 <- fisher.test(cbind(propsTopo$invasions[c(1, 3, 5, 7)], propsTopo$n[c(1, 3, 5, 7)] - propsTopo$invasions[c(1, 3, 5, 7)]))
-TopoTransTest2 <- fisher.test(cbind(propsTopo$invasions[c(2, 4, 6, 8)], propsTopo$n[c(2, 4, 6, 8)] - propsTopo$invasions[c(2, 4, 6, 8)]))
+#TopoTransTest1 <- fisher.test(cbind(propsTopo$invasions[c(1, 3, 5, 7)], propsTopo$n[c(1, 3, 5, 7)] - propsTopo$invasions[c(1, 3, 5, 7)]))
+#TopoTransTest2 <- fisher.test(cbind(propsTopo$invasions[c(2, 4, 6, 8)], propsTopo$n[c(2, 4, 6, 8)] - propsTopo$invasions[c(2, 4, 6, 8)]))
 
+
+TopoTransGLM1 <- summary(glm(invasion ~ transmission, data = dTopo[dTopo$meanK == 9, ], family = binomial))
+TopoTransGLM2 <- summary(glm(invasion ~ transmission, data = dTopo[dTopo$meanK == 2, ], family = binomial))
 
 %%end.rcode
 
@@ -1285,7 +1302,7 @@ This was true at all transmission levels (Fisher's exact test. $\beta = 0.1$: $p
 \subsection{Transmission}
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In line with theory, increasing the transmission rate increased the probability of invasion (Figure~\ref{f:invasionPropPlots}).
+Increasing the transmission rate increased the probability of invasion (Figure~\ref{f:invasionPropPlots}).
 This is true for all three dispersal values (Fisher's exact test. $\xi = 0.001$: $p < 10^{-5}$. $\xi = 0.01$: $p < 10^{-5}$. $\xi = 0.1$: $p < 10^{-5}$) and both network structures (Fisher's exact test. Fully connected: $p < 10^{-5}$. Minimally connected: $p < 10^{-5}$).
 
 
@@ -1299,7 +1316,7 @@ This is true for all three dispersal values (Fisher's exact test. $\xi = 0.001$:
 invasionPropCaption <- sprintf("The probability of successful invasion. 
   For three different transmission rates, the probability of invasion does not change between different A) dispersal rates or B) network topologies (with network topologies `Minimal` and `Full` referring to the  minimally and full connected topologies in Figure~\\ref{f:net}). 
   Error bars are 95\\%% confidence intervals. 
-  %i simulations were run for each treatment.
+  %i simulations were run for each treatment except $\\beta = 0.2$ in A) which has 200 per treatment.
   Other parameters were kept constant at: $N = 10,\\, \\, \\mu = \\Lambda = 0.05,\\, \\gamma = 0.1,\\, \\alpha = 0.1$. 
   When dispersal is varied, the population structure is fully connected. When population structure is varied, $\\xi = 0.01$.",
   as.integer(each))
