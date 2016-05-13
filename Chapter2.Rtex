@@ -418,11 +418,11 @@ Finally, recovery from any infectious class occurs at a rate $\gamma$
 \begin{figure}[t]
 {\centering 
 \subfloat[Fully connected\label{fig:fullyConnected}]{
-  \includegraphics[width=0.45\textwidth]{imgs/fullyConnected.pdf} 
+  \includegraphics[width=0.45\textwidth]{imgs/minimallyConnected.pdf} 
 }
 \subfloat[Minimally connected
 \label{fig:minimallyConnected}]{
-  \includegraphics[width=0.45\textwidth]{imgs/minimallyConnected.pdf} 
+  \includegraphics[width=0.45\textwidth]{imgs/fullyConnected.pdf} 
 }
 }
 \caption[Network topologies used to compare network connectedness]{
@@ -430,8 +430,8 @@ The two network topologies used to test whether network connectedness influences
 Blue circles are subpopulations of 3,000 individuals.
 Dispersal only occurs between subpopulations connected by an edge (black line).
 The dispersal rate is held constant between the two topologies.
-A) Dispersal can occur between any subpopulation.
-B) Animals can only disperse to neighbouring subpopulations. 
+A) Animals can only disperse to neighbouring subpopulations. 
+B) Dispersal can occur between any subpopulation.
 }
 \label{f:net}
 \end{figure}
@@ -1140,19 +1140,15 @@ propsDisp
 
 # Then run proportion tests between population structures
 
-#DispTest1 <- prop.test(propsDisp$invasions[1:3], propsDisp$n[1:3])
-#DispTest2 <- prop.test(propsDisp$invasions[4:6], propsDisp$n[4:6])
-#DispTest3 <- prop.test(propsDisp$invasions[7:9], propsDisp$n[7:9])
-#DispTest4 <- prop.test(propsDisp$invasions[10:12], propsDisp$n[10:12])
-
-
 DispTest1 <- fisher.test(cbind(propsDisp$invasions[1:3], propsDisp$n[1:3] - propsDisp$invasions[1:3]))
 DispTest2 <- fisher.test(cbind(propsDisp$invasions[4:6], propsDisp$n[4:6] - propsDisp$invasions[4:6]))
 DispTest3 <- fisher.test(cbind(propsDisp$invasions[7:9], propsDisp$n[1:3] - propsDisp$invasions[7:9]))
 DispTest4 <- fisher.test(cbind(propsDisp$invasions[10:12], propsDisp$n[10:12] - propsDisp$invasions[10:12]))
 
-
 dispPostHoc1 <- fisher.test(cbind(propsDisp$invasions[c(4, 6)], propsDisp$n[c(4, 6)] - propsDisp$invasions[c(4, 6)]))
+dispPostHoc2 <- fisher.test(cbind(propsDisp$invasions[c(5, 6)], propsDisp$n[c(5, 6)] - propsDisp$invasions[c(5, 6)]))
+dispPostHoc3 <- fisher.test(cbind(propsDisp$invasions[c(4, 5)], propsDisp$n[c(4, 5)] - propsDisp$invasions[c(4, 5)]))
+
 
 %%end.rcode
 
@@ -1161,10 +1157,6 @@ dispPostHoc1 <- fisher.test(cbind(propsDisp$invasions[c(4, 6)], propsDisp$n[c(4,
 
 %%begin.rcode DispTransPropTests
 ##Finally run proportion tests between transmission rates
-#DispTransTest1 <- prop.test(propsDisp$invasions[c(1, 4, 7, 10)], propsDisp$n[c(1, 4, 7, 1)])
-#DispTransTest2 <- prop.test(propsDisp$invasions[c(2, 5, 8, 11)], propsDisp$n[c(2, 5, 8, 11)])
-#DispTransTest3 <- prop.test(propsDisp$invasions[c(3, 6, 9, 12)], propsDisp$n[c(3, 6, 9, 12)])
-
 
 #Finally run proportion tests between transmission rates
 DispTransTest1 <- fisher.test(cbind(propsDisp$invasions[c(1, 4, 7, 10)], propsDisp$n[c(1, 4, 7, 10)] - propsDisp$invasions[c(1, 4, 7, 10)]))
@@ -1234,12 +1226,6 @@ propsTopo
 
 # Then run proportion tests between population structures
 
-#TopoTest1 <- prop.test(propsTopo$invasions[1:2], propsTopo$n[1:2])
-#TopoTest2 <- prop.test(propsTopo$invasions[3:4], propsTopo$n[3:4])
-#TopoTest3 <- prop.test(propsTopo$invasions[5:6], propsTopo$n[5:6])
-#TopoTest4 <- prop.test(propsTopo$invasions[7:8], propsTopo$n[7:8])
-
-
 TopoTest1 <- fisher.test(cbind(propsTopo$invasions[1:2], propsTopo$n[1:2] - propsTopo$invasions[1:2]))
 TopoTest2 <- fisher.test(cbind(propsTopo$invasions[3:4], propsTopo$n[3:4] - propsTopo$invasions[3:4]))
 TopoTest3 <- fisher.test(cbind(propsTopo$invasions[5:6], propsTopo$n[5:6] - propsTopo$invasions[5:6]))
@@ -1255,15 +1241,15 @@ TopoTest4 <- fisher.test(cbind(propsTopo$invasions[7:8], propsTopo$n[7:8] - prop
 %%begin.rcode TopoTransPropTests
 #Finally run proportion tests between transmission rates
 
-#TopoTransTest1 <- prop.test(propsTopo$invasions[c(1, 3, 5, 7)], propsTopo$n[c(1, 3, 5, 7)])
-#TopoTransTest2 <- prop.test(propsTopo$invasions[c(2, 4, 6, 8)], propsTopo$n[c(2, 4, 6, 8)])
-
-
 TopoTransTest1 <- fisher.test(cbind(propsTopo$invasions[c(1, 3, 5, 7)], propsTopo$n[c(1, 3, 5, 7)] - propsTopo$invasions[c(1, 3, 5, 7)]))
 TopoTransTest2 <- fisher.test(cbind(propsTopo$invasions[c(2, 4, 6, 8)], propsTopo$n[c(2, 4, 6, 8)] - propsTopo$invasions[c(2, 4, 6, 8)]))
 
 
 %%end.rcode
+
+
+
+
 
 
 The rates of invasion range from zero out of 100 simulations up to 100 out of 100 (Figure \ref{f:invasionPropPlots}).
@@ -1278,12 +1264,13 @@ Increased transmission clearly increases the rate of invasion even though the en
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-The proportion of invasions was not different across dispersal rates for three of four $\beta$ values (Fisher's exact test: $\beta = 0.1$, $p = \rinline{p(DispTest1$p.value)}$.  $\beta = 0.3$, $p = \rinline{p(DispTest3$p.value)}$, $\beta = 0.4$, $p = \rinline{p(DispTest4$p.value)}$).
+
 For $\beta = 0.2$ the rates of invasion were significantly different (Fisher's exact test: $p = \rinline{p(DispTest2$p.value)}$).
-The middle dispersal rate ($\xi = 0.01$) has the lowest invasion rate (\rinline{propsDisp$props[5]}) with the top and bottom dispersal rates have higher invasion rates ($\xi = 0.001$: invasion rate $=$ \rinline{propsDisp$props[4]}. $\xi = 0.1$: invasion rate $=$ \rinline{propsDisp$props[6]}).
-Given the 13 hypotheses tested in this study, if a Bonferroni correction is applied this difference would be insignificant at the 95\% confidence level (\rinline{p(DispTest2$p.value)} $> 0.05 / 12 = 6.8 \times 10^{-4}$).
-Due to this U-shape relationship and small differences in proportions of invasions I think this is probably not a real effect.
-Overall, there is no support for the hypothesis that population structure increases the rate at which pathogens invade into the population.
+The highest dispersal rate, $\xi = 0.1$, had significantly more invasions than either $\xi = 0.001$ (Fisher's exact test: $p = \rinline{p(dispPostHoc1$p.value)}$) or $\xi = 0.01$ (Fisher's exact test: $p = \rinline{p(dispPostHoc2$p.value)}$).
+The two lower dispersal rates ($\xi = 0.001$ and $0.01$) were not significantly different from each other (Fisher's exact test: $p = \rinline{p(dispPostHoc3$p.value)}$).
+The proportion of invasions was not different across dispersal rates for the other three $\beta$ values (Fisher's exact test: $\beta = 0.1$, $p = \rinline{p(DispTest1$p.value)}$.  $\beta = 0.3$, $p = \rinline{p(DispTest3$p.value)}$, $\beta = 0.4$, $p = \rinline{p(DispTest4$p.value)}$).
+
+
 
 \paragraph{Network structure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1293,6 +1280,8 @@ The proportion of invasions was not different between highly connected and large
 This was true at all transmission levels (Fisher's exact test. $\beta = 0.1$: $p = \rinline{p(TopoTest1$p.value)}$. $\beta = 0.2$:  $p = \rinline{p(TopoTest2$p.value)}$. $\beta = 0.3$: $p = \rinline{p(TopoTest3$p.value)}$. $\beta = 0.4$:  $p = \rinline{p(TopoTest4$p.value)}$).
 
  
+\paragraph{Unstructured population}
+
 \subsection{Transmission}
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1308,7 +1297,7 @@ This is true for all three dispersal values (Fisher's exact test. $\xi = 0.001$:
 # Just defining my caption label here to avoid the long string in chunk options below.
 
 invasionPropCaption <- sprintf("The probability of successful invasion. 
-  For three different transmission rates, the probability of invasion does not change between different A) dispersal rates or B) network topologies (with network topologies A and B referring to the fully and minimally connected topologies in Figure~\\ref{f:net}). 
+  For three different transmission rates, the probability of invasion does not change between different A) dispersal rates or B) network topologies (with network topologies `Minimal` and `Full` referring to the  minimally and full connected topologies in Figure~\\ref{f:net}). 
   Error bars are 95\\%% confidence intervals. 
   %i simulations were run for each treatment.
   Other parameters were kept constant at: $N = 10,\\, \\, \\mu = \\Lambda = 0.05,\\, \\gamma = 0.1,\\, \\alpha = 0.1$. 
@@ -1338,9 +1327,11 @@ dispPlot <- ggplot(propsDispCI, aes(x = factor(transmission), y = mean, fill = f
                  spread = 3) +
   theme(legend.position = "bottom", panel.grid.major.x = element_blank())
 
+
+
 propsTopoCI <- data.frame(propsTopo[, 1:2], binom.confint(propsTopo$invasions, nTopo$n, conf.level = 0.95, methods = "exact"))
 
-propsTopoCI$topo <- factor(propsTopoCI$meanK, levels = c(9, 2))
+propsTopoCI$topo <- factor(propsTopoCI$meanK, levels = c(2, 9))
 
 topoPlot <- ggplot(propsTopoCI, aes(x = factor(transmission), y = mean, fill = topo)) +
   geom_bar(stat = 'identity', position=position_dodge()) +
@@ -1349,8 +1340,8 @@ topoPlot <- ggplot(propsTopoCI, aes(x = factor(transmission), y = mean, fill = t
                 position = position_dodge(.9)) +
   xlab('Transmission') + 
   ylab('Prop. Invasions') +
-  scale_fill_poke(name='Topology', 
-                 labels=c("A", "B"),
+  scale_fill_poke(name='Topo.', 
+                 labels=c("Minimal", "Full"),
                  pokemon = 'Swampert',
                  spread = 2) +
   theme(legend.position = "bottom", panel.grid.major.x = element_blank())
@@ -1362,7 +1353,6 @@ ggdraw() +
   draw_plot(dispPlot, 0, 0, 0.5, 1) +
   draw_label("B)", 0.53, 0.96, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
   draw_plot(topoPlot, 0.5, 0, 0.5, 1)
-
 %%end.rcode
 
 
