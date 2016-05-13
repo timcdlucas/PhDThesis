@@ -954,7 +954,7 @@ fullSim <- function(x){
 
 %%end.rcode
 
-%%begin.rcode runNoDispSims, eval = TRUE, cache = FALSE
+%%begin.rcode runNoDispSims, eval = runAllSims, cache = FALSE
 
 # Create and set seed (seed object is used to set seed in each seperate simulation.'
 seed <- 19
@@ -1085,10 +1085,15 @@ dDisp <- read.csv('data/Chapter2/DispSims.csv', stringsAsFactors = FALSE)
 dim(dDisp)
 head(dDisp)
 
+extraMidBeta <- read.csv('data/Chapter2/extraMidBeta.csv', stringsAsFactors = FALSE)
+
 %%end.rcode
 
 
 %%begin.rcode DispDataOrganise
+
+dDisp <- rbind(dDisp, extraMidBeta[, 1:11])
+
 
 # Which simulations have an extinction
 
@@ -1146,6 +1151,8 @@ DispTest2 <- fisher.test(cbind(propsDisp$invasions[4:6], propsDisp$n[4:6] - prop
 DispTest3 <- fisher.test(cbind(propsDisp$invasions[7:9], propsDisp$n[1:3] - propsDisp$invasions[7:9]))
 DispTest4 <- fisher.test(cbind(propsDisp$invasions[10:12], propsDisp$n[10:12] - propsDisp$invasions[10:12]))
 
+
+dispPostHoc1 <- fisher.test(cbind(propsDisp$invasions[c(4, 6)], propsDisp$n[c(4, 6)] - propsDisp$invasions[c(4, 6)]))
 
 %%end.rcode
 
@@ -1252,8 +1259,8 @@ TopoTest4 <- fisher.test(cbind(propsTopo$invasions[7:8], propsTopo$n[7:8] - prop
 #TopoTransTest2 <- prop.test(propsTopo$invasions[c(2, 4, 6, 8)], propsTopo$n[c(2, 4, 6, 8)])
 
 
-TopoTransTest1 <- fisher.test(cbind(propsTopo$invasions[c(1, 3, 5, 7)], propsTopo$n[c(1, 3, 5, 7)] - propsDisp$invasions[c(1, 3, 5, 7)]))
-TopoTransTest2 <- fisher.test(cbind(propsTopo$invasions[c(2, 4, 6, 8)], propsTopo$n[c(2, 4, 6, 8)] - propsDisp$invasions[c(2, 4, 6, 8)]))
+TopoTransTest1 <- fisher.test(cbind(propsTopo$invasions[c(1, 3, 5, 7)], propsTopo$n[c(1, 3, 5, 7)] - propsTopo$invasions[c(1, 3, 5, 7)]))
+TopoTransTest2 <- fisher.test(cbind(propsTopo$invasions[c(2, 4, 6, 8)], propsTopo$n[c(2, 4, 6, 8)] - propsTopo$invasions[c(2, 4, 6, 8)]))
 
 
 %%end.rcode
