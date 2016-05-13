@@ -559,7 +559,7 @@ write.csv(z, file = 'data/Chapter2/DispSims.csv')
 %%end.rcode
 
 
-%%begin.rcode extraMidBeta, eval = TRUE
+%%begin.rcode extraMidBeta, eval = runAllSims
 
 
 
