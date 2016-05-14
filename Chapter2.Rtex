@@ -239,8 +239,8 @@ Finally, population structure has already been found to correlate with pathogen 
 % One sentence summarising the main result
 % (with the words “here we show” or their equivalent).
 
-Here I show that, given the assumptions of a metapopulation, population structure does not significantly affect the rate of invasion of new pathogens.
-This is true whether population structure is altered by changing the dispersal rate or the topology of the metapopulation network.
+Here I show that, given the assumptions of a metapopulation, increased population structure significantly reduces the rate of invasion of new pathogens.
+This is appears to only be true when population structure is altered by changing the dispersal rate; the topology of the metapopulation network has no significant affect on invasion rate.
 
 
 
@@ -934,7 +934,7 @@ fullSim <- function(x){
   d$meanK <- sum(p$adjacency != 0 )/p$parameters['nColonies']
   d$maxDistance <- p$parameters['maxDistance']
   d$nEvents <- p$parameters['events']
-  d$path2[x] <- sum(p$sample[c(2, 4), , dim(p$sample)[3]])
+  d$path2 <- sum(p$sample[c(2, 4), , dim(p$sample)[3]])
 
   # Time until extinction
   invadePath <- colSums(p$sample[2,  , (2 + invadeT / sample):(dim(p$sample)[3])]) + 
@@ -999,32 +999,6 @@ The model is a Markov chain where extinction of both pathogens species and extin
 However, the expected time to reach this state is much larger than the duration of the simulations.
 
 
-\subsection{Dispersal}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-The values used for the parameters of the model were chosen to highlight the effects of population structure. 
-Dispersal values are $\xi = 0, 0.1, 0.01$ and $ 0.001$ dispersals per individual per year. 
-$\xi = 0.1$ relates to individuals dispersing between colonies on average twice per lifetime. 
-Therefore exclusively juvenile dispersal would have dispersal rates similar to this value. %todo cite
-The probability that an individual disperses at least once in its lifetime is given by $\frac{\xi}{\xi + \mu}$.
-$\xi = 0.01$ relates to 17\% of individuals dispersing at least once in their lifetime.
-This value is therefore close to male-biased dispersal, with female philopatry. %todo cite
-$\xi = 0.001$ relates to 2\% of individuals dispersing in their lifetime.
-This therefore relates to a population that does not habitually disperse.
-Finally, I ran simulations with no dispersal.
-Given zero dispersal, only the seeded colony can ever recieve infections.
-Therefore, only one colony was simulated for $\xi = 0$.
-
-
-
-\subsection{Network structure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The network structure was synthetically created to be either fully or minimally connected (See Figure~\ref{f:net}). 
-10 subpopulations was selected as a trade off between computation time and a network complex enough that structure might have an effect. 
-This value is artificially small compared to wildlife populations. 
-To model a completely unconnected population the $\xi = 0$ simulations from above were used.
-
-
 
 \subsection{Parameter selection}
 \label{s:paramSelect}
@@ -1047,7 +1021,7 @@ However, the rationale of the model was that the invading species might be a new
 Furthermore, the model assumes complete cross-immunity after recovery from infection.
 Therefore cross-immunity to coinfection is likely to be very strong as well.
 
-The starting size of each subpopulation was set to 3,000. 
+The starting size of each colony was set to 3,000. 
 This is appropriate for many bat species \cite{jones2009pantheria}, especially the large, frugivorous \emph{Pteropodidae} that have been particularly associated with recent zoonotic diseases.
 
 
@@ -1066,11 +1040,53 @@ All simulations were run under all four transmission rates as this is such a fun
 % N = avg pop size, p = migration, mu = recovery, \alpha N_k is number of individuals infected. So think this is not with vital dynamics.
 
 
+
 \subsection{Unstructure population}
 
-For further comparison, I also ran simulations of a fully unstructured population.
-These simulation were run with a population of 30,000 so that the total population size is equal to that of the total metapopulation size.
-All other parameters were kept the same.
+As a baseline for comparison, I ran simulations of a fully unstructured population.
+These simulation were run with a population of 30,000 so that the total population size is equal to that of the total metapopulation size in the structured simulations.
+I ran 100 simulations at each transmission rate.
+
+
+\subsection{Dispersal}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The values used for the parameters of the model were chosen to highlight the effects of population structure. 
+Dispersal values are $\xi = 0, 0.1, 0.01$ and $ 0.001$ dispersals per individual per year. 
+$\xi = 0.1$ relates to individuals dispersing between colonies on average twice per lifetime. 
+Therefore exclusively juvenile dispersal would have dispersal rates similar to this value. %todo cite
+The probability that an individual disperses at least once in its lifetime is given by $\frac{\xi}{\xi + \mu}$.
+$\xi = 0.01$ relates to 17\% of individuals dispersing at least once in their lifetime.
+This value is therefore close to male-biased dispersal, with female philopatry. %todo cite
+$\xi = 0.001$ relates to 2\% of individuals dispersing in their lifetime.
+This therefore relates to a population that does not habitually disperse.
+Finally, I ran simulations with no dispersal.
+Given zero dispersal, only the seeded colony can ever recieve infections.
+Therefore, only one colony was simulated for $\xi = 0$.
+I 100 simulations for most parameter sets.
+However, examing these simulations had some marginal and difficult to interpret results.
+Therefore, I ran 200 simulations for $\beta = 0.2$ and $0.3$ (not including the zero dispersal case).
+
+
+
+\subsection{Network structure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The network structure was synthetically created to be either fully or minimally connected (See Figure~\ref{f:net}). 
+10 subpopulations was selected as a trade off between computation time and a network complex enough that structure might have an effect. 
+This value is artificially small compared to wildlife populations. 
+To model a completely unconnected population the $\xi = 0$ simulations from above were used.
+I ran 100 simulations for each parameter set.
+
+
+
+\subsection{Statistical analysis}
+
+I used binomial GLMs to test the hypothesis that probability of invasion increased with dispersal.
+Seperate GLMs were fitted for each transmission rate.
+To test whether the different topologies had different probabilities of invasion I used Fisher's exact tests.
+I also used binomial GLMs to test the hypothesis the probability of invasion increased with transmission rate.
+Seperate GLMs were fitted for each dispersal rate and network topology.
+All statistical analyses were performed using \emph{R}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1265,13 +1281,7 @@ TopoTransGLM2 <- summary(glm(invasion ~ transmission, data = dTopo[dTopo$meanK =
 %%end.rcode
 
 
-
-
-
-
-The rates of invasion range from zero out of 100 simulations up to 100 out of 100 (Figure \ref{f:invasionPropPlots}).
-Increased transmission clearly increases the rate of invasion even though the endemic pathogen has the same transmission rate as the invading pathogen.
- 
+\subsection{Unstructured population}
 
 
 \subsection{Population structure}
@@ -1281,11 +1291,13 @@ Increased transmission clearly increases the rate of invasion even though the en
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+At the intermediate transmission rate ($\beta = 0.2) the rate of invasion significantly increases with dispersal rate (GLM: $b$ = DispGLM2$coefficients[2, 1], $p$ = DispGLM2$coefficients[2, 4]).
+At all other transmission rates, the rate of invasion does not significantly change with dispersal rate (GLM. $\beta = 0.1$: $b$ = DispGLM1$coefficients[2, 1], $p$ = DispGLM1$coefficients[2, 4]. $\beta = 0.3$: $b$ = DispGLM3$coefficients[2, 1], $p$ = DispGLM3$coefficients[2, 4]. $\beta = 0.4$: $b$ = DispGLM4$coefficients[2, 1], $p$ = DispGLM4$coefficients[2, 4].)
 
-For $\beta = 0.2$ the rates of invasion were significantly different (Fisher's exact test: $p = \rinline{p(DispTest2$p.value)}$).
-The highest dispersal rate, $\xi = 0.1$, had significantly more invasions than either $\xi = 0.001$ (Fisher's exact test: $p = \rinline{p(dispPostHoc1$p.value)}$) or $\xi = 0.01$ (Fisher's exact test: $p = \rinline{p(dispPostHoc2$p.value)}$).
-The two lower dispersal rates ($\xi = 0.001$ and $0.01$) were not significantly different from each other (Fisher's exact test: $p = \rinline{p(dispPostHoc3$p.value)}$).
-The proportion of invasions was not different across dispersal rates for the other three $\beta$ values (Fisher's exact test: $\beta = 0.1$, $p = \rinline{p(DispTest1$p.value)}$.  $\beta = 0.3$, $p = \rinline{p(DispTest3$p.value)}$, $\beta = 0.4$, $p = \rinline{p(DispTest4$p.value)}$).
+%For $\beta = 0.2$ the rates of invasion were significantly different (Fisher's exact test: $p = \rinline{p(DispTest2$p.value)}$).
+%The highest dispersal rate, $\xi = 0.1$, had significantly more invasions than either $\xi = 0.001$ (Fisher's exact test: $p = \rinline{p(dispPostHoc1$p.value)}$) or $\xi = 0.01$ (Fisher's exact test: $p = \rinline{p(dispPostHoc2$p.value)}$).
+%The two lower dispersal rates ($\xi = 0.001$ and $0.01$) were not significantly different from each other (Fisher's exact test: $p = \rinline{p(dispPostHoc3$p.value)}$).
+%The proportion of invasions was not different across dispersal rates for the other three $\beta$ values (Fisher's exact test: $\beta = 0.1$, $p = \rinline{p(DispTest1$p.value)}$.  $\beta = 0.3$, $p = \rinline{p(DispTest3$p.value)}$, $\beta = 0.4$, $p = \rinline{p(DispTest4$p.value)}$).
 
 
 
@@ -1296,8 +1308,7 @@ I ran \rinline{nTopoSims} simulations over \rinline{length(unique(propsTopo$tran
 The proportion of invasions was not different between highly connected and largely unconnected metapopulations (Figure~\ref{f:invasionPropPlots}B). 
 This was true at all transmission levels (Fisher's exact test. $\beta = 0.1$: $p = \rinline{p(TopoTest1$p.value)}$. $\beta = 0.2$:  $p = \rinline{p(TopoTest2$p.value)}$. $\beta = 0.3$: $p = \rinline{p(TopoTest3$p.value)}$. $\beta = 0.4$:  $p = \rinline{p(TopoTest4$p.value)}$).
 
- 
-\paragraph{Unstructured population}
+
 
 \subsection{Transmission}
 %%%%%%%%%%%%%%%%%%%%%%%%%%
