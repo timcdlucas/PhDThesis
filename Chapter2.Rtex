@@ -989,12 +989,12 @@ The metapopulation contains 10 subpopulations.
 In each simulation the population was seeded with 10 sets of 200 infected individuals of pathogen 1.
 These groups were seeded into randomly selected colonies with replacement.
 For each 200 infected individuals added, 200 susceptible individuals were removed to keep starting colony sizes constant. 
-Pathogen 1 was then allowed to spread until the initial large epidemic had ended. 
+Pathogen 1 was then allowed to spread until the initial, large epidemic had ended. 
 After \rinline{invadeT} events, 5 individuals infected with pathogen 2 were added to one randomly selected colony. 
 Visual inspection of preliminary simulations was used to decide on \rinline{invadeT} as being long enough for the epidemic to end and the pathogen to be in an endemic state (Figures~\ref{fig:plotsInvade} and \ref{fig:plotsNoInvade1}).
 After another \rinline{nEvent - invadeT} events the invasion of pathogen 2 was considered successful if any individuals were still infected with pathogen 2.
 Therefore, if at least one individual is in class $I_2$ or $I_{12}$ at the end of the simulation, this was considered an invasion.
-Again visual inspection of preliminary simulations was used to determine that after \rinline{nEvent - invadeT} events, if an invading pathogen was still present, it was well established (Figures~\ref{plotsInvade} and \ref{plotsNoInvade1}).
+Again visual inspection of preliminary simulations was used to determine that after \rinline{nEvent - invadeT} events, if an invading pathogen was still present, it was well established (Figures~\ref{fig:plotsInvade} and \ref{fig:plotsNoInvade1}).
 The model is a Markov chain where extinction of both pathogens species and extinction of the host species are absorbing states.
 However, the expected time to reach this state is much larger than the duration of the simulations.
 
@@ -1180,7 +1180,6 @@ DispGLM4 <- summary(glm(invasion ~ dispersal, data = dDisp[dDisp$transmission ==
 
 
 
-
 %%begin.rcode DispTransPropTests
 ##Finally run proportion tests between transmission rates
 
@@ -1281,18 +1280,23 @@ TopoTransGLM2 <- summary(glm(invasion ~ transmission, data = dTopo[dTopo$meanK =
 %%end.rcode
 
 
-\subsection{Unstructured population}
+\subsection{Unstructured populations}
+
+The second pathogen invades and persists 100\% of the time in the unstructured population.
+This is true at all four transmission rates.
 
 
-\subsection{Population structure}
+\subsection{Structured populations}
 
 
 \paragraph{Dispersal}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-At the intermediate transmission rate ($\beta = 0.2) the rate of invasion significantly increases with dispersal rate (GLM: $b$ = DispGLM2$coefficients[2, 1], $p$ = DispGLM2$coefficients[2, 4]).
-At all other transmission rates, the rate of invasion does not significantly change with dispersal rate (GLM. $\beta = 0.1$: $b$ = DispGLM1$coefficients[2, 1], $p$ = DispGLM1$coefficients[2, 4]. $\beta = 0.3$: $b$ = DispGLM3$coefficients[2, 1], $p$ = DispGLM3$coefficients[2, 4]. $\beta = 0.4$: $b$ = DispGLM4$coefficients[2, 1], $p$ = DispGLM4$coefficients[2, 4].)
+At the intermediate transmission rate ($\beta = 0.2$) the rate of invasion increases with dispersal rate (Figure~\ref{fig:invasionPropPlots}A).
+This increase was strongly significant (GLM: $b$ = \rinline{DispGLM2$coefficients[2, 1]}, $p$ = \rinline{DispGLM2$coefficients[2, 4]}).
+The relative odds ratio is (\rinline{exp(DispGLM2$coefficients[2, 1])}
+At all other transmission rates, the rate of invasion does not significantly change with dispersal rate (GLM. $\beta = 0.1$: $b$ = \rinline{DispGLM1$coefficients[2, 1]}, $p$ = \rinline{DispGLM1$coefficients[2, 4]}. $\beta = 0.3$: $b$ = \rinline{DispGLM3$coefficients[2, 1]}, $p$ = \rinline{sprintf('%.2f', DispGLM3$coefficients[2, 4])}. $\beta = 0.4$: $b$ = \rinline{DispGLM4$coefficients[2, 1]}, $p$ = \rinline{sprintf('%.2f', DispGLM4$coefficients[2, 4])}.)
 
 %For $\beta = 0.2$ the rates of invasion were significantly different (Fisher's exact test: $p = \rinline{p(DispTest2$p.value)}$).
 %The highest dispersal rate, $\xi = 0.1$, had significantly more invasions than either $\xi = 0.001$ (Fisher's exact test: $p = \rinline{p(dispPostHoc1$p.value)}$) or $\xi = 0.01$ (Fisher's exact test: $p = \rinline{p(dispPostHoc2$p.value)}$).
@@ -1304,8 +1308,7 @@ At all other transmission rates, the rate of invasion does not significantly cha
 \paragraph{Network structure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-I ran \rinline{nTopoSims} simulations over \rinline{length(unique(propsTopo$transmission))} transmission values ($\beta = $ \rinline{unique(propsTopo$transmission)}).
-The proportion of invasions was not different between highly connected and largely unconnected metapopulations (Figure~\ref{f:invasionPropPlots}B). 
+The proportion of invasions was not different between fully connected and minimally connected metapopulations (Figure~\ref{f:invasionPropPlots}B). 
 This was true at all transmission levels (Fisher's exact test. $\beta = 0.1$: $p = \rinline{p(TopoTest1$p.value)}$. $\beta = 0.2$:  $p = \rinline{p(TopoTest2$p.value)}$. $\beta = 0.3$: $p = \rinline{p(TopoTest3$p.value)}$. $\beta = 0.4$:  $p = \rinline{p(TopoTest4$p.value)}$).
 
 
@@ -1314,8 +1317,7 @@ This was true at all transmission levels (Fisher's exact test. $\beta = 0.1$: $p
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Increasing the transmission rate increased the probability of invasion (Figure~\ref{f:invasionPropPlots}).
-This is true for all three dispersal values (Fisher's exact test. $\xi = 0.001$: $p < 10^{-5}$. $\xi = 0.01$: $p < 10^{-5}$. $\xi = 0.1$: $p < 10^{-5}$) and both network structures (Fisher's exact test. Fully connected: $p < 10^{-5}$. Minimally connected: $p < 10^{-5}$).
-
+This is true for all three dispersal values (GLM. $\xi = 0.001$: $b$ = \rinline{DispTransGLM1$coefficients[2, 1]}, $p < 10^{-5}$. $\xe = 0.01$: $b$ = \rinline{DispTransGLM2$coefficients[2, 1]}, $p < 10^{-5}$. $\xi = 0.1$: $b$ = \rinline{DispTransGLM3$coefficients[2, 1]}, $p < 10^{-5}$.) and both network structures (GLM. Minimally connected: $b$ = \rinline{TopoTransGLM2$coefficients[2, 1]}, $p < 10^{-5}$. Fully connected: $b$ = \rinline{TopoTransGLM1$coefficients[2, 1]}, $p < 10^{-5}$).
 
 
 
