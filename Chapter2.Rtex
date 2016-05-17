@@ -255,12 +255,12 @@ This is appears to only be true when population structure is altered by changing
 %%
 
 
-\subsection{Metapopulation model}
+\tmpsection{Metapopulation model}
 
 
 
 
-\paragraph{Two pathogen SIR model}
+\subsection{Two pathogen SIR model}
 
 I developed a multipathogen, SIR compartment model with individuals being classed as susceptible, infected or recovered with immunity (Figure~\ref{f:sir}).
 Susceptible individuals are counted in class $S$.
@@ -278,7 +278,7 @@ The time scale of the simulations are determined by setting $\mu$ = 0.05 per yea
 Infection is assumed to cause no extra mortality as for a number of viruses, bats show no clinical signs of infection \cite{halpin2011pteropid, deThoisy2016bioecological}.
 
 
-\paragraph{Metapopulation}
+\tmpsection{Metapopulation}
 
 
 The population is divided into a number of subpopulations.
@@ -294,7 +294,7 @@ Note this rate is independent of the degree and size of subpopulation $y$.
 
 
 
-\paragraph{Stochastic simulations}
+\tmpsection{Stochastic simulations}
 
 I examined this model using stochastic, continuous-time simulations implemented in \emph{R} \cite{R}.
 The model can be written as a continuous-time Markov chain.
@@ -401,7 +401,7 @@ while coinfection, given a coinfection adjustment factor $\alpha$, is given by
   i_{12,x} \rightarrow i_{12,x}+1,\: i_{1x} \rightarrow i_{1x}-1 &\;\;\text{at a rate of}\;\; \alpha\beta i_{1x}\left(i_{2x} + i_{12x}\right),\\
   i_{12,x} \rightarrow i_{12,x}+1,\: I_{2x} \rightarrow i_{2x}-1 &\;\;\text{at a rate of}\;\; \alpha\beta i_{2x}\left(i_{1x} + i_{12x}\right).
 \end{align}
-Note that lower values of $\alpha$ give lower rates of infection.
+Note that lower values of $\alpha$ give lower rates of infection as in \textcite{castillo1989epidemiological}.
 $\alpha = 0$ would be the case of no coinfection while $\alpha = 1$ would be the case where coinfection occurs at the same rate as the initial infection.
 The probability of migration from colony $m$ (with degree $k_m$) to colony $n$, given a dispersal rate $\xi$ is given by
 \begin{align}
@@ -566,7 +566,7 @@ write.csv(z, file = 'data/Chapter2/DispSims.csv')
 %%begin.rcode extraMidBeta, eval = runAllSims
 
 
-nExtraSims <- 600
+nExtraSims <- 150
 
 # Define our simulation function.
 fullSim <- function(x){
@@ -632,7 +632,6 @@ fullSim <- function(x){
 
   message(paste0("finished ", x, ". Invasion: ", invasion ))
  
-
   rm(p)
 
   return(d)
@@ -975,9 +974,6 @@ z <- do.call(rbind, z)
 # Save summary data.
 write.csv(z, file = 'data/Chapter2/noDispSims.csv')
 
-
-
-
 %%end.rcode
 
 
@@ -1041,14 +1037,14 @@ All simulations were run under all four transmission rates as this is such a fun
 
 
 
-\subsection{Unstructure population}
+\subsection{Population structure}
 
 As a baseline for comparison, I ran simulations of a fully unstructured population.
 These simulation were run with a population of 30,000 so that the total population size is equal to that of the total metapopulation size in the structured simulations.
 I ran 100 simulations at each transmission rate.
 
 
-\subsection{Dispersal}
+\tmpsection{Dispersal}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 The values used for the parameters of the model were chosen to highlight the effects of population structure. 
@@ -1069,7 +1065,7 @@ Therefore, I ran 200 simulations for $\beta = 0.2$ and $0.3$ (not including the 
 
 
 
-\subsection{Network structure}
+\tmpsection{Network structure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The network structure was synthetically created to be either fully or minimally connected (See Figure~\ref{f:net}). 
 10 subpopulations was selected as a trade off between computation time and a network complex enough that structure might have an effect. 
@@ -1083,7 +1079,7 @@ I ran 100 simulations for each parameter set.
 
 I used binomial GLMs to test the hypothesis that probability of invasion increased with dispersal.
 Seperate GLMs were fitted for each transmission rate.
-To test whether the different topologies had different probabilities of invasion I used Fisher's exact tests.
+To test whether the different topologies had different probabilities of invasion I used Fisher's exact tests as topology is best described as a categorical variable.
 I also used binomial GLMs to test the hypothesis the probability of invasion increased with transmission rate.
 Seperate GLMs were fitted for each dispersal rate and network topology.
 All statistical analyses were performed using \emph{R}.
@@ -1096,6 +1092,10 @@ All statistical analyses were performed using \emph{R}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%begin.rcode loadNoDispData
+noDisp <- read.csv('data/Chapter2/noDispSims.csv', stringsAsFactors = FALSE)
+
+%%end.rcode
 
 
 %%begin.rcode loadDispData
@@ -1111,9 +1111,12 @@ extraMidBeta <- read.csv('data/Chapter2/extraMidBeta.csv', stringsAsFactors = FA
 %%end.rcode
 
 
+
+
+
 %%begin.rcode DispDataOrganise
 
-dDisp <- rbind(dDisp, extraMidBeta[, 1:11])
+dDisp <- rbind(dDisp, extraMidBeta[, 1:11], noDisp[, 1:11])
 
 
 # Which simulations have an extinction
@@ -1161,15 +1164,6 @@ propsDisp
 
 # Then run proportion tests between population structures
 
-#DispTest1 <- fisher.test(cbind(propsDisp$invasions[1:3], propsDisp$n[1:3] - propsDisp$invasions[1:3]))
-#DispTest2 <- fisher.test(cbind(propsDisp$invasions[4:6], propsDisp$n[4:6] - propsDisp$invasions[4:6]))
-#DispTest3 <- fisher.test(cbind(propsDisp$invasions[7:9], propsDisp$n[1:3] - propsDisp$invasions[7:9]))
-#DispTest4 <- fisher.test(cbind(propsDisp$invasions[10:12], propsDisp$n[10:12] - propsDisp$invasions[10:12]))
-
-#dispPostHoc1 <- fisher.test(cbind(propsDisp$invasions[c(4, 6)], propsDisp$n[c(4, 6)] - propsDisp$invasions[c(4, 6)]))
-#dispPostHoc2 <- fisher.test(cbind(propsDisp$invasions[c(5, 6)], propsDisp$n[c(5, 6)] - propsDisp$invasions[c(5, 6)]))
-#dispPostHoc3 <- fisher.test(cbind(propsDisp$invasions[c(4, 5)], propsDisp$n[c(4, 5)] - propsDisp$invasions[c(4, 5)]))
-
 
 DispGLM1 <- summary(glm(invasion ~ dispersal, data = dDisp[dDisp$transmission == 0.1, ], family = binomial))
 DispGLM2 <- summary(glm(invasion ~ dispersal, data = dDisp[dDisp$transmission == 0.2, ], family = binomial))
@@ -1184,10 +1178,6 @@ DispGLM4 <- summary(glm(invasion ~ dispersal, data = dDisp[dDisp$transmission ==
 ##Finally run proportion tests between transmission rates
 
 #Finally run proportion tests between transmission rates
-#DispTransTest1 <- fisher.test(cbind(propsDisp$invasions[c(1, 4, 7, 10)], propsDisp$n[c(1, 4, 7, 10)] - propsDisp$invasions[c(1, 4, 7, 10)]))
-#DispTransTest2 <- fisher.test(cbind(propsDisp$invasions[c(2, 5, 8, 11)], propsDisp$n[c(2, 5, 8, 11)] - propsDisp$invasions[c(2, 5, 8, 11)]))
-#DispTransTest3 <- fisher.test(cbind(propsDisp$invasions[c(3, 6, 9, 12)], propsDisp$n[c(3, 6, 9, 12)] - propsDisp$invasions[c(3, 6, 9, 12)]))
-
 
 DispTransGLM1 <- summary(glm(invasion ~ transmission, data = dDisp[dDisp$dispersal == 0.001, ], family = binomial))
 DispTransGLM2 <- summary(glm(invasion ~ transmission, data = dDisp[dDisp$dispersal == 0.01, ], family = binomial))
@@ -1207,6 +1197,8 @@ dTopo <- read.csv('data/Chapter2/TopoSims.csv', stringsAsFactors = FALSE)
 dim(dTopo)
 head(dTopo)
 
+dTopo <- rbind(dTopo, noDisp[, 1:11])
+
 %%end.rcode
 
 
@@ -1221,7 +1213,8 @@ invsTopo <- dTopo %>%
   group_by(transmission, meanK) %>% 
   dplyr::select(invasion) %>%
   filter(invasion == TRUE) %>%
-  summarise(n())
+  summarise(n()) %>%
+  rbind(c(0.1, 1, 0), .)
 
 invsTopo
 
@@ -1255,10 +1248,10 @@ propsTopo
 
 # Then run proportion tests between population structures
 
-TopoTest1 <- fisher.test(cbind(propsTopo$invasions[1:2], propsTopo$n[1:2] - propsTopo$invasions[1:2]))
-TopoTest2 <- fisher.test(cbind(propsTopo$invasions[3:4], propsTopo$n[3:4] - propsTopo$invasions[3:4]))
-TopoTest3 <- fisher.test(cbind(propsTopo$invasions[5:6], propsTopo$n[5:6] - propsTopo$invasions[5:6]))
-TopoTest4 <- fisher.test(cbind(propsTopo$invasions[7:8], propsTopo$n[7:8] - propsTopo$invasions[7:8]))
+TopoTest1 <- fisher.test(cbind(propsTopo$invasions[1:3], propsTopo$n[1:3] - propsTopo$invasions[1:3]))
+TopoTest2 <- fisher.test(cbind(propsTopo$invasions[4:6], propsTopo$n[4:6] - propsTopo$invasions[4:6]))
+TopoTest3 <- fisher.test(cbind(propsTopo$invasions[7:9], propsTopo$n[7:9] - propsTopo$invasions[7:9]))
+TopoTest4 <- fisher.test(cbind(propsTopo$invasions[9:12], propsTopo$n[9:12] - propsTopo$invasions[9:12]))
 
 
 
@@ -1293,9 +1286,8 @@ This is true at all four transmission rates.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-At the intermediate transmission rate ($\beta = 0.2$) the rate of invasion increases with dispersal rate (Figure~\ref{fig:invasionPropPlots}A).
+At the intermediate transmission rate ($\beta = 0.2$) the rate of invasion increases with dispersal rate (Figure~\ref{f:invasionPropPlots}A).
 This increase was strongly significant (GLM: $b$ = \rinline{DispGLM2$coefficients[2, 1]}, $p$ = \rinline{DispGLM2$coefficients[2, 4]}).
-The relative odds ratio is (\rinline{exp(DispGLM2$coefficients[2, 1])}
 At all other transmission rates, the rate of invasion does not significantly change with dispersal rate (GLM. $\beta = 0.1$: $b$ = \rinline{DispGLM1$coefficients[2, 1]}, $p$ = \rinline{DispGLM1$coefficients[2, 4]}. $\beta = 0.3$: $b$ = \rinline{DispGLM3$coefficients[2, 1]}, $p$ = \rinline{sprintf('%.2f', DispGLM3$coefficients[2, 4])}. $\beta = 0.4$: $b$ = \rinline{DispGLM4$coefficients[2, 1]}, $p$ = \rinline{sprintf('%.2f', DispGLM4$coefficients[2, 4])}.)
 
 %For $\beta = 0.2$ the rates of invasion were significantly different (Fisher's exact test: $p = \rinline{p(DispTest2$p.value)}$).
@@ -1317,7 +1309,7 @@ This was true at all transmission levels (Fisher's exact test. $\beta = 0.1$: $p
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Increasing the transmission rate increased the probability of invasion (Figure~\ref{f:invasionPropPlots}).
-This is true for all three dispersal values (GLM. $\xi = 0.001$: $b$ = \rinline{DispTransGLM1$coefficients[2, 1]}, $p < 10^{-5}$. $\xe = 0.01$: $b$ = \rinline{DispTransGLM2$coefficients[2, 1]}, $p < 10^{-5}$. $\xi = 0.1$: $b$ = \rinline{DispTransGLM3$coefficients[2, 1]}, $p < 10^{-5}$.) and both network structures (GLM. Minimally connected: $b$ = \rinline{TopoTransGLM2$coefficients[2, 1]}, $p < 10^{-5}$. Fully connected: $b$ = \rinline{TopoTransGLM1$coefficients[2, 1]}, $p < 10^{-5}$).
+This is true for all three dispersal values (GLM. $\xi = 0.001$: $b$ = \rinline{DispTransGLM1$coefficients[2, 1]}, $p < 10^{-5}$. $\xi = 0.01$: $b$ = \rinline{DispTransGLM2$coefficients[2, 1]}, $p < 10^{-5}$. $\xi = 0.1$: $b$ = \rinline{DispTransGLM3$coefficients[2, 1]}, $p < 10^{-5}$.) and both network structures (GLM. Minimally connected: $b$ = \rinline{TopoTransGLM2$coefficients[2, 1]}, $p < 10^{-5}$. Fully connected: $b$ = \rinline{TopoTransGLM1$coefficients[2, 1]}, $p < 10^{-5}$).
 
 
 
@@ -1327,7 +1319,7 @@ This is true for all three dispersal values (GLM. $\xi = 0.001$: $b$ = \rinline{
 # Just defining my caption label here to avoid the long string in chunk options below.
 
 invasionPropCaption <- sprintf("
-  The probability of successful invasionfor not change between different A) dispersal rates or B) network topologies (with network topologies `Minimal` and `Full` referring to the  minimally and fully connected topologies in Figure~\\ref{f:net}). 
+  The probability of successful invasion for different A) dispersal rates or B) network topologies (with network topologies ``unconnected'', ``minimally connected'' and ``fully connected'' as in Figure~\\ref{f:net}). 
   Error bars are 95\\%% confidence intervals of probability of invasion. 
   %i simulations were run for each treatment except $\\beta = 0.2$ in A) which has 200 per treatment.
   Other parameters were kept constant at: $m = 10,\\, \\, \\mu = \\Lambda = 0.05,\\, \\gamma = 1,\\, \\alpha = 0.1$. 
@@ -1341,7 +1333,7 @@ invasionPropShort <- "The probability of invasion across different dispersal rat
 %%end.rcode
 
 
-%%begin.rcode invasionPropPlots, fig.lp = 'f:', fig.height = 2.8,  out.width = "\\textwidth", fig.cap = invasionPropCaption, cache = FALSE, fig.scap = invasionPropShort
+%%begin.rcode invasionPropPlots, fig.lp = 'f:', fig.height = 3.5,  out.width = "\\textwidth", fig.cap = invasionPropCaption, cache = FALSE, fig.scap = invasionPropShort
 
 propsDispCI <- data.frame(propsDisp[, 1:2], binom.confint(propsDisp$invasions, propsDisp$n, conf.level = 0.95, methods = "exact"))
 
@@ -1352,17 +1344,17 @@ dispPlot <- ggplot(propsDispCI, aes(x = factor(transmission), y = mean, fill = f
                 position = position_dodge(.9)) +
   xlab('Transmission') + 
   ylab('Prop. Invasions') +
-  scale_fill_poke(name="Dispersal", 
-                 labels=c('0.001', '0.01', '0.1'), 
+  scale_fill_poke(name="Disp.", 
+                 labels=c('0.00', '0.001', '0.01', '0.1'), 
                  pokemon = 'Swampert',
-                 spread = 3) +
-  theme(legend.position = "bottom", panel.grid.major.x = element_blank())
-
+                 spread = 4) +
+  theme(legend.position = "bottom", panel.grid.major.x = element_blank()) 
+  #guides(fill = guide_legend(ncol=1, title.vjust = 0.8)) 
 
 
 propsTopoCI <- data.frame(propsTopo[, 1:2], binom.confint(propsTopo$invasions, nTopo$n, conf.level = 0.95, methods = "exact"))
 
-propsTopoCI$topo <- factor(propsTopoCI$meanK, levels = c(2, 9))
+propsTopoCI$topo <- factor(propsTopoCI$meanK, levels = c(1, 2, 9))
 
 topoPlot <- ggplot(propsTopoCI, aes(x = factor(transmission), y = mean, fill = topo)) +
   geom_bar(stat = 'identity', position=position_dodge()) +
@@ -1372,10 +1364,11 @@ topoPlot <- ggplot(propsTopoCI, aes(x = factor(transmission), y = mean, fill = t
   xlab('Transmission') + 
   ylab('Prop. Invasions') +
   scale_fill_poke(name='Topo.', 
-                 labels=c("Minimal", "Full"),
+                 labels=c("Un.", "Min.", "Full."),
                  pokemon = 'Swampert',
-                 spread = 2) +
-  theme(legend.position = "bottom", panel.grid.major.x = element_blank())
+                 spread = 3) +
+  theme(legend.position = "bottom", panel.grid.major.x = element_blank()) 
+  #guides(fill = guide_legend(ncol=1))
 
 #plot_grid(dispPlot, topoPlot, labels = c('A', 'B'), align = 'h', label_size = 10)
 
@@ -1410,11 +1403,11 @@ Furthermore, simple analytical models suggest that population structure should i
 
 \tmpsection{Link results to consequences}
 
-These results imply that if population structure does in fact affect pathogen richness (Chapter \ref{ch:empirical}, \cites{vitone2004body, maganga2014bat, turmelle2009correlates}) it must occur by a mechanism other than the one studied here.
-Therefore it is not the spread and persistence of a newly evolved pathogen that is facilitated by decreased competition due to population structure.
+These results suggest that if population structure does in fact affect pathogen richness (Chapter \ref{ch:empirical}, \cites{vitone2004body, maganga2014bat, turmelle2009correlates}) it must occur by a mechanism other than the one studied here.
+The hypothesised mechanism for the relationship between population structure and pathogen richness (Chapter \ref{ch:empirical}, \cites{vitone2004body, maganga2014bat, turmelle2009correlates}) was that the spread and persistence of a newly evolved pathogen is facilitated by decreased competition due to population structure.
 Instead, reduced population structure allows the new pathogen to quickly spread outside of the colony in which it evolved.
 As the mechanism studied here cannot explain the relationship between population structure and pathogen richness seen in wild species (Chapter \ref{ch:empirical}, \cites{vitone2004body, maganga2014bat, turmelle2009correlates}), other mechanisms should be studied.
-Other mechanisms that should be examined include reduced competitive exclusion of already established pathogens or increased invasion of less closely and less strongly competing pathogens, perhaps mediated by ecological competition of pathogens (i.e.\ reduction of the susceptible pool by disease induced mortality).
+Other mechanisms that should be examined include reduced competitive exclusion of already established pathogens or increased invasion of less closely related and less strongly competing pathogens, perhaps mediated by ecological competition of pathogens (i.e.\ reduction of the susceptible pool by disease induced mortality).
 Furthermore, single pathogen dynamics could have an important role such as population structure causing a much slower, asynchronous epidemic preventing acquired herd immunity \cite{plowright2011urban}.
 
 However, my simulations do highlight the importance of competition for the spread of a new pathogen.
@@ -1434,6 +1427,10 @@ This is probably a reasonable assumption given that I am modelling a newly evolv
 However, further work could relax this assumption using a model similar to \cite{poletto2015characterising} which contains additional classes for `infected with pathogen one, immune to pathogen two' and `infected with pathogen two, immune to pathogen one'.
 The model here was formulated such that the study of systems with greater than two pathogens is still computationally feasible while a model such as used in \cite{poletto2015characterising} contains $3^\rho$ classes for a system with $\rho$ pathogen species.
 This quickly becomes computationally restrictive.
+The interaction of multiple pathogens is one avenue for further study.
+It might be expected that there is an upper limit to the total number of pathogen species that can coexist in a population.
+In particular, it is possible that once a certain number of species are endemic in a population, no more pathogens can invade into the population.
+This has not been studied in the context of metapopulations.
 
 \paragraph{Identical strains}
 
@@ -1459,9 +1456,9 @@ This would be expected to facilitate the invasion of new pathogen species; if a 
 
 \subsection{Conclusions}
 
-In conclusion I have found evidence that reduced population structure aids the invasion and establishment of newly evolved pathogen species.
+In conclusion I have found evidence that reduced population structure facilitates the invasion and establishment of newly evolved pathogen species.
 However, the direction of the relationship contradicts those found in wild species.
-This suggests that if population structure does have a role in shaping pathogen communities, it is not by this specific mechanism.
+This suggests that if population structure does have a role in shaping pathogen communities, it is unlikely to be by this specific mechanism.
 
 
 
