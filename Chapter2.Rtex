@@ -1061,7 +1061,7 @@ Given zero dispersal, only the seeded colony can ever recieve infections.
 Therefore, only one colony was simulated for $\xi = 0$.
 I 100 simulations for most parameter sets.
 However, examing these simulations had some marginal and difficult to interpret results.
-Therefore, I ran 200 simulations for $\beta = 0.2$ and $0.3$ (not including the zero dispersal case).
+Therefore, I ran 150 simulations for $\beta = 0.2$ and $0.3$ (not including the zero dispersal case).
 
 
 
@@ -1079,10 +1079,12 @@ I ran 100 simulations for each parameter set.
 
 I used binomial GLMs to test the hypothesis that probability of invasion increased with dispersal.
 Seperate GLMs were fitted for each transmission rate.
+These tests were performed both with and without the $\xi = 0$ results as the complete lack of dispersal makes these simulations quantitatively different to the other simulations.
 To test whether the different topologies had different probabilities of invasion I used Fisher's exact tests as topology is best described as a categorical variable.
-I also used binomial GLMs to test the hypothesis the probability of invasion increased with transmission rate.
+As with the $\xi = 0$ results, these tests were performed both with and with the completely unconnected topology results.
+Finally, I also used binomial GLMs to test the hypothesis that the probability of invasion increased with transmission rate.
 Seperate GLMs were fitted for each dispersal rate and network topology.
-All statistical analyses were performed using \emph{R}.
+All statistical analyses were performed using the \emph{stats} package in \emph{R}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1170,6 +1172,13 @@ DispGLM2 <- summary(glm(invasion ~ dispersal, data = dDisp[dDisp$transmission ==
 DispGLM3 <- summary(glm(invasion ~ dispersal, data = dDisp[dDisp$transmission == 0.3, ], family = binomial))
 DispGLM4 <- summary(glm(invasion ~ dispersal, data = dDisp[dDisp$transmission == 0.4, ], family = binomial))
 
+dDispNoZero <- dDisp %>% dplyr::filter(dispersal != 0)
+Disp2GLM1 <- summary(glm(invasion ~ dispersal, data = dDispNoZero[dDispNoZero$transmission == 0.1, ], family = binomial))
+Disp2GLM2 <- summary(glm(invasion ~ dispersal, data = dDispNoZero[dDispNoZero$transmission == 0.2, ], family = binomial))
+Disp2GLM3 <- summary(glm(invasion ~ dispersal, data = dDispNoZero[dDispNoZero$transmission == 0.3, ], family = binomial))
+Disp2GLM4 <- summary(glm(invasion ~ dispersal, data = dDispNoZero[dDispNoZero$transmission == 0.4, ], family = binomial))
+
+
 %%end.rcode
 
 
@@ -1182,7 +1191,7 @@ DispGLM4 <- summary(glm(invasion ~ dispersal, data = dDisp[dDisp$transmission ==
 DispTransGLM1 <- summary(glm(invasion ~ transmission, data = dDisp[dDisp$dispersal == 0.001, ], family = binomial))
 DispTransGLM2 <- summary(glm(invasion ~ transmission, data = dDisp[dDisp$dispersal == 0.01, ], family = binomial))
 DispTransGLM3 <- summary(glm(invasion ~ transmission, data = dDisp[dDisp$dispersal == 0.1, ], family = binomial))
-
+DispTransGLM4 <- summary(glm(invasion ~ transmission, data = dDisp[dDisp$dispersal == 0, ], family = binomial))
 
 %%end.rcode
 
@@ -1251,9 +1260,14 @@ propsTopo
 TopoTest1 <- fisher.test(cbind(propsTopo$invasions[1:3], propsTopo$n[1:3] - propsTopo$invasions[1:3]))
 TopoTest2 <- fisher.test(cbind(propsTopo$invasions[4:6], propsTopo$n[4:6] - propsTopo$invasions[4:6]))
 TopoTest3 <- fisher.test(cbind(propsTopo$invasions[7:9], propsTopo$n[7:9] - propsTopo$invasions[7:9]))
-TopoTest4 <- fisher.test(cbind(propsTopo$invasions[9:12], propsTopo$n[9:12] - propsTopo$invasions[9:12]))
+TopoTest4 <- fisher.test(cbind(propsTopo$invasions[10:12], propsTopo$n[10:12] - propsTopo$invasions[10:12]))
 
 
+
+Topo2Test1 <- fisher.test(cbind(propsTopo$invasions[2:3], propsTopo$n[2:3] - propsTopo$invasions[2:3]))
+Topo2Test2 <- fisher.test(cbind(propsTopo$invasions[5:6], propsTopo$n[5:6] - propsTopo$invasions[5:6]))
+Topo2Test3 <- fisher.test(cbind(propsTopo$invasions[8:9], propsTopo$n[8:9] - propsTopo$invasions[8:9]))
+Topo2Test4 <- fisher.test(cbind(propsTopo$invasions[11:12], propsTopo$n[11:12] - propsTopo$invasions[11:12]))
 
 %%end.rcode
 
@@ -1273,34 +1287,30 @@ TopoTransGLM2 <- summary(glm(invasion ~ transmission, data = dTopo[dTopo$meanK =
 %%end.rcode
 
 
-\subsection{Unstructured populations}
 
-The second pathogen invades and persists 100\% of the time in the unstructured population.
+\subsection{Dispersal}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In the unstructured population, the second pathogen invaded in 100 out of 100 simulations .
 This is true at all four transmission rates.
 
+When the $\xi = 0$ simulations are included, there is a positive relationship between dispersal rate and invasion probability for $\beta = 0.2, 0.3$ and $0.4$ (Figure~\ref{f:invasionPropPlots}A).
+These positive relationships are stongly significant (GLM. $\beta = 0.2$: $b$ = \rinline{Disp2GLM2$coefficients[2, 1]}, $p$ = \rinline{Disp2GLM2$coefficients[2, 4]}. $\beta = 0.3$: $b$ = \rinline{Disp2GLM3$coefficients[2, 1]}, $p$ = \rinline{sprintf('%.2f', Disp2GLM3$coefficients[2, 4])}. $\beta = 0.4$: $b$ = \rinline{Disp2GLM4$coefficients[2, 1]}, $p$ = \rinline{sprintf('%.2f', Disp2GLM4$coefficients[2, 4])}.)
+At $\beta = 0.1$ there is no significant relationship as invasion probaiblity is very close to zero at all dispersal rates (GLM. $b$ = \rinline{Disp2GLM1$coefficients[2, 1]}, $p$ = \rinline{Disp2GLM1$coefficients[2, 4]}).
 
-\subsection{Structured populations}
-
-
-\paragraph{Dispersal}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-At the intermediate transmission rate ($\beta = 0.2$) the rate of invasion increases with dispersal rate (Figure~\ref{f:invasionPropPlots}A).
-This increase was strongly significant (GLM: $b$ = \rinline{DispGLM2$coefficients[2, 1]}, $p$ = \rinline{DispGLM2$coefficients[2, 4]}).
+However, when the $\xi = 0$ simulations are removed, this significant, positive relationship largely disappears.
+At $\beta = 0.2$, the significant positive relationship remains (GLM: $b$ = \rinline{DispGLM2$coefficients[2, 1]}, $p$ = \rinline{DispGLM2$coefficients[2, 4]}).
 At all other transmission rates, the rate of invasion does not significantly change with dispersal rate (GLM. $\beta = 0.1$: $b$ = \rinline{DispGLM1$coefficients[2, 1]}, $p$ = \rinline{DispGLM1$coefficients[2, 4]}. $\beta = 0.3$: $b$ = \rinline{DispGLM3$coefficients[2, 1]}, $p$ = \rinline{sprintf('%.2f', DispGLM3$coefficients[2, 4])}. $\beta = 0.4$: $b$ = \rinline{DispGLM4$coefficients[2, 1]}, $p$ = \rinline{sprintf('%.2f', DispGLM4$coefficients[2, 4])}.)
 
-%For $\beta = 0.2$ the rates of invasion were significantly different (Fisher's exact test: $p = \rinline{p(DispTest2$p.value)}$).
-%The highest dispersal rate, $\xi = 0.1$, had significantly more invasions than either $\xi = 0.001$ (Fisher's exact test: $p = \rinline{p(dispPostHoc1$p.value)}$) or $\xi = 0.01$ (Fisher's exact test: $p = \rinline{p(dispPostHoc2$p.value)}$).
-%The two lower dispersal rates ($\xi = 0.001$ and $0.01$) were not significantly different from each other (Fisher's exact test: $p = \rinline{p(dispPostHoc3$p.value)}$).
-%The proportion of invasions was not different across dispersal rates for the other three $\beta$ values (Fisher's exact test: $\beta = 0.1$, $p = \rinline{p(DispTest1$p.value)}$.  $\beta = 0.3$, $p = \rinline{p(DispTest3$p.value)}$, $\beta = 0.4$, $p = \rinline{p(DispTest4$p.value)}$).
 
-
-
-\paragraph{Network structure}
+\subsection{Network structure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The proportion of invasions was not different between fully connected and minimally connected metapopulations (Figure~\ref{f:invasionPropPlots}B). 
+When the completely unconnected topology simulations were included, the probability of invasion was different across topologies for $\beta = 0.1, 0.2$ and $0.3$ (Fisher's exact test. $\beta = 0.2$:  $p = \rinline{p(TopoTest2$p.value)}$. $\beta = 0.3$: $p = \rinline{p(TopoTest3$p.value)}$. $\beta = 0.4$:  $p = \rinline{p(TopoTest4$p.value)}$).
+In each case, the fully unconnected population had a lower probability of invasion than the minimall and completely connected topologies (Figure~\ref{f:invasionPropPlots}B).
+At $\beta = 0.1$ there is no significant difference ($p = \rinline{p(TopoTest1$p.value)}$) and the probability of invasion was close to zero for all topologies (Figure~\ref{f:invasionPropPlots}B).
+
+When the completely unconnected topology simulations are removed, there are no significant differences between topologies i.e.\ between the minimally and fully connected topologies (Figure~\ref{f:invasionPropPlots}B). 
 This was true at all transmission levels (Fisher's exact test. $\beta = 0.1$: $p = \rinline{p(TopoTest1$p.value)}$. $\beta = 0.2$:  $p = \rinline{p(TopoTest2$p.value)}$. $\beta = 0.3$: $p = \rinline{p(TopoTest3$p.value)}$. $\beta = 0.4$:  $p = \rinline{p(TopoTest4$p.value)}$).
 
 
