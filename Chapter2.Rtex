@@ -1291,16 +1291,16 @@ TopoTransGLM2 <- summary(glm(invasion ~ transmission, data = dTopo[dTopo$meanK =
 \subsection{Dispersal}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In the unstructured population, the second pathogen invaded in 100 out of 100 simulations .
-This is true at all four transmission rates.
+In the unstructured population, the second pathogen invaded in 100 out of 100 simulations.
+This was true at all four transmission rates.
 
-When the $\xi = 0$ simulations are included, there is a positive relationship between dispersal rate and invasion probability for $\beta = 0.2, 0.3$ and $0.4$ (Figure~\ref{f:invasionPropPlots}A).
-These positive relationships are stongly significant (GLM. $\beta = 0.2$: $b$ = \rinline{Disp2GLM2$coefficients[2, 1]}, $p$ = \rinline{Disp2GLM2$coefficients[2, 4]}. $\beta = 0.3$: $b$ = \rinline{Disp2GLM3$coefficients[2, 1]}, $p$ = \rinline{sprintf('%.2f', Disp2GLM3$coefficients[2, 4])}. $\beta = 0.4$: $b$ = \rinline{Disp2GLM4$coefficients[2, 1]}, $p$ = \rinline{sprintf('%.2f', Disp2GLM4$coefficients[2, 4])}.)
-At $\beta = 0.1$ there is no significant relationship as invasion probaiblity is very close to zero at all dispersal rates (GLM. $b$ = \rinline{Disp2GLM1$coefficients[2, 1]}, $p$ = \rinline{Disp2GLM1$coefficients[2, 4]}).
+When the $\xi = 0$ simulations were included, there was a positive relationship between dispersal rate and invasion probability for $\beta = 0.2, 0.3$ and $0.4$ (Figure~\ref{f:invasionPropPlots}A).
+These positive relationships were stongly significant (GLM. $\beta = 0.2$: $b$ = \rinline{DispGLM2$coefficients[2, 1]}, $p$ = \rinline{DispGLM2$coefficients[2, 4]}. $\beta = 0.3$: $b$ = \rinline{DispGLM3$coefficients[2, 1]}, $p$ = \rinline{DispGLM3$coefficients[2, 4]}. $\beta = 0.4$: $b$ = \rinline{DispGLM4$coefficients[2, 1]}, $p$ = \rinline{DispGLM4$coefficients[2, 4]}.)
+At $\beta = 0.1$ there was no significant relationship as invasion probaiblity was very close to zero at all dispersal rates (GLM. $b$ = \rinline{DispGLM1$coefficients[2, 1]}, $p$ = \rinline{DispGLM1$coefficients[2, 4]}).
 
-However, when the $\xi = 0$ simulations are removed, this significant, positive relationship largely disappears.
-At $\beta = 0.2$, the significant positive relationship remains (GLM: $b$ = \rinline{DispGLM2$coefficients[2, 1]}, $p$ = \rinline{DispGLM2$coefficients[2, 4]}).
-At all other transmission rates, the rate of invasion does not significantly change with dispersal rate (GLM. $\beta = 0.1$: $b$ = \rinline{DispGLM1$coefficients[2, 1]}, $p$ = \rinline{DispGLM1$coefficients[2, 4]}. $\beta = 0.3$: $b$ = \rinline{DispGLM3$coefficients[2, 1]}, $p$ = \rinline{sprintf('%.2f', DispGLM3$coefficients[2, 4])}. $\beta = 0.4$: $b$ = \rinline{DispGLM4$coefficients[2, 1]}, $p$ = \rinline{sprintf('%.2f', DispGLM4$coefficients[2, 4])}.)
+However, when the $\xi = 0$ simulations were removed, this significant, positive relationship largely disappeared.
+At $\beta = 0.2$, the significant positive relationship remained (GLM: $b$ = \rinline{Disp2GLM2$coefficients[2, 1]}, $p$ = \rinline{Disp2GLM2$coefficients[2, 4]}).
+At all other transmission rates, the rate of invasion did not significantly change with dispersal rate (GLM. $\beta = 0.1$: $b$ = \rinline{Disp2GLM1$coefficients[2, 1]}, $p$ = \rinline{Disp2GLM1$coefficients[2, 4]}. $\beta = 0.3$: $b$ = \rinline{Disp2GLM3$coefficients[2, 1]}, $p$ = \rinline{sprintf('%.2f', Disp2GLM3$coefficients[2, 4])}. $\beta = 0.4$: $b$ = \rinline{Disp2GLM4$coefficients[2, 1]}, $p$ = \rinline{sprintf('%.2f', Disp2GLM4$coefficients[2, 4])}.)
 
 
 \subsection{Network structure}
@@ -1308,10 +1308,10 @@ At all other transmission rates, the rate of invasion does not significantly cha
 
 When the completely unconnected topology simulations were included, the probability of invasion was different across topologies for $\beta = 0.1, 0.2$ and $0.3$ (Fisher's exact test. $\beta = 0.2$:  $p = \rinline{p(TopoTest2$p.value)}$. $\beta = 0.3$: $p = \rinline{p(TopoTest3$p.value)}$. $\beta = 0.4$:  $p = \rinline{p(TopoTest4$p.value)}$).
 In each case, the fully unconnected population had a lower probability of invasion than the minimall and completely connected topologies (Figure~\ref{f:invasionPropPlots}B).
-At $\beta = 0.1$ there is no significant difference ($p = \rinline{p(TopoTest1$p.value)}$) and the probability of invasion was close to zero for all topologies (Figure~\ref{f:invasionPropPlots}B).
+At $\beta = 0.1$ there was no significant difference ($p = \rinline{p(TopoTest1$p.value)}$) and the probability of invasion was close to zero for all topologies (Figure~\ref{f:invasionPropPlots}B).
 
-When the completely unconnected topology simulations are removed, there are no significant differences between topologies i.e.\ between the minimally and fully connected topologies (Figure~\ref{f:invasionPropPlots}B). 
-This was true at all transmission levels (Fisher's exact test. $\beta = 0.1$: $p = \rinline{p(TopoTest1$p.value)}$. $\beta = 0.2$:  $p = \rinline{p(TopoTest2$p.value)}$. $\beta = 0.3$: $p = \rinline{p(TopoTest3$p.value)}$. $\beta = 0.4$:  $p = \rinline{p(TopoTest4$p.value)}$).
+When the completely unconnected topology simulations were removed, there were no significant differences between topologies i.e.\ between the minimally and fully connected topologies (Figure~\ref{f:invasionPropPlots}B). 
+This was true at all transmission levels (Fisher's exact test. $\beta = 0.1$, $p = \rinline{p(Topo2Test1$p.value)}$. $\beta = 0.2$,  $p = \rinline{p(Topo2Test2$p.value)}$. $\beta = 0.3$, $p = \rinline{p(Topo2Test3$p.value)}$. $\beta = 0.4$,  $p = \rinline{p(Topo2Test4$p.value)}$).
 
 
 
@@ -1319,7 +1319,7 @@ This was true at all transmission levels (Fisher's exact test. $\beta = 0.1$: $p
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Increasing the transmission rate increased the probability of invasion (Figure~\ref{f:invasionPropPlots}).
-This is true for all three dispersal values (GLM. $\xi = 0.001$: $b$ = \rinline{DispTransGLM1$coefficients[2, 1]}, $p < 10^{-5}$. $\xi = 0.01$: $b$ = \rinline{DispTransGLM2$coefficients[2, 1]}, $p < 10^{-5}$. $\xi = 0.1$: $b$ = \rinline{DispTransGLM3$coefficients[2, 1]}, $p < 10^{-5}$.) and both network structures (GLM. Minimally connected: $b$ = \rinline{TopoTransGLM2$coefficients[2, 1]}, $p < 10^{-5}$. Fully connected: $b$ = \rinline{TopoTransGLM1$coefficients[2, 1]}, $p < 10^{-5}$).
+This is true for all four dispersal values (GLM. $\xi = 0$: $b$ = \rinline{DispTransGLM4$coefficients[2, 1]}, $p < 10^{-5}$. $\xi = 0.001$: $b$ = \rinline{DispTransGLM1$coefficients[2, 1]}, $p < 10^{-5}$. $\xi = 0.01$: $b$ = \rinline{DispTransGLM2$coefficients[2, 1]}, $p < 10^{-5}$. $\xi = 0.1$: $b$ = \rinline{DispTransGLM3$coefficients[2, 1]}, $p < 10^{-5}$.) and both network structures (GLM. Minimally connected: $b$ = \rinline{TopoTransGLM2$coefficients[2, 1]}, $p < 10^{-5}$. Fully connected: $b$ = \rinline{TopoTransGLM1$coefficients[2, 1]}, $p < 10^{-5}$).
 
 
 
@@ -1331,7 +1331,7 @@ This is true for all three dispersal values (GLM. $\xi = 0.001$: $b$ = \rinline{
 invasionPropCaption <- sprintf("
   The probability of successful invasion for different A) dispersal rates or B) network topologies (with network topologies ``unconnected'', ``minimally connected'' and ``fully connected'' as in Figure~\\ref{f:net}). 
   Error bars are 95\\%% confidence intervals of probability of invasion. 
-  %i simulations were run for each treatment except $\\beta = 0.2$ in A) which has 200 per treatment.
+  %i simulations were run for each treatment except $\\beta = 0.2$ in A) which has 150 per treatment.
   Other parameters were kept constant at: $m = 10,\\, \\, \\mu = \\Lambda = 0.05,\\, \\gamma = 1,\\, \\alpha = 0.1$. 
   When dispersal is varied, the population structure is fully connected. 
   When network topology is varied, $\\xi = 0.01$.",
@@ -1346,47 +1346,87 @@ invasionPropShort <- "The probability of invasion across different dispersal rat
 %%begin.rcode invasionPropPlots, fig.lp = 'f:', fig.height = 3.5,  out.width = "\\textwidth", fig.cap = invasionPropCaption, cache = FALSE, fig.scap = invasionPropShort
 
 propsDispCI <- data.frame(propsDisp[, 1:2], binom.confint(propsDisp$invasions, propsDisp$n, conf.level = 0.95, methods = "exact"))
+propsDispCI <- propsDispCI %>% mutate(dispersal = replace(dispersal, dispersal == 0, 1e-4))
+propsDispCI <- propsDispCI %>% mutate(transFactor = factor(transmission, levels = c(0.4, 0.3, 0.2, 0.1)))
 
-dispPlot <- ggplot(propsDispCI, aes(x = factor(transmission), y = mean, fill = factor(dispersal))) +
-  geom_bar(stat = 'identity', position=position_dodge()) +
-  geom_errorbar(aes(ymin = lower, ymax = upper),
-                width=.2,                   
-                position = position_dodge(.9)) +
-  xlab('Transmission') + 
-  ylab('Prop. Invasions') +
-  scale_fill_poke(name="Disp.", 
-                 labels=c('0.00', '0.001', '0.01', '0.1'), 
-                 pokemon = 'Swampert',
+#dispPlot <- ggplot(propsDispCI, aes(x = factor(transmission), y = mean, fill = factor(dispersal))) +
+#  geom_bar(stat = 'identity', position=position_dodge()) +
+#  geom_errorbar(aes(ymin = lower, ymax = upper),
+#                width=.2,                   
+#                position = position_dodge(.9)) +
+#  xlab('Transmission') + 
+#  ylab('Prop. Invasions') +
+#  scale_fill_poke(name="Disp.", 
+#                 labels=c('0.00', '0.001', '0.01', '0.1'), 
+#                 pokemon = 'Swampert',
+#                 spread = 4) +
+#  theme(legend.position = "bottom", panel.grid.major.x = element_blank()) 
+
+
+dispPlot <- ggplot(propsDispCI, aes(x = dispersal, y = mean, colour = transFactor)) +
+              geom_point() +
+              geom_line() +
+              scale_x_log10(breaks = c(1e-4, 1e-3, 1e-2, 1e-1), labels = c('0', '0.001', '0.01', '0.1')) +
+              geom_errorbar(aes(ymin = lower, ymax = upper), width = 0.04) +
+              scale_colour_poke(name = expression(beta),
+                 pokemon = 'illumise',
                  spread = 4) +
-  theme(legend.position = "bottom", panel.grid.major.x = element_blank()) 
-  #guides(fill = guide_legend(ncol=1, title.vjust = 0.8)) 
+              xlab('Dispersal') + 
+              ylab('Prop. Invasions') +
+              theme(legend.position = "right", panel.grid.major.x = element_blank()) 
 
 
 propsTopoCI <- data.frame(propsTopo[, 1:2], binom.confint(propsTopo$invasions, nTopo$n, conf.level = 0.95, methods = "exact"))
 
 propsTopoCI$topo <- factor(propsTopoCI$meanK, levels = c(1, 2, 9))
+propsTopoCI <- propsTopoCI %>% mutate(transFactor = factor(transmission, levels = c(0.4, 0.3, 0.2, 0.1)))
 
-topoPlot <- ggplot(propsTopoCI, aes(x = factor(transmission), y = mean, fill = topo)) +
-  geom_bar(stat = 'identity', position=position_dodge()) +
-  geom_errorbar(aes(ymin = lower, ymax = upper),
-                width=.2,                   
-                position = position_dodge(.9)) +
-  xlab('Transmission') + 
-  ylab('Prop. Invasions') +
-  scale_fill_poke(name='Topo.', 
-                 labels=c("Un.", "Min.", "Full."),
-                 pokemon = 'Swampert',
-                 spread = 3) +
-  theme(legend.position = "bottom", panel.grid.major.x = element_blank()) 
-  #guides(fill = guide_legend(ncol=1))
+#topoPlot <- ggplot(propsTopoCI, aes(x = factor(transmission), y = mean, fill = topo)) +
+#  geom_bar(stat = 'identity', position=position_dodge()) +
+#  geom_errorbar(aes(ymin = lower, ymax = upper),
+#                width=.2,                   
+#                position = position_dodge(.9)) +
+#  xlab('Transmission') + 
+#  ylab('Prop. Invasions') +
+#  scale_fill_poke(name='Topo.', 
+#                 labels=c("Un.", "Min.", "Full."),
+#                 pokemon = 'Swampert',
+#                 spread = 3) +
+#  theme(legend.position = "bottom", panel.grid.major.x = element_blank()) 
 
-#plot_grid(dispPlot, topoPlot, labels = c('A', 'B'), align = 'h', label_size = 10)
+
+topoPlot <- ggplot(propsTopoCI, aes(x = topo, y = mean, colour = transFactor)) +
+              geom_point() +
+              geom_line(aes(x = as.numeric(topo))) +
+              scale_x_discrete(labels = c('Unconnected','Minimally','Fully')) +
+              geom_errorbar(aes(ymin = lower, ymax = upper), width = 0.04) +
+              scale_colour_poke(
+                 pokemon = 'illumise',
+                 spread = 4) +
+              xlab('Network Topology') + 
+              ylab('Prop. Invasions') + 
+              theme(legend.position = "none", panel.grid.major.x = element_blank()) 
+
+
+
+#ggdraw() +
+#  draw_label("A)", 0.02, 0.96, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
+#  draw_plot(dispPlot, 0, 0, 0.5, 1) +
+#  draw_label("B)", 0.53, 0.96, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
+#  draw_plot(topoPlot, 0.5, 0, 0.5, 1)
+
+
+
 
 ggdraw() +
   draw_label("A)", 0.02, 0.96, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
-  draw_plot(dispPlot, 0, 0, 0.5, 1) +
-  draw_label("B)", 0.53, 0.96, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
-  draw_plot(topoPlot, 0.5, 0, 0.5, 1)
+  draw_plot(dispPlot, 0, 0.5, 1, 0.5) +
+  draw_label("B)", 0.02, 0.46, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
+  draw_plot(topoPlot, 0, 0, 0.846, 0.5)
+
+
+
+
 %%end.rcode
 
 
@@ -1403,9 +1443,10 @@ ggdraw() +
 
 Empirical studies on the role of population structure on pathogen richness have contradictory results \cite{maganga2014bat, turmelle2009correlates, gay2014parasite} and cannot examine the specific mechanisms by which pathogen communities are created and maintained.
 I have used mechanistic, metapopulation models to test whether increased population structure can promote pathogen richness by facilitating invasion of new pathogens.
-I find that dispersal does affect the ability of a new pathogen to invade and persist in a population but this affect is only seen at intermediate transmission rates.
-Increasing transmission rate quickly reaches a state where new pathogens always invade, irregardless of dispersal rate, while decreasing transmission rate quickly reaches a state where invasion is impossible.
-I found no evidence that the topology of the metapopulation network altered invasion probability.
+I find that dispersal does affect the ability of a new pathogen to invade and persist in a population.
+Increasing transmission rate quickly reaches a state where new pathogens always invade aslong there is some dispersal while decreasing the transmission rate quickly reaches a state where invasion is impossible.
+I found evidence that the pathogen invasion is less likely in completely isolated colonies.
+However, as long as the metapopulation is slightly connected the topologyof the metapopulation network did not invasion probability.
 That increased population structure increases pathogen richness supports many predictions that increasing $R_0$ should increase pathogen richness \cite{nunn2003comparative, morand2000wormy, poulin2014parasite, poulin2000diversity, altizer2003social}.
 However, many comparative studies have found the opposite relationship, with increased population structure increasing pathogen richness (Chapter \ref{ch:empirical}, \cites{vitone2004body, maganga2014bat, turmelle2009correlates}).
 Furthermore, simple analytical models suggest that population structure should increase pathogen richness \cite{qiu2013vector, allen2004sis, nunes2006localized} and I find no evidence of this.
@@ -1420,7 +1461,7 @@ As the mechanism studied here cannot explain the relationship between population
 Other mechanisms that should be examined include reduced competitive exclusion of already established pathogens or increased invasion of less closely related and less strongly competing pathogens, perhaps mediated by ecological competition of pathogens (i.e.\ reduction of the susceptible pool by disease induced mortality).
 Furthermore, single pathogen dynamics could have an important role such as population structure causing a much slower, asynchronous epidemic preventing acquired herd immunity \cite{plowright2011urban}.
 
-However, my simulations do highlight the importance of competition for the spread of a new pathogen.
+My simulations also highlight the importance of competition for the spread of a new pathogen.
 All parameters used correspond to pathogens with $R_0>1$ (as seen in the unstructured simulations).
 However, the competition with the endemic pathogen means that for some transmission rates the chance of epidemic spread and persistence is close to zero.
 This has implications for human epidemics as well --- if there is strong competition between a newly evolved strain and an endemic strain, we are unlikely to see the new strain spread, irregardless of population structure.
