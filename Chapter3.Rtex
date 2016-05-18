@@ -1103,8 +1103,8 @@ sepVarWeights$variable <- factor(sepVarWeights$variable, levels(sepVarWeights$va
 
 ITPlot <- ggplot(sepVarWeights, aes(x = variable, y = estimate, colour = col, fill = col)) +
   geom_boxplot(outlier.colour = grey(0.3), notch = FALSE, width = 0.99, outlier.size = 1, lwd = 0.4) +
-  scale_colour_manual(values = pokepal('swellow')[c( 2, 8, 15)]) +
-  scale_fill_manual(values = pokepal('swellow')[c(10, 9, 14)]) +
+  scale_colour_manual(values = pokepal('kingdra')[c( 1, 11, 9)]) +
+  scale_fill_manual(values = pokepal('kingdra')[c(4, 12, 8)]) +
   theme(legend.position = 'none', axis.text.x = element_text(size = 10, angle = 40, hjust = 1, colour = 'black', family = 'lato light'),
     panel.grid.major.x = element_blank(),
     axis.text.y = element_text(size = 8)) +
@@ -2114,8 +2114,8 @@ fstSepVarWeights$variable <- factor(fstSepVarWeights$variable, levels(fstSepVarW
 # Draw the fst model selection plot
 fstIT <- ggplot(fstSepVarWeights, aes(x = variable, y = estimate, colour = col, fill = col)) +
   geom_boxplot(outlier.colour = grey(0.3), notch = FALSE, width = 0.7, outlier.size = 1, lwd = 0.4) +
-  scale_colour_manual(values = pokepal('swellow')[c( 2, 8, 15)]) +
-  scale_fill_manual(values = pokepal('swellow')[c(10, 9, 14)]) +
+  scale_colour_manual(values = pokepal('kingdra')[c( 1, 11, 9)]) +
+  scale_fill_manual(values = pokepal('kingdra')[c(4, 12, 8)]) +
   ylim(0, 1) +
   theme(legend.position = 'none', axis.text.x = element_text(size = 10, angle = 40, hjust = 1, colour = 'black', family = 'lato light'),
     panel.grid.major.x = element_blank(),
