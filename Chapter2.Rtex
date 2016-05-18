@@ -261,16 +261,17 @@ Overall, I found significant evidence that reduced population structure increase
 \subsection{Two pathogen SIR model}
 
 I developed a multipathogen, SIR compartment model with individuals being classed as susceptible, infected or recovered with immunity (Figure~\ref{f:sir}).
-Susceptible individuals are counted in class $S$.
-There are three infected classes, $I_1$, $I_2$ and $I_{12}$, being individuals infected with pathogen 1, pathogen 2 or both respectively (see Table~\ref{t:params} for a list of symbols and values used).
+Susceptible individuals are counted in class $S$ (see Table~\ref{t:params} for a list of symbols and values used).
+There are three infected classes, $I_1$, $I_2$ and $I_{12}$, being individuals infected with pathogen 1, pathogen 2 or both respectively .
 Recovered individuals, $R$, are immune to both pathogens, even if they have only been infected with one.
-Furthermore, recovery from one pathogen moves an individual straight into the recovered class, even if the individual is infected with both pathogens.
-This modelling choice allows the model to be easily expanded to include more than two pathogens.
+Furthermore, recovery from one pathogen moves an individual straight into the recovered class, even if the individual is infected with both pathogens (Figure~\ref{f:sir}).
+This modelling choice allows the model to be easily expanded to include more than two pathogens though here I only simulate two pathogens.
 The assumption of immediate recovery from all other diseases is likely to be quite accurate for very closely related pathogens as is being studied here as once an acquired immune response is activated, all infections are likely to be cleared quickly. %todo cite
 The coinfection rate (the rate at which an infected individual is infected with a second pathogen) is adjusted compared to the infection rate by a factor $\alpha$ (here I used $\alpha = 0.1$ which means coinfection happens at a tenth the rate of first infections).
 
 In the application of long term existence of pathogens it is necessary to include vital dynamics (births and deaths) as the SIR model without vital dynamics has no endemic state.
-Birth and death rates are assumed to be equal, $\mu = \Lambda$.
+Birth and death rates are assumed to be equal, $\mu = \Lambda$ meaning the population does not systematically increase or decrease.
+The population size does however change as a random walk.
 New born individuals enter the susceptible class.
 The time scale of the simulations are determined by setting $\mu$ = 0.05 per year, yielding an average host generation time of 20 years.
 Infection is assumed to cause no extra mortality as for a number of viruses, bats show no clinical signs of infection \cite{halpin2011pteropid, deThoisy2016bioecological}.
@@ -284,8 +285,8 @@ This metapopulation is modelled as a network with subpopulations being nodes and
 Individuals within a subpopulation interact randomly so that the subpopulation is fully mixed.
 Dispersal between subpopulations occurs at a rate $\xi$.
 Individuals can only disperse to subpopulations connected to theirs in the network.
-The rate of dispersal is not affected by the number of edges a subpopulation has (the degree of the subpopulation).
-So the dispersal rate from a subpopulation $x$ with degree $k_x$ to subpopulation $y$ is $\frac{\xi}{k_x}$.
+The rate of dispersal is not affected by the number of edges a subpopulation has (known as the degree of the subpopulation and denoted $k$).
+Therefore, the dispersal rate from a subpopulation $x$ with degree $k_x$ to subpopulation $y$ is $\xi / k_x$.
 Note this rate is independent of the degree and size of subpopulation $y$.
 
 
@@ -296,10 +297,13 @@ Note this rate is independent of the degree and size of subpopulation $y$.
 
 I examined this model using stochastic, continuous-time simulations implemented in \emph{R} \cite{R}.
 The model can be written as a continuous-time Markov chain.
-The Markov chain contains the random variables $((S_x)_{x = 1\ldots m}, (I_{x, q})_{x =1\ldots m, q \in \{1, 2, 12\}}, (R_x)_{x = 1\ldots m})$.
+The Markov chain contains the random variables $((S_x)_{x = 1\ldots m}, (I_{x, q})_{x =1\ldots m,\:q \in \{1, 2, 12\}}, (R_x)_{x = 1\ldots m})$.
 Here, $(S_x)_{x = 1\ldots m}$ is a length $m$ vector of the number of susceptibles in each colony.
 $(I_{x, q})_{x =1\ldots m, q \in \{1, 2, 12\}}$ is a length $m \times 3$ vector describing the number of individuals of each disease class ($q \in \{1, 2, 12\}$) in each colony.
 Finally, $(R_x)_{x = 1\ldots m}$ is a length $m$ vector of the number of individuals in the recovered class.
+The model is a Markov chain where extinction of both pathogens species and extinction of the host species are absorbing states.
+However, the expected time to reach this state is much larger than the duration of the simulations.
+
 At any time, suppose the system is in state $((s_x), (i_{x,q}), (r_x))$.
 At each step in the simulation we calculate the rate at which each possible event might occur.
 One event is then randomly chosen, weighted by its rate
@@ -311,20 +315,19 @@ Finally, the length of the time step, $\delta$, is drawn from an exponential dis
 \begin{align}
   \delta \sim \operatorname{Exp}\left(\sum_i e_i  \right).
 \end{align}
-We define the number of events we wish to simulate.
-This means that the total length of each simulation is stochastic. 
+
 
 \begin{figure}[t]
 \centering
   \includegraphics[width=0.4\textwidth]{imgs/SIRoption1.pdf}
   \caption[Schematic of the SIR model used]{
-Schematic of the SIR model used. 
-Individuals are in one of five classes, susceptible (orange, S), infectious with pathogen 1, pathogen 2 or both (blue, $I_1, I_2, I_{12}$) or recovered and immune from further infection (green, R).
-Transitions between classes occur only as indicated by arrows.
-Note that individuals in $I_{12}$ move into R, not back to $I_1$ or $I_2$. 
-That is, recovery from one pathogen causes immediate recovery from the other pathogen.
-}
-  \label{f:sir}
+  Schematic of the SIR model used. 
+  Individuals are in one of five classes, susceptible (orange, S), infected with pathogen 1, pathogen 2 or both (blue, $I_1, I_2, I_{12}$) or recovered and immune from further infection (green, R).
+  Transitions between classes occur only as indicated by arrows.
+  Note that individuals in $I_{12}$ move into R, not back to $I_1$ or $I_2$. 
+  That is, recovery from one pathogen causes immediate recovery from the other pathogen.
+  }
+\label{f:sir}
 \end{figure}
 
 
@@ -335,7 +338,7 @@ Assuming asexual reproduction, that all classes reproduce at the same rate and t
   s_x \rightarrow s_x + 1 \;\;\text{at a rate of}\;\; \Lambda\left( s_{x}+\sum_q i_{qx} + r_{x}\right) 
 \end{align}
 where $s_x \rightarrow s_x + 1$ is the event that the number of susceptibles in subpopulation $x$ will increase by 1 (a single birth) and $\sum_q i_{qx}$ is the sum of all infection classes $q \in \{1, 2, 12\}$.
-The rates of death, given a death rate $\mu$ are given by
+The rates of death, given a death rate $\mu$, and no increased mortality due to infection, are given by
 \begin{align}
   s_x \rightarrow s_x-1  &\;\;\text{at a rate of}\;\; \mu s_x, \\
   i_{qx}  \rightarrow i_{qx}-1 &\;\;\text{at a rate of}\;\; \mu i_{qx},\\
@@ -353,31 +356,25 @@ The justification for parameter values is given in Section \ref{s:paramSelect}.}
 Symbol & Explanation & Units & Value\\
 \midrule
 $\rho$ & Number of pathogens && 2\\
+$x, y$ & Colony index &&\\
 $p$ &  Pathogen index i.e.\ $p\in\{1,2\}$ for pathogens 1 and 2 & &\\
 $q$ & Disease class i.e.\ $q\in\{1,2,12\}$&\\
-$S$ & Number of susceptible individuals &&\\
-$I_q$ & Number of individuals infected with disease(s) $q \in {1, 2, 12}$ &&\\
-%$I^+_p$ & Total number of individuals infected with pathogen $p$ &\\
-$R$ & Number of individuals in the recovered with immunity class &&\\
+$S_x$ & Number of susceptible individuals in colony $x$ &&\\
+$I_qx$ & Number of individuals infected with disease(s) $q \in {1, 2, 12}$ in colony $x$ &&\\
+$R_x$ & Number of individuals in colony $x$ in the recovered with immunity class  &&\\
 $N$ & Total Population size && 30,000\\
 $m$ & Number of colonies&& 10\\
 $n$ & Colony size && 3,000\\
 $a$ & Area & km$^2$& 10,000\\
 $\beta$ & Transmission rate &  & 0.1 -- 0.4\\
+$\alpha$ & Coinfection adjustment factor.  & Proportion & 0.1\\
 $\gamma$ & Recovery rate & year$^{-1}.$individual$^{-1}$ & 1\\
 $\xi$ & Dispersal & year$^{-1}.$individual$^{-1}$ & 0.001--0.1\\
 $\Lambda$ & Birth rate & year$^{-1}.$individual$^{-1}$ & 0.05\\
 $\mu$ & Death rate & year$^{-1}.$individual$^{-1}$ & 0.05\\
-%$d_I$ & Infectious death rate & Additional deaths per day per individual&\\
-%$\mathcal{V}$ & Neighbourhood of a node &&\\
-%$t, t^\prime$ & Time, and time plus waiting time i.e. $t+\delta$ & years &\\
 $k_x$ & Degree of node $x$ (number of colonies that individuals from colony $x$ can disperse to). &&\\
 $\delta$ & Waiting time until next event & years &\\
-$\alpha$ & Coinfection adjustment factor.  & Proportion & 0.1\\
-$x, y$ & Colony index &&\\
-%$\bm{A}_{mn}$ & Adjacency matrix. & Distance &\\
-%$\mu$ & Maximum distance for edge to exist & km& 40, 100\\
-%$\sigma$ & Invading pathogen seed size & & 10\\
+
 $e_i$ & The rate at which event $i$ occurs & year$^{-1}$&\\
 \bottomrule
 \end{tabular}
@@ -387,26 +384,29 @@ $e_i$ & The rate at which event $i$ occurs & year$^{-1}$&\\
 
 
 I modelled transmission as being density-dependent.
-This assumption was more suitable than frequency-dependent transmission as I am modelling a disease transmitted by saliva or urine in highly dense populations confined to caves, building or potentially a small number of tree roosts.
-I was notably not modelling an STD as these diseases are not expected to be commonly zoonotic.
+This assumption was more suitable than frequency-dependent transmission as I was modelling a disease transmitted by saliva or urine in highly dense populations confined to caves, buildings or potentially a small number of tree roosts.
+I was notably not modelling an STD as spillover of STDs from bats to humans is is likely to be rare.
 Infection of a susceptible with either pathogen 1 or 2 is therefore given by
 \begin{align}
   i_{1x} \rightarrow i_{1x}+1, s_x \rightarrow s_x-1 &\;\;\text{at a rate of}\;\; \beta s_x\left(i_{1x} + i_{12x}\right),\\
   i_{2x} \rightarrow i_{2x}+1, s_x \rightarrow s_x-1  &\;\;\text{at a rate of}\;\; \beta s_x\left(i_{2x} + i_{12x}\right),
 \end{align}
-while coinfection, given a coinfection adjustment factor $\alpha$, is given by
+while coinfection, given the coinfection adjustment factor $\alpha$, is given by
 \begin{align}
   i_{12,x} \rightarrow i_{12,x}+1,\: i_{1x} \rightarrow i_{1x}-1 &\;\;\text{at a rate of}\;\; \alpha\beta i_{1x}\left(i_{2x} + i_{12x}\right),\\
   i_{12,x} \rightarrow i_{12,x}+1,\: I_{2x} \rightarrow i_{2x}-1 &\;\;\text{at a rate of}\;\; \alpha\beta i_{2x}\left(i_{1x} + i_{12x}\right).
 \end{align}
 Note that lower values of $\alpha$ give lower rates of infection as in \textcite{castillo1989epidemiological}.
 $\alpha = 0$ would be the case of no coinfection while $\alpha = 1$ would be the case where coinfection occurs at the same rate as the initial infection.
-The probability of migration from colony $m$ (with degree $k_m$) to colony $n$, given a dispersal rate $\xi$ is given by
+
+The probability of migration from colony $y$ (with degree $k_y$) to colony $x$, given a dispersal rate $\xi$ is given by
 \begin{align}
   s_x \rightarrow s_x+1,\: s_y \rightarrow s_y-1 &\;\;\text{at a rate of}\;\; \frac{\xi s_y}{k_y},\\
   i_{qx} \rightarrow i_{qx}+1,\: i_{qy} \rightarrow i_{qy}-1 &\;\;\text{at a rate of}\;\; \frac{\xi i_{qy}}{k_y},\\
   r_x \rightarrow r_x+1,\: r_y \rightarrow r_y-1 &\;\;\text{at a rate of}\;\; \frac{\xi r_y}{k_y}.
 \end{align}
+Not that the dispersal rate does not change with infection.
+As above, this is due to the low virulence of bat viruses.
 Finally, recovery from any infectious class occurs at a rate $\gamma$
 \begin{align}
   i_{qx} \rightarrow i_{qx}-1,\: r_x \rightarrow r_x+1  \;\;\text{at a rate of}\;\; \gamma i_{qx}.
@@ -976,40 +976,22 @@ write.csv(z, file = 'data/Chapter2/noDispSims.csv')
 
 
 
-
-\subsection{Experimental setup}
-
-The metapopulation contains 10 subpopulations.
-In each simulation the population was seeded with 10 sets of 200 infected individuals of pathogen 1.
-These groups were seeded into randomly selected colonies with replacement.
-For each 200 infected individuals added, 200 susceptible individuals were removed to keep starting colony sizes constant. 
-Pathogen 1 was then allowed to spread until the initial, large epidemic had ended. 
-After \rinline{invadeT} events, 5 individuals infected with pathogen 2 were added to one randomly selected colony. 
-Visual inspection of preliminary simulations was used to decide on \rinline{invadeT} as being long enough for the epidemic to end and the pathogen to be in an endemic state (Figures~\ref{fig:plotsInvade} and \ref{fig:plotsNoInvade1}).
-After another \rinline{nEvent - invadeT} events the invasion of pathogen 2 was considered successful if any individuals were still infected with pathogen 2.
-Therefore, if at least one individual is in class $I_2$ or $I_{12}$ at the end of the simulation, this was considered an invasion.
-Again visual inspection of preliminary simulations was used to determine that after \rinline{nEvent - invadeT} events, if an invading pathogen was still present, it was well established (Figures~\ref{fig:plotsInvade} and \ref{fig:plotsNoInvade1}).
-The model is a Markov chain where extinction of both pathogens species and extinction of the host species are absorbing states.
-However, the expected time to reach this state is much larger than the duration of the simulations.
-
-
-
 \subsection{Parameter selection}
 \label{s:paramSelect}
 
 The fixed parameters were chosen to roughly reflect realistic wild bat populations. 
 The death rate $\mu$ was set as 0.05 per year giving a generation time of 20 years.
 The birth rate $\Lambda$ was set to be equal to $\mu$.
-This yields a population that did not systematically increase or decrease.
+This yields a population that does not systematically increase or decrease.
 However, the size of each colony changes as a random walk.
 Given the length of the simulations, colonies were very unlikely to go extinct (Figure~\ref{fig:plotsNoInvade2})
-The recovery rate $\gamma$ was set to 1 giving a average infection duration of 1 years. 
+The recovery rate $\gamma$ was set to one, giving an average infection duration of one year. 
 This is therefore a long lasting infection but not a chronic infection. 
 It is very difficult to directly estimate infection durations in wild populations but it seems that these infections might sometimes be long lasting \cite{peel2012henipavirus, plowright2015ecological}.
 However, other studies have found much shorter infectious periods \cite{amengual2007temporal}.
 These shorter infections are not studied further here. %todo consider readding this. " as preliminary simulations found that they could not persist in the relatively small populations being modelled here."
 
-Cross-immunity was set to 0.1 so that an individual infected with one pathogen is 90\% less likely to be infected with another.
+The coinfection adjustment parameter, $\alpha$, was set to 0.1 so that an individual infected with one pathogen is 90\% less likely to be infected with another.
 This is a rather arbitrary value.
 However, the rationale of the model was that the invading species might be a newly speciated strain of the endemic species.
 Furthermore, the model assumes complete cross-immunity after recovery from infection.
@@ -1033,6 +1015,26 @@ All simulations were run under all four transmission rates as this is such a fun
 % R_\ast (R_0 - 1)\frac{\langle k^2 \rangle - \langle k \rangle}{\langle k^2 \rangle} \frac{p\bar{N}\alpha}{\mu} > 1
 % N = avg pop size, p = migration, mu = recovery, \alpha N_k is number of individuals infected. So think this is not with vital dynamics.
 
+
+
+
+\subsection{Experimental setup}
+
+The metapopulation contains 10 subpopulations.
+In each simulation the population was seeded with 10 sets of 200 infected individuals of pathogen 1.
+These groups were seeded into randomly selected colonies with replacement.
+For each 200 infected individuals added, 200 susceptible individuals were removed to keep starting colony sizes constant. 
+Pathogen 1 was then allowed to spread until the initial, large epidemic had ended. 
+Visual inspection of preliminary simulations was used to decide on \rinline{invadeT} as being long enough for the epidemic to end and the pathogen to be in an endemic state (Figures~\ref{fig:plotsInvade} and \ref{fig:plotsNoInvade1}).
+After \rinline{invadeT} events, five individuals infected with pathogen 2 were added to one randomly selected colony. 
+After another \rinline{nEvent - invadeT} events the invasion of pathogen 2 was considered successful if any individuals were still infected with pathogen 2.
+Therefore, if at least one individual was in class $I_2$ or $I_{12}$ at the end of the simulation, this was considered an invasion.
+Again visual inspection of preliminary simulations was used to determine that after \rinline{nEvent - invadeT} events, if an invading pathogen was still present, it was well established (Figures~\ref{fig:plotsInvade} and \ref{fig:plotsNoInvade1}).
+The choice to use a fixed number of events, rather than fixed amount number of years, was for computaiton convenience.
+However, this choice creates a risk of bias as simulations with more events per unit time will last for a shorter time overall.
+However, visual inspection of the dynamics of disease extinction (\ref{fig:plotsNoInvade1}), and examination of the typical time to extinction implies that this bias is very weak.
+For example, of the simulations where extinction occurred, the extinction occurred more than 50 years before the end of the simulation in 90\% of cases.
+On a preliminary run of 106 simulations across all combinations of dispersal and transmission rates, examining the population after $7 \times 10^5$ events instead of \rinline{nEvent} events gave exactly the same result with respect to the binary state of invasion or no invasion. 
 
 
 \subsection{Population structure}
