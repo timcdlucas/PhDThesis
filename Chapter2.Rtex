@@ -91,14 +91,15 @@ I tested these hypotheses using metapopulation networks parameterised to mimic w
 \tmpsection{One sentence summarising the main result}
 %  (with the words “here we show” or their equivalent).
 I simulated the process of a new pathogen invading into a metapopulation already occupied by an identical pathogen.
-I varied the topology of the metapopulation (using fully and minimally connected networks) , dispersal rate and transmission rate.
-I found no significant evidence that either metapopulation topology nor dispersal rate affected the probability that a new pathogen would invade into a population.
-Increased transmission rate strongly increased invasion probability, as expected. 
+I varied the dispersal rate, topology of the metapopulation and transmission rate.
+I found significant evidence that increased dispersal rate increased the probability that a new pathogen would invade into a population.
+I found marginal evidence that network topology affected the probability that a new pathogen would invade.
 %\paragraph{Two or three sentences explaining what the main result reveals in direct comparison to what was thought to be the case previously}
 % or how the main result adds to previous knowledge
-The assumption that all factors causing high $R_0$ allow new pathogens to invade and therefore increase pathogen richness was not supported.
-My results also contradict many theoretical studies which predict that increased population structure may promote coexistence of pathogens.
-Given the conflict between previous studies (empirical and theoretical) and this study, it is likely that either my model does not capture some important element of population structure or that population structure affects pathogen richness via a different mechanism to the one modelled here.
+The assumption that factors causing high $R_0$ allow new pathogens to invade and therefore increase pathogen richness was supported.
+However, my results contradict many theoretical studies which predict that increased population structure should promote coexistence of pathogens.
+My results also contradict empirical patterns of pathogen richness with respect to population structure.
+Therefore, it is likely that population structure affects pathogen richness via a different mechanism to the one modelled here.
 %
 %
 \tmpsection{One or two sentences to put the results into a more general context.}
@@ -1350,15 +1351,6 @@ topoPlot <- ggplot(propsTopoCI, aes(x = topoCont, y = mean, colour = transFactor
 # Extract the legend
 grobs <- ggplotGrob(topoPlot + theme(legend.position="bottom"))$grobs
 legend_b <- grobs[[which(sapply(grobs, function(x) x$name) == "guide-box")]]
-
-
-#ggdraw() +
-#  draw_label("A)", 0.02, 0.96, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
-#  draw_plot(dispPlot, 0, 0.5, 1, 0.5) +
-#  draw_label("B)", 0.02, 0.46, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
-#  draw_plot(topoPlot, 0, 0, 0.846, 0.5)
-
-
 
 
 ggdraw() +
