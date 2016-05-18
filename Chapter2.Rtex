@@ -1021,6 +1021,8 @@ All simulations were run under all four transmission rates as this is such a fun
 \subsection{Experimental setup}
 
 The metapopulation contains 10 subpopulations.
+10 subpopulations was selected as a trade off between computation time and a network complex enough that structure might have an effect. 
+This value is artificially small compared to wildlife populations. 
 In each simulation the population was seeded with 10 sets of 200 infected individuals of pathogen 1.
 These groups were seeded into randomly selected colonies with replacement.
 For each 200 infected individuals added, 200 susceptible individuals were removed to keep starting colony sizes constant. 
@@ -1040,26 +1042,26 @@ On a preliminary run of 106 simulations across all combinations of dispersal and
 \subsection{Population structure}
 
 As a baseline for comparison, I ran simulations of a fully unstructured population.
-These simulation were run with a population of 30,000 so that the total population size is equal to that of the total metapopulation size in the structured simulations.
+These simulations were run with a population of 30,000 so that the total population size was equal to that of the total metapopulation size in the structured simulations.
 I ran 100 simulations at each transmission rate.
 
 
 \tmpsection{Dispersal}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The values used for the parameters of the model were chosen to highlight the effects of population structure. 
-Dispersal values are $\xi = 0, 0.1, 0.01$ and $ 0.001$ dispersals per individual per year. 
-$\xi = 0.1$ relates to individuals dispersing between colonies on average twice per lifetime. 
+The values used for the parameters of the model that control population structure were chosen to highlight the effects of population structure. 
+I selected the dispersal values $\xi = 0, 0.1, 0.01$ and $ 0.001$ dispersals per individual per year. 
+The probability that an individual disperses at least once in its lifetime is given by $\xi / \right(\xi + \mu\left)$.
+$\xi = 0.1$ relates to 67\% of individuals dispersing between colonies at least once in their lifetime. 
 Therefore exclusively juvenile dispersal would have dispersal rates similar to this value. %todo cite
-The probability that an individual disperses at least once in its lifetime is given by $\frac{\xi}{\xi + \mu}$.
 $\xi = 0.01$ relates to 17\% of individuals dispersing at least once in their lifetime.
-This value is therefore close to male-biased dispersal, with female philopatry. %todo cite
+This value is relatively close to male-biased dispersal, with female philopatry. %todo cite
 $\xi = 0.001$ relates to 2\% of individuals dispersing in their lifetime.
-This therefore relates to a population that does not habitually disperse.
+This therefore relates to a species that does not habitually disperse.
 Finally, I ran simulations with no dispersal.
-Given zero dispersal, only the seeded colony can ever recieve infections.
+Given zero dispersal, only the colony seeded with pathogen 2 can ever recieve infections of the invading pathogen.
 Therefore, only one colony was simulated for $\xi = 0$.
-I 100 simulations for most parameter sets.
+I ran 100 simulations for most parameter sets.
 However, examing these simulations had some marginal and difficult to interpret results.
 Therefore, I ran 150 simulations for $\beta = 0.2$ and $0.3$ (not including the zero dispersal case).
 
@@ -1067,21 +1069,20 @@ Therefore, I ran 150 simulations for $\beta = 0.2$ and $0.3$ (not including the 
 
 \tmpsection{Network structure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The network structure was synthetically created to be either fully or minimally connected (See Figure~\ref{f:net}). 
-10 subpopulations was selected as a trade off between computation time and a network complex enough that structure might have an effect. 
-This value is artificially small compared to wildlife populations. 
+I also altered the topology of the metapopulation network.
+The network topology was created to be either fully or minimally connected (See Figure~\ref{f:net}). 
 To model a completely unconnected population the $\xi = 0$ simulations from above were used.
-I ran 100 simulations for each parameter set.
+I again ran 100 simulations for each parameter set.
 
 
 
 \subsection{Statistical analysis}
 
-I used binomial GLMs to test the hypothesis that probability of invasion increased with dispersal.
+I used generalised linear models (GLMs) with a binary response variable, invasion or not, to test the hypothesis that probability of invasion increased with dispersal.
 Seperate GLMs were fitted for each transmission rate.
-These tests were performed both with and without the $\xi = 0$ results as the complete lack of dispersal makes these simulations quantitatively different to the other simulations.
+These tests were performed both with and without the $\xi = 0$ results as the complete lack of dispersal makes these simulations qualitatively different to the other simulations.
 To test whether the different topologies had different probabilities of invasion I used Fisher's exact tests as topology is best described as a categorical variable.
-As with the $\xi = 0$ results, these tests were performed both with and with the completely unconnected topology results.
+As with the $\xi = 0$ results, these tests were performed both with and without the completely unconnected topology results.
 Finally, I also used binomial GLMs to test the hypothesis that the probability of invasion increased with transmission rate.
 Seperate GLMs were fitted for each dispersal rate and network topology.
 All statistical analyses were performed using the \emph{stats} package in \emph{R}.
@@ -1372,7 +1373,7 @@ In the unstructured population, the second pathogen invaded in 100 out of 100 si
 This was true at all four transmission rates.
 
 When the $\xi = 0$ simulations were included, there was a positive relationship between dispersal rate and invasion probability for $\beta = 0.2, 0.3$ and $0.4$ (Figure~\ref{f:invasionPropPlots}A).
-These positive relationships were stongly significant (GLM. $\beta = 0.2$: $b$ = \rinline{DispGLM2$coefficients[2, 1]}, $p$ = \rinline{DispGLM2$coefficients[2, 4]}. $\beta = 0.3$: $b$ = \rinline{DispGLM3$coefficients[2, 1]}, $p$ = \rinline{DispGLM3$coefficients[2, 4]}. $\beta = 0.4$: $b$ = \rinline{DispGLM4$coefficients[2, 1]}, $p$ = \rinline{DispGLM4$coefficients[2, 4]}.)
+These positive relationships were all significant (GLM. $\beta = 0.2$: $b$ = \rinline{DispGLM2$coefficients[2, 1]}, $p < 10^{-5}$. $\beta = 0.3$: $b$ = \rinline{DispGLM3$coefficients[2, 1]}, $p$ = \rinline{DispGLM3$coefficients[2, 4]}. $\beta = 0.4$: $b$ = \rinline{DispGLM4$coefficients[2, 1]}, $p$ = \rinline{DispGLM4$coefficients[2, 4]}.)
 At $\beta = 0.1$ there was no significant relationship as invasion probaiblity was very close to zero at all dispersal rates (GLM. $b$ = \rinline{DispGLM1$coefficients[2, 1]}, $p$ = \rinline{DispGLM1$coefficients[2, 4]}).
 
 However, when the $\xi = 0$ simulations were removed, this significant, positive relationship largely disappeared.
@@ -1383,12 +1384,12 @@ At all other transmission rates, the rate of invasion did not significantly chan
 \subsection{Network structure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-When the completely unconnected topology simulations were included, the probability of invasion was different across topologies for $\beta = 0.1, 0.2$ and $0.3$ (Fisher's exact test. $\beta = 0.2$:  $p = \rinline{p(TopoTest2$p.value)}$. $\beta = 0.3$: $p = \rinline{p(TopoTest3$p.value)}$. $\beta = 0.4$:  $p = \rinline{p(TopoTest4$p.value)}$).
-In each case, the fully unconnected population had a lower probability of invasion than the minimall and completely connected topologies (Figure~\ref{f:invasionPropPlots}B).
+When the completely unconnected topology simulations were included, the probability of invasion was different across topologies for $\beta = 0.1, 0.2$ and $0.3$ (Fisher's exact test. $\beta = 0.2$:  $p < 10^{-5}$. $\beta = 0.3$: $p < 10^{-5}$. $\beta = 0.4$:  $p < 10^{-5}$).
+In each case, the fully unconnected population had a lower probability of invasion than the minimally and completely connected topologies (Figure~\ref{f:invasionPropPlots}B).
 At $\beta = 0.1$ there was no significant difference ($p = \rinline{p(TopoTest1$p.value)}$) and the probability of invasion was close to zero for all topologies (Figure~\ref{f:invasionPropPlots}B).
 
 When the completely unconnected topology simulations were removed, there were no significant differences between topologies i.e.\ between the minimally and fully connected topologies (Figure~\ref{f:invasionPropPlots}B). 
-This was true at all transmission levels (Fisher's exact test. $\beta = 0.1$, $p = \rinline{p(Topo2Test1$p.value)}$. $\beta = 0.2$,  $p = \rinline{p(Topo2Test2$p.value)}$. $\beta = 0.3$, $p = \rinline{p(Topo2Test3$p.value)}$. $\beta = 0.4$,  $p = \rinline{p(Topo2Test4$p.value)}$).
+This was true at all transmission rates (Fisher's exact test. $\beta = 0.1$, $p = \rinline{sprintf('%.2f', Topo2Test1$p.value)}$. $\beta = 0.2$,  $p = \rinline{p(Topo2Test2$p.value)}$. $\beta = 0.3$, $p = \rinline{p(Topo2Test3$p.value)}$. $\beta = 0.4$,  $p = \rinline{p(Topo2Test4$p.value)}$).
 
 
 
@@ -1414,7 +1415,6 @@ This is true for all four dispersal values (GLM. $\xi = 0$: $b$ = \rinline{DispT
 
 \tmpsection{Restate the gap and the main result}
 
-Empirical studies on the role of population structure on pathogen richness have contradictory results \cite{maganga2014bat, turmelle2009correlates, gay2014parasite} and cannot examine the specific mechanisms by which pathogen communities are created and maintained.
 I have used mechanistic, metapopulation models to test whether increased population structure can promote pathogen richness by facilitating invasion of new pathogens.
 I find that dispersal does affect the ability of a new pathogen to invade and persist in a population.
 Increasing transmission rate quickly reaches a state where new pathogens always invade aslong there is some dispersal while decreasing the transmission rate quickly reaches a state where invasion is impossible.
