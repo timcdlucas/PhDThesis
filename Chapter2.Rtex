@@ -1287,6 +1287,92 @@ TopoTransGLM2 <- summary(glm(invasion ~ transmission, data = dTopo[dTopo$meanK =
 %%end.rcode
 
 
+%%begin.rcode caption1String
+# Just defining my caption label here to avoid the long string in chunk options below.
+
+invasionPropCaption <- sprintf("
+  The probability of successful invasion for different A) dispersal rates or B) network topologies (with network topologies ``unconnected'', ``minimally connected'' and ``fully connected'' as in Figure~\\ref{f:net}). 
+  Error bars are 95\\%% confidence intervals of probability of invasion. 
+  %i simulations were run for each treatment except $\\beta = 0.2$ in A) which has 150 per treatment.
+  Other parameters were kept constant at: $m = 10,\\, \\, \\mu = \\Lambda = 0.05,\\, \\gamma = 1,\\, \\alpha = 0.1$. 
+  When dispersal is varied, the population structure is fully connected. 
+  When network topology is varied, $\\xi = 0.01$.",
+  as.integer(each))
+
+invasionPropShort <- "The probability of invasion across different dispersal rates and network topologies."
+
+
+%%end.rcode
+
+
+%%begin.rcode invasionPropPlots, fig.lp = 'f:', fig.height = 2.6,  out.width = "\\textwidth", fig.cap = invasionPropCaption, cache = FALSE, fig.scap = invasionPropShort
+
+propsDispCI <- data.frame(propsDisp[, 1:2], binom.confint(propsDisp$invasions, propsDisp$n, conf.level = 0.95, methods = "exact"))
+propsDispCI <- propsDispCI %>% mutate(dispersal = replace(dispersal, dispersal == 0, 1e-4))
+propsDispCI <- propsDispCI %>% mutate(transFactor = factor(transmission))
+
+
+dispPlot <- ggplot(propsDispCI, aes(x = dispersal, y = mean, colour = transFactor)) +
+              geom_point() +
+              geom_line() +
+              scale_x_log10(breaks = c(1e-4, 1e-3, 1e-2, 1e-1), labels = c('0', '0.001', '0.01', '0.1')) +
+              geom_errorbar(aes(ymin = lower, ymax = upper), width = 0.04) +
+              scale_colour_poke(name = expression(beta),
+                 pokemon = 'illumise',
+                 spread = 4) +
+              xlab('Dispersal') + 
+              ylab('Prop. Invasions') +
+              theme(legend.position = "none", panel.grid.major.x = element_blank()) 
+
+
+propsTopoCI <- data.frame(propsTopo[, 1:2], binom.confint(propsTopo$invasions, nTopo$n, conf.level = 0.95, methods = "exact"))
+
+propsTopoCI$topo <- factor(propsTopoCI$meanK, levels = c(1, 2, 9))
+propsTopoCI$topoCont <- as.numeric(propsTopoCI$topo)
+propsTopoCI <- propsTopoCI %>% mutate(transFactor = factor(transmission))
+
+
+topoPlot <- ggplot(propsTopoCI, aes(x = topoCont, y = mean, colour = transFactor)) +
+              geom_point() +
+              geom_line() +
+              scale_x_continuous(breaks = c(1, 2, 3), 
+                                 labels = c('Unconn.','Min.','Full.'), 
+                                 limits = c(0.9, 3.1)) +
+              geom_errorbar(aes(ymin = lower, ymax = upper), width = 0.04) +
+              scale_colour_poke(name = expression(beta),
+                 pokemon = 'illumise',
+                 spread = 4) +
+
+              xlab('Network Topology') + 
+              ylab('Prop. Invasions') + 
+              theme(legend.position = "none", panel.grid.major.x = element_blank()) 
+
+# Extract the legend
+grobs <- ggplotGrob(topoPlot + theme(legend.position="bottom"))$grobs
+legend_b <- grobs[[which(sapply(grobs, function(x) x$name) == "guide-box")]]
+
+
+#ggdraw() +
+#  draw_label("A)", 0.02, 0.96, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
+#  draw_plot(dispPlot, 0, 0.5, 1, 0.5) +
+#  draw_label("B)", 0.02, 0.46, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
+#  draw_plot(topoPlot, 0, 0, 0.846, 0.5)
+
+
+
+
+ggdraw() +
+  draw_label("A)", 0.03, 0.96, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
+  draw_plot(dispPlot, 0, 0.06, 0.5, 0.94) +
+  draw_label("B)", 0.53, 0.96, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
+  draw_plot(topoPlot, 0.5, 0.06, 0.5, 0.94) +
+  draw_grob(legend_b, 0.32, 0.01, 0.4, 0.1)
+
+
+
+
+%%end.rcode
+
 
 \subsection{Dispersal}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1324,110 +1410,6 @@ This is true for all four dispersal values (GLM. $\xi = 0$: $b$ = \rinline{DispT
 
 
 
-
-%%begin.rcode caption1String
-# Just defining my caption label here to avoid the long string in chunk options below.
-
-invasionPropCaption <- sprintf("
-  The probability of successful invasion for different A) dispersal rates or B) network topologies (with network topologies ``unconnected'', ``minimally connected'' and ``fully connected'' as in Figure~\\ref{f:net}). 
-  Error bars are 95\\%% confidence intervals of probability of invasion. 
-  %i simulations were run for each treatment except $\\beta = 0.2$ in A) which has 150 per treatment.
-  Other parameters were kept constant at: $m = 10,\\, \\, \\mu = \\Lambda = 0.05,\\, \\gamma = 1,\\, \\alpha = 0.1$. 
-  When dispersal is varied, the population structure is fully connected. 
-  When network topology is varied, $\\xi = 0.01$.",
-  as.integer(each))
-
-invasionPropShort <- "The probability of invasion across different dispersal rates and network topologies."
-
-
-%%end.rcode
-
-
-%%begin.rcode invasionPropPlots, fig.lp = 'f:', fig.height = 3.5,  out.width = "\\textwidth", fig.cap = invasionPropCaption, cache = FALSE, fig.scap = invasionPropShort
-
-propsDispCI <- data.frame(propsDisp[, 1:2], binom.confint(propsDisp$invasions, propsDisp$n, conf.level = 0.95, methods = "exact"))
-propsDispCI <- propsDispCI %>% mutate(dispersal = replace(dispersal, dispersal == 0, 1e-4))
-propsDispCI <- propsDispCI %>% mutate(transFactor = factor(transmission, levels = c(0.4, 0.3, 0.2, 0.1)))
-
-#dispPlot <- ggplot(propsDispCI, aes(x = factor(transmission), y = mean, fill = factor(dispersal))) +
-#  geom_bar(stat = 'identity', position=position_dodge()) +
-#  geom_errorbar(aes(ymin = lower, ymax = upper),
-#                width=.2,                   
-#                position = position_dodge(.9)) +
-#  xlab('Transmission') + 
-#  ylab('Prop. Invasions') +
-#  scale_fill_poke(name="Disp.", 
-#                 labels=c('0.00', '0.001', '0.01', '0.1'), 
-#                 pokemon = 'Swampert',
-#                 spread = 4) +
-#  theme(legend.position = "bottom", panel.grid.major.x = element_blank()) 
-
-
-dispPlot <- ggplot(propsDispCI, aes(x = dispersal, y = mean, colour = transFactor)) +
-              geom_point() +
-              geom_line() +
-              scale_x_log10(breaks = c(1e-4, 1e-3, 1e-2, 1e-1), labels = c('0', '0.001', '0.01', '0.1')) +
-              geom_errorbar(aes(ymin = lower, ymax = upper), width = 0.04) +
-              scale_colour_poke(name = expression(beta),
-                 pokemon = 'illumise',
-                 spread = 4) +
-              xlab('Dispersal') + 
-              ylab('Prop. Invasions') +
-              theme(legend.position = "right", panel.grid.major.x = element_blank()) 
-
-
-propsTopoCI <- data.frame(propsTopo[, 1:2], binom.confint(propsTopo$invasions, nTopo$n, conf.level = 0.95, methods = "exact"))
-
-propsTopoCI$topo <- factor(propsTopoCI$meanK, levels = c(1, 2, 9))
-propsTopoCI <- propsTopoCI %>% mutate(transFactor = factor(transmission, levels = c(0.4, 0.3, 0.2, 0.1)))
-
-#topoPlot <- ggplot(propsTopoCI, aes(x = factor(transmission), y = mean, fill = topo)) +
-#  geom_bar(stat = 'identity', position=position_dodge()) +
-#  geom_errorbar(aes(ymin = lower, ymax = upper),
-#                width=.2,                   
-#                position = position_dodge(.9)) +
-#  xlab('Transmission') + 
-#  ylab('Prop. Invasions') +
-#  scale_fill_poke(name='Topo.', 
-#                 labels=c("Un.", "Min.", "Full."),
-#                 pokemon = 'Swampert',
-#                 spread = 3) +
-#  theme(legend.position = "bottom", panel.grid.major.x = element_blank()) 
-
-
-topoPlot <- ggplot(propsTopoCI, aes(x = topo, y = mean, colour = transFactor)) +
-              geom_point() +
-              geom_line(aes(x = as.numeric(topo))) +
-              scale_x_discrete(labels = c('Unconnected','Minimally','Fully')) +
-              geom_errorbar(aes(ymin = lower, ymax = upper), width = 0.04) +
-              scale_colour_poke(
-                 pokemon = 'illumise',
-                 spread = 4) +
-              xlab('Network Topology') + 
-              ylab('Prop. Invasions') + 
-              theme(legend.position = "none", panel.grid.major.x = element_blank()) 
-
-
-
-#ggdraw() +
-#  draw_label("A)", 0.02, 0.96, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
-#  draw_plot(dispPlot, 0, 0, 0.5, 1) +
-#  draw_label("B)", 0.53, 0.96, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
-#  draw_plot(topoPlot, 0.5, 0, 0.5, 1)
-
-
-
-
-ggdraw() +
-  draw_label("A)", 0.02, 0.96, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
-  draw_plot(dispPlot, 0, 0.5, 1, 0.5) +
-  draw_label("B)", 0.02, 0.46, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
-  draw_plot(topoPlot, 0, 0, 0.846, 0.5)
-
-
-
-
-%%end.rcode
 
 
 
