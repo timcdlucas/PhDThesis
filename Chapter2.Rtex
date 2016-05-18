@@ -226,7 +226,7 @@ Furthermore, this close evolutionary relationship means that competition via cro
 The metapopulations are parameterised to broadly mimic wild bat populations.
 Population structure has already been found to correlate with pathogen richness in bats (Chapter \ref{ch:empirical}, \cites{gay2014parasite, maganga2014bat, turmelle2009correlates}).
 Furthermore, bats have an unusually large variety of social structures.
-Colony sizes range from 10 to 1 million \cite{jones2009pantheria} and colonies can be very stable \cite{kerth2011bats, mccracken1981social}.
+Colony sizes range from 10 to 1 million \cite{jones2009pantheria} individuals and colonies can be very stable \cite{kerth2011bats, mccracken1981social}.
 This strong colony fidelity means they fit the assumptions of metapopulations well.
 Bats have also, over the last decade, become a focus for disease research \cite{calisher2006bats, hughes2007emerging}.
 The reason for this focus is that they have been implicated in a number of high profile diseases including Ebola, SARS, Hendra and Nipah \cite{calisher2006bats, li2005bats}.
@@ -1416,10 +1416,11 @@ This is true for all four dispersal values (GLM. $\xi = 0$: $b$ = \rinline{DispT
 \tmpsection{Restate the gap and the main result}
 
 I have used mechanistic, metapopulation models to test whether increased population structure can promote pathogen richness by facilitating invasion of new pathogens.
-I find that dispersal does affect the ability of a new pathogen to invade and persist in a population.
+I found that dispersal does affect the ability of a new pathogen to invade and persist in a population.
+I also found evidence that the pathogen invasion is less likely in completely isolated colonies.
+However, as long as the metapopulation is slightly connected, the topology of the metapopulation network did not affect invasion probability.
 Increasing transmission rate quickly reaches a state where new pathogens always invade aslong there is some dispersal while decreasing the transmission rate quickly reaches a state where invasion is impossible.
-I found evidence that the pathogen invasion is less likely in completely isolated colonies.
-However, as long as the metapopulation is slightly connected the topologyof the metapopulation network did not invasion probability.
+
 That increased population structure increases pathogen richness supports many predictions that increasing $R_0$ should increase pathogen richness \cite{nunn2003comparative, morand2000wormy, poulin2014parasite, poulin2000diversity, altizer2003social}.
 However, many comparative studies have found the opposite relationship, with increased population structure increasing pathogen richness (Chapter \ref{ch:empirical}, \cites{vitone2004body, maganga2014bat, turmelle2009correlates}).
 Furthermore, simple analytical models suggest that population structure should increase pathogen richness \cite{qiu2013vector, allen2004sis, nunes2006localized} and I find no evidence of this.
@@ -1427,15 +1428,20 @@ Furthermore, simple analytical models suggest that population structure should i
 
 \tmpsection{Link results to consequences}
 
-These results suggest that if population structure does in fact affect pathogen richness (Chapter \ref{ch:empirical}, \cites{vitone2004body, maganga2014bat, turmelle2009correlates}) it must occur by a mechanism other than the one studied here.
-The hypothesised mechanism for the relationship between population structure and pathogen richness (Chapter \ref{ch:empirical}, \cites{vitone2004body, maganga2014bat, turmelle2009correlates}) was that the spread and persistence of a newly evolved pathogen is facilitated by decreased competition due to population structure.
+These results suggest that if population structure does in fact affect pathogen richness, as observed in comparative studies (Chapter \ref{ch:empirical}, \cites{vitone2004body, maganga2014bat, turmelle2009correlates}), it must occur by a mechanism other than the one studied here.
+Here, the hypothesised mechanism for the relationship between population structure and pathogen richness was that the spread and persistence of a newly evolved pathogen is facilitated by decreased competition due to population structure.
 Instead, reduced population structure allows the new pathogen to quickly spread outside of the colony in which it evolved.
 As the mechanism studied here cannot explain the relationship between population structure and pathogen richness seen in wild species (Chapter \ref{ch:empirical}, \cites{vitone2004body, maganga2014bat, turmelle2009correlates}), other mechanisms should be studied.
 Other mechanisms that should be examined include reduced competitive exclusion of already established pathogens or increased invasion of less closely related and less strongly competing pathogens, perhaps mediated by ecological competition of pathogens (i.e.\ reduction of the susceptible pool by disease induced mortality).
 Furthermore, single pathogen dynamics could have an important role such as population structure causing a much slower, asynchronous epidemic preventing acquired herd immunity \cite{plowright2011urban}.
 
+I ran simulations of a completely unstructured population as a baseline comparison of pathogen invasion probability.
+However, this unstructured population could also be considered one, very large, subpopulation or colony.
+The fact that invasion occured 100\% of the time in these simulations suggest that colony size has an important role in pathogen richness.
+Therefore the interplay between population structure and colony size should be studied further especially as the range of colony size in bats is large, ranging from 10 to 1 million \cite{jones2009pantheria} individuals.
+
 My simulations also highlight the importance of competition for the spread of a new pathogen.
-All parameters used correspond to pathogens with $R_0>1$ (as seen in the unstructured simulations).
+All parameters used corresponded to pathogens with $R_0>1$ (as seen in the unstructured simulations).
 However, the competition with the endemic pathogen means that for some transmission rates the chance of epidemic spread and persistence is close to zero.
 This has implications for human epidemics as well --- if there is strong competition between a newly evolved strain and an endemic strain, we are unlikely to see the new strain spread, irregardless of population structure.
 
@@ -1467,13 +1473,14 @@ It is clear however that there are a number of factors that affect pathogen rich
 
 With the models here I have aimed to tread a middle ground between the overly simple models employed in analytical studies \cite{allen2004sis} and the full complexity and variety of true bat social systems \cite{kerth2008causes}.
 Omissions include seasonal migration,  maternity roosts, hibernation roosts and swarming sites \cite{kerth2008causes, fleming2003ecology, richter2008first, cryan2014continental}. 
-While future models might aim to model this complexity more fully the number of parameters that are required to be estimated and varied becomes very large.
+While future models might aim to model this complexity more fully, the number of parameters that are required to be estimated and varied becomes very large.
 Furthermore, not all of these social complexities exist in all bat species, so in limiting my analysis to the simpler end of bat social systems it is hoped that the results are more broadly representative of the order.
 
 Furthermore, I have considered a single host species in isolation.
 In some cases, treating multiple host species as identical could be appropriate.
 However, more generally, it seems likely that sympatry in bats is epidemiologically important \cite{brierley2016quantifying, luis2013comparison} but was beyond the scope of this study.
 There is potential for this to be effectively modelled as a multi-layered network \cite{wang2016structural, funk2010interacting} and this would be expected to act to reduce population structure.
+Conversely, the case of interspecies roost sharing could be modelled as an additional layer of within-colony, population structure which would tend to increase population structure.
 
 Finally, many species of bat exhibit strong seasonal birth pulses which are known to affect disease dynamics \cite{hayman2015biannual,peel2014effect,amman2012seasonal}.
 This would be expected to facilitate the invasion of new pathogen species; if a new strain evolved or entered the population by migration during a period of low population immunity, it would have a higher chance of invading and establishing in the population.
