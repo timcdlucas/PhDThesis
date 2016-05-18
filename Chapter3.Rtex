@@ -1099,8 +1099,10 @@ allResults %>%
 
 ITPlot <- ggplot(sepVarWeights, aes(x = variable, y = estimate, colour = col, fill = col)) +
   geom_boxplot(outlier.colour = grey(0.3), notch = FALSE, width = 0.99, outlier.size = 1, lwd = 0.4) +
-  scale_colour_manual(values = pokepal('nidorino')[c(2, 5, 11)]) +
-  scale_fill_manual(values = pokepal('nidorino')[c(3, 6, 10)]) +
+  #scale_colour_manual(values = pokepal('nidorino')[c(2, 5, 11)]) +
+  #scale_fill_manual(values = pokepal('nidorino')[c(3, 6, 10)]) +
+  scale_colour_manual(values = pokepal('swellow')[c(15, 2, 8)]) +
+  scale_fill_manual(values = pokepal('swellow')[c(14, 10, 9)]) +
   theme(legend.position = 'none', axis.text.x = element_text(size = 10, angle = 40, hjust = 1, colour = 'black', family = 'lato light'),
     panel.grid.major.x = element_blank(),
     axis.text.y = element_text(size = 8)) +
@@ -2094,8 +2096,8 @@ The relative weight of evidence that each explanatory variable is in the best mo
 The probability that each variable is in the best model (amongst the models tested) is shown for A) the number of subspecies analysis and B) the effective gene flow analysis.
 The boxplots show the variation of the results over 50 resamplings of the uniformly random ``null'' variable. 
 The thick bar of the boxplot shows the median value, the interquartile range is represented by a box, vertical lines represent range, and outliers are shown as filled circles.
-The purple ``Random'' box is the uniformly random variable. 
-Population structure (number of subspecies and effective gene flow), shown in red, is likely to be in the best model in both analyses."
+The yellow ``Random'' box is the uniformly random variable. 
+Population structure (number of subspecies and effective gene flow), shown in blue, is likely to be in the best model in both analyses."
 
 ITPlotTitle <- "The relative weight of evidence that each explanatory variable is in the best model for explaining viral richness."
 
@@ -2107,8 +2109,10 @@ ITPlotTitle <- "The relative weight of evidence that each explanatory variable i
 # Draw the fst model selection plot
 fstIT <- ggplot(fstSepVarWeights, aes(x = variable, y = estimate, colour = col, fill = col)) +
   geom_boxplot(outlier.colour = grey(0.3), notch = FALSE, width = 0.7, outlier.size = 1, lwd = 0.4) +
-  scale_colour_manual(values = pokepal('nidorino')[c(2, 5, 11)]) +
-  scale_fill_manual(values = pokepal('nidorino')[c(3, 6, 10)]) +
+  #scale_colour_manual(values = pokepal('nidorino')[c(2, 5, 11)]) +
+  #scale_fill_manual(values = pokepal('nidorino')[c(3, 6, 10)]) +
+  scale_colour_manual(values = pokepal('swellow')[c(15, 2, 8)]) +
+  scale_fill_manual(values = pokepal('swellow')[c(14, 10, 9)]) +
   ylim(0, 1) +
   theme(legend.position = 'none', axis.text.x = element_text(size = 10, angle = 40, hjust = 1, colour = 'black', family = 'lato light'),
     panel.grid.major.x = element_blank(),
