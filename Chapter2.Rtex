@@ -303,6 +303,7 @@ Note this rate is independent of the degree and size of subpopulation $y$.
 \tmpsection{Stochastic simulations}
 
 I examined this model using stochastic, continuous-time simulations implemented in \emph{R} \cite{R}.
+The implementation is available as an R package on GitHub \cite{metapopepi}.
 The model can be written as a continuous-time Markov chain.
 The Markov chain contains the random variables $((S_x)_{x = 1\ldots m}, (I_{x, q})_{x =1\ldots m,\:q \in \{1, 2, 12\}}, (R_x)_{x = 1\ldots m})$.
 Here, $(S_x)_{x = 1\ldots m}$ is a length $m$ vector of the number of susceptibles in each colony.
@@ -1058,7 +1059,7 @@ I ran 100 simulations at each transmission rate.
 Two parameters control population structure in the model: dispersal rate and the topology of the metapopulation network.
 The values used for these parameters were chosen to highlight the effects of population structure. 
 I selected the dispersal values $\xi = 0, 0.1, 0.01$ and $ 0.001$ dispersals per individual per year. 
-The probability that an individual disperses at least once in its lifetime is given by $\xi / \right(\xi + \mu\left)$.
+The probability that an individual disperses at least once in its lifetime is given by $\xi / \left(\xi + \mu\right)$.
 $\xi = 0.1$ relates to 67\% of individuals dispersing between colonies at least once in their lifetime. 
 Therefore exclusively juvenile dispersal would have dispersal rates similar to this value. %todo cite
 $\xi = 0.01$ relates to 17\% of individuals dispersing at least once in their lifetime.
@@ -1093,6 +1094,7 @@ As with the $\xi = 0$ results, these tests were performed both with and without 
 Finally, I also used binomial GLMs to test the hypothesis that the probability of invasion increased with transmission rate.
 Seperate GLMs were fitted for each dispersal rate and network topology.
 All statistical analyses were performed using the \emph{stats} package in \emph{R}.
+The code used for running the simulations and analysing the results is available at \href{https://github.com/timcdlucas/PhDThesis/blob/master/Chapter2.Rtex}{GitHub}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

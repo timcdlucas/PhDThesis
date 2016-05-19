@@ -943,8 +943,7 @@ Specifically I let two identical pathogens --- an endemic pathogen and an invadi
 I tested whether population size is more important than population density.
 I then tested whether colony size or the number of colonies is the more important component of population size.
 The multipathogen SIR model is identical to that in Chapter \ref{ch:sims1} and is implemented in \emph{R} \cite{R}.
-
-
+The code used for running all simulations is available on \href{https://github.com/timcdlucas/PhDThesis/blob/master/Chapter4.Rtex}{GitHub}.
 
 In each simulation the population is seeded with 20 individuals infected with pathogen 1 in each colony. 
 Pathogen 1 is then allowed to spread and reach equilibrium. 
