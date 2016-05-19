@@ -84,7 +84,7 @@ A more mechanistic understanding of how population structure affects pathogen ri
 \tmpsection{One sentence clearly stating the general problem (the gap)}
 % being addressed by this particular study.
 %It is unknown whether greater population structure allows invading pathogens to escape from competition by stochastically creating areas of low pathogen prevalence.
-I hypothesised that a low number of connections in a metapopulation network and low dispersal rates will allow invading pathogens to establish more easily, thus increasing pathogen richness. 
+I hypothesised that low dispersal rates and a low number of connections in a metapopulation network would allow invading pathogens to establish more easily, thus increasing pathogen richness. 
 I tested these hypotheses using metapopulation networks parameterised to mimic wild bat populations as bats have highly varied social structures and have recently been implicated in a number of high profile diseases such as Ebola, SARS, Hendra and Nipah.
 %
 %
@@ -166,10 +166,14 @@ In comparative studies it is often assumed that factors that promote fast diseas
 However, this assumption ignores competitive mechanisms such as cross-immunity and depletion of susceptible hosts.
 If competitive mechanisms are strong, pathogens in populations structured such that $R_0$ will be high will be able to easily out-compete invading pathogens.
 Only if competitive mechanisms are weak will high $R_0$  enable the invasion of new pathogens and allow higher pathogen richness.
-Overall, the evidence indicates that increased population structure correlates with higher pathogen richness (Chapter \ref{ch:empirical}, \cites{vitone2004body, maganga2014bat, turmelle2009correlates}).
+
+Overall, the evidence from comparative studies indicates that increased population structure correlates with higher pathogen richness.
+This conclusion is based on studies using a number of measures of population structure: genetic measures, the number of subspecies, the shape of species' distributions and social group size (Chapter \ref{ch:empirical}, \cites{vitone2004body, maganga2014bat, turmelle2009correlates}).
 However, there are number of studies that contradict this conclusion \cite{gay2014parasite, bordes2007rodent, ezenwa2006host}.
-Comparative studies are often contradictory due to small sample sizes, noisy data and because empirical relationships often do not extrapolate well to other taxa (though see \textcite{kamiya2014determines} for a meta-analysis).
-Multicollinearity between many traits also makes it hard to clearly distinguish which factors are important \cite{nunn2015infectious}.
+Comparative studies are often contradictory due to small sample sizes, noisy data and because empirical relationships often do not extrapolate well to other taxa. 
+Furthermore, multicollinearity between many traits also makes it hard to clearly distinguish which factors are important \cite{nunn2015infectious}.
+However, meta-analyses can be used to combine studies to help generalise conclusions \cite{kamiya2014determines}.
+
 
 %3. limitations of comparative studies (including highlighting that empirical and mechanistic approaches would give different predictions) that and need a more mechanistic approach 
 
@@ -190,7 +194,7 @@ Firstly, population structure may reduce competition between pathogens.
 In analytical models of well-mixed populations competitive exclusion has been predicted \cite{ackleh2003competitive, bremermann1989competitive, martcheva2013competitive, qiu2013vector, allen2004sis}.
 When competitive exclusion occurs, population structure has sometimes been shown to allow coexistence \cite{qiu2013vector, allen2004sis, nunes2006localized, garmer2016multistrain}.
 Alternatively, population structure may promote the evolution of new strains within a species \cite{buckee2004effects}, reduce the rate of pathogen extinction \cite{rand1995invasion} or increase the probability of pathogen invasion from other host species \cite{nunes2006localized}.
-These separate mechanisms have not been examined and it is difficult to see how they could be distringuished through comparative methods.
+These separate mechanisms have not been examined and it is difficult to see how they could be distinguished through comparative methods.
 
 %Competing epidemics, or two pathogens spreading at the same time in a population, is a well studied area \cite{poletto2013host, poletto2015characterising, karrer2011competing}. 
 %This area is related to the study of pathogen richness in that they indicate that dynamics of multiple pathogens in a population do depend on population %structure.
@@ -270,7 +274,7 @@ The assumption of immediate recovery from all other diseases is likely to be qui
 The coinfection rate (the rate at which an infected individual is infected with a second pathogen) is adjusted compared to the infection rate by a factor $\alpha$ (here I used $\alpha = 0.1$ which means coinfection happens at a tenth the rate of first infections).
 
 In the application of long term existence of pathogens it is necessary to include vital dynamics (births and deaths) as the SIR model without vital dynamics has no endemic state.
-Birth and death rates are assumed to be equal, $\mu = \Lambda$ meaning the population does not systematically increase or decrease.
+Birth and death rates ($\mu$ and $\Lambda$) are set as being equal meaning the population does not systematically increase or decrease.
 The population size does however change as a random walk.
 New born individuals enter the susceptible class.
 The time scale of the simulations are determined by setting $\mu$ = 0.05 per year, yielding an average host generation time of 20 years.
@@ -280,16 +284,19 @@ Infection is assumed to cause no extra mortality as for a number of viruses, bat
 \tmpsection{Metapopulation}
 
 
-The population is divided into a number of subpopulations.
-This metapopulation is modelled as a network with subpopulations being nodes and dispersal between subpopulations being indicated by edges (Figure~\ref{f:net}).
+The population is modelled as a metapopulation, being divided into a number of subpopulations.
+This model is an intermediate level of complexity between fully-mixed populations and contact networks.
+The existence of subspecies, measurements of genetic dissimilarity and ecological studies provide ample evidence that bat populations are structured to some extent \cite{kerth2011bats, mccracken1981social, burns2014correlates, wilson2005mammal}.
+Therefore a fully mixed population is a large oversimplification.
+However, trying to study the contact network relies on knowledge of detailed individual behaviour which is not available.		
+
+The metapopulation is modelled as a network with subpopulations being nodes and dispersal between subpopulations being indicated by edges (Figure~\ref{f:net}).
 Individuals within a subpopulation interact randomly so that the subpopulation is fully mixed.
 Dispersal between subpopulations occurs at a rate $\xi$.
 Individuals can only disperse to subpopulations connected to theirs in the network.
 The rate of dispersal is not affected by the number of edges a subpopulation has (known as the degree of the subpopulation and denoted $k$).
 Therefore, the dispersal rate from a subpopulation $x$ with degree $k_x$ to subpopulation $y$ is $\xi / k_x$.
 Note this rate is independent of the degree and size of subpopulation $y$.
-
-
 
 
 
@@ -322,9 +329,9 @@ Finally, the length of the time step, $\delta$, is drawn from an exponential dis
   \includegraphics[width=0.4\textwidth]{imgs/SIRoption1.pdf}
   \caption[Schematic of the SIR model used]{
   Schematic of the SIR model used. 
-  Individuals are in one of five classes, susceptible (orange, S), infected with pathogen 1, pathogen 2 or both (blue, $I_1, I_2, I_{12}$) or recovered and immune from further infection (green, R).
+  Individuals are in one of five classes, susceptible (orange, $S$), infected with pathogen 1, pathogen 2 or both (blue, $I_1, I_2, I_{12}$) or recovered and immune from further infection (green, $R$).
   Transitions between classes occur only as indicated by arrows.
-  Note that individuals in $I_{12}$ move into R, not back to $I_1$ or $I_2$. 
+  Note that individuals in $I_{12}$ move into $R$, not back to $I_1$ or $I_2$. 
   That is, recovery from one pathogen causes immediate recovery from the other pathogen.
   }
 \label{f:sir}
@@ -425,11 +432,11 @@ Finally, recovery from any infectious class occurs at a rate $\gamma$
 }
 \caption[Network topologies used to compare network connectedness]{
 The two network topologies used to test whether network connectedness influences a pathogens ability to invade.
+A) Animals can only disperse to neighbouring subpopulations. 
+B) Dispersal can occur between any subpopulation.
 Blue circles are subpopulations of 3,000 individuals.
 Dispersal only occurs between subpopulations connected by an edge (black line).
 The dispersal rate is held constant between the two topologies.
-A) Animals can only disperse to neighbouring subpopulations. 
-B) Dispersal can occur between any subpopulation.
 }
 \label{f:net}
 \end{figure}
@@ -999,8 +1006,6 @@ Therefore cross-immunity to coinfection is likely to be very strong as well.
 
 The starting size of each colony was set to 3,000. 
 This is appropriate for many bat species \cite{jones2009pantheria}, especially the large, frugivorous \emph{Pteropodidae} that have been particularly associated with recent zoonotic diseases.
-
-
 Four values of the transmission rate $\beta$ were used, 0.1, 0.2, 0.3 and 0.4.
 These values were chosen to cover the range of behaviours, from very high probabilities of invasion of the second pathogen, to very low probabilities.
 All simulations were run under all four transmission rates as this is such a fundamental parameter.
@@ -1049,7 +1054,9 @@ I ran 100 simulations at each transmission rate.
 \tmpsection{Dispersal}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The values used for the parameters of the model that control population structure were chosen to highlight the effects of population structure. 
+
+Two parameters control population structure in the model: dispersal rate and the topology of the metapopulation network.
+The values used for these parameters were chosen to highlight the effects of population structure. 
 I selected the dispersal values $\xi = 0, 0.1, 0.01$ and $ 0.001$ dispersals per individual per year. 
 The probability that an individual disperses at least once in its lifetime is given by $\xi / \right(\xi + \mu\left)$.
 $\xi = 0.1$ relates to 67\% of individuals dispersing between colonies at least once in their lifetime. 
@@ -1070,7 +1077,7 @@ Therefore, I ran 150 simulations for $\beta = 0.2$ and $0.3$ (not including the 
 \tmpsection{Network structure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 I also altered the topology of the metapopulation network.
-The network topology was created to be either fully or minimally connected (See Figure~\ref{f:net}). 
+The network topology was created to be either fully or minimally connected (Figure~\ref{f:net}). 
 To model a completely unconnected population the $\xi = 0$ simulations from above were used.
 I again ran 100 simulations for each parameter set.
 
