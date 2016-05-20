@@ -270,7 +270,8 @@ There are three infected classes, $I_1$, $I_2$ and $I_{12}$, being individuals i
 Recovered individuals, $R$, are immune to both pathogens, even if they have only been infected with one.
 Furthermore, recovery from one pathogen moves an individual straight into the recovered class, even if the individual is infected with both pathogens (Figure~\ref{f:sir}).
 This modelling choice allows the model to be easily expanded to include more than two pathogens though here I only simulate two pathogens.
-The assumption of immediate recovery from all other diseases is likely to be quite accurate for very closely related pathogens as is being studied here as once an acquired immune response is activated, all infections are likely to be cleared quickly. %todo cite
+The assumption of immediate recovery from all other diseases is likely to be reasonable for very closely related pathogens as is being studied here.
+Once an acquired immune response is activated, all infections are likely to be cleared quickly and up-regulation of the innate immune system will speed up recovery. 
 The coinfection rate (the rate at which an infected individual is infected with a second pathogen) is adjusted compared to the infection rate by a factor $\alpha$ (here I used $\alpha = 0.1$ which means coinfection happens at a tenth the rate of first infections).
 Both negative and positive associations have been found between closely related bat viruses \cite{anthony2013strategy}.
 I modelled a strong negative association between viruses based on the aim of modelling a newly evolved pathogen.
@@ -1466,6 +1467,9 @@ This has implications for human epidemics as well --- if there is strong competi
 I have assumed that once recovered, individuals are immune to both pathogens. 
 Furthermore, when a coinfected individual recovers from one pathogen, it immediately recovers from the other as well.
 This is probably a reasonable assumption given that I am modelling a newly evolved strain.
+The recovery rate of coinfected individuals has not been well studied however.
+In humans, recent recovery from a co-circulating virus, increased the rate of recovery from respiratory syncytial virus (though co-infected individuals recovered more slowly) \cite{munywoki2015influence}.
+
 However, further work could relax this assumption using a model similar to \cite{poletto2015characterising} which contains additional classes for `infected with pathogen one, immune to pathogen two' and `infected with pathogen two, immune to pathogen one'.
 The model here was formulated such that the study of systems with greater than two pathogens is still computationally feasible while a model such as used in \cite{poletto2015characterising} contains $3^\rho$ classes for a system with $\rho$ pathogen species.
 This quickly becomes computationally restrictive.
@@ -1489,8 +1493,7 @@ While future models might aim to model this complexity more fully, the number of
 Furthermore, not all of these social complexities exist in all bat species, so in limiting my analysis to the simpler end of bat social systems it is hoped that the results are more broadly representative of the order.
 
 Furthermore, I have considered a single host species in isolation.
-In some cases, treating multiple host species as identical could be appropriate.
-However, more generally, it seems likely that sympatry in bats is epidemiologically important \cite{brierley2016quantifying, luis2013comparison} but was beyond the scope of this study.
+It seems likely that sympatry in bats and other mammals is epidemiologically important \cite{brierley2016quantifying, luis2013comparison, pilosof2015potential} but was beyond the scope of this study.
 There is potential for this to be effectively modelled as a multi-layered network \cite{wang2016structural, funk2010interacting} and this would be expected to act to reduce population structure.
 Conversely, the case of interspecies roost sharing could be modelled as an additional layer of within-colony, population structure which would tend to increase population structure.
 
