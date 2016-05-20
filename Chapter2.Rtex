@@ -272,14 +272,17 @@ Furthermore, recovery from one pathogen moves an individual straight into the re
 This modelling choice allows the model to be easily expanded to include more than two pathogens though here I only simulate two pathogens.
 The assumption of immediate recovery from all other diseases is likely to be quite accurate for very closely related pathogens as is being studied here as once an acquired immune response is activated, all infections are likely to be cleared quickly. %todo cite
 The coinfection rate (the rate at which an infected individual is infected with a second pathogen) is adjusted compared to the infection rate by a factor $\alpha$ (here I used $\alpha = 0.1$ which means coinfection happens at a tenth the rate of first infections).
+Both negative and positive associations have been found between closely related bat viruses \cite{anthony2013strategy}.
+I modelled a strong negative association between viruses based on the aim of modelling a newly evolved pathogen.
+
 
 In the application of long term existence of pathogens it is necessary to include vital dynamics (births and deaths) as the SIR model without vital dynamics has no endemic state.
 Birth and death rates ($\mu$ and $\Lambda$) are set as being equal meaning the population does not systematically increase or decrease.
 The population size does however change as a random walk.
 New born individuals enter the susceptible class.
 The time scale of the simulations are determined by setting $\mu$ = 0.05 per year, yielding an average host generation time of 20 years.
-Infection is assumed to cause no extra mortality as for a number of viruses, bats show no clinical signs of infection \cite{halpin2011pteropid, deThoisy2016bioecological}.
-
+Infection amd coinfection were assumed to cause no extra mortality as for a number of viruses, bats show no clinical signs of infection \cite{halpin2011pteropid, deThoisy2016bioecological}.
+In humans, coinfection generally worsens health \cite{griffiths2011nature} but as there are 
 
 \tmpsection{Metapopulation}
 
