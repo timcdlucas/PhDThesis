@@ -227,7 +227,7 @@ In particular I have focused on studying the invasion of a newly evolved pathoge
 Furthermore, this close evolutionary relationship means that competition via cross-immunity is strong.
 
 \tmpsection{Why bats}
-The metapopulations are parameterised to broadly mimic wild bat populations.
+The metapopulations were parameterised to broadly mimic wild bat populations.
 Population structure has already been found to correlate with pathogen richness in bats (Chapter \ref{ch:empirical}, \cites{gay2014parasite, maganga2014bat, turmelle2009correlates}).
 Furthermore, bats have an unusually large variety of social structures.
 Colony sizes range from 10 to 1 million \cite{jones2009pantheria} individuals and colonies can be very stable \cite{kerth2011bats, mccracken1981social}.
@@ -287,19 +287,19 @@ In humans, coinfection generally worsens health \cite{griffiths2011nature} but a
 \tmpsection{Metapopulation}
 
 
-The population is modelled as a metapopulation, being divided into a number of subpopulations.
+The population is modelled as a metapopulation, being divided into a number of subpopulations (colonies).
 This model is an intermediate level of complexity between fully-mixed populations and contact networks.
 The existence of subspecies, measurements of genetic dissimilarity and ecological studies provide ample evidence that bat populations are structured to some extent \cite{kerth2011bats, mccracken1981social, burns2014correlates, wilson2005mammal}.
 Therefore a fully mixed population is a large oversimplification.
 However, trying to study the contact network relies on knowledge of detailed individual behaviour which is not available.		
 
-The metapopulation is modelled as a network with subpopulations being nodes and dispersal between subpopulations being indicated by edges (Figure~\ref{f:net}).
-Individuals within a subpopulation interact randomly so that the subpopulation is fully mixed.
-Dispersal between subpopulations occurs at a rate $\xi$.
-Individuals can only disperse to subpopulations connected to theirs in the network.
-The rate of dispersal is not affected by the number of edges a subpopulation has (known as the degree of the subpopulation and denoted $k$).
-Therefore, the dispersal rate from a subpopulation $x$ with degree $k_x$ to subpopulation $y$ is $\xi / k_x$.
-Note this rate is independent of the degree and size of subpopulation $y$.
+The metapopulation is modelled as a network with colonies being nodes and dispersal between colonies being indicated by edges (Figure~\ref{f:net}).
+Individuals within a colony interact randomly so that the colony is fully mixed.
+Dispersal between colonies occurs at a rate $\xi$.
+Individuals can only disperse to colonies connected to theirs in the network.
+The rate of dispersal is not affected by the number of edges a colonies has (known as the degree of the colony and denoted $k$).
+Therefore, the dispersal rate from a colony $x$ with degree $k_x$ to colony $y$ is $\xi / k_x$.
+Note this rate is independent of the degree and size of colony $y$.
 
 
 
@@ -348,7 +348,7 @@ Assuming asexual reproduction, that all classes reproduce at the same rate and t
 \begin{align}
   s_x \rightarrow s_x + 1 \;\;\text{at a rate of}\;\; \Lambda\left( s_{x}+\sum_q i_{qx} + r_{x}\right) 
 \end{align}
-where $s_x \rightarrow s_x + 1$ is the event that the number of susceptibles in subpopulation $x$ will increase by 1 (a single birth) and $\sum_q i_{qx}$ is the sum of all infection classes $q \in \{1, 2, 12\}$.
+where $s_x \rightarrow s_x + 1$ is the event that the number of susceptibles in colony $x$ will increase by 1 (a single birth) and $\sum_q i_{qx}$ is the sum of all infection classes $q \in \{1, 2, 12\}$.
 The rates of death, given a death rate $\mu$, and no increased mortality due to infection, are given by
 \begin{align}
   s_x \rightarrow s_x-1  &\;\;\text{at a rate of}\;\; \mu s_x, \\
@@ -436,10 +436,10 @@ Finally, recovery from any infectious class occurs at a rate $\gamma$
 }
 \caption[Network topologies used to compare network connectedness]{
 The two network topologies used to test whether network connectedness influences a pathogens ability to invade.
-A) Animals can only disperse to neighbouring subpopulations. 
-B) Dispersal can occur between any subpopulation.
-Blue circles are subpopulations of 3,000 individuals.
-Dispersal only occurs between subpopulations connected by an edge (black line).
+A) Animals can only disperse to neighbouring colonies. 
+B) Dispersal can occur between any colony.
+Blue circles are colonies of 3,000 individuals.
+Dispersal only occurs between colonies connected by an edge (black line).
 The dispersal rate is held constant between the two topologies.
 }
 \label{f:net}
@@ -1029,8 +1029,8 @@ All simulations were run under all four transmission rates as this is such a fun
 
 \subsection{Experimental setup}
 
-The metapopulation contains 10 subpopulations.
-10 subpopulations was selected as a trade off between computation time and a network complex enough that structure might have an effect. 
+The metapopulation contains 10 colonies.
+10 colonies was selected as a trade off between computation time and a network complex enough that structure might have an effect. 
 This value is artificially small compared to wildlife populations. 
 In each simulation the population was seeded with 10 sets of 200 infected individuals of pathogen 1.
 These groups were seeded into randomly selected colonies with replacement.
@@ -1455,7 +1455,7 @@ Therefore the interplay between population structure and colony size should be s
 My simulations also highlight the importance of competition for the spread of a new pathogen.
 All parameters used corresponded to pathogens with $R_0>1$ (as seen in the unstructured simulations).
 However, the competition with the endemic pathogen means that for some transmission rates the chance of epidemic spread and persistence is close to zero.
-This has implications for human epidemics as well --- if there is strong competition between a newly evolved strain and an endemic strain, we are unlikely to see the new strain spread, irregardless of population structure.
+This has implications for human epidemics as well --- if there is strong competition between a newly evolved strain and an endemic strain, we are unlikely to see the new strain spread, regardless of population structure.
 
 
 

@@ -155,7 +155,7 @@ Furthermore, population size is considered the more relevant measure in terms of
 \tmpsection{Population structure in comparative research}
 It is clear that animals are neither randomly distributed in space nor epidemiologically `will-mixed': social groups are common \cite{kerth2008causes} and distance and geographic boundaries reduce contacts between isolated populations \cite{jenkins2010meta, peel2012henipavirus}.
 In social species, measures such as global population density are largely meaningless with respect to the number of infectious contacts individuals may have.
-Rather, contacts are based on group size and rates of movements between groups.
+Rather, contacts are based on group size and rates of movement between groups.
 Two aspects of non-random transmission have been studied in particular: group size \cite{vitone2004body, gay2014parasite, ezenwa2006host, rifkin2012animals, nunn2003comparative} and global measures of population structure including genetic measures and measures derived from geographic distribution shapes (\textcite{gay2014parasite}, \textcite{maganga2014bat}, \textcite{turmelle2009correlates} and see Chapter \ref{ch:empirical}).
 Again however, the relationships between these terms and range size, population size and density are rarely examined.
 Population size can be decomposed into two components, the number of groups and the average size of a group with $N = nm$ where $n$ is group size and $m$ is the number of groups.
@@ -189,6 +189,8 @@ Finally, mechanistic models are expected to be more predictive into the future a
 
 Therefore there is great need for mechanistic models that try to disentangle the interplay between these many factors: density, population size, range size, population structure, group size and the number of groups.
 Here, I have used multipathogen, metapopulation models to individually vary these population parameters.
+The metapopulations were parameterised to broadly mimic wild bat populations.
+The size of bat groups (colonies) is very variable and they are often very stable \cite{kerth2011bats, mccracken1981social}.
 I examined how these factors affect the ability of a newly evolved pathogen to invade and persist in a population in the presence of strong competition from an endemic pathogen strain.
 I used these simulations to test two specific hypotheses.
 First I tested whether population size or population density more strongly promotes the invasion of a new pathogen.
@@ -1105,7 +1107,7 @@ $\beta$ & \emph{Variable} & \emph{Estimate} ($b$) & (95\% \emph{CI}) & $p$\\
 \tmpsection{Restate results}
 
 Overall, my results suggest that population size promotes pathogen richness significantly more than population density in the context of metapopulations or group living.
-Furthermore, the component of population size that is important is group size.
+Furthermore, the component of population size that is important is colony size.
 
 These results lead to a number of other conclusions.
 All else being equal, increasing range size (with density remaining constant) will not increase pathogen richness significantly unless the increased range size promotes larger groups.
