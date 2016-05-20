@@ -966,7 +966,7 @@ Secondly, number of colonies (and therefore population size) was varied and agai
 Finally, colony size and number of colonies were kept constant (therefore keeping population size constant) and area was varied alone to alter population density. 
 The values of area used were \rinline{dep3[-5]} and \rinline{dep3[5]}km$^2$ which gave density values of \rinline{depDens[-5]} and \rinline{depDens[5]} animals$\cdot\text{km}^{-2}$.
 
-The affects of area occur through changing the metapopulation network.
+The effects of area occur through changing the metapopulation network.
 The metapopulation structure was created for each simulation by randomly placing colonies in space (Figure~\ref{fig:colonyNetworkPlots}).
 The spatial scale of the simulations vary between \rinline{min(area)} and \rinline{max(area)} km$^2$.
 This corresponds to square areas with sides of \rinline{sqrt(min(area))} to \rinline{sqrt(max(area))}km.
@@ -1157,8 +1157,10 @@ This suggests that the mechanism studied here --- invasion of recently evolved p
 Being based on the same model as used earlier, the work presented here relies on many of the same assumptions (see Section~\ref{s:sims1Disc}).
 Furthermore, as a comparison is being made between the effects of area and population size, the exact specifications of how the metapopulation is affected by area is important.
 I have conducted this study at one rate of dispersal, 0.01 dispersals per individual per year.
-In practice this relates to only 20\% of individuals dispersing in their lifetime.
+In practice this relates to only 17\% of individuals dispersing in their lifetime.
 This low rate of dispersal is expected to exaggerate the effect of area; at high rates of dispersal the population is essentially well-mixed, despite the metapopulation.
+Furthermore, there is evidence that as groups get bigger, the within-group structure increases \cite{nunn2015infectious}.
+This has not been modelled here; instead the subpopulations are assumed to be fully mixed regardless of size.
 
 Also, I have assumed that dispersal only occurs between colonies a certain distance apart.
 Based on \emph{a priori} considerations such as the time and energy required to disperse long distances this is a reasonable assumption.
