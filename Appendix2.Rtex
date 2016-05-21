@@ -224,16 +224,22 @@ findDisDistr(p1, 2)[1] > 0
 invade1 <- pSIR(p1) + 
             theme_tcdl + 
             scale_y_log10() + 
-            scale_colour_poke(pokemon = 'Loudred', spread = 4) +
+            scale_colour_poke(pokemon = 'Loudred', spread = 4, 
+              labels = c(expression(S), expression(I['i']), expression(I[12]), expression(R))) +
+            guides(colour=guide_legend(title = '')) +
+            theme(legend.text.align = 0) +
             xlab('Time (years)') +
-            xlim(0, maxt)
+            xlim(0, maxt) 
 
 
 findDisDistr(p2, 2)[1] > 0
 invade2 <- pSIR(p2) + 
             theme_tcdl + 
             scale_y_log10() + 
-            scale_colour_poke(pokemon = 'Loudred', spread = 4) +
+            scale_colour_poke(pokemon = 'Loudred', spread = 4, 
+              labels = c(expression(S), expression(I['i']), expression(I[12]), expression(R))) +
+            guides(colour=guide_legend(title = '')) +
+            theme(legend.text.align = 0) +
             xlab('Time (years)') +
             xlim(0, maxt)
 
@@ -303,7 +309,10 @@ maxt <- max(sum(p1$sampleWaiting), sum(p2$sampleWaiting))
 noInvade1 <- pSIR(p1) + 
                theme_tcdl + 
                scale_y_log10() + 
-               scale_colour_poke(pokemon = 'Loudred', spread = 4) + 
+               scale_colour_poke(pokemon = 'Loudred', spread = 4, 
+                 labels = c(expression(S), expression(I['i']), expression(I[12]), expression(R))) +
+               guides(colour=guide_legend(title = '')) +
+               theme(legend.text.align = 0) +
                xlab('Time (years)') +
                xlim(0, maxt)
 pop1 <- pPop(p1) + theme_tcdl + xlab('Time (years)') + xlim(0, maxt)
@@ -315,7 +324,10 @@ pop1 <- pPop(p1) + theme_tcdl + xlab('Time (years)') + xlim(0, maxt)
 noInvade2 <- pSIR(p2) + 
                theme_tcdl + 
                scale_y_log10() + 
-               scale_colour_poke(pokemon = 'Loudred', spread = 4) +
+               scale_colour_poke(pokemon = 'Loudred', spread = 4, 
+                 labels = c(expression(S), expression(I['i']), expression(I[12]), expression(R))) +
+               guides(colour=guide_legend(title = '')) +
+               theme(legend.text.align = 0) +
                xlab('Time (years)') +
                xlim(0, maxt)
 pop2 <- pPop(p2) + theme_tcdl + xlab('Time (years)') + xlim(0, maxt)
