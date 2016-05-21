@@ -141,7 +141,7 @@ Therefore, it is likely that population structure affects pathogen richness via 
 %1. zoonotics bad, need to predict spillover, factors controlling pathogen richness unknown
 \tmpsection{Why is pathogen richness? important?}
 Over 50\% of emerging infectious diseases have an animal source \cite{jones2008global, smith2014global}.
-Zoonotic pathogens can be highly virulent \cite{luby2009recurrent, lefebvre2014case} and potentially have huge public health impacts \cite{granich2015trends}, economic costs \cite{knobler2004learning} and slow down international development \cite{ebolaWorldbank}.
+Zoonotic pathogens can be highly virulent \cite{luby2009recurrent, lefebvre2014case} and can have huge public health impacts \cite{granich2015trends}, economic costs \cite{knobler2004learning} and slow down international development \cite{ebolaWorldbank}.
 Therefore understanding and predicting changes in the process of zoonotic spillover is a global health priority \cite{taylor2001risk}.
 The number of pathogen species hosted by a wild animal species affects the chance that a disease from that species will infect humans \cite{wolfe2000deforestation}.
 However, the factors that control the number of pathogen species in a wild animal population are still unclear \cite{metcalf2015five}; in particular our mechanistic understanding of how population processes inhibit or promote pathogen richness is poor.
@@ -164,12 +164,12 @@ In comparative studies, a number of host traits have been shown to correlate wit
 A further factor that may affect pathogen richness is population structure.
 In comparative studies it is often assumed that factors that promote fast disease spread should promote high pathogen richness; the faster a new pathogen spreads through a population, the more likely it is to persist \cite{nunn2003comparative, morand2000wormy, poulin2014parasite, poulin2000diversity, altizer2003social}.
 However, this assumption ignores competitive mechanisms such as cross-immunity and depletion of susceptible hosts.
-If competitive mechanisms are strong, pathogens in populations structured such that $R_0$ will be high will be able to easily out-compete invading pathogens.
-Only if competitive mechanisms are weak will high $R_0$  enable the invasion of new pathogens and allow higher pathogen richness.
+If competitive mechanisms are strong, endemic pathogens in populations structured such that $R_0$ will be high will be able to easily out-compete invading pathogens.
+%Only if competitive mechanisms are weak will high $R_0$  enable the invasion of new pathogens and allow higher pathogen richness.
 
 Overall, the evidence from comparative studies indicates that increased population structure correlates with higher pathogen richness.
-This conclusion is based on studies using a number of measures of population structure: genetic measures, the number of subspecies, the shape of species' distributions and social group size (Chapter \ref{ch:empirical}, \cites{vitone2004body, maganga2014bat, turmelle2009correlates}).
-However, there are number of studies that contradict this conclusion \cite{gay2014parasite, bordes2007rodent, ezenwa2006host}.
+This conclusion is based on studies using a number of measures of population structure: genetic measures, the number of subspecies, the shape of species distributions and social group size (Chapter \ref{ch:empirical}, \cites{vitone2004body, maganga2014bat, turmelle2009correlates}).
+However, there are a number of studies that contradict this conclusion \cite{gay2014parasite, bordes2007rodent, ezenwa2006host}.
 Comparative studies are often contradictory due to small sample sizes, noisy data and because empirical relationships often do not extrapolate well to other taxa. 
 Furthermore, multicollinearity between many traits also makes it hard to clearly distinguish which factors are important \cite{nunn2015infectious}.
 However, meta-analyses can be used to combine studies to help generalise conclusions \cite{kamiya2014determines}.
@@ -178,7 +178,7 @@ However, meta-analyses can be used to combine studies to help generalise conclus
 %3. limitations of comparative studies (including highlighting that empirical and mechanistic approaches would give different predictions) that and need a more mechanistic approach 
 
 Furthermore, knowing which factors correlate with pathogen richness does not tell us if, or how, they causally control pathogen richness.
-This lack of a solid mechanistic understanding of these processes precludes predictions of how wild populations will respond to peterbations such as increased human pressure and global change.
+This lack of a solid mechanistic understanding of these processes prevents predictions of how wild populations will respond to peterbations such as increased human pressure and global change.
 As habitats fragment we expect wild populations to change in a number of ways including becoming smaller and less well connected \cite{andren1994effects, cushman2012separating}.
 As multiple population-level factors are likely to change simultaneously due to global change, the correlative relationships examined in comparative studies are unlikely to effectively predict future changes in pathogen richness.
 Mechanistic models are needed to project how these highly non-linear disease systems will respond to the multiple, simultaneous stressors affecting them.
@@ -192,7 +192,7 @@ Mechanistic models are needed to project how these highly non-linear disease sys
 There are a number of mechanisms by which population structure could increase pathogen richness.
 Firstly, population structure may reduce competition between pathogens.
 In analytical models of well-mixed populations competitive exclusion has been predicted \cite{ackleh2003competitive, bremermann1989competitive, martcheva2013competitive, qiu2013vector, allen2004sis}.
-When competitive exclusion occurs, population structure has sometimes been shown to allow coexistence \cite{qiu2013vector, allen2004sis, nunes2006localized, garmer2016multistrain}.
+In models where competitive exclusion occurs in well-mixed populations, population structure has sometimes been shown to allow coexistence \cite{qiu2013vector, allen2004sis, nunes2006localized, garmer2016multistrain}.
 Alternatively, population structure may promote the evolution of new strains within a species \cite{buckee2004effects}, reduce the rate of pathogen extinction \cite{rand1995invasion} or increase the probability of pathogen invasion from other host species \cite{nunes2006localized}.
 These separate mechanisms have not been examined and it is difficult to see how they could be distinguished through comparative methods.
 
@@ -208,7 +208,7 @@ These separate mechanisms have not been examined and it is difficult to see how 
 % being addressed by this particular study.
 % By this stage, must have defined/introduced all terms used within.
 
-Currently the literature contains very abstract, simplified models \cite{qiu2013vector, allen2004sis, nunes2006localized, garmer2016multistrain}.
+Currently, the literature contains very abstract, simplified models \cite{qiu2013vector, allen2004sis, garmer2016multistrain, may1994superinfection}.
 These cannot be easily applied to real data.
 They also do not easily give quantitative predictions of pathogen richness; typically they predict either no pathogen coexistence \cite{bremermann1989competitive, martcheva2013competitive} or infinite pathogen richness \cite{may1994superinfection}.
 Models that can give quantitive predictions of pathogen richness in wild populations are more applicable to real-world issues such as zoonotic disease surveillance.
@@ -230,7 +230,7 @@ Furthermore, this close evolutionary relationship means that competition via cro
 The metapopulations were parameterised to broadly mimic wild bat populations.
 Population structure has already been found to correlate with pathogen richness in bats (Chapter \ref{ch:empirical}, \cites{gay2014parasite, maganga2014bat, turmelle2009correlates}).
 Furthermore, bats have an unusually large variety of social structures.
-Colony sizes range from 10 to 1 million \cite{jones2009pantheria} individuals and colonies can be very stable \cite{kerth2011bats, mccracken1981social}.
+Colony sizes range from 10 to 1 million individuals \cite{jones2009pantheria} and colonies can be very stable \cite{kerth2011bats, mccracken1981social}.
 This strong colony fidelity means they fit the assumptions of metapopulations well.
 Bats have also, over the last decade, become a focus for disease research \cite{calisher2006bats, hughes2007emerging}.
 The reason for this focus is that they have been implicated in a number of high profile diseases including Ebola, SARS, Hendra and Nipah \cite{calisher2006bats, li2005bats}.
@@ -243,7 +243,7 @@ The reason for this focus is that they have been implicated in a number of high 
 % (with the words “here we show” or their equivalent).
 
 Here I show that, given the assumptions of a metapopulation, increased dispersal significantly increased the probability of invasion of new pathogens.
-Furthermore, structured populations nearly always had a lower probability of pathogen invasion than a fully-mixed population of equal size.
+Furthermore, structured populations nearly always had a lower probability of pathogen invasion than fully-mixed populations of equal size.
 The topology of the network did not strongly affect the probability of pathogen invasion as long as the population was not completely unconnected.
 Overall, I found significant evidence that reduced population structure increases the probability of invasion of a new pathogen, implying a role for the generation of pathogen richness more generally.
 
@@ -257,34 +257,29 @@ Overall, I found significant evidence that reduced population structure increase
 %%
 
 
-\tmpsection{Metapopulation model}
-
-
-
-
 \subsection{Two pathogen SIR model}
 
 I developed a multipathogen, SIR compartment model with individuals being classed as susceptible, infected or recovered with immunity (Figure~\ref{f:sir}).
 Susceptible individuals are counted in class $S$ (see Table~\ref{t:params} for a list of symbols and values used).
-There are three infected classes, $I_1$, $I_2$ and $I_{12}$, being individuals infected with pathogen 1, pathogen 2 or both respectively .
-Recovered individuals, $R$, are immune to both pathogens, even if they have only been infected with one.
+There are three infected classes, $I_1$, $I_2$ and $I_{12}$, being individuals infected with pathogen 1, pathogen 2 or both respectively.
+Recovered individuals, $R$, are immune to both pathogens, even if they have only been infected with one (i.e.\ there is complete cross-immunity).
 Furthermore, recovery from one pathogen moves an individual straight into the recovered class, even if the individual is infected with both pathogens (Figure~\ref{f:sir}).
-This modelling choice allows the model to be easily expanded to include more than two pathogens though here I only simulate two pathogens.
+This modelling choice allows the model to be easily expanded to include more than two pathogens, though this study is restricted to two pathogens.
 The assumption of immediate recovery from all other diseases is likely to be reasonable.
 Any up-regulation of innate immune response will affect both pathogens equally.
 Furthermore, as the pathogens are identical, any acquired immunity would also affect both pathogens equally.
 
-The coinfection rate (the rate at which an infected individual is infected with a second pathogen) is adjusted compared to the infection rate by a factor $\alpha$ (here I used $\alpha = 0.1$ which means coinfection happens at a tenth the rate of first infections).
-Both negative and positive associations have been found between closely related bat viruses \cite{anthony2013strategy}.
-I modelled a strong negative association between viruses based on the aim of modelling a newly evolved pathogen.
+The coinfection rate (the rate at which an infected individual is infected with a second pathogen) is adjusted compared to the infection rate by a factor $\alpha$.
+Low values of $\alpha$ imply lower rates of coinfection.
+In particular, $\alpha = 0$ indicates no coinfections, $\alpha = 1$ indicates that coinfections happen at the same rate as first infections while $\alpba > 1$ indicates that coinfections occur more readily than first infections.
+
 
 In the application of long term existence of pathogens it is necessary to include vital dynamics (births and deaths) as the SIR model without vital dynamics has no endemic state.
 Birth and death rates ($\mu$ and $\Lambda$) are set as being equal meaning the population does not systematically increase or decrease.
 The population size does however change as a random walk.
 New born individuals enter the susceptible class.
-The time scale of the simulations are determined by setting $\mu$ = 0.05 per year, yielding an average host generation time of 20 years.
 Infection amd coinfection were assumed to cause no extra mortality as for a number of viruses, bats show no clinical signs of infection \cite{halpin2011pteropid, deThoisy2016bioecological}.
-In humans, coinfection generally worsens health \cite{griffiths2011nature} but as there are 
+%In humans, coinfection generally worsens health \cite{griffiths2011nature} but as there are 
 
 \tmpsection{Metapopulation}
 
@@ -293,7 +288,7 @@ The population is modelled as a metapopulation, being divided into a number of s
 This model is an intermediate level of complexity between fully-mixed populations and contact networks.
 The existence of subspecies, measurements of genetic dissimilarity and ecological studies provide ample evidence that bat populations are structured to some extent \cite{kerth2011bats, mccracken1981social, burns2014correlates, wilson2005mammal}.
 Therefore a fully mixed population is a large oversimplification.
-However, trying to study the contact network relies on knowledge of detailed individual behaviour which is not available.		
+However, trying to study the contact network relies on knowledge of detailed individual behaviour which is rarely available.		
 
 The metapopulation is modelled as a network with colonies being nodes and dispersal between colonies being indicated by edges (Figure~\ref{f:net}).
 Individuals within a colony interact randomly so that the colony is fully mixed.
@@ -410,7 +405,7 @@ while coinfection, given the coinfection adjustment factor $\alpha$, is given by
   i_{12,x} \rightarrow i_{12,x}+1,\: I_{2x} \rightarrow i_{2x}-1 &\;\;\text{at a rate of}\;\; \alpha\beta i_{2x}\left(i_{1x} + i_{12x}\right).
 \end{align}
 Note that lower values of $\alpha$ give lower rates of infection as in \textcite{castillo1989epidemiological}.
-$\alpha = 0$ would be the case of no coinfection while $\alpha = 1$ would be the case where coinfection occurs at the same rate as the initial infection.
+
 
 The probability of migration from colony $y$ (with degree $k_y$) to colony $x$, given a dispersal rate $\xi$ is given by
 \begin{align}
@@ -437,7 +432,7 @@ Finally, recovery from any infectious class occurs at a rate $\gamma$
 }
 }
 \caption[Network topologies used to compare network connectedness]{
-The two network topologies used to test whether network connectedness influences a pathogens ability to invade.
+The two network topologies used to test whether network connectedness influences a pathogen's ability to invade.
 A) Animals can only disperse to neighbouring colonies. 
 B) Dispersal can occur between any colony.
 Blue circles are colonies of 3,000 individuals.
@@ -997,34 +992,27 @@ The death rate $\mu$ was set as 0.05 per year giving a generation time of 20 yea
 The birth rate $\Lambda$ was set to be equal to $\mu$.
 This yields a population that does not systematically increase or decrease.
 However, the size of each colony changes as a random walk.
-Given the length of the simulations, colonies were very unlikely to go extinct (Figure~\ref{fig:plotsNoInvade2})
+Given the length of the simulations, colonies were very unlikely to go extinct (Figure~\ref{fig:plotsNoInvade2}).
+The starting size of each colony was set to 3,000. 
+This is appropriate for many bat species \cite{jones2009pantheria}, especially the large, frugivorous \emph{Pteropodidae} that have been particularly associated with recent zoonotic diseases.
+
 The recovery rate $\gamma$ was set to one, giving an average infection duration of one year. 
 This is therefore a long lasting infection but not a chronic infection. 
 It is very difficult to directly estimate infection durations in wild populations but it seems that these infections might sometimes be long lasting \cite{peel2012henipavirus, plowright2015ecological}.
 However, other studies have found much shorter infectious periods \cite{amengual2007temporal}.
 These shorter infections are not studied further here. %todo consider readding this. " as preliminary simulations found that they could not persist in the relatively small populations being modelled here."
 
+Four values of the transmission rate $\beta$ were used, 0.1, 0.2, 0.3 and 0.4.
+These values were chosen to cover the range of behaviours, from very high probabilities of invasion of the second pathogen, to very low probabilities.
+All simulations were run under all four transmission rates as this is such a fundamental parameter.
 The coinfection adjustment parameter, $\alpha$, was set to 0.1 so that an individual infected with one pathogen is 90\% less likely to be infected with another.
 This is a rather arbitrary value.
 However, the rationale of the model was that the invading species might be a newly speciated strain of the endemic species.
 Furthermore, the model assumes complete cross-immunity after recovery from infection.
 Therefore cross-immunity to coinfection is likely to be very strong as well.
+Some pairs of closely related bat viruses have been found to coinfect individual bats less than would be expected by chance \cite{anthony2013strategy}.
+This indicates a level of cross-immunity between these pairs of viruses. %todo I'm sure there was a marburg ebola paper...
 
-The starting size of each colony was set to 3,000. 
-This is appropriate for many bat species \cite{jones2009pantheria}, especially the large, frugivorous \emph{Pteropodidae} that have been particularly associated with recent zoonotic diseases.
-Four values of the transmission rate $\beta$ were used, 0.1, 0.2, 0.3 and 0.4.
-These values were chosen to cover the range of behaviours, from very high probabilities of invasion of the second pathogen, to very low probabilities.
-All simulations were run under all four transmission rates as this is such a fundamental parameter.
-%Given the recovery, birth and death rates we can calculate an approximation of $R_0$ that ignores spatial structure.
-%That is, this is $R_0$ for the local, within-subpopulation dynamics.
-%Furthermore, it is $R_0$ for the first pathogen; $R_0$ of the invading pathogen will be lower due to competition.
-%We can calculate that $R_0 \approx \frac{\beta b}{d(d+ \gamma)}$.
-%For our four values of $\beta = 0.1, 0.2, 0.3, 0.4$ we therefore get $R_0 \approx 2.9, 4.8, 6.7, 8.6$.
-%These values are very high in part to again find a reasonable trade off between the number of simulations and the reasonableness of the parameters.
-%$R_0 \approx 13.3$ is similar to a highly contagious pathogen such as measles or pertussis. 
-
-% R_\ast (R_0 - 1)\frac{\langle k^2 \rangle - \langle k \rangle}{\langle k^2 \rangle} \frac{p\bar{N}\alpha}{\mu} > 1
-% N = avg pop size, p = migration, mu = recovery, \alpha N_k is number of individuals infected. So think this is not with vital dynamics.
 
 
 
