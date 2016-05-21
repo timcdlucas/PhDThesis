@@ -653,7 +653,7 @@ p %<+% nSpecies +
 Akaike variable weights for both analyses using the phylogeny from \cite{jones2005bats}. 
 The probability that each variable is in the best model (amongst the models test) is shown, with the boxplots showing the variation amongst the models over 50 resamplings of the uniformly random ``null'' variable. 
 The three bars of the boxplot show the median values and upper and lower quartiles of the data, vertical lines show the range and points display outliers. 
-The purple ``Random'' box is the uniformly random variable.
+The red ``Random'' box is the uniformly random variable.
 }
 \label{f:A-itplots}
 \end{figure}

@@ -2639,7 +2639,7 @@ fstSepVarWeights2 <- do.call(rbind, fstSepVarWeights2) %>%
                       reshape2::melt(., value.name = 'estimate', id.vars = 'boot')
 
 fstSepVarWeights2$col <- 'Other Variables'
-fstSepVarWeights2$col[fstSepVarWeights2$variable == 'log.Nm.'] <- 'Population Structure'
+fstSepVarWeights2$col[fstSepVarWeights2$variable == 'Nm'] <- 'Population Structure'
 fstSepVarWeights2$col[fstSepVarWeights2$variable == 'rand'] <- 'Null'
 
 
@@ -2664,8 +2664,6 @@ fstModelWeights2 <- fstAllResults2 %>%
 
 %%begin.rcode ITPlots2
 
-
-
 # reorder factors to get structure vars at beginning.
 sepVarWeights2$variable <- factor(sepVarWeights2$variable, levels(sepVarWeights2$variable)[c(2, 6, 1, 3, 4, 5)])
 
@@ -2680,17 +2678,14 @@ ITPlot2 <- ggplot(sepVarWeights2, aes(x = variable, y = estimate, colour = col, 
   ylab('P(in best model)') +
   xlab('')
 
-
-
-
 %%end.rcode
 
 
-%%begin.rcode fstITPlots2, fig.show = extraFigs, fig.cap = "Akaike variable weights for both analyses using the phylogeny from \\textcite{jones2005bats}. The probability that each variable is in the best model (amongst the models test) is shown, with the boxplots showing the variation amongst the models over 50 resamplings of the uniformly random ``null'' variable. The three bars of the boxplot show the median values and upper and lower quartiles of the data, vertical lines show the range and points display outliers. The purple ``Random'' box is the uniformly random variable.", fig.height = 2.5, fig.scap = 'Akaike variable weights', out.width = '\\textwidth', out.extra = 'trim = 0 1cm 0 0'
+%%begin.rcode fstITPlots2, fig.show = extraFigs, fig.cap = "Akaike variable weights for both analyses using the phylogeny from \\textcite{jones2005bats}. The probability that each variable is in the best model (amongst the models test) is shown, with the boxplots showing the variation amongst the models over 50 resamplings of the uniformly random ``null'' variable. The three bars of the boxplot show the median values and upper and lower quartiles of the data, vertical lines show the range and points display outliers. The red ``Random'' box is the uniformly random variable.", fig.height = 2.5, fig.scap = 'Akaike variable weights', out.width = '\\textwidth', out.extra = 'trim = 0 1cm 0 0'
 
 
+# Reorder var levels to get structure at beginning.
 fstSepVarWeights2$variable <- factor(fstSepVarWeights2$variable, levels(fstSepVarWeights2$variable)[c(2, 1, 3, 4, 5)])
-
 
 # Draw the fst model selection plot
 fstIT2 <- ggplot(fstSepVarWeights2, aes(x = variable, y = estimate, colour = col, fill = col)) +
