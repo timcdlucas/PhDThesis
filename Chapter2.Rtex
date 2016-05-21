@@ -270,12 +270,13 @@ There are three infected classes, $I_1$, $I_2$ and $I_{12}$, being individuals i
 Recovered individuals, $R$, are immune to both pathogens, even if they have only been infected with one.
 Furthermore, recovery from one pathogen moves an individual straight into the recovered class, even if the individual is infected with both pathogens (Figure~\ref{f:sir}).
 This modelling choice allows the model to be easily expanded to include more than two pathogens though here I only simulate two pathogens.
-The assumption of immediate recovery from all other diseases is likely to be reasonable for very closely related pathogens as is being studied here.
-Once an acquired immune response is activated, all infections are likely to be cleared quickly and up-regulation of the innate immune system will speed up recovery. 
+The assumption of immediate recovery from all other diseases is likely to be reasonable.
+Any up-regulation of innate immune response will affect both pathogens equally.
+Furthermore, as the pathogens are identical, any acquired immunity would also affect both pathogens equally.
+
 The coinfection rate (the rate at which an infected individual is infected with a second pathogen) is adjusted compared to the infection rate by a factor $\alpha$ (here I used $\alpha = 0.1$ which means coinfection happens at a tenth the rate of first infections).
 Both negative and positive associations have been found between closely related bat viruses \cite{anthony2013strategy}.
 I modelled a strong negative association between viruses based on the aim of modelling a newly evolved pathogen.
-
 
 In the application of long term existence of pathogens it is necessary to include vital dynamics (births and deaths) as the SIR model without vital dynamics has no endemic state.
 Birth and death rates ($\mu$ and $\Lambda$) are set as being equal meaning the population does not systematically increase or decrease.
@@ -1324,7 +1325,6 @@ invasionPropShort <- "The probability of invasion across different dispersal rat
 propsDispCI <- data.frame(propsDisp[, 1:2], binom.confint(propsDisp$invasions, propsDisp$n, conf.level = 0.95, methods = "exact"))
 propsDispCI <- propsDispCI %>% mutate(dispersal = replace(dispersal, dispersal == 0, 1e-4))
 propsDispCI <- propsDispCI %>% mutate(transFactor = factor(transmission))
-
 
 dispPlot <- ggplot(propsDispCI, aes(x = dispersal, y = mean, colour = transFactor)) +
               geom_point() +
