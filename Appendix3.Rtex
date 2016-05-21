@@ -55,7 +55,7 @@ library(GGally)
 library(cowplot)
 
 # tables
-
+library(xtable)
 
 
 # For synonym list
@@ -75,7 +75,10 @@ library(parallel)
 %% Give full data tables for both analyses.
 %%-------------------------------------------------------------------------------%%
 
+%%begin.rcode parameters
+nBoots <- 50
 
+%%end.rcode
 
 
 %%begin.rcode readRawData
@@ -269,6 +272,7 @@ ggplot(nSpecies, aes(y = scholarRefs, x = pubmedRefs + 1)) +
   labs(y = 'Scholar Refs', x = 'PubMed Refs', colour = 'Family') + 
   scale_colour_manual(values = pp[c(2, 5, 6, 7, 9, 10, 11)], guide = guide_legend(ncol = 2, title.position = 'top')) +
   geom_abline(intercept = coef(citeCor)[1], slope = coef(citeCor)[2], size = 1)
+
 
 %%end.rcode
 
@@ -614,7 +618,7 @@ p %<+% nSpecies +
 
 
 %%-----------------------------------------------------------------------------%%
-Interactive plots
+%Interactive plots
 %%-----------------------------------------------------------------------------%%
 
 

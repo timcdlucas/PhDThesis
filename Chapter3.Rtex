@@ -183,7 +183,7 @@ However, the factors that control the number of pathogen species in a host speci
 A number of species traits that might control pathogen richness have been studied.
 These traits can be at the level of the individual (e.g., body mass and longevity) or the level of the population (e.g., population density, sociality and species range size).
 Large bodied animals have been shown to have high pathogen richness with large bodies providing more resources for pathogens \cite{kamiya2014determines, arneberg2002host, poulin1995phylogeny, bordes2008bat, luis2013comparison}.
-Long lived species are expected to have high pathogen richness, because the number of pathogens a host encounters in its lifetime will be higher \cite{nunn2003comparative, ezenwa2006host, luis2013comparison}. 
+Long lived species are expected to have high pathogen richness, because the number of pathogens a host encounters in its lifetime will be higher \cite{nunn2003comparative, ezenwa2006host, luis2013comparison}.
 Animal density \cite{kamiya2014determines, nunn2003comparative, arneberg2002host} and sociality \cite{bordes2007rodent, vitone2004body, altizer2003social, ezenwa2006host} are both predicted to increase pathogen richness by increasing the rate of spread, $R_0$, of a new pathogen.
 Finally, widely distributed species have high pathogen richness, potentially because they experience a wider range of environments or because they are sympatric with more species \cite{kamiya2014determines, nunn2003comparative, luis2013comparison}.
 
@@ -1490,10 +1490,7 @@ fstAllFormulae <- c(as.formula('virusSpecies ~ 1'), fstAllFormulae)
 
 %%end.rcode
 
-
-
-%%begin.rcode fstModelSelectBoots, eval = fstBoots
-
+%%begin.rcode fstModelSelectFun
 
 
 fstModelSelect <- function(allForm, data, phy, boot, allModelMat, varList){
@@ -1576,6 +1573,9 @@ fstModelSelect <- function(allForm, data, phy, boot, allModelMat, varList){
 
 }
 
+%%end.rcode
+
+%%begin.rcode fstModelSelectBoots, eval = fstBoots
 
 
 
@@ -2009,8 +2009,6 @@ ggplot(nSpeciesCounts, aes(NumberOfSubspecies, virusSpecies, size = n)) +
   geom_line(data = lines, aes(x = NumberOfSubspecies, y = virusSpecies, group = 1),
     colour = pokepal('nidorina')[10], lwd = 0.7)
 
-
-
 %%end.rcode
 
 
@@ -2077,7 +2075,6 @@ ggplot(fstFinal, aes(x = Nm, y = virusSpecies, colour = Marker)) +
   xlab('Gene Flow (per gen.)') +
   ylab('Viral Richness') 
 
-
 %%end.rcode
 
 
@@ -2135,7 +2132,6 @@ ggdraw() +
   draw_label("B)", 0.52, 0.96, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
   draw_plot(fstIT, 0.5, 0.145, 0.5, 0.855) +
   draw_label('Explanatory variable', 0.5, 0.1, fontfamily = 'lato light', size = 12)
-
 
 %%end.rcode
 
@@ -2571,8 +2567,7 @@ rm(t2)
 
 
 
-%%begin.rcode runBatClocks, eval = batclocksBoots
-
+%%begin.rcode runBatClocks, eval = TRUE
 
 
 fitModelsBootStrap2 <- mclapply(1:nBoots, function(b) modelSelect(allFormulae, nSpecies2, pruneTree2, b, allModelMat, varList), mc.cores = nCores)
@@ -2595,7 +2590,6 @@ write.csv(fstAllResults2, file = 'data/Chapter3/fstModelSelectSubspeciesBatClock
 
 
 %%begin.rcode batClocksAnalyse
-
 
 allResults2 <- read.csv('data/Chapter3/modelSelectSubspeciesBatClocks.csv', row.names = 1)
 
@@ -2645,7 +2639,7 @@ fstSepVarWeights2 <- do.call(rbind, fstSepVarWeights2) %>%
                       reshape2::melt(., value.name = 'estimate', id.vars = 'boot')
 
 fstSepVarWeights2$col <- 'Other Variables'
-fstSepVarWeights2$col[fstSepVarWeights2$variable == 'Nm'] <- 'Population Structure'
+fstSepVarWeights2$col[fstSepVarWeights2$variable == 'log.Nm.'] <- 'Population Structure'
 fstSepVarWeights2$col[fstSepVarWeights2$variable == 'rand'] <- 'Null'
 
 
@@ -2670,18 +2664,23 @@ fstModelWeights2 <- fstAllResults2 %>%
 
 %%begin.rcode ITPlots2
 
+
+
+# reorder factors to get structure vars at beginning.
+sepVarWeights2$variable <- factor(sepVarWeights2$variable, levels(sepVarWeights2$variable)[c(2, 6, 1, 3, 4, 5)])
+
 ITPlot2 <- ggplot(sepVarWeights2, aes(x = variable, y = estimate, colour = col, fill = col)) +
   geom_boxplot(outlier.colour = grey(0.3), notch = FALSE, width = 0.99, outlier.size = 1, lwd = 0.4) +
-  scale_colour_manual(values = pokepal('nidorino')[c(2, 5, 11)]) +
-  scale_fill_manual(values = pokepal('nidorino')[c(3, 6, 10)]) +
-  ylim(0, 1) +
-  theme(legend.position = 'none', 
-        axis.text.x = element_text(size = 10, angle = 40, hjust = 1, colour = 'black', family = 'lato light'),
-        panel.grid.major.x = element_blank(),
-        axis.text.y = element_text(size = 8)) +
-  scale_x_discrete(labels = c('Scholar', 'NSubspecies', 'Mass', 'Range size', 'Random', 'NSubspecies*Effort')) +
+  scale_colour_manual(values = pokepal('kingdra')[c(11, 1, 9)]) +
+  scale_fill_manual(values = pokepal('kingdra')[c(12, 4, 8)]) +
+  theme(legend.position = 'none', axis.text.x = element_text(size = 10, angle = 40, hjust = 1, colour = 'black', family = 'lato light'),
+    panel.grid.major.x = element_blank(),
+    axis.text.y = element_text(size = 8)) +
+  scale_x_discrete(labels = c('NSubspecies', 'NSubspecies*Scholar', 'Scholar', 'Mass', 'Range size', 'Random')) +
   ylab('P(in best model)') +
   xlab('')
+
+
 
 
 %%end.rcode
@@ -2690,18 +2689,22 @@ ITPlot2 <- ggplot(sepVarWeights2, aes(x = variable, y = estimate, colour = col, 
 %%begin.rcode fstITPlots2, fig.show = extraFigs, fig.cap = "Akaike variable weights for both analyses using the phylogeny from \\textcite{jones2005bats}. The probability that each variable is in the best model (amongst the models test) is shown, with the boxplots showing the variation amongst the models over 50 resamplings of the uniformly random ``null'' variable. The three bars of the boxplot show the median values and upper and lower quartiles of the data, vertical lines show the range and points display outliers. The purple ``Random'' box is the uniformly random variable.", fig.height = 2.5, fig.scap = 'Akaike variable weights', out.width = '\\textwidth', out.extra = 'trim = 0 1cm 0 0'
 
 
+fstSepVarWeights2$variable <- factor(fstSepVarWeights2$variable, levels(fstSepVarWeights2$variable)[c(2, 1, 3, 4, 5)])
+
+
+# Draw the fst model selection plot
 fstIT2 <- ggplot(fstSepVarWeights2, aes(x = variable, y = estimate, colour = col, fill = col)) +
   geom_boxplot(outlier.colour = grey(0.3), notch = FALSE, width = 0.7, outlier.size = 1, lwd = 0.4) +
-  scale_colour_manual(values = pokepal('nidorino')[c(2, 5, 11)]) +
-  scale_fill_manual(values = pokepal('nidorino')[c(3, 6, 10)]) +
+  scale_colour_manual(values = pokepal('kingdra')[c(11, 1, 9)]) +
+  scale_fill_manual(values = pokepal('kingdra')[c(12, 4, 8)]) +
   ylim(0, 1) +
-  theme(legend.position = 'none', 
-        axis.text.x = element_text(size = 10, angle = 40, hjust = 1, colour = 'black', family = 'lato light'),
-        panel.grid.major.x = element_blank(),
-        axis.text.y = element_text(size = 8)) +
-  scale_x_discrete(labels = c('Scholar', 'Gene flow', 'Mass', 'Range size', 'Random'))+
+  theme(legend.position = 'none', axis.text.x = element_text(size = 10, angle = 40, hjust = 1, colour = 'black', family = 'lato light'),
+    panel.grid.major.x = element_blank(),
+    axis.text.y = element_text(size = 8)) +
+  scale_x_discrete(labels = c('Gene flow', 'Scholar', 'Mass', 'Range size', 'Random'))+
   ylab('P(in best model)') +
   xlab('')
+
 
 # Combine and print.
 ggdraw() +
@@ -2710,7 +2713,6 @@ ggdraw() +
   draw_label("B)", 0.52, 0.96, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
   draw_plot(fstIT2, 0.5, 0.145, 0.5, 0.855) +
   draw_label('Explanatory variable', 0.5, 0.1, fontfamily = 'lato light', size = 12)
-
 
 %%end.rcode
 

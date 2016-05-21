@@ -1132,8 +1132,8 @@ However, again, this affect is very weak compared to the strong changes in local
 It is clear that many species are suffering strong population changes due to climate change \cite{thomas2004extinction}.
 However these changes might affect range size \cite{thomas2004extinction}, population size \cite{craigie2010large}, population connectivity \cite{wasserman2013population, rivera2015habitat, fonturbel2014forest} or group size \cite{lehmann2010apes, zunino2007habitat, manor2003impact, atwood2006influence} to different extents.
 My results suggest that pathogen communities will respond differently depending on which factors are affected, although it should be noted that the mechanism here --- invasion of a new pathogen --- is possibly more relevant over longer, multi-generation time scales than decade-long time scales.
-In short, species suffering reductions in groups size \cite{lehmann2010apes, zunino2007habitat, manor2003impact, atwood2006influence} are predicted to experience decreases in pathogen richness in the long term.
-Species that are experiencing increases in group size \cite{lehmann2010apes} would be expected gain new pathogen species more quickly.
+In short, species suffering reductions in groups size \cite{lehmann2010apes, zunino2007habitat, manor2003impact, atwood2006influence} are predicted to experience decreases in pathogen richness in the long term and there is some evidence that this process is occuring \cite{altizer2007threatened, turmelle2009correlates}.
+Species that are experiencing increases in group size \cite{lehmann2010apes} would be expected to gain new pathogen species.
 In contrast, species suffering range contractions \cite{thomas2004extinction} and decreases in population size \cite{craigie2010large} are expected to experience smaller changes in pathogen richness.
 
 
@@ -1146,7 +1146,7 @@ This study suggests that it is in fact population size that is important (in the
 Therefore, the density measures in these comparative studies are more likely to be proxies for population size than the true causal factor.
 Similarly, this study suggests that host range size does not promote pathogen richness by the mechanism studied here, yet a number of studies have found evidence of this relationship \cite{kamiya2014determines, nunn2003comparative}.
 This suggests that either the relationship found in comparative studies is in fact due to a correlation with another factor, or that mechanisms other than probability of invasion of new pathogens are important.
-Range size has been suggested to affect pathogen richness by a number of mechanisms such as increasing the number of sympatric species and these other mechanisms should be specifically tested.
+Range size has been suggested to affect pathogen richness by a number of mechanisms such as increasing the number of sympatric species and these other mechanisms should be specifically tested \cite{luis2013comparison}.
 
 The studies that have tested specifically the affect of group size have in fact found both positive \cite{vitone2004body} and negative associations \cite{gay2014parasite} or no relationship \cite{ezenwa2006host}.
 Meta-analyses suggest that the relationship between social group size and pathogen richness is weak \cite{rifkin2012animals}.
