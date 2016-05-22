@@ -230,7 +230,7 @@ Furthermore, this close evolutionary relationship means that competition via cro
 The metapopulations were parameterised to broadly mimic wild bat populations.
 Population structure has already been found to correlate with pathogen richness in bats (Chapter \ref{ch:empirical}, \cites{gay2014parasite, maganga2014bat, turmelle2009correlates}).
 Furthermore, bats have an unusually large variety of social structures.
-Colony sizes range from 10 to 1 million individuals \cite{jones2009pantheria} and colonies can be very stable \cite{kerth2011bats, mccracken1981social}.
+Colony sizes range from ten to 1 million individuals \cite{jones2009pantheria} and colonies can be very stable \cite{kerth2011bats, mccracken1981social}.
 This strong colony fidelity means they fit the assumptions of metapopulations well.
 Bats have also, over the last decade, become a focus for disease research \cite{calisher2006bats, hughes2007emerging}.
 The reason for this focus is that they have been implicated in a number of high profile diseases including Ebola, SARS, Hendra and Nipah \cite{calisher2006bats, li2005bats}.
@@ -261,7 +261,7 @@ Overall, I found significant evidence that reduced population structure increase
 
 I developed a multipathogen, SIR compartment model with individuals being classed as susceptible, infected or recovered with immunity (Figure~\ref{f:sir}).
 Susceptible individuals are counted in class $S$ (see Table~\ref{t:params} for a list of symbols and values used).
-There are three infected classes, $I_1$, $I_2$ and $I_{12}$, being individuals infected with pathogen 1, pathogen 2 or both respectively.
+There are three infected classes, $I_1$, $I_2$ and $I_{12}$, being individuals infected with Pathogen 1, Pathogen 2 or both respectively.
 Recovered individuals, $R$, are immune to both pathogens, even if they have only been infected with one (i.e.\ there is complete cross-immunity).
 Furthermore, recovery from one pathogen moves an individual straight into the recovered class, even if the individual is infected with both pathogens (Figure~\ref{f:sir}).
 This modelling choice allows the model to be easily expanded to include more than two pathogens, though this study is restricted to two pathogens.
@@ -271,7 +271,7 @@ Furthermore, as the pathogens are identical, any acquired immunity would also af
 
 The coinfection rate (the rate at which an infected individual is infected with a second pathogen) is adjusted compared to the infection rate by a factor $\alpha$.
 Low values of $\alpha$ imply lower rates of coinfection.
-In particular, $\alpha = 0$ indicates no coinfections, $\alpha = 1$ indicates that coinfections happen at the same rate as first infections while $\alpba > 1$ indicates that coinfections occur more readily than first infections.
+In particular, $\alpha = 0$ indicates no coinfections, $\alpha = 1$ indicates that coinfections happen at the same rate as first infections while $\alpha > 1$ indicates that coinfections occur more readily than first infections.
 
 
 In the application of long term existence of pathogens it is necessary to include vital dynamics (births and deaths) as the SIR model without vital dynamics has no endemic state.
@@ -327,11 +327,13 @@ Finally, the length of the time step, $\delta$, is drawn from an exponential dis
 
 \begin{figure}[t]
 \centering
-  \includegraphics[width=0.4\textwidth]{imgs/SIRoption1.pdf}
+  \includegraphics[width=0.5\textwidth]{imgs/SIRoption1.pdf}
   \caption[Schematic of the SIR model used]{
   Schematic of the SIR model used. 
-  Individuals are in one of five classes, susceptible (orange, $S$), infected with pathogen 1, pathogen 2 or both (blue, $I_1, I_2, I_{12}$) or recovered and immune from further infection (green, $R$).
-  Transitions between classes occur only as indicated by arrows.
+  Individuals are in one of five classes, susceptible (orange, $S$), infected with Pathogen 1, Pathogen 2 or both (blue, $I_1, I_2, I_{12}$) or recovered and immune from further infection (green, $R$).
+  Transitions between epidemiological classes occur as indicated by solid arrows.
+  Vital dynamics (births and deaths) are indicated by dashed arrows.
+  Parameter symbols for transitions are indicated.
   Note that individuals in $I_{12}$ move into $R$, not back to $I_1$ or $I_2$. 
   That is, recovery from one pathogen causes immediate recovery from the other pathogen.
   }
@@ -394,7 +396,7 @@ $e_i$ & The rate at which event $i$ occurs & year$^{-1}$&\\
 I modelled transmission as being density-dependent.
 This assumption was more suitable than frequency-dependent transmission as I was modelling a disease transmitted by saliva or urine in highly dense populations confined to caves, buildings or potentially a small number of tree roosts.
 I was notably not modelling an STD as spillover of STDs from bats to humans is is likely to be rare.
-Infection of a susceptible with either pathogen 1 or 2 is therefore given by
+Infection of a susceptible with either Pathogen 1 or 2 is therefore given by
 \begin{align}
   i_{1x} \rightarrow i_{1x}+1, s_x \rightarrow s_x-1 &\;\;\text{at a rate of}\;\; \beta s_x\left(i_{1x} + i_{12x}\right),\\
   i_{2x} \rightarrow i_{2x}+1, s_x \rightarrow s_x-1  &\;\;\text{at a rate of}\;\; \beta s_x\left(i_{2x} + i_{12x}\right),
@@ -1019,19 +1021,20 @@ This indicates a level of cross-immunity between these pairs of viruses. %todo I
 
 \subsection{Experimental setup}
 
-The metapopulation contains 10 colonies.
-10 colonies was selected as a trade off between computation time and a network complex enough that structure might have an effect. 
+The metapopulation was made up of ten colonies.
+Ten colonies was selected as a trade-off between computation time and a network complex enough that any effects of population structure could be detected. 
 This value is artificially small compared to wildlife populations. 
-In each simulation the population was seeded with 10 sets of 200 infected individuals of pathogen 1.
+In each simulation the population was seeded with ten sets of 200 infected individuals of Pathogen 1.
 These groups were seeded into randomly selected colonies with replacement.
 For each 200 infected individuals added, 200 susceptible individuals were removed to keep starting colony sizes constant. 
 Pathogen 1 was then allowed to spread until the initial, large epidemic had ended. 
-Visual inspection of preliminary simulations was used to decide on \rinline{invadeT} as being long enough for the epidemic to end and the pathogen to be in an endemic state (Figures~\ref{fig:plotsInvade} and \ref{fig:plotsNoInvade1}).
-After \rinline{invadeT} events, five individuals infected with pathogen 2 were added to one randomly selected colony. 
-After another \rinline{nEvent - invadeT} events the invasion of pathogen 2 was considered successful if any individuals were still infected with pathogen 2.
+Visual inspection of preliminary simulations was used to decide on \rinline{invadeT} events as being long enough for the epidemic to end and the pathogen to be in an endemic state (Figures~\ref{fig:plotsInvade} and \ref{fig:plotsNoInvade1}).
+After \rinline{invadeT} events, five individuals infected with Pathogen 2 were added to one randomly selected colony. 
+After another \rinline{nEvent - invadeT} events the invasion of Pathogen 2 was considered successful if any individuals were still infected with Pathogen 2.
 Therefore, if at least one individual was in class $I_2$ or $I_{12}$ at the end of the simulation, this was considered an invasion.
-Again visual inspection of preliminary simulations was used to determine that after \rinline{nEvent - invadeT} events, if an invading pathogen was still present, it was well established (Figures~\ref{fig:plotsInvade} and \ref{fig:plotsNoInvade1}).
-The choice to use a fixed number of events, rather than fixed amount number of years, was for computaiton convenience.
+Again, visual inspection of preliminary simulations was used to determine that after \rinline{nEvent - invadeT} events, if an invading pathogen was still present, it was well established (Figures~\ref{fig:plotsInvade} and \ref{fig:plotsNoInvade1}).
+
+The choice to use a fixed number of events, rather than a fixed number of years, was for computational convenience.
 However, this choice creates a risk of bias as simulations with more events per unit time will last for a shorter time overall.
 However, visual inspection of the dynamics of disease extinction (\ref{fig:plotsNoInvade1}), and examination of the typical time to extinction implies that this bias is very weak.
 For example, of the simulations where extinction occurred, the extinction occurred more than 50 years before the end of the simulation in 90\% of cases.
@@ -1051,20 +1054,19 @@ I ran 100 simulations at each transmission rate.
 
 Two parameters control population structure in the model: dispersal rate and the topology of the metapopulation network.
 The values used for these parameters were chosen to highlight the effects of population structure. 
-I selected the dispersal values $\xi = 0, 0.1, 0.01$ and $ 0.001$ dispersals per individual per year. 
+I selected the dispersal rates $\xi = 0, 0.1, 0.01$ and $ 0.001$ dispersals per individual per year. 
 The probability that an individual disperses at least once in its lifetime is given by $\xi / \left(\xi + \mu\right)$.
-$\xi = 0.1$ relates to 67\% of individuals dispersing between colonies at least once in their lifetime. 
-Therefore exclusively juvenile dispersal would have dispersal rates similar to this value. %todo cite
+Therefore, $\xi = 0.1$ relates to 67\% of individuals dispersing between colonies at least once in their lifetime. 
+Exclusively juvenile dispersal would have dispersal rates similar to this value. %todo cite
 $\xi = 0.01$ relates to 17\% of individuals dispersing at least once in their lifetime.
 This value is relatively close to male-biased dispersal, with female philopatry. %todo cite
-$\xi = 0.001$ relates to 2\% of individuals dispersing in their lifetime.
 This therefore relates to a species that does not habitually disperse.
 Finally, I ran simulations with no dispersal.
-Given zero dispersal, only the colony seeded with pathogen 2 can ever recieve infections of the invading pathogen.
+Given zero dispersal, only the colony seeded with Pathogen 2 can ever recieve infections of the invading pathogen.
 Therefore, only one colony was simulated for $\xi = 0$.
 I ran 100 simulations for most parameter sets.
-However, examing these simulations had some marginal and difficult to interpret results.
-Therefore, I ran 150 simulations for $\beta = 0.2$ and $0.3$ (not including the zero dispersal case).
+I ran 150 simulations for $\xi = 0.1, 0.01$ and $0.001$ with $\beta = 0.2$ and $0.3$ as
+Preliminary simulations indicated that any effects of population structure would most likely be seen at these values so extra simulations were run to increase statistical power. 
 
 
 
@@ -1294,7 +1296,7 @@ TopoTransGLM2 <- summary(glm(invasion ~ transmission, data = dTopo[dTopo$meanK =
 # Just defining my caption label here to avoid the long string in chunk options below.
 
 invasionPropCaption <- sprintf("
-  The probability of successful invasion for different A) dispersal rates or B) network topologies (with network topologies ``unconnected'', ``minimally connected'' and ``fully connected'' as in Figure~\\ref{f:net}). 
+  The probability of successful invasion for different A) dispersal rates and B) network topologies (with network topologies ``unconnected'', ``minimally connected'' and ``fully connected'' as in Figure~\\ref{f:net}). 
   Error bars are 95\\%% confidence intervals of probability of invasion. 
   %i simulations were run for each treatment except $\\beta = 0.2$ in A) which has 150 per treatment.
   Other parameters were kept constant at: $m = 10,\\, \\, \\mu = \\Lambda = 0.05,\\, \\gamma = 1,\\, \\alpha = 0.1$. 
@@ -1382,10 +1384,10 @@ At $\beta = 0.2$, the significant positive relationship remained (GLM: $b$ = \ri
 At all other transmission rates, the probability of invasion did not significantly change with dispersal rate (GLM. $\beta = 0.1$: $b$ = \rinline{Disp2GLM1$coefficients[2, 1]}, $p$ = \rinline{Disp2GLM1$coefficients[2, 4]}. $\beta = 0.3$: $b$ = \rinline{Disp2GLM3$coefficients[2, 1]}, $p$ = \rinline{sprintf('%.2f', Disp2GLM3$coefficients[2, 4])}. $\beta = 0.4$: $b$ = \rinline{Disp2GLM4$coefficients[2, 1]}, $p$ = \rinline{sprintf('%.2f', Disp2GLM4$coefficients[2, 4])}.)
 
 
-\subsection{Network structure}
+\subsection{Network topology}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-When the completely unconnected topology simulations were included, the probability of invasion was different across topologies for $\beta = 0.1, 0.2$ and $0.3$ (Fisher's exact test. $\beta = 0.2$:  $p < 10^{-5}$. $\beta = 0.3$: $p < 10^{-5}$. $\beta = 0.4$:  $p < 10^{-5}$).
+When the completely unconnected topology simulations were included, the probability of invasion was different across topologies for $\beta = 0.2, 0.3$ and $0.4$ (Fisher's exact test. $\beta = 0.2$:  $p < 10^{-5}$. $\beta = 0.3$: $p < 10^{-5}$. $\beta = 0.4$:  $p < 10^{-5}$).
 In each case, the fully unconnected population had a lower probability of invasion than the minimally and completely connected topologies (Figure~\ref{f:invasionPropPlots}B).
 At $\beta = 0.1$ there was no significant difference ($p = \rinline{p(TopoTest1$p.value)}$) and the probability of invasion was close to zero for all topologies (Figure~\ref{f:invasionPropPlots}B).
 
@@ -1398,7 +1400,7 @@ This was true at all transmission rates (Fisher's exact test. $\beta = 0.1$, $p 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Increasing the transmission rate increased the probability of invasion (Figure~\ref{f:invasionPropPlots}).
-This is true for all four dispersal values (GLM. $\xi = 0$: $b$ = \rinline{DispTransGLM4$coefficients[2, 1]}, $p < 10^{-5}$. $\xi = 0.001$: $b$ = \rinline{DispTransGLM1$coefficients[2, 1]}, $p < 10^{-5}$. $\xi = 0.01$: $b$ = \rinline{DispTransGLM2$coefficients[2, 1]}, $p < 10^{-5}$. $\xi = 0.1$: $b$ = \rinline{DispTransGLM3$coefficients[2, 1]}, $p < 10^{-5}$.) and both network structures (GLM. Minimally connected: $b$ = \rinline{TopoTransGLM2$coefficients[2, 1]}, $p < 10^{-5}$. Fully connected: $b$ = \rinline{TopoTransGLM1$coefficients[2, 1]}, $p < 10^{-5}$).
+This was true for all four dispersal values (GLM. $\xi = 0$: $b$ = \rinline{DispTransGLM4$coefficients[2, 1]}, $p < 10^{-5}$. $\xi = 0.001$: $b$ = \rinline{DispTransGLM1$coefficients[2, 1]}, $p < 10^{-5}$. $\xi = 0.01$: $b$ = \rinline{DispTransGLM2$coefficients[2, 1]}, $p < 10^{-5}$. $\xi = 0.1$: $b$ = \rinline{DispTransGLM3$coefficients[2, 1]}, $p < 10^{-5}$.) and both network structures (GLM. Minimally connected: $b$ = \rinline{TopoTransGLM2$coefficients[2, 1]}, $p < 10^{-5}$. Fully connected: $b$ = \rinline{TopoTransGLM1$coefficients[2, 1]}, $p < 10^{-5}$).
 
 
 
@@ -1418,11 +1420,11 @@ This is true for all four dispersal values (GLM. $\xi = 0$: $b$ = \rinline{DispT
 
 I have used mechanistic, metapopulation models to test whether increased population structure can promote pathogen richness by facilitating invasion of new pathogens.
 I found that dispersal does affect the ability of a new pathogen to invade and persist in a population.
-I also found evidence that the pathogen invasion is less likely in completely isolated colonies.
+I also found evidence that pathogen invasion was less likely in completely isolated colonies.
 However, as long as the metapopulation is slightly connected, the topology of the metapopulation network did not affect invasion probability.
-Increasing transmission rate quickly reaches a state where new pathogens always invade aslong there is some dispersal while decreasing the transmission rate quickly reaches a state where invasion is impossible.
+Increasing transmission rate quickly reaches a state where new pathogens always invade as long as there is some dispersal while decreasing the transmission rate quickly reaches a state where invasion is impossible.
 
-That increased population structure increases pathogen richness supports many predictions that increasing $R_0$ should increase pathogen richness \cite{nunn2003comparative, morand2000wormy, poulin2014parasite, poulin2000diversity, altizer2003social}.
+The result that increased population structure increases pathogen richness supports many predictions that increasing $R_0$ should increase pathogen richness \cite{nunn2003comparative, morand2000wormy, poulin2014parasite, poulin2000diversity, altizer2003social}.
 However, many comparative studies have found the opposite relationship, with increased population structure increasing pathogen richness (Chapter \ref{ch:empirical}, \cites{vitone2004body, maganga2014bat, turmelle2009correlates}).
 Furthermore, simple analytical models suggest that population structure should increase pathogen richness \cite{qiu2013vector, allen2004sis, nunes2006localized} and I find no evidence of this.
 
@@ -1430,50 +1432,50 @@ Furthermore, simple analytical models suggest that population structure should i
 \tmpsection{Link results to consequences}
 
 These results suggest that if population structure does in fact affect pathogen richness, as observed in comparative studies (Chapter \ref{ch:empirical}, \cites{vitone2004body, maganga2014bat, turmelle2009correlates}), it must occur by a mechanism other than the one studied here.
-Here, the hypothesised mechanism for the relationship between population structure and pathogen richness was that the spread and persistence of a newly evolved pathogen is facilitated by decreased competition due to population structure.
-Instead, reduced population structure allows the new pathogen to quickly spread outside of the colony in which it evolved.
+The hypothesised mechanism for the relationship between population structure and pathogen richness, in this study, was that the spread and persistence of a newly evolved pathogen is facilitated by decreased competition due to population structure.
+Instead, reduced population structure allowed the new pathogen to quickly spread outside of the colony in which it evolved (i.e.\ was seeded).
 As the mechanism studied here cannot explain the relationship between population structure and pathogen richness seen in wild species (Chapter \ref{ch:empirical}, \cites{vitone2004body, maganga2014bat, turmelle2009correlates}), other mechanisms should be studied.
 Other mechanisms that should be examined include reduced competitive exclusion of already established pathogens or increased invasion of less closely related and less strongly competing pathogens, perhaps mediated by ecological competition of pathogens (i.e.\ reduction of the susceptible pool by disease induced mortality).
 Furthermore, single pathogen dynamics could have an important role such as population structure causing a much slower, asynchronous epidemic preventing acquired herd immunity \cite{plowright2011urban}.
 
 I ran simulations of a completely unstructured population as a baseline comparison of pathogen invasion probability.
 However, this unstructured population could also be considered one, very large, subpopulation or colony.
-The fact that invasion occured 100\% of the time in these simulations suggest that colony size has an important role in pathogen richness.
-Therefore the interplay between population structure and colony size should be studied further especially as the range of colony size in bats is large, ranging from 10 to 1 million \cite{jones2009pantheria} individuals.
+The fact that invasion occured 100\% of the time in these simulations suggests that colony size has an important role in pathogen richness.
+Therefore the interplay between population structure and colony size should be studied further especially as the range of colony size in bats is large, ranging from ten to 1 million \cite{jones2009pantheria} individuals.
 
-My simulations also highlight the importance of competition for the spread of a new pathogen.
-All parameters used corresponded to pathogens with $R_0>1$ (as seen in the unstructured simulations).
-However, the competition with the endemic pathogen means that for some transmission rates the chance of epidemic spread and persistence is close to zero.
+My simulations also highlighted the importance of competition for the spread of a new pathogen.
+All parameters used corresponded to pathogens with $R_0>1$ (as seen by the consistent spread of Pathogen 1).
+However, the competition with the endemic pathogen meant that for some transmission rates the chance of epidemic spread and persistence of the second pathogen was close to zero.
 This has implications for human epidemics as well --- if there is strong competition between a newly evolved strain and an endemic strain, we are unlikely to see the new strain spread, regardless of population structure.
 
 
 
 \subsection{Model assumptions}
 
-\paragraph{Complete cross-immunity}
+\subsubsection{Complete cross-immunity}
 
 I have assumed that once recovered, individuals are immune to both pathogens. 
 Furthermore, when a coinfected individual recovers from one pathogen, it immediately recovers from the other as well.
 This is probably a reasonable assumption given that I am modelling a newly evolved strain.
-The recovery rate of coinfected individuals has not been well studied however.
-In humans, recent recovery from a co-circulating virus, increased the rate of recovery from respiratory syncytial virus (though co-infected individuals recovered more slowly) \cite{munywoki2015influence}.
+The rate of recovery from pathogens in the presence of coinfections has not been well studied however.
+In humans, the rate of recovery from respiratory syncytial virus was faster in in (though co-infected individuals recovered more slowly) \cite{munywoki2015influence}.
 
-However, further work could relax this assumption using a model similar to \cite{poletto2015characterising} which contains additional classes for `infected with pathogen one, immune to pathogen two' and `infected with pathogen two, immune to pathogen one'.
-The model here was formulated such that the study of systems with greater than two pathogens is still computationally feasible while a model such as used in \cite{poletto2015characterising} contains $3^\rho$ classes for a system with $\rho$ pathogen species.
+However, further work could relax this assumption using a model similar to \cite{poletto2015characterising} which contains additional classes for `infected with Pathogen 1, immune to Pathogen 2' and `infected with Pathogen 1, immune to Pathogen 2'.
+The model here was formulated such that the study of systems with greater than two pathogens (an avenue for further study) is still computationally feasible. 
+A model such as used in \cite{poletto2015characterising} contains $3^\rho$ classes for a system with $\rho$ pathogen species.
 This quickly becomes computationally restrictive.
-The interaction of multiple pathogens is one avenue for further study.
 It might be expected that there is an upper limit to the total number of pathogen species that can coexist in a population.
 In particular, it is possible that once a certain number of species are endemic in a population, no more pathogens can invade into the population.
 This has not been studied in the context of metapopulations.
 
-\paragraph{Identical strains}
+\subsubsection{Identical strains}
 
-Many papers on pathogen richness have focused on the evolution of pathogen traits and have considered a trade off between transmission rate and virulence \cite{nowak1994superinfection, nowak1994superinfection} or infectious period \cite{poletto2013host}.
+Many papers on pathogen richness have focused on the evolution of pathogen traits and have considered a trade-off between transmission rate and virulence \cite{nowak1994superinfection, nowak1994superinfection} or infectious period \cite{poletto2013host}.
 However, here I am interested in host traits.
 Therefore we have assumed that pathogen strains are identical.
 It is clear however that there are a number of factors that affect pathogen richness and our focus on host population structure does not imply that pathogen traits are not important.
 
-\paragraph{Complex social structure and behaviour}
+\subsubsection{Complex social structure and behaviour}
 
 With the models here I have aimed to tread a middle ground between the overly simple models employed in analytical studies \cite{allen2004sis} and the full complexity and variety of true bat social systems \cite{kerth2008causes}.
 Omissions include seasonal migration,  maternity roosts, hibernation roosts and swarming sites \cite{kerth2008causes, fleming2003ecology, richter2008first, cryan2014continental}. 
