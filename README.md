@@ -12,14 +12,12 @@ The main file is [tim-lucas-thesis.tex](tim-lucas-thesis.tex) and [tim-lucas-the
 
 The following files contain the main content of the thesis.
 - [Introduction.tex](Introduction.tex)
-- [Chapter3.Rtex](Chapter3.Rtex)
-- [Chapter2.Rtex](Chapter2.Rtex)
-- [Chapter4.Rtex](Chapter4.Rtex)
-- [Chapter5.Rtex](Chapter5.Rtex)
+- [chapter_2.Rtex](chapter_2.Rtex)
+- [chapter_3.Rtex](chapter_3.Rtex)
+- [chapter_4.Rtex](chapter_4.Rtex)
+- [chapter_5.Rtex](chapter_5.Rtex)
 - [Conclusions.tex](Conclusions.tex)
 
-NB The file [Chapter3.Rtex](Chapter3.Rtex) is in fact Chapter 2 in the thesis and [Chapter2.Rtex](Chapter2.Rtex) is Chapter3. 
-I don't think I want to rename them as this will mess up the git history (lesson learned, don't use numbered files like this...)
 Data chapters are written as .Rtex files with embedded R code. 
 These files are `Chapter*.Rtex`.
 These files are compiled to create files `Chapter*.tex` which does not include R code.
