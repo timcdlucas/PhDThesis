@@ -66,9 +66,10 @@ library(cowplot)
 
 \tmpsection{One or two sentences providing a basic introduction to the field}
 % comprehensible to a scientist in any discipline.
-\lettr{A}n increasingly large fraction of emerging human diseases come from animals and these diseases have a huge impact on human health, healthcare systems and economic development.
+\lettr{A}n increasingly large proportion of emerging human diseases comes from animals.
+These diseases have a huge impact on human health, healthcare systems and economic development.
 The chance that a new zoonosis will come from any particular wild host species increases with the number of pathogen species occurring in that host species.
-However, the factors that control pathogen richness of wild animal species are still unclear.
+However, the factors that control pathogen richness of wild animal species remain unclear.
 %
 %
 \tmpsection{Two to three sentences of more detailed background}
@@ -84,7 +85,7 @@ A more mechanistic understanding of how population structure affects pathogen ri
 \tmpsection{One sentence clearly stating the general problem (the gap)}
 % being addressed by this particular study.
 %It is unknown whether greater population structure allows invading pathogens to escape from competition by stochastically creating areas of low pathogen prevalence.
-I hypothesised that low dispersal rates and a low number of connections in a metapopulation network would allow invading pathogens to establish more easily, thus increasing pathogen richness. 
+I hypothesised that both low dispersal rates and a low number of connections in a metapopulation network would allow invading pathogens to establish more easily, thus increasing pathogen richness. 
 I tested these hypotheses using metapopulation networks parameterised to mimic wild bat populations as bats have highly varied social structures and have recently been implicated in a number of high profile diseases such as Ebola, SARS, Hendra and Nipah.
 %
 %
@@ -178,7 +179,7 @@ However, meta-analyses can be used to combine studies to help generalise conclus
 %3. limitations of comparative studies (including highlighting that empirical and mechanistic approaches would give different predictions) that and need a more mechanistic approach 
 
 Furthermore, knowing which factors correlate with pathogen richness does not tell us if, or how, they causally control pathogen richness.
-This lack of a solid mechanistic understanding of these processes prevents predictions of how wild populations will respond to peterbations such as increased human pressure and global change.
+This lack of a solid mechanistic understanding of these processes prevents predictions of how wild populations will respond to perturbations such as increased human pressure and global change.
 As habitats fragment we expect wild populations to change in a number of ways including becoming smaller and less well connected \cite{andren1994effects, cushman2012separating}.
 As multiple population-level factors are likely to change simultaneously due to global change, the correlative relationships examined in comparative studies are unlikely to effectively predict future changes in pathogen richness.
 Mechanistic models are needed to project how these highly non-linear disease systems will respond to the multiple, simultaneous stressors affecting them.
@@ -220,8 +221,8 @@ This requires a middle ground of model complexity.
 %7. what your focus is (including a  bit about bat focus)
 
 In order to capture this middle ground, I have used metapopulation models. 
-Unlike two-patch models, that are used to add population structure while keeping model complexity to a minumum \cite{qiu2013vector, allen2004sis, garmer2016multistrain}, the metapopulations used here split the population into multiple subpopulations.
-I have used two independant variables that alter population structure, dispersal rate and metapopulation network topology.
+Unlike two-patch models that are used to add population structure while keeping model complexity to a minumum \cite{qiu2013vector, allen2004sis, garmer2016multistrain}, the metapopulations used here split the population into multiple subpopulations.
+I have used two independant variables that alter population structure: dispersal rate and metapopulation network topology.
 I have studied the invasion of new pathogens as a mechanism for increasing pathogen richness.
 In particular I have focused on studying the invasion of a newly evolved pathogen that is therefore identical in epidemiological parameters to the endemic pathogen.
 Furthermore, this close evolutionary relationship means that competition via cross-immunity is strong.
@@ -293,7 +294,7 @@ However, trying to study the contact network relies on knowledge of detailed ind
 The metapopulation is modelled as a network with colonies being nodes and dispersal between colonies being indicated by edges (Figure~\ref{f:net}).
 Individuals within a colony interact randomly so that the colony is fully mixed.
 Dispersal between colonies occurs at a rate $\xi$.
-Individuals can only disperse to colonies connected to theirs in the network.
+Individuals can only disperse to colonies connected to theirs by an edge in the network.
 The rate of dispersal is not affected by the number of edges a colonies has (known as the degree of the colony and denoted $k$).
 Therefore, the dispersal rate from a colony $x$ with degree $k_x$ to colony $y$ is $\xi / k_x$.
 Note this rate is independent of the degree and size of colony $y$.
@@ -395,7 +396,7 @@ $e_i$ & The rate at which event $i$ occurs & year$^{-1}$&\\
 
 I modelled transmission as being density-dependent.
 This assumption was more suitable than frequency-dependent transmission as I was modelling a disease transmitted by saliva or urine in highly dense populations confined to caves, buildings or potentially a small number of tree roosts.
-I was notably not modelling an STD as spillover of STDs from bats to humans is is likely to be rare.
+I was notably not modelling a sexually transmitted disease (STD) as spillover of STDs from bats to humans is likely to be rare.
 Infection of a susceptible with either Pathogen 1 or 2 is therefore given by
 \begin{align}
   i_{1x} \rightarrow i_{1x}+1, s_x \rightarrow s_x-1 &\;\;\text{at a rate of}\;\; \beta s_x\left(i_{1x} + i_{12x}\right),\\
@@ -1022,9 +1023,9 @@ This indicates a level of cross-immunity between these pairs of viruses. %todo I
 \subsection{Experimental setup}
 
 The metapopulation was made up of ten colonies.
-Ten colonies was selected as a trade-off between computation time and a network complex enough that any effects of population structure could be detected. 
+Ten colonies was selected as a trade-off between computation time and a network complex enough that any effects of population structure could be detected.
 This value is artificially small compared to wildlife populations. 
-In each simulation the population was seeded with ten sets of 200 infected individuals of Pathogen 1.
+In each simulation, the na{\"i}ve population was seeded with ten sets of 200 infected individuals of Pathogen 1.
 These groups were seeded into randomly selected colonies with replacement.
 For each 200 infected individuals added, 200 susceptible individuals were removed to keep starting colony sizes constant. 
 Pathogen 1 was then allowed to spread until the initial, large epidemic had ended. 
@@ -1062,7 +1063,7 @@ $\xi = 0.01$ relates to 17\% of individuals dispersing at least once in their li
 This value is relatively close to male-biased dispersal, with female philopatry. %todo cite
 This therefore relates to a species that does not habitually disperse.
 Finally, I ran simulations with no dispersal.
-Given zero dispersal, only the colony seeded with Pathogen 2 can ever recieve infections of the invading pathogen.
+Given zero dispersal, only the colony seeded with Pathogen 2 could ever recieve infections of the invading pathogen.
 Therefore, only one colony was simulated for $\xi = 0$.
 I ran 100 simulations for most parameter sets.
 I ran 150 simulations for $\xi = 0.1, 0.01$ and $0.001$ with $\beta = 0.2$ and $0.3$ as
@@ -1084,12 +1085,12 @@ I again ran 100 simulations for each parameter set.
 I used generalised linear models (GLMs) with a binary response variable, invasion or not, to test the hypothesis that probability of invasion increased with dispersal.
 Seperate GLMs were fitted for each transmission rate.
 These tests were performed both with and without the $\xi = 0$ results as the complete lack of dispersal makes these simulations qualitatively different to the other simulations.
-To test whether the different topologies had different probabilities of invasion I used Fisher's exact tests as topology is best described as a categorical variable.
+To test whether the different topologies had different probabilities of invasion, I used Fisher's exact tests because topology is best described as a categorical variable.
 As with the $\xi = 0$ results, these tests were performed both with and without the completely unconnected topology results.
 Finally, I also used binomial GLMs to test the hypothesis that the probability of invasion increased with transmission rate.
 Seperate GLMs were fitted for each dispersal rate and network topology.
 All statistical analyses were performed using the \emph{stats} package in \emph{R}.
-The code used for running the simulations and analysing the results is available at \href{https://github.com/timcdlucas/PhDThesis/blob/master/Chapter2.Rtex}{GitHub}.
+The code used for running the simulations and analysing the results is available at \href{https://github.com/timcdlucas/PhDThesis/blob/master/Chapter2.Rtex}{https://github.com/timcdlucas/PhDThesis/blob/master/Chapter2.Rtex}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1159,7 +1160,7 @@ propsDisp$invasions[is.na(propsDisp$invasions)] <- 0
 
 # Proportion of invasions in totals.
 propsDisp$props <- propsDisp$invasions / propsDisp$n 
-
+x
 propsDisp
 
 %%end.rcode
