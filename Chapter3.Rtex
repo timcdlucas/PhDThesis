@@ -1816,7 +1816,7 @@ Distribution size was estimated by downloading range maps for all species from I
 \subsection{Statistical analysis}
 
 Statistical analysis for both response variables --- number of subspecies and effective level of gene flow --- was conducted using an information theoretical approach \cite{burnham2002model}, specifically following \textcite{whittingham2005habitat, whittingham2006we}.
-All analysis were performed in R \cite{R} and all code is available on \href{https://github.com/timcdlucas/PhDThesis/blob/master/Chapter3.Rtex}{GitHub}.
+All analysis were performed in R \cite{R} and all code is available on \href{https://github.com/timcdlucas/PhDThesis/blob/master/Chapter3.Rtex}{https://github.com/timcdlucas/PhDThesis/blob/master/Chapter3.Rtex}.
 I chose a credible set of models including all combinations of explanatory variables and a model with just an intercept.
 In the analysis using the number of subspecies response variable I also modelled the interaction study effort and number of subspecies by including their product.
 This interaction was included as I believed \emph{a priori} that this interaction may be present as subspecies in well studied species are more likely to be identified.
