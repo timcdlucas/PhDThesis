@@ -332,14 +332,14 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.2279853"
-     inkscape:cx="532.22741"
-     inkscape:cy="278.41747"
+     inkscape:cx="388.90322"
+     inkscape:cy="343.56483"
      inkscape:current-layer="layer1"
      id="namedview2989"
      showgrid="false"
-     inkscape:window-width="1877"
+     inkscape:window-width="1871"
      inkscape:window-height="1056"
-     inkscape:window-x="43"
+     inkscape:window-x="49"
      inkscape:window-y="24"
      inkscape:window-maximized="1" />
   <metadata
@@ -350,7 +350,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -360,7 +360,7 @@
      id="layer1">
     <path
        sodipodi:type="arc"
-       style="fill:#fdbf6f;fill-opacity:1;fill-rule:evenodd;stroke:#ff7f00;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="fill:#f8d068;fill-opacity:1;fill-rule:evenodd;stroke:#d04008;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        id="path2994"
        sodipodi:cx="226.87575"
        sodipodi:cy="459.81183"
@@ -376,11 +376,11 @@
        sodipodi:cy="459.81183"
        sodipodi:cx="226.87575"
        id="path3764"
-       style="fill:#b2df8a;fill-opacity:1;fill-rule:evenodd;stroke:#33a02c;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="fill:#80e8c0;fill-opacity:1;fill-rule:evenodd;stroke:#184848;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        sodipodi:type="arc" />
     <path
        sodipodi:type="arc"
-       style="fill:#a6cee3;fill-opacity:1;fill-rule:evenodd;stroke:#1f78b4;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="fill:#80d0f8;fill-opacity:1;fill-rule:evenodd;stroke:#484880;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        id="path3768"
        sodipodi:cx="226.87575"
        sodipodi:cy="459.81183"
@@ -396,11 +396,11 @@
        sodipodi:cy="459.81183"
        sodipodi:cx="226.87575"
        id="path3789"
-       style="fill:#a6cee3;fill-opacity:1;fill-rule:evenodd;stroke:#1f78b4;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="fill:#80d0f8;fill-opacity:1;fill-rule:evenodd;stroke:#484880;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        sodipodi:type="arc" />
     <path
        sodipodi:type="arc"
-       style="fill:#a6cee3;fill-opacity:1;fill-rule:evenodd;stroke:#1f78b4;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="fill:#80d0f8;fill-opacity:1;fill-rule:evenodd;stroke:#484880;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        id="path3791"
        sodipodi:cx="226.87575"
        sodipodi:cy="459.81183"
