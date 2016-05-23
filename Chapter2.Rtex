@@ -1171,7 +1171,7 @@ propsDisp$invasions[is.na(propsDisp$invasions)] <- 0
 
 # Proportion of invasions in totals.
 propsDisp$props <- propsDisp$invasions / propsDisp$n 
-x
+
 propsDisp
 
 %%end.rcode
@@ -1433,10 +1433,11 @@ This was true for all four dispersal values (GLM. $\xi = 0$: $b$ = \rinline{Disp
 I have used mechanistic, metapopulation models to test whether increased population structure can promote pathogen richness by facilitating invasion of new pathogens.
 I found that dispersal does affect the ability of a new pathogen to invade and persist in a population.
 I also found evidence that pathogen invasion was less likely in completely isolated colonies.
-However, as long as the metapopulation is slightly connected, the topology of the metapopulation network did not affect invasion probability.
-Increasing transmission rate quickly reaches a state where new pathogens always invade as long as there is some dispersal while decreasing the transmission rate quickly reaches a state where invasion is impossible.
+However, apart from the completely unconnected network, the topology of the metapopulation network did not affect invasion probability.
+Increasing transmission rate quickly reaches a state where new pathogens always invade as long as there is some dispersal.
+Decreasing the transmission rate quickly reaches a state where invasion is impossible.
 
-The result that increased population structure increases pathogen richness supports many predictions that increasing $R_0$ should increase pathogen richness \cite{nunn2003comparative, morand2000wormy, poulin2014parasite, poulin2000diversity, altizer2003social}.
+The result that increased population structure increases pathogen richness supports many existing predictions that increasing $R_0$ should increase pathogen richness \cite{nunn2003comparative, morand2000wormy, poulin2014parasite, poulin2000diversity, altizer2003social}.
 However, many comparative studies have found the opposite relationship, with increased population structure increasing pathogen richness (Chapter \ref{ch:empirical}, \cites{vitone2004body, maganga2014bat, turmelle2009correlates}).
 Furthermore, simple analytical models suggest that population structure should increase pathogen richness \cite{qiu2013vector, allen2004sis, nunes2006localized} and I find no evidence of this.
 
@@ -1444,8 +1445,9 @@ Furthermore, simple analytical models suggest that population structure should i
 \tmpsection{Link results to consequences}
 
 These results suggest that if population structure does in fact affect pathogen richness, as observed in comparative studies (Chapter \ref{ch:empirical}, \cites{vitone2004body, maganga2014bat, turmelle2009correlates}), it must occur by a mechanism other than the one studied here.
-The hypothesised mechanism for the relationship between population structure and pathogen richness, in this study, was that the spread and persistence of a newly evolved pathogen is facilitated by decreased competition due to population structure.
-Instead, reduced population structure allowed the new pathogen to quickly spread outside of the colony in which it evolved (i.e.\ was seeded).
+In this study the hypothesised mechanism for the relationship between population structure and pathogen richness, was that the spread and persistence of a newly evolved pathogen would be facilitated in highly structured populations as the lack of movement between colonies would stochastically create areas of low prevalence of the endemic pathogen.
+If the invading pathogen evolved (i.e.\ was seeded) in one of these areas of low prevalence, invasion would be more likely.
+Instead, reduced population structure allowed the new pathogen to quickly spread outside of the colony in which it evolved.
 As the mechanism studied here cannot explain the relationship between population structure and pathogen richness seen in wild species (Chapter \ref{ch:empirical}, \cites{vitone2004body, maganga2014bat, turmelle2009correlates}), other mechanisms should be studied.
 Other mechanisms that should be examined include reduced competitive exclusion of already established pathogens or increased invasion of less closely related and less strongly competing pathogens, perhaps mediated by ecological competition of pathogens (i.e.\ reduction of the susceptible pool by disease induced mortality).
 Furthermore, single pathogen dynamics could have an important role such as population structure causing a much slower, asynchronous epidemic preventing acquired herd immunity \cite{plowright2011urban}.
@@ -1469,8 +1471,8 @@ This has implications for human epidemics as well --- if there is strong competi
 I have assumed that once recovered, individuals are immune to both pathogens. 
 Furthermore, when a coinfected individual recovers from one pathogen, it immediately recovers from the other as well.
 This is probably a reasonable assumption given that I am modelling a newly evolved strain.
-The rate of recovery from pathogens in the presence of coinfections has not been well studied however.
-In humans, the rate of recovery from respiratory syncytial virus was faster in in (though co-infected individuals recovered more slowly) \cite{munywoki2015influence}.
+However, the rate of recovery from pathogens in the presence of coinfections has not been well studied.
+In humans, the rate of recovery from respiratory syncytial virus was faster in individuals that had recently recovered from one of a number of co-circulating viruses (though coinfected individuals recovered more slowly) \cite{munywoki2015influence}.
 
 However, further work could relax this assumption using a model similar to \cite{poletto2015characterising} which contains additional classes for `infected with Pathogen 1, immune to Pathogen 2' and `infected with Pathogen 1, immune to Pathogen 2'.
 The model here was formulated such that the study of systems with greater than two pathogens (an avenue for further study) is still computationally feasible. 
@@ -1489,13 +1491,13 @@ It is clear however that there are a number of factors that affect pathogen rich
 
 \subsubsection{Complex social structure and behaviour}
 
-With the models here I have aimed to tread a middle ground between the overly simple models employed in analytical studies \cite{allen2004sis} and the full complexity and variety of true bat social systems \cite{kerth2008causes}.
-Omissions include seasonal migration,  maternity roosts, hibernation roosts and swarming sites \cite{kerth2008causes, fleming2003ecology, richter2008first, cryan2014continental}. 
+With the models here I have aimed to tread a middle ground between the overly simplistic models employed in analytical studies \cite{allen2004sis} and the full complexity and variety of true bat social systems \cite{kerth2008causes}.
+The factors that have not been modelled here include seasonal migration,  maternity roosts, hibernation roosts and swarming sites \cite{kerth2008causes, fleming2003ecology, richter2008first, cryan2014continental}. 
 While future models might aim to model this complexity more fully, the number of parameters that are required to be estimated and varied becomes very large.
 Furthermore, not all of these social complexities exist in all bat species, so in limiting my analysis to the simpler end of bat social systems it is hoped that the results are more broadly representative of the order.
 
 Furthermore, I have considered a single host species in isolation.
-It seems likely that sympatry in bats and other mammals is epidemiologically important \cite{brierley2016quantifying, luis2013comparison, pilosof2015potential} but was beyond the scope of this study.
+It seems likely that sympatry in bats and other mammals is epidemiologically important \cite{brierley2016quantifying, luis2013comparison, pilosof2015potential} but this was beyond the scope of this study.
 There is potential for this to be effectively modelled as a multi-layered network \cite{wang2016structural, funk2010interacting} and this would be expected to act to reduce population structure.
 Conversely, the case of interspecies roost sharing could be modelled as an additional layer of within-colony, population structure which would tend to increase population structure.
 
