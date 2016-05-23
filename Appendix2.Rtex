@@ -1,3 +1,11 @@
+%--------------------------------------------------------------------------------------------------------------------------------%
+% Code for "Appendix C: Understanding how population structure affects pathogen richness in a mechanistic model of bat populations"
+% Appendix for Chapter 3 of thesis "The role of population structure and size in determining bat pathogen richness"
+% by Tim CD Lucas
+%
+% NB The file is numbered Appendix2 as Chapter 3 was previously Chapter 2 in the thesis.
+%
+%---------------------------------------------------------------------------------------------------------------------------------%
 
 
 %%begin.rcode settings, echo = FALSE, cache = FALSE, message = FALSE, results = 'hide', eval = TRUE
