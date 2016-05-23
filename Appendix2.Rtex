@@ -588,7 +588,7 @@ write.csv(z, file = 'data/Chapter2/TopoSimsTimes.csv')
 
 
 
-%%being.rcode extinctionTimes
+%%begin.rcode extinctionTimes
 
 dispTimes <- read.csv('data/Chapter2/DispSimsTimes.csv', row.names = 1)
 
