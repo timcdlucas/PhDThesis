@@ -1112,7 +1112,6 @@ allResults %>%
 # reorder factors to get structure vars at beginning.
 sepVarWeights$variable <- factor(sepVarWeights$variable, levels(sepVarWeights$variable)[c(2, 6, 1, 3, 4, 5)])
 
-
 ITPlot <- ggplot(sepVarWeights, aes(x = variable, y = estimate, colour = col, fill = col)) +
   geom_boxplot(outlier.colour = grey(0.3), notch = FALSE, width = 0.99, outlier.size = 1, lwd = 0.4) +
   scale_colour_manual(values = pokepal('kingdra')[c(11, 1, 9)]) +
@@ -1121,6 +1120,8 @@ ITPlot <- ggplot(sepVarWeights, aes(x = variable, y = estimate, colour = col, fi
     panel.grid.major.x = element_blank(),
     axis.text.y = element_text(size = 8)) +
   scale_x_discrete(labels = c('NSubspecies', 'NSubspecies*Scholar', 'Scholar', 'Mass', 'Range size', 'Random')) +
+  scale_y_continuous(labels = c('0.00','0.25','0.50','0.75','1.00'), breaks = c(0, 0.25, 0.5, 0.75, 1)) +
+  ylim(0, 1) +
   ylab('P(in best model)') +
   xlab('')
 
@@ -2129,7 +2130,9 @@ fstIT <- ggplot(fstSepVarWeights, aes(x = variable, y = estimate, colour = col, 
   theme(legend.position = 'none', axis.text.x = element_text(size = 10, angle = 40, hjust = 1, colour = 'black', family = 'lato light'),
     panel.grid.major.x = element_blank(),
     axis.text.y = element_text(size = 8)) +
-  scale_x_discrete(labels = c('Gene flow', 'Scholar', 'Mass', 'Range size', 'Random'))+
+  scale_x_discrete(labels = c('Gene flow', 'Scholar', 'Mass', 'Range size', 'Random')) +
+  scale_y_continuous(labels = c('0.00','0.25','0.50','0.75','1.00'), breaks = c(0, 0.25, 0.5, 0.75, 1)) +
+  ylim(0, 1) +
   ylab('P(in best model)') +
   xlab('')
 
@@ -2142,8 +2145,9 @@ ggdraw() +
   draw_label("A)", 0.02, 0.96, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
   draw_plot(ITPlot, 0, 0, 0.5, 1) +
   draw_label("B)", 0.52, 0.96, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
-  draw_plot(fstIT, 0.5, 0.145, 0.5, 0.855) +
+  draw_plot(fstIT, 0.5, 0.164, 0.5, 0.855) +
   draw_label('Explanatory variable', 0.5, 0.1, fontfamily = 'lato light', size = 12)
+
 
 %%end.rcode
 
@@ -2687,8 +2691,11 @@ ITPlot2 <- ggplot(sepVarWeights2, aes(x = variable, y = estimate, colour = col, 
     panel.grid.major.x = element_blank(),
     axis.text.y = element_text(size = 8)) +
   scale_x_discrete(labels = c('NSubspecies', 'NSubspecies*Scholar', 'Scholar', 'Mass', 'Range size', 'Random')) +
+  scale_y_continuous(labels = c('0.00','0.25','0.50','0.75','1.00'), breaks = c(0, 0.25, 0.5, 0.75, 1)) +
+  ylim(0, 1) +
   ylab('P(in best model)') +
   xlab('')
+
 
 %%end.rcode
 
@@ -2708,7 +2715,9 @@ fstIT2 <- ggplot(fstSepVarWeights2, aes(x = variable, y = estimate, colour = col
   theme(legend.position = 'none', axis.text.x = element_text(size = 10, angle = 40, hjust = 1, colour = 'black', family = 'lato light'),
     panel.grid.major.x = element_blank(),
     axis.text.y = element_text(size = 8)) +
-  scale_x_discrete(labels = c('Gene flow', 'Scholar', 'Mass', 'Range size', 'Random'))+
+  scale_x_discrete(labels = c('Gene flow', 'Scholar', 'Mass', 'Range size', 'Random')) +
+  scale_y_continuous(labels = c('0.00','0.25','0.50','0.75','1.00'), breaks = c(0, 0.25, 0.5, 0.75, 1)) +
+  ylim(0, 1) +
   ylab('P(in best model)') +
   xlab('')
 
@@ -2718,8 +2727,9 @@ ggdraw() +
   draw_label("A)", 0.02, 0.96, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
   draw_plot(ITPlot2, 0, 0, 0.5, 1) +
   draw_label("B)", 0.52, 0.96, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
-  draw_plot(fstIT2, 0.5, 0.145, 0.5, 0.855) +
+  draw_plot(fstIT2, 0.5, 0.164, 0.5, 0.855) +
   draw_label('Explanatory variable', 0.5, 0.1, fontfamily = 'lato light', size = 12)
+
 
 %%end.rcode
 
