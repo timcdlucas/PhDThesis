@@ -164,6 +164,16 @@ More recently, the role of the population has been examined with respect to path
 Yet even in theoretical studies there is confusion as to how exactly we should measure populations.
 There is disagreement on whether population density (individuals per unit area) should be preferred over population size (number of individuals) and how exactly area should be incorporated \cite{begon2002clarification}. 
 
+However it is rarely if ever acknowledge that these two values are intrinsically linked by $d = N/a$ where $d$ is density, $N$ is the population size and $a$ is area (See Table~\ref{t:params} for all parameters used) or that the relationship $N \propto a$ has broad empirical support \cite{blackburn2006variations, borregaard2010causality}.
+In contrast, population size has never been directly studied as a predictor of pathogen richness --- although confusingly, population range size is sometimes used as a measure of size e.g., \cite{vogeli2011island}.
+%This is a glaring omission.
+Furthermore, population size is considered the more relevant measure in terms of pathogen dynamics, especially when area cannot be assumed to be constant \cite{begon2002clarification} as is commonly the case in wild populations, especially in the face of global warming and habitat degradation.
+
+Again however, the relationships between these terms and range size, population size and density are rarely examined.
+Population size can be decomposed into two components, the number of groups and the average size of a group with $N = nm$ where $n$ is group size and $m$ is the number of groups.
+The amount of movement between groups is at least partially dependent on the distance between them \cite{jenkins2010meta, le2012patterns, schooley2009enhancing}.
+The distance between neighbouring groups decreases with the number of groups per area $m/a$ or $N/na$.
+
 
 %3. review the evidence for comparative studies for size and other interrelated variables  first as that is the order you do it in other chapters
 
@@ -171,26 +181,23 @@ There is disagreement on whether population density (individuals per unit area) 
 With the increase of novel zoonotic pathogens \cite{jones2008global} attention has turned to comparatively assessing the factors that are associated with high or low pathogen richness in wild animal species \cite{poulin2000diversity}.
 Here again there is little clarity on the relationship between a number of species measurements.
 Population density is commonly studied \cite{morand1998density, kamiya2014determines, lindenfors2007parasite, nunn2003comparative, arneberg2002host} as is range size \cite{lindenfors2007parasite, nunn2003comparative, turmelle2009correlates, huang2015parasite, kamiya2014determines}.
-However it is rarely if ever acknowledge that these two values are intrinsically linked by $d = N/a$ where $d$ is density, $N$ is the population size and $a$ is area (See Table~\ref{t:params} for all parameters used) or that the relationship $N \propto a$ has broad empirical support \cite{blackburn2006variations, borregaard2010causality}.
-In contrast, population size has never been directly studied as a predictor of pathogen richness --- although confusingly, population range size is sometimes used as a measure of size e.g., \cite{vogeli2011island}.
-%This is a glaring omission.
-Furthermore, population size is considered the more relevant measure in terms of pathogen dynamics, especially when area cannot be assumed to be constant \cite{begon2002clarification} as is commonly the case in wild populations, especially in the face of global warming and habitat degradation.
 
 
-
-\tmpsection{Population structure in comparative research}
-It is clear that animals are neither randomly distributed in space nor epidemiologically `well-mixed': social groups are common \cite{kerth2008causes} and distance and geographic boundaries reduce contacts between isolated populations \cite{jenkins2010meta, peel2012henipavirus}.
-In social species, measures such as global population density are largely meaningless with respect to the number of infectious contacts individuals may have.
-Rather, contacts are based on group size and rates of movement between groups.
-Two aspects of non-random transmission have been studied in particular: group size \cite{vitone2004body, gay2014parasite, ezenwa2006host, rifkin2012animals, nunn2003comparative} and global measures of population structure including genetic measures and measures derived from geographic distribution shapes (\textcite{gay2014parasite}, \textcite{maganga2014bat}, \textcite{turmelle2009correlates} and see Chapter \ref{ch:empirical}).
-Again however, the relationships between these terms and range size, population size and density are rarely examined.
-Population size can be decomposed into two components, the number of groups and the average size of a group with $N = nm$ where $n$ is group size and $m$ is the number of groups.
-The amount of movement between groups is at least partially dependent on the distance between them \cite{jenkins2010meta, le2012patterns, schooley2009enhancing}.
-The distance between neighbouring groups decreases with the number of groups per area $m/a$ or $N/na$.
 
 %4. then talk about the limitations of taking a comparative approach and how mechanistic models can help
 
+
+As these population factors --- population size and density, range size and group size --- are likely to be intercorrelated, correlative comparative studies will struggle to distinguish between them.
+Furthermore, even if some factors are statistically supported or rejected, the specific mechanisms by which they promote pathogen richness will remain unknown, and these may suggest different responses to global change.
+Finally, mechanistic models are expected to be more predictive into the future and into hitherto unseen population regimes.
+
+
 %5. review the evidence for mechanistic studies
+%6. limitations of the mechanistic approach so far
+
+ Mechanistic "studies" is basically begon2002clarification.
+ "How should we model this", not "which is important".
+ Single species
 
 %7. what you are going to do that is new (ie tease apart these interdependencies) - using case study on bats (and why this is a good group to ask this particular question on)
 
@@ -205,10 +212,16 @@ If pathogen richness ultimately depends on the ``island size'' of the host popul
 If local group size affects the ability of new pathogens to invade (\textcite{nunn2003comparative}, Chapter \ref{ch:sims1}) then changes in group size are likely to be more important.
 Finally, if increased population structure allows pathogens to coexist (\textcite{qiu2013vector, allen2004sis, nunes2006localized} and Chapter \ref{ch:empirical}) increased habitat fragmentation could be expected to increase pathogen richness.
 
-As these population factors --- population size and density, range size and group size --- are likely to be intercorrelated, correlative comparative studies will struggle to distinguish between them.
-Furthermore, even if some factors are statistically supported or rejected, the specific mechanisms by which they promote pathogen richness will remain unknown, and these may suggest different responses to global change.
-Finally, mechanistic models are expected to be more predictive into the future and into hitherto unseen population regimes.
 
+
+
+
+
+\tmpsection{Population structure in comparative research}
+It is clear that animals are neither randomly distributed in space nor epidemiologically `well-mixed': social groups are common \cite{kerth2008causes} and distance and geographic boundaries reduce contacts between isolated populations \cite{jenkins2010meta, peel2012henipavirus}.
+In social species, measures such as global population density are largely meaningless with respect to the number of infectious contacts individuals may have.
+Rather, contacts are based on group size and rates of movement between groups.
+Two aspects of non-random transmission have been studied in particular: group size \cite{vitone2004body, gay2014parasite, ezenwa2006host, rifkin2012animals, nunn2003comparative} and global measures of population structure including genetic measures and measures derived from geographic distribution shapes (\textcite{gay2014parasite}, \textcite{maganga2014bat}, \textcite{turmelle2009correlates} and see Chapter \ref{ch:empirical}).
 
 
 
