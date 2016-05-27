@@ -384,10 +384,10 @@ $q$ & Disease class i.e.\ $q\in\{1,2,12\}$&\\
 $S_x$ & Number of susceptible individuals in colony $x$ &&\\
 $I_qx$ & Number of individuals infected with disease(s) $q \in {1, 2, 12}$ in colony $x$ &&\\
 $R_x$ & Number of individuals in colony $x$ in the recovered with immunity class  &&\\
-$N$ & Total Population size && 30,000\\
+$N$ & Total Population size && 30\,000\\
 $m$ & Number of colonies&& 10\\
-$n$ & Colony size && 3,000\\
-$a$ & Area & km$^2$& 10,000\\
+$n$ & Colony size && 3\,000\\
+$a$ & Area & \si{\square\kilo\metre}& 10\,000\\
 $\beta$ & Transmission rate &  & 0.1 -- 0.4\\
 $\alpha$ & Coinfection adjustment factor.  & Proportion & 0.1\\
 $\gamma$ & Recovery rate & year$^{-1}.$individual$^{-1}$ & 1\\
@@ -449,7 +449,7 @@ Finally, recovery from any infectious class occurs at a rate $\gamma$
 The two network topologies used to test whether network connectedness influences a pathogen's ability to invade.
 A) Animals can only disperse to neighbouring colonies. 
 B) Dispersal can occur between any colony.
-Blue circles are colonies of 3,000 individuals.
+Blue circles are colonies of \SI{3000} individuals.
 Dispersal only occurs between colonies connected by an edge (black line).
 The dispersal rate is held constant between the two topologies.
 }
@@ -1007,7 +1007,7 @@ The birth rate $\Lambda$ was set to be equal to $\mu$.
 This yields a population that does not systematically increase or decrease.
 However, the size of each colony changes as a random walk.
 Given the length of the simulations, colonies were very unlikely to go extinct (Figure~\ref{fig:plotsNoInvade2}).
-The starting size of each colony was set to 3,000. 
+The starting size of each colony was set to \SI{3000}. 
 This is appropriate for many bat species \cite{jones2009pantheria}, especially the large, frugivorous \emph{Pteropodidae} that have been particularly associated with recent zoonotic diseases.
 
 The recovery rate $\gamma$ was set to one, giving an average infection duration of one year. 
@@ -1056,7 +1056,7 @@ On a preliminary run of 106 simulations across all combinations of dispersal and
 \subsection{Population structure}
 
 As a baseline for comparison, I ran simulations of a fully unstructured population.
-These simulations were run with a population of 30,000 so that the total population size was equal to that of the total metapopulation size in the structured simulations.
+These simulations were run with a population of \SI{30000} so that the total population size was equal to that of the total metapopulation size in the structured simulations.
 I ran 100 simulations at each transmission rate.
 
 
