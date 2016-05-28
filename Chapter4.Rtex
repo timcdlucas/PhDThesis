@@ -144,10 +144,12 @@ It also highlights the necessity for studying the mechanisms underlying pathogen
 %1. Zoonotics important - determinants of pathogen richness important
 
 Zoonotic diseases are an increasingly important source of human infectious diseases \cite{jones2008global, woolhouse2006host, taylor2001risk}.
-The number of pathogen species occurring in wild animal populations is huge and largely unknown \cite{poulin2014parasite}.
-Furthermore, the factors that allow large numbers of pathogen species to coexist in a host (e.g., \textcite{anthony2013strategy}) are still unclear.
-It is well known that population level factors such as population density, range size and population structure have an important role in controlling pathogen community dynamics \cite{anderson1979population, may1979population, colizza2007invasion, may2001infection}.
-Global change is strongly perturbing wild animal populations \cite{thomas2004extinction, craigie2010large}, but without good mechanistic models of how these populations maintain pathogen species richness, we can not predict how pathogen communities, and the risks of zoonotic outbreaks, will change in the coming decades.
+The chance that a new zoonotic disease will come from a particular host reservoir depends on a number of factors including the number of pathogen species it carries \cite{wolfe2000deforestation}.
+It is well known that population level factors such as population density, range size and population structure have an important role in controlling pathogen dynamics \cite{anderson1979population, may1979population, colizza2007invasion, may2001infection}.
+However, the relative importance of these factors, in controlling pathogen richness, is largely unknown.
+
+
+%Global change is strongly perturbing wild animal populations \cite{thomas2004extinction, craigie2010large}, but without good mechanistic models of how these populations maintain pathogen species richness, we can not predict how pathogen communities, and the risks of zoonotic outbreaks, will change in the coming decades.
 
 
 
@@ -160,35 +162,54 @@ Global change is strongly perturbing wild animal populations \cite{thomas2004ext
 %2. review the evidence for comparative studies for size and other interrelated variables  first as that is the order you do it in other chapters
 
 \tmpsection{Density/size in comparative research}
-With the increase of novel zoonotic pathogens \cite{jones2008global} attention has turned to comparatively assessing the factors that are associated with high or low pathogen richness in wild animal species \cite{poulin2000diversity}.
+With the increase of novel zoonotic pathogens \cite{jones2008global} much attention has been devoted to comparatively assessing the factors that are associated with high or low pathogen richness in wild animal species (Chapter~\ref{ch:empirical}, \cites{poulin2000diversity, kamiya2014determines, luis2013comparison}).
 Many comparative studies have examined morphological or life history traits \cite{kamiya2014determines, luis2013comparison}.
-However, population level factors are also expected to affect disease dynamics and therefore affect pathogen richness.
-Population density is commonly studied \cite{morand1998density, kamiya2014determines, lindenfors2007parasite, nunn2003comparative, arneberg2002host}.
-In contrast, population size has never been directly studied as a predictor of pathogen richness --- although confusingly, population range size has been used as a measure of population size \cite{vogeli2011island}.
+However, factors related to population biology are also expected to affect disease dynamics and therefore affect pathogen richness.
+Population density is commonly included in comparative studies \cite{morand1998density, kamiya2014determines, lindenfors2007parasite, nunn2003comparative, arneberg2002host}.
+In contrast, population size has never been directly studied as a predictor of pathogen richness.
 Studies also often test for correlations between pathogen richness and range size \cite{lindenfors2007parasite, nunn2003comparative, turmelle2009correlates, huang2015parasite, kamiya2014determines}.
-A number of mechanisms related to range size are thought to increase pathogen richness such as an increased variety of habitats and an increased number of sympatric species \cite{kamiya2014determines, nunn2003comparative, luis2013comparison}.
-Range size also affects how well-mixed a population is; in a larger geographic range, more dispersal over larger distances is needed to keep the population well-mixed.
-However, range size is only a crude proxy for population structure.
-Global population structure has therefore been studied with other measures including genetic measures and measures derived from geographic distribution shapes (\textcite{gay2014parasite}, \textcite{maganga2014bat}, \textcite{turmelle2009correlates} and see Chapter \ref{ch:empirical}). 
+Confusingly, population range size has been used as a measure of population size \cite{vogeli2011island}.
+
+%A number of mechanisms related to range size are thought to increase pathogen richness such as an increased variety of habitats and an increased number of sympatric species \cite{kamiya2014determines, nunn2003comparative, luis2013comparison}.
+%Range size also affects how structured a population is; in a larger geographic range, more dispersal over larger distances is needed to keep the population well-mixed.
+%However, range size is only a crude proxy for population structure.
+%Global population structure has therefore been studied with other measures including genetic measures and measures derived from geographic distribution shapes (Chapter \ref{ch:empirical}, \cites{gay2014parasite, maganga2014bat, turmelle2009correlates}). 
 Finally, many studies have tested for correlations between pathogen richness and group size, though results are equivical \cite{vitone2004body, gay2014parasite, ezenwa2006host, rifkin2012animals, nunn2003comparative}.
 
 
 %2 But problems with interrelated variables
 
-It is rarely acknowledged that population size and density are intrinsically linked by $d = N/a$ where $d$ is density, $N$ is the population size and $a$ is area (See Table~\ref{t:params} for all parameters used) or that the relationship $N \propto a$ has broad empirical support \cite{blackburn2006variations, borregaard2010causality}.
-Population size is considered the more relevant measure in terms of pathogen dynamics, especially when area cannot be assumed to be constant \cite{begon2002clarification} as is commonly the case in wild populations, especially in the face of global warming and habitat degradation.
-Population size can be decomposed into two components, the number of groups and the average size of a group with $N = nm$ where $n$ is group size and $m$ is the number of groups.
-The amount of movement between groups is at least partially dependent on the distance between them \cite{jenkins2010meta, le2012patterns, schooley2009enhancing}.
-The distance between neighbouring groups decreases with the number of groups per area $m/a$ or $N/na$.
+However, the intrinsic relationships between these variables are rarely discussed or accounted for in comparative studies.
+There are two particularly clear relationships between these variables.
+Firstly, population size and density are linked by $d = N/a$ where $d$ is density, $N$ is the population size and $a$ is area (See Table~\ref{t:params} for all parameters used).
+This relationship, $N \propto a$, has broad empirical support \cite{blackburn2006variations, borregaard2010causality}.
+Secondly, population size can be decomposed into two components, the number of groups, $m$, and the average size of a group $n$, with $N = nm$.
+%The amount of movement between groups is at least partially dependent on the distance between them \cite{jenkins2010meta, le2012patterns, schooley2009enhancing}.
+%The distance between neighbouring groups decreases with the number of groups per area $m/a$ or $N/na$.
+
 
 
 
 %4. then talk about the limitations of taking a comparative approach and how mechanistic models can help
 
 
-As these population factors --- population size and density, range size and group size --- are likely to be colinear, correlative comparative studies will struggle to distinguish between them.
-Furthermore, even if some factors are statistically supported or rejected, the specific mechanisms by which they promote pathogen richness will remain unknown, and these may suggest different responses to population changes.
-Finally, mechanistic models are expected to be more predictive into the future and into hitherto unseen population regimes.
+As these population factors --- population size and density, range size and group size --- are likely to be colinear due to the above relationships, correlative comparative studies will struggle to distinguish between them.
+It as well acknowledged that correlative studies cannot prove causality.
+This issue is exacerbated when there are clear, causal relationships between explanatory variables (e.g.\ an increase in density will directly cause an increase in population size).
+If the aim of correlative studies is to create predictive models for estimating pathogen richness of wild animal species, these interelationships are not an issue.
+As long as two of three variables in each of the above relationships ($d = N/a$ and $N = nm$) are included in a statistical model, all the variance is contained in the data.
+
+However, if the aim is to know which factors are causally affecting pathogen richness, and the mechanisms by which they control pathogen richness, correlative approaches are less useful.
+Understanding the mechanisms by which population factors can affect pathogen richness has a number of important benefits.
+Mechanistic models are expected to be more predictive into the future and into hitherto unseen population regimes.
+These popalation-level factors, although interrelated, will respond differently to global change and the response will be species dependent.
+Some species may suffer large range contractions, and therefore large falls in population size, while their density remains fairly constant.
+Other species might retain their distribution but have a depressed population density.
+Furthermore, different mechanisms of maintenance and creation of pathogen richness will respond to changes in these factors differently as well.
+If pathogen richness ultimately depends on the size of the host population, as predicted by island biogeography, then falls in population size will reduce pathogen richness the most.
+If local group size affects the ability of new pathogens to invade (\textcite{nunn2003comparative}, Chapter \ref{ch:sims1}) then changes in group size are likely to be more important.
+
+
 
 
 %5. review the evidence for mechanistic studies
@@ -200,6 +221,7 @@ Finally, mechanistic models are expected to be more predictive into the future a
   Briefly, which factors have been found to be important for pathogen richness \cite{qiu2013vector, allen2004sis, nunes2006localized}.
   Need to check the pop size/density pathogen richness lit.
 
+%Population size is considered the more relevant measure in terms of pathogen dynamics, especially when area cannot be assumed to be constant \cite{begon2002clarification} as is commonly the case in wild populations, especially in the face of global warming and habitat degradation.
 
 \tmpsection{Theoretical background}
 Variables that describe populations, in particular population density and structure, are well established as having a central role in pathogen dynamics \cite{colizza2007invasion, barthelemy2010fluctuation, wu2013threshold, may1979population, anderson1979population}.
@@ -218,7 +240,7 @@ More comparative.
 
 %6. limitations of the mechanistic approach so far
 
-No direct comparisons between variables.
+While many theoretical studies have examined whether these population level factors can promote pathogen richness, none have attempted to distinguish which might be the most important in the wild.
 
 %7. what you are going to do that is new (ie tease apart these interdependencies) - using case study on bats (and why this is a good group to ask this particular question on)
 
@@ -226,15 +248,6 @@ No direct comparisons between variables.
 
 \tmpsection{Population structure in comparative research}
 
-
-Importantly, these factors, although interrelated, will respond differently to global change and the response will be species dependent.
-Some species may suffer large range contractions, and therefore large falls in population size, while their density remains fairly constant.
-Other species might retain their distribution but have a depressed population density.
-Similarly with population structure, species particularly affected by habitat fragmentation can expect increased reduced movement of individuals between groups, while other species may be most affected by a reduction in group size.
-Furthermore, different mechanisms of maintenance and creation of pathogen richness will respond to changes in these factors differently as well.
-If pathogen richness ultimately depends on the ``island size'' of the host population, then falls in population size will reduce pathogen richness the most.
-If local group size affects the ability of new pathogens to invade (\textcite{nunn2003comparative}, Chapter \ref{ch:sims1}) then changes in group size are likely to be more important.
-Finally, if increased population structure allows pathogens to coexist (\textcite{qiu2013vector, allen2004sis, nunes2006localized} and Chapter \ref{ch:empirical}) increased habitat fragmentation could be expected to increase pathogen richness.
 
 
 
