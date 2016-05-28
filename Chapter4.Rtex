@@ -125,9 +125,9 @@ It also highlights the necessity for studying the mechanisms underlying pathogen
 
 %I would suggest the following structure
 %1. Zoonotics important - determinants of pathogen richness important
-%2. Focus on population size and other interrelated variables and problems with definitions
-%3. review the evidence for comparative studies for size and other interrelated variables  first as that is the order you do it in other chapters
-%4. then talk about the limitations of taking a comparative approach
+%2. review the evidence for comparative studies for size and other interrelated variables  first as that is the order you do it in other chapters
+%3. But other interrelated variables and problems with definitions
+%4. Problems can't be fixed with a comparative approach
 %5. review the evidence for mechanistic studies
 %6. limitations of the mechanistic approach so far
 %7. what you are going to do that is new (ie tease apart these interdependencies) - using case study on bats (and why this is a good group to ask this particular question on)
@@ -158,35 +158,23 @@ Global change is strongly perturbing wild animal populations \cite{thomas2004ext
 % more detailed background}
 % comprehensible to scientists in related disciplines.
 
-\tmpsection{Theoretical background}
-Variables that describe populations, in particular population density and structure, are well established as having a central role in pathogen dynamics \cite{colizza2007invasion, barthelemy2010fluctuation, wu2013threshold, may1979population, anderson1979population}.
-Group size is also known to strongly affect disease dynamics \cite{colizza2007invasion}.
-Others?
-More recently, the role of the population has been examined with respect to pathogen richness and the coexistence of competing pathogens \cite{qiu2013vector, allen2004sis, nunes2006localized}.
 
-Most of this theoretical work has been conducted in the context of humans.
-The goal of epidemic modelling 
-In humans, broad-scale population information is generally very good, with censuses giving the number of people in each city, town or village.
-But the case in animals is different. 
-More comparative.
-It is rarely acknowledged that population size and density are intrinsically linked by $d = N/a$ where $d$ is density, $N$ is the population size and $a$ is area (See Table~\ref{t:params} for all parameters used) or that the relationship $N \propto a$ has broad empirical support \cite{blackburn2006variations, borregaard2010causality}.
-Population size is considered the more relevant measure in terms of pathogen dynamics, especially when area cannot be assumed to be constant \cite{begon2002clarification} as is commonly the case in wild populations, especially in the face of global warming and habitat degradation.
-Population size can be decomposed into two components, the number of groups and the average size of a group with $N = nm$ where $n$ is group size and $m$ is the number of groups.
-The amount of movement between groups is at least partially dependent on the distance between them \cite{jenkins2010meta, le2012patterns, schooley2009enhancing}.
-The distance between neighbouring groups decreases with the number of groups per area $m/a$ or $N/na$.
-
-
-%Yet even in theoretical studies there is confusion as to how exactly we should measure populations.
-%There is disagreement on whether population density (individuals per unit area) should be preferred over population size (number of individuals) and how exactly area should be incorporated \cite{begon2002clarification}. 
-
-
-%3. review the evidence for comparative studies for size and other interrelated variables  first as that is the order you do it in other chapters
+%2. review the evidence for comparative studies for size and other interrelated variables  first as that is the order you do it in other chapters
 
 \tmpsection{Density/size in comparative research}
 With the increase of novel zoonotic pathogens \cite{jones2008global} attention has turned to comparatively assessing the factors that are associated with high or low pathogen richness in wild animal species \cite{poulin2000diversity}.
 Here again there is little clarity on the relationship between a number of species measurements.
 Population density is commonly studied \cite{morand1998density, kamiya2014determines, lindenfors2007parasite, nunn2003comparative, arneberg2002host} as is range size \cite{lindenfors2007parasite, nunn2003comparative, turmelle2009correlates, huang2015parasite, kamiya2014determines}.
 In contrast, population size has never been directly studied as a predictor of pathogen richness --- although confusingly, population range size is sometimes used as a measure of size e.g., \cite{vogeli2011island}.
+
+%2 But problems with interrelated variables
+
+It is rarely acknowledged that population size and density are intrinsically linked by $d = N/a$ where $d$ is density, $N$ is the population size and $a$ is area (See Table~\ref{t:params} for all parameters used) or that the relationship $N \propto a$ has broad empirical support \cite{blackburn2006variations, borregaard2010causality}.
+Population size is considered the more relevant measure in terms of pathogen dynamics, especially when area cannot be assumed to be constant \cite{begon2002clarification} as is commonly the case in wild populations, especially in the face of global warming and habitat degradation.
+Population size can be decomposed into two components, the number of groups and the average size of a group with $N = nm$ where $n$ is group size and $m$ is the number of groups.
+The amount of movement between groups is at least partially dependent on the distance between them \cite{jenkins2010meta, le2012patterns, schooley2009enhancing}.
+The distance between neighbouring groups decreases with the number of groups per area $m/a$ or $N/na$.
+
 
 
 %4. then talk about the limitations of taking a comparative approach and how mechanistic models can help
@@ -198,13 +186,33 @@ Finally, mechanistic models are expected to be more predictive into the future a
 
 
 %5. review the evidence for mechanistic studies
-%6. limitations of the mechanistic approach so far
+
 
  Mechanistic "studies" is basically begon2002clarification.
  "How should we model this", not "which is important".
  Single species
   Briefly, which factors have been found to be important for pathogen richness \cite{qiu2013vector, allen2004sis, nunes2006localized}.
   Need to check the pop size/density pathogen richness lit.
+
+
+\tmpsection{Theoretical background}
+Variables that describe populations, in particular population density and structure, are well established as having a central role in pathogen dynamics \cite{colizza2007invasion, barthelemy2010fluctuation, wu2013threshold, may1979population, anderson1979population}.
+Group size is also known to strongly affect disease dynamics \cite{colizza2007invasion}.
+Others?
+More recently, the role of the population has been examined with respect to pathogen richness and the coexistence of competing pathogens \cite{qiu2013vector, allen2004sis, nunes2006localized}.
+
+Most of this theoretical work has been conducted in the context of humans.
+The goal of epidemic modelling 
+In humans, broad-scale population information is generally very good, with censuses giving the number of people in each city, town or village.
+But the case in animals is different. 
+More comparative.
+
+%Yet even in theoretical studies there is confusion as to how exactly we should measure populations.
+%There is disagreement on whether population density (individuals per unit area) should be preferred over population size (number of individuals) and how exactly area should be incorporated \cite{begon2002clarification}. 
+
+%6. limitations of the mechanistic approach so far
+
+No direct comparisons between variables.
 
 %7. what you are going to do that is new (ie tease apart these interdependencies) - using case study on bats (and why this is a good group to ask this particular question on)
 
