@@ -147,11 +147,9 @@ Zoonotic diseases are an increasingly important source of human infectious disea
 The number of pathogen species occurring in wild animal populations is huge and largely unknown \cite{poulin2014parasite}.
 Furthermore, the factors that allow large numbers of pathogen species to coexist in a host (e.g., \textcite{anthony2013strategy}) are still unclear.
 It is well known that population level factors such as population density, range size and population structure have an important role in controlling pathogen community dynamics \cite{anderson1979population, may1979population, colizza2007invasion, may2001infection}.
-Global change is strongly perturbing wild animal populations \cite{thomas2004extinction, craigie2010large}, but without clear mechanistic models of how these populations maintain pathogen species richness, we can not predict how pathogen communities, and the risks of zoonotic outbreaks, will change in the coming decades.
+Global change is strongly perturbing wild animal populations \cite{thomas2004extinction, craigie2010large}, but without good mechanistic models of how these populations maintain pathogen species richness, we can not predict how pathogen communities, and the risks of zoonotic outbreaks, will change in the coming decades.
 
 
-
-%2. Focus on population size and other interrelated variables and problems with definitions
 
 \tmpsection{Specific Intro}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -163,9 +161,17 @@ Global change is strongly perturbing wild animal populations \cite{thomas2004ext
 
 \tmpsection{Density/size in comparative research}
 With the increase of novel zoonotic pathogens \cite{jones2008global} attention has turned to comparatively assessing the factors that are associated with high or low pathogen richness in wild animal species \cite{poulin2000diversity}.
-Here again there is little clarity on the relationship between a number of species measurements.
-Population density is commonly studied \cite{morand1998density, kamiya2014determines, lindenfors2007parasite, nunn2003comparative, arneberg2002host} as is range size \cite{lindenfors2007parasite, nunn2003comparative, turmelle2009correlates, huang2015parasite, kamiya2014determines}.
-In contrast, population size has never been directly studied as a predictor of pathogen richness --- although confusingly, population range size is sometimes used as a measure of size e.g., \cite{vogeli2011island}.
+Many comparative studies have examined morphological or life history traits \cite{kamiya2014determines, luis2013comparison}.
+However, population level factors are also expected to affect disease dynamics and therefore affect pathogen richness.
+Population density is commonly studied \cite{morand1998density, kamiya2014determines, lindenfors2007parasite, nunn2003comparative, arneberg2002host}.
+In contrast, population size has never been directly studied as a predictor of pathogen richness --- although confusingly, population range size has been used as a measure of population size \cite{vogeli2011island}.
+Studies also often test for correlations between pathogen richness and range size \cite{lindenfors2007parasite, nunn2003comparative, turmelle2009correlates, huang2015parasite, kamiya2014determines}.
+A number of mechanisms related to range size are thought to increase pathogen richness such as an increased variety of habitats and an increased number of sympatric species \cite{kamiya2014determines, nunn2003comparative, luis2013comparison}.
+Range size also affects how well-mixed a population is; in a larger geographic range, more dispersal over larger distances is needed to keep the population well-mixed.
+However, range size is only a crude proxy for population structure.
+Global population structure has therefore been studied with other measures including genetic measures and measures derived from geographic distribution shapes (\textcite{gay2014parasite}, \textcite{maganga2014bat}, \textcite{turmelle2009correlates} and see Chapter \ref{ch:empirical}). 
+Finally, many studies have tested for correlations between pathogen richness and group size, though results are equivical \cite{vitone2004body, gay2014parasite, ezenwa2006host, rifkin2012animals, nunn2003comparative}.
+
 
 %2 But problems with interrelated variables
 
@@ -219,10 +225,6 @@ No direct comparisons between variables.
 
 
 \tmpsection{Population structure in comparative research}
-It is clear that animals are neither randomly distributed in space nor epidemiologically `well-mixed': social groups are common \cite{kerth2008causes} and distance and geographic boundaries reduce contacts between isolated populations \cite{jenkins2010meta, peel2012henipavirus}.
-In social species, measures such as global population density are largely meaningless with respect to the number of infectious contacts individuals may have.
-Rather, contacts are based on group size and rates of movement between groups.
-Two aspects of non-random transmission have been studied in particular: group size \cite{vitone2004body, gay2014parasite, ezenwa2006host, rifkin2012animals, nunn2003comparative} and global measures of population structure including genetic measures and measures derived from geographic distribution shapes (\textcite{gay2014parasite}, \textcite{maganga2014bat}, \textcite{turmelle2009correlates} and see Chapter \ref{ch:empirical}).
 
 
 Importantly, these factors, although interrelated, will respond differently to global change and the response will be species dependent.
@@ -777,14 +779,14 @@ densPreds <- rbind(dens1Model, dens2Model) %>%
 %%begin.rcode valueChangeMeansCapt
 
 valueChangeMeansCapt <- '
-Comparison of the effect of colony size, colony number and area on probability of invasion.
+Comparison of the effect of colony size, colony number and density on probability of invasion.
+The $x$-axis shows the relative change in the default values of each of these factors ($\\times 0.25, 0.5, 1, 2$ and $4$).
 Default values are: colony number = 20, colony size = 400 and density = 0.8 animals.\\si{\\per\\square\\kilo\\metre}.
-The $x$-axis shows the relative change in each of these values ($\\times 0.25, 0.5, 1, 2$ and $4$).
 For colony size and number, area is altered so that density remains constant.
-For density, population size is constant at \SI{8000} and area is altered.
+For density, population size is constant at \\SI{8000} and area is altered.
 Each point is the mean of 100 simulations and bars are 95\\% confidence intervals.
 Curves are simple logistic regression fits for each independent variable.
-Relationships are shown separately for each transmission value.
+Relationships are shown separately for each transmission value, $\\beta$.
 '
 
 valueChangeMeansTitle <- 'Comparison of the probability of invasion when population size is altered by changing colony size or colony number.'
@@ -864,8 +866,10 @@ ggplot(d, aes(x = ValueChange, y = mean, colour = vary)) +
                labels=c( 'Colony Number', 'Colony Size', 'Density'), 
                pokemon = 'Swampert',
                spread = 3) +
-  scale_y_continuous(breaks = c(0, 0.5, 1), labels = c('0.0', '0.5', '0.1')) +
-  scale_x_continuous(breaks = c(0.25, 0.5, 1, 2, 4), labels = c(0.25, 0.5, 1, 2, 4), trans = 'log10') +
+  scale_y_continuous(breaks = c(0, 0.5, 1), labels = c('0.0', '0.5', '1.0')) +
+  scale_x_continuous(breaks = c(0.25, 0.5, 1, 2, 4), 
+                     labels = c(0.25, 0.5, 1, 2, 4), 
+                     trans = 'log10') +
   facet_grid(transmission ~ ., labeller = label_parsed) 
 
 
@@ -904,9 +908,9 @@ combModel <- rbind(dens1, dens2, pop) %>%
 
 transMeansCapt <- '
 Comparison of the effect of population size on probability of invasion when population size is altered by changing colony size or colony number.
-Relationship is shown separately for each transmission value.
+Relationships are shown separately for each transmission value, $\\beta$.
 It can be seen that changes in colony size give a much greater increase in invasion probability than changes in colony number.
-Note that this is the same data as Figure~\\ref{fig:plotValueChangeMeans} but with the $x$-axis scaled by population size, not parameter change.
+Note that this is the same data as Figure~\\ref{fig:plotValueChangeMeans} but with the $x$-axis scaled by population size, rather than relative parameter change.
 '
 
 transMeansTitle <- 'Comparison of the probability of invasion when population size is altered by changing colony size or colony number.'
@@ -933,8 +937,10 @@ ggplot(d2, aes(x = pop, y = mean, colour = vary)) +
   scale_colour_manual(name="Variable varied", 
                labels=c('Colony Size', 'Colony Number'), 
                values = pokepal('Swampert', spread = 3)[2:1]) +
-  scale_y_continuous(breaks = c(0, 0.5, 1), labels = c('0.0', '0.5', '0.1')) +
-  scale_x_continuous(breaks = c(1e4, 2e4, 3e4), label = c('10000', '20000', '30000')) +
+  scale_y_continuous(breaks = c(0, 0.5, 1), labels = c('0.0', '0.5', '1.0')) +
+  scale_x_continuous(limits = c(0, 32000), 
+                     breaks = c(0, 1e4, 2e4, 3e4), 
+                     label = c('0', '10000', '20000', '30000')) +
   facet_grid(transmission ~ ., labeller = label_parsed) 
 
 %%end.rcode
