@@ -181,9 +181,9 @@ Although my analysis implies that increased population structure does promote pa
 
 %#1. Zoonotic disease is bad (as you have written it already)
 Zoonotic pathogens make up the majority of newly emerging diseases and have profound consequences for public health, economics and international development \cite{jones2008global, smith2014global, ebolaWorldbank}.
-Better models for predicting which wild host species are potential reservoirs of zoonotic diseases would allow us to optimise zoonotic disease surveillance and anticipate how the risks of disease spillover might change with global change.
+Better statistical models for predicting which wild host species are potential reservoirs of zoonotic diseases would allow us to optimise zoonotic disease surveillance and anticipate how the risks of disease spillover might change with global change.
 The chance that a host species will be the source of an outbreak depends on a number of factors, such as its proximity and interactions with humans, and the prevalence and the number of pathogen species it carries \cite{wolfe2000deforestation}.
-However, the factors that control the number of pathogen species in a host species remain poorly understood.
+However, the factors that control the number of pathogen species a host species carries remain poorly understood.
 
 
 \tmpsection{Specific Intro}
@@ -1827,7 +1827,7 @@ This variable can be used to benchmark how important other explanatory variables
 The whole analysis was run \rinline{nBoots} times, resampling the random variable each time.
 
 
-To control for phylogenetic non-independence of datapoints I used the best-supported phylogeny from \textcite{fritz2009geographical} (Figure~\ref{fig:treePlot}) which is the supertree from \textcite{bininda2007delayed} with names updated to match the taxonomy by \textcite{wilson2005mammal}.
+To control for phylogenetic non-independence of data points I used the best-supported phylogeny from \textcite{fritz2009geographical} (Figure~\ref{fig:treePlot}) which is the supertree from \textcite{bininda2007delayed} with names updated to match the taxonomy by \textcite{wilson2005mammal}.
 Phylogenetic manipulation was performed using the \emph{ape} package \cite{ape}.
 I also performed the analysis using the phylogeny from \textcite{jones2005bats} as this has some broad topological differences including the Rhinolophoidea being sister to the Pteropodidae rather than being related to the other insectivorous bats (Figure~\ref{fig:treePlot2}). 
 
@@ -2374,7 +2374,7 @@ By analysing data on two measures of population structure, and using larger data
 In contrast, one study \textcite{gay2014parasite} found the opposite relationship using fragmentation of species distribution.
 Furthermore, \textcite{bordes2008bat} found no relationship between increased colony size and pathogen richness while \textcite{gay2014parasite} found relationships in opposite directions for virus and ectoparasite richness.
 However, the study by \textcite{gay2014parasite} uses relatively few species while the study by \textcite{bordes2008bat} uses group size which is a measure of local rather than global population structure.
-The overall weight of evidence suggests that poplulation structure and pathogen richness are associated.
+The overall weight of evidence suggests that population structure and pathogen richness are associated.
 fur
 
 
@@ -2400,7 +2400,7 @@ The number of subspecies is more commonly used as a variable in comparative anal
 Of the other explanatory variables considered, study effort and body mass were selected as being in the best model while there was marginal evidence for range size being associated with viral richness.
 Study effort positively predicted pathogen richness, confirming the expectation that additional study of a bat species yields more known viruses infecting that host species.
 Therefore, this bias cannot be ignored in studies using known pathogen richness as a proxy for total pathogen richness \cite{nunn2003comparative, gregory1990parasites}.
-While body mass is selected as being in the best model in both the number of subspecies analysis and the effective gene flow analyis the estimated coefficients have opposite signs in the two analyses.
+While body mass is selected as being in the best model in both the number of subspecies analysis and the effective gene flow analysis the estimated coefficients have opposite signs in the two analyses.
 In the number of subspecies analysis, body mass has a positive relationship with pathogen richness which is in agreement with previous studies \cite{kamiya2014determines, bordes2008bat, turmelle2009correlates, gay2014parasite, maganga2014bat}.
 However, in the effective gene flow analysis, body mass has a negative estimated coefficient.
 This is in contrast to the number of subspecies analysis, previous studies in the literature and the single-predictor model.
