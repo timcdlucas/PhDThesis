@@ -23,7 +23,7 @@ opts_chunk$set(
   size = 'footnotesize',
   cache.extra = list(R.version)
   )
-options(digits = 2)
+options(digits = 2, 'scipen' = 1)
 
 
 
@@ -49,8 +49,6 @@ p <- function(x, eps = 1e-3){
 
 p <- function(x) return(x)
 
-
-options('scipen' = -1)
 
 
 

@@ -991,7 +991,8 @@ Specifically I let two identical pathogens --- an endemic pathogen and an invadi
 I tested whether population size is more important than population density.
 I then tested whether colony size or the number of colonies is the more important component of population size.
 The multipathogen SIR model is identical to that in Chapter \ref{ch:sims1} and is implemented in \emph{R} \cite{R}.
-The code used for running all simulations is available on \href{https://github.com/timcdlucas/PhDThesis/blob/master/Chapter4.Rtex}{https://github.com/timcdlucas/PhDThesis/blob/master/Chapter4.Rtex}.
+The code used for running all simulations is available at \url{https://github.com/timcdlucas/PhDThesis/blob/master/Chapter4.Rtex}.
+
 
 In each simulation the population is seeded with 20 individuals infected with pathogen 1 in each colony. 
 Pathogen 1 is then allowed to spread and reach equilibrium. 
@@ -1003,7 +1004,7 @@ After another \rinline{nEvent - invadeT} events the invasion of pathogen 2 is co
 Three independent variables were varied: colony size, number of colonies and area.
 From these parameters, population size and population density can be calculated.
 The default values of these parameters was a population size of \SI{8000} individuals split into 20 colonies of 400 individuals.
-The default area of the simulations was \rinline{dep3[3]} \si{\square\kilo\metre} (space is given in square kilometres for simplicity even though they are in fact arbitrary units).
+The default area of the simulations was \SI{\rinline{dep3[3]}}{\square\kilo\metre} (space is given in square kilometres for simplicity even though they are in fact arbitrary units).
 
 Three sets of simulations were run.
 First, colony size was varied using values \rinline{dep1[-5]} and \SI{\rinline{sprintf('%3i', dep1[5])}}.
