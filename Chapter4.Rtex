@@ -433,14 +433,18 @@ write.csv(z, file = 'data/Chapter4/PopSims.csv')
 
 %%begin.rcode colonyNetCaptions
 
-colonyNetTitle <- 'Example metapopulation networks'
+colonyNetTitle <- 'Relationship between range size and metapopulation network structure'
 
 colonyNetCapt <- '
-Examples of the metapopulation networks used.
-They include the smallest number of colonies (five, A and B) and the default (20, C and D).
-They also include the default range size (\\SI{10000}{\\square\\kilo\\metre}, grey dashed lines, A and C) and the largest range size (\\SI{40000}{\\square\\kilo\\metre}, full plot, B and C), though all networks are plotted on the same spatial scale.
-Colonies are connected if they are within \\SI{100}{\\kilo\\meter} of each other.
-As range size increases, the number of connections each subpopulation has decreases as seen by the changes in mean degree, $\\bar{k}$.
+The relationship between range size and metapopulation network structure.
+Colonies are shown by circles.
+Colonies that are close enough for animals to disperse between (i.e.\  within \\SI{100}{\\kilo\\meter} of each other) are joined by a line.
+Colonies are placed randomly in spaces of various sizes (grey dashed lines).
+A and C) the default range size (\\SI{10000}{\\square\\kilo\\metre}).
+B and D) the largest range size (\\SI{40000}{\\square\\kilo\\metre}).
+A and B) the smallest number of colonies (five).
+C and D) the default number of colonies (20).
+The mean number of connections per subpopulation, $\\bar{k}$, is shown for each metapopulation.
 '
 
 
@@ -993,7 +997,7 @@ The code used for running all simulations is available at \url{https://github.co
 
 In each simulation the host population is seeded with 20 individuals infected with Pathogen 1 in each colony. 
 Pathogen 1 is then allowed to spread and reach equilibrium. 
-After \SI{\rinline{invadeT}} events, 5 individuals infected with Pathogen 2 are added to one randomly selected colony. 
+After \SI{\rinline{invadeT}} events, five individual hosts infected with Pathogen 2 are added to one randomly selected colony. 
 After another \SI{\rinline{nEvent - invadeT}} events the invasion of Pathogen 2 is considered successful if any individuals with Pathogen 2 still remain.
 
 \subsection{Independent variables}
