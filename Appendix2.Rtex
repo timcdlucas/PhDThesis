@@ -210,8 +210,8 @@ Examples of simulated SIR dynamics with succesfull invasions
 invadeCapt <- 
 '
 Two examples (A and B) of a succesful invasion plotted on a logged $y$-axis.
-The lines are coloured such that blue represents susceptibles, brown represents individuals infected with one pathogen (the two seperate brown lines are pathogen 1 and 2), black represents co-infected individuals and yellow represents recovered and immune individuals.
-Pathogen 2 is seeded after $3\times 10^4$ events (approximately 30 years).
+The lines are coloured such that blue represents susceptibles, brown represents individuals infected with one pathogen (the two seperate brown lines are Pathogen 1 and 2), black represents co-infected individuals and yellow represents recovered and immune individuals.
+Pathogen 2 is seeded after \\SI{300000} events (approximately 30 years).
 Simulations are run on a fully-connected network.
 Parameter values are: dispersal rate = 0.1, transmission rate = 0.2.
 All other parameters are as stated in Table~\\ref{t:params}.
@@ -285,9 +285,9 @@ Examples of colony size dynamics
 noInvadeCapt <- c(
 '
 Two examples (A and B) of an unsuccesful invasion plotted on a logged $y$-axis.
-The lines are coloured such that blue represents susceptibles, brown represents individuals infected with one pathogen (the two seperate brown lines are pathogen 1 and 2), black represents co-infected individuals and yellow represents recovered and immune individuals.
-Pathogen 2 is seeded after $3\times 10^4$ events (approximately 30 years).
-It can be seen that after seeding pathogen 2, there is a very short period before extinction as opposed to a long fade out of disease.
+The lines are coloured such that blue represents susceptibles, brown represents individuals infected with one pathogen (the two seperate brown lines are Pathogen 1 and 2), black represents co-infected individuals and yellow represents recovered and immune individuals.
+Pathogen 2 is seeded after \\SI{300000} events (approximately 30 years).
+It can be seen that after seeding Pathogen 2, there is a very short period before extinction as opposed to a long fade out of disease.
 Simulations are run on a fully-connected network.
 Parameter values are: dispersal rate = 0.1, transmission rate = 0.2.
 All other parameters are as stated in Table~\\ref{t:params}.
@@ -298,7 +298,7 @@ The size of each colony changes as a random walk.
 However, given the length of the simulations, there is little risk of colonies going extinct or becoming very large.
 Birth and death rate are equal and set to 0.05, giving a generation time of 20 years.
 The metapopulation network is fully-connected and the dispersal rate is 0.1 per year.
-The starting colony size is 3,000.
+The starting colony size is \\SI{3000}.
 '
 )
 

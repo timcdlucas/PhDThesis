@@ -23,7 +23,7 @@ opts_chunk$set(
   size = 'footnotesize',
   cache.extra = list(R.version)
   )
-options(digits = 2, 'scipen' = 1)
+options(digits = 2, 'scipen' = 2)
 
 
 

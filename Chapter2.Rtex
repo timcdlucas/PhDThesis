@@ -315,7 +315,7 @@ Note this rate is independent of the degree and size of colony $y$.
 \tmpsection{Stochastic simulations}
 
 I examined this model using stochastic, continuous-time simulations implemented in \emph{R} \cite{R}.
-The implementation is available as an R package on GitHub \cite{metapopepi}.
+The implementation is available as an \emph{R} package on GitHub \cite{metapopepi}.
 The model can be written as a continuous-time Markov chain.
 The Markov chain contains the random variables $((S_x)_{x = 1\ldots m}, (I_{x, q})_{x =1\ldots m,\:q \in \{1, 2, 12\}}, (R_x)_{x = 1\ldots m})$.
 Here, $(S_x)_{x = 1\ldots m}$ is a length $m$ vector of the number of susceptibles in each colony.
@@ -1040,17 +1040,17 @@ In each simulation, the na{\"i}ve population was seeded with ten sets of 200 inf
 These groups were seeded into randomly selected colonies with replacement.
 For each 200 infected individuals added, 200 susceptible individuals were removed to keep starting colony sizes constant. 
 Pathogen 1 was then allowed to spread until the initial, large epidemic had ended. 
-Visual inspection of preliminary simulations was used to decide on \rinline{invadeT} events as being long enough for the epidemic to end and the pathogen to be in an endemic state (Figures~\ref{fig:plotsInvade} and \ref{fig:plotsNoInvade1}).
-After \rinline{invadeT} events, five individuals infected with Pathogen 2 were added to one randomly selected colony. 
-After another \rinline{nEvent - invadeT} events the invasion of Pathogen 2 was considered successful if any individuals were still infected with Pathogen 2.
+Visual inspection of preliminary simulations was used to decide on \SI{\rinline{invadeT}} events as being long enough for the epidemic to end and the pathogen to be in an endemic state (Figures~\ref{fig:plotsInvade} and \ref{fig:plotsNoInvade1}).
+After \SI{\rinline{invadeT}} events, five individuals infected with Pathogen 2 were added to one randomly selected colony. 
+After another \SI{\rinline{nEvent - invadeT}} events the invasion of Pathogen 2 was considered successful if any individuals were still infected with Pathogen 2.
 Therefore, if at least one individual was in class $I_2$ or $I_{12}$ at the end of the simulation, this was considered an invasion.
-Again, visual inspection of preliminary simulations was used to determine that after \rinline{nEvent - invadeT} events, if an invading pathogen was still present, it was well established (Figures~\ref{fig:plotsInvade} and \ref{fig:plotsNoInvade1}).
+Again, visual inspection of preliminary simulations was used to determine that after \SI{\rinline{nEvent - invadeT}} events, if an invading pathogen was still present, it was well established (Figures~\ref{fig:plotsInvade} and \ref{fig:plotsNoInvade1}).
 
 The choice to use a fixed number of events, rather than a fixed number of years, was for computational convenience.
 However, this choice creates a risk of bias as simulations with more events per unit time will last for a shorter time overall.
 However, visual inspection of the dynamics of disease extinction (\ref{fig:plotsNoInvade1}), and examination of the typical time to extinction implies that this bias is very weak.
 For example, of the simulations where extinction occurred, the extinction occurred more than 50 years before the end of the simulation in 90\% of cases.
-On a preliminary run of 106 simulations across all combinations of dispersal and transmission rates, examining the population after $7 \times 10^5$ events instead of \rinline{nEvent} events gave exactly the same result with respect to the binary state of invasion or no invasion. 
+On a preliminary run of 106 simulations across all combinations of dispersal and transmission rates, examining the population after \SI{700000} events instead of \SI{\rinline{nEvent}} events gave exactly the same result with respect to the binary state of invasion or no invasion. 
 
 
 \subsection{Population structure}

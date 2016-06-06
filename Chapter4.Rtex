@@ -987,14 +987,14 @@ I used a two-pathogen, metapopulation SIR model to compare the roles of demograp
 Specifically I let two identical pathogens --- an endemic pathogen and an invading pathogen --- compete and used persistence or not of the second pathogen as my response variable.
 I tested whether host population size is more important than host density.
 I then tested whether colony size or the number of colonies is the more important component of population size.
-The multipathogen SIR model is identical to that in Chapter \ref{ch:sims1} and is implemented in \emph{R} \cite{R}.
+The multipathogen SIR model is identical to that in Chapter \ref{ch:sims1} and an implementation in \emph{R} \cite{R} is available as a package on GitHub \cite{metapopepi}.
 The code used for running all simulations is available at \url{https://github.com/timcdlucas/PhDThesis/blob/master/Chapter4.Rtex}.
 
 
-In each simulation the population is seeded with 20 individuals infected with pathogen 1 in each colony. 
+In each simulation the host population is seeded with 20 individuals infected with Pathogen 1 in each colony. 
 Pathogen 1 is then allowed to spread and reach equilibrium. 
-After \rinline{invadeT} events, 5 individuals infected with pathogen 2 are added to one randomly selected colony. 
-After another \rinline{nEvent - invadeT} events the invasion of pathogen 2 is considered successful if any individuals with pathogen 2 still remain.
+After \SI{\rinline{invadeT}} events, 5 individuals infected with Pathogen 2 are added to one randomly selected colony. 
+After another \SI{\rinline{nEvent - invadeT}} events the invasion of Pathogen 2 is considered successful if any individuals with Pathogen 2 still remain.
 
 \subsection{Independent variables}
 
