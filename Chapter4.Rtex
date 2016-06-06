@@ -88,27 +88,27 @@ library(showtext)
 The chance that a new disease will come from any particularly host species increases with the number of pathogen species in that host species.
 However, the factors that control pathogen richness in wild populations are still poorly understood.
 %\tmpsection{Two to three sentences of more detailed background}
-Host density is thought to increase pathogen richness while theory suggests that host population structure and host population size may also play a role.
-However, these factors are intrinsically linked --- reducing density reduces contacts between individuals and directly reduces host population size.
+Comparative studies have found evidence that host density, geographic range size and population structure are associated with high pathogen richness. 
+Additionally, epidemiological theory suggests that host population structure and host population abundance may influence pathogen richness.
+However, these factors are intrinsically linked.
+Host density is population size divided by range size while reducing host density directly reduces host population size and reduces contacts between individuals, therefore increasing population structure.
 In group living species group size and the total number of groups both contribute to total host population size. 
-As these factors are all completely interdependent, it is very difficult to study them empirically e.g., in a comparative frame work.
+As these factors are all completely interdependent, it is impossible to identify the causal factors within a comparative frame work.
 %\tmpsection{One sentence clearly stating the general problem (the gap)}
 % being addressed by this particular study.
 %\tmpsection{One sentence summarising the main result}
-%  (with the words “here we show” or their equivalent).
-It is unknown whether it is specifically density that controls pathogen richness or whether density merely correlates with other causal factors such as host population structure, group size or population size.
-Here I use metapopulation SIR models to test whether it is host density \emph{per se} that increases the ability of a newly evolved pathogen to invade and persist in a population as opposed to host group size, population size or population structure.
+%  (with the words ``here we show'' or their equivalent).
+Here I use metapopulation susceptible-infected-recovered (SIR) models to test whether it is host density \emph{per se} that increases the ability of a newly evolved pathogen to invade and persist in a population as opposed to host group size, population size or range size.
+I parameterised these metapopulations to mimic bat populations as bats exhibit a large range in group (colony) size and geographic range size as well as being associated with a number of important zoonotic pathogens.
 %\tmpsection{Two or three sentences explaining what the main result reveals in direct comparison to what was thought to be the case previously}
 % or how the main result adds to previous knowledge
 %\tmpsection{One or two sentences to put the results into a more general context.}
-I found that increased group size increases the chance that a new pathogen will invade into a population to the largest extent.
-Both group size and the number of groups (i.e.\ the components of population size) promote pathogen richness more than host density.
-This implies that, in comparative studies, host density is merely a correlate of group size or population size.
-As these factors are not equally important it is expected that the pathogen communities of different host species will respond to climate change in different ways.
-Species which experience changes in group size are expected to have larger changes in pathogen richness than other species.
+I found that increased population size increased the chance that a new pathogen will invade into a population more than host density.
+Furthermore, increased group size increased the probability of pathogen invasion more than the number of groups.
+This implies that, in comparative studies, host density may be merely a correlate of group size or population size.
 %\tmpsection{Two or three sentences to provide a broader perspective, }
 % readily comprehensible to a scientist in any discipline.
-This study helps clarify both the inter-relationships between, and relative importance of, a number of population-level factors affecting pathogen richness. 
+This study helps clarify both the inter-relationships between, and relative importance of, a number of host, population-level factors affecting pathogen richness. 
 It also highlights the necessity for studying the mechanisms underlying pathogen community construction as comparative approaches do not have the specificity to do so.
 
 
@@ -215,11 +215,13 @@ Host density and structure are well established as having a central role in path
 Host group size is also known to strongly affect disease dynamics with disease spreading more quickly through populations made up of larger groups \cite{colizza2007invasion}.
 Fewer studies specifically study how these factors affect pathogen coexistence.
 A number of studies find that increased host population structure can promote pathogen coexistence \cite{qiu2013vector, allen2004sis, nunes2006localized}.
+
 While some theoretical studies have examined whether these population-level factors can promote pathogen richness, none have attempted to distinguish which might be the most important.
 Most studies have examined how pathogen coexistence depends on pathogen traits such as the transmission rate and virulence \cite{allen2004sis, may1994superinfection, alizon2008decreased}.
 This focus is more relavent to studies of pathogens in humans and how different human pathogens may coexist.
 The context of comparing wild host species has been largely ignored.
-
+However, it has been noted that host population size is a more natural measure than population density and that particularly in comparative settings, population size should be preferred \cite{begon2002clarification}.
+This preference is due to the fact that host population size uniquely describes a property of the population while, for example, a high host density could be produced by a large population in a medium sized area or a medium sized population in a small area \cite{begon2002clarification}.
 
 
 
