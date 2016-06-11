@@ -840,14 +840,14 @@ ggplot(d, aes(x = ValueChange, y = mean, colour = vary)) +
   geom_line(data = percChangePreds, aes(x = ValueChange, y = pred, colour = vary)) +
   geom_point() +
   geom_errorbar(aes(ymin = lower, ymax = upper),
-              width=.01) +
+              width = .01) +
   ylab('Prop. Invasions') +
   xlab('Amount Varied') +
   ylim(0, 1) +
-  scale_colour_poke(name="Variable varied", 
-               labels=c( 'Colony Number', 'Colony Size', 'Density'), 
-               pokemon = 'Swampert',
-               spread = 3) +
+  scale_colour_poke(name = "Focal Pop. Factor", 
+                    labels = c( 'Pop. Size', 'Pop. Size', 'Host Density'), 
+                    pokemon = 'Swampert',
+                    spread = 3) +
   scale_y_continuous(breaks = c(0, 0.5, 1), labels = c('0.0', '0.5', '1.0')) +
   scale_x_continuous(breaks = c(0.25, 0.5, 1, 2, 4), 
                      labels = c(0.25, 0.5, 1, 2, 4), 
@@ -916,9 +916,9 @@ ggplot(d2, aes(x = pop, y = mean, colour = vary)) +
   ylab('Prop. Invasions') +
   xlab('Population size') +
   ylim(0, 1) +
-  scale_colour_manual(name="Variable varied", 
-               labels=c('Colony Size', 'Colony Number'), 
-               values = pokepal('Swampert', spread = 3)[2:1]) +
+  scale_colour_manual(name = "Focal Pop. factor", 
+                      labels = c('Colony Size', 'Colony Number'), 
+                      values = pokepal('Swampert', spread = 3)[2:1]) +
   scale_y_continuous(breaks = c(0, 0.5, 1), labels = c('0.0', '0.5', '1.0')) +
   scale_x_continuous(limits = c(0, 32000), 
                      breaks = c(0, 1e4, 2e4, 3e4), 
@@ -977,80 +977,108 @@ fewAllExtinct <- rbind(dens1, dens2, pop) %>%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%
-
-
-
-
-\subsection{Metapopulation model}
-
-\tmpsection{Overview}
-
-
-I used a two-pathogen, metapopulation SIR model to compare the roles of demographic parameters on pathogen species richness.
-Specifically I let two identical pathogens --- an endemic pathogen and an invading pathogen --- compete and used persistence or not of the second pathogen as my response variable.
+I used a two-pathogen, metapopulation SIR model to compare the roles of population parameters on pathogen species richness.
+The multipathogen SIR model was identical to that in Chapter~\ref{ch:sims1} and an implementation in \emph{R} \cite{R} is available as a package on GitHub \cite{metapopepi}.
+Specifically, I let two identical pathogens --- an endemic pathogen and an invading pathogen --- compete and used persistence or not of the Pathogen 2 as my response variable.
 I tested whether host population size is more important than host density.
 I then tested whether colony size or the number of colonies is the more important component of population size.
-The multipathogen SIR model is identical to that in Chapter \ref{ch:sims1} and an implementation in \emph{R} \cite{R} is available as a package on GitHub \cite{metapopepi}.
+I used the same fixed parameters as Chapter~\ref{ch:sims1} (Table~\ref{t:params}) except I used only three values of the transmission rate $\beta$,  0.1, 0.2 and 0.3.
+All simulations were run under all three transmission rates.
 The code used for running all simulations is available at \url{https://github.com/timcdlucas/PhDThesis/blob/master/Chapter4.Rtex}.
 
+In each simulation the host population was seeded with 20 individuals infected with Pathogen 1 in each colony. 
+Pathogen 1 was then allowed to spread and reach equilibrium. 
+After \SI{\rinline{invadeT}} events, five hosts individuals infected with Pathogen 2 were added to one randomly selected colony. 
+After another \SI{\rinline{nEvent - invadeT}} events the invasion of Pathogen 2 was considered successful if any individuals infected  with Pathogen 2 still remained.
 
-In each simulation the host population is seeded with 20 individuals infected with Pathogen 1 in each colony. 
-Pathogen 1 is then allowed to spread and reach equilibrium. 
-After \SI{\rinline{invadeT}} events, five individual hosts infected with Pathogen 2 are added to one randomly selected colony. 
-After another \SI{\rinline{nEvent - invadeT}} events the invasion of Pathogen 2 is considered successful if any individuals with Pathogen 2 still remain.
-
-\subsection{Independent variables}
-
-Three independent variables were varied: colony size, number of colonies and range size.
-From these parameters, population size and population density can be calculated.
-The default values of these parameters was a population size of \SI{8000} individuals split into 20 colonies of 400 individuals.
-The default range size of the simulations was \SI{\rinline{dep3[3]}}{\square\kilo\metre} (space is given in square kilometres for simplicity even though they are in fact arbitrary units).
-
-Three sets of simulations were run.
-First, colony size was varied using values \rinline{dep1[-5]} and \SI{\rinline{sprintf('%3i', dep1[5])}}.
-The number of colonies was kept constant and so population size varied directly proportionally with colony size.
-Range size was scaled to keep host density constant. 
-Secondly, number of colonies (and therefore population size) was varied and again range size was varied to keep density constant.
-\rinline{dep2[-5]} and \rinline{dep2[5]} colonies were used.
-Finally, colony size and number of colonies were kept constant (therefore keeping population size constant) and range size was varied alone to alter host density. 
-The values of range size used were \SI{40000}, \SI{20000}, \SI{10000}, \SI{5000} and \SI{\rinline{dep3[5]}}{\square\kilo\metre} which gave density values of \rinline{depDens[-5]} and \rinline{depDens[5]} animals.\si{\per\square\kilo\metre}.
-
-The effects of range size occur through changing the metapopulation network.
-The metapopulation structure was created for each simulation by randomly placing colonies in space (Figure~\ref{fig:colonyNetworkPlots}).
-The spatial scale of the simulations vary between \SI{\rinline{min(area)}} and \SI{\rinline{max(area)}}{\square\kilo\metre}.
+The effect of range size on disease dynamics occured through changes in the metapopulation network.
+The metapopulation structure was created for each simulation by randomly placing colonies in a square space (Figure~\ref{fig:colonyNetworkPlots}).
+This square space was considered to be the species geographic range, the size of which was varied.
+Range size was varied between \SI{\rinline{min(area)}} and \SI{\rinline{max(area)}}{\square\kilo\metre}.
 This corresponds to square areas with sides of \rinline{sqrt(min(area))} to \SI{\rinline{sqrt(max(area))}}{\kilo\metre}.
-Dispersal can only occur between two colonies if they are within \SI{100}{\kilo\metre} of each other i.e.\ they are then counted as connected nodes in the metapopulation network.
+Dispersal was only allowed to occur between two colonies if they are within \SI{100}{\kilo\metre} of each other i.e.\ they were then counted as connected nodes in the metapopulation network.
 The number of connections each colony has is called its degree, $k$.
 How well connected the metapopulation network is overall is measured by the mean degree, $\bar{k}$.
-This random placement does not guarantee that the population network is connected (i.e.\ made up of a single connected component) but as the endemic pathogen is seeded in all colonies, the invading pathogen cannot be seeded into a fully susceptible colony.
-This was considered more realistic than repeatedly resampling the colony locations until a fully connected population occurred.
+The random placement of colonies in space did not guarantee that the population network is connected (i.e.\ made up of a single connected component) but as Pathogen 1 was seeded in all colonies, Pathogen 2 could not be seeded into a fully susceptible colony.
+This was considered more realistic than repeatedly resampling the colony locations until a connected metapopulation population occurred.
 The threshold of \SI{100}{\kilo\metre} was arbitrary but I aimed to maximise the range  of $\bar{k}$ (Figure~\ref{fig:plotK}) while not having many simulations with networks that were not fully connected.
-Given this setup, populations with low densities had relatively unconnected metapopulation networks while high density populations had fully connected networks.
+Given this setup, populations with low densities had relatively unconnected metapopulation networks while high density populations had fully connected networks (Figure \ref{fig:todo}).
 
 
 
-\subsection{Other Parameters}
 
 
-The fixed parameters used are chosen to roughly reflect realistic wild bat populations. 
-The death rate $\Lambda$ is set as 0.05 per year giving a generation time of 20 years.
-The birth rate is set to be equal to $\mu$ so that the host population size is stable.
-The recovery rate $\gamma$ is set to 1 giving a average infection duration of 1 years. 
-This is therefore a long lasting infection but not a chronic infection. 
-It is difficult to estimate the duration of infections in wild bats but it seems that these infections may often be long lasting \cite{peel2012henipavirus, plowright2015ecological}.
-However, much shorter infectious periods have also been identified \cite{amengual2007temporal}.
-These shorter lived infections are not studied further here.
 
-Cross-immunity is set to 0.1 so that coinfection is 90\% less likely than an initial infection.
-This is an arbitrary value that is based on the fact that the rationale of the model is that the invading species is a newly speciated strain of the endemic species.
-Furthermore, the model assumes complete cross-immunity after recovery from infection.
-Therefore cross-immunity to coinfection is also likely to be strong.
-Three values, 0.1, 0.2 and 0.3, of the transmission rate $\beta$ are used.
-All simulations are run under all three transmission rates.
+\begin{table}
+
+\caption[Population parameter values]{
+Population parameter values used.
+}
+\label{t:popParams}
+\centering
+\begin{tabular}{@{}llrrrrr@{}}
+\toprule
+Focal Pop. Factor & Parameter & $\times$0.25 & $\times$0.5 & $\times$1 & $\times$2 & $\times$4\\
+\midrule
+                   & Colony size & 400 & 400 & 400 & 400 & 400 \\
+                   & Number of colonies & 20 & 20 & 20 & 20 & 20 \\
+\emph{Host Density}& Range size & \textbf{2\,500} & \textbf{5\,000} & \textbf{10\,000} & \textbf{20\,000} & \textbf{40\,000} \\ 
+(Population density)& Host density & \emph{0.2} & \emph{0.4} & \emph{0.8} & \emph{1.6} & \emph{3.2} \\
+                   & population size & 8\,000 & 8\,000 & 8\,000 & 8\,000 & 8\,000 \\
+%
+                   & Colony size & \textbf{100} & \textbf{200} & \textbf{400} &\textbf{800} & \textbf{1\,600} \\
+                   & Number of colonies & 20 & 20 & 20 & 20 & 20 \\
+\emph{Colony size} & Range size & 2\,500 & 5\,000 & 10\,000 & 20\,000 & 40\,000 \\
+(Population size)  & Host density & 0.8 & 0.8 & 0.8 & 0.8 & 0.8 \\
+                   & population size & \emph{2\,000} & \emph{4\,000} & \emph{8\,000} & \emph{16\,000} & \emph{32\,000} \\[4mm]
+                  %
+                   & Colony size & 400 & 400 & 400 & 400 & 400 \\
+                   & Number of colonies & \textbf{5} & \textbf{10} & \textbf{20} & \textbf{40} & \textbf{80} \\
+\emph{Number of Colonies} & Range size & 2\,500 & 5\,000 & 10\,000 & 20\,000 & 40\,000 \\
+(Population size)  & Host density & 0.8 & 0.8 & 0.8 & 0.8 & 0.8 \\
+                   & population size & \emph{2\,000} & \emph{4\,000} & \emph{8\,000} & \emph{16\,000} & \emph{32\,000} \\[4mm]
+\bottomrule
+
+\end{tabular}
+\end{table}
 
 
-\subsection{Statistical comparisons}
+
+\subsection{Population factors}
+
+Three sets of simulations were run (Table~\ref{t:popParams}).
+This set of three simulations was used to compare two pairs of population factors: \emph{i}) population size and host density, \emph{ii}) colony size and the number of colonies.
+The population parameters that were directly varied were colony size, the number of colonies and range size.
+In each case the values these parameters took were their default value multiplied by 0.25, 0.5, 1, 2 and 4.
+The default colony size was 400, the default number of colonies was 20 and the default range size was \SI{10000}{{\square\kilo\metre}}.
+
+\subsubsection{population size and host density}
+In the first set of simulations, host density was varied by keeping population constant while varying range size.
+Colony size was kept at a constant value of 400 while the number of colonies was fixed at 20 giving a population size of 8000.
+The values of range size used were \SI{40000}, \SI{20000}, \SI{10000}, \SI{5000} and \SI{\rinline{dep3[5]}}{\square\kilo\metre} which gave density values of \rinline{depDens[-5]} and \rinline{depDens[5]} animals.\si{\per\square\kilo\metre}.
+
+In the second set of simulations, population size was varied by changing colony size while the number of colonies was kept constant.
+To keep host density constant, range size was reduced as population size increased.
+The values of colony size used were 100, 200, 400, 800 and \SI{`600} while range size was set to \SI{40000}, \SI{20000}, \SI{10000}, \SI{5000} and \SI{\rinline{dep3[5]}}{\square\kilo\metre}.
+This gave population size values of \SI{2000}, \SI{4000}, \SI{8000}, \SI{16000} and \SI{32000} while host density remained at 0.8 hosts{\si{\per\square\kilo\metre}}.
+
+In the third set of simulations, population size was varied by changing the number of colonies while colony size was kept constant.
+Again, to keep host density constant, range size was reduced as population size increased.
+The numbers of colonies used were 5, 10, 20, 40 and 80 while range size was set to \SI{40000}, \SI{20000}, \SI{10000}, \SI{5000} and \SI{\rinline{dep3[5]}}{\square\kilo\metre}.
+Again, this gave population size values of \SI{2000}, \SI{4000}, \SI{8000}, \SI{16000} and \SI{32000} while host density remained at 0.8 hosts{\si{\per\square\kilo\metre}}.
+
+
+\subsubsection{colony size and the number of colonies}
+
+To compare colony size and the number of colonies, only the second and third set of simulations above were used.
+However, colony size and the number of colonies were directly used as independent variables instead of using the derived values for population size or host density.
+It can be seen that population density and range size are equivalent in the two sets of simulations.
+Therefore, the only difference between these two sets of simulations is the factor used to increase population size: colony size or the number of colonies.
+
+
+
+
+\subsection{Statistical analysis}
 
 I tested two hypotheses.
 Firstly I tested the hypothesis that an increase in host population size creates a stronger increase in invasion probability (of the second pathogen) than an equal increase in host density.
@@ -1065,7 +1093,9 @@ $c$ is a fitted intercept and $\epsilon$ is a binomially distributed error term.
 To test the first hypothesis I compared the size (and 95\% confidence intervals) of $b_1$ to $b_2$ and $b_3$.
 To test the second hypothesis I compared $b_2$ to $b_3$.
 
-
+Logistic regression was also used to test for an affect of transmission rate at the default parameter setting.
+Finally, in a small number of simulations both pathogens went extinct.
+Logistic regression was used to test whether transmission rate was associated with these events.
 
 
 
