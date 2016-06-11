@@ -241,6 +241,41 @@ I found that population size has a much stronger affect on the invasion of a new
 
 
 
+
+\begin{table}
+
+\caption[Population parameter values]{
+Population parameter values used.
+}
+\label{t:popParams}
+\centering
+\begin{tabular}{@{}llrrrrr@{}}
+\toprule
+Focal Pop. Factor & Parameter & $\times$0.25 & $\times$0.5 & $\times$1 & $\times$2 & $\times$4\\
+\midrule
+                   & Colony size & 400 & 400 & 400 & 400 & 400 \\
+                   & Number of colonies & 20 & 20 & 20 & 20 & 20 \\
+\emph{Host Density}& Range size & \textbf{2\,500} & \textbf{5\,000} & \textbf{10\,000} & \textbf{20\,000} & \textbf{40\,000} \\ 
+(Population density)& Host density & \emph{0.2} & \emph{0.4} & \emph{0.8} & \emph{1.6} & \emph{3.2} \\
+                   & population size & 8\,000 & 8\,000 & 8\,000 & 8\,000 & 8\,000 \\
+%
+                   & Colony size & \textbf{100} & \textbf{200} & \textbf{400} &\textbf{800} & \textbf{1\,600} \\
+                   & Number of colonies & 20 & 20 & 20 & 20 & 20 \\
+\emph{Colony size} & Range size & 2\,500 & 5\,000 & 10\,000 & 20\,000 & 40\,000 \\
+(Population size)  & Host density & 0.8 & 0.8 & 0.8 & 0.8 & 0.8 \\
+                   & population size & \emph{2\,000} & \emph{4\,000} & \emph{8\,000} & \emph{16\,000} & \emph{32\,000} \\[4mm]
+                  %
+                   & Colony size & 400 & 400 & 400 & 400 & 400 \\
+                   & Number of colonies & \textbf{5} & \textbf{10} & \textbf{20} & \textbf{40} & \textbf{80} \\
+\emph{Number of Colonies} & Range size & 2\,500 & 5\,000 & 10\,000 & 20\,000 & 40\,000 \\
+(Population size)  & Host density & 0.8 & 0.8 & 0.8 & 0.8 & 0.8 \\
+                   & population size & \emph{2\,000} & \emph{4\,000} & \emph{8\,000} & \emph{16\,000} & \emph{32\,000} \\[4mm]
+\bottomrule
+
+\end{tabular}
+\end{table}
+
+
 %%begin.rcode SimSetup
 
   # These apply to both topo and disp sims. And probably should apply to extinction sims if I include them.
@@ -667,8 +702,7 @@ All simulations had 20 colonies, meaning 19 is the maximum value of $\\bar{k}$.
 plotKtitle <- 'Change in average network degree with increasing range size'
 
 
-%%begin.rcode plotK, fig.cap = plotKcapt, fig.scap = plotKtitle, out.width = '0.8\\textwidth'
-
+%%begin.rcode plotK, fig.cap = plotKcapt, fig.scap = plotKtitle, out.width = '0.8\\textwidth', cache = FALSE
 
 ggplot(dens1, aes(x = factor(area), y = meanK, colour = 'a', fill = 'a')) +
   geom_boxplot(outlier.size = 1, size = 0.3, outlier.colour = grey(0.3), 
@@ -775,10 +809,9 @@ valueChangeMeansTitle <- 'Comparison of the effect of colony size, number of col
 
 %%end.rcode
 
-%%begin.rcode plotValueChangeMeans, fig.cap = valueChangeMeansCapt, fig.scap = valueChangeMeansTitle, out.width = '\\textwidth'
+%%begin.rcode plotValueChangeMeans, fig.cap = valueChangeMeansCapt, fig.scap = valueChangeMeansTitle, out.width = '\\textwidth', cache = FALSE
 
 # Convert to percentage change in density, colonysize or colony number.
-
 
 d <- rbind(popMeans %>% 
              mutate(ValueChange = as.numeric(as.character(area))/median(as.numeric(as.character(area))), vary = 'Density') %>%
@@ -865,20 +898,25 @@ ggplot(d, aes(x = ValueChange, y = mean, colour = vary)) +
 combDensModel <- rbind(dens1, dens2) %>% 
                    mutate(invasion = nExtantDis == 2 ) %>%
                    group_by(transmission) %>% 
-                   mutate(colonySize = scale(colonySize), colonyNumber = scale(colonyNumber)) %>% 
+                   mutate(colonySize = scale(colonySize), 
+                          colonyNumber = scale(colonyNumber)) %>% 
                    do(glm(invasion ~ colonySize + colonyNumber, data = ., family = binomial) %>% tidy)
 
 
 combModel <- rbind(dens1, dens2, pop) %>% 
                mutate(invasion = nExtantDis == 2 ) %>%
                group_by(transmission) %>% 
-               mutate(colonySize = scale(colonySize), colonyNumber = scale(colonyNumber), area = scale(area)) %>% 
+               mutate(colonySize = scale(colonySize), 
+                      colonyNumber = scale(colonyNumber), 
+                      area = scale(area)) %>% 
                do(glm(invasion ~  colonySize + colonyNumber + area, data = ., family = binomial) %>% tidy)
 
 combModel <- rbind(dens1, dens2, pop) %>% 
                mutate(invasion = nExtantDis == 2 ) %>%
                group_by(transmission) %>% 
-               mutate(colonySize = scale(colonySize), colonyNumber = scale(colonyNumber), area = scale(area)) %>% 
+               mutate(colonySize = scale(colonySize), 
+                      colonyNumber = scale(colonyNumber), 
+                      area = scale(area)) %>% 
                do(glm(invasion ~ colonySize + colonyNumber + area, data = ., family = binomial) %>% confint_tidy) %>%
                ungroup %>%
                dplyr::select(conf.low, conf.high) %>%
@@ -899,13 +937,11 @@ transMeansTitle <- 'Comparison of the probability of invasion when host populati
 
 %%end.rcode
 
-%%begin.rcode plotTransMeans, fig.cap = transMeansCapt, fig.scap = transMeansTitle, out.width = '\\textwidth', fig.show = TRUE
+%%begin.rcode plotTransMeans, fig.cap = transMeansCapt, fig.scap = transMeansTitle, out.width = '\\textwidth', fig.show = TRUE, cache = FALSE
 
 d2 <- rbind(dens1Means, dens2Means)
 d2$transmission <- factor(d2$transmission, labels = c('beta == 0.1', '0.2', '0.3'))
 densPreds$transmission <- factor(densPreds$transmission, labels = c('beta == 0.1', '0.2', '0.3'))
-
-
 
 
 ggplot(d2, aes(x = pop, y = mean, colour = vary)) +
@@ -934,13 +970,16 @@ meanDefault <- rbind(dens1, dens2, pop) %>%
                  group_by(transmission) %>%
                  summarise(mean = mean(nExtantDis == 2))
 
-transTest <- rbind(dens1, dens2, pop) %>%
-                 filter(colonyNumber == 20, colonySize == 400, dens == 0.8, nExtantDis != 0) %>%
-               group_by(transmission) %>%
-               summarise(x = sum(nExtantDis == 2), n = n()) %>% 
-               with(., prop.test(x = x, n = n)) %>%
-               tidy
 
+
+
+
+
+transTest <- rbind(dens1, dens2, pop) %>%
+               filter(colonyNumber == 20, colonySize == 400, dens == 0.8, nExtantDis != 0) %>%
+               mutate(invasion = nExtantDis == 2) %>%
+               glm(invasion ~ transmission, data = .) %>%
+               tidy
 
 
 
@@ -954,7 +993,11 @@ whichTransAllExtinct <- rbind(dens1, dens2, pop) %>%
                           group_by(transmission) %>%
                           summarise(n = n())
 
-transExtinctTest <- chisq.test(whichTransAllExtinct$n) %>% tidy
+transExtinctTest <- rbind(dens1, dens2, pop) %>%
+                      mutate(doubleExtinct = nExtantDis == 0) %>%
+                      glm(doubleExtinct ~ transmission, data = .) %>%
+                      tidy
+
 
 
 smallAllExtinct <- rbind(dens1, dens2, pop) %>%
@@ -1009,41 +1052,6 @@ Given this setup, populations with low densities had relatively unconnected meta
 
 
 
-\begin{table}
-
-\caption[Population parameter values]{
-Population parameter values used.
-}
-\label{t:popParams}
-\centering
-\begin{tabular}{@{}llrrrrr@{}}
-\toprule
-Focal Pop. Factor & Parameter & $\times$0.25 & $\times$0.5 & $\times$1 & $\times$2 & $\times$4\\
-\midrule
-                   & Colony size & 400 & 400 & 400 & 400 & 400 \\
-                   & Number of colonies & 20 & 20 & 20 & 20 & 20 \\
-\emph{Host Density}& Range size & \textbf{2\,500} & \textbf{5\,000} & \textbf{10\,000} & \textbf{20\,000} & \textbf{40\,000} \\ 
-(Population density)& Host density & \emph{0.2} & \emph{0.4} & \emph{0.8} & \emph{1.6} & \emph{3.2} \\
-                   & population size & 8\,000 & 8\,000 & 8\,000 & 8\,000 & 8\,000 \\
-%
-                   & Colony size & \textbf{100} & \textbf{200} & \textbf{400} &\textbf{800} & \textbf{1\,600} \\
-                   & Number of colonies & 20 & 20 & 20 & 20 & 20 \\
-\emph{Colony size} & Range size & 2\,500 & 5\,000 & 10\,000 & 20\,000 & 40\,000 \\
-(Population size)  & Host density & 0.8 & 0.8 & 0.8 & 0.8 & 0.8 \\
-                   & population size & \emph{2\,000} & \emph{4\,000} & \emph{8\,000} & \emph{16\,000} & \emph{32\,000} \\[4mm]
-                  %
-                   & Colony size & 400 & 400 & 400 & 400 & 400 \\
-                   & Number of colonies & \textbf{5} & \textbf{10} & \textbf{20} & \textbf{40} & \textbf{80} \\
-\emph{Number of Colonies} & Range size & 2\,500 & 5\,000 & 10\,000 & 20\,000 & 40\,000 \\
-(Population size)  & Host density & 0.8 & 0.8 & 0.8 & 0.8 & 0.8 \\
-                   & population size & \emph{2\,000} & \emph{4\,000} & \emph{8\,000} & \emph{16\,000} & \emph{32\,000} \\[4mm]
-\bottomrule
-
-\end{tabular}
-\end{table}
-
-
-
 \subsection{Population factors}
 
 Three sets of simulations were run (Table~\ref{t:popParams}).
@@ -1059,7 +1067,7 @@ The values of range size used were \SI{40000}, \SI{20000}, \SI{10000}, \SI{5000}
 
 In the second set of simulations, population size was varied by changing colony size while the number of colonies was kept constant.
 To keep host density constant, range size was reduced as population size increased.
-The values of colony size used were 100, 200, 400, 800 and \SI{`600} while range size was set to \SI{40000}, \SI{20000}, \SI{10000}, \SI{5000} and \SI{\rinline{dep3[5]}}{\square\kilo\metre}.
+The values of colony size used were 100, 200, 400, 800 and \SI{600} while range size was set to \SI{40000}, \SI{20000}, \SI{10000}, \SI{5000} and \SI{\rinline{dep3[5]}}{\square\kilo\metre}.
 This gave population size values of \SI{2000}, \SI{4000}, \SI{8000}, \SI{16000} and \SI{32000} while host density remained at 0.8 hosts{\si{\per\square\kilo\metre}}.
 
 In the third set of simulations, population size was varied by changing the number of colonies while colony size was kept constant.
@@ -1113,11 +1121,11 @@ Logistic regression was used to test whether transmission rate was associated wi
 %%%     Results text    %%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-At the default parameter settings, the probability of invasion and establishment of the second pathogen, $P(I)$,  was rare ($\beta = 0.1,\: P(I) = \rinline{meanDefault$mean[1]};\: \beta = 0.2,\: P(I) = \rinline{meanDefault$mean[2]};\: \beta = 0.3,\: P(I) = \rinline{meanDefault$mean[3]}$).
-Although there is no clear, directional relationship, these proportions are significantly different ($\chi^2$ test: $\chi^2 = \rinline{transTest$statistic},\: \text{df} = \rinline{transTest$parameter},\: p = \rinline{transTest$p.value}$).
+At the default parameter settings, the probability of invasion and establishment of the second pathogen, $P(I)$,  was rare ($\beta = 0.1,\: P(I) = \rinline{sprintf('%.3f', meanDefault$mean[1])};\: \beta = 0.2,\: P(I) = \rinline{sprintf('%.3f', meanDefault$mean[2])};\: \beta = 0.3,\: P(I) = \rinline{sprintf('%.3f', meanDefault$mean[3])}$).
+These proportions significantly increase with transmission rate (GLM: $b$ = \rinline{transTest$estimate[2]}, $p$ = \rinline{transTest$p.value[2]}).
 
 In \rinline{nAllExtinct} simulations, both of the pathogens went extinct.
-This did not depend on transmission rate ($\chi^2$ test: $\chi^2 = \rinline{transExtinctTest$statistic},\: \text{df} = \rinline{transExtinctTest$parameter},\: p = \rinline{transExtinctTest$p.value}$).
+This did not depend on transmission rate (GLM: $b$ = \rinline{transExtinctTest$estimate[2]}, $p$ = \rinline{transExtinctTest$p.value[2]}).
 However they were all either in simulations with the smallest colony size (colony size = 100, \rinline{smallAllExtinct} simulations) or with the fewest colonies (5 colonies, \rinline{fewAllExtinct} simulations).
 Results from these simulations were removed before further analyses.
 
