@@ -1,0 +1,176 @@
+%--------------------------------------------------------------------------------------------------------------------------------%
+% Code for "Appendix C: A mechanistic model to compare the importance of interrelated population measures: population size, population density and colony size"
+% Appendix for Chapter 4 of thesis "The role of population structure and size in determining bat pathogen richness"
+% by Tim CD Lucas
+%
+%---------------------------------------------------------------------------------------------------------------------------------%
+
+
+
+%%begin.rcode settings, echo = FALSE, cache = FALSE, message = FALSE, results = 'hide', eval = TRUE
+
+# There are figures created in the data analysis which are not in the final chapter document.
+#   If TRUE, they will be included in the output.
+#   Use 'hide' to remove them.
+extraFigs <- 'hide'
+
+#knitr options
+#  Set figure prefix as A so that no figures will be overwritten.
+opts_chunk$set(cache.path = '.AppCh4Cache/', fig.path = 'figure/C-')
+source('misc/KnitrOptions.R')
+
+# ggplot2 theme.
+source('misc/theme_tcdl.R')
+theme_set(theme_grey() + theme_tcdl)
+
+%%end.rcode
+
+
+
+
+%%begin.rcode rawDataTables, cache = FALSE
+dens1 <- read.csv('data/Chapter4/DensSims.csv') %>% dplyr::select(-X)
+
+dens1Means <- dens1 %>%
+                filter(nExtantDis > 0) %>%
+                group_by(transmission, colonySize, colonyNumber) %>%
+                summarise(`Area \\tiny{($\\times 1000$ km$^2$)}` = mean(area / 1000),
+                          `$N$ \\tiny{($\\times 1000$)}` = mean(as.numeric(as.character(pop)) / 1000) , 
+                          `Density \\tiny{(km$^{-2}$)}`  = mean(as.numeric(as.character(pop))) / mean(as.numeric(as.character(area))),
+                          Invasions = sum(nExtantDis == 2), 
+                          Sims = n()) %>%
+                rename(`$\\beta$` = transmission, `$n$` = colonySize, `$m$` = colonyNumber)
+
+
+# Constant density, altered colony number
+
+dens2 <- read.csv('data/Chapter4/Dens2Sims.csv') %>% dplyr::select(-X)
+
+dens2Means <- dens2 %>%
+                filter(nExtantDis > 0) %>%
+                group_by(transmission, colonySize, colonyNumber) %>%
+                summarise(`Area \\tiny{($\\times 1000$ km$^2$)}` = mean(area / 1000),
+                          `$N$ \\tiny{($\\times 1000$)}` = mean(as.numeric(as.character(pop)) / 1000) , 
+                          `Density \\tiny{(km$^{-2}$)}`  = mean(as.numeric(as.character(pop))) / mean(as.numeric(as.character(area))),
+                          Invasions = sum(nExtantDis == 2), 
+                          Sims = n()) %>%
+                rename(`$\\beta$` = transmission, `$n$` = colonySize, `$m$` = colonyNumber)
+
+# Constant population, altered area
+
+pop <- read.csv('data/Chapter4/PopSims.csv') %>% dplyr::select(-X)
+
+popMeans <- pop %>%
+                filter(nExtantDis > 0) %>%
+                group_by(transmission, area) %>%
+                summarise(`$\\beta$` = mean(transmission),
+                          `$n$` = mean(colonySize),
+                          `$m$` = mean(colonyNumber),
+                          `Area \\tiny{($\\times 1000$ km$^2$)}` = mean(area / 1000),
+                          `$N$ \\tiny{($\\times 1000$)}` = mean(as.numeric(as.character(pop)) / 1000) , 
+                          `Density \\tiny{(km$^{-2}$)}` = mean(as.numeric(as.character(pop))) / mean(as.numeric(as.character(area))),
+                          Invasions = sum(nExtantDis == 2), 
+                          Sims = n()) %>%
+                ungroup %>%
+                select(-area, -transmission)
+%%end.rcode
+
+
+
+%%begin.rcode dens1, results = 'asis'
+
+
+dens1Title <- "
+Raw data for colony size simulations
+  "
+
+dens1Capt <- "
+Raw data for colony size simulations. 
+The population parameters are shown along with the number of invasions and the number of simulations.
+Note that simulations where both pathogens went extinct have been removed (100 simulations were originally run for each parameter set).
+$\\beta$ is the transmission rate, $n$ is colony size, $m$ is the number of colonies and $N$ is the total population size.
+"
+
+
+print(xtable(dens1Means,
+             caption = c(dens1Capt, dens1Title), 
+             label = "D-dens1",
+             digits = c(0, 1, 0, 0, 1, 0, 1, 0, 0),
+             align = c('r', '@{}r', 'r', 'r', 'r', 'r', 'r', 'r', 'r@{}')), 
+      size = "small", #Change size; useful for bigger tables
+      include.rownames = FALSE, #Don't print rownames
+      include.colnames = TRUE,
+      sanitize.colnames.function = function(x){x},
+      caption.placement = "top",
+      booktabs = TRUE
+    )
+
+%%end.rcode
+
+
+
+
+%%begin.rcode dens2, results = 'asis'
+
+
+dens2Title <- "
+Raw data for number of colonies simulations
+  "
+
+dens2Capt <- "
+Raw data for number of colonies simulations.
+The population parameters are shown along with the number of invasions and the number of simulations.
+Note that simulations where both pathogens went extinct have been removed (100 simulations were originally run for each parameter set).
+$\\beta$ is the transmission rate, $n$ is colony size, $m$ is the number of colonies and $N$ is the total population size.
+"
+
+
+print(xtable(dens2Means,
+             caption = c(dens2Capt, dens2Title), 
+             label = "D-dens2",
+             digits = c(0, 1, 0, 0, 1, 0, 1, 0, 0),
+             align = c('r', '@{}r', 'r', 'r', 'r', 'r', 'r', 'r', 'r@{}')), 
+      size = "small", #Change size; useful for bigger tables
+      include.rownames = FALSE, #Don't print rownames
+      include.colnames = TRUE,
+      sanitize.colnames.function = function(x){x},
+      caption.placement = "top",
+      booktabs = TRUE
+    )
+
+%%end.rcode
+
+
+
+
+%%begin.rcode pop, results = 'asis'
+
+
+popTitle <- "
+Raw data for range size simulations
+  "
+
+popCapt <- "
+Raw data for range size simulations.
+The population parameters are shown along with the number of invasions and the number of simulations.
+Note that simulations where both pathogens went extinct have been removed (100 simulations were originally run for each parameter set).
+$\\beta$ is the transmission rate, $n$ is colony size, $m$ is the number of colonies and $N$ is the total population size.
+"
+
+
+print(xtable(popMeans,
+             caption = c(popCapt, popTitle), 
+             label = "D-pop",
+             digits = c(0, 1, 0, 0, 1, 0, 1, 0, 0),
+             align = c('r', '@{}r', 'r', 'r', 'r', 'r', 'r', 'r', 'r@{}')), 
+      size = "small", #Change size; useful for bigger tables
+      include.rownames = FALSE, #Don't print rownames
+      include.colnames = TRUE,
+      sanitize.colnames.function = function(x){x},
+      caption.placement = "top",
+      booktabs = TRUE
+    )
+
+%%end.rcode
+
+
