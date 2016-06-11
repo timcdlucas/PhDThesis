@@ -798,8 +798,9 @@ valueChangeMeansCapt <- '
 Comparison of the effect of colony size, number of colonies and host density on probability of invasion.
 The $x$-axis shows the relative change in the default values of each of these factors ($\\times 0.25, 0.5, 1, 2$ and $4$).
 Default values are: colony number = 20, colony size = 400 and density = 0.8 animals.\\si{\\per\\square\\kilo\\metre}.
-For colony size and number, range size is altered so that density remains constant.
-For density, population size is constant at \\SI{8000} and range size is altered.
+Red) population size is altered by changing colony number.
+Blue) population size is altered by changing colony size.
+Yellow) population density is altered by changing range size.
 Each point is the mean of 100 simulations and bars are 95\\% confidence intervals.
 Curves are simple logistic regression fits for each independent variable.
 Relationships are shown separately for each transmission value, $\\beta$.
@@ -1079,7 +1080,7 @@ Again, this gave population size values of \SI{2000}, \SI{4000}, \SI{8000}, \SI{
 \subsubsection{colony size and the number of colonies}
 
 To compare colony size and the number of colonies, only the second and third set of simulations above were used.
-However, colony size and the number of colonies were directly used as independent variables instead of using the derived values for population size or host density.
+However, colony size and the number of colonies were directly used as independent variables instead of using the derived values for host density or population size.
 It can be seen that population density and range size are equivalent in the two sets of simulations.
 Therefore, the only difference between these two sets of simulations is the factor used to increase population size: colony size or the number of colonies.
 
@@ -1133,7 +1134,7 @@ Results from these simulations were removed before further analyses.
 
 \subsection{Host density or population size}
 
-To test whether host density or size has a stronger affect on invasion probability I compared the regression coefficients of the multiple regressions fitted to simulation results (Figure~\ref{fig:plotValueChangeMeans}).
+To test whether host density or population size had a stronger affect on invasion probability I compared the regression coefficients of the multiple regressions fitted to simulation results (Figure~\ref{fig:plotValueChangeMeans}).
 Increasing host population size, either by increasing colony size or number of colonies, increased the probability of invasion (Table~\ref{t:regrCoefs}).
 The relationship between colony size and invasion is strong and significant at all transmission rates, while the relationship between colony number and invasion is weaker and more marginally significant.
 In contrast, varying host density does not alter invasion probability.
@@ -1143,7 +1144,7 @@ Therefore the simulations support the hypothesis that population size affects in
 \subsection{Colony size or number of groups}
 
 To test whether colony size or the number of colonies is the more important component of population size, I compared the regression coefficients, $b_2$ and $b_3$, of the multiple regressions fitted to simulation results (Figure~\ref{fig:plotTransMeans}).
-Increasing colony size or the number of colonies increases the probability of invasion but this affect is much stronger and more statistically significant, for colony size (Table~\ref{t:regrCoefs}).
+Increasing either colony size or the number of colonies increased the probability of invasion but this affect was much stronger and more statistically significant for colony size (Table~\ref{t:regrCoefs}).
 Therefore the simulations support the hypothesis that colony size is the more important component of population size.
 
 
@@ -1196,47 +1197,48 @@ Overall, my results suggest that population size promotes pathogen richness sign
 Furthermore, the component of population size that is important is colony size.
 
 These results lead to a number of other conclusions.
-All else being equal, increasing range size (with density remaining constant) will not increase pathogen richness significantly unless the increased range size promotes larger groups.
-Furthermore, social species that live in large groups are likely to harbour more pathogen species, even if sociality promotes reduced interactions between groups due to territory defence or simply because of larger distances between groups due to groups needing larger home ranges than solitary individuals.
-
+All else being equal, increasing range size (with density remaining constant) will not strongly increase pathogen richness unless the increased range size promotes larger groups.
+Furthermore, social species that live in large groups are likely to harbour more pathogen species, even if 
+the larger groups require more space and therefore dispersal between groups is reduced.
 
 \tmpsection{Why are these results like that? What do they mean?}
 
-For related, strongly competing strains, the factor that most strongly allows new pathogens to invade is the number of susceptible individuals in the local group.
+The results suggest that, for related, strongly competing strains, the factor that most strongly allows new pathogens to invade is the number of susceptible individuals in the local group.
 As long as there are enough susceptible individuals that the new pathogen species persists through the stochastic, early stages of the epidemic, the new pathogen will persist.
 As dispersal is a very slow process compared to infection, the global pool of susceptibles is not important. 
-This is why increasing the number of colonies does not increase pathogen invasion as quickly as the size of a colony does.
-Similarly, the density --- at the global scale --- of the species has little affect.
-In these simulations, increasing density without increasing population size implies a reduction in range size, which simply increases the number of colonies which are connected to the colony experiencing the invading pathogen.
-This increases the pool of susceptibles that are within one dispersal of the invading pathogen.
-However, again, this affect is very weak compared to the strong changes in local disease dynamics caused by increasing colony size.
+This is probably why increasing the number of colonies did not increase pathogen invasion rate as quickly as the size of a colony did.
+Similarly, the global host density of the species had little effect on pathogen invasion rate.
+In these simulations, increasing density without increasing population size was only achieved by reducing range size; this simply increased the number of connections between colonies in the metapopulation network.
+This, in turn, increased the pool of susceptibles that were within one dispersal of the invading pathogen.
+However, again, this effect was very weak compared to the strong changes in local disease dynamics caused by increasing colony size.
 
 
 
 \subsection{Global change}
 
-It is clear that many species are suffering strong population changes due to climate change \cite{thomas2004extinction}.
+It is clear that many species are suffering strong population changes due to global change \cite{thomas2004extinction}.
 However these changes might affect range size \cite{thomas2004extinction}, population size \cite{craigie2010large}, population connectivity \cite{wasserman2013population, rivera2015habitat, fonturbel2014forest} or group size \cite{lehmann2010apes, zunino2007habitat, manor2003impact, atwood2006influence} to different extents.
-My results suggest that pathogen communities will respond differently depending on which factors are affected, although it should be noted that the mechanism here --- invasion of a new pathogen --- is possibly more relevant over longer, multi-generation time scales than decade-long time scales.
+My results suggest that pathogen communities will respond differently depending on which factors are affected most affected by global change.
 In short, species suffering reductions in groups size \cite{lehmann2010apes, zunino2007habitat, manor2003impact, atwood2006influence} are predicted to experience decreases in pathogen richness in the long term and there is some evidence that this process is occurring \cite{altizer2007threatened, turmelle2009correlates}.
 Species that are experiencing increases in group size \cite{lehmann2010apes} would be expected to gain new pathogen species.
 In contrast, species suffering range contractions \cite{thomas2004extinction} and decreases in population size \cite{craigie2010large} are expected to experience smaller changes in pathogen richness.
-
+However, it should be noted that these conclusions apply only to the specific mechanism studied here; the invasion of newly evolved pathogens.
 
 \subsection{Comparative studies}
 
 Many comparative studies measure some aspect of a species population size or structure, yet it is rarely discussed how these relate.
-Instead most studies use the data that are available, without considering \emph{a priori} how it may depend on other factors (though statistical correlations between independent variables is usually considered and dealt with using PCA or by removing colinear variables).
+Instead most studies use the data that are available, without considering \emph{a priori} how the explanatory variables are causally related (though statistical correlations between independent variables is usually considered and dealt with using PCA or by removing colinear variables).
 Host density is often measured \cite{morand1998density, lindenfors2007parasite, nunn2003comparative, arneberg2002host} yet density is directly associated with population size.
 This study suggests that it is in fact population size that is important (in the context of social species as studied here).
-Therefore, the density measures in these comparative studies are more likely to be proxies for population size than the true causal factor.
+This suggests that the density measures in these comparative studies are in fact proxies for population size rather than the true causal factor.
 Similarly, this study suggests that host range size does not promote pathogen richness by the mechanism studied here, yet a number of studies have found evidence of this relationship \cite{kamiya2014determines, nunn2003comparative}.
 This suggests that either the relationship found in comparative studies is in fact due to a correlation with another factor, or that mechanisms other than probability of invasion of new pathogens are important.
 Range size has been suggested to affect pathogen richness by a number of mechanisms such as increasing the number of sympatric species and these other mechanisms should be specifically tested \cite{luis2013comparison}.
 
-The studies that have tested specifically the affect of group size have in fact found both positive \cite{vitone2004body} and negative associations \cite{gay2014parasite} or no relationship \cite{ezenwa2006host}.
+The studies that have specifically tested the effect of group size have in fact found both positive \cite{vitone2004body} and negative associations \cite{gay2014parasite} or no relationship \cite{ezenwa2006host}.
 Meta-analyses suggest that the relationship between social group size and pathogen richness is weak \cite{rifkin2012animals}.
-This suggests that the mechanism studied here --- invasion of recently evolved pathogens --- is not the major cause of pathogen richness in wild populations.
+However, I have found that group size is the most important population factor.
+This suggests that the mechanism studied here --- invasion of recently evolved pathogens --- may not the major mechanism by which pathogen richness is created in wild populations.
 
 
 
@@ -1247,9 +1249,9 @@ Furthermore, as a comparison is being made between the effects of range size and
 I have conducted this study at one rate of dispersal, 0.01 dispersals per individual per year.
 In practice this relates to only 17\% of individuals dispersing in their lifetime.
 This low rate of dispersal is expected to exaggerate the effect of range size; at high rates of dispersal the population is essentially well-mixed, despite the metapopulation.
+
 Furthermore, there is evidence that as groups get bigger, the within-group structure increases \cite{nunn2015infectious}.
 This has not been modelled here; instead the subpopulations are assumed to be fully mixed regardless of size.
-
 Also, I have assumed that dispersal only occurs between colonies a certain distance apart.
 Based on \emph{a priori} considerations such as the time and energy required to disperse long distances this is a reasonable assumption.
 The exact threshold was chosen to attempt to maximise the range of $\bar{k}$ studied (Figure~\ref{fig:plotK}).
