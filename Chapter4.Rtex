@@ -257,19 +257,19 @@ Focal Pop. Factor & Parameter & $\times$0.25 & $\times$0.5 & $\times$1 & $\times
                    & Number of colonies & 20 & 20 & 20 & 20 & 20 \\
 \emph{Host Density}& Range size & \textbf{2\,500} & \textbf{5\,000} & \textbf{10\,000} & \textbf{20\,000} & \textbf{40\,000} \\ 
 (Population density)& Host density & \emph{0.2} & \emph{0.4} & \emph{0.8} & \emph{1.6} & \emph{3.2} \\
-                   & population size & 8\,000 & 8\,000 & 8\,000 & 8\,000 & 8\,000 \\
+                   & Population size & 8\,000 & 8\,000 & 8\,000 & 8\,000 & 8\,000 \\[4mm]
 %
                    & Colony size & \textbf{100} & \textbf{200} & \textbf{400} &\textbf{800} & \textbf{1\,600} \\
                    & Number of colonies & 20 & 20 & 20 & 20 & 20 \\
 \emph{Colony size} & Range size & 2\,500 & 5\,000 & 10\,000 & 20\,000 & 40\,000 \\
 (Population size)  & Host density & 0.8 & 0.8 & 0.8 & 0.8 & 0.8 \\
-                   & population size & \emph{2\,000} & \emph{4\,000} & \emph{8\,000} & \emph{16\,000} & \emph{32\,000} \\[4mm]
+                   & Population size & \emph{2\,000} & \emph{4\,000} & \emph{8\,000} & \emph{16\,000} & \emph{32\,000} \\[4mm]
                   %
                    & Colony size & 400 & 400 & 400 & 400 & 400 \\
                    & Number of colonies & \textbf{5} & \textbf{10} & \textbf{20} & \textbf{40} & \textbf{80} \\
 \emph{Number of Colonies} & Range size & 2\,500 & 5\,000 & 10\,000 & 20\,000 & 40\,000 \\
 (Population size)  & Host density & 0.8 & 0.8 & 0.8 & 0.8 & 0.8 \\
-                   & population size & \emph{2\,000} & \emph{4\,000} & \emph{8\,000} & \emph{16\,000} & \emph{32\,000} \\[4mm]
+                   & Population size & \emph{2\,000} & \emph{4\,000} & \emph{8\,000} & \emph{16\,000} & \emph{32\,000} \\
 \bottomrule
 
 \end{tabular}
@@ -1012,6 +1012,20 @@ fewAllExtinct <- rbind(dens1, dens2, pop) %>%
 
 %%end.rcode
 
+%%begin.rcode kmeansregr, show.figs = extraFigs
+
+#pop %>% 
+#  filter(nExtantDis != 0) %>%
+#  mutate(invasion = as.numeric(nExtantDis == 2)) %>%
+#  ggplot(., aes(meanK, invasion)) +
+#    facet_grid(transmission ~ .) +
+#    geom_point() +
+#    geom_smooth(method = 'glm', method.args = list(family = 'binomial'))
+
+
+
+%%end.rcode
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1046,7 +1060,7 @@ How well connected the metapopulation network is overall is measured by the mean
 The random placement of colonies in space did not guarantee that the population network is connected (i.e.\ made up of a single connected component) but as Pathogen 1 was seeded in all colonies, Pathogen 2 could not be seeded into a fully susceptible colony.
 This was considered more realistic than repeatedly resampling the colony locations until a connected metapopulation population occurred.
 The threshold of \SI{100}{\kilo\metre} was arbitrary but I aimed to maximise the range  of $\bar{k}$ (Figure~\ref{fig:plotK}) while not having many simulations with networks that were not fully connected.
-Given this setup, populations with low densities had relatively unconnected metapopulation networks while high density populations had fully connected networks (Figure \ref{fig:todo}).
+Given this setup, populations with low densities had relatively unconnected metapopulation networks while high density populations had fully connected networks (Figure \ref{fig:plotK}).
 
 
 
@@ -1061,7 +1075,7 @@ The population parameters that were directly varied were colony size, the number
 In each case the values these parameters took were their default value multiplied by 0.25, 0.5, 1, 2 and 4.
 The default colony size was 400, the default number of colonies was 20 and the default range size was \SI{10000}{{\square\kilo\metre}}.
 
-\subsubsection{population size and host density}
+\subsubsection{Population size and host density}
 In the first set of simulations, host density was varied by keeping population constant while varying range size.
 Colony size was kept at a constant value of 400 while the number of colonies was fixed at 20 giving a population size of 8000.
 The values of range size used were \SI{40000}, \SI{20000}, \SI{10000}, \SI{5000} and \SI{\rinline{dep3[5]}}{\square\kilo\metre} which gave density values of \rinline{depDens[-5]} and \rinline{depDens[5]} animals.\si{\per\square\kilo\metre}.
@@ -1077,7 +1091,7 @@ The numbers of colonies used were 5, 10, 20, 40 and 80 while range size was set 
 Again, this gave population size values of \SI{2000}, \SI{4000}, \SI{8000}, \SI{16000} and \SI{32000} while host density remained at 0.8 hosts{\si{\per\square\kilo\metre}}.
 
 
-\subsubsection{colony size and the number of colonies}
+\subsubsection{Colony size and the number of colonies}
 
 To compare colony size and the number of colonies, only the second and third set of simulations above were used.
 However, colony size and the number of colonies were directly used as independent variables instead of using the derived values for host density or population size.
@@ -1122,7 +1136,7 @@ Logistic regression was used to test whether transmission rate was associated wi
 %%%     Results text    %%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-At the default parameter settings, the probability of invasion and establishment of the second pathogen, $P(I)$,  was rare ($\beta = 0.1,\: P(I) = \rinline{sprintf('%.3f', meanDefault$mean[1])};\: \beta = 0.2,\: P(I) = \rinline{sprintf('%.3f', meanDefault$mean[2])};\: \beta = 0.3,\: P(I) = \rinline{sprintf('%.3f', meanDefault$mean[3])}$).
+At the default parameter settings, the probability of invasion and establishment of the second pathogen, $P(I)$,  was rare (Figure~\ref{fig:plotValueChangeMeans} and Tables~\ref{C-pop}--\ref{C-dens2}).
 These proportions significantly increase with transmission rate (GLM: $b$ = \rinline{transTest$estimate[2]}, $p$ = \rinline{transTest$p.value[2]}).
 
 In \rinline{nAllExtinct} simulations, both of the pathogens went extinct.

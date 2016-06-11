@@ -77,6 +77,46 @@ popMeans <- pop %>%
 
 
 
+
+
+
+% ----------------------------------------------- %
+% Print tables
+% ----------------------------------------------- %
+
+
+
+%%begin.rcode pop, results = 'asis'
+
+
+popTitle <- "
+Raw data for range size simulations
+  "
+
+popCapt <- "
+Raw data for range size simulations.
+The population parameters are shown along with the number of invasions and the number of simulations.
+Note that simulations where both pathogens went extinct have been removed (100 simulations were originally run for each parameter set).
+$\\beta$ is the transmission rate, $n$ is colony size, $m$ is the number of colonies and $N$ is the total population size.
+"
+
+
+print(xtable(popMeans,
+             caption = c(popCapt, popTitle), 
+             label = "C-pop",
+             digits = c(0, 1, 0, 0, 1, 0, 1, 0, 0),
+             align = c('r', '@{}r', 'r', 'r', 'r', 'r', 'r', 'r', 'r@{}')), 
+      size = "small", #Change size; useful for bigger tables
+      include.rownames = FALSE, #Don't print rownames
+      include.colnames = TRUE,
+      sanitize.colnames.function = function(x){x},
+      caption.placement = "top",
+      booktabs = TRUE
+    )
+
+%%end.rcode
+
+
 %%begin.rcode dens1, results = 'asis'
 
 
@@ -94,7 +134,7 @@ $\\beta$ is the transmission rate, $n$ is colony size, $m$ is the number of colo
 
 print(xtable(dens1Means,
              caption = c(dens1Capt, dens1Title), 
-             label = "D-dens1",
+             label = "C-dens1",
              digits = c(0, 1, 0, 0, 1, 0, 1, 0, 0),
              align = c('r', '@{}r', 'r', 'r', 'r', 'r', 'r', 'r', 'r@{}')), 
       size = "small", #Change size; useful for bigger tables
@@ -127,7 +167,7 @@ $\\beta$ is the transmission rate, $n$ is colony size, $m$ is the number of colo
 
 print(xtable(dens2Means,
              caption = c(dens2Capt, dens2Title), 
-             label = "D-dens2",
+             label = "C-dens2",
              digits = c(0, 1, 0, 0, 1, 0, 1, 0, 0),
              align = c('r', '@{}r', 'r', 'r', 'r', 'r', 'r', 'r', 'r@{}')), 
       size = "small", #Change size; useful for bigger tables
@@ -141,36 +181,5 @@ print(xtable(dens2Means,
 %%end.rcode
 
 
-
-
-%%begin.rcode pop, results = 'asis'
-
-
-popTitle <- "
-Raw data for range size simulations
-  "
-
-popCapt <- "
-Raw data for range size simulations.
-The population parameters are shown along with the number of invasions and the number of simulations.
-Note that simulations where both pathogens went extinct have been removed (100 simulations were originally run for each parameter set).
-$\\beta$ is the transmission rate, $n$ is colony size, $m$ is the number of colonies and $N$ is the total population size.
-"
-
-
-print(xtable(popMeans,
-             caption = c(popCapt, popTitle), 
-             label = "D-pop",
-             digits = c(0, 1, 0, 0, 1, 0, 1, 0, 0),
-             align = c('r', '@{}r', 'r', 'r', 'r', 'r', 'r', 'r', 'r@{}')), 
-      size = "small", #Change size; useful for bigger tables
-      include.rownames = FALSE, #Don't print rownames
-      include.colnames = TRUE,
-      sanitize.colnames.function = function(x){x},
-      caption.placement = "top",
-      booktabs = TRUE
-    )
-
-%%end.rcode
 
 
