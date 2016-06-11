@@ -621,3 +621,198 @@ changes <- sum(invasion == invasionShort) / length(invasion)
 %%end.rcode
 
 
+
+
+
+% ------------------------------------------------ %
+% Raw data tables
+% ------------------------------------------------ %
+
+
+
+%%begin.rcode loadDispData
+
+# Read in the data.
+# Later I'll add in the option to simulate the whole dataset.
+dDisp <- read.csv('data/Chapter2/DispSims.csv', stringsAsFactors = FALSE)
+dim(dDisp)
+head(dDisp)
+
+extraMidBeta <- read.csv('data/Chapter2/extraMidBeta.csv', stringsAsFactors = FALSE)
+
+noDisp <- read.csv('data/Chapter2/noDispSims.csv', stringsAsFactors = FALSE)
+%%end.rcode
+
+
+
+
+
+%%begin.rcode DispDataOrganise
+
+dDisp <- rbind(dDisp, extraMidBeta[, 1:11], noDisp[, 1:11])
+
+
+# Which simulations have an extinction
+
+dDisp$invasion <- dDisp$nPathogens - dDisp$nExtantDis == 0
+
+
+
+# Number of simulations of each treatment
+nDisp <- dDisp %>% 
+  group_by(transmission, dispersal) %>% 
+  dplyr::select(invasion) %>%
+  summarise(n())
+
+
+# Number of extinctions by treatment
+invsDisp <- dDisp %>% 
+  group_by(transmission, dispersal) %>% 
+  dplyr::select(invasion) %>%
+  filter(invasion == TRUE) %>%
+  summarise(n())
+
+propsDisp <- left_join(nDisp, invsDisp, by = c('dispersal', 'transmission')) %>%
+               select(1, 2, 4, 3)
+
+names(propsDisp) <- c( '$\\beta$', 'Dispersal', 'Invasions', 'Sims')
+
+propsDisp$Invasions[is.na(propsDisp$Invasions)] <- 0
+
+
+             
+%%end.rcode
+
+
+
+
+%%begin.rcode loadTopoData
+
+# Read in the data.
+# Later I'll add in the option to simulate the whole dataset.
+dTopo <- read.csv('data/Chapter2/TopoSims.csv', stringsAsFactors = FALSE)
+dim(dTopo)
+head(dTopo)
+
+dTopo <- rbind(dTopo, noDisp[, 1:11])
+
+%%end.rcode
+
+
+%%begin.rcode TopoDataOrganise
+
+# Which simulations have an extinction
+
+dTopo$invasion <- dTopo$nPathogens - dTopo$nExtantDis == 0
+
+# Number of extinctions by treatment
+invsTopo <- dTopo %>% 
+  group_by(transmission, meanK) %>% 
+  dplyr::select(invasion) %>%
+  filter(invasion == TRUE) %>%
+  summarise(n()) %>%
+  rbind(c(0.1, 1, 0), .)
+
+# Number of simulations of each treatment
+nTopo <- dTopo %>% 
+  group_by(transmission, meanK) %>% 
+  dplyr::select(invasion) %>%
+  summarise(n())
+
+
+propsTopo <- left_join(nTopo, invsTopo, by = c('meanK', 'transmission')) %>%
+               mutate(Topology = c('Unconnected', 'Minimally', 'Fully')[factor(meanK)]) %>%
+               select(1, 5, 4, 3)
+
+names(propsTopo) <- c( '$\\beta$', 'Topology', 'Invasions', 'Sims')
+
+
+%%end.rcode
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\clearpage
+%%begin.rcode pop, results = 'asis'
+
+
+dispTitle <- "
+Raw data for dispersal simulations
+  "
+
+dispCapt <- "
+Raw data for dispersal simulations.
+The relevant parameters are shown along with the number of invasions and the number of simulations.
+$\\beta$ is the transmission rate.
+"
+
+
+print(xtable(propsDisp,
+             caption = c(dispCapt, dispTitle), 
+             label = "B-disp",
+             digits = c(0, 1, 3, 0, 0),
+             align = c('r', '@{}r', 'r', 'r','r@{}')), 
+      size = "small", #Change size; useful for bigger tables
+      include.rownames = FALSE, #Don't print rownames
+      include.colnames = TRUE,
+      sanitize.colnames.function = function(x){x},
+      caption.placement = "top",
+      booktabs = TRUE
+    )
+
+%%end.rcode
+
+
+
+
+%%begin.rcode topo, results = 'asis'
+
+
+topoTitle <- "
+Raw data for topology simulations
+  "
+
+topoCapt <- "
+Raw data for topology simulations.
+The relevant parameters are shown along with the number of invasions and the number of simulations.
+$\\beta$ is the transmission rate.
+"
+
+
+print(xtable(propsTopo,
+             caption = c(topoCapt, topoTitle), 
+             label = "B-topo",
+             digits = c(0, 1, 1, 0, 0),
+             align = c('r', '@{}r', 'l', 'l','r@{}')), 
+      size = "small", #Change size; useful for bigger tables
+      include.rownames = FALSE, #Don't print rownames
+      include.colnames = TRUE,
+      sanitize.colnames.function = function(x){x},
+      caption.placement = "top",
+      booktabs = TRUE
+    )
+
+%%end.rcode
+
+
+
+
+
