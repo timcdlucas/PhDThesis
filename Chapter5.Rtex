@@ -55,7 +55,7 @@ library(palettetown)
 Current methods to estimate population size or density require individual recognition of animals or knowing the distance of the animal from the sensor, which is often difficult.
 A method without these requirements, the random encounter model (REM), has been successfully applied to estimate animal densities from count data generated from camera traps.
 However, count data from acoustic detectors do not fit the assumptions of the REM due to the directionality of animal signals.
-I developed a generalised REM (gREM), to estimate absolute animal density from count data from both camera traps and acoustic detectors.
+I developed a generalised REM (gREM), to estimate absolute population size or density from count data from both camera traps and acoustic detectors.
 I derived the gREM for different combinations of sensor detection widths and animal signal widths (a measure of directionality).
 I tested the accuracy and precision of this model using simulations of different combinations of sensor detection widths and animal signal widths, number of captures, and models of animal movement. 
 I foundnd that the gREM produces accurate estimates of absolute animal density for all combinations of sensor detection widths and animal signal widths.
@@ -143,6 +143,7 @@ As a circle moving across a plane, the area covered by the sensor per unit time 
 The expected number of captures, $z$, for a survey period of $t$, with an animal density of $D$ is $z = 2rvtD$.
 To estimate the density we rearrange to get $D = z/2rvt$.
 Note that as $z$ is the number of encounters, not individuals, the possibility of repeated detections of the same individual is accounted for \cite{Hutchinson_Waser_2007}.
+To estimate population size rather than density, the density is simply multiplied by the size of the survey area.
 
 
 \subsubsection{gREM derivations for different detection and signal widths}
