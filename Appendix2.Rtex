@@ -221,7 +221,7 @@ All other parameters are as stated in Table~\\ref{t:params}.
 %%end.rcode
 
 
-%%begin.rcode plotsInvade, fig.cap = invadeCapt, fig.scap = invadeTitle, fig.height = 5, out.width = "\\textwidth" 
+%%begin.rcode plotsInvade, fig.cap = invadeCapt, fig.scap = invadeTitle, fig.height = 5, out.width = "\\textwidth", cache = FALSE
 
 load('data/Chapter2/Appen1.RData')
 load('data/Chapter2/Appen24.RData')
@@ -306,7 +306,7 @@ The starting colony size is \\SI{3000}.
 
 
 
-%%begin.rcode plotsNoInvade, fig.cap = noInvadeCapt, fig.scap = noInvadeTitle, fig.height = 5, out.width = c("\\textwidth", "0.8\\textwidth")
+%%begin.rcode plotsNoInvade, fig.cap = noInvadeCapt, fig.scap = noInvadeTitle, fig.height = 5, out.width = c("\\textwidth", "0.8\\textwidth"), cache = FALSE
 
 load('data/Chapter2/Appen22.RData')
 p1 <- p2

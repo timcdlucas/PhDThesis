@@ -2442,10 +2442,12 @@ Although I have used measures of study effort to try to control for biases in th
 It is hoped that as untargeted sequencing of viral genetic material (e.g., \textcite{anthony2013strategy}) becomes cheaper and more common this bias can be reduced.
 The strength of the relationship between study effort and known viral richness also highlights the number of bat-virus host-pathogen relationships yet to be discovered and the number of virus species that are yet to be described.
 
-I have a number of explanatory variables to avoid spurious correlations.
-However, there is little data on bat density.
-Given that studies in other mammalian groups have found relationships between density and pathogen richness this would be a useful variable to include in further analyses \cite{kamiya2014determines, nunn2003comparative, arneberg2002host}.
-Acoustic monitoring is becoming cheaper and less labour intensive and may provide suitable data for estimating population densities for more bat species.
+I have included a number of explanatory variables to avoid spurious correlations.
+However, there is little data on bat density or population size.
+Given that studies in other mammalian groups have found relationships between host density and pathogen richness this would be a useful variable to include in further analyses \cite{kamiya2014determines, nunn2003comparative, arneberg2002host}.
+Acoustic monitoring is becoming cheaper and less labour intensive and may provide suitable data for estimating population densities or population sizes for more bat species.
+However, it is not clear whether host population density or host population size is the more appropriate measure with respect to disease dynamics \cite{begon2002clarification}.
+Given the importance of geographic range size found here and elsewhere \cite{lindenfors2007parasite, nunn2003comparative, turmelle2009correlates, huang2015parasite, kamiya2014determines} comparative studies may struggle to select between these three related factors: host population size, population density and geographic range size.
 
 I have used two measures of population structure and the number of subspecies data set is larger than those used in previous studies.
 However it is clear that the gene flow data set is small ($n$ = \rinline{nrow(fstFinal)}).

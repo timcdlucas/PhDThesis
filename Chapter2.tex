@@ -260,7 +260,7 @@ Note this rate is independent of the degree and size of colony $y$.
 \tmpsection{Stochastic simulations}
 
 I examined this model using stochastic, continuous-time simulations implemented in \emph{R} \cite{R}.
-The implementation is available as an R package on GitHub \cite{metapopepi}.
+The implementation is available as an \emph{R} package on GitHub \cite{metapopepi}.
 The model can be written as a continuous-time Markov chain.
 The Markov chain contains the random variables $((S_x)_{x = 1\ldots m}, (I_{x, q})_{x =1\ldots m,\:q \in \{1, 2, 12\}}, (R_x)_{x = 1\ldots m})$.
 Here, $(S_x)_{x = 1\ldots m}$ is a length $m$ vector of the number of susceptibles in each colony.
@@ -329,10 +329,10 @@ $q$ & Disease class i.e.\ $q\in\{1,2,12\}$&\\
 $S_x$ & Number of susceptible individuals in colony $x$ &&\\
 $I_qx$ & Number of individuals infected with disease(s) $q \in {1, 2, 12}$ in colony $x$ &&\\
 $R_x$ & Number of individuals in colony $x$ in the recovered with immunity class  &&\\
-$N$ & Total Population size && 30\,000\\
+$N$ & Total Population size && 30,000\\
 $m$ & Number of colonies&& 10\\
-$n$ & Colony size && 3\,000\\
-$a$ & Area & \si{\square\kilo\metre}& 10\,000\\
+$n$ & Colony size && 3,000\\
+$a$ & Area & \si{\square\kilo\metre}& 10,000\\
 $\beta$ & Transmission rate &  & 0.1 -- 0.4\\
 $\alpha$ & Coinfection adjustment factor.  & Proportion & 0.1\\
 $\gamma$ & Recovery rate & year$^{-1}.$individual$^{-1}$ & 1\\
@@ -501,17 +501,17 @@ In each simulation, the na{\"i}ve population was seeded with ten sets of 200 inf
 These groups were seeded into randomly selected colonies with replacement.
 For each 200 infected individuals added, 200 susceptible individuals were removed to keep starting colony sizes constant. 
 Pathogen 1 was then allowed to spread until the initial, large epidemic had ended. 
-Visual inspection of preliminary simulations was used to decide on \ensuremath{3\times 10^{5}} events as being long enough for the epidemic to end and the pathogen to be in an endemic state (Figures~\ref{fig:plotsInvade} and \ref{fig:plotsNoInvade1}).
-After \ensuremath{3\times 10^{5}} events, five individuals infected with Pathogen 2 were added to one randomly selected colony. 
-After another \ensuremath{5\times 10^{5}} events the invasion of Pathogen 2 was considered successful if any individuals were still infected with Pathogen 2.
+Visual inspection of preliminary simulations was used to decide on \SI{300000} events as being long enough for the epidemic to end and the pathogen to be in an endemic state (Figures~\ref{fig:plotsInvade} and \ref{fig:plotsNoInvade1}).
+After \SI{300000} events, five individuals infected with Pathogen 2 were added to one randomly selected colony. 
+After another \SI{500000} events the invasion of Pathogen 2 was considered successful if any individuals were still infected with Pathogen 2.
 Therefore, if at least one individual was in class $I_2$ or $I_{12}$ at the end of the simulation, this was considered an invasion.
-Again, visual inspection of preliminary simulations was used to determine that after \ensuremath{5\times 10^{5}} events, if an invading pathogen was still present, it was well established (Figures~\ref{fig:plotsInvade} and \ref{fig:plotsNoInvade1}).
+Again, visual inspection of preliminary simulations was used to determine that after \SI{500000} events, if an invading pathogen was still present, it was well established (Figures~\ref{fig:plotsInvade} and \ref{fig:plotsNoInvade1}).
 
 The choice to use a fixed number of events, rather than a fixed number of years, was for computational convenience.
 However, this choice creates a risk of bias as simulations with more events per unit time will last for a shorter time overall.
 However, visual inspection of the dynamics of disease extinction (\ref{fig:plotsNoInvade1}), and examination of the typical time to extinction implies that this bias is very weak.
 For example, of the simulations where extinction occurred, the extinction occurred more than 50 years before the end of the simulation in 90\% of cases.
-On a preliminary run of 106 simulations across all combinations of dispersal and transmission rates, examining the population after $7 \times 10^5$ events instead of \ensuremath{8\times 10^{5}} events gave exactly the same result with respect to the binary state of invasion or no invasion. 
+On a preliminary run of 106 simulations across all combinations of dispersal and transmission rates, examining the population after \SI{700000} events instead of \SI{800000} events gave exactly the same result with respect to the binary state of invasion or no invasion. 
 
 
 \subsection{Population structure}
@@ -640,7 +640,7 @@ The code used for running the simulations and analysing the results is available
 In the unstructured population, the second pathogen invaded in 100 out of 100 simulations.
 This was true at all four transmission rates.
 
-When the $\xi = 0$ simulations were included, there was a positive relationship between dispersal rate and invasion probability for $\beta = 0.2, 0.3$ and $0.4$ (Figure~\ref{f:invasionPropPlots}A).
+When the $\xi = 0$ simulations were included, there was a positive relationship between dispersal rate and invasion probability for $\beta = 0.2, 0.3$ and $0.4$ (Figure~\ref{f:invasionPropPlots}A, Table~\ref{B-disp}).
 These positive relationships were all significant (GLM. $\beta = 0.2$: $b$ = 12.59, $p < 10^{-5}$. $\beta = 0.3$: $b$ = 12.07, $p$ = 0. $\beta = 0.4$: $b$ = 13.44, $p$ = 0.03.)
 At $\beta = 0.1$ there was no significant relationship as invasion probaiblity was very close to zero at all dispersal rates (GLM. $b$ = \ensuremath{-220.19}, $p$ = 0.62).
 
@@ -653,7 +653,7 @@ At all other transmission rates, the probability of invasion did not significant
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 When the completely unconnected topology simulations were included, the probability of invasion was different across topologies for $\beta = 0.2, 0.3$ and $0.4$ (Fisher's exact test. $\beta = 0.2$:  $p < 10^{-5}$. $\beta = 0.3$: $p < 10^{-5}$. $\beta = 0.4$:  $p < 10^{-5}$).
-In each case, the fully unconnected population had a lower probability of invasion than the minimally and completely connected topologies (Figure~\ref{f:invasionPropPlots}B).
+In each case, the fully unconnected population had a lower probability of invasion than the minimally and completely connected topologies (Figure~\ref{f:invasionPropPlots}B, Table~\ref{B-topo}).
 At $\beta = 0.1$ there was no significant difference ($p = 0.77$) and the probability of invasion was close to zero for all topologies (Figure~\ref{f:invasionPropPlots}B).
 
 When the completely unconnected topology simulations were removed, there were no significant differences between topologies i.e.\ between the minimally and fully connected topologies (Figure~\ref{f:invasionPropPlots}B). 

@@ -671,7 +671,7 @@ The red ``Random'' box is the uniformly random variable.
 
 
 
-%%begin.rcode batClocksAnalyse
+%%begin.rcode batClocksAnalyse, echo = FALSE
 
 
 allResults2 <- read.csv('data/Chapter3/modelSelectSubspeciesBatClocks.csv', row.names = 1)

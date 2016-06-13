@@ -21,7 +21,7 @@
 Current methods to estimate population size or density require individual recognition of animals or knowing the distance of the animal from the sensor, which is often difficult.
 A method without these requirements, the random encounter model (REM), has been successfully applied to estimate animal densities from count data generated from camera traps.
 However, count data from acoustic detectors do not fit the assumptions of the REM due to the directionality of animal signals.
-I developed a generalised REM (gREM), to estimate absolute animal density from count data from both camera traps and acoustic detectors.
+I developed a generalised REM (gREM), to estimate absolute population size or density from count data from both camera traps and acoustic detectors.
 I derived the gREM for different combinations of sensor detection widths and animal signal widths (a measure of directionality).
 I tested the accuracy and precision of this model using simulations of different combinations of sensor detection widths and animal signal widths, number of captures, and models of animal movement. 
 I foundnd that the gREM produces accurate estimates of absolute animal density for all combinations of sensor detection widths and animal signal widths.
@@ -96,7 +96,7 @@ Dashed lines around the filled square and circle represents the maximum extent o
 
 
 
-\paragraph{Gas Model}
+\subsubsection{Gas Model}
 
 Following \cite{yapp1956theory}, we derive the gas model where sensors can capture animals in any direction and animal signals are detectable from any direction ($\theta =  2\pi$ and $ \alpha =  2\pi$).
 We assume that animals are in a homogeneous environment, and move in straight lines of random direction with velocity $v$.
@@ -109,9 +109,10 @@ As a circle moving across a plane, the area covered by the sensor per unit time 
 The expected number of captures, $z$, for a survey period of $t$, with an animal density of $D$ is $z = 2rvtD$.
 To estimate the density we rearrange to get $D = z/2rvt$.
 Note that as $z$ is the number of encounters, not individuals, the possibility of repeated detections of the same individual is accounted for \cite{Hutchinson_Waser_2007}.
+To estimate population size rather than density, the density is simply multiplied by the size of the survey area.
 
 
-\paragraph{gREM derivations for different detection and signal widths}
+\subsubsection{gREM derivations for different detection and signal widths}
 Different combinations of $\theta$ and $\alpha$ would be expected to occur (e.g., sensors have different detection widths and animals have different signal widths).
 For different combinations $\theta$ and $\alpha$, the area covered per unit time is no longer given by $2rv$.
 Instead of the size of the sensor detection zone having a diameter of $2r$, the size changes with the approach angle between the sensor and the animal.
@@ -157,7 +158,7 @@ Any estimate of density would require prior knowledge of animal velocity, $v$ an
 Sensor width, $\theta$, and detection distance, $r$ would also need to be measured or obtained from manufacturer specifications \cite{holderied2003echolocation, adams2012you}.
 
 
-\paragraph{Example derivation of SE2}
+\subsubsection{Example derivation of SE2}
 
 In order to calculate $\bar{p}$, we have to integrate over the focal angle, $x_1$ (Figure~\ref{f:x1AndInt}a).
 This is the angle taken from the centre line of the sensor.
@@ -286,7 +287,7 @@ Expressions on the edge of the plot are for submodels with $\alpha, \theta = 2\p
 
 \subsection{Simulation model}
 
-\paragraph{gREM submodels}
+\subsubsection{gREM submodels}
 All gREM submodels showed a high accuracy, i.e., the median difference between the estimated and true values was less than 2\% across all models (Figure~\ref{fig:gremSubmods}).
 However, the precision of the submodels do vary, where the gas model is the most precise and the SW7 sub model the least precise, having the smallest and the largest interquartile range, respectively (Figure~\ref{fig:gremSubmods}).
 The standard deviation of the error between the estimated and true densities is strongly related to both the sensor and signal widths (Appendix S5), such that larger widths have lower standard deviations (greater precision) due to the increased capture rate of these models.
@@ -321,7 +322,7 @@ Box colours correspond to the expressions for average profile width $\bar{p}$ gi
 %	\label{f:ModelBias}
 %\end{figure}
 
-\paragraph{Number of captures}
+\subsubsection{Number of captures}
 
 Within the four gREM submodels tested (NW1, SW1, SE3, NE1), the accuracy was not strongly affected by the number of captures.
 The median difference between the estimated and true values was less than 15\% across all capture rates (Figure~\ref{fig:Captures}).
@@ -362,13 +363,13 @@ The colour of each box plot corresponds to the expressions for average profile w
 %\label{f:Captures}
 %\end{figure}
 
-\paragraph{Movement models}
+\subsubsection{Movement models}
 
 Within the four gREM submodels tested (NW1, SW1, SE3, NE1), neither the accuracy or precision was affected by the average amount of time spent stationary.
 The median difference between the estimated and true values was less than 2\% for each category of stationary time (0, 0.25, 0.5 and 0.75) (Figure~\ref{fig:movtFig}).
 Altering the maximum change in direction in each step (0, $\pi/3$, $2\pi/3$, and $\pi$) did not affect the accuracy or precision of the four gREM submodels (Figure~\ref{fig:movtFig}). 
 
-\paragraph{Impact of parameter error}
+\subsubsection{Impact of parameter error}
 
 The percentage error in the density estimates across all parameters and gREM submodels shows a similar response for under and over estimated parameters, suggesting the accuracy is reasonable with respect to parameter error (Appendix S6).
 The impact of parameter error on the precision of the density estimate varies across gREM submodels and parameters, where $\alpha$ shows the largest variation including the largest values.
