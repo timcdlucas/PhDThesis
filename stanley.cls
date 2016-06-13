@@ -110,6 +110,7 @@
 \hangsecnum
 %readd to go back to no "chapter 1" and haning nums.
 %\chapterstyle{hangnum}
+\chapterstyle{chappell}
 
 % fonts
 \renewcommand*{\chaptitlefont}{\Huge\raggedright}
@@ -118,7 +119,9 @@
 \setsubsubsecheadstyle{\large\raggedright}
 
 
-% Redefine chapter with subtitle for declarations.
+
+
+
 
 
 
