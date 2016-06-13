@@ -108,13 +108,15 @@
 
 % section numbers hanging into left margin
 \hangsecnum
-\chapterstyle{hangnum}
+%readd to go back to no "chapter 1" and haning nums.
+%\chapterstyle{hangnum}
 
 % fonts
 \renewcommand*{\chaptitlefont}{\Huge\raggedright}
 \setsecheadstyle{\LARGE\raggedright}
 \setsubsecheadstyle{\Large\raggedright}
 \setsubsubsecheadstyle{\large\raggedright}
+
 
 % Redefine chapter with subtitle for declarations.
 
