@@ -273,7 +273,7 @@ ggdraw() +
 
 noInvadeTitle <- c(
 '
-Examples of simulated SIR dynamics with nusuccesfull invasions
+Examples of simulated SIR dynamics with unsuccesfull invasions
 ',
 '
 Examples of colony size dynamics
