@@ -53,26 +53,25 @@ Little research has so far been conducted contrasting these different processes 
 
 Colony size has been found to have a negative relationship \cite{gay2014parasite} and no relationship \cite{turmelle2009correlates} with parasite richness in previous comparative studies using relatively small datasets.
 However, in Chapter \ref{ch:sims2} I found that colony size is particularly important for promoting pathogen richness.
-I did not include colony size in my comparative analysis (Chapter \ref{ch:empirical}) for three reasons: the focus of the chapter was broad-scale population structure, the lack of previous evidence of a positive relationship \cite{gay2014parasite, turmelle2009correlates} and the lack of data.
+I did not include colony size in my comparative analysis (Chapter \ref{ch:empirical}) for three reasons: the focus of the chapter was broad-scale population structure, the lack of strong evidence of a relationship \cite{turmelle2009correlates} and the lack of data.
 However, given the results of Chapter~\ref{ch:sims2}, filling these data gaps would be a useful avenue for further research.
-In particularly, testing the relative effects of colony size, population structure and range size would be a useful test of the model used in Chapter~\ref{ch:sims2}.
+In particularly, testing the relative effects of population density and colony size would be a useful test of the model used in Chapter~\ref{ch:sims2}.
 
-In this thesis I have only examined one mechanism by which demographic attributes may affect pathogen richness.
-I have only examined the ability of a newly evolved pathogen (i.e. a pathogen, identical to an endemic pathogen and in the presence of strong competition) to invade and persist.
-
+In this thesis I have only examined one mechanism by which population-level factors may affect pathogen richness.
+I have only examined the ability of a newly evolved pathogen (i.e. a pathogen identical to an endemic pathogen and in the presence of strong competition) to invade and persist.
 However, there are a number of other mechanisms that could equally strongly affect pathogen richness in the wild.
 Closely related to the mechanism studied here is the case of pathogens invading from other host species.
-These pathogens are likely to have different epidemiological parameters (transmission rate, virulence, recovery rate) to the endemic pathogen.
+These pathogens are likely to have different epidemiological parameters (transmission rate, virulence, recovery rate) to the endemic pathogen as modelled in \textcite{may1994superinfection} for example.
 Furthermore, the competition between pathogens is expected to be less strong.
 Alternatively, host population traits could affect the rate of pathogen extinction.
-Once a number of pathogens are established in a population, there is still likely to be occasional extinctions, especially in the presence of inter-pathogen competition.
+Once a number of pathogens are established in a population, there is still likely to be occasional extinctions, especially in the presence of inter-pathogen competition. %todo ref
 A number of population factors could affect this rate.
 It is expected that large populations will experience slower rates of pathogen loss as stochastic extinction will be more rare.
 Furthermore, populations with strongly varying disease prevalences are likely to have higher rates of pathogen extinction.
 This includes populations where epidemic cycles are common \cite{altizer2006sesonality}; subsequent to a large epidemic, and after a time lag, the number of susceptible individuals in the populations will be low due to immunity, host death or low birth rates induced by infection \cite{scott1987population, hethcote1994thousand}.
-While the number of susceptibles is low, incidence could stochastically drop to zero for one disease generation, thus causing extinction. 
-This effect will be exacerbated in the case where an epidemic cycle is synchronous across the whole population \cite{duke2011strong}.
-Structured populations with asynchronous epidemic cycles may experience local pathogen extinction but rarely global extinction; this pattern of local extinction and recolonisation has been well studied in the ecological literature \cite{grenfell1995seasonality, levin1974dispersion, hanski1998metapopulation}, but less so in the epidemiological literature. %read http://link.springer.com/article/10.1007/s10980-008-9245-4
+While the number of susceptibles is low stochastic extinction is more likely. %ref 
+This effect will be exacerbated in the case where an epidemic cycle is synchronous across the whole population as is the case in unstructured populations \cite{duke2011strong, mckenzie2001seasonality}.
+Structured populations with asynchronous epidemic cycles may experience local pathogen extinction but rarely global extinction; this pattern of local extinction and recolonisation has been well studied in the ecological literature \cite{grenfell1995seasonality, levin1974dispersion, hanski1998metapopulation}, but less so in the epidemiological literature. %todo read http://link.springer.com/article/10.1007/s10980-008-9245-4
 
 
 \section{Predictive modelling}
@@ -102,10 +101,10 @@ This suggests that further research should study in more detail the effects of c
 
 \section{Bat social structure}
 
-Finally it is important to note that I have ignored much of the social complexity found in bats.
-In Chapters \ref{ch:sims1} and \ref{ch:sims2} I have modelled bat populations as a metapopulation where the only social structure is the grouping of individuals into subpopulations.
+It is important to note that I have ignored much of the social complexity found in bats.
+Information on these other social behaviours was not explicitly included in the empirical study in Chapter \ref{ch:empirical}.
+Furthermore, in Chapters \ref{ch:sims1} and \ref{ch:sims2} I have modelled bat populations as a metapopulation where the only social structure is the grouping of individuals into subpopulations.
 There is dispersal between these subpopulations but otherwise they are static.
-Similarly, information on these other social behaviours was not explicitly included in the regression in Chapter \ref{ch:empirical}.
 Firstly, I have not modelled the creation of new colonies, or the disbanding of colonies \cite{metheny2008genetic}.
 Especially in the face of habitat destruction, it is likely that the number of colonies of a species will be decreasing.
 Furthermore, in some species, colonies are likely to be more fluid, with groups joining and splitting \cite{kerth2012causes, august2014sympatric}.
@@ -117,11 +116,11 @@ Similarly, swarming behaviour --- the coming together of many bats from differen
 
 
 Furthermore, many bat species, both temperate and tropical, are migratory \cite{fleming2003ecology, krauel2013recent, popa2009bats, hutterer2005bat}.
-Again, it is largely unknown whether colonies travel together during migration. 
+Again, it is largely unknown whether colonies travel together during migration \cite{baerwald2016migratory}. 
 It is therefore also unknown whether colony structure is similar before and after migration \cite{carter2013cooperation} though \textcite{kurta2002philopatry} find that individuals do not migrate together.
-There is also little data on whether parameters such as dispersal rate are constant before and after migration, though it is likely that most dispersal between colonies is juvenile dispersal and so dispersal rate is likely to be much higher in one location than the other.
+There is also little data on whether parameters, such as intercolony dispersal rate, are constant before and after migration.
 Even if colonies remain fairly constant during migration, the spatial relationships may be different; colonies that were far apart in one area could subsequently be near neighbours after migration.
-Migratory status has been included in previous comparative analyses and not been found to be a strong predictor of pathogen richness \cite{turmelle2009correlates, maganga2014bat}. 
+However, migratory status has been included in previous comparative analyses and not been found to be a strong predictor of pathogen richness \cite{turmelle2009correlates, maganga2014bat}. 
 
 Another potentially important factor that has been ignored here is roost sharing by different bat species \cite{maganga2014bat, lopez2014seroprevalence, serra2002european, pons2014insights, deThoisy2016bioecological}.
 If the species are very similar in most epidemiological factors, this could potentially be sensibly modelled by ignoring species identity and treating the whole population as one.
