@@ -82,11 +82,12 @@ While there is potential for population structure and colony size to be useful v
 However, as more unbiased data is collected --- as in \textcite{anthony2013strategy, anthony2015non} --- or using much larger pathogen data sets --- such as \textcite{wardeh2015database} --- predictive models may become a more viable tool.
 Furthermore, the method provided in Chapter~\ref{ch:grem} makes the collection of population size data more feasible over broad taxonomic, spatial or temporal scales, further increasing the potential of predictive models.
 
-One approach to dealing with the biases in the data would be to use small, unbiased pathogen richness datasets as test data while using the large biased data sets as training data.
+One approach to dealing with the biases in the data would be to use small, unbiased pathogen richness datasets as test data while using the large, biased data sets as training data.
+This use of data that predicts a related but different measure is known as domain adaptation \cite{daume2006domain, daume2009frustratingly}.
 As pathogen richness will be measured on different scales in these datasets, steps will have to be taken to make the information in the larger data sets applicable to the smaller datasets.
 It might be possible to predict a species to pathogen richness quantile or broad pathogen richness classes (i.e.\ ``high pathogen richness'' and ``low pathogen richness'').
 This may be informative enough for advising policy and prioritising species for zoonotic surveillance.
-Alternatively, a subset of the small unbiased data sets could be used to create a simple model to rescale predictions from the model trained on the large dataset so that it is applicable to the small dataset.
+Alternatively, a subset of the small unbiased data sets could be used to create a simple model to rescale predictions from the model trained on the large dataset so that it is applicable to the small dataset \cite{daume2009frustratingly}.
 
 While predictive models should be built, forecasting changes in pathogen richness and zoonotic risk will be difficult.
 However, the mechanistic understanding obtained by the theoretical chapters here can suggest how pathogen richness may respond to global change and other population stressors.
