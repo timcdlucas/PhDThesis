@@ -2425,7 +2425,7 @@ However, given that it is difficult to measure population structure and given th
 However, as number of other factors are also associated with pathogen richness such as body mass and to a lesser extent range size as shown here as well as other traits studied elsewhere \cite{turmelle2009correlates, luis2013comparison}.
 Therefore, using a combination of traits in a predictive (i.e.\ machine learning) framework has potential to be used in prioritising zoonotic disease surveillance.
 The main hurdle in this approach is finding a way to validate models; due to the study effort bias in current data, predictive models will also be biased.
-As unbiased pathogen surveys (e.g., \textcite{anthony2013strategy}) become more common this may become possible.
+As unbiased pathogen surveys such as \textcite{anthony2013strategy} become more common good validation may become possible.
 Alternatively, predictive models could be trained on all available --- and therefore biased --- data and validated by predicting smaller, unbiased data sets such as the data collected in \textcite{maganga2014bat}.
 
 The relationship between increased population structure and pathogen richness also has implications for habitat fragmentation and range shifts due to global change.
@@ -2439,7 +2439,7 @@ Therefore further studies on the exact mechanisms by which increased population 
 \subsection{Study limitations}
 
 Although I have used measures of study effort to try to control for biases in the viral richness data, this bias could still make the results here unreliable --- this is especially true as study effort is by far the strongest predictor of viral richness in both data sets.
-It is hoped that as untargeted sequencing of viral genetic material (e.g., \textcite{anthony2013strategy}) becomes cheaper and more common this bias can be reduced.
+It is hoped that as untargeted sequencing of viral genetic material  becomes cheaper and more common this bias can be reduced \cite{anthony2013strategy}.
 The strength of the relationship between study effort and known viral richness also highlights the number of bat-virus host-pathogen relationships yet to be discovered and the number of virus species that are yet to be described.
 
 I have included a number of explanatory variables to avoid spurious correlations.
