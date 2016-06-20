@@ -75,7 +75,7 @@ library(cowplot)
 \section{Abstract}
 
 
-\tmpsection{One or two sentences providing a basic introduction to the field}
+%\tmpsection{One or two sentences providing a basic introduction to the field}
 % comprehensible to a scientist in any discipline.
 \lettr{A}n increasingly large proportion of emerging human diseases comes from animals.
 These diseases have a huge impact on human health, healthcare systems and economic development.
@@ -83,24 +83,24 @@ The chance that a new zoonosis will come from any particular wild host species i
 However, the factors that control pathogen richness of wild animal species remain unclear.
 %
 %
-\tmpsection{Two to three sentences of more detailed background}
+%\tmpsection{Two to three sentences of more detailed background}
 % comprehensible to scientists in related disciplines.
 % Add mechanistic vs empirical
 Comparative, phylogenetic studies have shown that host-species traits such as population density, longevity and body size correlate with pathogen richness.
 Further comparative studies have found correlations between population structure and pathogen richness.
 Typically it is assumed that well-connected, unstructured populations (that therefore have a high basic reproductive number, $R_0$) promote the invasion of new pathogens and therefore increase pathogen richness. % Where or how to define well-connected?
-However, this assumption is largely untested.
+However, this assumption is largely untested in the multipathogen context.
 In the presence of inter-pathogen competition, the opposite effect might occur; increased population structure may increase pathogen richness by reducing the effects of competition.
 A more mechanistic understanding of how population structure affects pathogen richness could discriminate between these two broad hypotheses.
 %
-\tmpsection{One sentence clearly stating the general problem (the gap)}
+%\tmpsection{One sentence clearly stating the general problem (the gap)}
 % being addressed by this particular study.
 %It is unknown whether greater population structure allows invading pathogens to escape from competition by stochastically creating areas of low pathogen prevalence.
 I hypothesised that both low dispersal rates and a low number of connections in a metapopulation network would allow invading pathogens to establish more easily, thus increasing pathogen richness. 
-I tested these hypotheses using metapopulation networks parameterised to mimic wild bat populations as bats have highly varied social structures and have recently been implicated in a number of high profile diseases such as Ebola, SARS, Hendra and Nipah.
+I tested this hypothesis using metapopulation networks parameterised to mimic wild bat populations as bats have highly varied social structures and have recently been implicated in a number of high profile diseases such as Ebola, SARS, Hendra and Nipah.
 %
 %
-\tmpsection{One sentence summarising the main result}
+%\tmpsection{One sentence summarising the main result}
 %  (with the words “here we show” or their equivalent).
 I simulated the process of a new pathogen invading into a metapopulation already occupied by an identical pathogen.
 I varied the dispersal rate, topology of the metapopulation and transmission rate.
@@ -108,8 +108,8 @@ I found significant evidence that increased dispersal rate increased the probabi
 I found marginal evidence that network topology affected the probability that a new pathogen would invade.
 %\paragraph{Two or three sentences explaining what the main result reveals in direct comparison to what was thought to be the case previously}
 % or how the main result adds to previous knowledge
-The assumption that factors causing high $R_0$ allow new pathogens to invade and therefore increase pathogen richness was supported.
-However, my results contradict many theoretical studies which predict that increased population structure should promote coexistence of pathogens.
+Therefore, the assumption that factors causing high $R_0$ allow new pathogens to invade and therefore increase pathogen richness was supported.
+However, my results contradict theoretical studies that predict that increased population structure should promote coexistence of pathogens.
 My results also contradict empirical patterns of pathogen richness with respect to population structure.
 Therefore, it is likely that population structure affects pathogen richness via a different mechanism to the one modelled here.
 %
@@ -176,8 +176,7 @@ In comparative studies, a number of host traits have been shown to correlate wit
 A further factor that may affect pathogen richness is population structure.
 In comparative studies it is often assumed that factors that promote fast disease spread should promote high pathogen richness; the faster a new pathogen spreads through a population, the more likely it is to persist \cite{nunn2003comparative, morand2000wormy, poulin2014parasite, poulin2000diversity, altizer2003social}.
 However, this assumption ignores competitive mechanisms such as cross-immunity and depletion of susceptible hosts.
-If competitive mechanisms are strong, endemic pathogens in populations structured such that $R_0$ will be high will be able to easily out-compete invading pathogens.
-%Only if competitive mechanisms are weak will high $R_0$  enable the invasion of new pathogens and allow higher pathogen richness.
+If competitive mechanisms are strong, endemic pathogens in might be able to out0compete invading pathogens irrespective of population structure.
 
 Overall, the evidence from comparative studies indicates that increased population structure correlates with higher pathogen richness.
 This conclusion is based on studies using a number of measures of population structure: genetic measures, the number of subspecies, the shape of species distributions and social group size (Chapter \ref{ch:empirical}, \cites{vitone2004body, maganga2014bat, turmelle2009correlates}).
@@ -254,7 +253,7 @@ The reason for this focus is that they have been implicated in a number of high 
 % One sentence summarising the main result
 % (with the words “here we show” or their equivalent).
 
-Here I show that, given the assumptions of a metapopulation, increased dispersal significantly increased the probability of invasion of new pathogens.
+Here I found that, given the assumptions of a metapopulation, increased dispersal significantly increased the probability of invasion of new pathogens.
 Furthermore, structured populations nearly always had a lower probability of pathogen invasion than fully-mixed populations of equal size.
 The topology of the network did not strongly affect the probability of pathogen invasion as long as the population was not completely unconnected.
 Overall, I found significant evidence that reduced population structure increases the probability of invasion of a new pathogen, implying a role for the generation of pathogen richness more generally.
@@ -282,7 +281,7 @@ Any up-regulation of innate immune response will affect both pathogens equally.
 Furthermore, as the pathogens are identical, any acquired immunity would also affect both pathogens equally.
 
 The coinfection rate (the rate at which an infected individual is infected with a second pathogen) is adjusted compared to the infection rate by a factor $\alpha$.
-Low values of $\alpha$ imply lower rates of coinfection.
+As in \textcite{castillo1989epidemiological}, low values of $\alpha$ imply lower rates of coinfection.
 In particular, $\alpha = 0$ indicates no coinfections, $\alpha = 1$ indicates that coinfections happen at the same rate as first infections while $\alpha > 1$ indicates that coinfections occur more readily than first infections.
 
 
@@ -300,15 +299,15 @@ The population is modelled as a metapopulation, being divided into a number of s
 This model is an intermediate level of complexity between fully-mixed populations and contact networks.
 The existence of subspecies, measurements of genetic dissimilarity and ecological studies provide ample evidence that bat populations are structured to some extent \cite{kerth2011bats, mccracken1981social, burns2014correlates, wilson2005mammal}.
 Therefore a fully mixed population is a large oversimplification.
-However, trying to study the contact network relies on knowledge of detailed individual behaviour which is rarely available.		
+However, trying to study the contact network relies on detailed knowledge of individual behaviour which is rarely available.		
 
 The metapopulation is modelled as a network with colonies being nodes and dispersal between colonies being indicated by edges (Figure~\ref{f:net}).
 Individuals within a colony interact randomly so that the colony is fully mixed.
 Dispersal between colonies occurs at a rate $\xi$.
 Individuals can only disperse to colonies connected to theirs by an edge in the network.
 The rate of dispersal is not affected by the number of edges a colonies has (known as the degree of the colony and denoted $k$).
-Therefore, the dispersal rate from a colony $x$ with degree $k_x$ to colony $y$ is $\xi / k_x$.
-Note this rate is independent of the degree and size of colony $y$.
+Therefore, the dispersal rate from a colony $y$ with degree $k_y$ to colony $x$ is $\xi / k_y$.
+Note this rate is independent of the degree and size of colony $x$.
 
 
 
@@ -333,7 +332,7 @@ One event is then randomly chosen, weighted by its rate
 where $e_i$ is the rate at which event $i$ occurs and $\sum_j e_j$ is the sum of the rates of all possible events.
 Finally, the length of the time step, $\delta$, is drawn from an exponential distribution 
 \begin{align}
-  \delta \sim \operatorname{Exp}\left(\sum_i e_i  \right).
+  \delta \sim \operatorname{Exp}\left(\sum_j e_j  \right).
 \end{align}
 
 
@@ -371,7 +370,7 @@ The rates of death, given a death rate $\mu$, and no increased mortality due to 
 \begin{table}[b!]
 \centering
 \caption[All symbols used in Chapters \ref{ch:sims1} and \ref{ch:sims2}.]{A summary of all symbols used in Chapters \ref{ch:sims1} and \ref{ch:sims2} along with their units and default values.
-The justification for parameter values is given in Section \ref{s:paramSelect}.}
+The justifications for parameter values are given in Section \ref{s:paramSelect}.}
 
 \begin{tabular}{@{}lp{6cm}p{2.9cm}r@{}}
 \toprule
@@ -389,7 +388,7 @@ $m$ & Number of colonies&& 10\\
 $n$ & Colony size && 3,000\\
 $a$ & Area & \si{\square\kilo\metre}& 10,000\\
 $\beta$ & Transmission rate &  & 0.1 -- 0.4\\
-$\alpha$ & Coinfection adjustment factor.  & Proportion & 0.1\\
+$\alpha$ & Coinfection adjustment factor  & & 0.1\\
 $\gamma$ & Recovery rate & year$^{-1}.$individual$^{-1}$ & 1\\
 $\xi$ & Dispersal & year$^{-1}.$individual$^{-1}$ & 0.001--0.1\\
 $\Lambda$ & Birth rate & year$^{-1}.$individual$^{-1}$ & 0.05\\
@@ -410,28 +409,28 @@ This assumption was more suitable than frequency-dependent transmission as I was
 I was notably not modelling a sexually transmitted disease (STD) as spillover of STDs from bats to humans is likely to be rare.
 Infection of a susceptible with either Pathogen 1 or 2 is therefore given by
 \begin{align}
-  i_{1x} \rightarrow i_{1x}+1, s_x \rightarrow s_x-1 &\;\;\text{at a rate of}\;\; \beta s_x\left(i_{1x} + i_{12x}\right),\\
-  i_{2x} \rightarrow i_{2x}+1, s_x \rightarrow s_x-1  &\;\;\text{at a rate of}\;\; \beta s_x\left(i_{2x} + i_{12x}\right),
+  i_{1x} \rightarrow i_{1x}+1,\;\; s_x \rightarrow s_x-1 &\;\;\text{at a rate of}\;\; \beta s_x\left(i_{1x} + i_{12x}\right),\\
+  i_{2x} \rightarrow i_{2x}+1,\;\; s_x \rightarrow s_x-1  &\;\;\text{at a rate of}\;\; \beta s_x\left(i_{2x} + i_{12x}\right),
 \end{align}
 while coinfection, given the coinfection adjustment factor $\alpha$, is given by
 \begin{align}
-  i_{12,x} \rightarrow i_{12,x}+1,\: i_{1x} \rightarrow i_{1x}-1 &\;\;\text{at a rate of}\;\; \alpha\beta i_{1x}\left(i_{2x} + i_{12x}\right),\\
-  i_{12,x} \rightarrow i_{12,x}+1,\: I_{2x} \rightarrow i_{2x}-1 &\;\;\text{at a rate of}\;\; \alpha\beta i_{2x}\left(i_{1x} + i_{12x}\right).
+  i_{12,x} \rightarrow i_{12,x}+1,\;\; i_{1x} \rightarrow i_{1x}-1 &\;\;\text{at a rate of}\;\; \alpha\beta i_{1x}\left(i_{2x} + i_{12x}\right),\\
+  i_{12,x} \rightarrow i_{12,x}+1,\;\; I_{2x} \rightarrow i_{2x}-1 &\;\;\text{at a rate of}\;\; \alpha\beta i_{2x}\left(i_{1x} + i_{12x}\right).
 \end{align}
 Note that lower values of $\alpha$ give lower rates of infection as in \textcite{castillo1989epidemiological}.
 
 
 The probability of migration from colony $y$ (with degree $k_y$) to colony $x$, given a dispersal rate $\xi$ is given by
 \begin{align}
-  s_x \rightarrow s_x+1,\: s_y \rightarrow s_y-1 &\;\;\text{at a rate of}\;\; \frac{\xi s_y}{k_y},\\
+  s_x \rightarrow s_x+1,\;\; s_y \rightarrow s_y-1 &\;\;\text{at a rate of}\;\; \frac{\xi s_y}{k_y},\\
   i_{qx} \rightarrow i_{qx}+1,\: i_{qy} \rightarrow i_{qy}-1 &\;\;\text{at a rate of}\;\; \frac{\xi i_{qy}}{k_y},\\
-  r_x \rightarrow r_x+1,\: r_y \rightarrow r_y-1 &\;\;\text{at a rate of}\;\; \frac{\xi r_y}{k_y}.
+  r_x \rightarrow r_x+1,\;\; r_y \rightarrow r_y-1 &\;\;\text{at a rate of}\;\; \frac{\xi r_y}{k_y}.
 \end{align}
 Not that the dispersal rate does not change with infection.
 As above, this is due to the low virulence of bat viruses.
 Finally, recovery from any infectious class occurs at a rate $\gamma$
 \begin{align}
-  i_{qx} \rightarrow i_{qx}-1,\: r_x \rightarrow r_x+1  \;\;\text{at a rate of}\;\; \gamma i_{qx}.
+  i_{qx} \rightarrow i_{qx}-1,\;\; r_x \rightarrow r_x+1  \;\;\text{at a rate of}\;\; \gamma i_{qx}.
 \end{align}
 
 
@@ -732,7 +731,7 @@ fullSim <- function(x){
   invasion <- findDisDistr(p, 2)[1] > 0
 
   # Save summary stats
-  d <- data.frame(transmission = NA)
+  d <- data.frame(transmission = N
 
   d$transmission <- p$parameters['transmission']
   d$dispersal <- p$parameters['dispersal']
@@ -1036,7 +1035,7 @@ This indicates a level of cross-immunity between these pairs of viruses. %todo I
 The metapopulation was made up of ten colonies.
 Ten colonies was selected as a trade-off between computation time and a network complex enough that any effects of population structure could be detected.
 This value is artificially small compared to wildlife populations. 
-In each simulation, the na{\"i}ve population was seeded with ten sets of 200 infected individuals of Pathogen 1.
+In each simulation, the na{\"i}ve population was seeded with ten sets of 200 individuals infected with Pathogen 1.
 These groups were seeded into randomly selected colonies with replacement.
 For each 200 infected individuals added, 200 susceptible individuals were removed to keep starting colony sizes constant. 
 Pathogen 1 was then allowed to spread until the initial, large epidemic had ended. 
@@ -1047,7 +1046,7 @@ Therefore, if at least one individual was in class $I_2$ or $I_{12}$ at the end 
 Again, visual inspection of preliminary simulations was used to determine that after \SI{\rinline{nEvent - invadeT}} events, if an invading pathogen was still present, it was well established (Figures~\ref{fig:plotsInvade} and \ref{fig:plotsNoInvade1}).
 
 The choice to use a fixed number of events, rather than a fixed number of years, was for computational convenience.
-However, this choice creates a risk of bias as simulations with more events per unit time will last for a shorter time overall.
+However, this choice creates a risk of bias as simulations with a greater total rate of events $\sum_j e_j$ (e.g.,\ faster disease transmission)  will last for a shorter time overall (i.e.\ a smaller $\sum \delta$ over all events).
 However, visual inspection of the dynamics of disease extinction (\ref{fig:plotsNoInvade1}), and examination of the typical time to extinction implies that this bias is very weak.
 For example, of the simulations where extinction occurred, the extinction occurred more than 50 years before the end of the simulation in 90\% of cases.
 On a preliminary run of 106 simulations across all combinations of dispersal and transmission rates, examining the population after \SI{700000} events instead of \SI{\rinline{nEvent}} events gave exactly the same result with respect to the binary state of invasion or no invasion. 
@@ -1072,13 +1071,14 @@ Therefore, $\xi = 0.1$ relates to 67\% of individuals dispersing between colonie
 Exclusively juvenile dispersal would have dispersal rates similar to this value. %todo cite
 $\xi = 0.01$ relates to 17\% of individuals dispersing at least once in their lifetime.
 This value is relatively close to male-biased dispersal, with female philopatry. %todo cite
+$\xi = 0.001$ relates to 2\% of individuals dispersing during their lifetime.
 This therefore relates to a species that does not habitually disperse.
 Finally, I ran simulations with no dispersal.
-Given zero dispersal, only the colony seeded with Pathogen 2 could ever recieve infections of the invading pathogen.
+Given zero dispersal, only the colony seeded with Pathogen 2 could ever receive infections of the invading pathogen.
 Therefore, only one colony was simulated for $\xi = 0$.
+While altering the dispersal rate I used a fully connected network topology.
 I ran 100 simulations for most parameter sets.
-I ran 150 simulations for $\xi = 0.1, 0.01$ and $0.001$ with $\beta = 0.2$ and $0.3$ as
-Preliminary simulations indicated that any effects of population structure would most likely be seen at these values so extra simulations were run to increase statistical power. 
+I ran 150 simulations for $\xi = 0.1, 0.01$ and $0.001$ with $\beta = 0.2$ and $0.3$ as preliminary simulations indicated that any effects of population structure would most likely be seen at these values so extra simulations were run to increase statistical power. 
 
 
 
@@ -1087,6 +1087,7 @@ Preliminary simulations indicated that any effects of population structure would
 I also altered the topology of the metapopulation network.
 The network topology was created to be either fully or minimally connected (Figure~\ref{f:net}). 
 To model a completely unconnected population the $\xi = 0$ simulations from above were used.
+While altering network topology, the intermediate dispersal rate, $\xi = 0.01$, was used.
 I again ran 100 simulations for each parameter set.
 
 
@@ -1094,6 +1095,7 @@ I again ran 100 simulations for each parameter set.
 \subsection{Statistical analysis}
 
 I used generalised linear models (GLMs) with a binary response variable, invasion or not, to test the hypothesis that probability of invasion increased with dispersal.
+I examined $p$ values and the regression coefficient, $b$, from each model.
 Seperate GLMs were fitted for each transmission rate.
 These tests were performed both with and without the $\xi = 0$ results as the complete lack of dispersal makes these simulations qualitatively different to the other simulations.
 To test whether the different topologies had different probabilities of invasion, I used Fisher's exact tests because topology is best described as a categorical variable.
@@ -1310,7 +1312,7 @@ TopoTransGLM2 <- summary(glm(invasion ~ transmission, data = dTopo[dTopo$meanK =
 invasionPropCaption <- sprintf("
   The probability of successful invasion for different A) dispersal rates and B) network topologies (with network topologies ``unconnected'', ``minimally connected'' and ``fully connected'' as in Figure~\\ref{f:net}). 
   Error bars are 95\\%% confidence intervals of probability of invasion. 
-  %i simulations were run for each treatment except $\\beta = 0.2$ in A) which has 150 per treatment.
+  %i simulations were run for each treatment except $\\beta = 0.2$ and $0.3$ in A) which has 150 per treatment.
   Other parameters were kept constant at: $m = 10,\\, \\, \\mu = \\Lambda = 0.05,\\, \\gamma = 1,\\, \\alpha = 0.1$. 
   When dispersal is varied, the population structure is fully connected. 
   When network topology is varied, $\\xi = 0.01$.",
@@ -1384,9 +1386,10 @@ ggdraw() +
 \subsection{Dispersal}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In the unstructured population, the second pathogen invaded in 100 out of 100 simulations.
+In the unstructured population, Pathogen 2 invaded in 100 out of 100 simulations.
 This was true at all four transmission rates.
 
+%todo check formating of pvalues
 When the $\xi = 0$ simulations were included, there was a positive relationship between dispersal rate and invasion probability for $\beta = 0.2, 0.3$ and $0.4$ (Figure~\ref{f:invasionPropPlots}A, Table~\ref{B-disp}).
 These positive relationships were all significant (GLM. $\beta = 0.2$: $b$ = \rinline{DispGLM2$coefficients[2, 1]}, $p < 10^{-5}$. $\beta = 0.3$: $b$ = \rinline{DispGLM3$coefficients[2, 1]}, $p$ = \rinline{DispGLM3$coefficients[2, 4]}. $\beta = 0.4$: $b$ = \rinline{DispGLM4$coefficients[2, 1]}, $p$ = \rinline{DispGLM4$coefficients[2, 4]}.)
 At $\beta = 0.1$ there was no significant relationship as invasion probaiblity was very close to zero at all dispersal rates (GLM. $b$ = \rinline{DispGLM1$coefficients[2, 1]}, $p$ = \rinline{DispGLM1$coefficients[2, 4]}).
@@ -1434,10 +1437,10 @@ I have used mechanistic, metapopulation models to test whether increased populat
 I found that dispersal does affect the ability of a new pathogen to invade and persist in a population.
 I also found evidence that pathogen invasion was less likely in completely isolated colonies.
 However, apart from the completely unconnected network, the topology of the metapopulation network did not affect invasion probability.
-Increasing transmission rate quickly reaches a state where new pathogens always invade as long as there is some dispersal.
+Increasing transmission rate quickly reaches a state where new pathogens always invade as long as the metapopulation is not completely unconnected.
 Decreasing the transmission rate quickly reaches a state where invasion is impossible.
 
-The result that increased population structure increases pathogen richness supports many existing predictions that increasing $R_0$ should increase pathogen richness \cite{nunn2003comparative, morand2000wormy, poulin2014parasite, poulin2000diversity, altizer2003social}.
+The result that increased population structure decreases pathogen richness supports many existing predictions that increasing $R_0$ should increase pathogen richness \cite{nunn2003comparative, morand2000wormy, poulin2014parasite, poulin2000diversity, altizer2003social}.
 However, many comparative studies have found the opposite relationship, with increased population structure increasing pathogen richness (Chapter \ref{ch:empirical}, \cites{vitone2004body, maganga2014bat, turmelle2009correlates}).
 Furthermore, simple analytical models suggest that population structure should increase pathogen richness \cite{qiu2013vector, allen2004sis, nunes2006localized} and I find no evidence of this.
 
@@ -1459,7 +1462,7 @@ Therefore the interplay between population structure and colony size should be s
 
 My simulations also highlighted the importance of competition for the spread of a new pathogen.
 All parameters used corresponded to pathogens with $R_0>1$ (as seen by the consistent spread of Pathogen 1).
-However, the competition with the endemic pathogen meant that for some transmission rates the chance of epidemic spread and persistence of the second pathogen was close to zero.
+However, the competition with the endemic pathogen meant that for some transmission rates the chance of epidemic spread and persistence of Pathogen 2 was close to zero.
 This has implications for human epidemics as well --- if there is strong competition between a newly evolved strain and an endemic strain, we are unlikely to see the new strain spread, regardless of population structure.
 
 
@@ -1472,7 +1475,8 @@ I have assumed that once recovered, individuals are immune to both pathogens.
 Furthermore, when a coinfected individual recovers from one pathogen, it immediately recovers from the other as well.
 This is probably a reasonable assumption given that I am modelling a newly evolved strain.
 However, the rate of recovery from pathogens in the presence of coinfections has not been well studied.
-In humans, the rate of recovery from respiratory syncytial virus was faster in individuals that had recently recovered from one of a number of co-circulating viruses (though coinfected individuals recovered more slowly) \cite{munywoki2015influence}.
+In humans, the rate of recovery from respiratory syncytial virus was faster in individuals that had recently recovered from one of a number of co-circulating viruses \cite{munywoki2015influence}.
+However, currently coinfected individuals recovered more slowly than average \cite{munywoki2015influence}.
 
 However, further work could relax this assumption using a model similar to \cite{poletto2015characterising} which contains additional classes for `infected with Pathogen 1, immune to Pathogen 2' and `infected with Pathogen 1, immune to Pathogen 2'.
 The model here was formulated such that the study of systems with greater than two pathogens (an avenue for further study) is still computationally feasible. 
@@ -1486,8 +1490,8 @@ This has not been studied in the context of metapopulations.
 
 Many papers on pathogen richness have focused on the evolution of pathogen traits and have considered a trade-off between transmission rate and virulence \cite{nowak1994superinfection, nowak1994superinfection} or infectious period \cite{poletto2013host}.
 However, here I am interested in host traits.
-Therefore we have assumed that pathogen strains are identical.
-It is clear however that there are a number of factors that affect pathogen richness and our focus on host population structure does not imply that pathogen traits are not important.
+Therefore I have assumed that pathogen strains are identical.
+It is clear however that there are a number of factors that affect pathogen richness and my focus on host population structure does not imply that pathogen traits are not important.
 
 \subsubsection{Complex social structure and behaviour}
 
@@ -1503,6 +1507,7 @@ Conversely, the case of interspecies roost sharing could be modelled as an addit
 
 Finally, many species of bat exhibit strong seasonal birth pulses which are known to affect disease dynamics \cite{hayman2015biannual,peel2014effect,amman2012seasonal}.
 This would be expected to facilitate the invasion of new pathogen species; if a new strain evolved or entered the population by migration during a period of low population immunity, it would have a higher chance of invading and establishing in the population.
+Again this was beyond the scope of this study, but birth pulses and their interactions with seasonally varying transmission rates is a useful area for further research.
 
 \subsection{Conclusions}
 
