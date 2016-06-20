@@ -731,7 +731,8 @@ fullSim <- function(x){
   invasion <- findDisDistr(p, 2)[1] > 0
 
   # Save summary stats
-  d <- data.frame(transmission = N
+  d <- data.frame(transmission = NA)
+
 
   d$transmission <- p$parameters['transmission']
   d$dispersal <- p$parameters['dispersal']
