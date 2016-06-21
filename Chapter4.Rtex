@@ -84,22 +84,24 @@ library(showtext)
 
 %\tmpsection{One or two sentences providing a basic introduction to the field}
 % comprehensible to a scientist in any discipline.
-\lettr{A}n increasingly large fraction of emerging diseases come from wild animals and these diseases have a huge impact on human health.
-The chance that a new disease will come from any particularly host species increases with the number of pathogen species in that host species.
-However, the factors that control pathogen richness in wild populations are still poorly understood.
+\lettr{A} large proportion of human diseases are zoonotic and there is a continuous flow of new pathogens from wild animals to humans.
+The chance that a particularly host species will be the source of a new zoonotic disease increases with the pathogen richness of that host species.
+However, the relative importance of factors that control pathogen richness is not known.
 %\tmpsection{Two to three sentences of more detailed background}
 Comparative studies have found evidence that host density, geographic range size and population structure are associated with high pathogen richness. 
 Additionally, epidemiological theory suggests that host population structure and host population abundance may influence pathogen richness.
 However, these factors are intrinsically linked.
-Host density is population size divided by range size while reducing host density directly reduces host population size and reduces contacts between individuals, therefore increasing population structure.
-In group living species group size and the total number of groups both contribute to total host population size. 
+For example, host density is defined as the population size divided by range size.
+Furthermore, a reduction in host density reduces contacts between individuals, therefore increasing population structure.
+In group living species, group size and the total number of groups both contribute to total host population size. 
 As these factors are all completely interdependent, it is impossible to identify the causal factors within a comparative frame work.
 %\tmpsection{One sentence clearly stating the general problem (the gap)}
 % being addressed by this particular study.
 %\tmpsection{One sentence summarising the main result}
 %  (with the words ``here we show'' or their equivalent).
-Here I use metapopulation susceptible-infected-recovered (SIR) models to test whether it is host density \emph{per se} that increases the ability of a newly evolved pathogen to invade and persist in a population as opposed to host group size, population size or range size.
-I parameterised these metapopulations to mimic bat populations as bats exhibit a large range in group (colony) size and geographic range size as well as being associated with a number of important zoonotic pathogens.
+Here I use metapopulation susceptible-infected-recovered (SIR) models to test whether the ability of a newly evolved pathogen to invade and persist in a population is controlled specifically by host density as opposed to host population size 
+I also test whether pathogens invade more readily into a population with large groups or many groups.
+I parameterised these metapopulations to mimic bat populations, as bats exhibit a large range in group (colony) size and geographic range size as well as being associated with a number of important zoonotic pathogens.
 %\tmpsection{Two or three sentences explaining what the main result reveals in direct comparison to what was thought to be the case previously}
 % or how the main result adds to previous knowledge
 %\tmpsection{One or two sentences to put the results into a more general context.}
@@ -108,8 +110,8 @@ Furthermore, increased group size increased the probability of pathogen invasion
 This implies that, in comparative studies, host density may be merely a correlate of group size or population size.
 %\tmpsection{Two or three sentences to provide a broader perspective, }
 % readily comprehensible to a scientist in any discipline.
-This study helps clarify both the inter-relationships between, and relative importance of, a number of host, population-level factors affecting pathogen richness. 
-It also highlights the necessity for studying the mechanisms underlying pathogen community construction as comparative approaches do not have the specificity to do so.
+This study helps clarify both the inter-relationships between, and relative importance of, a number of population-level factors affecting pathogen richness. 
+It also highlights the necessity for studying the mechanisms underlying pathogen community construction, as comparative approaches do not have the specificity to do so.
 
 
 
