@@ -15,14 +15,14 @@ In Chapter~\ref{ch:empirical} I tested the hypothesis that bat species with more
 I tested this hypothesis with two measurements of host population structure: the number of subspecies (a novel measure and the largest dataset yet used to test this hypothesis) and gene flow.
 With both measures I found that, after controlling for phylogeny and study bias, a positive relationship between population structure and pathogen richness was very likely in the best model.
 While the results from Chapter~\ref{ch:empirical} suggest that there is a relationship between population structure and pathogen richness, comparative studies like these cannot identify which specific mechanisms maintain high pathogen richness.
-I therefore simualations to test whether population structure (specifically network topology and dispersal rate) could allow a newly evolved pathogen to invade and persist in the presence of strong competition from an established, endemic pathogen.
+I therefore used simulations to test whether population structure (specifically network topology and dispersal rate) could allow a newly evolved pathogen to invade and persist in the presence of strong competition from an established, endemic pathogen (Chapter~\ref{ch:sim1}).
 However, I found the opposite relationship to Chapter~\ref{ch:empirical}; I found that decreasing host population structure increased the rate of pathogen invasion.
-In Chapter~\ref{ch:sims2} I used the same model as Chapter~\ref{ch:sims1} to test whether host population size or density more strongly promoted pathogen invasion and establishment and whether a pathogen invaded more easily into a population comprising many small colonies or few big colonies.
-I found that population size had a much stronger effect than density and that the component of population size that had the strongest effect was colony size.
+In Chapter~\ref{ch:sims2} I used the same model as Chapter~\ref{ch:sims1} to test whether host population size or density more strongly promoted pathogen invasion and establishment and whether a pathogen invaded more easily into a population comprising many small colonies or fewer big colonies.
+I found that population size had a much stronger effect than density on the probability of pathogen invasion and that colony size had a much stronger effect than the number of colonies.
 Theory \cite{may1979population, anderson1979population}, previous literature \cite{kamiya2014determines, nunn2003comparative, morand1998density} and Chapters \ref{ch:sims1} and \ref{ch:sims2} suggested that population size (either local group size or global population size) strongly influences the dynamics of disease and pathogen richness.
-However, this variable was not included in the emprical study in Chapter~\ref{ch:empirical} as there are very few estimates of population size for bats and colony counts are time consuming and costly \cite{kloepper2016estimating}.
-However data from acoustic camera trap surveys are increasingly available, for example, the iBats program \cite{jones2011indicator}.
-I, therefore, developed a general method for estimating population size and density from acoustic detectors or camera traps (Chapter~\ref{ch:grem}).
+However, this variable was not included in the empirical study in Chapter~\ref{ch:empirical} as there are very few estimates of population size for bats and colony counts are time consuming and costly \cite{kloepper2016estimating}.
+However data from acoustic camera trap surveys are increasingly available \cite{jones2011indicator}.
+To make the estimation of population sizes easier, for bats and other acoustic detectable animals, I developed a general method for estimating population size and density from acoustic detectors or camera traps (Chapter~\ref{ch:grem}).
 
 
 \section{Comparison to the literature}
@@ -34,8 +34,9 @@ However, in Chapter~\ref{ch:sims2} I found that global host population density -
 However, in Chapter \ref{ch:empirical} I found the opposite relationship; that in wild bat populations, increased host population structure promotes pathogen richness.
 One interpretation of this is that there are two distinct phases to pathogen competition.
 When a new pathogen first enters a population, many contacts (i.e. a highly connected population) allows the pathogen to spread and avoid stochastic extinction.
-However, after this initial spread, host population structure may enable the pathogen to persist for longer as shown by the positive empirical relationship between pathogen richness and host population structure (Chapter~\ref{ch:empirical}, \textcite{turmelle2009correlates, maganga2014bat}) and range size \cite{kamiya2014determines, nunn2003comparative} and the equivical evidence for a positive relationship with group size \cite{rifkin2012animals, ezenwa2006host}.
-This highlights the distinction between factors that promote the addition of new pathogens to the community and those factors that instead allow a larger number of pathogens to coexist or reduce the rate of extinction of pathogens due to competition or other processes.
+However, after this initial spread, host population structure may enable the pathogen to persist for longer.
+There is a positive empirical relationships between pathogen richness and host population structure (Chapter~\ref{ch:empirical}, \textcite{turmelle2009correlates}, \textcite{maganga2014bat}) and population structure and range size \cite{kamiya2014determines, nunn2003comparative} while in contrast the evidence for a positive relationship between pathogen richness and  group size is equivocal \cite{rifkin2012animals, ezenwa2006host}.
+This contrast suggests that population structure in wild species affects the latter stages of pathogen dynamics, enabling pathogen persistence, more than it affects the initial invasion of pathogens.
 Little research has so far been conducted contrasting these different processes and examining which mechanisms could promote high pathogen richness at each scale.
 
 %Much research in multipathogen systems has been conducted over the short time scales of a single epidemic \cite{van2014domination, poletto2013host, poletto2015characterising, funk2010interacting}.
@@ -51,9 +52,12 @@ Little research has so far been conducted contrasting these different processes 
 
 \section{Other mechanisms controlling pathogen richness}
 
-Colony size has been found to have a negative relationship \cite{gay2014parasite} and no relationship \cite{turmelle2009correlates} with parasite richness in previous comparative studies using relatively small datasets.
+Colony size has been found to have both a negative relationship \cite{gay2014parasite} and no relationship \cite{turmelle2009correlates} with parasite richness in previous comparative studies using relatively small data sets.
 However, in Chapter \ref{ch:sims2} I found that colony size is particularly important for promoting pathogen richness.
-I did not include colony size in my comparative analysis (Chapter \ref{ch:empirical}) for three reasons: the focus of the chapter was broad-scale population structure, the lack of strong evidence of a relationship \cite{turmelle2009correlates} and the lack of data.
+I did not include colony size in my comparative analysis (Chapter \ref{ch:empirical}) for three reasons.
+Firstly, the focus of the chapter was broad-scale population structure.
+Secondly, there was a lack of previously published, strong evidence of a relationship between colony size and pathogen richness.\cite{turmelle2009correlates}.
+Finally, there is a considerable lack of data on colony size and I was aiming for a large sample size.
 However, given the results of Chapter~\ref{ch:sims2}, filling these data gaps would be a useful avenue for further research.
 In particularly, testing the relative effects of population density and colony size would be a useful test of the model used in Chapter~\ref{ch:sims2}.
 
@@ -64,12 +68,13 @@ Closely related to the mechanism studied here is the case of pathogens invading 
 These pathogens are likely to have different epidemiological parameters (transmission rate, virulence, recovery rate) to the endemic pathogen as modelled in \textcite{may1994superinfection} for example.
 Furthermore, the competition between pathogens is expected to be less strong.
 Alternatively, host population traits could affect the rate of pathogen extinction.
-Once a number of pathogens are established in a population, there is still likely to be occasional extinctions, especially in the presence of inter-pathogen competition. %todo ref
+Once a number of pathogens are established in a population, there is still likely to be occasional extinctions, especially in the presence of inter-pathogen competition \cite{kapusinszky2015local}. %todo ref
 A number of population factors could affect this rate.
 It is expected that large populations will experience slower rates of pathogen loss as stochastic extinction will be more rare.
 Furthermore, populations with strongly varying disease prevalences are likely to have higher rates of pathogen extinction.
-This includes populations where epidemic cycles are common \cite{altizer2006sesonality}; subsequent to a large epidemic, and after a time lag, the number of susceptible individuals in the populations will be low due to immunity, host death or low birth rates induced by infection \cite{scott1987population, hethcote1994thousand}.
-While the number of susceptibles is low stochastic extinction is more likely. %ref 
+Higher rates of pathogen extinction are likely to occur in populations where epidemic cycles are common \cite{altizer2006sesonality}.
+After a large epidemic, the number of susceptible individuals in the population will be low due to immunity, host death or low birth rates induced by infection \cite{scott1987population, hethcote1994thousand}.
+While the number of susceptibles is low, stochastic extinction is more likely. %ref 
 This effect will be exacerbated in the case where an epidemic cycle is synchronous across the whole population as is the case in unstructured populations \cite{duke2011strong, mckenzie2001seasonality}.
 Structured populations with asynchronous epidemic cycles may experience local pathogen extinction but rarely global extinction; this pattern of local extinction and recolonisation has been well studied in the ecological literature \cite{grenfell1995seasonality, levin1974dispersion, hanski1998metapopulation}, but less so in the epidemiological literature. %todo read http://link.springer.com/article/10.1007/s10980-008-9245-4
 
@@ -91,8 +96,9 @@ Alternatively, a subset of the small unbiased data sets could be used to create 
 
 While predictive models should be built, forecasting changes in pathogen richness and zoonotic risk will be difficult.
 However, the mechanistic understanding obtained by the theoretical chapters here can suggest how pathogen richness may respond to global change and other population stressors.
-Firstly, when global change acts to reduce group size \cite{lehmann2010apes, zunino2007habitat, manor2003impact, atwood2006influence} pathogen richness is expected to decrease while in species where group size is increasing \cite{lehmann2010apes} pathogen richness is expected to increase.
-In contrast, species suffering range contractions \cite{thomas2004extinction} and decreases in population size \cite{craigie2010large} are expected to experience smaller changes in pathogen richness despite these being the more commonly studied effects of global change.
+Firstly, when global change acts to reduce group size \cite{lehmann2010apes, zunino2007habitat, manor2003impact, atwood2006influence} pathogen richness is expected to decrease.
+Conversely, in species where group size is increasing \cite{lehmann2010apes}, pathogen richness is expected to increase.
+Species suffering range contractions \cite{thomas2004extinction} and decreases in population size \cite{craigie2010large} are expected to experience smaller changes in pathogen richness despite these being the more commonly studied effects of global change.
 This suggests that further research should study in more detail the effects of climate change on social group size.
 
 %Furthermore, I have shown that while population factors such as population size, density and range size are directly linked, they have very different effects on pathogen richness.
@@ -162,9 +168,9 @@ Further work should include specific, detailed models of well studied species an
 %\end{itemize}
 
 Overall my studies suggest that population size and structure do have consequences for pathogen richness. 
-However, the exact mechanisms by which these effects occur are not clear.
-I have found that colony size is particularly important in the case of closely related, strongly competing pathogens.
-I have also provided a tool to facilitate the estimation of population sizes in echolocating bats; data which is currently sparse despite its importance to epidemiology and bat ecology more generally.
+However, my two studies on this topic give contradictory results and so the exact mechanisms by which these effects occur are not clear.
+I have found that colony size is particularly important for controlling pathogen richness in the case of closely related, strongly competing pathogens.
+I have also provided a tool to facilitate the estimation of population sizes in echolocating bats.
 
 
 

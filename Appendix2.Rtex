@@ -251,7 +251,6 @@ invade2 <- pSIR(p2) +
             xlab('Time (years)') +
             xlim(0, maxt)
 
-
 # Combine and print the plots.
 ggdraw() +
   draw_label("A)", 0.02, 0.98, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
@@ -307,6 +306,7 @@ The starting colony size is \\SI{3000}.
 
 
 %%begin.rcode plotsNoInvade, fig.cap = noInvadeCapt, fig.scap = noInvadeTitle, fig.height = 5, out.width = c("\\textwidth", "0.8\\textwidth"), cache = FALSE
+
 
 load('data/Chapter2/Appen22.RData')
 p1 <- p2

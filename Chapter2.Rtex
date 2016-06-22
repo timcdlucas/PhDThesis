@@ -80,7 +80,7 @@ library(cowplot)
 \lettr{A}n increasingly large proportion of emerging human diseases comes from animals.
 These diseases have a huge impact on human health, healthcare systems and economic development.
 The chance that a new zoonosis will come from any particular wild host species increases with the number of pathogen species occurring in that host species.
-However, the factors that control pathogen richness of wild animal species remain unclear.
+However, the factors that control pathogen richness in wild animal species remain unclear.
 %
 %
 %\tmpsection{Two to three sentences of more detailed background}
@@ -356,14 +356,14 @@ We can now write down the rates of all events.
 %I defined $I^+_p$ to be the sum of all classes that are infectious with pathogen $p$, for example $I^+_1 = I_1 + I_{12}$. 
 Assuming asexual reproduction, that all classes reproduce at the same rate and that individuals are born into the susceptible class we get
 \begin{align}
-  s_x \rightarrow s_x + 1 \;\;\text{at a rate of}\;\; \Lambda\left( s_{x}+\sum_q i_{qx} + r_{x}\right) 
+  s_x \rightarrow s_x + 1 \;\;\;\text{at a rate of}\;\; \Lambda\left( s_{x}+\sum_q i_{qx} + r_{x}\right) 
 \end{align}
 where $s_x \rightarrow s_x + 1$ is the event that the number of susceptibles in colony $x$ will increase by 1 (a single birth) and $\sum_q i_{qx}$ is the sum of all infection classes $q \in \{1, 2, 12\}$.
 The rates of death, given a death rate $\mu$, and no increased mortality due to infection, are given by
 \begin{align}
-  s_x \rightarrow s_x-1  &\;\;\text{at a rate of}\;\; \mu s_x, \\
+  s_x \rightarrow s_x-1  &\;\;\;\text{at a rate of}\;\; \mu s_x, \\
   i_{qx}  \rightarrow i_{qx}-1 &\;\;\text{at a rate of}\;\; \mu i_{qx},\\
-  r_x  \rightarrow r_x-1 &\;\;\text{at a rate of}\;\; \mu r_x.
+  r_x  \rightarrow r_x-1 &\;\;\;\text{at a rate of}\;\; \mu r_x.
 \end{align}
 
 
@@ -409,22 +409,22 @@ This assumption was more suitable than frequency-dependent transmission as I was
 I was notably not modelling a sexually transmitted disease (STD) as spillover of STDs from bats to humans is likely to be rare.
 Infection of a susceptible with either Pathogen 1 or 2 is therefore given by
 \begin{align}
-  i_{1x} \rightarrow i_{1x}+1,\;\; s_x \rightarrow s_x-1 &\;\;\text{at a rate of}\;\; \beta s_x\left(i_{1x} + i_{12x}\right),\\
-  i_{2x} \rightarrow i_{2x}+1,\;\; s_x \rightarrow s_x-1  &\;\;\text{at a rate of}\;\; \beta s_x\left(i_{2x} + i_{12x}\right),
+  i_{1x} \rightarrow i_{1x}+1,\;\;\; s_x \rightarrow s_x-1 &\;\;\text{at a rate of}\;\; \beta s_x\left(i_{1x} + i_{12x}\right),\\
+  i_{2x} \rightarrow i_{2x}+1,\;\;\; s_x \rightarrow s_x-1  &\;\;\text{at a rate of}\;\; \beta s_x\left(i_{2x} + i_{12x}\right),
 \end{align}
 while coinfection, given the coinfection adjustment factor $\alpha$, is given by
 \begin{align}
-  i_{12,x} \rightarrow i_{12,x}+1,\;\; i_{1x} \rightarrow i_{1x}-1 &\;\;\text{at a rate of}\;\; \alpha\beta i_{1x}\left(i_{2x} + i_{12x}\right),\\
-  i_{12,x} \rightarrow i_{12,x}+1,\;\; I_{2x} \rightarrow i_{2x}-1 &\;\;\text{at a rate of}\;\; \alpha\beta i_{2x}\left(i_{1x} + i_{12x}\right).
+  i_{12,x} \rightarrow i_{12,x}+1,\;\;\; i_{1x} \rightarrow i_{1x}-1 &\;\;\text{at a rate of}\;\; \alpha\beta i_{1x}\left(i_{2x} + i_{12x}\right),\\
+  i_{12,x} \rightarrow i_{12,x}+1,\;\;\; I_{2x} \rightarrow i_{2x}-1 &\;\;\text{at a rate of}\;\; \alpha\beta i_{2x}\left(i_{1x} + i_{12x}\right).
 \end{align}
 Note that lower values of $\alpha$ give lower rates of infection as in \textcite{castillo1989epidemiological}.
 
 
 The probability of migration from colony $y$ (with degree $k_y$) to colony $x$, given a dispersal rate $\xi$ is given by
 \begin{align}
-  s_x \rightarrow s_x+1,\;\; s_y \rightarrow s_y-1 &\;\;\text{at a rate of}\;\; \frac{\xi s_y}{k_y},\\
-  i_{qx} \rightarrow i_{qx}+1,\: i_{qy} \rightarrow i_{qy}-1 &\;\;\text{at a rate of}\;\; \frac{\xi i_{qy}}{k_y},\\
-  r_x \rightarrow r_x+1,\;\; r_y \rightarrow r_y-1 &\;\;\text{at a rate of}\;\; \frac{\xi r_y}{k_y}.
+  s_x \rightarrow s_x+1,\;\;\; s_y \rightarrow s_y-1 &\;\;\text{at a rate of}\;\; \frac{\xi s_y}{k_y},\\
+  i_{qx} \rightarrow i_{qx}+1,\;\;\; i_{qy} \rightarrow i_{qy}-1 &\;\;\text{at a rate of}\;\; \frac{\xi i_{qy}}{k_y},\\
+  r_x \rightarrow r_x+1,\;\;\; r_y \rightarrow r_y-1 &\;\;\text{at a rate of}\;\; \frac{\xi r_y}{k_y}.
 \end{align}
 Not that the dispersal rate does not change with infection.
 As above, this is due to the low virulence of bat viruses.

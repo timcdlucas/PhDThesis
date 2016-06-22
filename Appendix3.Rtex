@@ -268,7 +268,7 @@ refsCapt <- paste0("
 
 %%end.rcode
 
-%%begin.rcode scholarvspubmedPlot, fig.show = TRUE, fig.height = 3.5, out.width = '0.9\\textwidth', fig.cap = refsCapt
+%%begin.rcode scholarvspubmedPlot, fig.show = TRUE, fig.height = 3.5, out.width = '0.9\\textwidth', fig.cap = refsCapt, cache = FALSE
 
 pp <- c(pokepal('oddish')[c(1,3,5,7,9,10)], pokepal('Carvanha')[c(2, 4, 13, 12, 9, 1)])
 
@@ -294,7 +294,7 @@ subsDataCapts <- c(
 'Virus species against study effort (log pubmed references +1)')
 %%end.rcode
 
-%%begin.rcode subsDataviz, fig.show = extraFigs, fig.cap = subsDataCapts
+%%begin.rcode subsDataviz, fig.show = extraFigs, fig.cap = subsDataCapts, cache = FALSE
 
 # A number of exploratory plots
 
@@ -304,7 +304,6 @@ ggplot(nSpecies, aes(log(mass), virusSpecies)) +
   geom_smooth(method = 'lm')+
   labs(colour = 'Family') +
   scale_colour_hc()
-
 
 
 # N Subspecies and against viruses
@@ -598,7 +597,8 @@ treeTitle <- 'Pruned alternative phylogeny with dot size showing number of patho
 %%end.rcode
 
 
-%%begin.rcode treePlot2, out.width = '1\\textwidth', out.extra = 'trim = 0cm 0cm 0cm 0cm', fig.height = 5, fig.height = 5.5, fig.cap = treeCapt, fig.scap = treeTitle
+%%begin.rcode treePlot2, out.width = '1\\textwidth', out.extra = 'trim = 0cm 0cm 0cm 0cm', fig.height = 5, fig.height = 5.5, fig.cap = treeCapt, fig.scap = treeTitle, cache = FALSE
+
 # Plot tree 
 p <- ggtree(pruneTree2, layout = 'fan') 
 
