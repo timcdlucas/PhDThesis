@@ -12,16 +12,16 @@ library(grid)
 library(extrafont)
 
 theme_tcdl <-theme(text = element_text(family = "Lato Light", size = 12),
-        panel.grid.major.x = element_line(colour = "#ECECEC", size = 0.3, linetype = 1),
+        panel.grid.major.x = element_line(colour = "#a4a4a4", size = 0.3, linetype = 1),
         panel.grid.minor.x = element_blank(),
         panel.grid.minor.y = element_blank(),
-        panel.grid.major.y = element_line(colour = "#ECECEC", size = 0.3, linetype = 1),
-        legend.title = element_text(size = 10, colour  =  "#8B8B8B"),
+        panel.grid.major.y = element_line(colour = "#a4a4a4", size = 0.3, linetype = 1),
+        legend.title = element_text(size = 10, colour  =  "#656565"),
+        legend.text = element_text(size = 10, colour  =  "#656565"),
         legend.key = element_rect(fill = "transparent", colour = NA),
         legend.background = element_rect(fill = "transparent", colour = NA),
         legend.key.size = unit(1, "lines"),
-        legend.text = element_text(size = 10, colour  =  "#8B8B8B"),
-        axis.text = element_text(color = "grey", size = 11, family  =  "Lato Black"),
+        axis.text = element_text(color = "#a4a4a4", size = 11, family  =  "Lato Black"),
         axis.title = element_text(size = 11),
         axis.title.y = element_text(vjust = 1.5),
         axis.title.x = element_text(vjust = -1),
@@ -31,8 +31,8 @@ theme_tcdl <-theme(text = element_text(family = "Lato Light", size = 12),
         plot.margin  =  unit(c(0.3, 0.1, 1, 1.3), "lines"),
         panel.background = element_rect(fill = "transparent", colour = NA), 
         plot.background = element_rect(colour = NA, fill = 'transparent'),
-        strip.background = element_rect(colour = 'grey', fill = 'grey'),
-        strip.text = element_text(colour = 'white', family = 'Lato Light', size = 10)
+        strip.background = element_rect(colour = '#a5a5a5', fill = '#a5a5a5'),
+        strip.text = element_text(colour = 'white', family = 'Lato', size = 12)
 )
 
 

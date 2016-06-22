@@ -551,13 +551,13 @@ labSz <- 1
 bigy <- 11.4
 bigx <- 10.6
 titleSz <- 4
-axSz <- 3
+axSz <- 4
 
 par(mfrow = c(2,2))
 
 
 plotColonyNet(p1, area = side[5], cex = 0.25, mar = c(bigx, bigy, 3, 2))
-axis(2, col = 'grey', cex.axis = axSz, at = c(0, 50, 100, 150, 200), labels = c('0', '', '100', '', '200'), col.axis = 'grey', family = 'Lato', font = 2)
+axis(2, col = 'grey', cex.axis = axSz, at = c(0, 50, 100, 150, 200), labels = c('0', '', '100', '', '200'), col.axis = '#a4a4a4', family = 'Lato', font = 2)
 axis(1, col = 'grey', labels = FALSE)
 title(main = bquote(italic(bar(k)) ~ '='~ .(k1)), cex.main = titleSz, family = 'Lato',  line = 0.5)
 mtext(side = 2,  line = 7.8, text = 'Longitude', cex = labSz, family = 'Lato')
@@ -571,9 +571,9 @@ title(main = bquote(italic(bar(k)) ~ '='~ .(k4)), cex.main = titleSz, family = '
 mtext(side = 3,  line = -0.3, text = 'B)', cex = 1, family = 'Lato', at = -22)
 
 plotColonyNet(p3, area = side[5], cex = 0.25, mar = c(bigx, bigy, 3, 2))
-axis(2, col = 'grey', cex.axis = axSz, col.axis = 'grey', at = c(0, 50, 100, 150, 200), labels = c('0', '', '100', '', '200'), family = 'Lato', font = 2)
+axis(2, col = 'grey', cex.axis = axSz, col.axis = '#a4a4a4', at = c(0, 50, 100, 150, 200), labels = c('0', '', '100', '', '200'), family = 'Lato', font = 2)
 axis(1, col = 'grey', labels = FALSE)
-axis(1, col = 'grey', cex.axis = axSz, col.axis = 'grey', at = c(0, 100, 200), labels = c('0', '100', '200'), family = 'Lato', font = 2, line = 3, lwd = 0)
+axis(1, col = 'grey', cex.axis = axSz, col.axis = '#a4a4a4', at = c(0, 100, 200), labels = c('0', '100', '200'), family = 'Lato', font = 2, line = 3, lwd = 0)
 title(main = bquote(italic(bar(k)) ~ '='~ .(k3)), cex.main = titleSz, family = 'Lato',  line = 0.5)
 mtext(side = 2,  line = 7.8, text = 'Longitude', cex = labSz, family = 'Lato')
 mtext(side = 1,  line = 9.8, text = 'Latitude', cex = labSz, family = 'Lato')
@@ -582,7 +582,7 @@ mtext(side = 3,  line = -0.3, text = 'C)', cex = 1, family = 'Lato', at = -62)
 
 plotColonyNet(p2, area = side[5], cex = 0.25, mar = c(bigx, 6, 3, 2))
 axis(1, col = 'grey', labels = FALSE)
-axis(1, col = 'grey', cex.axis = axSz, col.axis = 'grey', at = c(0, 100, 200), labels = c('0', '100', '200'), family = 'Lato', font = 2, line = 3, lwd = 0)
+axis(1, col = 'grey', cex.axis = axSz, col.axis = '#a4a4a4', at = c(0, 100, 200), labels = c('0', '100', '200'), family = 'Lato', font = 2, line = 3, lwd = 0)
 axis(2, col = 'grey', labels = FALSE)
 title(main = bquote(italic(bar(k)) ~ '='~ .(k2)), cex.main = titleSz, family = 'Lato',  line = 0.5)
 mtext(side = 1,  line = 9.8, text = 'Latitude', cex = labSz, family = 'Lato')
@@ -704,7 +704,7 @@ All simulations had 20 colonies, meaning 19 is the maximum value of $\\bar{k}$.
 plotKtitle <- 'Change in average network degree with increasing range size'
 
 
-%%begin.rcode plotK, fig.cap = plotKcapt, fig.scap = plotKtitle, out.width = '0.8\\textwidth', cache = FALSE
+%%begin.rcode plotK, fig.cap = plotKcapt, fig.scap = plotKtitle, out.width = '\\textwidth', cache = FALSE, plot.height = 2.3
 
 ggplot(dens1, aes(x = factor(area), y = meanK, colour = 'a', fill = 'a')) +
   geom_boxplot(outlier.size = 1, size = 0.3, outlier.colour = grey(0.3), 
@@ -718,6 +718,7 @@ ggplot(dens1, aes(x = factor(area), y = meanK, colour = 'a', fill = 'a')) +
   xlab(expression(paste('Area ', (km^2)))) +
   ylab(expression(paste('Mean degree, ', italic(bar(k))))) +
   ylim(0, 20)
+
 
 %%end.rcode
 
