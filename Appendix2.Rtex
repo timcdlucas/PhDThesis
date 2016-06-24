@@ -202,14 +202,14 @@ library(palettetown)
 
 invadeTitle <-
 '
-Examples of simulated SIR dynamics with succesfull invasions
+Examples of simulated SIR dynamics with successfull invasions
 '
 
 
 
 invadeCapt <- 
 '
-Two examples (A and B) of a succesful invasion plotted on a logged $y$-axis.
+Two examples (A and B) of a successful invasion plotted on a logged $y$-axis.
 The lines are coloured such that blue represents susceptibles, brown represents individuals infected with one pathogen (the two seperate brown lines are Pathogen 1 and 2), black represents co-infected individuals and yellow represents recovered and immune individuals.
 Pathogen 2 is seeded after \\SI{300000} events (approximately 30 years).
 Simulations are run on a fully-connected network.
@@ -272,7 +272,7 @@ ggdraw() +
 
 noInvadeTitle <- c(
 '
-Examples of simulated SIR dynamics with unsuccesfull invasions
+Examples of simulated SIR dynamics with unsuccessfull invasions
 ',
 '
 Examples of colony size dynamics
@@ -283,8 +283,8 @@ Examples of colony size dynamics
 
 noInvadeCapt <- c(
 '
-Two examples (A and B) of an unsuccesful invasion plotted on a logged $y$-axis.
-The lines are coloured such that blue represents susceptibles, brown represents individuals infected with one pathogen (the two seperate brown lines are Pathogen 1 and 2), black represents co-infected individuals and yellow represents recovered and immune individuals.
+Two examples (A and B) of an unsuccessful invasion plotted on a logged $y$-axis.
+The lines are coloured such that blue represents susceptibles, brown represents individuals infected with one pathogen (the two separate brown lines are Pathogen 1 and 2), black represents co-infected individuals and yellow represents recovered and immune individuals.
 Pathogen 2 is seeded after \\SI{300000} events (approximately 30 years).
 It can be seen that after seeding Pathogen 2, there is a very short period before extinction as opposed to a long fade out of disease.
 Simulations are run on a fully-connected network.

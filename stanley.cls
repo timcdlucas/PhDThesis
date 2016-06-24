@@ -232,7 +232,8 @@
   dashed=false, %
 	maxcitenames=2, 
   terseinits=true,
-  maxbibnames=99,
+  maxbibnames=6,
+  minbibnames=6,
   sortcites=true
 ]{biblatex}
 \renewcommand{\cite}[1]{\parencite{#1}}
@@ -274,6 +275,7 @@
 
 % all names last-first
 \DeclareNameAlias{sortname}{last-first}
+
 
 % Try for smaller dois in bib
 

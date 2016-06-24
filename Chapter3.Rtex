@@ -2060,7 +2060,7 @@ paste(
 'Relationship between viral richness and log effective gene flow per generation for',
 nrow(fstFinal),
 'bat species.
-Green points are studies that estimated effective gene flow using allozymes and blue points are studies using microstatellites.
+Green points are studies that estimated effective gene flow using allozymes and blue points are studies using microsatellites.
 ')
 
 

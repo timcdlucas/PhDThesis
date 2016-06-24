@@ -234,7 +234,7 @@ Therefore there is great need for mechanistic models that try to disentangle the
 Here, I have used multipathogen, metapopulation models to individually vary these host population parameters.
 The metapopulations were parameterised to broadly mimic wild bat populations.
 I used bats as a case study as the size of bat groups (colonies) is very variable and bat colonies are often very stable \cite{kerth2011bats, mccracken1981social}.
-Furthermore, bats are particularly relavent in the context of zoonotic disease as they are thought to be reservoirs for a number of important, recent outbreaks \cite{calisher2006bats, li2005bats}.
+Furthermore, bats are particularly relevant in the context of zoonotic disease as they are thought to be reservoirs for a number of important, recent outbreaks \cite{calisher2006bats, li2005bats}.
 I examined how the interrelated population factors affect the ability of a newly evolved pathogen to invade and persist in a population in the presence of strong competition from an endemic pathogen strain.
 I used these simulations to test two specific hypotheses.
 First, I tested whether host density or population size more strongly promotes the invasion of a new pathogen.
@@ -799,7 +799,7 @@ After \SI{\rinline{invadeT}} events, five hosts individuals infected with Pathog
 The simulation was then run for another \SI{\rinline{nEvent - invadeT}} events.
 The invasion of Pathogen 2 was considered successful if any individuals infected with Pathogen 2 remained at the end of the simulation.
 
-The effect of range size on disease dynamics occured through changes in the metapopulation network.
+The effect of range size on disease dynamics occurred through changes in the metapopulation network.
 The metapopulation network was created for each simulation by randomly placing colonies in a square space (Figure~\ref{fig:colonyNetworkPlots}).
 This square space was considered to be the species geographic range, the size of which was varied.
 Range size was varied between \SI{\rinline{min(area)}} and \SI{\rinline{max(area)}}{\square\kilo\metre}.

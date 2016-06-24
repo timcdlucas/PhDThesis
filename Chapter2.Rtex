@@ -222,7 +222,7 @@ These separate mechanisms have not been examined and it is difficult to see how 
 Currently, the literature contains very abstract, simplified models \cite{qiu2013vector, allen2004sis, garmer2016multistrain, may1994superinfection}.
 These cannot be easily applied to real data.
 They also do not easily give quantitative predictions of pathogen richness; typically they predict either no pathogen coexistence \cite{bremermann1989competitive, martcheva2013competitive} or infinite pathogen richness \cite{may1994superinfection}.
-Models that can give quantitive predictions of pathogen richness in wild populations are more applicable to real-world issues such as zoonotic disease surveillance.
+Models that can give quantitative predictions of pathogen richness in wild populations are more applicable to real-world issues such as zoonotic disease surveillance.
 While predicting an absolute value of pathogen richness for a wild species is likely to be impossible, models that attempt to rank species from highest to lowest pathogen richness are still useful for prioritising species for surveillance.
 This requires a middle ground of model complexity.
 
@@ -231,8 +231,8 @@ This requires a middle ground of model complexity.
 %7. what your focus is (including a  bit about bat focus)
 
 In order to capture this middle ground, I have used metapopulation models. 
-Unlike two-patch models that are used to add population structure while keeping model complexity to a minumum \cite{qiu2013vector, allen2004sis, garmer2016multistrain}, the metapopulations used here split the population into multiple subpopulations.
-I have used two independant variables that alter population structure: dispersal rate and metapopulation network topology.
+Unlike two-patch models that are used to add population structure while keeping model complexity to a minimum \cite{qiu2013vector, allen2004sis, garmer2016multistrain}, the metapopulations used here split the population into multiple subpopulations.
+I have used two independent variables that alter population structure: dispersal rate and metapopulation network topology.
 I have studied the invasion of new pathogens as a mechanism for increasing pathogen richness.
 In particular I have focused on studying the invasion of a newly evolved pathogen that is therefore identical in epidemiological parameters to the endemic pathogen.
 Furthermore, this close evolutionary relationship means that competition via cross-immunity is strong.
@@ -327,7 +327,7 @@ In the application of long term existence of pathogens it is necessary to includ
 Birth and death rates ($\mu$ and $\Lambda$) are set as being equal meaning the population does not systematically increase or decrease.
 The population size does however change as a random walk.
 New born individuals enter the susceptible class.
-Infection amd coinfection were assumed to cause no extra mortality as for a number of viruses, bats show no clinical signs of infection \cite{halpin2011pteropid, deThoisy2016bioecological}.
+Infection and coinfection were assumed to cause no extra mortality as for a number of viruses, bats show no clinical signs of infection \cite{halpin2011pteropid, deThoisy2016bioecological}.
 %In humans, coinfection generally worsens health \cite{griffiths2011nature} but as there are 
 
 \tmpsection{Metapopulation}
@@ -1100,12 +1100,12 @@ I again ran 100 simulations for each parameter set.
 
 I used generalised linear models (GLMs) with a binary response variable, invasion or not, to test the hypothesis that probability of invasion increased with dispersal.
 I examined $p$ values and the regression coefficient, $b$, from each model.
-Seperate GLMs were fitted for each transmission rate.
+Separate GLMs were fitted for each transmission rate.
 These tests were performed both with and without the $\xi = 0$ results as the complete lack of dispersal makes these simulations qualitatively different to the other simulations.
 To test whether the different topologies had different probabilities of invasion, I used Fisher's exact tests because topology is best described as a categorical variable.
 As with the $\xi = 0$ results, these tests were performed both with and without the completely unconnected topology results.
 Finally, I also used binomial GLMs to test the hypothesis that the probability of invasion increased with transmission rate.
-Seperate GLMs were fitted for each dispersal rate and network topology.
+Separate GLMs were fitted for each dispersal rate and network topology.
 All statistical analyses were performed using the \emph{stats} package in \emph{R}.
 The code used for running the simulations and analysing the results is available at \url{https://github.com/timcdlucas/PhDThesis/blob/master/Chapter2.Rtex}.
 
@@ -1396,7 +1396,7 @@ This was true at all four transmission rates.
 %todo check formating of pvalues
 When the $\xi = 0$ simulations were included, there was a positive relationship between dispersal rate and invasion probability for $\beta = 0.2, 0.3$ and $0.4$ (Figure~\ref{f:invasionPropPlots}A, Table~\ref{B-disp}).
 These positive relationships were all significant (GLM. $\beta = 0.2$: $b$ = \rinline{DispGLM2$coefficients[2, 1]}, $p < 10^{-5}$. $\beta = 0.3$: $b$ = \rinline{DispGLM3$coefficients[2, 1]}, $p$ = \rinline{DispGLM3$coefficients[2, 4]}. $\beta = 0.4$: $b$ = \rinline{DispGLM4$coefficients[2, 1]}, $p$ = \rinline{DispGLM4$coefficients[2, 4]}.)
-At $\beta = 0.1$ there was no significant relationship as invasion probaiblity was very close to zero at all dispersal rates (GLM. $b$ = \rinline{DispGLM1$coefficients[2, 1]}, $p$ = \rinline{DispGLM1$coefficients[2, 4]}).
+At $\beta = 0.1$ there was no significant relationship as invasion probability was very close to zero at all dispersal rates (GLM. $b$ = \rinline{DispGLM1$coefficients[2, 1]}, $p$ = \rinline{DispGLM1$coefficients[2, 4]}).
 
 However, when the $\xi = 0$ simulations were removed, this significant, positive relationship largely disappeared.
 At $\beta = 0.2$, the significant positive relationship remained (GLM: $b~=~$\rinline{Disp2GLM2$coefficients[2, 1]}, $p$ = \rinline{Disp2GLM2$coefficients[2, 4]}).
@@ -1461,7 +1461,7 @@ Furthermore, single pathogen dynamics could have an important role such as popul
 
 I ran simulations of a completely unstructured population as a baseline comparison of pathogen invasion probability.
 However, this unstructured population could also be considered one, very large, subpopulation or colony.
-The fact that invasion occured 100\% of the time in these simulations suggests that colony size has an important role in pathogen richness.
+The fact that invasion occurred 100\% of the time in these simulations suggests that colony size has an important role in pathogen richness.
 Therefore the interplay between population structure and colony size should be studied further especially as the range of colony size in bats is large, ranging from ten to 1 million \cite{jones2009pantheria} individuals.
 
 My simulations also highlighted the importance of competition for the spread of a new pathogen.

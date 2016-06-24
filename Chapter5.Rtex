@@ -58,7 +58,7 @@ However, count data from acoustic detectors do not fit the assumptions of the RE
 I developed a generalised REM (gREM), to estimate absolute population size or density from count data from both camera traps and acoustic detectors.
 I derived the gREM for different combinations of sensor detection widths and animal signal widths (a measure of directionality).
 I tested the accuracy and precision of this model using simulations of different combinations of sensor detection widths and animal signal widths, number of captures, and models of animal movement. 
-I foundnd that the gREM produces accurate estimates of absolute animal density for all combinations of sensor detection widths and animal signal widths.
+I found that the gREM produces accurate estimates of absolute animal density for all combinations of sensor detection widths and animal signal widths.
 However, larger sensor detection and animal signal widths were found to be more precise.
 While the model is accurate for all capture efforts tested, the precision of the estimate increases with the number of captures.
 I found no effect of different animal movement models on the accuracy and precision of the gREM.  
@@ -683,7 +683,7 @@ Therefore testing the gREM against real animal data, or further simulations with
 
 The assumptions of our simulations may require further consideration, for example, I have assumed an equal density across the study area.
 However, in a field environment the situation may be more complex, with additional variation coming from local changes in density between sensor sites.
-Athough unequal densities should theoretically not affect accuracy \cite{Hutchinson_Waser_2007}, it will affect precision and further simulations should be used to quantify this effect.
+Although unequal densities should theoretically not affect accuracy \cite{Hutchinson_Waser_2007}, it will affect precision and further simulations should be used to quantify this effect.
 Additionally, I allowed the sensor to be stationary and continuously detecting, negating the triggering, and non-continuous recording issues that could exist with some sensors and reduce precision or accuracy.
 Finally, in the simulation animals moved at the equivalent of the largest day range of terrestrial animals \cite{carbone2005far}.
 Slower speed values should not alter the accuracy of the gREM, but precision would be affected since slower speeds produce fewer records.
