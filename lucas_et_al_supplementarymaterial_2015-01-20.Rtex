@@ -89,7 +89,7 @@ Standard deviations are shown from deep red to pink, representing high to low va
   }
 }%%
 \caption[Model sensitivity to error in parameter estimates]{
-Model sensitivity (for all gREM submodels) to error in estimates of a) signal width $\alpha$,  b) sensor width $\theta$, c) detection distance $r$ and d) animal movement speed $v$. 
+Model sensitivity (for all gREM submodels) to error in estimates of A) signal width $\alpha$,  B) sensor width $\theta$, C) detection distance $r$ and D) animal movement speed $v$. 
 Estimates are -10\% (red), -1\% (orange), 0\% (grey), +1\% (green) and +10\% (blue) of the true parameter value. 
 The black dashed line indicates zero error in density estimates. 
 The error bars 95\% confidence intervals across all simulations.

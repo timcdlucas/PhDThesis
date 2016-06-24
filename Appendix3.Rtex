@@ -893,7 +893,7 @@ print(xtable(fstModelWeightsFull2,
 \begin{table}[t]
 \centering
 \caption[Estimated variable weights and coefficients using alternative phylogeny]{
-Estimated variable weights (probability that a variable is in the best model) and their estimated coefficients for both number of subspecies and gene flow analyses using phylogeny from \cite{jones2005bats}. .
+Estimated variable weights (probability that a variable is in the best model) and their estimated coefficients for both number of subspecies and gene flow analyses using phylogeny from \cite{jones2005bats}.
 The coefficients for the number of subspecies variable are also separated for models with and without the interaction term because this term strongly changes the coefficient and because the coefficient can only be usefully interpreted when estimated without the interaction. 
 However, there are no weights for these separated terms as they are not directly compared in the model selection framework.
 }

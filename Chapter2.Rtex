@@ -297,7 +297,8 @@ Infection amd coinfection were assumed to cause no extra mortality as for a numb
 
 The population is modelled as a metapopulation, being divided into a number of subpopulations (colonies).
 This model is an intermediate level of complexity between fully-mixed populations and contact networks.
-The existence of subspecies, measurements of genetic dissimilarity and ecological studies provide ample evidence that bat populations are structured to some extent \cite{kerth2011bats, mccracken1981social, burns2014correlates, wilson2005mammal}.
+There is ample evidence that bat populations are structured to some extent.
+This evidence comes from the existence of subspecies, measurements of genetic dissimilarity and ecological studies provide   \cite{kerth2011bats, mccracken1981social, burns2014correlates, wilson2005mammal}.
 Therefore a fully mixed population is a large oversimplification.
 However, trying to study the contact network relies on detailed knowledge of individual behaviour which is rarely available.		
 
@@ -358,7 +359,7 @@ Assuming asexual reproduction, that all classes reproduce at the same rate and t
 \begin{align}
   s_x \rightarrow s_x + 1 \;\;\;\text{at a rate of}\;\; \Lambda\left( s_{x}+\sum_q i_{qx} + r_{x}\right) 
 \end{align}
-where $s_x \rightarrow s_x + 1$ is the event that the number of susceptibles in colony $x$ will increase by 1 (a single birth) and $\sum_q i_{qx}$ is the sum of all infection classes $q \in \{1, 2, 12\}$.
+where $s_x \rightarrow s_x + 1$ is the event that the number of susceptibles in colony $x$ will increase by 1 (a single birth) and $\sum_q i_{qx}$ is the sum of all infection classes $q~\in~\{1, 2, 12\}$.
 The rates of death, given a death rate $\mu$, and no increased mortality due to infection, are given by
 \begin{align}
   s_x \rightarrow s_x-1  &\;\;\;\text{at a rate of}\;\; \mu s_x, \\
@@ -1396,7 +1397,7 @@ These positive relationships were all significant (GLM. $\beta = 0.2$: $b$ = \ri
 At $\beta = 0.1$ there was no significant relationship as invasion probaiblity was very close to zero at all dispersal rates (GLM. $b$ = \rinline{DispGLM1$coefficients[2, 1]}, $p$ = \rinline{DispGLM1$coefficients[2, 4]}).
 
 However, when the $\xi = 0$ simulations were removed, this significant, positive relationship largely disappeared.
-At $\beta = 0.2$, the significant positive relationship remained (GLM: $b$ = \rinline{Disp2GLM2$coefficients[2, 1]}, $p$ = \rinline{Disp2GLM2$coefficients[2, 4]}).
+At $\beta = 0.2$, the significant positive relationship remained (GLM: $b~=~$\rinline{Disp2GLM2$coefficients[2, 1]}, $p$ = \rinline{Disp2GLM2$coefficients[2, 4]}).
 At all other transmission rates, the probability of invasion did not significantly change with dispersal rate (GLM. $\beta = 0.1$: $b$ = \rinline{Disp2GLM1$coefficients[2, 1]}, $p$ = \rinline{Disp2GLM1$coefficients[2, 4]}. $\beta = 0.3$: $b$ = \rinline{Disp2GLM3$coefficients[2, 1]}, $p$ = \rinline{sprintf('%.2f', Disp2GLM3$coefficients[2, 4])}. $\beta = 0.4$: $b$ = \rinline{Disp2GLM4$coefficients[2, 1]}, $p$ = \rinline{sprintf('%.2f', Disp2GLM4$coefficients[2, 4])}.)
 
 
@@ -1479,7 +1480,7 @@ However, the rate of recovery from pathogens in the presence of coinfections has
 In humans, the rate of recovery from respiratory syncytial virus was faster in individuals that had recently recovered from one of a number of co-circulating viruses \cite{munywoki2015influence}.
 However, currently coinfected individuals recovered more slowly than average \cite{munywoki2015influence}.
 
-However, further work could relax this assumption using a model similar to \cite{poletto2015characterising} which contains additional classes for `infected with Pathogen 1, immune to Pathogen 2' and `infected with Pathogen 1, immune to Pathogen 2'.
+However, further work could relax this assumption using a model similar to \cite{poletto2015characterising} which contains additional classes for ``infected with Pathogen 1, immune to Pathogen 2'' and ``infected with Pathogen 1, immune to Pathogen 2''.
 The model here was formulated such that the study of systems with greater than two pathogens (an avenue for further study) is still computationally feasible. 
 A model such as used in \cite{poletto2015characterising} contains $3^\rho$ classes for a system with $\rho$ pathogen species.
 This quickly becomes computationally restrictive.

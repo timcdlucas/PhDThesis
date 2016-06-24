@@ -160,13 +160,13 @@ However, different combinations of $\theta$ and $\alpha$ need different equation
 equalRegionsCapt <- '
 Locations where derivation of the average profile $\\bar{p}$ is the same for different combinations of sensor detection and animal signal widths.
 Symbols within each polygon refer to each gREM submodel named after their compass point, except for Gas and REM which highlight the position of these previously derived models within the gREM.
-Symbols on the edge of the plot are for submodels where $\\alpha, \\theta = 2\\pi$
+Symbols on the edge of the plot are for submodels where $\\alpha$ or $\\theta = 2\\pi$
 '
 
 equalRegionsTitle <- 'Locations where derivation of the average profile $\\bar{p}$ is the same'
 %%end.rcode
 
-%%begin.rcode equalRegions, fig.width = 6, fig.height = 6, fig.show = 'show', fig.cap = equalRegionsCapt, fig.scap = equalRegionsTitle, out.width = '0.6\\textwidth'
+%%begin.rcode equalRegions, fig.width = 6, fig.height = 6, fig.show = 'show', fig.cap = equalRegionsCapt, fig.scap = equalRegionsTitle, out.width = '0.8\\textwidth'
 
 
 polys <- list(
@@ -261,16 +261,16 @@ Sensor width, $\theta$, and detection distance, $r$ would also need to be measur
 
 \subsubsection{Example derivation of SE2}
 
-In order to calculate $\bar{p}$, we have to integrate over the focal angle, $x_1$ (Figure~\ref{f:x1AndInt}a).
+In order to calculate $\bar{p}$, we have to integrate over the focal angle, $x_1$ (Figure~\ref{f:x1AndInt}A).
 This is the angle taken from the centre line of the sensor.
 Other focal angles are possible ($x_2$, $x_3$, $x_4$) and are used in other gREM sub-models (see Appendix S2).
 As the size of the profile depends on the approach angle, we present the derivation across all approach angles.
 When the sensor is directly approaching the animal $x_1  = \pi/2$.
 
-Starting from $x_1 = \pi/2$ until $\theta/2 + \pi/2 - \alpha/2$, the size of the profile is $2r\sin \alpha/2$ (Figure~\ref{f:x1AndInt}b).
+Starting from $x_1 = \pi/2$ until $\theta/2 + \pi/2 - \alpha/2$, the size of the profile is $2r\sin \alpha/2$ (Figure~\ref{f:x1AndInt}B).
 During this first interval, the size of $\alpha$ limits the width of the profile.
-When the animal reaches $x_1$  = $\theta/2 + \pi/2 - \alpha/2$ (Figure~\ref{f:x1AndInt}c), the size of the profile is $r\sin( \alpha/2) + r\cos( x_1  - \theta/2)$ and the size of $\theta$ and $\alpha$ both limit the width of the profile (Figure~ \ref{f:x1AndInt}c).
-Finally, at $x_1  = 5\pi/2 - \theta/2  - \alpha/2$ until $x_1  = 3\pi/2$, the width of the profile is again $2r\sin\alpha/2$ (Figure~ \ref{f:x1AndInt}d) and the size of $\alpha$ again limits the width of the profile. 
+When the animal reaches $x_1$  = $\theta/2 + \pi/2 - \alpha/2$ (Figure~\ref{f:x1AndInt}C), the size of the profile is $r\sin( \alpha/2) + r\cos( x_1  - \theta/2)$ and the size of $\theta$ and $\alpha$ both limit the width of the profile (Figure~ \ref{f:x1AndInt}C).
+Finally, at $x_1  = 5\pi/2 - \theta/2  - \alpha/2$ until $x_1  = 3\pi/2$, the width of the profile is again $2r\sin\alpha/2$ (Figure~ \ref{f:x1AndInt}D) and the size of $\alpha$ again limits the width of the profile. 
 
 
 \begin{figure}[t]
@@ -301,7 +301,7 @@ The average profile $\bar{p}$ is the size of the profile averaged across all app
 
 \end{figure}
 
-The profile width $p$ for $\pi$ radians of rotation (from directly towards the sensor to directly behind the sensor) is completely characterised by the three intervals (Figure \ref{f:x1AndInt}b--d).
+The profile width $p$ for $\pi$ radians of rotation (from directly towards the sensor to directly behind the sensor) is completely characterised by the three intervals (Figure \ref{f:x1AndInt}B -- D).
 Average profile width $\bar{p}$ is calculated by integrating these profiles over their appropriate intervals of $x_1$ and dividing by $\pi$ which gives
 
 \begin{align}
@@ -319,7 +319,7 @@ D = z/vt\bar{p}.
 
 Rather than having one equation that describes $\bar{p}$ globally, the gREM must be split into submodels due to discontinuous changes in $p$ as $\alpha$ and $\beta$ change.
 These discontinuities can occur for a number of reasons such as a profile switching between being limited by $\alpha$ and $\theta$, the difference between very small profiles and profiles of size zero, and the fact that the width of a sector stops increasing once the central angle reaches $\pi$ radians (i.e., a semi-circle is just as wide as a full circle).
-As an example, if $\alpha$ is small, there is an interval between Figure \ref{f:x1AndInt}c and \ref{f:x1AndInt}d where the `blind spot' would prevent animals being detected giving $p=0$.
+As an example, if $\alpha$ is small, there is an interval between Figure \ref{f:x1AndInt}C and \ref{f:x1AndInt}D where the `blind spot' would prevent animals being detected giving $p=0$.
 This would require an extra integral in our equation, as simply putting our small value of $\alpha$ into \ref{e:SE2int} would not give us this integral of $p=0$.
 
 gREM submodel specifications were done by hand, and the integration was done using \emph{SymPy} \cite{sympy} in \emph{Python} (Appendix S3).
@@ -381,7 +381,7 @@ equalRegionsResultTitle <- 'Expressions for the average profile width'
 
 %%end.rcode
 
-%%begin.rcode, fig.width = 6, fig.height = 6, fig.cap = equalRegionsResultCapt, fig.scap = equalRegionsResultTitle, out.width = '0.6\\textwidth', fig.show = 'hide', cache = FALSE
+%%begin.rcode, fig.width = 6, fig.height = 6, fig.cap = equalRegionsResultCapt, fig.scap = equalRegionsResultTitle, out.width = '0.7\\textwidth', fig.show = 'hide', cache = FALSE
 
 
 type = c(8, 5, 5, 6, 7, 2, 2, 2, 2, 2, 2, 2, 4, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
@@ -500,7 +500,7 @@ CapturesTitle <- 'Simulation model results of the accuracy and precision of four
 
 %%end.rcode
 
-%%begin.rcode Captures, fig.cap = CapturesCapt, fig.scap = CapturesTitle, out.width = '0.9\\textwidth', cache = FALSE
+%%begin.rcode Captures, fig.cap = CapturesCapt, fig.scap = CapturesTitle, out.width = '\\textwidth', cache = FALSE
 
 captures <- read.csv('data/Chapter5/captures_tidy.csv')
 captures$count <- factor(captures$count)
@@ -565,7 +565,7 @@ movtTitle <- 'Simulation model results of the accuracy and precision of four gRE
 
 %%end.rcode
 
-%%begin.rcode movtFig, fig.cap = movtCapt, fig.height = 5, fig.scap = movtTitle,  out.width = '0.7\\textwidth', cache = FALSE
+%%begin.rcode movtFig, fig.cap = movtCapt, fig.height = 5, fig.scap = movtTitle,  out.width = '0.8\\textwidth', cache = FALSE
 
 wait <- read.csv('data/Chapter5/prop_time_still_tidy.csv')
 

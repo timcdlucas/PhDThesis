@@ -243,40 +243,40 @@ I found that population size has a much stronger affect on the invasion of a new
 
 
 
-
-\begin{table}
-
-\caption[Population parameter values]{
-Population parameter values used.
-}
-\label{t:popParams}
-\centering
-\begin{tabular}{@{}llrrrrr@{}}
-\toprule
-Focal Pop. Factor & Parameter & $\times$0.25 & $\times$0.5 & $\times$1 & $\times$2 & $\times$4\\
-\midrule
-                   & Colony size & 400 & 400 & 400 & 400 & 400 \\
-                   & Number of colonies & 20 & 20 & 20 & 20 & 20 \\
-\emph{Host Density}& Range size & \textbf{2\,500} & \textbf{5\,000} & \textbf{10\,000} & \textbf{20\,000} & \textbf{40\,000} \\ 
-(Population density)& Host density & \emph{0.2} & \emph{0.4} & \emph{0.8} & \emph{1.6} & \emph{3.2} \\
-                   & Population size & 8\,000 & 8\,000 & 8\,000 & 8\,000 & 8\,000 \\[4mm]
 %
-                   & Colony size & \textbf{100} & \textbf{200} & \textbf{400} &\textbf{800} & \textbf{1\,600} \\
-                   & Number of colonies & 20 & 20 & 20 & 20 & 20 \\
-\emph{Colony size} & Range size & 2\,500 & 5\,000 & 10\,000 & 20\,000 & 40\,000 \\
-(Population size)  & Host density & 0.8 & 0.8 & 0.8 & 0.8 & 0.8 \\
-                   & Population size & \emph{2\,000} & \emph{4\,000} & \emph{8\,000} & \emph{16\,000} & \emph{32\,000} \\[4mm]
-                  %
-                   & Colony size & 400 & 400 & 400 & 400 & 400 \\
-                   & Number of colonies & \textbf{5} & \textbf{10} & \textbf{20} & \textbf{40} & \textbf{80} \\
-\emph{Number of Colonies} & Range size & 2\,500 & 5\,000 & 10\,000 & 20\,000 & 40\,000 \\
-(Population size)  & Host density & 0.8 & 0.8 & 0.8 & 0.8 & 0.8 \\
-                   & Population size & \emph{2\,000} & \emph{4\,000} & \emph{8\,000} & \emph{16\,000} & \emph{32\,000} \\
-\bottomrule
-
-\end{tabular}
-\end{table}
-
+%\begin{table}
+%
+%\caption[Population parameter values]{
+%Population parameter values used.
+%}
+%\label{t:popParams}
+%\centering
+%\begin{tabular}{@{}llrrrrr@{}}
+%\toprule
+%Focal Pop. Factor & Parameter & $\times$0.25 & $\times$0.5 & $\times$1 & $\times$2 & $\times$4\\
+%\midrule
+%                   & Colony size & 400 & 400 & 400 & 400 & 400 \\
+%                   & Number of colonies & 20 & 20 & 20 & 20 & 20 \\
+%\emph{Host Density}& Range size & \textbf{2\,500} & \textbf{5\,000} & \textbf{10\,000} & \textbf{20\,000} & \textbf{40\,000} \\ 
+%(Population density)& Host density & \emph{0.2} & \emph{0.4} & \emph{0.8} & \emph{1.6} & \emph{3.2} \\
+%                   & Population size & 8\,000 & 8\,000 & 8\,000 & 8\,000 & 8\,000 \\[4mm]
+%%
+%                   & Colony size & \textbf{100} & \textbf{200} & \textbf{400} &\textbf{800} & \textbf{1\,600} \\
+%                   & Number of colonies & 20 & 20 & 20 & 20 & 20 \\
+%\emph{Colony size} & Range size & 2\,500 & 5\,000 & 10\,000 & 20\,000 & 40\,000 \\
+%(Population size)  & Host density & 0.8 & 0.8 & 0.8 & 0.8 & 0.8 \\
+%                   & Population size & \emph{2\,000} & \emph{4\,000} & \emph{8\,000} & \emph{16\,000} & \emph{32\,000} \\[4mm]
+%                  %
+%                   & Colony size & 400 & 400 & 400 & 400 & 400 \\
+%                   & Number of colonies & \textbf{5} & \textbf{10} & \textbf{20} & \textbf{40} & \textbf{80} \\
+%\emph{Number of Colonies} & Range size & 2\,500 & 5\,000 & 10\,000 & 20\,000 & 40\,000 \\
+%(Population size)  & Host density & 0.8 & 0.8 & 0.8 & 0.8 & 0.8 \\
+%                   & Population size & \emph{2\,000} & \emph{4\,000} & \emph{8\,000} & \emph{16\,000} & \emph{32\,000} \\
+%\bottomrule
+%
+%\end{tabular}
+%\end{table}
+%
 
 %%begin.rcode SimSetup
 
@@ -799,8 +799,8 @@ densPreds <- rbind(dens1Model, dens2Model) %>%
 
 valueChangeMeansCapt <- '
 Comparison of the effect of colony size, number of colonies and host density on probability of invasion.
-The $x$-axis shows the relative change in the default values of each of these factors ($\\times 0.25, 0.5, 1, 2$ and $4$).
-Default values are: colony number = 20, colony size = 400 and density = 0.8 animals.\\si{\\per\\square\\kilo\\metre}.
+The $x$-axis shows the relative change in the default values of each of these factors ($\\times$0.25, 0.5, 1, 2 and $4$).
+Default values are: colony number = 20, colony size = 400 and density = 0.8 animals per \\si{\\square\\kilo\\metre}.
 Red lines: population size is altered by changing colony number.
 Blue lines: population size is altered by changing colony size.
 Yellow lines: population density is altered by changing range size.
@@ -1051,7 +1051,8 @@ The code used for running all simulations is available at \url{https://github.co
 In each simulation the host population was seeded with 20 individuals infected with Pathogen 1 in each colony. 
 Pathogen 1 was then allowed to spread and reach equilibrium. 
 After \SI{\rinline{invadeT}} events, five hosts individuals infected with Pathogen 2 were added to one randomly selected colony. 
-After another \SI{\rinline{nEvent - invadeT}} events the invasion of Pathogen 2 was considered successful if any individuals infected  with Pathogen 2 still remained.
+The simulation was then run for another \SI{\rinline{nEvent - invadeT}} events.
+The invasion of Pathogen 2 was considered successful if any individuals infected with Pathogen 2 remained at the end of the simulation.
 
 The effect of range size on disease dynamics occured through changes in the metapopulation network.
 The metapopulation network was created for each simulation by randomly placing colonies in a square space (Figure~\ref{fig:colonyNetworkPlots}).
@@ -1077,7 +1078,7 @@ Given this setup, populations with low densities had relatively unconnected meta
 
 \subsection{Population factors}
 
-Three sets of simulations were run (Table~\ref{t:popParams}).
+Three sets of simulations were run.
 This set of three simulations was used to compare two pairs of population factors: \emph{i}) population size and host density, \emph{ii}) colony size and the number of colonies.
 The population parameters that were directly varied were colony size, the number of colonies and range size.
 In each case these parameters were assigned their default value multiplied by 0.25, 0.5, 1, 2 and 4.
@@ -1144,7 +1145,7 @@ Logistic regression was used to test whether transmission rate was associated wi
 %%%     Results text    %%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-At the default parameter settings, the probability of invasion and establishment of the second pathogen, $P(I)$,  was rare (Figure~\ref{fig:plotValueChangeMeans} and Tables~\ref{C-pop}--\ref{C-dens2}).
+At the default parameter settings, the probability of invasion and establishment of the second pathogen, $P(I)$,  was rare (Figure~\ref{fig:plotValueChangeMeans} and Tables~\ref{C-pop} -- \ref{C-dens2}).
 These proportions significantly increase with transmission rate (GLM: $b$ = \rinline{transTest$estimate[2]}, $p$ = \rinline{transTest$p.value[2]}).
 
 In \rinline{nAllExtinct} simulations, both of the pathogens went extinct.
@@ -1172,39 +1173,39 @@ Therefore the simulations support the hypothesis that colony size is the more im
 
 
 
-%\begin{table}
-%
-%\caption[Regression results]{
-%Regression results comparing effects of colony size, colony number and density.
-%Coefficients are from multiple logistic regressions with invasion as the dependent variable and all independent variables being scaled and centred.
-%Colony size and colony number were varied while keeping density equal while density was varied by changing range size while keeping population size equal.
-%$p$ is for the test against the null hypothesis that  $b = 0$.
-%}
-%\label{t:regrCoefs}
-%\centering
-%\begin{tabular}{@{}rlrrr@{}}
-%\toprule
-%$\beta$ & \emph{Variable} & \emph{Estimate} ($b$) & (95\% \emph{CI}) & $p$\\
-%\midrule
-%0.1   &    Intercept     & \rinline{combModel$estimate[1]} & (\rinline{combModel$conf.low[1]}, \rinline{combModel$conf.high[1]}) & $< 10^{-5}$ \\
-%      &    Colony Size   & \rinline{combModel$estimate[2]} & (\rinline{combModel$conf.low[2]}, \rinline{combModel$conf.high[2]}) & $< 10^{-5}$ \\
-%      &    Colony Number & \rinline{combModel$estimate[3]} & (\rinline{combModel$conf.low[3]}, \rinline{combModel$conf.high[3]}) & \rinline{combModel$p.value[3]} \\
-%      &    Density       & \rinline{combModel$estimate[4]} & (\rinline{combModel$conf.low[4]}, \rinline{combModel$conf.high[4]}) & \rinline{combModel$p.value[4]} \\[1em]
-%0.2   &    Intercept     & \rinline{combModel$estimate[5]} & (\rinline{combModel$conf.low[5]}, \rinline{combModel$conf.high[5]}) & $< 10^{-5}$ \\
-%      &    Colony Size   & \rinline{combModel$estimate[6]} & (\rinline{combModel$conf.low[6]}, \rinline{combModel$conf.high[6]}) & $< 10^{-5}$ \\
-%      &    Colony Number & \rinline{combModel$estimate[7]} & (\rinline{combModel$conf.low[7]}, \rinline{combModel$conf.high[7]}) & \rinline{sprintf('%.3f', combModel$p.value[7])} \\
-%      &    Density       & \rinline{combModel$estimate[8]} & (\rinline{combModel$conf.low[8]}, \rinline{combModel$conf.high[8]}) & \rinline{combModel$p.value[8]} \\[1em]
-%0.3   &    Intercept     & \rinline{combModel$estimate[9]} & (\rinline{combModel$conf.low[9]}, \rinline{combModel$conf.high[9]}) & $< 10^{-5}$ \\
-%      &    Colony Size   & \rinline{combModel$estimate[10]} & (\rinline{combModel$conf.low[10]}, \rinline{combModel$conf.high[10]}) & $< 10^{-5}$ \\
-%      &    Colony Number & \rinline{combModel$estimate[11]} & (\rinline{combModel$conf.low[11]}, \rinline{combModel$conf.high[11]}) & \rinline{combModel$p.value[11]} \\
-%      &    Density       & \rinline{combModel$estimate[12]} & (\rinline{combModel$conf.low[12]}, \rinline{combModel$conf.high[12]}) & \rinline{combModel$p.value[12]} \\
-%
-%\bottomrule
-%
-%\end{tabular}
-%\end{table}
-%
-%
+\begin{table}
+
+\caption[Regression results]{
+Regression results comparing effects of colony size, colony number and density.
+Coefficients are from multiple logistic regressions with invasion as the dependent variable and all independent variables being scaled and centred.
+Colony size and colony number were varied while keeping density equal while density was varied by changing range size while keeping population size equal.
+$p$ is for the test against the null hypothesis that  $b = 0$.
+}
+\label{t:regrCoefs}
+\centering
+\begin{tabular}{@{}rlrrr@{}}
+\toprule
+$\beta$ & \emph{Variable} & \emph{Estimate} ($b$) & (95\ \emph{CI}) & $p$\\
+\midrule
+0.1   &    Intercept     & \rinline{combModel$estimate[1]} & (\rinline{combModel$conf.low[1]}, \rinline{combModel$conf.high[1]}) & $< 10^{-5}$ \\
+      &    Colony Size   & \rinline{combModel$estimate[2]} & (\rinline{combModel$conf.low[2]}, \rinline{combModel$conf.high[2]}) & $< 10^{-5}$ \\
+      &    Colony Number & \rinline{combModel$estimate[3]} & (\rinline{combModel$conf.low[3]}, \rinline{combModel$conf.high[3]}) & \rinline{combModel$p.value[3]} \\
+      &    Density       & \rinline{combModel$estimate[4]} & (\rinline{combModel$conf.low[4]}, \rinline{combModel$conf.high[4]}) & \rinline{combModel$p.value[4]} \\[1em]
+0.2   &    Intercept     & \rinline{combModel$estimate[5]} & (\rinline{combModel$conf.low[5]}, \rinline{combModel$conf.high[5]}) & $< 10^{-5}$ \\
+      &    Colony Size   & \rinline{combModel$estimate[6]} & (\rinline{combModel$conf.low[6]}, \rinline{combModel$conf.high[6]}) & $< 10^{-5}$ \\
+      &    Colony Number & \rinline{combModel$estimate[7]} & (\rinline{combModel$conf.low[7]}, \rinline{combModel$conf.high[7]}) & \rinline{sprintf('.3f', combModel$p.value[7])} \\
+      &    Density       & \rinline{combModel$estimate[8]} & (\rinline{combModel$conf.low[8]}, \rinline{combModel$conf.high[8]}) & \rinline{combModel$p.value[8]} \\[1em]
+0.3   &    Intercept     & \rinline{combModel$estimate[9]} & (\rinline{combModel$conf.low[9]}, \rinline{combModel$conf.high[9]}) & $< 10^{-5}$ \\
+      &    Colony Size   & \rinline{combModel$estimate[10]} & (\rinline{combModel$conf.low[10]}, \rinline{combModel$conf.high[10]}) & $< 10^{-5}$ \\
+      &    Colony Number & \rinline{combModel$estimate[11]} & (\rinline{combModel$conf.low[11]}, \rinline{combModel$conf.high[11]}) & \rinline{combModel$p.value[11]} \\
+      &    Density       & \rinline{combModel$estimate[12]} & (\rinline{combModel$conf.low[12]}, \rinline{combModel$conf.high[12]}) & \rinline{combModel$p.value[12]} \\
+
+\bottomrule
+
+\end{tabular}
+\end{table}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
