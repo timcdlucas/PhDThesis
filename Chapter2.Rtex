@@ -258,6 +258,22 @@ Furthermore, structured populations nearly always had a lower probability of pat
 The topology of the network did not strongly affect the probability of pathogen invasion as long as the population was not completely unconnected.
 Overall, I found significant evidence that reduced population structure increases the probability of invasion of a new pathogen, implying a role for the generation of pathogen richness more generally.
 
+\begin{figure}[t]
+\centering
+  \includegraphics[width=0.5\textwidth]{imgs/SIRoption1.pdf}
+  \caption[Schematic of the SIR model used]{
+  Schematic of the SIR model used. 
+  Individuals are in one of five classes, susceptible (orange, $S$), infected with Pathogen 1, Pathogen 2 or both (blue, $I_1, I_2, I_{12}$) or recovered and immune from further infection (green, $R$).
+  Transitions between epidemiological classes occur as indicated by solid arrows.
+  Vital dynamics (births and deaths) are indicated by dashed arrows.
+  Parameter symbols for transitions are indicated.
+  Note that individuals in $I_{12}$ move into $R$, not back to $I_1$ or $I_2$. 
+  That is, recovery from one pathogen causes immediate recovery from the other pathogen.
+  }
+\label{f:sir}
+\end{figure}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -285,6 +301,28 @@ As in \textcite{castillo1989epidemiological}, low values of $\alpha$ imply lower
 In particular, $\alpha = 0$ indicates no coinfections, $\alpha = 1$ indicates that coinfections happen at the same rate as first infections while $\alpha > 1$ indicates that coinfections occur more readily than first infections.
 
 
+\begin{figure}[t]
+{\centering 
+\subfloat[Fully connected\label{fig:fullyConnected}]{
+  \includegraphics[width=0.45\textwidth]{imgs/minimallyConnected.pdf} 
+}
+\subfloat[Minimally connected
+\label{fig:minimallyConnected}]{
+  \includegraphics[width=0.45\textwidth]{imgs/fullyConnected.pdf} 
+}
+}
+\caption[Network topologies used to compare network connectedness]{
+The two network topologies used to test whether network connectedness influences a pathogen's ability to invade.
+A) Animals can only disperse to neighbouring colonies. 
+B) Dispersal can occur between any colony.
+Blue circles are colonies of \SI{3000} individuals.
+Dispersal only occurs between colonies connected by an edge (black line).
+The dispersal rate is held constant between the two topologies.
+}
+\label{f:net}
+\end{figure}
+
+
 In the application of long term existence of pathogens it is necessary to include vital dynamics (births and deaths) as the SIR model without vital dynamics has no endemic state.
 Birth and death rates ($\mu$ and $\Lambda$) are set as being equal meaning the population does not systematically increase or decrease.
 The population size does however change as a random walk.
@@ -293,6 +331,43 @@ Infection amd coinfection were assumed to cause no extra mortality as for a numb
 %In humans, coinfection generally worsens health \cite{griffiths2011nature} but as there are 
 
 \tmpsection{Metapopulation}
+
+
+\begin{table}[tb]
+\centering
+\caption[All symbols used in Chapters \ref{ch:sims1} and \ref{ch:sims2}.]{A summary of all symbols used in Chapters \ref{ch:sims1} and \ref{ch:sims2} along with their units and default values.
+The justifications for parameter values are given in Section \ref{s:paramSelect}.}
+
+\begin{tabular}{@{}lp{6cm}p{2.9cm}r@{}}
+\toprule
+Symbol & Explanation & Units & Value\\
+\midrule
+$\rho$ & Number of pathogens && 2\\
+$x, y$ & Colony index &&\\
+$p$ &  Pathogen index i.e.\ $p\in\{1,2\}$ for pathogens 1 and 2 & &\\
+$q$ & Disease class i.e.\ $q\in\{1,2,12\}$&\\
+$S_x$ & Number of susceptible individuals in colony $x$ &&\\
+$I_qx$ & Number of individuals infected with disease(s) $q \in {1, 2, 12}$ in colony $x$ &&\\
+$R_x$ & Number of individuals in colony $x$ in the recovered with immunity class  &&\\
+$N$ & Total Population size && 30,000\\
+$m$ & Number of colonies&& 10\\
+$n$ & Colony size && 3,000\\
+$a$ & Area & \si{\square\kilo\metre}& 10,000\\
+$\beta$ & Transmission rate &  & 0.1 -- 0.4\\
+$\alpha$ & Coinfection adjustment factor  & & 0.1\\
+$\gamma$ & Recovery rate & year$^{-1}.$individual$^{-1}$ & 1\\
+$\xi$ & Dispersal & year$^{-1}.$individual$^{-1}$ & 0.001--0.1\\
+$\Lambda$ & Birth rate & year$^{-1}.$individual$^{-1}$ & 0.05\\
+$\mu$ & Death rate & year$^{-1}.$individual$^{-1}$ & 0.05\\
+$k_x$ & Degree of node $x$ (number of colonies that individuals from colony $x$ can disperse to). &&\\
+$\delta$ & Waiting time until next event & years &\\
+
+$e_i$ & The rate at which event $i$ occurs & year$^{-1}$&\\
+\bottomrule
+\end{tabular}
+
+\label{t:params}
+\end{table}
 
 
 The population is modelled as a metapopulation, being divided into a number of subpopulations (colonies).
@@ -337,22 +412,6 @@ Finally, the length of the time step, $\delta$, is drawn from an exponential dis
 \end{align}
 
 
-\begin{figure}[t]
-\centering
-  \includegraphics[width=0.5\textwidth]{imgs/SIRoption1.pdf}
-  \caption[Schematic of the SIR model used]{
-  Schematic of the SIR model used. 
-  Individuals are in one of five classes, susceptible (orange, $S$), infected with Pathogen 1, Pathogen 2 or both (blue, $I_1, I_2, I_{12}$) or recovered and immune from further infection (green, $R$).
-  Transitions between epidemiological classes occur as indicated by solid arrows.
-  Vital dynamics (births and deaths) are indicated by dashed arrows.
-  Parameter symbols for transitions are indicated.
-  Note that individuals in $I_{12}$ move into $R$, not back to $I_1$ or $I_2$. 
-  That is, recovery from one pathogen causes immediate recovery from the other pathogen.
-  }
-\label{f:sir}
-\end{figure}
-
-
 We can now write down the rates of all events. 
 %I defined $I^+_p$ to be the sum of all classes that are infectious with pathogen $p$, for example $I^+_1 = I_1 + I_{12}$. 
 Assuming asexual reproduction, that all classes reproduce at the same rate and that individuals are born into the susceptible class we get
@@ -367,42 +426,6 @@ The rates of death, given a death rate $\mu$, and no increased mortality due to 
   r_x  \rightarrow r_x-1 &\;\;\;\text{at a rate of}\;\; \mu r_x.
 \end{align}
 
-
-\begin{table}[b!]
-\centering
-\caption[All symbols used in Chapters \ref{ch:sims1} and \ref{ch:sims2}.]{A summary of all symbols used in Chapters \ref{ch:sims1} and \ref{ch:sims2} along with their units and default values.
-The justifications for parameter values are given in Section \ref{s:paramSelect}.}
-
-\begin{tabular}{@{}lp{6cm}p{2.9cm}r@{}}
-\toprule
-Symbol & Explanation & Units & Value\\
-\midrule
-$\rho$ & Number of pathogens && 2\\
-$x, y$ & Colony index &&\\
-$p$ &  Pathogen index i.e.\ $p\in\{1,2\}$ for pathogens 1 and 2 & &\\
-$q$ & Disease class i.e.\ $q\in\{1,2,12\}$&\\
-$S_x$ & Number of susceptible individuals in colony $x$ &&\\
-$I_qx$ & Number of individuals infected with disease(s) $q \in {1, 2, 12}$ in colony $x$ &&\\
-$R_x$ & Number of individuals in colony $x$ in the recovered with immunity class  &&\\
-$N$ & Total Population size && 30,000\\
-$m$ & Number of colonies&& 10\\
-$n$ & Colony size && 3,000\\
-$a$ & Area & \si{\square\kilo\metre}& 10,000\\
-$\beta$ & Transmission rate &  & 0.1 -- 0.4\\
-$\alpha$ & Coinfection adjustment factor  & & 0.1\\
-$\gamma$ & Recovery rate & year$^{-1}.$individual$^{-1}$ & 1\\
-$\xi$ & Dispersal & year$^{-1}.$individual$^{-1}$ & 0.001--0.1\\
-$\Lambda$ & Birth rate & year$^{-1}.$individual$^{-1}$ & 0.05\\
-$\mu$ & Death rate & year$^{-1}.$individual$^{-1}$ & 0.05\\
-$k_x$ & Degree of node $x$ (number of colonies that individuals from colony $x$ can disperse to). &&\\
-$\delta$ & Waiting time until next event & years &\\
-
-$e_i$ & The rate at which event $i$ occurs & year$^{-1}$&\\
-\bottomrule
-\end{tabular}
-
-\label{t:params}
-\end{table}
 
 
 I modelled transmission as being density-dependent.
@@ -434,27 +457,6 @@ Finally, recovery from any infectious class occurs at a rate $\gamma$
   i_{qx} \rightarrow i_{qx}-1,\;\; r_x \rightarrow r_x+1  \;\;\text{at a rate of}\;\; \gamma i_{qx}.
 \end{align}
 
-
-\begin{figure}[t]
-{\centering 
-\subfloat[Fully connected\label{fig:fullyConnected}]{
-  \includegraphics[width=0.45\textwidth]{imgs/minimallyConnected.pdf} 
-}
-\subfloat[Minimally connected
-\label{fig:minimallyConnected}]{
-  \includegraphics[width=0.45\textwidth]{imgs/fullyConnected.pdf} 
-}
-}
-\caption[Network topologies used to compare network connectedness]{
-The two network topologies used to test whether network connectedness influences a pathogen's ability to invade.
-A) Animals can only disperse to neighbouring colonies. 
-B) Dispersal can occur between any colony.
-Blue circles are colonies of \SI{3000} individuals.
-Dispersal only occurs between colonies connected by an edge (black line).
-The dispersal rate is held constant between the two topologies.
-}
-\label{f:net}
-\end{figure}
 
 %%begin.rcode SimLengths
 
