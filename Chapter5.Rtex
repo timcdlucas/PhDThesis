@@ -112,7 +112,7 @@ The REM presented by \cite{rowcliffe2008estimating} adapts the gas model to coun
 The REM is derived assuming a stationary sensor with a detection width less than $\pi/2$ radians.
 However, in order to apply this approach more generally, and in particular to stationary acoustic detectors, we need both to relax the constraint on sensor detection width, and allow for animals with directional signals.
 Consequently, we derive the gREM for any detection width, $ \theta$, between 0 and $2\pi$ with a detection distance $r$ giving a circular sector within which animals can be captured (the detection zone) (Figure~\ref{f:AngleDef}).
-Additionally, we model the animal as having an associated signal width $\alpha$ between 0 and $2\pi$  (Figure~\ref{f:AngleDef}, see Appendix S1 for a list of symbols).
+Additionally, we model the animal as having an associated signal width $\alpha$ between 0 and $2\pi$  (Figure~\ref{f:AngleDef}, see Table~\ref{t:paras} for a list of symbols).
 We start deriving the gREM with the simplest situation, the gas model where $\theta =  2\pi$ and $ \alpha =  2\pi$. 
 
 
@@ -254,7 +254,7 @@ ggplot(reg, aes(x = x, y = y)) +
 
 I have identified the parameter space for the combinations of $\theta$ and $\alpha$ for which the derivation of the equations are the same (defined as sub-models in the gREM) (Figure~\ref{fig:equalRegions}).
 For example, the gas model becomes the simplest gREM sub-model (upper right in Figure~\ref{fig:equalRegions}) and the REM from \cite{rowcliffe2008estimating} is another gREM sub-model where $\theta<\pi/2$ and $\alpha = 2\pi$.
-I derive one gREM sub-model SE2 as an example below, where $2 \pi - \alpha/2 < \theta < 2\pi ,\; 0 < \alpha <\pi$ (see Appendix S2 for derivations of all gREM sub-models).
+I derive one gREM sub-model SE2 as an example below, where $2 \pi - \alpha/2 < \theta < 2\pi ,\; 0 < \alpha <\pi$ (see Appendix \ref{gremAppendix} for derivations of all gREM sub-models).
 Any estimate of density would require prior knowledge of animal velocity, $v$ and animal signal width, $\alpha$ taken from other sources, for example, existing literature \cite{brinklov2011, carbone2005far}.
 Sensor width, $\theta$, and detection distance, $r$ would also need to be measured or obtained from manufacturer specifications \cite{holderied2003echolocation, adams2012you}.
 
@@ -263,7 +263,7 @@ Sensor width, $\theta$, and detection distance, $r$ would also need to be measur
 
 In order to calculate $\bar{p}$, we have to integrate over the focal angle, $x_1$ (Figure~\ref{f:x1AndInt}A).
 This is the angle taken from the centre line of the sensor.
-Other focal angles are possible ($x_2$, $x_3$, $x_4$) and are used in other gREM sub-models (see Appendix S2).
+Other focal angles are possible ($x_2$, $x_3$, $x_4$) and are used in other gREM sub-models (see Appendix \ref{gremAppendix}).
 As the size of the profile depends on the approach angle, we present the derivation across all approach angles.
 When the sensor is directly approaching the animal $x_1  = \pi/2$.
 
@@ -322,9 +322,9 @@ These discontinuities can occur for a number of reasons such as a profile switch
 As an example, if $\alpha$ is small, there is an interval between Figure \ref{f:x1AndInt}C and \ref{f:x1AndInt}D where the `blind spot' would prevent animals being detected giving $p=0$.
 This would require an extra integral in our equation, as simply putting our small value of $\alpha$ into \ref{e:SE2int} would not give us this integral of $p=0$.
 
-gREM submodel specifications were done by hand, and the integration was done using \emph{SymPy} \cite{sympy} in \emph{Python} (Appendix S3).
+gREM submodel specifications were done by hand, and the integration was done using \emph{SymPy} \cite{sympy} in \emph{Python}.
 The gREM submodels were checked by confirming that: (1) submodels adjacent in parameter space were equal at the boundary between them; (2) submodels that border $ \alpha = 0$ had $p = 0$ when $ \alpha = 0$; (3) average profile widths $\bar{p}$ were between 0 and $2r$ and; (4) each integral, divided by the range of angles that it was integrated over, was between 0 and $2r$.
-The scripts for these tests are included in Appendix S3 and the \emph{R} \cite{R} implementation of the gREM is given in Appendix S4.  
+The scripts for these tests are available on GitHub at \url{https://github.com/timcdlucas/PhDThesis/blob/master/Chapter5-supplementary-script1.py} and the \emph{R} \cite{R} implementation of the gREM is also available on GitHub at \url{https://github.com/timcdlucas/PhDThesis/blob/master/Chapter5-supplementary-script2.R}.  
 
 \subsection{Simulation Model}
 
@@ -367,7 +367,7 @@ The equation for $\bar{p}$ has been newly derived for each submodel in the gREM,
 However, many models, although derived separately, have the same expression for $\bar{p}$.
 Figure~\ref{f:equalModelResults} shows the expression for $\bar{p}$ in each case.
 The general equation for density, \ref{e:gas}, is used with the correct value of $\bar{p}$ substituted.
-Although more thorough checks are performed in Appendix S3, it can be seen that all adjacent expressions in Figure~\ref{f:equalModelResults} are equal when expressions for the boundaries between them are substituted in.
+Although more thorough checks are performed in the additional Python script, it can be seen that all adjacent expressions in Figure~\ref{f:equalModelResults} are equal when expressions for the boundaries between them are substituted in.
 
 %%begin.rcode equalRegionsResultCapt
 equalRegionsResultCapt <- '
@@ -430,7 +430,7 @@ Expressions on the edge of the plot are for submodels with $\alpha, \theta = 2\p
 \subsubsection{gREM submodels}
 All gREM submodels showed a high accuracy, i.e., the median difference between the estimated and true values was less than 2\% across all models (Figure~\ref{fig:gremSubmods}).
 However, the precision of the submodels do vary, where the gas model is the most precise and the SW7 sub model the least precise, having the smallest and the largest interquartile range, respectively (Figure~\ref{fig:gremSubmods}).
-The standard deviation of the error between the estimated and true densities is strongly related to both the sensor and signal widths (Appendix S5), such that larger widths have lower standard deviations (greater precision) due to the increased capture rate of these models.
+The standard deviation of the error between the estimated and true densities is strongly related to both the sensor and signal widths (Figure~\ref{f:StandardDeviation}), such that larger widths have lower standard deviations (greater precision) due to the increased capture rate of these models.
 
 %%begin.rcode gremSubsCapt
 
@@ -548,9 +548,9 @@ Altering the maximum change in direction in each step (0, $\pi/3$, $2\pi/3$, and
 
 \subsubsection{Impact of parameter error}
 
-The percentage error in the density estimates across all parameters and gREM submodels shows a similar response for under and over estimated parameters, suggesting the accuracy is reasonable with respect to parameter error (Appendix S6).
+The percentage error in the density estimates across all parameters and gREM submodels shows a similar response for under and over estimated parameters, suggesting the accuracy is reasonable with respect to parameter error (Figure~\ref{f:sensitivity}).
 The impact of parameter error on the precision of the density estimate varies across gREM submodels and parameters, where $\alpha$ shows the largest variation including the largest values.
-However, in all cases the percentage error in the density estimate is not more than 5\% greater than the error in the parameter estimate (Appendix S6).
+However, in all cases the percentage error in the density estimate is not more than 5\% greater than the error in the parameter estimate (Figure~\ref{f:sensitivity}).
 
 %%begin.rcode movtCapt
 movtCapt <- '
@@ -663,11 +663,11 @@ The coefficient of variation falls dramatically between 10 and 60 captures and t
 At 100 captures the submodels reach 10\% coefficient of variation, considered to be a very good level of precision and better than many previous studies \cite{thomas2012passive, o2003crouching, foster2012critique}.  The length of surveys in the field will need to be adjusted so that enough data can be collected to reach this precision level.
 Populations of fast moving animals or populations with high densities will require less survey effort than those species that are slow moving or have populations with low densities. 
 
-I found that the sensitivity of the gREM to inaccurate parameter estimates was both predictable and reasonable (Appendix S6), although this varies between different parameters and gREM submodels.
+I found that the sensitivity of the gREM to inaccurate parameter estimates was both predictable and reasonable (Figure~\ref{f:sensitivity}), although this varies between different parameters and gREM submodels.
 Whilst care should be taken in parameter estimation when analysing both acoustic and camera trap data, acoustic data poses particular problems.
 For acoustic surveys, estimates of $r$ (detection distance) can be measured directly or calculated using sound attenuation models \cite{holderied2003echolocation}, while the sensor angle is often easily measured \cite{adams2012you} or found in the manufacturer's specifications.
 When estimating animal movement speed $v$, only the speed of movement during the survey period should be used.
-The signal width is the most sensitive parameter to inaccurate estimates (Appendix S6) and is also the most difficult to measure.  While this parameter will typically be assumed to be $2\pi$ for camera trap surveys, fewer estimates exist for acoustic signal widths.
+The signal width is the most sensitive parameter to inaccurate estimates (Figure~\ref{f:sensitivity}) and is also the most difficult to measure.  While this parameter will typically be assumed to be $2\pi$ for camera trap surveys, fewer estimates exist for acoustic signal widths.
 Although signal width has been measured for echolocating bats using arrays of microphones \cite{brinklov2011}, more work should be done on obtaining estimates for a range of acoustically surveyed species.
 
 
