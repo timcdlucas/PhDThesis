@@ -559,14 +559,14 @@ Simulation model results of the accuracy and precision of four gREM submodels (N
 The percentage error between estimated and true density within each gREM sub model for the different movement models is shown within each box plot, where the white line represents the median percentage error across all simulations, boxes represent the middle 50\\% of the data, whiskers represent variability outside the upper and lower quartiles with outliers plotted as individual points.
 Notches in boxplots show the 95\\% confidence for the median.
 The simple model is represented where time and maximum change in direction equals 0.
-The colour of each box plot corresponds to the expressions for average profile width $\\bar{p}$ given in Figure 4.
+The colour of each box plot corresponds to the expressions for average profile width $\\bar{p}$ given in Figure \\ref{f:equalModelResults}. %todo
 '
 
 movtTitle <- 'Simulation model results of the accuracy and precision of four gREM submodels'
 
 %%end.rcode
 
-%%begin.rcode movtFig, fig.cap = movtCapt, fig.height = 5, fig.scap = movtTitle,  out.width = '0.8\\textwidth', cache = FALSE
+%%begin.rcode movtFig, fig.cap = movtCapt, fig.height = 5, fig.scap = movtTitle,  out.width = '0.8\\textwidth', cache = FALSE, fig.show = 'hide'
 
 wait <- read.csv('data/Chapter5/prop_time_still_tidy.csv')
 
@@ -625,6 +625,24 @@ plot_grid(waitPlot, tortPlot, labels = c("A", "B"), align = 'h', label_size = 10
 
 
 %%end.rcode
+
+
+
+\begin{figure}[t]
+        \centering
+	\includegraphics[width=0.8\textwidth]{imgs/movtFig-Edit.pdf}
+
+\caption[Simulation model results of the accuracy and precision of four gREM submodels]{
+Simulation model results of the accuracy and precision of four gREM submodels (NW1, SW1, SE3 and NE1) given different movement models where (a) average amount of time spent stationary (stop-start movement) and (b) maximum change in direction at each step (correlated random walk model).
+The percentage error between estimated and true density within each gREM sub model for the different movement models is shown within each box plot, where the white line represents the median percentage error across all simulations, boxes represent the middle 50\% of the data, whiskers represent variability outside the upper and lower quartiles with outliers plotted as individual points.
+Notches in boxplots show the 95\% confidence for the median.
+The simple model is represented where time and maximum change in direction equals 0.
+The colour of each box plot corresponds to the expressions for average profile width $\bar{p}$ given in Figure \ref{f:equalModelResults}.
+}
+\label{f:movtFig}
+\end{figure}
+
+
 
                   
 %%%% ------- Discussion ---------%%%%
