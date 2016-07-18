@@ -176,7 +176,8 @@ In comparative studies, a number of host traits have been shown to correlate wit
 A further factor that may affect pathogen richness is population structure.
 In comparative studies it is often assumed that factors that promote fast disease spread should promote high pathogen richness; the faster a new pathogen spreads through a population, the more likely it is to persist \cite{nunn2003comparative, morand2000wormy, poulin2014parasite, poulin2000diversity, altizer2003social}.
 However, this assumption ignores competitive mechanisms such as cross-immunity and depletion of susceptible hosts.
-If competitive mechanisms are strong, endemic pathogens in might be able to out0compete invading pathogens irrespective of population structure.
+If competitive mechanisms are strong, endemic pathogens in populations with high $R_0$ will be able to easily out-compete invading pathogens.
+Only if competitive mechanisms are weak will high $R_0$  enable the invasion of new pathogens and allow higher pathogen richness.
 
 Overall, the evidence from comparative studies indicates that increased population structure correlates with higher pathogen richness.
 This conclusion is based on studies using a number of measures of population structure: genetic measures, the number of subspecies, the shape of species distributions and social group size (Chapter \ref{ch:empirical}, \cites{vitone2004body, maganga2014bat, turmelle2009correlates}).
@@ -303,10 +304,10 @@ In particular, $\alpha = 0$ indicates no coinfections, $\alpha = 1$ indicates th
 
 \begin{figure}[t]
 {\centering 
-\subfloat[Fully connected\label{fig:fullyConnected}]{
+\subfloat[Minimally connected\label{fig:fullyConnected}]{
   \includegraphics[width=0.45\textwidth]{imgs/minimallyConnected.pdf} 
 }
-\subfloat[Minimally connected
+\subfloat[Fully connected
 \label{fig:minimallyConnected}]{
   \includegraphics[width=0.45\textwidth]{imgs/fullyConnected.pdf} 
 }
@@ -314,7 +315,7 @@ In particular, $\alpha = 0$ indicates no coinfections, $\alpha = 1$ indicates th
 \caption[Network topologies used to compare network connectedness]{
 The two network topologies used to test whether network connectedness influences a pathogen's ability to invade.
 A) Animals can only disperse to neighbouring colonies. 
-B) Dispersal can occur between any colony.
+B) Dispersal can occur between any colonies.
 Blue circles are colonies of \SI{3000} individuals.
 Dispersal only occurs between colonies connected by an edge (black line).
 The dispersal rate is held constant between the two topologies.
@@ -324,7 +325,7 @@ The dispersal rate is held constant between the two topologies.
 
 
 In the application of long term existence of pathogens it is necessary to include vital dynamics (births and deaths) as the SIR model without vital dynamics has no endemic state.
-Birth and death rates ($\mu$ and $\Lambda$) are set as being equal meaning the population does not systematically increase or decrease.
+Birth and death rates ($\Lambda$ and $\mu$) are set as being equal meaning the population does not systematically increase or decrease.
 The population size does however change as a random walk.
 New born individuals enter the susceptible class.
 Infection and coinfection were assumed to cause no extra mortality as for a number of viruses, bats show no clinical signs of infection \cite{halpin2011pteropid, deThoisy2016bioecological}.
@@ -347,7 +348,7 @@ $x, y$ & Colony index &&\\
 $p$ &  Pathogen index i.e.\ $p\in\{1,2\}$ for pathogens 1 and 2 & &\\
 $q$ & Disease class i.e.\ $q\in\{1,2,12\}$&\\
 $S_x$ & Number of susceptible individuals in colony $x$ &&\\
-$I_qx$ & Number of individuals infected with disease(s) $q \in {1, 2, 12}$ in colony $x$ &&\\
+$I_{qx}$ & Number of individuals infected with disease(s) $q \in \{1, 2, 12\}$ in colony $x$ &&\\
 $R_x$ & Number of individuals in colony $x$ in the recovered with immunity class  &&\\
 $N$ & Total Population size && 30,000\\
 $m$ & Number of colonies&& 10\\
@@ -356,7 +357,7 @@ $a$ & Area & \si{\square\kilo\metre}& 10,000\\
 $\beta$ & Transmission rate &  & 0.1 -- 0.4\\
 $\alpha$ & Coinfection adjustment factor  & & 0.1\\
 $\gamma$ & Recovery rate & year$^{-1}.$individual$^{-1}$ & 1\\
-$\xi$ & Dispersal & year$^{-1}.$individual$^{-1}$ & 0.001--0.1\\
+$\xi$ & Dispersal rate & year$^{-1}.$individual$^{-1}$ & 0.001--0.1\\
 $\Lambda$ & Birth rate & year$^{-1}.$individual$^{-1}$ & 0.05\\
 $\mu$ & Death rate & year$^{-1}.$individual$^{-1}$ & 0.05\\
 $k_x$ & Degree of node $x$ (number of colonies that individuals from colony $x$ can disperse to). &&\\
@@ -373,7 +374,7 @@ $e_i$ & The rate at which event $i$ occurs & year$^{-1}$&\\
 The population is modelled as a metapopulation, being divided into a number of subpopulations (colonies).
 This model is an intermediate level of complexity between fully-mixed populations and contact networks.
 There is ample evidence that bat populations are structured to some extent.
-This evidence comes from the existence of subspecies, measurements of genetic dissimilarity and ecological studies provide   \cite{kerth2011bats, mccracken1981social, burns2014correlates, wilson2005mammal}.
+This evidence comes from the existence of subspecies, measurements of genetic dissimilarity and ecological studies \cite{kerth2011bats, mccracken1981social, burns2014correlates, wilson2005mammal}.
 Therefore a fully mixed population is a large oversimplification.
 However, trying to study the contact network relies on detailed knowledge of individual behaviour which is rarely available.		
 
@@ -381,9 +382,9 @@ The metapopulation is modelled as a network with colonies being nodes and disper
 Individuals within a colony interact randomly so that the colony is fully mixed.
 Dispersal between colonies occurs at a rate $\xi$.
 Individuals can only disperse to colonies connected to theirs by an edge in the network.
-The rate of dispersal is not affected by the number of edges a colonies has (known as the degree of the colony and denoted $k$).
+The rate of dispersal is not affected by the number of edges a colony has (known as the degree of the colony and denoted $k$).
 Therefore, the dispersal rate from a colony $y$ with degree $k_y$ to colony $x$ is $\xi / k_y$.
-Note this rate is independent of the degree and size of colony $x$.
+Note this rate is not affect by the degree and size of colony $x$.
 
 
 
@@ -396,8 +397,8 @@ The Markov chain contains the random variables $((S_x)_{x = 1\ldots m}, (I_{x, q
 Here, $(S_x)_{x = 1\ldots m}$ is a length $m$ vector of the number of susceptibles in each colony.
 $(I_{x, q})_{x =1\ldots m, q \in \{1, 2, 12\}}$ is a length $m \times 3$ vector describing the number of individuals of each disease class ($q \in \{1, 2, 12\}$) in each colony.
 Finally, $(R_x)_{x = 1\ldots m}$ is a length $m$ vector of the number of individuals in the recovered class.
-The model is a Markov chain where extinction of both pathogens species and extinction of the host species are absorbing states.
-However, the expected time to reach this state is much larger than the duration of the simulations.
+The model is a Markov chain where extinction of both pathogen species and extinction of the host species are absorbing states.
+The expected time for either host to go extinct is much larger than the duration of the simulations.
 
 At any time, suppose the system is in state $((s_x), (i_{x,q}), (r_x))$.
 At each step in the simulation we calculate the rate at which each possible event might occur.
@@ -439,18 +440,18 @@ Infection of a susceptible with either Pathogen 1 or 2 is therefore given by
 while coinfection, given the coinfection adjustment factor $\alpha$, is given by
 \begin{align}
   i_{12,x} \rightarrow i_{12,x}+1,\;\;\; i_{1x} \rightarrow i_{1x}-1 &\;\;\text{at a rate of}\;\; \alpha\beta i_{1x}\left(i_{2x} + i_{12x}\right),\\
-  i_{12,x} \rightarrow i_{12,x}+1,\;\;\; I_{2x} \rightarrow i_{2x}-1 &\;\;\text{at a rate of}\;\; \alpha\beta i_{2x}\left(i_{1x} + i_{12x}\right).
+  i_{12,x} \rightarrow i_{12,x}+1,\;\;\; i_{2x} \rightarrow i_{2x}-1 &\;\;\text{at a rate of}\;\; \alpha\beta i_{2x}\left(i_{1x} + i_{12x}\right).
 \end{align}
 Note that lower values of $\alpha$ give lower rates of infection as in \textcite{castillo1989epidemiological}.
 
 
-The probability of migration from colony $y$ (with degree $k_y$) to colony $x$, given a dispersal rate $\xi$ is given by
+The rate of migration from colony $y$ (with degree $k_y$) to colony $x$, given a dispersal rate $\xi$ is given by
 \begin{align}
   s_x \rightarrow s_x+1,\;\;\; s_y \rightarrow s_y-1 &\;\;\text{at a rate of}\;\; \frac{\xi s_y}{k_y},\\
   i_{qx} \rightarrow i_{qx}+1,\;\;\; i_{qy} \rightarrow i_{qy}-1 &\;\;\text{at a rate of}\;\; \frac{\xi i_{qy}}{k_y},\\
   r_x \rightarrow r_x+1,\;\;\; r_y \rightarrow r_y-1 &\;\;\text{at a rate of}\;\; \frac{\xi r_y}{k_y}.
 \end{align}
-Not that the dispersal rate does not change with infection.
+Note that the dispersal rate does not change with infection.
 As above, this is due to the low virulence of bat viruses.
 Finally, recovery from any infectious class occurs at a rate $\gamma$
 \begin{align}
@@ -1010,7 +1011,7 @@ The birth rate $\Lambda$ was set to be equal to $\mu$.
 This yields a population that does not systematically increase or decrease.
 However, the size of each colony changes as a random walk.
 Given the length of the simulations, colonies were very unlikely to go extinct (Figure~\ref{fig:plotsNoInvade2}).
-The starting size of each colony was set to \SI{3000}. 
+The starting size of each colony was set to \si{3000}.
 This is appropriate for many bat species \cite{jones2009pantheria}, especially the large, frugivorous \emph{Pteropodidae} that have been particularly associated with recent zoonotic diseases.
 
 The recovery rate $\gamma$ was set to one, giving an average infection duration of one year. 
@@ -1051,7 +1052,7 @@ Again, visual inspection of preliminary simulations was used to determine that a
 
 The choice to use a fixed number of events, rather than a fixed number of years, was for computational convenience.
 However, this choice creates a risk of bias as simulations with a greater total rate of events $\sum_j e_j$ (e.g.,\ faster disease transmission)  will last for a shorter time overall (i.e.\ a smaller $\sum \delta$ over all events).
-However, visual inspection of the dynamics of disease extinction (\ref{fig:plotsNoInvade1}), and examination of the typical time to extinction implies that this bias is very weak.
+However, visual inspection of the dynamics of disease extinction (Figure~\ref{fig:plotsNoInvade1}), and examination of the typical time to extinction suggests that this bias is negligible.
 For example, of the simulations where extinction occurred, the extinction occurred more than 50 years before the end of the simulation in 90\% of cases.
 On a preliminary run of 106 simulations across all combinations of dispersal and transmission rates, examining the population after \SI{700000} events instead of \SI{\rinline{nEvent}} events gave exactly the same result with respect to the binary state of invasion or no invasion. 
 
@@ -1069,7 +1070,7 @@ I ran 100 simulations at each transmission rate.
 
 Two parameters control population structure in the model: dispersal rate and the topology of the metapopulation network.
 The values used for these parameters were chosen to highlight the effects of population structure. 
-I selected the dispersal rates $\xi = 0, 0.1, 0.01$ and $ 0.001$ dispersals per individual per year. 
+I selected the dispersal rates $\xi = 0, 0.001, 0.01$ and $0.1$ dispersals per individual per year. 
 The probability that an individual disperses at least once in its lifetime is given by $\xi / \left(\xi + \mu\right)$.
 Therefore, $\xi = 0.1$ relates to 67\% of individuals dispersing between colonies at least once in their lifetime. 
 Exclusively juvenile dispersal would have dispersal rates similar to this value. %todo cite
@@ -1482,7 +1483,7 @@ However, the rate of recovery from pathogens in the presence of coinfections has
 In humans, the rate of recovery from respiratory syncytial virus was faster in individuals that had recently recovered from one of a number of co-circulating viruses \cite{munywoki2015influence}.
 However, currently coinfected individuals recovered more slowly than average \cite{munywoki2015influence}.
 
-However, further work could relax this assumption using a model similar to \cite{poletto2015characterising} which contains additional classes for ``infected with Pathogen 1, immune to Pathogen 2'' and ``infected with Pathogen 1, immune to Pathogen 2''.
+However, further work could relax this assumption using a model similar to \cite{poletto2015characterising} which contains additional classes for ``infected with Pathogen 1, immune to Pathogen 2'' and ``infected with Pathogen 2, immune to Pathogen 1''.
 The model here was formulated such that the study of systems with greater than two pathogens (an avenue for further study) is still computationally feasible. 
 A model such as used in \cite{poletto2015characterising} contains $3^\rho$ classes for a system with $\rho$ pathogen species.
 This quickly becomes computationally restrictive.
