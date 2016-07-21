@@ -119,7 +119,7 @@ rangeUseable <- 0.20
 %\tmpsection{One or two sentences providing a basic introduction to the field}
 % comprehensible to a scientist in any discipline.
 \lettr{Z}oonotic diseases make up the majority of human infectious diseases and are a major drain on healthcare resources and economies.
-Species that host many pathogen species are more likely to be the source of a novel zoonotic disease than species with few pathogens.
+Species that host many pathogen species are more likely to be the source of a novel zoonotic disease than species with few pathogens, all else being equal.
 However, the factors that influence pathogen richness in animal species are poorly understood.
 %
 %
@@ -275,7 +275,7 @@ Furthermore, I found that the role of phylogeny is very weak both in the models 
 
 To measure pathogen richness I used data from \textcite{luis2013comparison}. 
 This data simply includes known infections of a bat species with a virus species. 
-I have used viral richness as a proxy for pathogen richness more generally, but the analysis could also be considered as representative of viral richness only.
+I have used viral richness as a proxy for pathogen richness more generally.
 Rows with host species that were not identified to species level according to \textcite{wilson2005mammal} were removed.
 Many viruses were not identified to species level or their specified species names were not in the ICTV virus taxonomy \cite{ICTV}.
 Therefore, I counted a virus if it was the only virus, for that host species, in the lowest taxonomic level identified (present in the ICTV taxonomy).
@@ -1827,7 +1827,8 @@ This variable can be used to benchmark how important other explanatory variables
 The whole analysis was run \rinline{nBoots} times, resampling the random variable each time.
 
 
-To control for phylogenetic non-independence of data points I used the best-supported phylogeny from \textcite{fritz2009geographical} (Figure~\ref{fig:treePlot}) which is the supertree from \textcite{bininda2007delayed} with names updated to match the taxonomy by \textcite{wilson2005mammal}.
+To control for phylogenetic non-independence of data points I used the best-supported phylogeny from \textcite{fritz2009geographical} which is the supertree from \textcite{bininda2007delayed} with names updated to match the taxonomy by \textcite{wilson2005mammal}.
+This tree was pruned to include only the species I had data for (Figure~\ref{fig:treePlot}).
 Phylogenetic manipulation was performed using the \emph{ape} package \cite{ape}.
 I also performed the analysis using the phylogeny from \textcite{jones2005bats} as this has some broad topological differences including the Rhinolophoidea being sister to the Pteropodidae rather than being related to the other insectivorous bats (Figure~\ref{fig:treePlot2}). 
 
@@ -1836,18 +1837,12 @@ I also performed the analysis using the phylogeny from \textcite{jones2005bats} 
 
 %%begin.rcode treeCapt
 
-treeCapt <- paste0('
+treeCapt <- '
 The phylogenetic distribution of viral richness.
-There is no clear association between phylogeny and virus richness (pgls: $\\lambda =$ ', 
-round(virusLambda$param['lambda'], 2),
-', $p =$ ',
-round(virusLambda$param.CI$lambda$bounds.p[1], 2),
-').',
-'
-The phylogeny is from \\cite{bininda2007delayed} pruned to include all species used in either the number of subspecies or gene flow analysis.
+The phylogeny is from \\cite{fritz2009geographical} pruned to include all species used in either the number of subspecies or gene flow analysis.
 Dot size shows the number of known viruses for that species and colour shows family.
 The red scale bar shows 25 million years.'
-)
+
 
 
 treeTitle <- 'Pruned phylogeny with dot size showing number of pathogens and colour showing family.'
@@ -2099,7 +2094,7 @@ Body mass and range size are also probably in the best model ($b = $ \rinline{va
 
 When using the phylogeny from \textcite{jones2005bats} the results are broadly similar (Figure~\ref{f:A-itplots} and Tables~\ref{A-modelWeights2} and \ref{t:variables2}).
 Study effort, the number of subspecies and the interaction between the number of subspecies and study effort have strong support while range size and mass have intermediate support.
-However, mass, range size and the interaction between number of subspecies and study effort have slightly weaker support than in the analysis using the phylogeny from \textcite{bininda2007delayed}.
+However, mass, range size and the interaction between number of subspecies and study effort have slightly weaker support than in the analysis using the phylogeny from \textcite{fritz2009geographical}.
 
 %%begin.rcode ITCombPlotCapt
 
