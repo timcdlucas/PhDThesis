@@ -180,7 +180,7 @@ If competitive mechanisms are strong, endemic pathogens in populations with high
 Only if competitive mechanisms are weak will high $R_0$  enable the invasion of new pathogens and allow higher pathogen richness.
 
 Overall, the evidence from comparative studies indicates that increased population structure correlates with higher pathogen richness.
-This conclusion is based on studies using a number of measures of population structure: genetic measures, the number of subspecies, the shape of species distributions and social group size (Chapter \ref{ch:empirical}, \cites{vitone2004body, maganga2014bat, turmelle2009correlates}).
+This conclusion is based on studies using a number of measures of population structure: genetic measures, the number of subspecies, the shape of species distributions and social group size (Chapter~\ref{ch:empirical}, \cites{vitone2004body, maganga2014bat, turmelle2009correlates}).
 However, there are a number of studies that contradict this conclusion \cite{gay2014parasite, bordes2007rodent, ezenwa2006host}.
 Comparative studies are often contradictory due to small sample sizes, noisy data and because empirical relationships often do not extrapolate well to other taxa. 
 Furthermore, multicollinearity between many traits also makes it hard to clearly distinguish which factors are important \cite{nunn2015infectious}.
@@ -240,7 +240,7 @@ Furthermore, this close evolutionary relationship means that competition via cro
 
 \tmpsection{Why bats}
 The metapopulations were parameterised to broadly mimic wild bat populations.
-Population structure has already been found to correlate with pathogen richness in bats (Chapter \ref{ch:empirical}, \cites{gay2014parasite, maganga2014bat, turmelle2009correlates}).
+Population structure has already been found to correlate with pathogen richness in bats (Chapter~\ref{ch:empirical}, \cites{gay2014parasite, maganga2014bat, turmelle2009correlates}).
 Furthermore, bats have an unusually large variety of social structures.
 Colony sizes range from ten to 1 million individuals \cite{jones2009pantheria} and colonies can be very stable \cite{kerth2011bats, mccracken1981social}.
 This strong colony fidelity means they fit the assumptions of metapopulations well.
@@ -336,8 +336,8 @@ Infection and coinfection were assumed to cause no extra mortality as for a numb
 
 \begin{table}[tb]
 \centering
-\caption[All symbols used in Chapters \ref{ch:sims1} and \ref{ch:sims2}.]{A summary of all symbols used in Chapters \ref{ch:sims1} and \ref{ch:sims2} along with their units and default values.
-The justifications for parameter values are given in Section \ref{s:paramSelect}.}
+\caption[All symbols used in Chapters~\ref{ch:sims1} and \ref{ch:sims2}.]{A summary of all symbols used in Chapters~\ref{ch:sims1} and \ref{ch:sims2} along with their units and default values.
+The justifications for parameter values are given in Section~\ref{s:paramSelect}.}
 
 \begin{tabular}{@{}lp{6cm}p{2.9cm}r@{}}
 \toprule
@@ -1446,17 +1446,17 @@ Increasing transmission rate quickly reaches a state where new pathogens always 
 Decreasing the transmission rate quickly reaches a state where invasion is impossible.
 
 The result that increased population structure decreases pathogen richness supports many existing predictions that increasing $R_0$ should increase pathogen richness \cite{nunn2003comparative, morand2000wormy, poulin2014parasite, poulin2000diversity, altizer2003social}.
-However, many comparative studies have found the opposite relationship, with increased population structure increasing pathogen richness (Chapter \ref{ch:empirical}, \cites{vitone2004body, maganga2014bat, turmelle2009correlates}).
+However, many comparative studies have found the opposite relationship, with increased population structure increasing pathogen richness (Chapter~\ref{ch:empirical}, \cites{vitone2004body, maganga2014bat, turmelle2009correlates}).
 Furthermore, simple analytical models suggest that population structure should increase pathogen richness \cite{qiu2013vector, allen2004sis, nunes2006localized} and I find no evidence of this.
 
 
 \tmpsection{Link results to consequences}
 
-These results suggest that if population structure does in fact affect pathogen richness, as observed in comparative studies (Chapter \ref{ch:empirical}, \cites{vitone2004body, maganga2014bat, turmelle2009correlates}), it must occur by a mechanism other than the one studied here.
+These results suggest that if population structure does in fact affect pathogen richness, as observed in comparative studies (Chapter~\ref{ch:empirical}, \cites{vitone2004body, maganga2014bat, turmelle2009correlates}), it must occur by a mechanism other than the one studied here.
 In this study the hypothesised mechanism for the relationship between population structure and pathogen richness, was that the spread and persistence of a newly evolved pathogen would be facilitated in highly structured populations as the lack of movement between colonies would stochastically create areas of low prevalence of the endemic pathogen.
 If the invading pathogen evolved (i.e.\ was seeded) in one of these areas of low prevalence, invasion would be more likely.
 Instead, reduced population structure allowed the new pathogen to quickly spread outside of the colony in which it evolved.
-As the mechanism studied here cannot explain the relationship between population structure and pathogen richness seen in wild species (Chapter \ref{ch:empirical}, \cites{vitone2004body, maganga2014bat, turmelle2009correlates}), other mechanisms should be studied.
+As the mechanism studied here cannot explain the relationship between population structure and pathogen richness seen in wild species (Chapter~\ref{ch:empirical}, \cites{vitone2004body, maganga2014bat, turmelle2009correlates}), other mechanisms should be studied.
 Other mechanisms that should be examined include reduced competitive exclusion of already established pathogens or increased invasion of less closely related and less strongly competing pathogens, perhaps mediated by ecological competition of pathogens (i.e.\ reduction of the susceptible pool by disease induced mortality).
 Furthermore, single pathogen dynamics could have an important role such as population structure causing a much slower, asynchronous epidemic preventing acquired herd immunity \cite{plowright2011urban}.
 

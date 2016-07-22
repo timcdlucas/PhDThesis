@@ -172,7 +172,7 @@ Host density is commonly included in comparative studies and seems to promote hi
 In contrast, host population size has rarely been directly studied as a predictor of pathogen richness.
 Studies also often test for correlations between pathogen richness and range size \cite{lindenfors2007parasite, nunn2003comparative, turmelle2009correlates, huang2015parasite, kamiya2014determines}.
 Overall it seems that species with larger geographic range sizes have higher pathogen richness \cite{kamiya2014determines}.
-While host population structure can be difficult to define and measure, a number of studies have found that increased population structure is associated with increased pathogen richness (Chapter \ref{ch:empirical}, \cites{maganga2014bat, turmelle2009correlates}).
+While host population structure can be difficult to define and measure, a number of studies have found that increased population structure is associated with increased pathogen richness (Chapter~\ref{ch:empirical}, \cites{maganga2014bat, turmelle2009correlates}).
 Finally, many studies have tested for correlations between pathogen richness and group size, though results are equivocal \cite{vitone2004body, gay2014parasite, ezenwa2006host, rifkin2012animals, nunn2003comparative}.
 
 
@@ -814,7 +814,7 @@ To ensure connected metapopulation networks I would have had to repeatedly resam
 However, this would bias $\bar{k}$.
 Therefore, it was considered preferential to keep the unconnected networks.
 The threshold of \SI{100}{\kilo\metre} was arbitrary but I aimed to maximise the range  of $\bar{k}$ (Figure~\ref{fig:plotK}) while not having many simulations with networks that were unconnected.
-Given this setup, populations with low densities had relatively unconnected metapopulation networks while high density populations had fully connected networks (Figure \ref{fig:plotK}).
+Given this setup, populations with low densities had relatively unconnected metapopulation networks while high density populations had fully connected networks (Figure~\ref{fig:plotK}).
 
 
 
@@ -837,12 +837,12 @@ The values of range size used were \SI{40000}, \SI{20000}, \SI{10000}, \SI{5000}
 In the second set of simulations, population size was varied by changing colony size while the number of colonies was kept constant.
 To keep host density constant, range size was reduced as population size increased.
 The values of colony size used were 100, 200, 400, 800 and \SI{600} while range size was set to \SI{40000}, \SI{20000}, \SI{10000}, \SI{5000} and \SI{\rinline{dep3[5]}}{\square\kilo\metre}.
-This gave population size values of \SI{2000}, \SI{4000}, \SI{8000}, \SI{16000} and \SI{32000} while host density remained at 0.8 hosts{\si{\per\square\kilo\metre}}.
+This gave population size values of \SI{2000}, \SI{4000}, \SI{8000}, \SI{16000} and \SI{32000} while host density remained at 0.8 hosts per {\si{\square\kilo\metre}}.
 
 In the third set of simulations, population size was varied by changing the number of colonies while colony size was kept constant.
 Again, to keep host density constant, range size was reduced as population size increased.
 The numbers of colonies used were 5, 10, 20, 40 and 80 while range size was set to \SI{40000}, \SI{20000}, \SI{10000}, \SI{5000} and \SI{\rinline{dep3[5]}}{\square\kilo\metre}.
-Again, this gave population size values of \SI{2000}, \SI{4000}, \SI{8000}, \SI{16000} and \SI{32000} while host density remained at 0.8 hosts{\si{\per\square\kilo\metre}}.
+Again, this gave population size values of \SI{2000}, \SI{4000}, \SI{8000}, \SI{16000} and \SI{32000} while host density remained at 0.8 hosts per {\si{\square\kilo\metre}}.
 
 
 \subsubsection{Colony size and the number of colonies}

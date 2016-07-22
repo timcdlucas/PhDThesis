@@ -128,17 +128,18 @@ However, the factors that influence pathogen richness in animal species are poor
 % Theory led.
 The pattern of contacts between individuals (i.e.\ population structure) can be influenced by habitat fragmentation, sociality and dispersal behaviour.
 Epidemiological theory suggests that increased population structure can promote pathogen richness by reducing competition between pathogen species.
-Conversely, it is often assumed that as greater population structure slows the spread of a new pathogen, less structured populations should have greater pathogen richness.
+Conversely, it is often assumed that as greater population structure slows the spread of a new pathogen (i.e.\ lowers $R_0$), less structured populations should have greater pathogen richness.
 %
 %
 %\tmpsection{One sentence clearly stating the general problem (the gap)}
 % being addressed by this particular study.
-Previous studies have had contradictory results and different measures of population structure have been used, complicating the interpretation.
+Previous comparative studies comparing pathogen richness and population structure measured population structure differently and have had contradictory results, complicating the interpretation.
 %
 %
 %\tmpsection{One sentence summarising the main result}
 %  (with the words “here we show” or their equivalent).
-Here I used comparative data across 203 bat species, controlling for body mass, geographic range size, study effort and phylogeny, to test whether increased population structure correlates with viral richness.
+Here I test whether increased population structure correlates with viral richness using comparative data across 203 bat species, controlling for body mass, geographic range size, study effort and phylogeny.
+This is an indirect test between the two competing hypotheses: does increased population structure allow pathogen coexistence by reducing competition, or does increased population structure decrease $R_0$ and therefore cause fewer new pathogens to enter the population.
 Bats, as a group, make a useful case study because they have been associated with a number of important, recent zoonotic outbreaks.
 Unlike previous studies, I used two measures of population structure: the number of subspecies and effective levels of gene flow.
 I find that both measures are positively associated with pathogen richness.
@@ -148,7 +149,7 @@ I find that both measures are positively associated with pathogen richness.
 % or how the main result adds to previous knowledge
 My results add more robust support to the hypothesis that increased population structure promotes viral richness in bats.
 The results support the prediction that increased population structure allows greater pathogen richness by reducing competition between pathogens
-The prediction that factors that increase $R_0$ should increase pathogen richness is not supported.
+The prediction that factors that decrease $R_0$ should decrease pathogen richness is not supported.
 %
 %
 %\tmpsection{One or two sentences to put the results into a more general context.}
@@ -1786,7 +1787,7 @@ These bat species with no known viruses were included to make the greatest use o
 
 After data cleaning there was data for \rinline{nrow(nSpecies)} bat species in \rinline{length(unique(nSpecies$Family))} families for the subspecies analysis.
 Due to the limited number of studies and the restrictive requirements imposed on study design, there was only data for \rinline{nrow(fstFinal)} bat species in \rinline{length(unique(fstFinal$Family))} families for the effective gene flow analysis.
-The raw data are included in Table \ref{A-rawData}.
+The raw data are included in Table~\ref{A-rawData}.
 
 
 
@@ -1795,8 +1796,8 @@ The raw data are included in Table \ref{A-rawData}.
 
 
 
-To control for study bias I collected the number of PubMed and Google Scholar citations for each bat species name including synonyms from ITIS \cite{itis} via the \emph{taxize} package \cite{chamberlain2013taxize}.
-The counts were scraped using the \emph{rvest} package \cite{rvest}.
+To control for study bias I collected the number of PubMed and Google Scholar citations for each bat species name including synonyms from ITIS \cite{itis}.
+This was performed in \emph{R} \cite{R} using the \emph{rvest} package \cite{rvest}, with ITIS synonyms being accessed with the \emph{taxize} package \cite{chamberlain2013taxize}.
 I log transformed these variables as they were strongly right skewed.
 I tested for correlation between these two proxies for study effort using phylogenetic least squares regression (pgls), using the best-supported phylogeny from \textcite{fritz2009geographical}, and likelihood ratio tests using the \emph{caper} package \cite{caper} (Figures~\ref{fig:treePlot} and \ref{fig:scholarvspubmedPlot}).
 The log number of citations on PubMed and Google scholar were highly correlated (pgls: $t$ = \rinline{studyEffortCor$coefficients['log(pubmedRefs + 1)', 't value']}, df = \rinline{studyEffortCor$df[2]}, $p < 10^{-5}$).
@@ -1817,7 +1818,7 @@ Distribution size was estimated by downloading range maps for all species from I
 \subsection{Statistical analysis}
 
 Statistical analysis for both response variables --- number of subspecies and effective level of gene flow --- was conducted using an information theoretical approach \cite{burnham2002model}, specifically following \textcite{whittingham2005habitat, whittingham2006we}.
-All analysis were performed in R \cite{R} and all code is available at \url{https://github.com/timcdlucas/PhDThesis/blob/master/Chapter3.Rtex}.
+All analyses were performed in \emph{R} \cite{R} and all code is available at \url{https://github.com/timcdlucas/PhDThesis/blob/master/Chapter3.Rtex}.
 I chose a credible set of models including all combinations of explanatory variables and a model with just an intercept.
 In the analysis using the number of subspecies response variable I also modelled the interaction study effort and number of subspecies by including their product.
 This interaction was included as I believed \emph{a priori} that this interaction may be present as subspecies in well studied species are more likely to be identified.
@@ -2033,148 +2034,10 @@ ggplot(nSpeciesCounts, aes(NumberOfSubspecies, virusSpecies, size = n)) +
 
 The number of described virus species for a bat host ranged up to \rinline{max(nSpecies$virusSpecies)} viruses in \emph{\rinline{nSpecies$binomial[which.max(nSpecies$virusSpecies)]}}.
 There appears to be a positive relationship between the number of subspecies and viral richness (Figure~\ref{fig:boxplot}) though few species have more than five subspecies. 
-Out of \rinline{nrow(modelWeights)} fitted models, the top seven models all had $\Delta\text{AICc} < 4$ meaning there was no clear best model (Table~\ref{t:models} and Table \ref{A-modelWeights}).
+Out of \rinline{nrow(modelWeights)} fitted models, the top seven models all had $\Delta\text{AICc} < 4$ meaning there was no clear best model (Table~\ref{t:models} and Table~\ref{A-modelWeights}).
 However these top seven models all contained study effort, number of subspecies and the interaction between these two variables.
 The explanatory variables log(Mass), log(Range Size) and the uniformly random variable are each in three of the top seven models.
 These top seven models had a combined weight of \rinline{sprintf("%.2f", round(modelWeights[7, 5], 2))} meaning that there is a \rinline{sprintf("%.0f", round(100 * modelWeights[7, 5]))}\% chance that one of these models is the best model amongst those examined.
-
-
-
-Summing the Akaike weights of all models that contain a given variable gives a probability, $Pr$, that the variable would be in the best model amongst those in the plausible set \cite{whittingham2006we}.
-The number of subspecies is very likely in the best model ($Pr > $ \rinline{substring(as.character( varWeights['NumberOfSubspecies']), 1, 4)}) as is the interaction term between the number of subspecies and study effort ($Pr = $ \rinline{varWeights['scholarRefs.NumberOfSubspecies']}) compared to the benchmark random variable which has $Pr = $ \rinline{varWeights['rand']} (Figure~\ref{fig:fstITPlots}A and Table~\ref{t:variables}).
-When models with the interaction term are removed there is, on average (mean weighted by Akaike weights), a positive relationship between the number of subspecies and viral richness ($b = $ \rinline{nSpeciesCoefMean}, variance = \rinline{nSpeciesCoefVar}).
-Models with an interaction term between the number of subspecies and study effort have a positive interaction term ($b = $ \rinline{nSpeciesInterMean}, variance = \rinline{nSpeciesInterVar}) and linear term ($b = $ \rinline{nSpeciesCoefMeanI}, variance = \rinline{nSpeciesCoefVarI}).
-
-
-
-
-%%begin.rcode fstRawCapt
-
-fstRawDataCapt <- 
-paste(
-'Relationship between viral richness and log effective gene flow per generation for',
-nrow(fstFinal),
-'bat species.
-Green points are studies that estimated effective gene flow using allozymes and blue points are studies using microsatellites.
-')
-
-
-
-fstRawDataTitle <- 
-paste(
-'Relationship between viral richness and log effective gene flow per generation for',
-nrow(fstFinal),
-'bat species.
-')
-
-%%end.rcode
-
-
-
-%%begin.rcode fstRawData, fig.height = 2.3, fig.cap = fstRawDataCapt, fig.scap = fstRawDataTitle
-
-# Plot raw fst data
-
-ggplot(fstFinal, aes(x = Nm, y = virusSpecies, colour = Marker)) +
-  geom_point(size = 2) +
-  scale_colour_poke(pokemon = 'oddish', spread = 3) +
-  scale_x_log10() +
-  geom_abline(intercept = nmFstUni$coef[1, 1], slope = nmFstUni$coef[2, 1], lwd = 0.7, colour = pokepal('nidorina')[10]) +
-  xlab('Gene Flow (per gen.)') +
-  ylab('Viral Richness') 
-
-%%end.rcode
-
-
-
-
-Study effort is very likely in the best model ($b = $ \rinline{varCoefMeans['beta.scholarRefs']}, $Pr > $ \rinline{substring(as.character(varWeights['scholarRefs']), 1, 4)}).
-Body mass and range size are also probably in the best model ($b = $ \rinline{varCoefMeans['beta.mass']}, $Pr = $ \rinline{varWeights['mass']} and $b = $ \rinline{varCoefMeans['beta.distrSize']}, $Pr = $ \rinline{varWeights['distrSize']} respectively) with positive relationships of slightly lower strength than the number of subspecies in models without an interaction term ($b = $ \rinline{nSpeciesCoefMean}, variance = \rinline{nSpeciesCoefVar}).	
-
-
-When using the phylogeny from \textcite{jones2005bats} the results are broadly similar (Figure~\ref{f:A-itplots} and Tables~\ref{A-modelWeights2} and \ref{t:variables2}).
-Study effort, the number of subspecies and the interaction between the number of subspecies and study effort have strong support while range size and mass have intermediate support.
-However, mass, range size and the interaction between number of subspecies and study effort have slightly weaker support than in the analysis using the phylogeny from \textcite{fritz2009geographical}.
-
-%%begin.rcode ITCombPlotCapt
-
-ITPlotCapts <- "
-The relative weight of evidence that each explanatory variable is in the best model for explaining viral richness.
-The probability that each variable is in the best model (amongst the models tested) is shown for A) the number of subspecies analysis and B) the effective gene flow analysis.
-The boxplots show the variation of the results over 50 resamplings of the uniformly random ``null'' variable. 
-The thick bar of the boxplot shows the median value, the interquartile range is represented by a box, vertical lines represent range, and outliers are shown as filled circles.
-The red ``Random'' box is the uniformly random variable. 
-Population structure (number of subspecies and effective gene flow), shown in yellow, is likely to be in the best model in both analyses."
-
-ITPlotTitle <- "The relative weight of evidence that each explanatory variable is in the best model for explaining viral richness."
-
-%%end.rcode
-
-
-%%begin.rcode fstITPlots, fig.cap = ITPlotCapts, fig.height = 2.5, fig.scap = 'Akaike variable weights', out.width = '\\textwidth', cache = FALSE
-
-# Reorder var levels to get structure at beginning.
-fstSepVarWeights$variable <- factor(fstSepVarWeights$variable, levels(fstSepVarWeights$variable)[c(2, 1, 3, 4, 5)])
-
-# Draw the fst model selection plot
-fstIT <- ggplot(fstSepVarWeights, aes(x = variable, y = estimate, colour = col, fill = col)) +
-  geom_boxplot(outlier.colour = grey(0.3), notch = FALSE, width = 0.7, outlier.size = 1, lwd = 0.4) +
-  scale_colour_manual(values = pokepal('kingdra')[c(11, 1, 9)]) +
-  scale_fill_manual(values = pokepal('kingdra')[c(12, 4, 8)]) +
-  ylim(0, 1) +
-  theme(legend.position = 'none', axis.text.x = element_text(size = 10, angle = 40, hjust = 1, colour = 'black', family = 'lato light'),
-    panel.grid.major.x = element_blank(),
-    axis.text.y = element_text(size = 8)) +
-  scale_x_discrete(labels = c('Gene flow', 'Scholar', 'Mass', 'Range size', 'Random')) +
-  scale_y_continuous(labels = c('0.00','0.25','0.50','0.75','1.00'), breaks = c(0, 0.25, 0.5, 0.75, 1)) +
-  ylim(0, 1) +
-  ylab('P(in best model)') +
-  xlab('')
-
-
-#plot_grid(ITPlot, fstIT, labels = c("A", "B"), align = 'h', label_size = 10)
-
-
-# Combine and print the plots.
-ggdraw() +
-  draw_label("A)", 0.02, 0.96, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
-  draw_plot(ITPlot, 0, 0, 0.5, 1) +
-  draw_label("B)", 0.52, 0.96, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
-  draw_plot(fstIT, 0.5, 0.164, 0.5, 0.855) +
-  draw_label('Explanatory variable', 0.5, 0.1, fontfamily = 'lato light', size = 12)
-
-
-%%end.rcode
-
-\tmpsection{Model results}
-
-
-
-
-\subsection{Gene Flow}
-
-\tmpsection{More Descriptive}
-
-%Figure~\ref{fig:fstTreePlot} shows the phylogeny used and the number of viruses for each species.
-The number of described virus species for a bat host ranged up to \rinline{max(fstFinal$virusSpecies)} viruses in \emph{\rinline{fstFinal$binomial[which.max(fstFinal$virusSpecies)]}} (Figure~\ref{fig:fstRawData}).
-Only the model with study effort, gene flow and body mass was well supported with the second model having an $\Delta\text{AICc}$ of \rinline{round(fstModelWeights[2, 3])} (Table \ref{t:models} and Table \ref{A-modelWeights}).
-The effective level of gene flow was likely in the best model ($Pr > 0.999$, see Figure~\ref{fig:fstITPlots}B and Table~\ref{t:variables}).
-On average (mean weighted by Akaike weights) there was a negative relationship between gene flow and viral richness ($b = $ \rinline{fstCoefMeans['beta.Nm']}, variance = \rinline{fstCoefVars['beta.Nm']}) despite the insignificant positive relationship (Figure~\ref{fig:fstRawData}) estimated by the single-predictor model (pgls: $b$ = \rinline{nmFstUni$coefficients['log(Nm)', 'Estimate']}, $t$ = \rinline{nmFstUni$coefficients['log(Nm)', 't value']}, df = \rinline{nmFstUni$df[2]}, $p$ = \rinline{nmFstUni$coefficients['log(Nm)', 'Pr(>|t|)']}).
-Possibly due to the smaller sample size, or a weaker relationship, this coefficient was much more varied than the number of subspecies coefficient with \rinline{round(pcCoefLzero)}\% of multiple-regression models estimating a positive relationship.
-
-Study effort was very likely in the best model ($Pr > 0.999$) as was body mass ($Pr > 0.999$).
-However, body mass had a negative average coefficient ($b = $ \rinline{fstCoefMeans['beta.mass']}, variance = \rinline{fstCoefVars['beta.mass']}). % which is in contrast to the number of subspecies analysis, many studies in the literature \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat} and the single-predictor model (pgls: $b$ = \rinline{massFstUni$coefficients['log(mass)', 'Estimate']}, $t$ = \rinline{massFstUni$coefficients['log(mass)', 't value']}, df = \rinline{massFstUni$df[2]}, $p$ = \rinline{massFstUni$coefficients['log(mass)', 'Pr(>|t|)']}).
-In contrast to the number of subspecies analysis, range size was almost certainly not in the best model with $Pr = $ \rinline{fstVarWeights['distrSize']}.
-%This variable being less supported than the random variable may be because range size is closely correlated with study effort (pgls: $b$ = \rinline{fstDistrStudyEffort$coefficients['log(distrSize)', 'Estimate']}, $t$ = \rinline{fstDistrStudyEffort$coefficients['log(distrSize)', 't value']}, df = \rinline{fstDistrStudyEffort$df[2]}, $p$ = \rinline{fstDistrStudyEffort$coefficients['log(distrSize)', 'Pr(>|t|)']}).
-Of the three explanatory variables in the best model, study effort had the largest effect ($b = $ \rinline{fstCoefMeans['beta.scholarRefs']}, variance = \rinline{fstCoefVars['beta.scholarRefs']}).
-The effect size of gene flow ($b = $ \rinline{fstCoefMeans['beta.Nm']}, variance = \rinline{fstCoefVars['beta.Nm']}) was approximately twice the size of that of body mass ($b = $ \rinline{fstCoefMeans['beta.mass']}, variance = \rinline{fstCoefVars['beta.mass']})
-
-
-
-When using the phylogeny from \textcite{jones2005bats} the analysis became very unstable (Figure~\ref{f:A-itplots}).
-The support for each variable changed dramatically with each resampling of the random variable.
-On average however, only the model containing mass and range size is supported (Tables~\ref{A-fstModelWeights} and \ref{t:variables2}).
-
 
 
 \afterpage{ % use after page to make sure this whole table is at the end of a page.
@@ -2260,27 +2123,14 @@ log(Mass) &
 \end{landscape}
 }
 
+Summing the Akaike weights of all models that contain a given variable gives a probability, $Pr$, that the variable would be in the best model amongst those in the plausible set \cite{whittingham2006we}.
+The number of subspecies is very likely in the best model ($Pr > $ \rinline{substring(as.character( varWeights['NumberOfSubspecies']), 1, 4)}) as is the interaction term between the number of subspecies and study effort ($Pr = $ \rinline{varWeights['scholarRefs.NumberOfSubspecies']}) compared to the benchmark random variable which has $Pr = $ \rinline{varWeights['rand']} (Figure~\ref{fig:fstITPlots}A and Table~\ref{t:variables}).
+When models with the interaction term are removed there is, on average (mean weighted by Akaike weights), a positive relationship between the number of subspecies and viral richness ($b = $ \rinline{nSpeciesCoefMean}, variance = \rinline{nSpeciesCoefVar}).
+Models with an interaction term between the number of subspecies and study effort have a positive interaction term ($b = $ \rinline{nSpeciesInterMean}, variance = \rinline{nSpeciesInterVar}) and linear term ($b = $ \rinline{nSpeciesCoefMeanI}, variance = \rinline{nSpeciesCoefVarI}).
 
+Study effort is very likely in the best model ($b = $ \rinline{varCoefMeans['beta.scholarRefs']}, $Pr > $ \rinline{substring(as.character(varWeights['scholarRefs']), 1, 4)}).
+Body mass and range size are also probably in the best model ($b = $ \rinline{varCoefMeans['beta.mass']}, $Pr = $ \rinline{varWeights['mass']} and $b = $ \rinline{varCoefMeans['beta.distrSize']}, $Pr = $ \rinline{varWeights['distrSize']} respectively) with positive relationships of slightly lower strength than the number of subspecies in models without an interaction term ($b = $ \rinline{nSpeciesCoefMean}, variance = \rinline{nSpeciesCoefVar}).	
 
-\subsection{Phylogenetic Analysis}
-
-\subsubsection{Number of subspecies}
-
-Figure~\ref{fig:treePlot} shows the phylogeny used and the number of viruses for each species.
-The mean number of viruses across families is fairly constant with \rinline{familyMeans$Family[which.min(familyMeans$mean)]} having the smallest mean, (\rinline{min(familyMeans$mean)}).
-The highest mean is \rinline{familyMeans$Family[which.max(familyMeans$mean)]} with \rinline{max(familyMeans$mean)} virus species per bat species, but this is based on only \rinline{familyMeans$n[which.max(familyMeans$mean)]} species.
-The \rinline{familyMeans$Family[order(familyMeans$mean, decreasing = TRUE)[2]]} have the second highest mean  of \rinline{familyMeans$mean[order(familyMeans$mean, decreasing = TRUE)[2]]} ($n$ = \rinline{familyMeans$n[order(familyMeans$mean, decreasing = TRUE)[2]]}).
-
-
-
-The small change in mean pathogen richness across families and the lack of clear pattern in Figure~\ref{fig:treePlot} implies that viral richness is not strongly phylogenetic. 
-This is corroborated by the small estimated size of $\lambda$ ($\lambda$ = \rinline{virusLambda$param['lambda']}, $p$ = \rinline{virusLambda$param.CI$lambda$bounds.p[1]}).
-%This fact implies that other factors must control pathogen richness.
-%It also implies that pathogens are not directly inherited down the phylogeny, although this is to be expected by the fast evolution of viruses.
-
-Of the explanatory variables, the number of subspecies had no phylogenetic autocorrelation ($\lambda$ = \rinline{sspLambda$param['lambda']}, $p > 0.999$), study effort and distribution size had weak but significant autocorrelation (Study Effort: $\lambda$ = \rinline{scholarLambda$param['lambda']}, $p$ = \rinline{scholarLambda$param.CI$lambda$bounds.p[1]}, Distribution size: $\lambda$ = \rinline{distrLambda$param['lambda']}, $p < 10^{-5}$) and body mass was strongly phylogenetic ($\lambda$ = \rinline{massLambda$param['lambda']}, $p < 10^{-5}$). 
-Across all multiple regression models the mean value of $\lambda$ was \rinline{mean(na.omit(allResults$lambda))} which implied that the residuals from the models were very weakly phylogenetic.
-A small number of models (\rinline{mean(na.omit(allResults$lambda < 0))*100}\%)  had negatively phylogenetically distributed residuals.
 
 
 \begin{table}[t!]
@@ -2319,6 +2169,158 @@ Random &  \rinline{sprintf('%.2f', varWeights['rand'])} &  \rinline{varCoefMeans
 
 
 
+When using the phylogeny from \textcite{jones2005bats} the results are broadly similar (Figure~\ref{f:A-itplots} and Tables~\ref{A-modelWeights2} and~\ref{t:variables2}).
+Study effort, the number of subspecies and the interaction between the number of subspecies and study effort have strong support while range size and mass have intermediate support.
+However, mass, range size and the interaction between number of subspecies and study effort have slightly weaker support than in the analysis using the phylogeny from \textcite{fritz2009geographical}.
+
+%%begin.rcode ITCombPlotCapt
+
+ITPlotCapts <- "
+The relative weight of evidence that each explanatory variable is in the best model for explaining viral richness.
+The probability that each variable is in the best model (amongst the models tested) is shown for A) the number of subspecies analysis and B) the effective gene flow analysis.
+The boxplots show the variation of the results over 50 resamplings of the uniformly random ``null'' variable. 
+The thick bar of the boxplot shows the median value, the interquartile range is represented by a box, vertical lines represent range, and outliers are shown as filled circles.
+The red ``Random'' box is the uniformly random variable. 
+Population structure (number of subspecies and effective gene flow), shown in yellow, is likely to be in the best model in both analyses."
+
+ITPlotTitle <- "The relative weight of evidence that each explanatory variable is in the best model for explaining viral richness."
+
+%%end.rcode
+
+
+%%begin.rcode fstITPlots, fig.cap = ITPlotCapts, fig.height = 2.5, fig.scap = 'Akaike variable weights', out.width = '\\textwidth', cache = FALSE
+
+# Reorder var levels to get structure at beginning.
+fstSepVarWeights$variable <- factor(fstSepVarWeights$variable, levels(fstSepVarWeights$variable)[c(2, 1, 3, 4, 5)])
+
+# Draw the fst model selection plot
+fstIT <- ggplot(fstSepVarWeights, aes(x = variable, y = estimate, colour = col, fill = col)) +
+  geom_boxplot(outlier.colour = grey(0.3), notch = FALSE, width = 0.7, outlier.size = 1, lwd = 0.4) +
+  scale_colour_manual(values = pokepal('kingdra')[c(11, 1, 9)]) +
+  scale_fill_manual(values = pokepal('kingdra')[c(12, 4, 8)]) +
+  ylim(0, 1) +
+  theme(legend.position = 'none', axis.text.x = element_text(size = 10, angle = 40, hjust = 1, colour = 'black', family = 'lato light'),
+    panel.grid.major.x = element_blank(),
+    axis.text.y = element_text(size = 8)) +
+  scale_x_discrete(labels = c('Gene flow', 'Scholar', 'Mass', 'Range size', 'Random')) +
+  scale_y_continuous(labels = c('0.00','0.25','0.50','0.75','1.00'), breaks = c(0, 0.25, 0.5, 0.75, 1)) +
+  ylim(0, 1) +
+  ylab('P(in best model)') +
+  xlab('')
+
+
+#plot_grid(ITPlot, fstIT, labels = c("A", "B"), align = 'h', label_size = 10)
+
+
+# Combine and print the plots.
+ggdraw() +
+  draw_label("A)", 0.02, 0.96, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
+  draw_plot(ITPlot, 0, 0, 0.5, 1) +
+  draw_label("B)", 0.52, 0.96, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
+  draw_plot(fstIT, 0.5, 0.164, 0.5, 0.855) +
+  draw_label('Explanatory variable', 0.5, 0.1, fontfamily = 'lato light', size = 12)
+
+
+%%end.rcode
+
+
+
+
+
+\tmpsection{Model results}
+
+
+
+
+\subsection{Gene Flow}
+
+\tmpsection{More Descriptive}
+
+%Figure~\ref{fig:fstTreePlot} shows the phylogeny used and the number of viruses for each species.
+The number of described virus species for a bat host ranged up to \rinline{max(fstFinal$virusSpecies)} viruses in \emph{\rinline{fstFinal$binomial[which.max(fstFinal$virusSpecies)]}} (Figure~\ref{fig:fstRawData}).
+Only the model with study effort, gene flow and body mass was well supported with the second model having an $\Delta\text{AICc}$ of \rinline{round(fstModelWeights[2, 3])} (Table~\ref{t:models} and Table~\ref{A-modelWeights}).
+The effective level of gene flow was likely in the best model ($Pr > 0.999$, see Figure~\ref{fig:fstITPlots}B and Table~\ref{t:variables}).
+On average (mean weighted by Akaike weights) there was a negative relationship between gene flow and viral richness ($b = $ \rinline{fstCoefMeans['beta.Nm']}, variance = \rinline{fstCoefVars['beta.Nm']}) despite the insignificant positive relationship (Figure~\ref{fig:fstRawData}) estimated by the single-predictor model (pgls: $b$ = \rinline{nmFstUni$coefficients['log(Nm)', 'Estimate']}, $t$ = \rinline{nmFstUni$coefficients['log(Nm)', 't value']}, df = \rinline{nmFstUni$df[2]}, $p$ = \rinline{nmFstUni$coefficients['log(Nm)', 'Pr(>|t|)']}).
+Possibly due to the smaller sample size, or a weaker relationship, this coefficient was much more varied than the number of subspecies coefficient with \rinline{round(pcCoefLzero)}\% of multiple-regression models estimating a positive relationship.
+
+Study effort was very likely in the best model ($Pr > 0.999$) as was body mass ($Pr > 0.999$).
+However, body mass had a negative average coefficient ($b = $ \rinline{fstCoefMeans['beta.mass']}, variance = \rinline{fstCoefVars['beta.mass']}). % which is in contrast to the number of subspecies analysis, many studies in the literature \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat} and the single-predictor model (pgls: $b$ = \rinline{massFstUni$coefficients['log(mass)', 'Estimate']}, $t$ = \rinline{massFstUni$coefficients['log(mass)', 't value']}, df = \rinline{massFstUni$df[2]}, $p$ = \rinline{massFstUni$coefficients['log(mass)', 'Pr(>|t|)']}).
+In contrast to the number of subspecies analysis, range size was almost certainly not in the best model with $Pr = $ \rinline{fstVarWeights['distrSize']}.
+%This variable being less supported than the random variable may be because range size is closely correlated with study effort (pgls: $b$ = \rinline{fstDistrStudyEffort$coefficients['log(distrSize)', 'Estimate']}, $t$ = \rinline{fstDistrStudyEffort$coefficients['log(distrSize)', 't value']}, df = \rinline{fstDistrStudyEffort$df[2]}, $p$ = \rinline{fstDistrStudyEffort$coefficients['log(distrSize)', 'Pr(>|t|)']}).
+Of the three explanatory variables in the best model, study effort had the largest effect ($b = $ \rinline{fstCoefMeans['beta.scholarRefs']}, variance = \rinline{fstCoefVars['beta.scholarRefs']}).
+The effect size of gene flow ($b = $ \rinline{fstCoefMeans['beta.Nm']}, variance = \rinline{fstCoefVars['beta.Nm']}) was approximately twice the size of that of body mass ($b = $ \rinline{fstCoefMeans['beta.mass']}, variance = \rinline{fstCoefVars['beta.mass']})
+
+
+
+
+%%begin.rcode fstRawCapt
+
+fstRawDataCapt <- 
+paste(
+'Relationship between viral richness and log effective gene flow per generation for',
+nrow(fstFinal),
+'bat species.
+Green points are studies that estimated effective gene flow using allozymes and blue points are studies using microsatellites.
+')
+
+
+
+fstRawDataTitle <- 
+paste(
+'Relationship between viral richness and log effective gene flow per generation for',
+nrow(fstFinal),
+'bat species.
+')
+
+%%end.rcode
+
+
+
+%%begin.rcode fstRawData, fig.height = 2.3, fig.cap = fstRawDataCapt, fig.scap = fstRawDataTitle
+
+# Plot raw fst data
+
+ggplot(fstFinal, aes(x = Nm, y = virusSpecies, colour = Marker)) +
+  geom_point(size = 2) +
+  scale_colour_poke(pokemon = 'oddish', spread = 3) +
+  scale_x_log10() +
+  geom_abline(intercept = nmFstUni$coef[1, 1], slope = nmFstUni$coef[2, 1], lwd = 0.7, colour = pokepal('nidorina')[10]) +
+  xlab('Gene Flow (per gen.)') +
+  ylab('Viral Richness') 
+
+%%end.rcode
+
+
+
+When using the phylogeny from \textcite{jones2005bats} the analysis became very unstable (Figure~\ref{f:A-itplots}).
+The support for each variable changed dramatically with each resampling of the random variable.
+On average however, only the model containing mass and range size is supported (Tables~\ref{A-fstModelWeights} and~\ref{t:variables2}).
+
+
+
+
+\subsection{Phylogenetic Analysis}
+
+\subsubsection{Number of subspecies}
+
+Figure~\ref{fig:treePlot} shows the phylogeny used and the number of viruses for each species.
+The mean number of viruses across families is fairly constant with \rinline{familyMeans$Family[which.min(familyMeans$mean)]} having the smallest mean, (\rinline{min(familyMeans$mean)}).
+The highest mean is \rinline{familyMeans$Family[which.max(familyMeans$mean)]} with \rinline{max(familyMeans$mean)} virus species per bat species, but this is based on only \rinline{familyMeans$n[which.max(familyMeans$mean)]} species.
+The \rinline{familyMeans$Family[order(familyMeans$mean, decreasing = TRUE)[2]]} have the second highest mean  of \rinline{familyMeans$mean[order(familyMeans$mean, decreasing = TRUE)[2]]} ($n$ = \rinline{familyMeans$n[order(familyMeans$mean, decreasing = TRUE)[2]]}).
+
+
+
+The small change in mean pathogen richness across families and the lack of clear pattern in Figure~\ref{fig:treePlot} implies that viral richness is not strongly phylogenetic. 
+This is corroborated by the small estimated size of $\lambda$ ($\lambda$ = \rinline{virusLambda$param['lambda']}, $p$ = \rinline{virusLambda$param.CI$lambda$bounds.p[1]}).
+%This fact implies that other factors must control pathogen richness.
+%It also implies that pathogens are not directly inherited down the phylogeny, although this is to be expected by the fast evolution of viruses.
+
+Of the explanatory variables, the number of subspecies had no phylogenetic autocorrelation ($\lambda$ = \rinline{sspLambda$param['lambda']}, $p > 0.999$), study effort and distribution size had weak but significant autocorrelation (Study Effort: $\lambda$ = \rinline{scholarLambda$param['lambda']}, $p$ = \rinline{scholarLambda$param.CI$lambda$bounds.p[1]}, Distribution size: $\lambda$ = \rinline{distrLambda$param['lambda']}, $p < 10^{-5}$) and body mass was strongly phylogenetic ($\lambda$ = \rinline{massLambda$param['lambda']}, $p < 10^{-5}$). 
+Across all multiple regression models the mean value of $\lambda$ was \rinline{mean(na.omit(allResults$lambda))} which implied that the residuals from the models were very weakly phylogenetic.
+A small number of models (\rinline{mean(na.omit(allResults$lambda < 0))*100}\%)  had negatively phylogenetically distributed residuals.
+
+
+
 
 \subsubsection{Effective gene flow}
 
@@ -2352,8 +2354,8 @@ In this study I have used known viral richness in bats as a case study for the m
 In both analyses I found that a positive effect of increasing population structure (a positive effect of the number of subspecies and a negative effect of gene flow) is likely to be in the best model for explaining viral richness.
 Only the effective gene flow analysis, when performed using the phylogeny from \textcite{jones2005bats}, does not support this hypothesis.
 Therefore my study supports the broader hypothesis that increased population structure promotes pathogen richness.
-Furthermore it contradicts the assumption that factors that promote high $R_0$ will automatically promote high pathogen richness \cite{nunn2003comparative, morand2000wormy}.
 The positive relationship between increased population structure and pathogen richness implies that direct or indirect competitive mechanisms are acting such that increased population structure allows escape from competition which promotes pathogen richness.
+Furthermore my study contradicts the assumption that factors that promote high $R_0$ will automatically promote high pathogen richness by increasing the rate of spread of new pathogens entering into the population \cite{nunn2003comparative, morand2000wormy}.
 
 
 
