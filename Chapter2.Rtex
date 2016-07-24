@@ -74,53 +74,28 @@ library(cowplot)
 
 \section{Abstract}
 
-
 %\tmpsection{One or two sentences providing a basic introduction to the field}
 % comprehensible to a scientist in any discipline.
-\lettr{A}n increasingly large proportion of emerging human diseases comes from animals.
-These diseases have a huge impact on human health, healthcare systems and economic development.
+%\lettr{A}n increasingly large proportion of emerging human diseases comes from animals.
+%These diseases have a huge impact on human health, healthcare systems and economic development.
 The chance that a new zoonosis will come from any particular wild host species increases with the number of pathogen species occurring in that host species.
-However, the factors that control pathogen richness in wild animal species remain unclear.
+Comparative, phylogenetic studies have shown that host-species traits such as population density and population structure correlate with pathogen richness
+However, the mechanisms by which these factors control pathogen richness in wild animal species remain unclear.
 %
 %
 %\tmpsection{Two to three sentences of more detailed background}
 % comprehensible to scientists in related disciplines.
 % Add mechanistic vs empirical
-Comparative, phylogenetic studies have shown that host-species traits such as population density, longevity and body size correlate with pathogen richness.
-Further comparative studies have found correlations between population structure and pathogen richness.
-Typically it is assumed that well-connected, unstructured populations (that therefore have a high basic reproductive number, $R_0$) promote the invasion of new pathogens and therefore increase pathogen richness. % Where or how to define well-connected?
-However, this assumption is largely untested in the multipathogen context.
+Typically it is assumed that well-connected, unstructured populations (that therefore have a high basic reproductive number, $R_0$) promote the invasion of new pathogens and therefore increase pathogen richness. However, this assumption is largely untested in the multipathogen context.
 In the presence of inter-pathogen competition, the opposite effect might occur; increased population structure may increase pathogen richness by reducing the effects of competition.
 A more mechanistic understanding of how population structure affects pathogen richness could discriminate between these two broad hypotheses.
-%
-%\tmpsection{One sentence clearly stating the general problem (the gap)}
-% being addressed by this particular study.
-%It is unknown whether greater population structure allows invading pathogens to escape from competition by stochastically creating areas of low pathogen prevalence.
-I hypothesised that both low dispersal rates and a low number of connections in a metapopulation network would allow invading pathogens to establish more easily, thus increasing pathogen richness. 
-I tested this hypothesis using metapopulation networks parameterised to mimic wild bat populations as bats have highly varied social structures and have recently been implicated in a number of high profile diseases such as Ebola, SARS, Hendra and Nipah.
-%
-%
-%\tmpsection{One sentence summarising the main result}
-%  (with the words “here we show” or their equivalent).
-I simulated the process of a new pathogen invading into a metapopulation already occupied by an identical pathogen.
-I varied the dispersal rate, topology of the metapopulation and transmission rate.
-I found significant evidence that increased dispersal rate increased the probability that a new pathogen would invade into a population.
-I found marginal evidence that network topology affected the probability that a new pathogen would invade.
-%\paragraph{Two or three sentences explaining what the main result reveals in direct comparison to what was thought to be the case previously}
-% or how the main result adds to previous knowledge
-Therefore, the assumption that factors causing high $R_0$ allow new pathogens to invade and therefore increase pathogen richness was supported.
-However, my results contradict theoretical studies that predict that increased population structure should promote coexistence of pathogens.
-My results also contradict empirical patterns of pathogen richness with respect to population structure.
-Therefore, it is likely that population structure affects pathogen richness via a different mechanism to the one modelled here.
-%
-%
-\tmpsection{One or two sentences to put the results into a more general context.}
-
-
-%\tmpsection{Two or three sentences to provide a broader perspective, }
-% readily comprehensible to a scientist in any discipline.
-
-
+Here I have examined one mechanism by which increased population structure may cause greater pathogen richness. 
+I used simulations to test whether increased population structure could increase the probability that a newly evolved pathogen would invade into a population already infected with an identical, endemic pathogen. 
+I tested this hypothesis using individual-based, metapopulation networks parameterised to mimic wild bat populations as bats have highly varied social structures and have recently been implicated in a number of high profile diseases such as Ebola, SARS, Hendra and Nipah.
+In a metapopulation, dispersal rate and the number of links between colonies can both affect population structure.
+I tested whether either of these factors could increase the probability that a pathogen would invade and persist in the population.
+I found that, at intermediate transmission rates, increasing dispersal rate significantly increased the probability of a newly evolved pathogen invading into the metapopulation. 
+However, there was very limited evidence that the number of links between colonies affected pathogen invasion probability.
 
 
 
@@ -152,7 +127,7 @@ Therefore, it is likely that population structure affects pathogen richness via 
 
 %1. zoonotics bad, need to predict spillover, factors controlling pathogen richness unknown
 \tmpsection{Why is pathogen richness? important?}
-Over 50\% of emerging infectious diseases have an animal source \cite{jones2008global, smith2014global}.
+Over 60\% of emerging infectious diseases have an animal source \cite{jones2008global, smith2014global}.
 Zoonotic pathogens can be highly virulent \cite{luby2009recurrent, lefebvre2014case} and can have huge public health impacts \cite{granich2015trends}, economic costs \cite{knobler2004learning} and slow down international development \cite{ebolaWorldbank}.
 Therefore understanding and predicting changes in the process of zoonotic spillover is a global health priority \cite{taylor2001risk}.
 The number of pathogen species hosted by a wild animal species affects the chance that a disease from that species will infect humans \cite{wolfe2000deforestation}.
