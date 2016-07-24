@@ -1930,6 +1930,7 @@ $\kappa$ and $\delta$ parameters were constrained to one as they are more concer
 Further, fitting multiple parameters makes interpretation difficult. 
 
 
+
 To establish the importance of variables I calculated the probability, $Pr$, that each variable would be in the best model amongst those examined (under the assumption that all models are \emph{a priori} equally likely).
 This value can more generally, and with fewer assumptions, be considered as simply the relative weight of evidence for each variable being in the best model amongst those examined.
 I calculated AICc for each model.
@@ -1946,8 +1947,6 @@ To aid interpretation, the mean coefficient for the number of subspecies was cal
 
 
 
-
-
 %%begin.rcode boxplotCapt	
 		
 # Caption for the main boxplot of subspecies vs virus		
@@ -1958,8 +1957,7 @@ nrow(nSpecies),
 'bat species.
 The area of the circle shows the number of bat species at each discrete value.
 48 bat species have one subspecies and one known virus species.
-The red line represents a phylogenetic multiple regression including all the explanatory variables but no interaction term.
-The line shows the slope from the multiple regression with the intercept being calculated by setting other explanatory variables to their median values.
+The red line represents a phylogenetic simple regression between the two variables.
 '
 )
 
@@ -1973,36 +1971,6 @@ nrow(nSpecies),
 		
 %%begin.rcode boxplot, fig.cap = boxplotCapt, fig.scap = boxplotTitle,	fig.height = 2.3
 
-# Make a boxplot of subspecies vs virus
-# Add model lines for pgls models.
-
-# Make predictions of model w/out interactions using median values of other variables.
-
-predData <- data.frame(scholarRefs = quantile(nSpecies$scholarRefs, 0.5),
-                       mass = quantile(nSpecies$mass, 0.5),
-                       NumberOfSubspecies =
-                         seq(min(nSpecies$NumberOfSubspecies), max(nSpecies$NumberOfSubspecies), 
-                         length.out = 200)
-                       )
-
-
-lines <- data.frame(NumberOfSubspecies = predData$NumberOfSubspecies, 
-               virusSpecies = predict(subspeciesJointUnlog, newdata = predData))
-
-## Make predictions of model w/ interactions using median values of other variables.
-
-predDataInter <- data.frame(scholarRefs = quantile(nSpecies$scholarRefs, 0.5),
-                       mass = quantile(nSpecies$mass, 0.5),
-                       NumberOfSubspecies =
-                         seq(min(nSpecies$NumberOfSubspecies), max(nSpecies$NumberOfSubspecies), 
-                         length.out = 200)
-                       )
-
-
-
-linesInter <- data.frame(NumberOfSubspecies = predData$NumberOfSubspecies, 
-               virusSpecies = predict(subspeciesInter, newdata = predDataInter))
-
 
 nSpeciesCounts <- nSpecies %>%
                     group_by(NumberOfSubspecies, virusSpecies) %>%
@@ -2015,10 +1983,11 @@ ggplot(nSpeciesCounts, aes(NumberOfSubspecies, virusSpecies, size = n)) +
   scale_x_continuous(breaks = c(1,  4, 8, 12, 16)) +
   xlab('Number of Subspecies') +
   ylab('Viral Richness') +
-  geom_line(data = lines, aes(x = NumberOfSubspecies, y = virusSpecies, group = 1),
-    colour = pokepal('nidorina')[10], lwd = 0.7)
+  geom_abline(slope = sspUni$coef[2, 1], intercept = sspUni$coef[1,1], lwd = 0.7, colour = pokepal('nidorina')[10])
 
 %%end.rcode
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2039,10 +2008,16 @@ However these top seven models all contained study effort, number of subspecies 
 The explanatory variables log(Mass), log(Range Size) and the uniformly random variable are each in three of the top seven models.
 These top seven models had a combined weight of \rinline{sprintf("%.2f", round(modelWeights[7, 5], 2))} meaning that there is a \rinline{sprintf("%.0f", round(100 * modelWeights[7, 5]))}\% chance that one of these models is the best model amongst those examined.
 
+Summing the Akaike weights of all models that contain a given variable gives a probability, $Pr$, that the variable would be in the best model amongst those in the plausible set \cite{whittingham2006we}.
+The number of subspecies is very likely in the best model ($Pr > $ \rinline{substring(as.character( varWeights['NumberOfSubspecies']), 1, 4)}) as is the interaction term between the number of subspecies and study effort ($Pr = $ \rinline{varWeights['scholarRefs.NumberOfSubspecies']}) compared to the benchmark random variable which has $Pr = $ \rinline{varWeights['rand']} (Figure~\ref{fig:fstITPlots}A and Table~\ref{t:variables}).
+When models with the interaction term are removed there is, on average (mean weighted by Akaike weights), a positive relationship between the number of subspecies and viral richness ($b = $ \rinline{nSpeciesCoefMean}, variance = \rinline{nSpeciesCoefVar}).
+Models with an interaction term between the number of subspecies and study effort have a positive interaction term ($b = $ \rinline{nSpeciesInterMean}, variance = \rinline{nSpeciesInterVar}) and linear term ($b = $ \rinline{nSpeciesCoefMeanI}, variance = \rinline{nSpeciesCoefVarI}).
+
+
 
 \afterpage{ % use after page to make sure this whole table is at the end of a page.
 \begin{landscape}
-\begin{table}[t]
+\begin{table}[p!]
 \centering
 %\rowcolors{2}{gray!25}{white}
 \caption[Model selection results]{
@@ -2123,14 +2098,16 @@ log(Mass) &
 \end{landscape}
 }
 
-Summing the Akaike weights of all models that contain a given variable gives a probability, $Pr$, that the variable would be in the best model amongst those in the plausible set \cite{whittingham2006we}.
-The number of subspecies is very likely in the best model ($Pr > $ \rinline{substring(as.character( varWeights['NumberOfSubspecies']), 1, 4)}) as is the interaction term between the number of subspecies and study effort ($Pr = $ \rinline{varWeights['scholarRefs.NumberOfSubspecies']}) compared to the benchmark random variable which has $Pr = $ \rinline{varWeights['rand']} (Figure~\ref{fig:fstITPlots}A and Table~\ref{t:variables}).
-When models with the interaction term are removed there is, on average (mean weighted by Akaike weights), a positive relationship between the number of subspecies and viral richness ($b = $ \rinline{nSpeciesCoefMean}, variance = \rinline{nSpeciesCoefVar}).
-Models with an interaction term between the number of subspecies and study effort have a positive interaction term ($b = $ \rinline{nSpeciesInterMean}, variance = \rinline{nSpeciesInterVar}) and linear term ($b = $ \rinline{nSpeciesCoefMeanI}, variance = \rinline{nSpeciesCoefVarI}).
 
-Study effort is very likely in the best model ($b = $ \rinline{varCoefMeans['beta.scholarRefs']}, $Pr > $ \rinline{substring(as.character(varWeights['scholarRefs']), 1, 4)}).
-Body mass and range size are also probably in the best model ($b = $ \rinline{varCoefMeans['beta.mass']}, $Pr = $ \rinline{varWeights['mass']} and $b = $ \rinline{varCoefMeans['beta.distrSize']}, $Pr = $ \rinline{varWeights['distrSize']} respectively) with positive relationships of slightly lower strength than the number of subspecies in models without an interaction term ($b = $ \rinline{nSpeciesCoefMean}, variance = \rinline{nSpeciesCoefVar}).	
 
+
+When using the phylogeny from \textcite{jones2005bats} the results are broadly similar (Figure~\ref{f:A-itplots} and Tables~\ref{A-modelWeights2} and~\ref{t:variables2}).
+Study effort, the number of subspecies and the interaction between the number of subspecies and study effort have strong support while range size and mass have intermediate support.
+However, mass, range size and the interaction between number of subspecies and study effort have slightly weaker support than in the analysis using the phylogeny from \textcite{fritz2009geographical}.
+
+
+
+\tmpsection{Model results}
 
 
 \begin{table}[t!]
@@ -2169,9 +2146,20 @@ Random &  \rinline{sprintf('%.2f', varWeights['rand'])} &  \rinline{varCoefMeans
 
 
 
-When using the phylogeny from \textcite{jones2005bats} the results are broadly similar (Figure~\ref{f:A-itplots} and Tables~\ref{A-modelWeights2} and~\ref{t:variables2}).
-Study effort, the number of subspecies and the interaction between the number of subspecies and study effort have strong support while range size and mass have intermediate support.
-However, mass, range size and the interaction between number of subspecies and study effort have slightly weaker support than in the analysis using the phylogeny from \textcite{fritz2009geographical}.
+\subsection{Gene Flow}
+
+\tmpsection{More Descriptive}
+
+%Figure~\ref{fig:fstTreePlot} shows the phylogeny used and the number of viruses for each species.
+The number of described virus species for a bat host ranged up to \rinline{max(fstFinal$virusSpecies)} viruses in \emph{\rinline{fstFinal$binomial[which.max(fstFinal$virusSpecies)]}} (Figure~\ref{fig:fstRawData}).
+Only the model with study effort, gene flow and body mass was well supported with the second model having an $\Delta\text{AICc}$ of \rinline{round(fstModelWeights[2, 3])} (Table~\ref{t:models} and Table~\ref{A-modelWeights}).
+The effective level of gene flow was likely in the best model ($Pr > 0.999$, see Figure~\ref{fig:fstITPlots}B and Table~\ref{t:variables}).
+On average (mean weighted by Akaike weights) there was a negative relationship between gene flow and viral richness ($b = $ \rinline{fstCoefMeans['beta.Nm']}, variance = \rinline{fstCoefVars['beta.Nm']}) despite the insignificant positive relationship (Figure~\ref{fig:fstRawData}) estimated by the single-predictor model (pgls: $b$ = \rinline{nmFstUni$coefficients['log(Nm)', 'Estimate']}, $t$ = \rinline{nmFstUni$coefficients['log(Nm)', 't value']}, df = \rinline{nmFstUni$df[2]}, $p$ = \rinline{nmFstUni$coefficients['log(Nm)', 'Pr(>|t|)']}).
+Possibly due to the smaller sample size, or a weaker relationship, this coefficient was much more varied than the number of subspecies coefficient with \rinline{round(pcCoefLzero)}\% of multiple-regression models estimating a positive relationship.
+
+
+
+
 
 %%begin.rcode ITCombPlotCapt
 
@@ -2226,23 +2214,6 @@ ggdraw() +
 
 
 
-
-\tmpsection{Model results}
-
-
-
-
-\subsection{Gene Flow}
-
-\tmpsection{More Descriptive}
-
-%Figure~\ref{fig:fstTreePlot} shows the phylogeny used and the number of viruses for each species.
-The number of described virus species for a bat host ranged up to \rinline{max(fstFinal$virusSpecies)} viruses in \emph{\rinline{fstFinal$binomial[which.max(fstFinal$virusSpecies)]}} (Figure~\ref{fig:fstRawData}).
-Only the model with study effort, gene flow and body mass was well supported with the second model having an $\Delta\text{AICc}$ of \rinline{round(fstModelWeights[2, 3])} (Table~\ref{t:models} and Table~\ref{A-modelWeights}).
-The effective level of gene flow was likely in the best model ($Pr > 0.999$, see Figure~\ref{fig:fstITPlots}B and Table~\ref{t:variables}).
-On average (mean weighted by Akaike weights) there was a negative relationship between gene flow and viral richness ($b = $ \rinline{fstCoefMeans['beta.Nm']}, variance = \rinline{fstCoefVars['beta.Nm']}) despite the insignificant positive relationship (Figure~\ref{fig:fstRawData}) estimated by the single-predictor model (pgls: $b$ = \rinline{nmFstUni$coefficients['log(Nm)', 'Estimate']}, $t$ = \rinline{nmFstUni$coefficients['log(Nm)', 't value']}, df = \rinline{nmFstUni$df[2]}, $p$ = \rinline{nmFstUni$coefficients['log(Nm)', 'Pr(>|t|)']}).
-Possibly due to the smaller sample size, or a weaker relationship, this coefficient was much more varied than the number of subspecies coefficient with \rinline{round(pcCoefLzero)}\% of multiple-regression models estimating a positive relationship.
-
 Study effort was very likely in the best model ($Pr > 0.999$) as was body mass ($Pr > 0.999$).
 However, body mass had a negative average coefficient ($b = $ \rinline{fstCoefMeans['beta.mass']}, variance = \rinline{fstCoefVars['beta.mass']}). % which is in contrast to the number of subspecies analysis, many studies in the literature \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat} and the single-predictor model (pgls: $b$ = \rinline{massFstUni$coefficients['log(mass)', 'Estimate']}, $t$ = \rinline{massFstUni$coefficients['log(mass)', 't value']}, df = \rinline{massFstUni$df[2]}, $p$ = \rinline{massFstUni$coefficients['log(mass)', 'Pr(>|t|)']}).
 In contrast to the number of subspecies analysis, range size was almost certainly not in the best model with $Pr = $ \rinline{fstVarWeights['distrSize']}.
@@ -2261,6 +2232,7 @@ paste(
 nrow(fstFinal),
 'bat species.
 Green points are studies that estimated effective gene flow using allozymes and blue points are studies using microsatellites.
+The red line represents a phylogenetic simple regression between the two variables.
 ')
 
 
