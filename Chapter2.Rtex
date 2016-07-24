@@ -311,7 +311,7 @@ Infection and coinfection were assumed to cause no extra mortality as for a numb
 
 \begin{table}[tb]
 \centering
-\caption[All symbols used in Chapters~\ref{ch:sims1} and \ref{ch:sims2}.]{A summary of all symbols used in Chapters~\ref{ch:sims1} and \ref{ch:sims2} along with their units and default values.
+\caption[All symbols used in Chapters~\ref{ch:sims1} and \ref{ch:sims2}]{A summary of all symbols used in Chapters~\ref{ch:sims1} and \ref{ch:sims2} along with their units and default values.
 The justifications for parameter values are given in Section~\ref{s:paramSelect}.}
 
 \begin{tabular}{@{}lp{6cm}p{2.9cm}r@{}}
@@ -1026,7 +1026,7 @@ Therefore, if at least one individual was in class $I_2$ or $I_{12}$ at the end 
 Again, visual inspection of preliminary simulations was used to determine that after \SI{\rinline{nEvent - invadeT}} events, if an invading pathogen was still present, it was well established (Figures~\ref{fig:plotsInvade} and \ref{fig:plotsNoInvade1}).
 
 The choice to use a fixed number of events, rather than a fixed number of years, was for computational convenience.
-However, this choice creates a risk of bias as simulations with a greater total rate of events $\sum_j e_j$ (e.g.,\ faster disease transmission)  will last for a shorter time overall (i.e.\ a smaller $\sum \delta$ over all events).
+However, this choice creates a risk of bias as simulations with a greater total rate of events, $\sum_j e_j$ (e.g.,\ faster disease transmission)  will last for a shorter time overall (i.e.\ a smaller $\sum \delta$ over all events).
 However, visual inspection of the dynamics of disease extinction (Figure~\ref{fig:plotsNoInvade1}), and examination of the typical time to extinction suggests that this bias is negligible.
 For example, of the simulations where extinction occurred, the extinction occurred more than 50 years before the end of the simulation in 90\% of cases.
 On a preliminary run of 106 simulations across all combinations of dispersal and transmission rates, examining the population after \SI{700000} events instead of \SI{\rinline{nEvent}} events gave exactly the same result with respect to the binary state of invasion or no invasion. 
@@ -1298,7 +1298,7 @@ invasionPropCaption <- sprintf("
   When network topology is varied, $\\xi = 0.01$.",
   as.integer(each))
 
-invasionPropShort <- "The probability of invasion across different dispersal rates and network topologies."
+invasionPropShort <- "The probability of invasion across different dispersal rates and network topologies"
 
 
 %%end.rcode

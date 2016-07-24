@@ -197,7 +197,6 @@ polys <- list(
               SW9=list(c(0, 0, pi/4),c(0, pi, pi/2))
 )    
 
-
 reg <- do.call(rbind, lapply(1:length(polys), function(x) data.frame(do.call(cbind, polys[[x]]), names(polys[x]))))
 
 names(reg) <- c('x', 'y', 'model')
@@ -368,7 +367,7 @@ The equation for $\bar{p}$ has been newly derived for each submodel in the gREM,
 However, many models, although derived separately, have the same expression for $\bar{p}$.
 Figure~\ref{f:equalModelResults} shows the expression for $\bar{p}$ in each case.
 The general equation for density, \ref{e:gas}, is used with the correct value of $\bar{p}$ substituted.
-Although more thorough checks are performed in the additional Python script, it can be seen that all adjacent expressions in Figure~\ref{f:equalModelResults} are equal when expressions for the boundaries between them are substituted in.
+Although more thorough checks are performed in the additional \emph{Python} script, it can be seen that all adjacent expressions in Figure~\ref{f:equalModelResults} are equal when expressions for the boundaries between them are substituted in.
 
 %%begin.rcode equalRegionsResultCapt
 equalRegionsResultCapt <- '
@@ -472,7 +471,7 @@ ggplot(allMods, aes(x = model, y = percentageerror, colour = expression, fill = 
 %\begin{figure}[t]
 %	\centering
 %	\includegraphics[width=7cm]{imgs/lucas_et_al_figure5.pdf}
-%       	\caption[Simulation model results of the accuracy and precision for gREM submodels]{Simulation model results of the accuracy and precision for gREM submodels.
+%       	\caption[Accuracy and precision for gREM submodels given ]{Simulation model results of the accuracy and precision for gREM submodels.
 %The percentage error between estimated and true density for each gREM sub model is shown within each box plot, where the black line represents the median percentage error across all simulations, boxes represent the middle 50\% of the data, whiskers represent variability outside the upper and lower quartiles with outliers plotted as individual points.
 %Box colours correspond to the expressions for average profile width $\bar{p}$ given in Figure 4.        
 %} 
@@ -497,7 +496,7 @@ The numbers beneath each plot represent the coefficient of variation.
 The colour of each box plot corresponds to the expressions for average profile width $\\bar{p}$ given in Figure \\ref{f:equalModelResults}. 
 '
 
-CapturesTitle <- 'Simulation model results of the accuracy and precision of four gREM submodels'
+CapturesTitle <- 'Accuracy and precision of four gREM submodels given different numbers of captures'
 
 %%end.rcode
 
@@ -562,7 +561,7 @@ The simple model is represented where time and maximum change in direction equal
 The colour of each box plot corresponds to the expressions for average profile width $\\bar{p}$ given in Figure \\ref{f:equalModelResults}. %todo
 '
 
-movtTitle <- 'Simulation model results of the accuracy and precision of four gREM submodels'
+movtTitle <- 'Accuracy and precision of four gREM submodels given different movement models'
 
 %%end.rcode
 
@@ -621,8 +620,16 @@ tortPlot <- ggplot(tort, aes(x = maxAngle, y = percentageerror, colour = express
                         expression(phantom(over(0, 0))*pi*phantom(0))))
 
 
-plot_grid(waitPlot, tortPlot, labels = c("A", "B"), align = 'h', label_size = 10, ncol = 1)
+# plot_grid(waitPlot, tortPlot, labels = c("A", "B"), align = 'h', label_size = 10, ncol = 1, fontfamily = 'lato light')
 
+# Combine and print the plots.
+ggdraw() +
+  draw_label("A)", 0.02, 0.98, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
+  draw_plot(tortPlot, 0, 0, 1, 0.5) +
+  draw_label("B)", 0.02, 0.48, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
+  draw_plot(waitPlot, 0, 0.5, 1, 0.5) 
+
+  
 
 %%end.rcode
 
@@ -670,7 +677,7 @@ Both of these problems may cause biases in the gREM, as animals can move through
 As the gREM assumes constant surveillance, the error created by switching the sensor on and off quickly will become more important if the sensor is only on for short periods of time.
 I recommend that the gREM is applied to constantly sampled data, and the impacts of breaking these assumptions on the gREM should be further explored. 
 
-\subsection{Accuracy, Precision and Recommendations for Best Practice}
+\subsection{Accuracy, precision and recommendations for best practice}
 Based on our simulations, I believe that the gREM has the potential to produce accurate estimates for many different species, using either camera traps or acoustic detectors.
 However, the precision of the gREM differed between submodels.
 For example, when the sensor and signal width were small, the precision of the model was reduced.

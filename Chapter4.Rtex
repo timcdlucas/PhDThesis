@@ -99,7 +99,7 @@ As these factors are all completely interdependent, it is impossible to identify
 % being addressed by this particular study.
 %\tmpsection{One sentence summarising the main result}
 %  (with the words ``here we show'' or their equivalent).
-Here I use metapopulation susceptible-infected-recovered (SIR) models to test whether the ability of a newly evolved pathogen to invade and persist in a population is controlled specifically by host density as opposed to host population size 
+Here I use metapopulation susceptible-infected-recovered (SIR) models to test whether the ability of a newly evolved pathogen to invade and persist in a population is controlled specifically by host density as opposed to host population size.
 I also test whether pathogens invade more readily into a population with large groups or many groups.
 I parameterised these metapopulations to mimic bat populations, as bats exhibit a large range in group (colony) size and geographic range size as well as being associated with a number of important zoonotic pathogens.
 %\tmpsection{Two or three sentences explaining what the main result reveals in direct comparison to what was thought to be the case previously}
@@ -192,8 +192,8 @@ The amount of movement between groups is at least partially dependent on the dis
 %4. then talk about the limitations of taking a comparative approach and how mechanistic models can help
 
 Collinearity between explanatory variables is a common problem in correlative studies.
-However, this issue is exacerbated when there are clear, causal relationships between explanatory variables (e.g.\ an increase in host density will directly cause an increase in host population size).
-Therefore, correlative comparative studies will be especially poor at identifying which of factors are closely correlated with pathogen richness.
+However, this issue is exacerbated when there are clear, causal relationships between explanatory variables (e.g.,\ an increase in host density will directly cause an increase in host population size).
+Therefore, correlative comparative studies will be especially poor at identifying which of these factors are closely correlated with pathogen richness.
 If the aim of correlative studies is to create predictive models for estimating pathogen richness of wild animal species, these relationships are not an issue.
 In each of the above relationships ($d = N / a$ and $N = mn$), as long as two of three variables are included in a statistical model, all the variance in the third variable will also be captured.
 
@@ -237,7 +237,7 @@ I used bats as a case study as the size of bat groups (colonies) is very variabl
 Furthermore, bats are particularly relevant in the context of zoonotic disease as they are thought to be reservoirs for a number of important, recent outbreaks \cite{calisher2006bats, li2005bats}.
 I examined how the interrelated population factors affect the ability of a newly evolved pathogen to invade and persist in a population in the presence of strong competition from an endemic pathogen strain.
 I used these simulations to test two specific hypotheses.
-First, I tested whether host density or population size more strongly promotes the invasion of a new pathogen.
+First, I tested whether host population size or density more strongly promotes the invasion of a new pathogen.
 Secondly, I tested whether the invasion of a new pathogen is more strongly promoted by colony size or the number of colonies.
 I found that population size has a much stronger affect on the invasion of a new pathogen than host density and that increasing population size by increasing group size promotes pathogen invasion much more than increasing population size by increasing the number of groups.
 
@@ -697,7 +697,7 @@ popModel <- pop %>%
 plotKcapt <- '
 Change in average metapopulation network degree ($\\bar{k}$) with increasing range size. 
 Bars show the median, boxes show the interquartile range, vertical lines show the range and grey dots indicate outlier values.
-Notches indicate the 95\\% confidence interval of the mean.
+Notches indicate the 95\\% confidence interval of the median.
 All simulations had 20 colonies, meaning 19 is the maximum value of $\\bar{k}$.
 '
 
@@ -784,7 +784,7 @@ ggplot(dens1, aes(x = factor(area), y = meanK, colour = 'a', fill = 'a')) +
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 I used a two-pathogen, metapopulation SIR model to compare the roles of population parameters on pathogen species richness.
-The multipathogen SIR model was identical to that in Chapter~\ref{ch:sims1} using the same \emph{R} implementation \cite{R} \cite{metapopepi}.
+The multipathogen SIR model was identical to that in Chapter~\ref{ch:sims1} using the same \emph{R} implementation \cite{metapopepi}.
 Specifically, I let two identical pathogens compete: an endemic pathogen (Pathogen 1) and an invading pathogen (Pathogen 2).
 I used persistence (coded as 1) or extinction (coded as 0) of Pathogen 2 as a binomial response variable.
 I tested whether host population size is more important than host density.
@@ -804,7 +804,7 @@ The metapopulation network was created for each simulation by randomly placing c
 This square space was considered to be the species geographic range, the size of which was varied.
 Range size was varied between \SI{\rinline{min(area)}} and \SI{\rinline{max(area)}}{\square\kilo\metre}.
 This corresponds to square areas with sides of \rinline{sqrt(min(area))} to \SI{\rinline{sqrt(max(area))}}{\kilo\metre}.
-Dispersal was only allowed to occur between two colonies if they are within \SI{100}{\kilo\metre} of each other i.e.\ they were then counted as connected nodes in the metapopulation network.
+Dispersal was only allowed to occur between two colonies if they were within \SI{100}{\kilo\metre} of each other i.e.\ they were then counted as connected nodes in the metapopulation network.
 The number of connections each colony has is called its degree, $k$.
 The mean degree, $\bar{k}$ is a measure of how well connected the metapopulation network is overall.
 
@@ -848,7 +848,7 @@ Again, this gave population size values of \SI{2000}, \SI{4000}, \SI{8000}, \SI{
 \subsubsection{Colony size and the number of colonies}
 
 To compare colony size and the number of colonies, only the second and third set of simulations above were used.
-However, colony size and the number of colonies were directly used as independent variables instead of using the derived values for host density or population size.
+However, colony size and the number of colonies were directly used as independent variables instead of using the derived values for host population size or density.
 It can be seen that population density and range size are equivalent in the two sets of simulations.
 Therefore, the only difference between these two sets of simulations is the factor used to increase population size: this factor being either colony size or the number of colonies.
 
@@ -910,7 +910,7 @@ densPreds <- rbind(dens1Model, dens2Model) %>%
 
 valueChangeMeansCapt <- '
 Comparison of the effect of colony size, number of colonies and host density on probability of invasion.
-The $x$-axis shows the relative change in the default values of each of these factors ($\\times$0.25, 0.5, 1, 2 and $4$).
+The $x$-axis shows the change ($\\times$0.25, 0.5, 1, 2 and $4$) in the each of these factors  relative to the default value.
 Default values are: colony number = 20, colony size = 400 and density = 0.8 animals per \\si{\\square\\kilo\\metre}.
 Red lines: population size is altered by changing colony number.
 Blue lines: population size is altered by changing colony size.
@@ -920,7 +920,7 @@ Curves are simple logistic regression fits for each independent variable.
 Relationships are shown separately for each transmission value, $\\beta$.
 '
 
-valueChangeMeansTitle <- 'Comparison of the effect of colony size, number of colonies and host density on probability of invasion.'
+valueChangeMeansTitle <- 'Comparison of the effect of colony size, number of colonies and host density on probability of invasion'
 
 %%end.rcode
 
@@ -1048,7 +1048,7 @@ It can be seen that changes in colony size give a much greater increase in invas
 Note that this is the same data as Figure~\\ref{fig:plotValueChangeMeans} but with the $x$-axis scaled by population size, rather than relative parameter change.
 '
 
-transMeansTitle <- 'Comparison of the probability of invasion when host population size is altered by changing colony size or colony number.'
+transMeansTitle <- 'Comparison of the probability of the affect of colony size and number of colonies on probability of invasion'
 
 %%end.rcode
 
@@ -1132,18 +1132,18 @@ fewAllExtinct <- rbind(dens1, dens2, pop) %>%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 At the default parameter settings, the probability of invasion and establishment of the second pathogen, $P(I)$,  was rare (Figure~\ref{fig:plotValueChangeMeans} and Tables~\ref{C-pop} -- \ref{C-dens2}).
-These proportions significantly increase with transmission rate (GLM: $b$ = \rinline{transTest$estimate[2]}, $p$ = \rinline{transTest$p.value[2]}).
+These proportions significantly increased with transmission rate (GLM: $b$ = \rinline{transTest$estimate[2]}, $p$ = \rinline{transTest$p.value[2]}).
 
 In \rinline{nAllExtinct} simulations, both of the pathogens went extinct.
 The number of simulations where both pathogens went extinct did not depend on transmission rate (GLM: $b$ = \rinline{transExtinctTest$estimate[2]}, $p$ = \rinline{transExtinctTest$p.value[2]}).
-However all of the simulations with extinction of both pathogens had either the smallest colony size (colony size = 100, \rinline{smallAllExtinct} simulations) or with the fewest colonies (5 colonies, \rinline{fewAllExtinct} simulations).
+However all of the simulations with extinction of both pathogens had either the smallest colony size (colony size = 100, \rinline{smallAllExtinct} simulations) or the fewest number of colonies (5 colonies, \rinline{fewAllExtinct} simulations).
 Results from these simulations were removed before further analyses.
 
 
 
-\subsection{Host density or population size}
+\subsection{Host population size or density}
 
-To test whether host density or population size had a stronger effect on invasion probability I compared the regression coefficients of the multiple regressions fitted to simulation results (Figure~\ref{fig:plotValueChangeMeans}).
+To test whether host population size or density had a stronger effect on invasion probability I compared the regression coefficients of the multiple regressions fitted to simulation results (Figure~\ref{fig:plotValueChangeMeans}).
 Increasing host population size, either by increasing colony size or number of colonies, increased the probability of invasion (Table~\ref{t:regrCoefs}).
 The relationship between colony size and invasion is strong and significant at all transmission rates, while the relationship between colony number and invasion is weaker and more marginally significant.
 In contrast, varying host density does not alter invasion probability.
@@ -1236,7 +1236,7 @@ However, it should be noted that these conclusions apply only to the specific me
 \subsection{Comparative studies}
 
 Many comparative studies measure some aspect of a species population size or structure, yet it is rarely discussed how these are related.
-Instead most studies use the data that are available, without considering \emph{a priori} how the explanatory variables are causally related (though statistical correlations between independent variables is usually considered and dealt with using PCA or by removing collinear variables).
+Instead most studies use the data that are available, without considering \emph{a priori} how the explanatory variables are causally related (though statistical correlations between independent variables are usually considered and dealt with using PCA or by removing collinear variables).
 Host density is often measured \cite{morand1998density, lindenfors2007parasite, nunn2003comparative, arneberg2002host} yet density is directly associated with population size.
 My results suggest that it is in fact population size that is important (in the context of social species as studied here).
 This leads to the suggestion that the density measures in these comparative studies are in fact proxies for population size rather than the true causal factor.
@@ -1247,7 +1247,7 @@ Range size has been suggested to affect pathogen richness by a number of mechani
 The studies that have specifically tested the effect of group size have in fact found both positive \cite{vitone2004body} and negative associations \cite{gay2014parasite} or no relationship \cite{ezenwa2006host}.
 Meta-analyses suggest that the relationship between social group size and pathogen richness is weak \cite{rifkin2012animals}.
 However, I have found that group size is the most important population factor.
-This suggests that the mechanism studied here --- invasion of recently evolved pathogens --- may not the major mechanism by which pathogen richness is created in wild populations.
+This suggests that the mechanism studied here --- invasion of recently evolved pathogens --- may not be the major mechanism by which pathogen richness is created in wild populations.
 
 
 

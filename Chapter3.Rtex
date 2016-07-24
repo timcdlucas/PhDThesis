@@ -183,7 +183,7 @@ Although my analysis implies that increased population structure does promote pa
 %#1. Zoonotic disease is bad (as you have written it already)
 Zoonotic pathogens make up the majority of newly emerging diseases and have profound consequences for public health, economics and international development \cite{jones2008global, smith2014global, ebolaWorldbank}.
 Better statistical models for predicting which wild host species are potential reservoirs of zoonotic diseases would allow us to optimise zoonotic disease surveillance and anticipate how the risks of disease spillover might change with global change.
-The chance that a host species will be the source of a zoonotic pathogen depends on a number of factors, such as its proximity and interactions with humans, and the prevalence and the number of pathogen species it carries \cite{wolfe2000deforestation}.
+The chance that a host species will be the source of a zoonotic pathogen depends on a number of factors, such as its proximity and interactions with humans, the prevalence of its pathogens and the number of pathogen species it carries \cite{wolfe2000deforestation}.
 However, the factors that control the number of pathogen species a host species carries remain poorly understood.
 
 
@@ -196,7 +196,7 @@ However, the factors that control the number of pathogen species a host species 
 A number of species traits that might control pathogen richness have been studied.
 These traits can be at the level of the individual (e.g., body mass and longevity) or the level of the population (e.g., population density, sociality and species range size).
 Large bodied animals have been shown to have high pathogen richness with large bodies providing more resources for pathogens \cite{kamiya2014determines, arneberg2002host, poulin1995phylogeny, bordes2008bat, luis2013comparison}.
-Long lived species are expected to have high pathogen richness, because the number of pathogens a host encounters in its lifetime will be higher \cite{nunn2003comparative, ezenwa2006host, luis2013comparison}.
+Long lived species are expected to have high pathogen richness because the number of pathogens a host encounters in its lifetime will be higher \cite{nunn2003comparative, ezenwa2006host, luis2013comparison}.
 Animal density \cite{kamiya2014determines, nunn2003comparative, arneberg2002host} and sociality \cite{bordes2007rodent, vitone2004body, altizer2003social, ezenwa2006host} are both predicted to increase pathogen richness by increasing the rate of spread, $R_0$, of a new pathogen.
 Finally, widely distributed species have high pathogen richness, potentially because they experience a wider range of environments or because they are sympatric with more species \cite{kamiya2014determines, nunn2003comparative, luis2013comparison}.
 
@@ -224,7 +224,7 @@ However, in primates only a weak positive association between sociality and path
 Furthermore, a negative association was found in rodents \cite{bordes2007rodent} and in even and odd-toed hoofed mammals \cite{ezenwa2006host}.
 Finally, two studies tested for an association between group size and parasite richness in bats \cite{bordes2008bat, gay2014parasite}.
 Amongst 138 bat species, \textcite{bordes2008bat} found no relationship between group size (coded into four classes) and bat fly species richness.
-\textcite{gay2014parasite} a negative relationship between colony size and viral richness but a positive relationship between colony size and ectoparasite richness.
+\textcite{gay2014parasite} found a negative relationship between colony size and viral richness but a positive relationship between colony size and ectoparasite richness.
 While sociality is an important component of population structure it does not capture fully how connected the population is globally. 
 
 
@@ -433,7 +433,7 @@ Number of viruses against number of subspecies.
 Points are coloured by family, with families with less than 10 species being grouped into "other".
 Contours show the 2D density of points and suggest a positive correlation.
 '
-subvsvirusTitle <- 'Number of viruses against number of subspecies.'
+subvsvirusTitle <- 'Number of viruses against number of subspecies'
 %%end.rcode
 
 %%begin.rcode subsDataFrame, fig.show = extraFigs, fig.cap = subvsvirus, fig.scap = subvsvirusTitle, out.width = '\\textwidth'
@@ -1801,13 +1801,13 @@ This was performed in \emph{R} \cite{R} using the \emph{rvest} package \cite{rve
 I log transformed these variables as they were strongly right skewed.
 I tested for correlation between these two proxies for study effort using phylogenetic least squares regression (pgls), using the best-supported phylogeny from \textcite{fritz2009geographical}, and likelihood ratio tests using the \emph{caper} package \cite{caper} (Figures~\ref{fig:treePlot} and \ref{fig:scholarvspubmedPlot}).
 The log number of citations on PubMed and Google scholar were highly correlated (pgls: $t$ = \rinline{studyEffortCor$coefficients['log(pubmedRefs + 1)', 't value']}, df = \rinline{studyEffortCor$df[2]}, $p < 10^{-5}$).
-As the correlation between citation counts is strong, I only used Google Scholar reference counts in subsequent analyses.
+As the correlation between citation counts was strong, I only used Google Scholar reference counts in subsequent analyses.
 %See the appendix for analyses run using PubMed citations.
 
-A number of other factors that have previously been found to be important were included as additional explanatory variables: body mass \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat, han2015infectious, bordes2008bat}, range size \cite{kamiya2014determines, turmelle2009correlates, maganga2014bat}.		
+Two factors that have previously been found to be important were included as additional explanatory variables: body mass \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat, han2015infectious, bordes2008bat}, range size \cite{kamiya2014determines, turmelle2009correlates, maganga2014bat}.		
 These other factors were included to avoid spurious positive results occurring simply due to correlations between pathogen richness and a different, causal factor.
-Despite commonly being associated with pathogen richness \cite{arneberg2002host, kamiya2014determines, nunn2003comparative}, population density is not included in the analysis as there is very little data for bat densities.
-Measures of body mass were taken from Pantheria \cite{jones2009pantheria} and primary literature \cite{canals2005relative, arita1993rarity, lopez2014echolocation, orr2013does, lim2001bat, aldridge1987turning, ma2003dietary, owen2003home, henderson2008movements, heaney2012nyctalus, oleksy2015high, zhang2009recent}. 
+Despite commonly being associated with pathogen richness \cite{arneberg2002host, kamiya2014determines, nunn2003comparative}, population density was not included in the analysis as there is very little data for bat densities.
+Measurements of body mass were taken from Pantheria \cite{jones2009pantheria} and primary literature \cite{canals2005relative, arita1993rarity, lopez2014echolocation, orr2013does, lim2001bat, aldridge1987turning, ma2003dietary, owen2003home, henderson2008movements, heaney2012nyctalus, oleksy2015high, zhang2009recent}. 
 \emph{Pipistrellus pygmaeus} was assigned the same mass as \emph{P. pipistrellus} as they are indistinguishable by mass.
 Body mass measurements were log transformed as they were strongly right skewed.
 Distribution size was estimated by downloading range maps for all species from IUCN \cite{iucn} and were also log transformed due to right skew.
@@ -1820,8 +1820,8 @@ Distribution size was estimated by downloading range maps for all species from I
 Statistical analysis for both response variables --- number of subspecies and effective level of gene flow --- was conducted using an information theoretical approach \cite{burnham2002model}, specifically following \textcite{whittingham2005habitat, whittingham2006we}.
 All analyses were performed in \emph{R} \cite{R} and all code is available at \url{https://github.com/timcdlucas/PhDThesis/blob/master/Chapter3.Rtex}.
 I chose a credible set of models including all combinations of explanatory variables and a model with just an intercept.
-In the analysis using the number of subspecies response variable I also modelled the interaction study effort and number of subspecies by including their product.
-This interaction was included as I believed \emph{a priori} that this interaction may be present as subspecies in well studied species are more likely to be identified.
+In the analysis using the number of subspecies response variable I also modelled the interaction between study effort and number of subspecies by including their product.
+This interaction was included as I believed \emph{a priori} that this interaction may be important as subspecies in well studied species are more likely to be identified.
 The interaction was only included in models with both study effort and number of subspecies as individual terms.
 Following \textcite{whittingham2005habitat} I included a uniformly distributed random variable.
 This variable can be used to benchmark how important other explanatory variables are.
@@ -1846,7 +1846,7 @@ The red scale bar shows 25 million years.'
 
 
 
-treeTitle <- 'Pruned phylogeny with dot size showing number of pathogens and colour showing family.'
+treeTitle <- 'Pruned phylogeny showing number of pathogens and family'
 
 %%end.rcode
 
@@ -1926,7 +1926,7 @@ The explanatory variables were centred and scaled to allow direct comparison of 
 For each regression model I simultaneously fitted the $\lambda$ parameter as this avoids misspecifying the model \cite{revell2010phylogenetic}.
 Unlike the \emph{pgls} function, \emph{gls} does not constrain $\lambda$ to be in the range $\lbrack 0, 1\rbrack$.
 $\lambda < 0$ indicates that residuals from the fitted model are distributed on the phylogeny more uniformly than expected by chance.
-$\kappa$ and $\delta$ parameters were constrained to one as they are more concerned with when along a branch evolution occurs than the importance of the phylogeny.
+$\kappa$ and $\delta$ parameters were constrained to one as they are more concerned with when evolution occurs along a branch than the importance of the phylogeny.
 Further, fitting multiple parameters makes interpretation difficult. 
 
 
@@ -1934,7 +1934,7 @@ Further, fitting multiple parameters makes interpretation difficult.
 To establish the importance of variables I calculated the probability, $Pr$, that each variable would be in the best model amongst those examined (under the assumption that all models are \emph{a priori} equally likely).
 This value can more generally, and with fewer assumptions, be considered as simply the relative weight of evidence for each variable being in the best model amongst those examined.
 I calculated AICc for each model.
-I calculated the average AICc, $\bar{\text{AICc}}$, by averaging AICc scores within models.
+As each model was fitted 50 times, I calculated the average AICc, $\bar{\text{AICc}}$, by averaging AICc scores for each model.
 $\Delta\text{AICc}$ was calculated as $\text{min}(\bar{\text{AICc}}) - \bar{\text{AICc}}$, not the mean of the individual $\Delta\text{AICc}$ scores, to guarantee that the best model has $\Delta\text{AICc} = 0$.
 From these $\Delta\text{AICc}$ values I calculated Akaike weights, $w$.
 This value can be interpreted as the probability that a model is the best model, given the data, amongst those examined.
@@ -1964,7 +1964,7 @@ The red line represents a phylogenetic simple regression between the two variabl
 boxplotTitle <- paste(
 'The relationship between number of subspecies and viral richness for',
 nrow(nSpecies),
-'bat species.'
+'bat species'
 )
 
 %%end.rcode		
@@ -2128,11 +2128,11 @@ Number of subspecies &&&&\\
 \hspace{3mm}Models without interaction term &&  \rinline{nSpeciesCoefMean} &&\\
 \hspace{3mm}Models with interaction term &&  \rinline{nSpeciesCoefMeanI} &&\\
 Number of subspecies*log(Scholar) &  \rinline{varWeights['scholarRefs.NumberOfSubspecies']} &  \rinline{sprintf('%.2f', varCoefMeans['beta.scholarRefs.NumberOfSubspecies'])} && \\[2.5mm]  
-Gene flow & & &  \rinline{fstVarWeights['Nm']} &  \rinline{fstCoefMeans['beta.Nm']}\\[2.5mm]  
+Gene flow & & &  \rinline{sprintf('%.2f', fstVarWeights['Nm'])} &  \rinline{fstCoefMeans['beta.Nm']}\\[2.5mm]  
 log(Scholar) &  \rinline{sprintf('%.2f', varWeights['scholarRefs'])} &  \rinline{varCoefMeans['beta.scholarRefs']} & 
-   \rinline{fstVarWeights['scholarRefs']} &  \rinline{fstCoefMeans['beta.scholarRefs']}\\
+   \rinline{sprintf('%.2f', fstVarWeights['scholarRefs'])} &  \rinline{fstCoefMeans['beta.scholarRefs']}\\
 log(Mass) &  \rinline{sprintf('%.2f', varWeights['mass'])} &  \rinline{varCoefMeans['beta.mass']} & 
-   \rinline{fstVarWeights['mass']} &  \rinline{fstCoefMeans['beta.mass']}\\
+   \rinline{sprintf('%.2f', fstVarWeights['mass'])} &  \rinline{fstCoefMeans['beta.mass']}\\
 log(Range size) &  \rinline{sprintf('%.2f', varWeights['distrSize'])} &  \rinline{varCoefMeans['beta.distrSize']}& 
    \rinline{fstVarWeights['distrSize']} &  \rinline{fstCoefMeans['beta.distrSize']}\\
 Random &  \rinline{sprintf('%.2f', varWeights['rand'])} &  \rinline{varCoefMeans['beta.rand']}& 
@@ -2153,7 +2153,7 @@ Random &  \rinline{sprintf('%.2f', varWeights['rand'])} &  \rinline{varCoefMeans
 %Figure~\ref{fig:fstTreePlot} shows the phylogeny used and the number of viruses for each species.
 The number of described virus species for a bat host ranged up to \rinline{max(fstFinal$virusSpecies)} viruses in \emph{\rinline{fstFinal$binomial[which.max(fstFinal$virusSpecies)]}} (Figure~\ref{fig:fstRawData}).
 Only the model with study effort, gene flow and body mass was well supported with the second model having an $\Delta\text{AICc}$ of \rinline{round(fstModelWeights[2, 3])} (Table~\ref{t:models} and Table~\ref{A-modelWeights}).
-The effective level of gene flow was likely in the best model ($Pr > 0.999$, see Figure~\ref{fig:fstITPlots}B and Table~\ref{t:variables}).
+The effective level of gene flow was likely in the best model ($Pr > 0.99$, see Figure~\ref{fig:fstITPlots}B and Table~\ref{t:variables}).
 On average (mean weighted by Akaike weights) there was a negative relationship between gene flow and viral richness ($b = $ \rinline{fstCoefMeans['beta.Nm']}, variance = \rinline{fstCoefVars['beta.Nm']}) despite the insignificant positive relationship (Figure~\ref{fig:fstRawData}) estimated by the single-predictor model (pgls: $b$ = \rinline{nmFstUni$coefficients['log(Nm)', 'Estimate']}, $t$ = \rinline{nmFstUni$coefficients['log(Nm)', 't value']}, df = \rinline{nmFstUni$df[2]}, $p$ = \rinline{nmFstUni$coefficients['log(Nm)', 'Pr(>|t|)']}).
 Possibly due to the smaller sample size, or a weaker relationship, this coefficient was much more varied than the number of subspecies coefficient with \rinline{round(pcCoefLzero)}\% of multiple-regression models estimating a positive relationship.
 
@@ -2171,12 +2171,12 @@ The thick bar of the boxplot shows the median value, the interquartile range is 
 The red ``Random'' box is the uniformly random variable. 
 Population structure (number of subspecies and effective gene flow), shown in yellow, is likely to be in the best model in both analyses."
 
-ITPlotTitle <- "The relative weight of evidence that each explanatory variable is in the best model for explaining viral richness."
+ITPlotTitle <- "The relative weight of evidence that each explanatory variable is in the best model for explaining viral richness"
 
 %%end.rcode
 
 
-%%begin.rcode fstITPlots, fig.cap = ITPlotCapts, fig.height = 2.5, fig.scap = 'Akaike variable weights', out.width = '\\textwidth', cache = FALSE
+%%begin.rcode fstITPlots, fig.cap = ITPlotCapts, fig.height = 2.5, fig.scap = ITPlotTitle, out.width = '\\textwidth', cache = FALSE
 
 # Reorder var levels to get structure at beginning.
 fstSepVarWeights$variable <- factor(fstSepVarWeights$variable, levels(fstSepVarWeights$variable)[c(2, 1, 3, 4, 5)])
@@ -2214,7 +2214,7 @@ ggdraw() +
 
 
 
-Study effort was very likely in the best model ($Pr > 0.999$) as was body mass ($Pr > 0.999$).
+Study effort was very likely in the best model ($Pr > 0.99$) as was body mass ($Pr > 0.99$).
 However, body mass had a negative average coefficient ($b = $ \rinline{fstCoefMeans['beta.mass']}, variance = \rinline{fstCoefVars['beta.mass']}). % which is in contrast to the number of subspecies analysis, many studies in the literature \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat} and the single-predictor model (pgls: $b$ = \rinline{massFstUni$coefficients['log(mass)', 'Estimate']}, $t$ = \rinline{massFstUni$coefficients['log(mass)', 't value']}, df = \rinline{massFstUni$df[2]}, $p$ = \rinline{massFstUni$coefficients['log(mass)', 'Pr(>|t|)']}).
 In contrast to the number of subspecies analysis, range size was almost certainly not in the best model with $Pr = $ \rinline{fstVarWeights['distrSize']}.
 %This variable being less supported than the random variable may be because range size is closely correlated with study effort (pgls: $b$ = \rinline{fstDistrStudyEffort$coefficients['log(distrSize)', 'Estimate']}, $t$ = \rinline{fstDistrStudyEffort$coefficients['log(distrSize)', 't value']}, df = \rinline{fstDistrStudyEffort$df[2]}, $p$ = \rinline{fstDistrStudyEffort$coefficients['log(distrSize)', 'Pr(>|t|)']}).
@@ -2241,7 +2241,7 @@ fstRawDataTitle <-
 paste(
 'Relationship between viral richness and log effective gene flow per generation for',
 nrow(fstFinal),
-'bat species.
+'bat species
 ')
 
 %%end.rcode
@@ -2287,7 +2287,7 @@ This is corroborated by the small estimated size of $\lambda$ ($\lambda$ = \rinl
 %This fact implies that other factors must control pathogen richness.
 %It also implies that pathogens are not directly inherited down the phylogeny, although this is to be expected by the fast evolution of viruses.
 
-Of the explanatory variables, the number of subspecies had no phylogenetic autocorrelation ($\lambda$ = \rinline{sspLambda$param['lambda']}, $p > 0.999$), study effort and distribution size had weak but significant autocorrelation (Study Effort: $\lambda$ = \rinline{scholarLambda$param['lambda']}, $p$ = \rinline{scholarLambda$param.CI$lambda$bounds.p[1]}, Distribution size: $\lambda$ = \rinline{distrLambda$param['lambda']}, $p < 10^{-5}$) and body mass was strongly phylogenetic ($\lambda$ = \rinline{massLambda$param['lambda']}, $p < 10^{-5}$). 
+Of the explanatory variables, the number of subspecies had no phylogenetic autocorrelation ($\lambda$ = \rinline{sspLambda$param['lambda']}, $p > 0.99$), study effort and distribution size had weak but significant autocorrelation (Study Effort: $\lambda$ = \rinline{scholarLambda$param['lambda']}, $p$ = \rinline{scholarLambda$param.CI$lambda$bounds.p[1]}, Distribution size: $\lambda$ = \rinline{distrLambda$param['lambda']}, $p < 10^{-5}$) and body mass was strongly phylogenetic ($\lambda$ = \rinline{massLambda$param['lambda']}, $p < 10^{-5}$). 
 Across all multiple regression models the mean value of $\lambda$ was \rinline{mean(na.omit(allResults$lambda))} which implied that the residuals from the models were very weakly phylogenetic.
 A small number of models (\rinline{mean(na.omit(allResults$lambda < 0))*100}\%)  had negatively phylogenetically distributed residuals.
 
@@ -2296,8 +2296,8 @@ A small number of models (\rinline{mean(na.omit(allResults$lambda < 0))*100}\%) 
 
 \subsubsection{Effective gene flow}
 
-There was no phylogenetic signal in the number of virus species ($\lambda$ = \rinline{virusFstLambda$param['lambda']}, $p > 0.999$).
-Gene flow also had no phylogenetic autocorrelation ($\lambda$ = \rinline{nmFstLambda$param['lambda']},  $p > 0.999$).
+There was no phylogenetic signal in the number of virus species ($\lambda$ = \rinline{virusFstLambda$param['lambda']}, $p > 0.99$).
+Gene flow also had no phylogenetic autocorrelation ($\lambda$ = \rinline{nmFstLambda$param['lambda']},  $p > 0.99$).
 Due to the limited sample size, significance tests are unlikely to have much power.
 There is little evidence of phylogenetic autocorrelation in study effort ($\lambda$ = \rinline{scholarFstLambda$param['lambda']}, $p$ = \rinline{scholarFstLambda$param.CI$lambda$bounds.p[1]}).
 However, there is some weak evidence of phylogenetic signal in range size as the estimated size of $\lambda$ is large while $p$ is also large, potentially due to a lack of statistical power ($\lambda$ = \rinline{distrFstLambda$param['lambda']}, $p$ = \rinline{distrFstLambda$param.CI$lambda$bounds.p[1]}).
@@ -2344,7 +2344,7 @@ In contrast, one study \textcite{gay2014parasite} found the opposite relationshi
 Furthermore, \textcite{bordes2008bat} found no relationship between increased colony size and pathogen richness while \textcite{gay2014parasite} found relationships in opposite directions for virus and ectoparasite richness.
 However, the study by \textcite{gay2014parasite} uses relatively few species while the study by \textcite{bordes2008bat} uses group size which is a measure of local rather than global population structure.
 The overall weight of evidence suggests that population structure and pathogen richness are associated.
-fur
+
 
 
 
@@ -2391,8 +2391,8 @@ This result is probably due to correlations with other variables in the analysis
 
 The relationship between increased population structure and pathogen richness suggests that population structure has at least some potential as being predictive of high pathogen richness and therefore of a species' likelihood of being a reservoir of a potentially zoonotic pathogen. 
 However, given that it is difficult to measure population structure and given that the relationship appears to be weak at best, this trait on its own is unlikely to be useful in predicting zoonotic risk.
-However, as number of other factors are also associated with pathogen richness such as body mass and to a lesser extent range size as shown here as well as other traits studied elsewhere \cite{turmelle2009correlates, luis2013comparison}.
-Therefore, using a combination of traits in a predictive (i.e.\ machine learning) framework has potential to be used in prioritising zoonotic disease surveillance.
+However, as a number of other factors are also associated with pathogen richness such as body mass and to a lesser extent range size as shown here as well as other traits studied elsewhere \cite{turmelle2009correlates, luis2013comparison}.
+Therefore, using a combination of traits in a predictive (i.e.\ machine learning) framework has potential for use in prioritising zoonotic disease surveillance.
 The main hurdle in this approach is finding a way to validate models; due to the study effort bias in current data, predictive models will also be biased.
 As unbiased pathogen surveys such as \textcite{anthony2013strategy} become more common good validation may become possible.
 Alternatively, predictive models could be trained on all available --- and therefore biased --- data and validated by predicting smaller, unbiased data sets such as the data collected in \textcite{maganga2014bat}.
@@ -2400,9 +2400,9 @@ Alternatively, predictive models could be trained on all available --- and there
 The relationship between increased population structure and pathogen richness also has implications for habitat fragmentation and range shifts due to global change.
 In short, habitat fragmentation and range shifts that reduce movement between populations would be predicted to increase pathogen richness.
 However, depending on the mechanisms by which increased population structure increases pathogen richness this may not be a cause for concern.
-If the main mechanism is one that reduces pathogen extinction rates, a newly fragmented population is unlikely to increase its pathogen richness over any appreciable timescale.
+If the main mechanism is one that reduces pathogen extinction rates, a newly fragmented population is unlikely to increase its pathogen richness over any short to medium-term timescales.
 If, however, increased population structure actively promotes the evolution of new pathogen strains or allows the persistence of more virulent strains \cite{blackwood2013resolving, pons2014insights, plowright2011urban} this could have important public health implications.
-Therefore further studies on the exact mechanisms by which increased population structure affects pathogen richness is needed. 
+Therefore further studies on the exact mechanisms by which increased population structure affects pathogen richness are needed. 
 
 
 \subsection{Study limitations}

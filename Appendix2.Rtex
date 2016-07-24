@@ -40,7 +40,7 @@ saveData <- TRUE
 
 %%end.rcode
 
-%%begin.rcode libs
+%%begin.rcode libs, cache = FALSE
 
 library(MetapopEpi)
 library(cowplot)
@@ -322,8 +322,9 @@ noInvade1 <- pSIR(p1) +
                guides(colour=guide_legend(title = '')) +
                theme(legend.text.align = 0) +
                xlab('Time (years)') +
-               xlim(0, maxt)
-pop1 <- pPop(p1) + theme_tcdl + xlab('Time (years)') + xlim(0, maxt)
+               scale_x_continuous(breaks = c(0, 20, 40, 60, 80), limits = c(0, maxt))
+
+pop1 <- pPop(p1) + theme_tcdl + xlab('Time (years)') + scale_x_continuous(breaks = c(0, 20, 40, 60, 80), limits = c(0, maxt))
 
 
 
@@ -337,8 +338,8 @@ noInvade2 <- pSIR(p2) +
                guides(colour=guide_legend(title = '')) +
                theme(legend.text.align = 0) +
                xlab('Time (years)') +
-               xlim(0, maxt)
-pop2 <- pPop(p2) + theme_tcdl + xlab('Time (years)') + xlim(0, maxt)
+               scale_x_continuous(breaks = c(0, 20, 40, 60, 80), limits = c(0, maxt))
+pop2 <- pPop(p2) + theme_tcdl + xlab('Time (years)') + scale_x_continuous(breaks = c(0, 20, 40, 60, 80), limits = c(0, maxt))
 
 
 # Combine and print the plots.
@@ -456,7 +457,7 @@ fullSim <- function(x){
 }
 %%end.rcode
 
-%%begin.rcode runDispSim, eval = TRUE, cache = TRUE
+%%begin.rcode runDispSim, eval = runSims, cache = TRUE
 
 # Create and set seed (seed object is used to set seed in each seperate simulation.'
 seed <- 33355
@@ -571,7 +572,7 @@ fullSim <- function(x){
 }
 %%end.rcode
 
-%%begin.rcode runTopoSim, eval = TRUE, cache = TRUE
+%%begin.rcode runTopoSim, eval = runSims, cache = TRUE
 
 # Create and set seed (seed object is used to set seed in each seperate simulation.'
 seed <- 1230202
