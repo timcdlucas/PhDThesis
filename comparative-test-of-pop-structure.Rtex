@@ -3,7 +3,8 @@
 % Chapter 2 of thesis "The role of population structure and size in determining bat pathogen richness"
 % by Tim CD Lucas
 %
-% NB The file is numbered Chapter3 as this was previously Chapter 3 in the thesis.
+% NB This file is a copy due to the mess up with chapter numbers.
+% To see the full commit history see https://github.com/timcdlucas/PhDThesis/blob/master/Chapter3.Rtex
 %
 %---------------------------------------------------------------------------------------------------------------------------------%
 
@@ -1818,7 +1819,7 @@ Distribution size was estimated by downloading range maps for all species from I
 \subsection{Statistical analysis}
 
 Statistical analysis for both response variables --- number of subspecies and effective level of gene flow --- was conducted using an information theoretical approach \cite{burnham2002model}, specifically following \textcite{whittingham2005habitat, whittingham2006we}.
-All analyses were performed in \emph{R} \cite{R} and all code is available at \url{https://github.com/timcdlucas/PhDThesis/blob/master/comparative-test-of-pop-structure.Rtex}.
+All analyses were performed in \emph{R} \cite{R} and all code is available at \url{https://github.com/timcdlucas/PhDThesis/blob/master/Chapter3.Rtex}.
 I chose a credible set of models including all combinations of explanatory variables and a model with just an intercept.
 In the analysis using the number of subspecies response variable I also modelled the interaction between study effort and number of subspecies by including their product.
 This interaction was included as I believed \emph{a priori} that this interaction may be important as subspecies in well studied species are more likely to be identified.
