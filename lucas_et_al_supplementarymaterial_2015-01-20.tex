@@ -33,11 +33,11 @@ $A$ 		& Maximum turning angle & \SI{}{\radian}\\
 
 \clearpage
 
-\section{Supplementary Methods}
+\section{Supplementary methods}
 \subsection{Introduction}
 \lettr{T}hese supplementary methods derive all the models used. 
 For continuity, the gas model derivation is included here as well as in the main text. 
-The calculation of all integrals used in the gREM is included in the Python script S3. 
+The calculation of all integrals used in the gREM is included in the \emph{Python} script S3. 
 
 
 \input{REM-methods.tex}
@@ -48,7 +48,7 @@ The calculation of all integrals used in the gREM is included in the Python scri
 
 
 \clearpage
-\section{Supplementary Information: Simulation model results of the gREM precision}
+\section{Supplementary information: Simulation model results of the gREM precision}
 \setcounter{figure}{0}    
 
 
@@ -66,7 +66,7 @@ Standard deviations are shown from deep red to pink, representing high to low va
 
 
 \clearpage
-\section{Supplementary Information: Impact of parameter error}
+\section{Supplementary information: Impact of parameter error}
 
 
 
@@ -74,22 +74,22 @@ Standard deviations are shown from deep red to pink, representing high to low va
 \begin{figure}[h!]
   \centering
 {
-  \subfloat[label{f:signal}]{
+  \subfloat[\label{f:signal}]{
     \includegraphics[width=0.4\textwidth]{imgs/AverageModelBias_callerror.pdf}
   } 
-  \subfloat[label{f:sensor}]{
+  \subfloat[\label{f:sensor}]{
     \includegraphics[width=0.4\textwidth]{imgs/AverageModelBias_cameraerror.pdf}
   } 
     
-	\subfloat[label{f:radius}]{
+	\subfloat[\label{f:radius}]{
     \includegraphics[width=0.4\textwidth]{imgs/AverageModelBias_radiuserror.pdf}
   }%%
-	\subfloat[label{f:speed}]{
+	\subfloat[\label{f:speed}]{
     \includegraphics[width=0.4\textwidth]{imgs/AverageModelBias_speederror.pdf}
   }
 }%%
 \caption[Model sensitivity to error in parameter estimates]{
-Model sensitivity (for all gREM submodels) to error in estimates of a) signal width $\alpha$,  b) sensor width $\theta$, c) detection distance $r$ and d) animal movement speed $v$. 
+Model sensitivity (for all gREM submodels) to error in estimates of A) signal width $\alpha$,  B) sensor width $\theta$, C) detection distance $r$ and D) animal movement speed $v$. 
 Estimates are -10\% (red), -1\% (orange), 0\% (grey), +1\% (green) and +10\% (blue) of the true parameter value. 
 The black dashed line indicates zero error in density estimates. 
 The error bars 95\% confidence intervals across all simulations.
