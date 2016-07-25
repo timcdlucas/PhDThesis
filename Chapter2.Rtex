@@ -1073,7 +1073,7 @@ I again ran 100 simulations for each parameter set.
 
 
 \subsection{Statistical analysis}
-
+\sloppy
 I used generalised linear models (GLMs) with a binary response variable, invasion or not, to test the hypothesis that probability of invasion increased with dispersal.
 I examined $p$ values and the regression coefficient, $b$, from each model.
 Separate GLMs were fitted for each transmission rate.
@@ -1083,8 +1083,8 @@ As with the $\xi = 0$ results, these tests were performed both with and without 
 Finally, I also used binomial GLMs to test the hypothesis that the probability of invasion increased with transmission rate.
 Separate GLMs were fitted for each dispersal rate and network topology.
 All statistical analyses were performed using the \emph{stats} package in \emph{R}.
-The code used for running the simulations and analysing the results is available at \url{https://github.com/timcdlucas/PhDThesis/blob/master/population-structure-affects-pathogen-richness-mechanistic-model.Rtex}.
-
+The code used for running the simulations and analysing the results is available at \url{https://github.com/timcdlucas/PhDThesis/blob/master/pop-structure-path-richness-mechanistic.Rtex}.
+\fussy
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
