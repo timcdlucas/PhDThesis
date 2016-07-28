@@ -14,7 +14,7 @@ In particular these impacts can have huge effects on lower-income economies.
 For example, both Liberia and Guinea experienced negative per capita growth rates of -2\% due to the Ebola epidemic in 2014 \cite{ebolaWorldbank, ebola2015worldbank}.
 More generally, death rates per 1,000 people living with AIDS are up to ten times higher in developing countries than in Europe and North America \cite{granich2015trends}.
 The global richness of pathogens is large but mostly unknown \cite{poulin2014parasite}.
-Recent large studies suggest that the global number of mammalian virus species is of the order of hundreds of thousands \cite{anthony2013strategy} while only 3,000 virus species, across all host groups, are currently described \cite{ICTV}.
+Recent studies suggest that the global number of mammalian virus species is of the order of hundreds of thousands \cite{anthony2013strategy} while only 3,000 virus species, across all taxonomic groups, are currently described \cite{ICTV}.
 This large pool of unknown pathogens presents a continuing risk of new pathogens spilling over into humans.
 
 
@@ -47,31 +47,33 @@ Therefore, the large number of coexisting parasite species needs an explanation.
 
 
 
-\section{Influence of population structure and size on pathogen richness}
+\section{Influence of population size and structure on pathogen richness}
 
 
 \tmpsection{Theoretical evidence that structure and density increase richness}
 
-% Density
+\subsection{Single-pathogen models}
+% Structure + single path theory
 
-The roles of population size and density in disease dynamics are well established \cite{may1979population, anderson1979population, heesterbeek2002brief, lloyd2005should}.
-Broadly, larger populations can maintain diseases more easily by having a larger pool of susceptible individuals (individuals without acquired immunity) and having a greater number of new susceptible individuals enter the population by birth or immigration \cite{may1979population, anderson1979population}.
-High density populations are expected to have a greater number of contacts between individuals and so promote disease spread.
-However, there is much discussion on if and when the number of contacts might scale independently of density \cite{mccallum2001should}.
-
-% Structure
-
-There is a large literature on the role of population structure on disease dynamics, as reviewed by \textcite{pastor2015epidemic}, driven by applications to human health as well as computer viruses \cite{pastor2001epidemic} and the social spread of information \cite{goffman1964generalization}.
+There is a large literature on the role of population structure on single-disease dynamics, as reviewed by \textcite{pastor2015epidemic}, driven by applications to human health as well as computer viruses \cite{pastor2001epidemic} and the social spread of information \cite{goffman1964generalization}.
 In particular, work has concentrated on how population structure affects the basic reproduction number, $R_0$ \cite{colizza2007invasion, barthelemy2010fluctuation, wu2013threshold, may2001infection, pastor2001epidemic}. 
 This value combines relevant parameters to yield a threshold above which a disease is expected to infect a significant proportion of the population \cite{may1979population, anderson1979population}.
 Below the threshold, only small outbreaks that quickly die out are expected.
+% Density + single path theory
 
+The roles of population size and density in the dynamics of single pathogens are also well established \cite{may1979population, anderson1979population, heesterbeek2002brief, lloyd2005should}.
+Broadly, larger populations can maintain a disease more easily by having a larger pool of susceptible individuals (individuals without acquired immunity) and having a greater number of new susceptible individuals enter the population by birth or immigration \cite{may1979population, anderson1979population}.
+High density populations are expected to have a greater number of contacts between individuals and so promote the spread of a pathogen.
+However, there is much discussion about if, and when, the number of contacts might scale independently of density \cite{mccallum2001should}.
 
-However, the majority of theoretical work considers single pathogens with models examining whether a pathogen can spread and persist in a population, ignoring all other pathogens.
-Recent large studies have found tens \cite{anthony2013strategy} or even hundreds \cite{anthony2015non} of virus species in a single host species.
-This suggests that the global number of mammalian virus species is of the order of hundreds of thousands \cite{anthony2013strategy} while recent large databases include nearly 2,000 pathogens from approximately 400 wild animal hosts \cite{wardeh2015database}.
+\subsection{Multi-pathogen models}
+% multi path is important
+While the majority of theoretical work considers single pathogens, with models examining whether a pathogen can spread and persist in a population, much less work has been done on multiple pathogen systems.
+Studies have found tens \cite{anthony2013strategy} or even hundreds \cite{anthony2015non} of virus species in a single host species.
+%This suggests that the global number of mammalian virus species is of the order of hundreds of thousands \cite{anthony2013strategy} while recent large databases include nearly 2,000 pathogens from approximately 400 wild animal hosts \cite{wardeh2015database}.
 Therefore ignoring inter-pathogen competition is an oversimplification.
 
+% structure and multi theory
 A number of studies have considered the case where two pathogens spread concurrently and examine which pathogen infects more individuals.
 These studies have found that increased population structure reduces dominance of the more competitive strain \cite{van2014domination, poletto2013host, poletto2015characterising}.
 However, this again reveals little about how pathogen communities form and what factors control total pathogen richness.
@@ -79,6 +81,7 @@ Far fewer papers explicitly study long term coexistence of two or more pathogens
 Those that do commonly find that competitive exclusion is likely \cite{castillo1995dynamics, bremermann1989competitive, martcheva2013competitive, ackleh2003competitive, ackleh2014robust, turner2002impact}.
 Mechanisms that have been shown to allow pathogen coexistence include superinfection \cite{may1994superinfection, li2010age}, density-dependent deaths \cite{ackleh2003competitive, kirupaharan2004coexistence} and differing transmission routes \cite{allen2003dynamics}.
 
+% density + multi theory
 The specific role of density on the ability of pathogens to coexist has not been theoretically studied though it is commonly found to promote pathogen richness in comparative empirical studies \cite{kamiya2014determines, nunn2003comparative, arneberg2002host}.
 The few papers that have directly studied how coexistence of pathogens responds to population structure have found that population structure can allow pathogens to coexist even though competitive exclusion would occur in a fully mixed population \cite{qiu2013vector, allen2004sis, nunes2006localized}.
 Furthermore, genetic diversity has been shown to be maximised at intermediate levels of population structure \cite{campos2006pathogen}.
@@ -129,7 +132,7 @@ This allowed me to study specific mechanisms while linking my theoretical insigh
 
 \tmpsection{Chapter 2}
 
-First, in Chapter \ref{ch:empirical}, I empirically tested the hypothesis that population structure is associated with pathogen richness (measured as known viral richness) in wild bat populations.
+First, in Chapter~\ref{ch:empirical}, I empirically tested the hypothesis that population structure is associated with pathogen richness (measured as known viral richness) in wild bat populations.
 To ensure robust results I used two measures of population structure --- the number of subspecies and gene flow --- and a larger data set than previous studies.
 For both measures I found that bat species with more structured populations have more known viruses.
 This relationship is still present after controlling for study bias and phylogenetic nonindependence.
@@ -137,7 +140,7 @@ I also tested for relationships between body mass and pathogen richness, and ran
 
 \tmpsection{Chapter 3}
 
-In Chapter \ref{ch:sims1}, I examined one specific mechanism by which population structure may promote increased pathogen richness.
+In Chapter~\ref{ch:sims1}, I examined one specific mechanism by which population structure may promote increased pathogen richness.
 I tested whether increased population structure can allow newly evolved pathogen strains to invade and persist more easily.
 I modelled bat populations as individual-based, stochastic metapopulations and examined the competition dynamics of two identical pathogen strains.
 I tested two factors related to host population structure: dispersal rate and the number of links between colonies.
@@ -147,10 +150,10 @@ I did not find a significant difference in invasion probability due to the numbe
 
 \tmpsection{Chapter 4}
 
-Next, I examined the relationships between a number of elements of population structure (Chapter \ref{ch:sims2}).
+Next, I examined the relationships between a number of elements of population structure (Chapter~\ref{ch:sims2}).
 I clarified the interdependence between range size, population size and density.
 I also noted that population size can be decomposed into colony size and the number of colonies.
-Using the same model as in Chapter \ref{ch:sims1}, I then tested which of these factors are most important in promoting pathogen richness.
+Using the same model as in Chapter~\ref{ch:sims1}, I then tested which of these factors are most important in promoting pathogen richness.
 Specifically I tested which factor most strongly promotes the invasion and establishment of newly evolved pathogens.
 I found that population size is more important than population density and that colony size is the important component of population size.
 
@@ -159,7 +162,7 @@ I found that population size is more important than population density and that 
 Given the importance of host population size and density on pathogen richness it is important to have good population estimates for wild bat populations.
 However, there are currently very few measurements of bat population size due to their small size, nocturnal habit and difficulties in identification.
 Therefore I aimed to develop a method for estimating bat population size from acoustic data, specifically data collected by the iBats project \cite{jones2011indicator}.
-In Chapter \ref{ch:grem} I developed a generally applicable method --- based on random encounter models \cite{rowcliffe2008estimating, yapp1956theory} --- for estimating population sizes of animal populations using camera traps or acoustic detectors.
+In Chapter~\ref{ch:grem} I developed a generally applicable method --- based on random encounter models \cite{rowcliffe2008estimating, yapp1956theory} --- for estimating population sizes of animal populations using camera traps or acoustic detectors.
 I used spatial simulations to test the method for biases and to assess its precision.
 I found that the method is unbiased and precise as long as a reasonable amount of data is collected.
 
@@ -167,7 +170,7 @@ I found that the method is unbiased and precise as long as a reasonable amount o
 \tmpsection{Chapter 6: Conclusions}
 
 %to do Conclusions chapter
-Finally, in Chapter \ref{ch:discussion}, I discuss broader conclusions, applications and implications of my results.
+Finally, in Chapter~\ref{ch:discussion}, I discuss broader conclusions, applications and implications of my results.
 I also discuss potential future directions for research.
 
 

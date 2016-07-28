@@ -15,10 +15,10 @@
    width="463.75"
    height="450"
    xml:space="preserve"
-   sodipodi:docname="movtFig-Edit.pdf"><metadata
+   sodipodi:docname="movtFig-Edit.svg"><metadata
      id="metadata8"><rdf:RDF><cc:Work
          rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata><defs
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title /></cc:Work></rdf:RDF></metadata><defs
      id="defs6"><clipPath
        clipPathUnits="userSpaceOnUse"
        id="clipPath18"><path
@@ -220,14 +220,14 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1701"
+     inkscape:window-width="1242"
      inkscape:window-height="952"
      id="namedview4"
      showgrid="false"
      inkscape:zoom="1.4833529"
-     inkscape:cx="90.537204"
+     inkscape:cx="-16.315319"
      inkscape:cy="204.29494"
-     inkscape:window-x="43"
+     inkscape:window-x="38"
      inkscape:window-y="24"
      inkscape:window-maximized="0"
      inkscape:current-layer="g10" /><g
@@ -750,11 +750,12 @@
            id="tspan474">Percentage Error</tspan></text>
 <text
          transform="matrix(1,0,0,-1,4,348.70898)"
-         id="text476"><tspan
-           style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:TeXGyreHeros;font-variant:normal;font-weight:bold;font-size:10.036133;writing-mode:lr;-inkscape-font-specification:TeXGyreHeros-Bold"
+         id="text476"
+         style="stroke-width:0.25599999;stroke-miterlimit:4;stroke-dasharray:none;font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Lato Light;-inkscape-font-specification:Lato-Light"><tspan
+           style="font-size:medium;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;font-family:Lato Light;-inkscape-font-specification:Lato-Light;stroke-opacity:1;stroke-width:0.25599999;stroke-miterlimit:4;stroke-dasharray:none;font-style:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;text-anchor:start;baseline-shift:baseline;color:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
            x="0"
            y="0"
-           id="tspan478">A</tspan></text>
+           id="tspan478">A)</tspan></text>
 </g><g
        id="g480"><g
          id="g482"
@@ -1472,11 +1473,12 @@
            id="tspan1172">Percent Error</tspan></text>
 <text
          transform="matrix(1,0,0,-1,4,168.70898)"
-         id="text1174"><tspan
-           style="font-size:10.03613281px;font-variant:normal;font-weight:bold;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:TeXGyreHeros;-inkscape-font-specification:TeXGyreHeros-Bold"
+         id="text1174"
+         style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.25599999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Lato Light;-inkscape-font-specification:Lato-Light"><tspan
+           style="font-size:medium;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;font-family:Lato Light;-inkscape-font-specification:Lato-Light;font-style:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;text-anchor:start;baseline-shift:baseline;color:#000000;stroke-width:0.25599999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
            x="0"
            y="0"
-           id="tspan1176">B</tspan></text>
+           id="tspan1176">B)</tspan></text>
 <text
          id="text4153"
          transform="scale(1,-1)"

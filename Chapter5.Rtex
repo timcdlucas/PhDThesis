@@ -197,7 +197,6 @@ polys <- list(
               SW9=list(c(0, 0, pi/4),c(0, pi, pi/2))
 )    
 
-
 reg <- do.call(rbind, lapply(1:length(polys), function(x) data.frame(do.call(cbind, polys[[x]]), names(polys[x]))))
 
 names(reg) <- c('x', 'y', 'model')
@@ -254,7 +253,7 @@ ggplot(reg, aes(x = x, y = y)) +
 
 I have identified the parameter space for the combinations of $\theta$ and $\alpha$ for which the derivation of the equations are the same (defined as sub-models in the gREM) (Figure~\ref{fig:equalRegions}).
 For example, the gas model becomes the simplest gREM sub-model (upper right in Figure~\ref{fig:equalRegions}) and the REM from \cite{rowcliffe2008estimating} is another gREM sub-model where $\theta<\pi/2$ and $\alpha = 2\pi$.
-I derive one gREM sub-model SE2 as an example below, where $2 \pi - \alpha/2 < \theta < 2\pi ,\; 0 < \alpha <\pi$ (see Appendix \ref{gremAppendix} for derivations of all gREM sub-models).
+I derive one gREM sub-model SE2 as an example below, where $2 \pi - \alpha/2 < \theta < 2\pi ,\; 0 < \alpha <\pi$ (see Appendix~\ref{gremAppendix} for derivations of all gREM sub-models).
 Any estimate of density would require prior knowledge of animal velocity, $v$ and animal signal width, $\alpha$ taken from other sources, for example, existing literature \cite{brinklov2011, carbone2005far}.
 Sensor width, $\theta$, and detection distance, $r$ would also need to be measured or obtained from manufacturer specifications \cite{holderied2003echolocation, adams2012you}.
 
@@ -263,14 +262,14 @@ Sensor width, $\theta$, and detection distance, $r$ would also need to be measur
 
 In order to calculate $\bar{p}$, we have to integrate over the focal angle, $x_1$ (Figure~\ref{f:x1AndInt}A).
 This is the angle taken from the centre line of the sensor.
-Other focal angles are possible ($x_2$, $x_3$, $x_4$) and are used in other gREM sub-models (see Appendix \ref{gremAppendix}).
+Other focal angles are possible ($x_2$, $x_3$, $x_4$) and are used in other gREM sub-models (see Appendix~\ref{gremAppendix}).
 As the size of the profile depends on the approach angle, we present the derivation across all approach angles.
 When the sensor is directly approaching the animal $x_1  = \pi/2$.
 
 Starting from $x_1 = \pi/2$ until $\theta/2 + \pi/2 - \alpha/2$, the size of the profile is $2r\sin \alpha/2$ (Figure~\ref{f:x1AndInt}B).
 During this first interval, the size of $\alpha$ limits the width of the profile.
-When the animal reaches $x_1$  = $\theta/2 + \pi/2 - \alpha/2$ (Figure~\ref{f:x1AndInt}C), the size of the profile is $r\sin( \alpha/2) + r\cos( x_1  - \theta/2)$ and the size of $\theta$ and $\alpha$ both limit the width of the profile (Figure~ \ref{f:x1AndInt}C).
-Finally, at $x_1  = 5\pi/2 - \theta/2  - \alpha/2$ until $x_1  = 3\pi/2$, the width of the profile is again $2r\sin\alpha/2$ (Figure~ \ref{f:x1AndInt}D) and the size of $\alpha$ again limits the width of the profile. 
+When the animal reaches $x_1$  = $\theta/2 + \pi/2 - \alpha/2$ (Figure~\ref{f:x1AndInt}C), the size of the profile is $r\sin( \alpha/2) + r\cos( x_1  - \theta/2)$ and the size of $\theta$ and $\alpha$ both limit the width of the profile (Figure~\ref{f:x1AndInt}C).
+Finally, at $x_1  = 5\pi/2 - \theta/2  - \alpha/2$ until $x_1  = 3\pi/2$, the width of the profile is again $2r\sin\alpha/2$ (Figure~\ref{f:x1AndInt}D) and the size of $\alpha$ again limits the width of the profile. 
 
 
 \begin{figure}[t]
@@ -301,7 +300,7 @@ The average profile $\bar{p}$ is the size of the profile averaged across all app
 
 \end{figure}
 
-The profile width $p$ for $\pi$ radians of rotation (from directly towards the sensor to directly behind the sensor) is completely characterised by the three intervals (Figure \ref{f:x1AndInt}B -- D).
+The profile width $p$ for $\pi$ radians of rotation (from directly towards the sensor to directly behind the sensor) is completely characterised by the three intervals (Figure~\ref{f:x1AndInt}B -- D).
 Average profile width $\bar{p}$ is calculated by integrating these profiles over their appropriate intervals of $x_1$ and dividing by $\pi$ which gives
 
 \begin{align}
@@ -319,7 +318,7 @@ D = z/vt\bar{p}.
 
 Rather than having one equation that describes $\bar{p}$ globally, the gREM must be split into submodels due to discontinuous changes in $p$ as $\alpha$ and $\beta$ change.
 These discontinuities can occur for a number of reasons such as a profile switching between being limited by $\alpha$ and $\theta$, the difference between very small profiles and profiles of size zero, and the fact that the width of a sector stops increasing once the central angle reaches $\pi$ radians (i.e., a semi-circle is just as wide as a full circle).
-As an example, if $\alpha$ is small, there is an interval between Figure \ref{f:x1AndInt}C and \ref{f:x1AndInt}D where the `blind spot' would prevent animals being detected giving $p=0$.
+As an example, if $\alpha$ is small, there is an interval between Figure~\ref{f:x1AndInt}C and \ref{f:x1AndInt}D where the `blind spot' would prevent animals being detected giving $p=0$.
 This would require an extra integral in our equation, as simply putting our small value of $\alpha$ into \ref{e:SE2int} would not give us this integral of $p=0$.
 
 gREM submodel specifications were done by hand, and the integration was done using \emph{SymPy} \cite{sympy} in \emph{Python}.
@@ -368,7 +367,7 @@ The equation for $\bar{p}$ has been newly derived for each submodel in the gREM,
 However, many models, although derived separately, have the same expression for $\bar{p}$.
 Figure~\ref{f:equalModelResults} shows the expression for $\bar{p}$ in each case.
 The general equation for density, \ref{e:gas}, is used with the correct value of $\bar{p}$ substituted.
-Although more thorough checks are performed in the additional Python script, it can be seen that all adjacent expressions in Figure~\ref{f:equalModelResults} are equal when expressions for the boundaries between them are substituted in.
+Although more thorough checks are performed in the additional \emph{Python} script, it can be seen that all adjacent expressions in Figure~\ref{f:equalModelResults} are equal when expressions for the boundaries between them are substituted in.
 
 %%begin.rcode equalRegionsResultCapt
 equalRegionsResultCapt <- '
@@ -472,7 +471,7 @@ ggplot(allMods, aes(x = model, y = percentageerror, colour = expression, fill = 
 %\begin{figure}[t]
 %	\centering
 %	\includegraphics[width=7cm]{imgs/lucas_et_al_figure5.pdf}
-%       	\caption[Simulation model results of the accuracy and precision for gREM submodels]{Simulation model results of the accuracy and precision for gREM submodels.
+%       	\caption[Accuracy and precision for gREM submodels given ]{Simulation model results of the accuracy and precision for gREM submodels.
 %The percentage error between estimated and true density for each gREM sub model is shown within each box plot, where the black line represents the median percentage error across all simulations, boxes represent the middle 50\% of the data, whiskers represent variability outside the upper and lower quartiles with outliers plotted as individual points.
 %Box colours correspond to the expressions for average profile width $\bar{p}$ given in Figure 4.        
 %} 
@@ -497,7 +496,7 @@ The numbers beneath each plot represent the coefficient of variation.
 The colour of each box plot corresponds to the expressions for average profile width $\\bar{p}$ given in Figure \\ref{f:equalModelResults}. 
 '
 
-CapturesTitle <- 'Simulation model results of the accuracy and precision of four gREM submodels'
+CapturesTitle <- 'Accuracy and precision of four gREM submodels given different numbers of captures'
 
 %%end.rcode
 
@@ -544,8 +543,8 @@ ggplot(captures, aes(x = count, y = percentageerror,
 \subsubsection{Movement models}
 
 Within the four gREM submodels tested (NW1, SW1, SE3, NE1), neither the accuracy or precision was affected by the average amount of time spent stationary.
-The median difference between the estimated and true values was less than 2\% for each category of stationary time (0, 0.25, 0.5 and 0.75) (Figure~\ref{fig:movtFig}).
-Altering the maximum change in direction in each step (0, $\pi/3$, $2\pi/3$, and $\pi$) did not affect the accuracy or precision of the four gREM submodels (Figure~\ref{fig:movtFig}). 
+The median difference between the estimated and true values was less than 2\% for each category of stationary time (0, 0.25, 0.5 and 0.75) (Figure~\ref{f:movtFig}).
+Altering the maximum change in direction in each step (0, $\pi/3$, $2\pi/3$, and $\pi$) did not affect the accuracy or precision of the four gREM submodels (Figure~\ref{f:movtFig}). 
 
 \subsubsection{Impact of parameter error}
 
@@ -562,7 +561,7 @@ The simple model is represented where time and maximum change in direction equal
 The colour of each box plot corresponds to the expressions for average profile width $\\bar{p}$ given in Figure \\ref{f:equalModelResults}. %todo
 '
 
-movtTitle <- 'Simulation model results of the accuracy and precision of four gREM submodels'
+movtTitle <- 'Accuracy and precision of four gREM submodels given different movement models'
 
 %%end.rcode
 
@@ -621,8 +620,16 @@ tortPlot <- ggplot(tort, aes(x = maxAngle, y = percentageerror, colour = express
                         expression(phantom(over(0, 0))*pi*phantom(0))))
 
 
-plot_grid(waitPlot, tortPlot, labels = c("A", "B"), align = 'h', label_size = 10, ncol = 1)
+# plot_grid(waitPlot, tortPlot, labels = c("A", "B"), align = 'h', label_size = 10, ncol = 1, fontfamily = 'lato light')
 
+# Combine and print the plots.
+ggdraw() +
+  draw_label("A)", 0.02, 0.98, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
+  draw_plot(tortPlot, 0, 0, 1, 0.5) +
+  draw_label("B)", 0.02, 0.48, size = 10, fontface = 'plain', fontfamily = 'lato light') + 
+  draw_plot(waitPlot, 0, 0.5, 1, 0.5) 
+
+  
 
 %%end.rcode
 
@@ -637,7 +644,7 @@ Simulation model results of the accuracy and precision of four gREM submodels (N
 The percentage error between estimated and true density within each gREM sub model for the different movement models is shown within each box plot, where the white line represents the median percentage error across all simulations, boxes represent the middle 50\% of the data, whiskers represent variability outside the upper and lower quartiles with outliers plotted as individual points.
 Notches in boxplots show the 95\% confidence for the median.
 The simple model is represented where time and maximum change in direction equals 0.
-The colour of each box plot corresponds to the expressions for average profile width $\bar{p}$ given in Figure \ref{f:equalModelResults}.
+The colour of each box plot corresponds to the expressions for average profile width $\bar{p}$ given in Figure~\ref{f:equalModelResults}.
 }
 \label{f:movtFig}
 \end{figure}
@@ -670,7 +677,7 @@ Both of these problems may cause biases in the gREM, as animals can move through
 As the gREM assumes constant surveillance, the error created by switching the sensor on and off quickly will become more important if the sensor is only on for short periods of time.
 I recommend that the gREM is applied to constantly sampled data, and the impacts of breaking these assumptions on the gREM should be further explored. 
 
-\subsection{Accuracy, Precision and Recommendations for Best Practice}
+\subsection{Accuracy, precision and recommendations for best practice}
 Based on our simulations, I believe that the gREM has the potential to produce accurate estimates for many different species, using either camera traps or acoustic detectors.
 However, the precision of the gREM differed between submodels.
 For example, when the sensor and signal width were small, the precision of the model was reduced.

@@ -33,11 +33,11 @@ $A$ 		& Maximum turning angle & \SI{}{\radian}\\
 
 \clearpage
 
-\section{Supplementary Methods}
+\section{Supplementary methods}
 \subsection{Introduction}
 \lettr{T}hese supplementary methods derive all the models used. 
 For continuity, the gas model derivation is included here as well as in the main text. 
-The calculation of all integrals used in the gREM is included in the Python script S3. 
+The calculation of all integrals used in the gREM is included in the \emph{Python} script S3. 
 
 
 \input{REM-methods.tex}
@@ -48,7 +48,7 @@ The calculation of all integrals used in the gREM is included in the Python scri
 
 
 \clearpage
-\section{Supplementary Information: Simulation model results of the gREM precision}
+\section{Supplementary information: Simulation model results of the gREM precision}
 \setcounter{figure}{0}    
 
 
@@ -66,7 +66,7 @@ Standard deviations are shown from deep red to pink, representing high to low va
 
 
 \clearpage
-\section{Supplementary Information: Impact of parameter error}
+\section{Supplementary information: Impact of parameter error}
 
 
 
