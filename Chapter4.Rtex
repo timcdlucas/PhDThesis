@@ -85,7 +85,7 @@ library(showtext)
 %\tmpsection{One or two sentences providing a basic introduction to the field}
 % comprehensible to a scientist in any discipline.
 \lettr{A} large proportion of human diseases are zoonotic and there is a continuous flow of new pathogens from wild animals to humans.
-The chance that a particularly host species will be the source of a new zoonotic disease increases with the pathogen richness of that host species.
+The chance that a particular host species will be the source of a new zoonotic disease increases with the pathogen richness of that host species.
 However, the relative importance of factors that control pathogen richness is not known.
 %\tmpsection{Two to three sentences of more detailed background}
 Comparative studies have found evidence that host density, geographic range size and population structure are associated with high pathogen richness. 
