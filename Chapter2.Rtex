@@ -359,7 +359,7 @@ Dispersal between colonies occurs at a rate $\xi$.
 Individuals can only disperse to colonies connected to theirs by an edge in the network.
 The rate of dispersal is not affected by the number of edges a colony has (known as the degree of the colony and denoted $k$).
 Therefore, the dispersal rate from a colony $y$ with degree $k_y$ to colony $x$ is $\xi / k_y$.
-Note this rate is not affect by the degree and size of colony $x$.
+Note this rate is not affected by the degree and size of colony $x$.
 
 
 
