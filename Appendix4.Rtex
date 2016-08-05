@@ -23,6 +23,8 @@ source('misc/KnitrOptions.R')
 source('misc/theme_tcdl.R')
 theme_set(theme_grey() + theme_tcdl)
 
+library(xtable)
+
 %%end.rcode
 
 
