@@ -180,7 +180,7 @@ Finally, many studies have tested for correlations between pathogen richness and
 
 However, the intrinsic relationships between these population-level factors are rarely discussed or accounted for in comparative studies.
 There are two particularly clear relationships between these factors.
-Firstly, host density, $d$, host population size, $N$, and geographic range size, $a$, are, by definition, linked by $d = N / a$ (See Table~\ref{t:params} for all parameters used).
+Firstly, host density, $d$, host population size, $N$, and geographic range size, $a$, are, by definition, linked by $d = N / a$ (see Table~\ref{t:params} for all parameters used).
 The relationship, $N \propto a$, has broad empirical support \cite{blackburn2006variations, borregaard2010causality}.
 Secondly, host population size can be decomposed into two components, the number of groups, $m$, and the average size of a group, $n$, with $N = n$.
 While less clear, geographic range size and host population structure are also related.
