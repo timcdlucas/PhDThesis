@@ -795,7 +795,7 @@ The code used for running all simulations is available at \url{https://github.co
 
 In each simulation the host population was seeded with 20 individuals infected with Pathogen 1 in each colony. 
 Pathogen 1 was then allowed to spread and reach equilibrium. 
-After \SI{\rinline{invadeT}} events, five hosts individuals infected with Pathogen 2 were added to one randomly selected colony. 
+After \SI{\rinline{invadeT}} events, five host individuals infected with Pathogen 2 were added to one randomly selected colony. 
 The simulation was then run for another \SI{\rinline{nEvent - invadeT}} events.
 The invasion of Pathogen 2 was considered successful if any individuals infected with Pathogen 2 remained at the end of the simulation.
 
