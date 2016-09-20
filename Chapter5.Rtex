@@ -316,7 +316,7 @@ D = z/vt\bar{p}.
 \end{equation}
 
 
-Rather than having one equation that describes $\bar{p}$ globally, the gREM must be split into submodels due to discontinuous changes in $p$ as $\alpha$ and $\beta$ change.
+Rather than having one equation that describes $\bar{p}$ globally, the gREM must be split into submodels due to discontinuous changes in $p$ as $\alpha$ and $\theta$ change.
 These discontinuities can occur for a number of reasons such as a profile switching between being limited by $\alpha$ and $\theta$, the difference between very small profiles and profiles of size zero, and the fact that the width of a sector stops increasing once the central angle reaches $\pi$ radians (i.e., a semi-circle is just as wide as a full circle).
 As an example, if $\alpha$ is small, there is an interval between Figure~\ref{f:x1AndInt}C and \ref{f:x1AndInt}D where the `blind spot' would prevent animals being detected giving $p=0$.
 This would require an extra integral in our equation, as simply putting our small value of $\alpha$ into \ref{e:SE2int} would not give us this integral of $p=0$.

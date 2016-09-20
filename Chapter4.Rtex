@@ -182,7 +182,7 @@ However, the intrinsic relationships between these population-level factors are 
 There are two particularly clear relationships between these factors.
 Firstly, host density, $d$, host population size, $N$, and geographic range size, $a$, are, by definition, linked by $d = N / a$ (see Table~\ref{t:params} for all parameters used).
 The relationship, $N \propto a$, has broad empirical support \cite{blackburn2006variations, borregaard2010causality}.
-Secondly, host population size can be decomposed into two components, the number of groups, $m$, and the average size of a group, $n$, with $N = n$.
+Secondly, host population size can be decomposed into two components, the number of groups, $m$, and the average size of a group, $n$, with $N = mn$.
 While less clear, geographic range size and host population structure are also related.
 The amount of movement between groups is at least partially dependent on the distance between them \cite{jenkins2010meta, le2012patterns, schooley2009enhancing} and the distance between neighbouring groups decreases with the number of groups per area, $m/a$.
 
@@ -993,7 +993,7 @@ ggplot(d, aes(x = ValueChange, y = mean, colour = vary)) +
   xlab('Amount Varied') +
   ylim(0, 1) +
   scale_colour_poke(name = "Focal Pop. Factor", 
-                    labels = c( 'Pop. Size', 'Pop. Size', 'Host Density'), 
+                    labels = c( 'Pop. Size (Colony Size)', 'Pop. Size (N. Colonies)', 'Host Density'), 
                     pokemon = 'Swampert',
                     spread = 3) +
   scale_y_continuous(breaks = c(0, 0.5, 1), labels = c('0.0', '0.5', '1.0')) +
@@ -1228,7 +1228,7 @@ However, again, this effect was very weak compared to the strong changes in loca
 It is clear that many species are suffering strong population changes due to global change \cite{thomas2004extinction}.
 However these changes might affect range size \cite{thomas2004extinction}, population size \cite{craigie2010large}, population connectivity \cite{wasserman2013population, rivera2015habitat, fonturbel2014forest} or group size \cite{lehmann2010apes, zunino2007habitat, manor2003impact, atwood2006influence} to different extents.
 My results suggest that pathogen communities will respond differently depending on which factors are most strongly affected by global change.
-In short, species suffering reductions in groups size \cite{lehmann2010apes, zunino2007habitat, manor2003impact, atwood2006influence} are predicted to experience decreases in pathogen richness in the long term and there is some evidence that this process is occurring \cite{altizer2007threatened, turmelle2009correlates}.
+In short, species suffering reductions in group size \cite{lehmann2010apes, zunino2007habitat, manor2003impact, atwood2006influence} are predicted to experience decreases in pathogen richness in the long term and there is some evidence that this process is occurring \cite{altizer2007threatened, turmelle2009correlates}.
 Species that are experiencing increases in group size \cite{lehmann2010apes} would be expected to gain new pathogen species.
 In contrast, species suffering range contractions \cite{thomas2004extinction} and decreases in population size \cite{craigie2010large} are expected to experience smaller changes in pathogen richness.
 However, it should be noted that these conclusions apply only to the specific mechanism studied here; that is, the invasion of newly evolved pathogens.

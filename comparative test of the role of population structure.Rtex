@@ -3,7 +3,8 @@
 % Chapter 2 of thesis "The role of population structure and size in determining bat pathogen richness"
 % by Tim CD Lucas
 %
-% NB The file is numbered Chapter3 as this was previously Chapter 3 in the thesis.
+% NB This file is a copy due to the mess up with chapter numbers.
+% To see the full commit history see https://github.com/timcdlucas/PhDThesis/blob/master/Chapter3.Rtex
 %
 %---------------------------------------------------------------------------------------------------------------------------------%
 
@@ -148,7 +149,7 @@ I find that both measures are positively associated with pathogen richness.
 %\tmpsection{Two or three sentences explaining what the main result reveals in direct comparison to what was thoughts to be the case previously}
 % or how the main result adds to previous knowledge
 My results add more robust support to the hypothesis that increased population structure promotes viral richness in bats.
-The results support the prediction that increased population structure allows greater pathogen richness by reducing competition between pathogens.
+The results support the prediction that increased population structure allows greater pathogen richness by reducing competition between pathogens
 The prediction that factors that decrease $R_0$ should decrease pathogen richness is not supported.
 %
 %
@@ -1804,7 +1805,7 @@ The log number of citations on PubMed and Google scholar were highly correlated 
 As the correlation between citation counts was strong, I only used Google Scholar reference counts in subsequent analyses.
 %See the appendix for analyses run using PubMed citations.
 
-Two factors that have previously been found to be important were included as additional explanatory variables: body mass \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat, han2015infectious, bordes2008bat} and range size \cite{kamiya2014determines, turmelle2009correlates, maganga2014bat}.		
+Two factors that have previously been found to be important were included as additional explanatory variables: body mass \cite{kamiya2014determines, turmelle2009correlates, gay2014parasite, maganga2014bat, han2015infectious, bordes2008bat}, range size \cite{kamiya2014determines, turmelle2009correlates, maganga2014bat}.		
 These other factors were included to avoid spurious positive results occurring simply due to correlations between pathogen richness and a different, causal factor.
 Despite commonly being associated with pathogen richness \cite{arneberg2002host, kamiya2014determines, nunn2003comparative}, population density was not included in the analysis as there is very little data for bat densities.
 Measurements of body mass were taken from Pantheria \cite{jones2009pantheria} and primary literature \cite{canals2005relative, arita1993rarity, lopez2014echolocation, orr2013does, lim2001bat, aldridge1987turning, ma2003dietary, owen2003home, henderson2008movements, heaney2012nyctalus, oleksy2015high, zhang2009recent}. 
@@ -1818,7 +1819,7 @@ Distribution size was estimated by downloading range maps for all species from I
 \subsection{Statistical analysis}
 
 Statistical analysis for both response variables --- number of subspecies and effective level of gene flow --- was conducted using an information theoretical approach \cite{burnham2002model}, specifically following \textcite{whittingham2005habitat, whittingham2006we}.
-All analyses were performed in \emph{R} \cite{R} and all code is available at \url{https://github.com/timcdlucas/PhDThesis/blob/master/comparative-test-of-pop-structure.Rtex}. %latex link issue. URL is correct.
+All analyses were performed in \emph{R} \cite{R} and all code is available at \url{https://github.com/timcdlucas/PhDThesis/blob/master/comparative-test-of-pop-structure.Rtex}.
 I chose a credible set of models including all combinations of explanatory variables and a model with just an intercept.
 In the analysis using the number of subspecies response variable I also modelled the interaction between study effort and number of subspecies by including their product.
 This interaction was included as I believed \emph{a priori} that this interaction may be important as subspecies in well studied species are more likely to be identified.
