@@ -272,6 +272,7 @@ refsCapt <- paste0("
 
 pp <- c(pokepal('oddish')[c(1,3,5,7,9,10)], pokepal('Carvanha')[c(2, 4, 13, 12, 9, 1)])
 
+
 studyEffortCor <- summary(citeCor)
 # And plot
 ggplot(nSpecies, aes(y = scholarRefs, x = pubmedRefs + 1)) +
@@ -541,7 +542,7 @@ lines.df <- data.frame(y1 = 1 * betasubspecies + intercept,
 boxplotCapt <- 
 'The effect of the interaction term on the estimated relationship between number of subspecies and pathogen richness.
 The area of the circle shows the number of bat species at each discrete value.
-The ... line shows the estimated relationship at the median value of study effort.
+The blue line shows the estimated regression slope at the median value of study effort while the green and pink lines show the estimated slope at the upper and lower quartiles and maximum and minimum values of study effort respectively.
 '
 
 
@@ -550,7 +551,6 @@ boxplotTitle <- 'The effect of the interaction term on the estimated relationshi
 %%end.rcode		
 		
 %%begin.rcode boxplotInter, fig.cap = boxplotCapt, fig.scap = boxplotTitle,	fig.height = 2.3
-
 
 nSpeciesCounts <- nSpecies %>%
                     group_by(NumberOfSubspecies, virusSpecies) %>%
@@ -564,7 +564,7 @@ ggplot(nSpeciesCounts, aes(NumberOfSubspecies, virusSpecies, size = n)) +
   ylab('Viral Richness') +
   geom_segment(data = lines.df, 
 							 aes(y = y1, yend = y2, x = x1, xend = x2, size = NULL, colour = type)) +
-	scale_colour_manual(values = pokepal('rhyhorn')[3:1], guide = 'none') +
+	scale_colour_manual(values = pokepal('tentacool', spread = 3), guide = 'none') +
   guides(size = guide_legend(override.aes = list(linetype = 0)))
 
 
