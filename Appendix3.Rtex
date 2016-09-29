@@ -372,6 +372,8 @@ nSpecies %>%
 
 
 
+
+
 %%-------------------------------------------------------------------------------%%
 %% Read full model selection results for both analyses and make tables.
 %%-------------------------------------------------------------------------------%%
@@ -499,6 +501,74 @@ print(xtable(fstModelWeights,
 
 
 
+
+%% ------------------------------------------------------------------------ %%
+%% Examine interaction better.
+%% ------------------------------------------------------------------------ %%
+
+
+%%begin.rcode interactionPlot
+
+
+effortRange <- c(quantile(scale(log(nSpecies$scholarRefs)), probs = c(0.25, 0.5, 0.75)), range(scale(log(nSpecies$scholarRefs))))
+
+betasubspecies <- wtd.mean(allResults$beta.NumberOfSubspecies, allResults$weight, na.rm = TRUE) + 
+								 			    	effortRange * wtd.mean(allResults$beta.scholarRefs.NumberOfSubspecies, 
+									   														   allResults$weight, na.rm = TRUE)
+
+intercept <-  wtd.mean(allResults$beta..Intercept., allResults$weight, na.rm = TRUE) + 
+								wtd.mean(allResults$beta.scholarRefs, allResults$weight, na.rm = TRUE) * effortRange
+
+# As all variables are scaled, mean is 0. So don't need to include other variables +
+#								wtd.mean(allResults$beta.mass, allResults$weight, na.rm = TRUE) * median(log(nSpecies$mass)) +								
+#								wtd.mean(allResults$beta.distrSize, allResults$weight, na.rm = TRUE) * median(log(nSpecies$distrSize)) #+								
+#								wtd.mean(allResults$beta.rand, allResults$weight, na.rm = TRUE) * 0.5				
+
+
+lines.df <- data.frame(y1 = 1 * betasubspecies + intercept,
+											 y2 = 16 * betasubspecies + intercept,
+											 x1 = 1,
+											 x2 = 16,
+											 type = factor(c(2, 1, 2, 3, 3)))
+
+%%end.rcode
+
+
+%%begin.rcode boxplotCapt	
+		
+# Caption for the main boxplot of subspecies vs virus		
+		
+boxplotCapt <- 
+'The effect of the interaction term on the estimated relationship between number of subspecies and pathogen richness.
+The area of the circle shows the number of bat species at each discrete value.
+The ... line shows the estimated relationship at the median value of study effort.
+'
+
+
+boxplotTitle <- 'The effect of the interaction term on the estimated relationship between number of subspecies and pathogen richness'
+
+%%end.rcode		
+		
+%%begin.rcode boxplotInter, fig.cap = boxplotCapt, fig.scap = boxplotTitle,	fig.height = 2.3
+
+
+nSpeciesCounts <- nSpecies %>%
+                    group_by(NumberOfSubspecies, virusSpecies) %>%
+                    dplyr::summarize(n = n())
+
+ggplot(nSpeciesCounts, aes(NumberOfSubspecies, virusSpecies, size = n)) + 
+  geom_point() +
+  scale_size(range = c(0.5, 4.3), breaks = c(1, 20, 40)) +
+  scale_x_continuous(breaks = c(1,  4, 8, 12, 16)) +
+  xlab('Number of Subspecies') +
+  ylab('Viral Richness') +
+  geom_segment(data = lines.df, 
+							 aes(y = y1, yend = y2, x = x1, xend = x2, size = NULL, colour = type)) +
+	scale_colour_manual(values = pokepal('rhyhorn')[3:1], guide = 'none') +
+  guides(size = guide_legend(override.aes = list(linetype = 0)))
+
+
+%%end.rcode	
 
 
 
