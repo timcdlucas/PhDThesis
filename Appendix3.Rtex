@@ -696,34 +696,6 @@ p %<+% nSpecies +
 
 
 
-%%-----------------------------------------------------------------------------%%
-%Interactive plots
-%%-----------------------------------------------------------------------------%%
-
-
-
-
-
-
-%%begin.rcode fstInteractive, eval = FALSE		
- 		
- pp < ggplot(fstFinal, aes(x = Nm, y = virusSpecies, colour = Marker, text = binomial)) +		
-   geom_point(size = 2) +		
-   scale_colour_poke(pokemon = 'oddish', spread = 3) +		
-   scale_x_log10() +		
-   geom_abline(intercept = nmFstUni$coef[1, 1], slope = nmFstUni$coef[2, 1], lwd = 0.7, colour = pokepal('nidorina')[10]) +		
-   xlab('Gene Flow (per gen.)') +		
-   ylab('Viral Richness') 		
- 		
- ply <- ggplotly(pp, tooltip = c('text', 'colour', 'y'))		
- htmlwidgets::saveWidget(as.widget(ply), "imgs/fstinter.html")		
- 		
- %%end.rcode		
- 		
-
-
-
-
 
 \begin{figure}[t]
 \centering
