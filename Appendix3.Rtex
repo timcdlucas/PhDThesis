@@ -34,7 +34,7 @@ theme_set(theme_grey() + theme_tcdl)
 nCores <- 4
 
 runScrape <- FALSE
-
+rangeusesens <- FALSE
 %%end.rcode
 
 
@@ -563,7 +563,7 @@ ggplot(nSpeciesCounts, aes(NumberOfSubspecies, virusSpecies, size = n)) +
   ylab('Viral Richness') +
   geom_segment(data = lines.df, 
 							 aes(y = y1, yend = y2, x = x1, xend = x2, size = NULL, colour = type)) +
-	scale_colour_manual(values = pokepal('277'exploud', spread = 3)[c(2, 1, 3)], guide = 'none') +
+	scale_colour_manual(values = pokepal('exploud', spread = 3)[c(2, 1, 3)], guide = 'none') +
   guides(size = guide_legend(override.aes = list(linetype = 0)))
 
 
@@ -1039,7 +1039,7 @@ scrapeScholar <- function(sp){
 
 
 
-%%begin.rcode luis2013virusRead
+%%begin.rcode luis2013virusRead, eval = rangeusesens
 
 #read in luis2013virus data
 virus2 <- read.csv('data/Chapter3/luis2013comparison.csv', stringsAsFactors = FALSE)
@@ -1061,7 +1061,7 @@ virus2 <- virus2[!virus2$remove, ]
 
 %%end.rcode
 
-%%begin.rcode ranges
+%%begin.rcode ranges, eval = rangeusesens
 
 # Read in iucn ranges and calculate range sizes for each species.
 ranges <- readShapePoly('data/Chapter3/TERRESTRIAL_MAMMALS/TERRESTRIAL_MAMMALS.shp')
@@ -1076,7 +1076,7 @@ ranges$binomial[ranges$binomial == 'Myotis pilosus'] <- 'Myotis ricketti'
 
 
 
-%%begin.rcode fstRead, eval = fstComb
+%%begin.rcode fstRead, eval = rangeusesens
 
 # Read in Fst data.
 # Then add extra columns needed.
@@ -1158,7 +1158,7 @@ fst$rangeCoverage <- fst$Dmax..km. / fst$rangeWidth
 
 
 
-%%begin.rcode fstStudyEffort, eval = fstComb
+%%begin.rcode fstStudyEffort, eval = rangeusesens
 
 nSpecies <- read.csv(file = 'data/Chapter3/nSpecies.csv')
 
@@ -1200,7 +1200,7 @@ write.csv(fstFullStudy, file = 'data/Chapter3/fstScrapeAppendix.csv')
 %%end.rcode
 
 
-%%begin.rcode readNewStudy
+%%begin.rcode readNewStudy, eval = rangeusesens
 
 fstFullStudy <- read.csv(file = 'data/Chapter3/fstScrapeAppendix.csv')[, -1]
 
@@ -1287,7 +1287,7 @@ write.csv(fstFinal, 'data/Chapter3/fstFinalBootRangeuseable.csv')
 
 
 
-%%begin.rcode fstTree
+%%begin.rcode fstTree, eval = rangeusesens
 
 # Read in trees
 t <- read.nexus('data/Chapter3/fritz2009geographical.tre')
@@ -1308,7 +1308,7 @@ tr1$tip.label <- gsub('_', ' ', tr1$tip.label)
 %%end.rcode
 
 
-%%begin.rcode fstITanalysis
+%%begin.rcode fstITanalysis, eval = rangeusesens
 
 fstVarList <- c('scholarRefs', 'Nm', 'mass', 'distrSize', 'rand')
 
@@ -1328,7 +1328,7 @@ fstAllFormulae <- c(as.formula('virusSpecies ~ 1'), fstAllFormulae)
 
 %%end.rcode
 
-%%begin.rcode fstModelSelectFun
+%%begin.rcode fstModelSelectFun, eval = rangeusesens
 
 
 fstModelSelect <- function(allForm, data, phy, boot, allModelMat, varList){
@@ -1466,7 +1466,7 @@ fstModelSelect <- function(allForm, data, phy, boot, allModelMat, varList){
 
 %%end.rcode
 
-%%begin.rcode fstModelSelectBoots, eval = fstBoots
+%%begin.rcode fstModelSelectBoots, eval = rangeusesens
 
 rangeUseable <- c(0.15, 0.175, 0.2, 0.225, 0.25)
 
@@ -1539,7 +1539,7 @@ write.csv(fstAllResults5, file = 'data/Chapter3/fstModelSelectBoot5.csv')
 %%end.rcode
 
 
-%%begin.rcode fstAnalyseModelSelect, fig.show = extraFigs
+%%begin.rcode fstAnalyseModelSelectRangeUse, fig.show = extraFigs, eval = rangeusesens
 
 #combAllResults <- list()
 fstres <- list(fstAllResults, 
@@ -1578,9 +1578,12 @@ allCombinedResults.df <- do.call(rbind, combAllResults)
 
 
 
+%%begin.rcode fstITBootCapt
+ITPlotCapts <- ''
+ITPlotTitle <- ''
+%%end.rcode
 
-
-%%begin.rcode fstITBootPlots, fig.cap = ITPlotCapts, fig.height = 2.5, fig.scap = ITPlotTitle, out.width = '\\textwidth', cache = FALSE
+%%begin.rcode fstITBootPlots, fig.cap = ITPlotCapts, fig.height = 2.5, fig.scap = ITPlotTitle, out.width = '\\textwidth', cache = FALSE, eval = rangeusesens
 
 # Reorder var levels to get structure at beginning.
 allCombinedResults.df$variable <- factor(allCombinedResults.df$variable, levels(allCombinedResults.df$variable)[c(2, 1, 3, 4, 5)])
