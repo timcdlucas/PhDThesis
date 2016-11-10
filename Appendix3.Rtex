@@ -1216,8 +1216,19 @@ fst$Nm <- calcNm(fst$Value)
 
 
 fst <- fst[!is.na(fst$Nm) & !(fst$Nm == Inf), ]
+fst <- fst[fst$Marker != 'mtDNA', ]
+
+
+# Couple of small cleaning issues.
+# Two values for Miniopterus screibersii. One low range coverage, one big.
+# Instead of taking means, remove the low coverage row.
+# And similar issue with Myotis lucifugus
+fst <- fst %>% filter(!(binomial == 'Miniopterus schreibersii' & rangeCoverage < 0.1))
+fst <- fst %>% filter(!(binomial == 'Myotis lucifugus' & rangeCoverage < 0.2))
+
 
 fstFinal <- fst
+
 
 # Take means of species with multiple measurements
 
@@ -1258,6 +1269,8 @@ fstFinal$mass[fstFinal$binomial == 'Myotis ricketti'] <- meanAdditionalMass$mass
 
 fstFinal$mass[fstFinal$binomial == 'Myotis macropus'] <- 9.8
 
+
+
 fstFinal <- fstFinal[!is.na(fstFinal$mass), ]
 
 
@@ -1285,6 +1298,11 @@ tr1 <- t[[1]]
 # Make names match previous names
 tr1$tip.label <- gsub('_', ' ', tr1$tip.label)
 
+#unneededTips <- tr1$tip.label[!(tr1$tip.label %in% fstFinal$binomial)]
+
+# Prune tree down to only needed tips.
+#fstTree <- drop.tip(tr1, unneededTips)
+
 
 
 %%end.rcode
@@ -1294,6 +1312,12 @@ tr1$tip.label <- gsub('_', ' ', tr1$tip.label)
 
 fstVarList <- c('scholarRefs', 'Nm', 'mass', 'distrSize', 'rand')
 
+findCombs <- function(k, vars, longest){
+  x <- t(combn(vars, k))
+  nas <- matrix(NA, ncol = longest - NCOL(x), nrow = nrow(x))
+  mat <- cbind(x, nas)
+  return(mat)
+}
 
 fstModelList <- lapply(0:5, function(k) findCombs(k, fstVarList, 5))
 fstModelMat <- do.call(rbind, fstModelList)
@@ -1347,6 +1371,7 @@ fstModelSelect <- function(allForm, data, phy, boot, allModelMat, varList){
 
   # Fit each model 
   # I'm having problems with convergence so sometimes have to try different starting values.
+  # Really need to replace this with a while loop or something.
   for(m in 1:length(allForm)){
     if(exists('model')){
       rm(model)
@@ -1369,14 +1394,50 @@ fstModelSelect <- function(allForm, data, phy, boot, allModelMat, varList){
     }
     if(!exists('model')){
         try({
-          model <- gls(allForm[[m]], correlation = corPagel(value = 0.1, phy = phy), data = bootData, method = 'ML')  
+          model <- gls(allForm[[m]], correlation = corPagel(value = runif(1), phy = phy), data = bootData, method = 'ML')  
           results$attempt[m] <- 4
+        }) 
+      }
+      if(!exists('model')){
+        try({
+          model <- gls(allForm[[m]], correlation = corPagel(value = runif(1), phy = phy), data = bootData, method = 'ML')  
+          results$attempt[m] <- 5
+        }) 
+      }
+      if(!exists('model')){
+        try({
+          model <- gls(allForm[[m]], correlation = corPagel(value = runif(1), phy = phy), data = bootData, method = 'ML')  
+          results$attempt[m] <- 6
+        }) 
+      }
+      if(!exists('model')){
+        try({
+          model <- gls(allForm[[m]], correlation = corPagel(value = runif(1), phy = phy), data = bootData, method = 'ML')  
+          results$attempt[m] <- 7
+        }) 
+      }
+       if(!exists('model')){
+        try({
+          model <- gls(allForm[[m]], correlation = corPagel(value = runif(1), phy = phy), data = bootData, method = 'ML')  
+          results$attempt[m] <- 7
+        }) 
+      }
+       if(!exists('model')){
+        try({
+          model <- gls(allForm[[m]], correlation = corPagel(value = runif(1), phy = phy), data = bootData, method = 'ML')  
+          results$attempt[m] <- 7
+        }) 
+      }
+       if(!exists('model')){
+        try({
+          model <- gls(allForm[[m]], correlation = corPagel(value = runif(1), phy = phy), data = bootData, method = 'ML')  
+          results$attempt[m] <- 7
         }) 
       }
     if(!exists('model')){
       try({
         model <- lm(allForm[[m]], data = bootData) 
-        results$attempt[m] <- 5
+        results$attempt[m] <- 8
         message('Running lm')
       }) 
     }
@@ -1407,7 +1468,7 @@ fstModelSelect <- function(allForm, data, phy, boot, allModelMat, varList){
 
 %%begin.rcode fstModelSelectBoots, eval = fstBoots
 
-rangeUseable <- c(0.15, 0.175, 0.225, 0.25)
+rangeUseable <- c(0.15, 0.175, 0.2, 0.225, 0.25)
 
 
 
@@ -1462,17 +1523,31 @@ fstAllResults4 <- do.call(rbind, fstModelsBootStrap)
 
 write.csv(fstAllResults4, file = 'data/Chapter3/fstModelSelectBoot4.csv')
 
+
+fstModelsBootStrap <- mclapply(1:nBoots, function(b) 
+    fstModelSelect(fstAllFormulae, 
+                   fstFinal[fstFinal$rangeCoverage > rangeUseable[5], ],
+                   fstTree, 
+                   b, 
+                   fstModelMat, 
+                   fstVarList), mc.cores = nCores)
+
+fstAllResults5 <- do.call(rbind, fstModelsBootStrap)
+
+write.csv(fstAllResults5, file = 'data/Chapter3/fstModelSelectBoot5.csv')
+
 %%end.rcode
 
 
 %%begin.rcode fstAnalyseModelSelect, fig.show = extraFigs
 
-combAllResults <- list()
+#combAllResults <- list()
 fstres <- list(fstAllResults, 
                fstAllResults1, 
                fstAllResults2, 
                fstAllResults3, 
-               fstAllResults4)
+               fstAllResults4,
+               fstAllResults5)
                
                
 for(i in 1:length(fstres)){
@@ -1513,6 +1588,7 @@ allCombinedResults.df$variable <- factor(allCombinedResults.df$variable, levels(
 
 # Draw the fst model selection plot
 ggplot(allCombinedResults.df, aes(x = variable, y = estimate, colour = col, fill = col)) +
+  geom_boxplot() +
   scale_colour_manual(values = pokepal('kingdra')[c(11, 1, 9)]) +
   scale_fill_manual(values = pokepal('kingdra')[c(12, 4, 8)]) +
   theme(legend.position = 'none', axis.text.x = element_text(size = 10, angle = 40, hjust = 1, colour = 'black', family = 'lato light'),
@@ -1520,7 +1596,6 @@ ggplot(allCombinedResults.df, aes(x = variable, y = estimate, colour = col, fill
     axis.text.y = element_text(size = 8)) +
   scale_x_discrete(labels = c('Gene flow', 'Scholar', 'Mass', 'Range size', 'Random')) +
   scale_y_continuous(labels = c('0.00','0.25','0.50','0.75','1.00'), breaks = c(0, 0.25, 0.5, 0.75, 1)) +
-  #ylim(0, 1) +
   ylab('P(in best model)') +
   xlab('')
 
