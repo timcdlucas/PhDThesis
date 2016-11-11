@@ -2356,7 +2356,7 @@ The overall weight of evidence suggests that population structure and pathogen r
 % Biases are known in the lit. gippoliti2007problem % maybe should add to methods?
 
 There was strong support for a positive interaction between the number of subspecies and study effort.
-The support for this interaction implies that increased population structure has a stronger relationship with known pathogen richness in the presence of study effort.
+The support for this interaction implies that increased population structure has a stronger relationship with known pathogen richness when study effort is not very low.
 One interpretation of this is that increased population structure alone does not predict high known viral richness; reasonable study effort is also needed to turn the expected high viral richness into known and recorded viral richness.
 Biases in identification of subspecies have been noted before \cite{gippoliti2007problem}.
 The number of subspecies is more commonly used as a variable in comparative analyses of birds than mammals but the fact that it is associated with study effort is often not taken into account \cite{phillimore2007biogeographical, belliure2000dispersal}.
