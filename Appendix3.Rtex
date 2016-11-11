@@ -549,7 +549,8 @@ boxplotTitle <- 'The effect of the interaction term on the estimated relationshi
 
 %%end.rcode		
 		
-%%begin.rcode boxplotInter, fig.cap = boxplotCapt, fig.scap = boxplotTitle,	fig.height = 2.3
+%%begin.rcode plotInter, fig.cap = boxplotCapt, fig.scap = boxplotTitle,	fig.height = 2.3
+
 
 nSpeciesCounts <- nSpecies %>%
                     group_by(NumberOfSubspecies, virusSpecies) %>%

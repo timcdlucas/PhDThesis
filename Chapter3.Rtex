@@ -1770,7 +1770,7 @@ fstMassStudyEffort <- summary(pgls(log(scholarRefs) ~ log(mass), data = compFst,
 I used two measures of population structure: the number of subspecies and the effective level of gene flow.
 The number of subspecies was counted using the taxonomy from \textcite{wilson2005mammal}.
 The effective level of gene flow was calculated from estimates of $F_{ST}$ collated from the literature.
-The studies were from a wide range of spatial scales, from local ($\sim\SI{10}{\kilo\metre}$) to continental.
+The studies were from a wide range of spatial scales, from local ($\sim\!\SI{10}{\kilo\metre}$) to continental.
 As $F_{ST}$ often increases with spatial scale \cite{burland1999population, hulva2010mechanisms, o2015genetic, vonhof2015range} I controlled for this by only using data from studies where a large proportion of the species range was studied.
 I used the ratio of the furthest distance between $F_{ST}$ samples (taken from the paper or measured with \url{http://www.distancefromto.net/} if not stated) to the length of the IUCN species range \cite{iucn} and only used studies if this ratio was greater than \rinline{rangeUseable}.
 This is an arbitrary value that was a compromise between retaining a reasonable number of data points and controlling for the bias in spatial scale.
@@ -2012,6 +2012,8 @@ Summing the Akaike weights of all models that contain a given variable gives a p
 The number of subspecies is very likely in the best model ($Pr > $ \rinline{substring(as.character( varWeights['NumberOfSubspecies']), 1, 4)}) as is the interaction term between the number of subspecies and study effort ($Pr = $ \rinline{varWeights['scholarRefs.NumberOfSubspecies']}) compared to the benchmark random variable which has $Pr = $ \rinline{varWeights['rand']} (Figure~\ref{fig:fstITPlots}A and Table~\ref{t:variables}).
 When models with the interaction term are removed there is, on average (mean weighted by Akaike weights), a positive relationship between the number of subspecies and viral richness ($b = $ \rinline{nSpeciesCoefMean}, variance = \rinline{nSpeciesCoefVar}).
 Models with an interaction term between the number of subspecies and study effort have a positive interaction term ($b = $ \rinline{nSpeciesInterMean}, variance = \rinline{nSpeciesInterVar}) and linear term ($b = $ \rinline{nSpeciesCoefMeanI}, variance = \rinline{nSpeciesCoefVarI}).
+At median and high values of study effort, this gives a positive relationship between the number of subspecies and viral richness (Figure~\ref{fig:plotInter}).
+At low values of study effort, the relationship between the number of subspecies and viral richness becomes flat or even negative.
 
 
 
