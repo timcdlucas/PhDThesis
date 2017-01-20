@@ -33,6 +33,8 @@ theme_set(theme_grey() + theme_tcdl)
 # Choose the number of cores to use
 nCores <- 4
 
+runScrape <- FALSE
+rangeusesens <- FALSE
 %%end.rcode
 
 
@@ -75,7 +77,7 @@ library(taxize)
 library(maptools)
 library(geosphere)
 
-# Parllel computation
+# Parallel computation
 library(parallel)
 
 %%end.rcode
@@ -240,9 +242,6 @@ rm(t)
 
 # Check how correlated pubmed and scholar are.  
 
-# Check how correlated pubmed and scholar are.  
-
-
 compSubspecies <- comparative.data(data = nSpecies, phy = pruneTree, names.col = 'binomial')
 
 citeCor <- pgls(log(scholarRefs, base = 10) ~ log(pubmedRefs + 1, base = 10), data = compSubspecies, lambda = 'ML')
@@ -271,6 +270,7 @@ refsCapt <- paste0("
 %%begin.rcode scholarvspubmedPlot, fig.show = TRUE, fig.height = 5, out.width = '0.9\\textwidth', fig.cap = refsCapt, cache = FALSE
 
 pp <- c(pokepal('oddish')[c(1,3,5,7,9,10)], pokepal('Carvanha')[c(2, 4, 13, 12, 9, 1)])
+
 
 studyEffortCor <- summary(citeCor)
 # And plot
@@ -361,6 +361,8 @@ nSpecies %>%
   ggpairs(.)
 
 %%end.rcode
+
+
 
 
 
@@ -475,7 +477,7 @@ fstSelectCapt <- "
   $\\Delta$AICc is the model's $\\bar{\\text{AICc}}$ score minus $\\text{min}(\\bar{\\text{AICc}})$. 
   $w$ is the Akaike weight and can be interpreted as the probability that the model is the best model (of those in the plausible set).
   $\\sum w$ is the cumulative sum of the Akaike weights.
-  "
+  " 
 
 fstSelectTitle <- "
   Full model selection results for effective gene flow analysis
@@ -499,6 +501,74 @@ print(xtable(fstModelWeights,
 
 
 
+
+%% ------------------------------------------------------------------------ %%
+%% Examine interaction better.
+%% ------------------------------------------------------------------------ %%
+
+
+%%begin.rcode interactionPlot
+
+
+effortRange <- c(quantile(scale(log(nSpecies$scholarRefs)), probs = c(0.25, 0.5, 0.75)), range(scale(log(nSpecies$scholarRefs))))
+
+betasubspecies <- wtd.mean(allResults$beta.NumberOfSubspecies, allResults$weight, na.rm = TRUE) + 
+								 			    	effortRange * wtd.mean(allResults$beta.scholarRefs.NumberOfSubspecies, 
+									   														   allResults$weight, na.rm = TRUE)
+
+intercept <-  wtd.mean(allResults$beta..Intercept., allResults$weight, na.rm = TRUE) + 
+								wtd.mean(allResults$beta.scholarRefs, allResults$weight, na.rm = TRUE) * effortRange
+
+# As all variables are scaled, mean is 0. So don't need to include other variables +
+#								wtd.mean(allResults$beta.mass, allResults$weight, na.rm = TRUE) * median(log(nSpecies$mass)) +								
+#								wtd.mean(allResults$beta.distrSize, allResults$weight, na.rm = TRUE) * median(log(nSpecies$distrSize)) #+								
+#								wtd.mean(allResults$beta.rand, allResults$weight, na.rm = TRUE) * 0.5				
+
+
+lines.df <- data.frame(y1 = 1 * betasubspecies + intercept,
+											 y2 = 16 * betasubspecies + intercept,
+											 x1 = 1,
+											 x2 = 16,
+											 type = factor(c(2, 1, 2, 3, 3)))
+
+%%end.rcode
+
+
+%%begin.rcode boxplotCapt	
+		
+# Caption for the main boxplot of subspecies vs virus		
+		
+boxplotCapt <- 
+'The effect of the interaction term on the estimated relationship between number of subspecies and pathogen richness.
+The area of the circle shows the number of bat species at each discrete value.
+The black line shows the estimated regression slope at the median value of study effort while the blue and yellow lines show the estimated slope at the upper and lower quartiles and maximum and minimum values of study effort respectively.
+'
+
+
+boxplotTitle <- 'The effect of the interaction term on the estimated relationship between number of subspecies and pathogen richness'
+
+%%end.rcode		
+		
+%%begin.rcode plotInter, fig.cap = boxplotCapt, fig.scap = boxplotTitle,	fig.height = 2.3
+
+
+nSpeciesCounts <- nSpecies %>%
+                    group_by(NumberOfSubspecies, virusSpecies) %>%
+                    dplyr::summarize(n = n())
+
+ggplot(nSpeciesCounts, aes(NumberOfSubspecies, virusSpecies, size = n)) + 
+  geom_point() +
+  scale_size(range = c(0.5, 4.3), breaks = c(1, 20, 40)) +
+  scale_x_continuous(breaks = c(1,  4, 8, 12, 16)) +
+  xlab('Number of Subspecies') +
+  ylab('Viral Richness') +
+  geom_segment(data = lines.df, 
+							 aes(y = y1, yend = y2, x = x1, xend = x2, size = NULL, colour = type)) +
+	scale_colour_manual(values = pokepal('exploud', spread = 3)[c(2, 1, 3)], guide = 'none') +
+  guides(size = guide_legend(override.aes = list(linetype = 0)))
+
+
+%%end.rcode	
 
 
 
@@ -623,34 +693,6 @@ p %<+% nSpecies +
 %%end.rcode
 
 
-
-
-
-
-%%-----------------------------------------------------------------------------%%
-%Interactive plots
-%%-----------------------------------------------------------------------------%%
-
-
-
-
-
-
-%%begin.rcode fstInteractive, eval = FALSE		
- 		
- pp < ggplot(fstFinal, aes(x = Nm, y = virusSpecies, colour = Marker, text = binomial)) +		
-   geom_point(size = 2) +		
-   scale_colour_poke(pokemon = 'oddish', spread = 3) +		
-   scale_x_log10() +		
-   geom_abline(intercept = nmFstUni$coef[1, 1], slope = nmFstUni$coef[2, 1], lwd = 0.7, colour = pokepal('nidorina')[10]) +		
-   xlab('Gene Flow (per gen.)') +		
-   ylab('Viral Richness') 		
- 		
- ply <- ggplotly(pp, tooltip = c('text', 'colour', 'y'))		
- htmlwidgets::saveWidget(as.widget(ply), "imgs/fstinter.html")		
- 		
- %%end.rcode		
- 		
 
 
 
@@ -924,6 +966,648 @@ Random &  \rinline{sprintf('%.2f', varWeights2['rand'])} &  \rinline{sprintf('%.
 
 \label{t:variables2}
 \end{table}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% ------------------------------------------------------------------------ %
+%% Bootstrap rangeuseable parameter
+% ------------------------------------------------------------------------ %
+
+
+%%begin.rcode scholarScrapeFunc
+
+scrapeScholar <- function(sp){
+    
+  wait <- rnorm(1, 320, 2)
+  Sys.sleep(wait)
+
+
+  syns <- synonyms(sp, db = 'itis')
+  if(NROW(syns[[1]]) == 1){
+    spString <- tolower(gsub(' ', '%20', sp))
+  } else {
+    spString <- paste(tolower(gsub(' ', '%20', syns[[1]]$syn_name)), collapse = '%22+OR+%22')
+  }
+
+  url <- paste0('https://scholar.google.co.uk/scholar?hl=en&q=%22', 
+                spString, '%22&btnG=&as_sdt=1%2C5&as_sdtp=')
+
+
+  page <- html(url)
+  
+  try({
+  refs <- page %>%
+            html_node('#gs_ab_md') %>%
+            html_text() %>%
+            gsub('About\\s(.*)\\sresults.*', '\\1', .) %>%
+            gsub(',', '', .) %>%
+            as.numeric
+  })
+  return(refs)
+}
+
+%%end.rcode
+
+
+
+
+
+
+%%begin.rcode luis2013virusRead, eval = rangeusesens
+
+#read in luis2013virus data
+virus2 <- read.csv('data/Chapter3/luis2013comparison.csv', stringsAsFactors = FALSE)
+
+
+virus2$binomial <- paste(virus2$host.genus, virus2$host.species)
+
+
+# From methods
+#Many viruses were not identified to species level or their identified species was not in the ICTV virus taxonomy \cite{ICTV}.
+#I counted a virus if it was the only virus, for that host species, in the lowest taxonomic level identified in the ICTV taxonomy.
+#That is, if a host carries an unknown Paramyxoviridae virus, then it must carry at least one Paramyxoviridae virus.
+#If a host carries an unknown Paramyxoviridae virus and a known Paramyxoviridae virus, then it is hard to confirm that the unknown virus is not another record of the known virus.
+#In this case, this would be counted as one virus species.
+
+# This has been implemented manually and indicated in the column `remove`
+
+virus2 <- virus2[!virus2$remove, ]
+
+%%end.rcode
+
+%%begin.rcode ranges, eval = rangeusesens
+
+# Read in iucn ranges and calculate range sizes for each species.
+ranges <- readShapePoly('data/Chapter3/TERRESTRIAL_MAMMALS/TERRESTRIAL_MAMMALS.shp')
+
+ranges <- ranges[ranges$order_name == 'CHIROPTERA', ]
+
+levels(ranges$binomial) <- c(levels(ranges$binomial), 'Myotis ricketti')
+ranges$binomial[ranges$binomial == 'Myotis pilosus'] <- 'Myotis ricketti'
+
+
+%%end.rcode
+
+
+
+%%begin.rcode fstRead, eval = rangeusesens
+
+# Read in Fst data.
+# Then add extra columns needed.
+
+fst <- read.csv('data/Chapter3/FstDataCompData.csv')
+
+# Check overlap of datasets.
+sum(!(fst$binomial %in% virus2$binomial[virus2$host.species != '']))
+
+notInFst <- fst$binomial[!(fst$binomial %in% virus2$binomial)]
+# lots of sp not in virus2. MAybe will include 0 virus species. Kinda makes sense.
+
+
+
+#########################################################################################
+#### Get distribution size and width                                                 ####
+#########################################################################################
+
+
+
+
+fst$binomial[!(fst$binomial %in% ranges$binomial)]
+
+fst <- fst[(fst$binomial %in% ranges$binomial), ]
+
+unique(fst$binomial) %>% length
+
+
+
+
+findAreaFst <- function(name){
+  #cat(name)
+  A <- areaPolygon(ranges[ranges$binomial == as.character(name), ])
+  sum(A)
+}
+
+fstIucnDistr <- sapply(fst$binomial, findAreaFst)
+
+
+fst$distrSize <- fstIucnDistr
+
+
+#### Now get distribution width
+
+findWidth <- function(name){
+  #print(name)
+  distr <- ranges[ranges$binomial == as.character(name), ]
+
+  coords <- list()
+  # Get coordinates from all polygons into one matrix.
+  for(i in 1:length(distr@polygons)){
+    coords[[i]] <- distr@polygons[[i]]@Polygons[[1]]@coords
+  }
+  coords <- do.call(rbind, coords)
+
+  # Take the convex hull of coordinates to speed up last step.
+  hullCoords <- coords[chull(coords), ]
+
+  maxDist <- max(apply(hullCoords, 1, function(x) distGeo(coords, x)))/1000
+  return(maxDist)
+  
+}
+
+# Calculate widest part of all species distributions.
+#   This is slow but also RAM heavy.
+#   3 cores doesn't crash my computer with 16GB RAM.
+rangeWidth <- mclapply(fst$binomial, findWidth, mc.cores = 3) %>% do.call(c, .)
+
+#rangeWidth <- sapply(fst$binomial, findWidth)
+
+fst$rangeWidth <- rangeWidth
+fst$rangeCoverage <- fst$Dmax..km. / fst$rangeWidth
+
+
+
+
+
+%%end.rcode
+
+
+
+%%begin.rcode fstStudyEffort, eval = rangeusesens
+
+nSpecies <- read.csv(file = 'data/Chapter3/nSpecies.csv')
+
+# First take what data we can from nSpecies analysis.
+fstStudy <- sqldf("	
+                SELECT fst.binomial, nSpecies.scholarRefs, nSpecies.pubmedRefs
+                FROM fst
+                LEFT JOIN nSpecies
+                ON nSpecies.binomial=fst.binomial
+              ")
+
+%%end.rcode
+
+
+
+
+%%begin.rcode fstScrape, eval = runScrape
+
+########################################################
+#### Sloow bit that might get you blocked by google ####
+########################################################
+
+fstFullStudy <- fstStudy[,1:2]
+
+
+
+
+for(i in 1:nrow(fstFullStudy)){
+	if(is.na(fstFullStudy[i, 2])){
+		fstFullStudy[i, 2] <- scrapeScholar(fstFullStudy[i, 1])
+	}
+	print(i)
+}
+
+
+
+write.csv(fstFullStudy, file = 'data/Chapter3/fstScrapeAppendix.csv')
+
+%%end.rcode
+
+
+%%begin.rcode readNewStudy, eval = rangeusesens
+
+fstFullStudy <- read.csv(file = 'data/Chapter3/fstScrapeAppendix.csv')[, -1]
+
+fst$scholarRefs <- fstFullStudy[, 2]
+
+
+
+calcNm <- function(Fst){ (1 - Fst)/(4 * Fst) }
+
+
+fst$Nm <- calcNm(fst$Value)
+
+
+
+fst <- fst[!is.na(fst$Nm) & !(fst$Nm == Inf), ]
+fst <- fst[fst$Marker != 'mtDNA', ]
+
+
+# Couple of small cleaning issues.
+# Two values for Miniopterus screibersii. One low range coverage, one big.
+# Instead of taking means, remove the low coverage row.
+# And similar issue with Myotis lucifugus
+fst <- fst %>% filter(!(binomial == 'Miniopterus schreibersii' & rangeCoverage < 0.1))
+fst <- fst %>% filter(!(binomial == 'Myotis lucifugus' & rangeCoverage < 0.2))
+
+
+fstFinal <- fst
+
+
+# Take means of species with multiple measurements
+
+fstFinal <- fstFinal[!duplicated(fstFinal$binomial), ]
+fstFinal$Nm <- sapply(fstFinal$binomial, function(x) mean(fst$Nm[fst$binomial == x]))
+
+# Add number of viruses to fst dataset
+#   Includes zeros for species with no known viruses.
+
+fstFinal$virusSpecies <- sapply(fstFinal$binomial, function(x) sum(virus2$binomial == x))
+
+
+
+
+# Add mass data.
+
+pantheria <- read.table(file = 'data/Chapter3/PanTHERIA_1-0_WR05_Aug2008.txt',
+  header = TRUE, sep = "\t", na.strings = c("-999", "-999.00"))
+
+additionalMass <- read.csv('data/Chapter3/AdditionalBodyMass.csv', stringsAsFactors = FALSE)
+meanAdditionalMass <- additionalMass %>%
+                        group_by(binomial) %>% 
+                        summarise(mass = mean(Body.Mass.grams))
+
+mass <- sqldf("
+  SELECT [X5.1_AdultBodyMass_g]
+  FROM fstFinal
+  LEFT JOIN pantheria
+  ON fstFinal.binomial=pantheria.MSW05_Binomial
+  ")
+
+# Don't need pantheria data anymore
+rm(pantheria)
+
+fstFinal$mass <- mass[, 1]
+
+fstFinal$mass[fstFinal$binomial == 'Myotis ricketti'] <- meanAdditionalMass$mass[meanAdditionalMass$binomial == 'Myotis ricketti']
+
+fstFinal$mass[fstFinal$binomial == 'Myotis macropus'] <- 9.8
+
+
+
+fstFinal <- fstFinal[!is.na(fstFinal$mass), ]
+
+
+#############################
+### fst data is finished  ###
+#############################
+
+write.csv(fstFinal, 'data/Chapter3/fstFinalBootRangeuseable.csv')
+
+%%end.rcode
+
+
+
+
+
+
+%%begin.rcode fstTree, eval = rangeusesens
+
+# Read in trees
+t <- read.nexus('data/Chapter3/fritz2009geographical.tre')
+
+# Select best supported tree
+tr1 <- t[[1]]
+
+# Make names match previous names
+tr1$tip.label <- gsub('_', ' ', tr1$tip.label)
+
+#unneededTips <- tr1$tip.label[!(tr1$tip.label %in% fstFinal$binomial)]
+
+# Prune tree down to only needed tips.
+#fstTree <- drop.tip(tr1, unneededTips)
+
+
+
+%%end.rcode
+
+
+%%begin.rcode fstITanalysis, eval = rangeusesens
+
+fstVarList <- c('scholarRefs', 'Nm', 'mass', 'distrSize', 'rand')
+
+findCombs <- function(k, vars, longest){
+  x <- t(combn(vars, k))
+  nas <- matrix(NA, ncol = longest - NCOL(x), nrow = nrow(x))
+  mat <- cbind(x, nas)
+  return(mat)
+}
+
+fstModelList <- lapply(0:5, function(k) findCombs(k, fstVarList, 5))
+fstModelMat <- do.call(rbind, fstModelList)
+
+fstAllFormulae <- apply(fstModelMat[-1, ], 1, function(x) as.formula(paste('virusSpecies ~', paste(x[!is.na(x)], collapse = ' + '))))
+
+fstAllFormulae <- c(as.formula('virusSpecies ~ 1'), fstAllFormulae)
+
+%%end.rcode
+
+%%begin.rcode fstModelSelectFun, eval = rangeusesens
+
+
+fstModelSelect <- function(allForm, data, phy, boot, allModelMat, varList){
+  
+  set.seed(paste0('2388', boot))
+  bootData <- cbind(data, rand = runif(nrow(data)))
+  row.names(bootData) <- bootData$binomial
+
+  
+  # Prune the tree for the fst data.
+  
+  # Which tips are not needed
+  fstUnneededTips <- tr1$tip.label[!(tr1$tip.label %in% data$binomial)]
+  
+  # Prune tree down to only needed tips.
+  phy <- drop.tip(tr1, fstUnneededTips)
+
+
+
+  # log some predictors
+  bootData[, c('mass', 'scholarRefs', 'distrSize')] <- log(bootData[, c('mass', 'scholarRefs', 'distrSize')])
+  
+  # scale
+  bootData[, c('mass', 'scholarRefs', 'distrSize', 'rand', 'Nm')] <- base::scale(bootData[, c('mass', 'scholarRefs', 'distrSize', 'rand', 'Nm')])
+  
+
+  coefs <- matrix(NA, ncol = length(varList) + 1, nrow = nrow(allModelMat), 
+             dimnames = list(NULL, paste0('beta.', c('(Intercept)', varList))))
+
+  results <- apply(allModelMat, 1, 
+                   function(x) sapply(varList, function(y) y %in% x)) %>%
+               t %>%
+               data.frame %>%
+               cbind(AIC = NA, 
+                     boot = boot, 
+                     lambda = NA, 
+                     attempt = NA, 
+                     predictors = NA, 
+                     coefs)
+
+  # Fit each model 
+  # I'm having problems with convergence so sometimes have to try different starting values.
+  # Really need to replace this with a while loop or something.
+  for(m in 1:length(allForm)){
+    if(exists('model')){
+      rm(model)
+    }
+    try({
+      model <- gls(allForm[[m]], correlation = corPagel(value = 0.4, phy = phy), data = bootData, method = 'ML')  
+      results$attempt[m] <- 1
+    }) 
+    if(!exists('model')){
+      try({
+        model <- gls(allForm[[m]], correlation = corPagel(value = 0.3, phy = phy), data = bootData, method = 'ML')  
+        results$attempt[m] <- 2
+      }) 
+    }
+    if(!exists('model')){
+      try({
+        model <- gls(allForm[[m]], correlation = corPagel(value = 0.2, phy = phy), data = bootData, method = 'ML')  
+        results$attempt[m] <- 3
+      }) 
+    }
+    if(!exists('model')){
+        try({
+          model <- gls(allForm[[m]], correlation = corPagel(value = runif(1), phy = phy), data = bootData, method = 'ML')  
+          results$attempt[m] <- 4
+        }) 
+      }
+      if(!exists('model')){
+        try({
+          model <- gls(allForm[[m]], correlation = corPagel(value = runif(1), phy = phy), data = bootData, method = 'ML')  
+          results$attempt[m] <- 5
+        }) 
+      }
+      if(!exists('model')){
+        try({
+          model <- gls(allForm[[m]], correlation = corPagel(value = runif(1), phy = phy), data = bootData, method = 'ML')  
+          results$attempt[m] <- 6
+        }) 
+      }
+      if(!exists('model')){
+        try({
+          model <- gls(allForm[[m]], correlation = corPagel(value = runif(1), phy = phy), data = bootData, method = 'ML')  
+          results$attempt[m] <- 7
+        }) 
+      }
+       if(!exists('model')){
+        try({
+          model <- gls(allForm[[m]], correlation = corPagel(value = runif(1), phy = phy), data = bootData, method = 'ML')  
+          results$attempt[m] <- 7
+        }) 
+      }
+       if(!exists('model')){
+        try({
+          model <- gls(allForm[[m]], correlation = corPagel(value = runif(1), phy = phy), data = bootData, method = 'ML')  
+          results$attempt[m] <- 7
+        }) 
+      }
+       if(!exists('model')){
+        try({
+          model <- gls(allForm[[m]], correlation = corPagel(value = runif(1), phy = phy), data = bootData, method = 'ML')  
+          results$attempt[m] <- 7
+        }) 
+      }
+    if(!exists('model')){
+      try({
+        model <- lm(allForm[[m]], data = bootData) 
+        results$attempt[m] <- 8
+        message('Running lm')
+      }) 
+    }
+    #model <- pgls(allForm[[m]], data = compBootData, lambda = 'ML')
+    results$AIC[m] <- AICc(model)
+
+    if(inherits(model, 'gls')){
+        results$lambda[m] <- model$modelStruct$corStruct[1]
+    }
+
+    results$predictors[m] <- allForm[[m]] %>% as.character %>% .[3]
+
+
+    results[m, paste0('beta.', names(coef(model)))] <- coef(model)
+
+    message(paste('Boot:', boot, ', m:', m, '\n'))
+  }
+
+  results$dAIC <- results$AIC - min(results$AIC)
+  results$weight <- exp(- 0.5 * results$dAIC) / sum(exp(- 0.5 * results$dAIC))
+
+
+  return(results)
+
+}
+
+%%end.rcode
+
+%%begin.rcode fstModelSelectBoots, eval = rangeusesens
+
+rangeUseable <- c(0.15, 0.175, 0.2, 0.225, 0.25)
+
+
+
+fstModelsBootStrap <- mclapply(1:nBoots, function(b) 
+    fstModelSelect(fstAllFormulae, 
+                   fstFinal[fstFinal$rangeCoverage > rangeUseable[1], ],
+                   fstTree, 
+                   b, 
+                   fstModelMat, 
+                   fstVarList), mc.cores = nCores)
+
+fstAllResults1 <- do.call(rbind, fstModelsBootStrap)
+
+write.csv(fstAllResults1, file = 'data/Chapter3/fstModelSelectBoot1.csv')
+
+
+fstModelsBootStrap <- mclapply(1:nBoots, function(b) 
+    fstModelSelect(fstAllFormulae, 
+                   fstFinal[fstFinal$rangeCoverage > rangeUseable[2], ],
+                   fstTree, 
+                   b, 
+                   fstModelMat, 
+                   fstVarList), mc.cores = nCores)
+
+fstAllResults2 <- do.call(rbind, fstModelsBootStrap)
+
+write.csv(fstAllResults2, file = 'data/Chapter3/fstModelSelectBoot2.csv')
+
+
+fstModelsBootStrap <- mclapply(1:nBoots, function(b) 
+    fstModelSelect(fstAllFormulae, 
+                   fstFinal[fstFinal$rangeCoverage > rangeUseable[3], ],
+                   fstTree, 
+                   b, 
+                   fstModelMat, 
+                   fstVarList), mc.cores = nCores)
+
+fstAllResults3 <- do.call(rbind, fstModelsBootStrap)
+
+write.csv(fstAllResults3, file = 'data/Chapter3/fstModelSelectBoot3.csv')
+
+
+fstModelsBootStrap <- mclapply(1:nBoots, function(b) 
+    fstModelSelect(fstAllFormulae, 
+                   fstFinal[fstFinal$rangeCoverage > rangeUseable[4], ],
+                   fstTree, 
+                   b, 
+                   fstModelMat, 
+                   fstVarList), mc.cores = nCores)
+
+fstAllResults4 <- do.call(rbind, fstModelsBootStrap)
+
+write.csv(fstAllResults4, file = 'data/Chapter3/fstModelSelectBoot4.csv')
+
+
+fstModelsBootStrap <- mclapply(1:nBoots, function(b) 
+    fstModelSelect(fstAllFormulae, 
+                   fstFinal[fstFinal$rangeCoverage > rangeUseable[5], ],
+                   fstTree, 
+                   b, 
+                   fstModelMat, 
+                   fstVarList), mc.cores = nCores)
+
+fstAllResults5 <- do.call(rbind, fstModelsBootStrap)
+
+write.csv(fstAllResults5, file = 'data/Chapter3/fstModelSelectBoot5.csv')
+
+%%end.rcode
+
+
+%%begin.rcode fstAnalyseModelSelectRangeUse, fig.show = extraFigs, eval = rangeusesens
+
+#combAllResults <- list()
+fstres <- list(fstAllResults, 
+               fstAllResults1, 
+               fstAllResults2, 
+               fstAllResults3, 
+               fstAllResults4,
+               fstAllResults5)
+               
+               
+for(i in 1:length(fstres)){
+        
+  fstSepVarWeights <- lapply(1:nBoots, function(b) 
+                        sapply(names(fstres[[i]])[1:5], 
+                          function(x) 
+                            sum(fstres[[i]][fstres[[i]]$boot == b, 'weight'][fstres[[i]][fstres[[i]]$boot == b, x]])
+                        )
+                       )      
+  
+  fstSepVarWeights <- do.call(rbind, fstSepVarWeights) %>%
+                        data.frame(., boot = 1:nBoots) %>%
+                        reshape2::melt(., value.name = 'estimate', 
+                                          id.vars = 'boot')
+  
+  fstSepVarWeights$col <- 'Other Variables'
+  fstSepVarWeights$col[fstSepVarWeights$variable == 'Nm'] <- 'Population Structure'
+  fstSepVarWeights$col[fstSepVarWeights$variable == 'rand'] <- 'Null'
+  fstSepVarWeights$useableRange <- c(0.2, rangeUseable)[i]
+  combAllResults[[i]] <- fstSepVarWeights
+}
+
+
+allCombinedResults.df <- do.call(rbind, combAllResults)
+
+%%end.rcode
+
+
+
+%%begin.rcode fstITBootCapt
+ITPlotCapts <- ''
+ITPlotTitle <- ''
+%%end.rcode
+
+%%begin.rcode fstITBootPlots, fig.cap = ITPlotCapts, fig.height = 2.5, fig.scap = ITPlotTitle, out.width = '\\textwidth', cache = FALSE, eval = rangeusesens
+
+# Reorder var levels to get structure at beginning.
+allCombinedResults.df$variable <- factor(allCombinedResults.df$variable, levels(allCombinedResults.df$variable)[c(2, 1, 3, 4, 5)])
+
+
+# Draw the fst model selection plot
+ggplot(allCombinedResults.df, aes(x = variable, y = estimate, colour = col, fill = col)) +
+  geom_boxplot() +
+  scale_colour_manual(values = pokepal('kingdra')[c(11, 1, 9)]) +
+  scale_fill_manual(values = pokepal('kingdra')[c(12, 4, 8)]) +
+  theme(legend.position = 'none', axis.text.x = element_text(size = 10, angle = 40, hjust = 1, colour = 'black', family = 'lato light'),
+    panel.grid.major.x = element_blank(),
+    axis.text.y = element_text(size = 8)) +
+  scale_x_discrete(labels = c('Gene flow', 'Scholar', 'Mass', 'Range size', 'Random')) +
+  scale_y_continuous(labels = c('0.00','0.25','0.50','0.75','1.00'), breaks = c(0, 0.25, 0.5, 0.75, 1)) +
+  ylab('P(in best model)') +
+  xlab('')
+
+
+%%end.rcode
+
+
+
 
 
 

@@ -1770,7 +1770,7 @@ fstMassStudyEffort <- summary(pgls(log(scholarRefs) ~ log(mass), data = compFst,
 I used two measures of population structure: the number of subspecies and the effective level of gene flow.
 The number of subspecies was counted using the taxonomy from \textcite{wilson2005mammal}.
 The effective level of gene flow was calculated from estimates of $F_{ST}$ collated from the literature.
-The studies were from a wide range of spatial scales, from local ($\sim\SI{10}{\kilo\metre}$) to continental.
+The studies were from a wide range of spatial scales, from local ($\sim\!\SI{10}{\kilo\metre}$) to continental.
 As $F_{ST}$ often increases with spatial scale \cite{burland1999population, hulva2010mechanisms, o2015genetic, vonhof2015range} I controlled for this by only using data from studies where a large proportion of the species range was studied.
 I used the ratio of the furthest distance between $F_{ST}$ samples (taken from the paper or measured with \url{http://www.distancefromto.net/} if not stated) to the length of the IUCN species range \cite{iucn} and only used studies if this ratio was greater than \rinline{rangeUseable}.
 This is an arbitrary value that was a compromise between retaining a reasonable number of data points and controlling for the bias in spatial scale.
@@ -1971,7 +1971,6 @@ nrow(nSpecies),
 		
 %%begin.rcode boxplot, fig.cap = boxplotCapt, fig.scap = boxplotTitle,	fig.height = 2.3
 
-
 nSpeciesCounts <- nSpecies %>%
                     group_by(NumberOfSubspecies, virusSpecies) %>%
                     dplyr::summarize(n = n())
@@ -2011,7 +2010,9 @@ These top seven models had a combined weight of \rinline{sprintf("%.2f", round(m
 Summing the Akaike weights of all models that contain a given variable gives a probability, $Pr$, that the variable would be in the best model amongst those in the plausible set \cite{whittingham2006we}.
 The number of subspecies is very likely in the best model ($Pr > $ \rinline{substring(as.character( varWeights['NumberOfSubspecies']), 1, 4)}) as is the interaction term between the number of subspecies and study effort ($Pr = $ \rinline{varWeights['scholarRefs.NumberOfSubspecies']}) compared to the benchmark random variable which has $Pr = $ \rinline{varWeights['rand']} (Figure~\ref{fig:fstITPlots}A and Table~\ref{t:variables}).
 When models with the interaction term are removed there is, on average (mean weighted by Akaike weights), a positive relationship between the number of subspecies and viral richness ($b = $ \rinline{nSpeciesCoefMean}, variance = \rinline{nSpeciesCoefVar}).
-Models with an interaction term between the number of subspecies and study effort have a positive interaction term ($b = $ \rinline{nSpeciesInterMean}, variance = \rinline{nSpeciesInterVar}) and linear term ($b = $ \rinline{nSpeciesCoefMeanI}, variance = \rinline{nSpeciesCoefVarI}).
+Models with an interaction term between the number of subspecies and study effort have a positive regression slope for the interaction term ($b = $ \rinline{nSpeciesInterMean}, variance = \rinline{nSpeciesInterVar}) and linear term ($b = $ \rinline{nSpeciesCoefMeanI}, variance = \rinline{nSpeciesCoefVarI}).
+At median and high values of study effort, this gives a positive relationship between the number of subspecies and viral richness (Figure~\ref{fig:plotInter}).
+At low values of study effort, the relationship between the number of subspecies and viral richness becomes flat or even negative.
 
 
 
@@ -2260,6 +2261,7 @@ ggplot(fstFinal, aes(x = Nm, y = virusSpecies, colour = Marker)) +
   xlab('Gene Flow (per gen.)') +
   ylab('Viral Richness') 
 
+
 %%end.rcode
 
 
@@ -2354,7 +2356,7 @@ The overall weight of evidence suggests that population structure and pathogen r
 % Biases are known in the lit. gippoliti2007problem % maybe should add to methods?
 
 There was strong support for a positive interaction between the number of subspecies and study effort.
-The support for this interaction implies that increased population structure has a stronger relationship with known pathogen richness in the presence of study effort.
+The support for this interaction implies that increased population structure has a stronger relationship with known pathogen richness when study effort is not very low.
 One interpretation of this is that increased population structure alone does not predict high known viral richness; reasonable study effort is also needed to turn the expected high viral richness into known and recorded viral richness.
 Biases in identification of subspecies have been noted before \cite{gippoliti2007problem}.
 The number of subspecies is more commonly used as a variable in comparative analyses of birds than mammals but the fact that it is associated with study effort is often not taken into account \cite{phillimore2007biogeographical, belliure2000dispersal}.
