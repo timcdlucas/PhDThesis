@@ -1971,7 +1971,6 @@ nrow(nSpecies),
 		
 %%begin.rcode boxplot, fig.cap = boxplotCapt, fig.scap = boxplotTitle,	fig.height = 2.3
 
-
 nSpeciesCounts <- nSpecies %>%
                     group_by(NumberOfSubspecies, virusSpecies) %>%
                     dplyr::summarize(n = n())
@@ -2261,6 +2260,7 @@ ggplot(fstFinal, aes(x = Nm, y = virusSpecies, colour = Marker)) +
   geom_abline(intercept = nmFstUni$coef[1, 1], slope = nmFstUni$coef[2, 1], lwd = 0.7, colour = pokepal('nidorina')[10]) +
   xlab('Gene Flow (per gen.)') +
   ylab('Viral Richness') 
+
 
 %%end.rcode
 
